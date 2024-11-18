@@ -1,7 +1,0 @@
-type: marketplace
-title: PatternPractice
-language: English
-summary: Code and tasks to practice OOP pattern implementation.
-programming_language: Java
-content:
-  - Patterns
