@@ -16,17 +16,11 @@
 		<link rel="stylesheet" href="../dist/reveal.css">
 		<link rel="stylesheet" href="../dist/theme/sky.css">
 
-        <!-- Theme used for syntax highlighted code -->
+        <!-- Theme used for syntax-highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["numpy", "pandas"]
-            [[fetch]]
-            files = ["../ml_with_python/resources/example.csv", "../ml_with_python/resources/titanic.csv"]
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<style>
 			.column {
 			  float: left;
@@ -133,20 +127,20 @@
                     </section>
                     <section id="conv-from-py" data-background-color="#fdf6e3">
                         <h3 style="text-align: left">Conversion from Python structures</h3>
-                        <py-repl>
+                        <script type="py-editor" config='{"packages":["numpy"]}' env="shared">
                             import numpy as np
-                            np.array([1, 2, 3, 4, 5])
-                        </py-repl>
+                            print(np.array([1, 2, 3, 4, 5]))
+                        </script>
                         <div class="fragment" style="margin-bottom:20px;">
                             <p>During conversion, you can specify the data type using the
                                 <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.html">dtype</a> argument:</p>
-                            <py-repl>
-                                np.array([1, 2, 3, 4, 5], dtype=np.float32)
-                            </py-repl>
+                            <script type="py-editor" env="shared">
+                                print(np.array([1, 2, 3, 4, 5], dtype=np.float32))
+                            </script>
                             <p>Or similarly</p>
-                            <py-repl>
-                                np.float32([1, 2, 3, 4, 5])
-                            </py-repl>
+                            <script type="py-editor" env="shared">
+                                print(np.float32([1, 2, 3, 4, 5]))
+                            </script>
                         </div>
                     </section>
                     <section id="gen-numpy">
@@ -171,40 +165,40 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
-                            np.arange(0, 5, 2)
-                        </py-repl>
-                        <py-repl>
-                            np.linspace(0, 5, 11)
-                        </py-repl>
-                        <py-repl>
-                            np.logspace(0, 9, 10, base=2)
-                        </py-repl>
-                        <py-repl>
-                            np.zeros((2, 2, 3))
-                        </py-repl>
-                        <py-repl>
-                            np.diag([1,2,3])
-                        </py-repl>
+                        <script type="py-editor" env="shared">
+                            print(np.arange(0, 5, 2))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(np.linspace(0, 5, 11))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(np.logspace(0, 9, 10, base=2))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(np.zeros((2, 2, 3)))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(np.diag([1,2,3]))
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left">The array sizes are stored in the <strong>shape</strong> field, and the number of dimensions are stored in
                             <strong>ndim</strong>.</p>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             arr = np.ones((2, 3))
                             print(f"Array shape — {arr.shape}, number of dimensions — {arr.ndim}")
-                        </py-repl>
+                        </script>
                         <p style="text-align: left">The <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.reshape.html">reshape</a> method
                             allows you to transform the dimensions of an array without changing the data,
                             but <strong>possibly with copying</strong>.</p>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             array = np.arange(0, 6)
                             array = array.reshape((2, 3))
-                            array
-                        </py-repl>
+                            print(array)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = np.zeros((10, 2))
 
                             # A transpose makes the array non-contiguous
@@ -216,39 +210,39 @@
 
                             # AttributeError: ... Use `.reshape()` to make a copy with the desired shape
                             c.shape = (20)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
-                            a
-                        </py-repl>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
+                            print(a)
+                        </script>
+                        <script type="py-editor" env="shared">
                             # it is possible to change the shape of the initial array
                             # but don't do it, because it is bad practice
                             a.shape = (20)
-                            a
-                        </py-repl>
+                            print(a)
+                        </script>
                         <p style="text-align: left">To unroll a multi-dimensional array into a vector,
                             you can use the <a href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html">ravel</a>
                             function (equivalent to `reshape(-1, order=order)`).</p>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             array = np.arange(0, 6)
                             array = array.reshape((2, 3))
                             array = np.ravel(array)
-                            array
-                        </py-repl>
+                            print(array)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3 style="text-align: left">Indexation</h3>
                         <p>In NumPy, familiar Python indexing works, including the use of negative indices and slices.</p>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import numpy as np
                             array = np.arange(0, 6)
                             print(array[0], array[-1])
                             print(array[1:-1])
                             print(array[1:-1:2])
                             print(array[::-1])
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
                         <div style="margin-bottom:20px;text-align: left">
@@ -267,55 +261,54 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left">You can use lists as indices.</p>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import numpy as np
                             array = np.arange(0, 6)
-                            array[[0, 2, 4]]
-                        </py-repl>
-                        <py-repl>
+                            print(array[[0, 2, 4]])
+                        </script>
+                        <script type="py-editor" env="shared">
                             array[[True, False, True, False, True, False]]
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             x = np.array([[1, 2, 3]])
                             y = np.array([1, 2, 3])
 
                             print(x.shape, y.shape)
                             print(np.array_equal(x, y))
                             print(np.array_equal(x, y[np.newaxis, :]))
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             x = np.arange(10)
-                            x
-                        </py-repl>
-                        <py-repl>
-                            x % 2
-                        </py-repl>
-                        <py-repl>
-                            x[(x % 2 == 0) & (x > 5)]
-                        </py-repl>
-                        <py-repl>
+                            print(x)
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(x % 2)
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(x[(x % 2 == 0) & (x > 5)])
+                        </script>
+                        <script type="py-editor" env="shared">
                             print(x)
                             x[x > 3] *= 2
                             print(x)
-                        </py-repl>
+                        </script>
                     </section>
                     <section id="read-from-disk" data-background-color="#fdf6e3">
                         <h3 style="text-align: left">Reading from disk</h3>
                         <p style="text-align: left">(but better use pandas)</p>
-                        <py-repl>
+                        <script type="py-editor" config="pyscript.toml" env="read">
                             from numpy import genfromtxt
-                            data = genfromtxt('../ml_with_python/resources/example.csv',
-                                                delimiter=',', skip_header=1)
+                            data = genfromtxt('example.csv', delimiter=',', skip_header=1)
                             for row in data:
                                 print(row)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             help(genfromtxt)
-                        </py-repl>
+                        </script>
                     </section>
                 </section>
                 <section>
@@ -330,15 +323,17 @@
                             </div>
                         </div>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
+                            <script type="py-editor" env="read">
                                 import numpy as np
                                 _l = np.ones(5)
                                 x = np.linspace(1, 5, 5)
                                 print(x - _l)
                                 print(x - 2 * _l)
-                            </py-repl>
+                            </script>
                         </div>
-                        <div class="fragment" style="margin-bottom:20px;">
+                    </section>
+                    <section data-background-color="#fdf6e3">
+                        <div style="margin-bottom:20px;">
                             <div class="typesetting">
                                 <p style="text-align: left">Similarly, for multi-dimensional arrays.</p>
                                 <p style="text-align: left"><strong>Note 3:</strong> All arithmetic operations on arrays of the same size
@@ -357,36 +352,37 @@
                             </div>
                         </div>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
+                            <script type="py-editor" env="read">
                                 import numpy as np
                                 np.arange(1, 4) * 2
-                            </py-repl>
+                            </script>
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left">The rule of dimensionality consistency is expressed in one sentence:</p>
                         <div class="fragment r-frame" style="margin-bottom:20px;">
                             <div class="typesetting">
-                            <code>For broadcasting, starting from right
+                            <p style="text-align: left"><code>For broadcasting, starting from right
                                 the dimensions along the axes in two arrays must either be the same,
                                 or one of them must be equal to one.</code>
+                            </p>
                             </div>
                         </div>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
+                            <script type="py-editor" env="read">
                                 a  = np.ones((2, 3, 4))
                                 b = np.arange(1, 5) # b.shape = (4,)
                                 # here a.shape = (2, 3, 4) and
                                 # b.shape is considered to be (1, 1, 4)
-                                a * b
-                            </py-repl>
+                                print(a * b)
+                            </script>
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left">Add the same vector to each row of the matrix.</p>
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             np.array([[0, 0, 0], [10, 10, 10], [20, 20, 20], [30, 30, 30]]) + np.arange(3)
-                        </py-repl>
+                        </script>
                         <p><img src="../ml_with_python/images/broadcasting.gif" alt="broadcasting"></p>
                     </section>
                     <section data-background-color="#fdf6e3">
@@ -396,16 +392,16 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left">First, the vector needs to be transformed to the form:</p>
-                        <py-repl>
-                            np.arange(4)
-                        </py-repl>
-                        <py-repl>
-                            np.arange(4)[:, np.newaxis]
-                        </py-repl>
-                        <p>And then add the matrix to it:</p>
-                        <py-repl>
-                            np.arange(4)[:, np.newaxis] + np.array([[0, 0, 0], [10, 10, 10], [20, 20, 20], [30, 30, 30]])
-                        </py-repl>
+                        <script type="py-editor" env="read">
+                            print(np.arange(4))
+                        </script>
+                        <script type="py-editor" env="read">
+                            print(np.arange(4)[:, np.newaxis])
+                        </script>
+                        <p style="text-align: left">And then add the matrix to it:</p>
+                        <script type="py-editor" env="read">
+                            print(np.arange(4)[:, np.newaxis] + np.array([[0, 0, 0], [10, 10, 10], [20, 20, 20], [30, 30, 30]]))
+                        </script>
                     </section>
                     <section>
                         <p style="text-align: left">If you need to multiply multidimensional arrays not element-by-element,
@@ -436,33 +432,33 @@
                 <section>
                     <section data-background-color="#fdf6e3">
                         <h3 style="text-align: left">Operations</h3>
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             import numpy as np
                             x = np.arange(20).reshape(4, 1, 5)
                             print(x)
                             print(x.T.shape)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             print(x.mean())
                             print(np.mean(x))
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="read">
                             x_mean_0 = x.mean(axis=0)
                             print(x_mean_0.shape)
                             print(x_mean_0)
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="read">
                             x_mean_1 = x.mean(axis=1)
                             print(x_mean_1.shape)
                             print(x_mean_1)
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="read">
                             x_mean_02 = x.mean(axis=(0, 2))
                             print(x_mean_02.shape)
                             print(x_mean_02)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3 style="text-align: left">Concatenation of multidimensional arrays</h3>
@@ -473,60 +469,60 @@
                             </div>
                         </div>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
+                            <script type="py-editor" env="read">
                                 import numpy as np
                                 x = np.arange(10).reshape(5, 2)
                                 y = np.arange(100, 120).reshape(5, 4)
                                 print(f"{x=},\n {y=}")
-                            </py-repl>
-                            <py-repl>
+                            </script>
+                            <script type="py-editor" env="read">
                                 print(np.hstack((x, y)))
-                            </py-repl>
+                            </script>
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             p = np.arange(1).reshape([1, 1, 1, 1])
-                            p
-                        </py-repl>
-                        <py-repl>
+                            print(p)
+                        </script>
+                        <script type="py-editor" env="read">
                             print("vstack: ", np.vstack((p, p)).shape)
                             print("hstack: ", np.hstack((p, p)).shape)
                             print("dstack: ", np.dstack((p, p)).shape)
-                        </py-repl>
-                        <py-repl>
-                            np.concatenate((p, p), axis=3).shape
-                        </py-repl>
+                        </script>
+                        <script type="py-editor" env="read">
+                            print(np.concatenate((p, p), axis=3).shape)
+                        </script>
                     </section>
                 </section>
                 <section>
                     <section data-background-color="#fdf6e3">
                         <h3>Numpy types</h3>
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             import numpy as np
                             x = [1, 2, 70000]
-                            np.array(x, dtype=np.float64)
-                        </py-repl>
-                        <py-repl>
-                            np.array(x, dtype=np.uint16)
-                        </py-repl>
-                        <py-repl>
-                            np.array(x, dtype=np.unicode_)
-                        </py-repl>
+                            print(np.array(x, dtype=np.float64))
+                        </script>
+                        <script type="py-editor" env="read">
+                            print(np.array(x, dtype=np.uint16))
+                        </script>
+                        <script type="py-editor" env="read">
+                            print(np.array(x, dtype=np.unicode_))
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Function vectorization</h3>
-                        <py-repl>
+                        <script type="py-editor" env="read">
                             def f(value):
                                 return np.sqrt(value)
 
                             vf = np.vectorize(f)
                             # like the python "map" function,
                             # except it uses the broadcasting rules of numpy
-                        </py-repl>
-                        <py-repl>
-                            vf(np.arange(10))
-                        </py-repl>
+                        </script>
+                        <script type="py-editor" env="read">
+                            print(vf(np.arange(10)))
+                        </script>
                     </section>
                     <section>
                         <h3>Let's have a break!</h3>
@@ -547,54 +543,54 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" config="pyscript.toml" env="pandas">
                             import pandas as pd
-                            df = pd.read_csv("../ml_with_python/resources/titanic.csv", sep="\t")
-                        </py-repl>
-                        <py-repl>
-                            df.head(3)
-                        </py-repl>
+                            df = pd.read_csv("titanic.csv", sep="\t")
+                        </script>
+                        <script type="py-editor" env="pandas">
+                            print(df.head(3))
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
-                            df[["Sex", "Cabin"]].describe()
-                        </py-repl>
+                        <script type="py-editor" env="pandas">
+                            print(df[["Sex", "Cabin"]].describe())
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Slices in DataFrames</h3>
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             df.sort_values("Age", inplace=True)
                             print(df.iloc[78]) # integer-location — just a line in order from 0 to length-1
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             print(df.loc[78]) # index 78
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="pandas">
                             print(df.loc[[78, 79, 100], ["Age", "Name"]])
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left"><b>Note:</b> If you want to modify the data of a slice
                         without changing the main table, you need to make a copy.</p>
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             df_slice_copy = df.loc[[78, 79, 100], ["Age", "Name"]].copy()
                             df_slice_copy["Age"] = 3
                             print(df_slice_copy)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left"><b>Note:</b> If you want to change the main table, use <b>loc/iloc</b>.</p>
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             some_slice = df["Age"].isin([20, 25, 30])
                             df.loc[some_slice, "Fare"] = df.loc[some_slice, "Fare"] * 1000
-                        </py-repl>
+                        </script>
                         <p style="text-align: left">And don't do this way:</p>
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             slice_df = df[some_slice]
                             slice_df["Fare"] = slice_df["Fare"] * 10
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
                         <p style="text-align: left">You can get the values of only the necessary columns by
@@ -612,19 +608,19 @@
                         <p style="text-align: left">Series and DataFrame have many common methods.</p>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             # pandas.Series
-                            df["Age"].head(5)
-                        </py-repl>
-                        <py-repl>
+                            print(df["Age"].head(5))
+                        </script>
+                        <script type="py-editor" env="pandas">
                             # pandas.DataFrame
-                            df[["Age"]].head(5)
-                        </py-repl>
-                        <py-repl>
+                            print(df[["Age"]].head(5))
+                        </script>
+                        <script type="py-editor" env="pandas">
                             # Series to DataFrame
                             s = pd.Series([1, 2, 3], index=["Red", "Green", "Blue"])
-                            s.to_frame("Values")
-                        </py-repl>
+                            print(s.to_frame("Values"))
+                        </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <h3>How to make concatenation?</h3>
@@ -632,22 +628,22 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Join and merge</h3>
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             df1 = df[["Age", "Parch"]].copy()
                             df2 = df[["Ticket", "Fare"]].copy()
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="pandas">
                             # by index
-                            df1.join(df2).head(3)
-                        </py-repl>
-                        <py-repl>
+                            print(df1.join(df2).head(3))
+                        </script>
+                        <script type="py-editor" env="pandas">
                             df1 = df[["Age", "Parch", "PassengerId"]].copy()
                             df2 = df[["Ticket", "Fare", "PassengerId"]].copy()
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="pandas">
                             # by columns
-                            pd.merge(df1, df2, on=["PassengerId"], how="inner").head(3)
-                        </py-repl>
+                            print(pd.merge(df1, df2, on=["PassengerId"], how="inner").head(3))
+                        </script>
                     </section>
                     <section>
                       <h3 style="text-align: left">Key Differences: <code>merge</code> vs <code>join</code></h3>
@@ -671,25 +667,25 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Grouping</h3>
-                        <py-repl>
+                        <script type="py-editor" env="pandas">
                             print("Pclass 1: ", df[df["Pclass"] == 1]["Age"].mean())
                             print("Pclass 2: ", df[df["Pclass"] == 2]["Age"].mean())
                             print("Pclass 3: ", df[df["Pclass"] == 3]["Age"].mean())
-                        </py-repl>
-                        <py-repl>
-                            df.groupby(["Pclass"])[["Age"]].mean()
-                        </py-repl>
-                        <py-repl>
-                            df.groupby(["Survived", "Pclass"])
-                        </py-repl>
-                        <py-repl>
-                            df.groupby(["Survived", "Pclass"])["PassengerId"].count()
-                        </py-repl>
+                        </script>
+                        <script type="py-editor" env="pandas">
+                            print(df.groupby(["Pclass"])[["Age"]].mean())
+                        </script>
+                        <script type="py-editor" env="pandas">
+                            print(df.groupby(["Survived", "Pclass"]))
+                        </script>
+                        <script type="py-editor" env="pandas">
+                            print(df.groupby(["Survived", "Pclass"])["PassengerId"].count())
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
-                            df.groupby(["Survived", "Pclass"])[["PassengerId", "Cabin"]].count()
-                        </py-repl>
+                        <script type="py-editor" env="pandas">
+                            print(df.groupby(["Survived", "Pclass"])[["PassengerId", "Cabin"]].count())
+                        </script>
                     </section>
                     <section>
                         <div class="r-frame"><a href="https://wesmckinney.com/blog/apache-arrow-pandas-internals/">

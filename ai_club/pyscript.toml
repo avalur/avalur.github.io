@@ -1,0 +1,6 @@
+name = "Numpy and Pandas"
+packages = ["numpy", "pandas"]
+
+[files]
+"../ml_with_python/resources/example.csv" = ""
+"../ml_with_python/resources/titanic.csv" = ""
