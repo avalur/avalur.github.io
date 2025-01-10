@@ -15,12 +15,8 @@
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["numpy", "matplotlib", "scikit-learn"]
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<style>
 			.column {
 			  float: left;
@@ -233,7 +229,7 @@
                     </section>
                     <section data-background-color="#fdf6e3">
 <!--language=python-->
-                        <py-repl>
+                        <script type="py-editor" config='{"packages":["numpy", "matplotlib","scikit-learn"]}'>
                             import matplotlib.pyplot as plt
                             import numpy as np
 
@@ -251,7 +247,7 @@
                             ax.grid(True), plt.legend(loc='best')
 
                             fig
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <img src="../ml_with_python/images/entropy_and_gini.png" alt="entropy_and_gini" width="70%">
@@ -409,7 +405,7 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" config='{"packages":["numpy", "matplotlib","scikit-learn"]}' env="shared">
                             import numpy as np
 
                             from sklearn.datasets import load_iris
@@ -420,10 +416,10 @@
                             labels = np.array(["setosa", "versicolor", "virginica"])
 
                             print(X[:3], "\n", y[:3])
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                         import matplotlib.pyplot as plt
 
                         def show_legend():
@@ -432,31 +428,34 @@
                             cb.set_ticks(loc)
                             cb.set_ticklabels(labels)
                         print("Ok!")
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             fig = plt.figure(figsize=(18.0, 10.0))
                             plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap='autumn', edgecolors="black")
                             plt.xlabel(features[0]), plt.ylabel(features[1]), show_legend()
                             fig
-                        </py-repl>
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/iris_dataset.png" alt="iris_dataset">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             from sklearn.linear_model import LogisticRegression
 
                             clf = LogisticRegression(random_state=0, C=1.0).fit(X, y)
-                            clf.predict(X)
-                        </py-repl>
+                            print(clf.predict(X))
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
-                            clf.predict_proba(X[:2])
-                        </py-repl>
-                        <py-repl>
-                            clf.score(X, y)
-                        </py-repl>
+                        <script type="py-editor" env="shared">
+                            print(clf.predict_proba(X[:2]))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(clf.score(X, y))
+                        </script>
                     </section>
                     <section>
                         <div class="r-frame">
@@ -473,14 +472,14 @@
                     <section data-background-color="#fdf6e3">
                         We will use a helper function that returns a grid
                         for further nice visualizations:
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             def get_grid(data):
                                 x_min, x_max = data[:, 0].min()-1, data[:, 0].max()+1
                                 y_min, y_max = data[:, 1].min()-1, data[:, 1].max()+1
                                 return np.meshgrid(np.arange(x_min, x_max, 0.01),
                                                    np.arange(y_min, y_max, 0.01))
                             print("Ok!")
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p style="text-align: left">Let's write a function to train on data,
@@ -489,7 +488,7 @@
                         we visualize only them (we take the average parameters of the sepals)</p>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             def plot_model(X, y, clf, prob=False, legend=True):
                                 clf.fit(X, y)
                                 xx2, xx3 = get_grid(X[:, [2,3]])
@@ -513,24 +512,24 @@
                                         cb = plt.colorbar(mesh)
                                 return clf
                             print("Ok!")
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             fig = plt.figure(figsize=(18.0, 10.0))
                             clf = plot_model(X, y, LogisticRegression())
                             fig
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <img src="../ml_with_python/images/LR_results.png" alt="LR_results" width="80%">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             fig = plt.figure(figsize=(18.0, 10.0))
                             clf = plot_model(X, y, LogisticRegression(), prob=True)
                             fig
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <img src="../ml_with_python/images/LR_proba_results.png" alt="LR_proba_results" width="80%">
@@ -543,21 +542,27 @@
                             Nice visual example of DecisionTreeClassifier</a></p>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import matplotlib.pyplot as plt
                             from sklearn.tree import DecisionTreeClassifier
 
                             fig = plt.figure(figsize=(18.0, 10.0))
                             clf = plot_model(X, y, DecisionTreeClassifier())
                             fig
-                        </py-repl>
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/DTC_default.png" alt="DTC_default">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             fig = plt.figure(figsize=(18.0, 10.0))
                             clf = plot_model(X, y, DecisionTreeClassifier(), prob=True)
                             fig
-                        </py-repl>
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/DTC_prob.png" alt="DTC_prob">
                     </section>
                     <section>
                         <div class="r-frame">
@@ -565,24 +570,29 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             fig = plt.figure(figsize=(18.0, 10.0))
                             clf = plot_model(X, y, DecisionTreeClassifier(max_depth=3))
                             fig
-                        </py-repl>
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/DTC_max_depth3.png" alt="DTC_max_depth3">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             from sklearn.tree import plot_tree
 
                             def draw_decision_tree(clf, column_names):
                                 fig = plt.figure(figsize=(18,10))
                                 plot_tree(clf, filled=True, feature_names=column_names)
                                 return fig
-                        </py-repl>
-                        <py-repl>
-                            draw_decision_tree(clf, features)
-                        </py-repl>
+
+                            # draw_decision_tree(clf, features)
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/draw_DT.png" alt="draw_DT" width="900">
                     </section>
                     <section>
                       <h3>Training a Decision Tree: ID3 Algorithm</h3>
