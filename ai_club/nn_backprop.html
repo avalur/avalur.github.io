@@ -15,12 +15,6 @@
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["numpy", "matplotlib", "scikit-learn"]
-		</py-config>
         <style>
 			.column {
 			  float: left;
@@ -368,7 +362,7 @@
                 </section>
                 <section>
                     <section>
-                        <p style="text-align: left">Function $\sigma(z)$ — sigmoid, if $\lim\limits_{z \to -\infty} \sigma(z) = 0$ and $\lim\limits_{z \to +\infty} \sigma(z) = 1$</p>
+                        <p style="text-align: left">Function $\sigma(z)$ is sigmoidal, if $\lim\limits_{z \to -\infty} \sigma(z) = 0$ and $\lim\limits_{z \to +\infty} \sigma(z) = 1$</p>
 
                         <hr>
 
@@ -376,16 +370,16 @@
                             <div class="typesetting">
                             <h4 style="text-align: left">Cybenko's Theorem</h4>
 
-                            <p style="text-align: left">If $\sigma(z)$ is a continuous sigmoid,
+                            <p style="text-align: left">If $\sigma(z)$ is a continuous sigmoidal function,
                                 then for any continuous function $f(x)$ on $[0,1]^n$,
-                                there exist such parameter values $w_h \in \mathbb{R}^n, b \in \mathbb{R},
+                                there exist such parameter values $w_h \in \mathbb{R}^n, b_h \in \mathbb{R},
                                 \alpha_h \in \mathbb{R}$ that a single-layer network
-                             $a(x) = \sigma\left(\sum\limits_{h=1}^H \alpha_h \left< x, w_h\right> + b\right)$
+                             $a(x) = \sum\limits_{h=1}^H \alpha_h \sigma\left(\left< x, w_h\right> + b_h\right)$
                             approximates $f(x)$ with any desired accuracy $\varepsilon$:
                             $|a(x) - f(x)| < \varepsilon$, for all $x \in [0, 1]^n$
                             </p>
                             <hr>
-                            <p>G. Cybenko. Approximation by Superpositions of a Sigmoidal Function.
+                            <p style="text-align: left">G. Cybenko. Approximation by Superpositions of a Sigmoidal Function.
                                 Mathematics of Control, Signals, and Systems (MCSS) 2 (4): 303-314 (Dec 1, 1989)</p>
                             </div>
                         </div>
