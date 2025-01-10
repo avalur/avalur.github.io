@@ -15,12 +15,8 @@
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["numpy", "matplotlib"]
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<style>
 			.column {
 			  float: left;
@@ -186,7 +182,7 @@
                         <p style="text-align: left">$E(M)= \exp(-M)$ — exponential (let's remember for future AdaBoost)</p>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" config='{"packages":["numpy", "matplotlib"]}' env="shared">
                             import matplotlib.pyplot as plt
                             import numpy as np
 
@@ -214,7 +210,7 @@
                             fig.set_size_inches(14, 8)
                             plt.legend(loc='best')
                             plt.savefig('loss_functions.png')
-                        </py-repl>
+                        </script>
                     </section>
                     <section  data-background-color="#ffffff">
                         <img src="../ml_with_python/images/loss_functions.png" alt="loss_functions" width="100%">
@@ -673,7 +669,7 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>How else can the logarithm help?</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import matplotlib.pyplot as plt
                             from matplotlib import cm, ticker
                             from matplotlib.ticker import LinearLocator
@@ -689,10 +685,10 @@
                             X, Y = np.meshgrid(x, y)
                             R = np.sqrt(X**2 + Y**2)
                             Z = R**1.2 / 5
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             # Plot the surface
                             surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
                                                    linewidth=0, antialiased=False)
@@ -707,7 +703,7 @@
                             fig.colorbar(surf, shrink=0.5, aspect=5)
 
                             fig
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
                         <img src="../ml_with_python/images/loss_example.png" alt="" style="width:49%; float:left;">
