@@ -15,12 +15,8 @@
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["numpy", "matplotlib", "scikit-learn"]
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<style>
 			.column {
 			  float: left;
@@ -212,7 +208,7 @@
                             <div class="typesetting">
                             <h4 style="text-align: left">Example</h4>
 
-                            <p>Linear model with vector of parameters
+                            <p style="text-align: left">Linear model with vector of parameters
                                 $\theta = (\theta_1, \dots, \theta_n), \Theta = \mathbb{R}^n$:</p>
 
                             <p>$g(x, \theta) = \sum\limits_{j=1}^n \theta_jf_j(x)$ — for regression and ranking,
@@ -231,22 +227,22 @@
                         <p style="text-align: left">$X = Y = \mathbb{R}$, $\ell = 50$ objects</p>
 
                         <p>$n = 3$ features: $\{1, x, x^2\}$ or $\{1, x, \sin x\}$</p>
-                        <py-repl>
+                        <script type="py-editor" config="mlintro.toml" env="exp1">
                             import matplotlib.pyplot as plt
+
                             import numpy as np
                             np.random.seed(0)
 
                             l = 50
                             x = np.linspace(0, 30, num=l)
                             Y = x + 4*np.sin(x) + 3*np.random.randn(l)
-
                             X1 = np.vstack([np.ones_like(x), x, x**2]).T
                             X2 = np.vstack([np.ones_like(x), x, np.sin(x)]).T
                             print(X1.shape, X2.shape)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="exp1">
                             fig, ax = plt.subplots()
                             ax.set_xlabel('x'), ax.set_ylabel('Y')
                             ax.plot(x, Y, '.', label='train points')
@@ -254,11 +250,14 @@
                             x_plot = np.linspace(0, 30, num=1000)
                             ax.plot(x_plot, x_plot + 4*np.sin(x_plot), label='real')
                             plt.legend(loc='best')
-                            fig # plt.show()
-                        </py-repl>
+                            plt.savefig('exp1_train.png')
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/exp1_train.png" width="840">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="exp1">
                             from sklearn.linear_model import LinearRegression
 
                             reg1 = LinearRegression(fit_intercept=False)
@@ -268,7 +267,7 @@
                             reg2.fit(X2, Y)
 
                             print("Models have been trained.")
-                        </py-repl>
+                        </script>
                         <div class="fragment important" style="margin-top:20px;">
                             <div class="typesetting">
                                 <div class="r-frame">
@@ -278,26 +277,29 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
-                            fig, ax = plt.subplots()
-                            ax.set_xlabel('x'), ax.set_ylabel('Y')
-                            ax.plot(x, Y, '.', label='train points')
-
+                        <script type="py-editor" env="exp1">
                             x_plot = np.linspace(0, 30, num=1000)
                             X1 = np.vstack([np.ones_like(x_plot), x_plot, x_plot**2]).T
                             X2 = np.vstack([np.ones_like(x_plot), x_plot, np.sin(x_plot)]).T
 
                             print("Data for plots have been created.")
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="exp1">
+                            fig, ax = plt.subplots()
+                            ax.set_xlabel('x'), ax.set_ylabel('Y')
+                            ax.plot(x, Y, '.', label='train points')
+
                             ax.plot(x_plot, reg1.predict(X1), label='{1, x, x^2}', linestyle='dashed')
                             ax.plot(x_plot, reg2.predict(X2), label='{1, x, sin(x)}')
                             ax.plot(x_plot, x_plot + 4*np.sin(x_plot), label='real')
                             plt.legend(loc='best')
-                            fig
-                        </py-repl>
+                            plt.savefig('exp1_res.png')
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/exp1_res.png" width="840">
                     </section>
                     <section>
                         <h3>Let's have a break!</h3>
@@ -324,7 +326,7 @@
                         <div class="fragment" style="margin-bottom:20px;">
                             <h3 style="text-align: left">Test Stage</h3>
                             <div class="typesetting">
-                                <p>The algorithm $a$ produces answers $a(x_i^\prime)$ for new objects $x_i^\prime$</p>
+                                <p style="text-align: left">The algorithm $a$ produces answers $a(x_i^\prime)$ for new objects $x_i^\prime$</p>
                             </div>
                         </div>
                     </section>
@@ -411,7 +413,7 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" config="mlintro.toml" env="ex2">
                             import numpy as np
 
                             np.random.seed(0)
@@ -420,10 +422,10 @@
                             x = np.linspace(-2, 2, num=l)
                             Y = 1 / (1 + 25*x**2)
                             print(x.shape, Y.shape)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="ex2">
                             import matplotlib.pyplot as plt
 
                             fig, ax = plt.subplots()
@@ -433,10 +435,11 @@
                             y_plot = 1 / (1 + 25*x_plot**2)
                             ax.plot(x_plot, y_plot, label='real')
                             plt.legend(loc='best'); fig
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="ex2">
+                            import numpy as np
                             from sklearn.linear_model import LinearRegression
 
                             def X(x, n):
@@ -446,10 +449,10 @@
                                 return np.vstack(res).T
 
                             print("X has been compiled.")
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="ex2">
                             x_l = np.array([4*(i - 1)/(l - 1) - 2 for i in range(1, l + 1)])
                             x_k = np.array([4*(i - 0.5)/(l - 1) - 2 for i in range(1, l)])
                             lin_reg = LinearRegression(fit_intercept=False)
@@ -466,11 +469,11 @@
                                 test_score.append(np.mean((lin_reg.predict(X_k) - Y_k)**2))
                                 print(n,end=', ')
                             print()
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
 <!--language=Python-->
-                        <py-repl>
+                        <script type="py-editor" env="ex2">
                             import matplotlib.pyplot as plt_
                             fig_, ax_ = plt_.subplots()
                             ax_.set_xlabel('n'), ax_.set_ylabel('log Q')
@@ -479,9 +482,8 @@
                             ax_.plot(np.log(train_score), 'bo-', label='train score')
                             ax_.plot(np.log(test_score), 'go--', label='test score')
                             plt_.legend(loc='best')
-                            # plt_.savefig('overfitting.png')
-                            fig_
-                        </py-repl>
+                            plt_.savefig('overfitting.png')
+                        </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <img src="../ml_with_python/images/overfitting.png" width="50%">
@@ -653,6 +655,12 @@
                             <div class="typesetting">
                                 <p style="text-align: left">2024: AI gets en-Nobel-ed: John Hopfield and Geoffrey Hinton receive the Nobel Prize in Physics,
                                 David Baker, Demis Hassabis and John Jumper receive the Nobel Prize in Chemistry</p>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="fragment" style="margin-bottom:20px;">
+                            <div class="typesetting">
+                                <p style="text-align: left">2025: another one release from OpenAI - GPT o3</p>
                                 </p>
                             </div>
                         </div>
