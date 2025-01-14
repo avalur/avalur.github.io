@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Cogwheels</title>
+    <style>
+        .cogwheel {
+            position: absolute;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            border: 15px dashed #333;
+        }
+
+        .cogwheel-large {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="position: relative; width: 580px; height: 580px;">
+        <div class="cogwheel cogwheel-large" id="cog1"></div>
+        <div class="cogwheel" id="cog2"></div>
+        <div class="cogwheel" id="cog3"></div>
+        <div class="cogwheel" id="cog4"></div>
+        <div class="cogwheel" id="cog5"></div>
+    </div>
+
+    <script>
+        const cog1 = document.getElementById('cog1');
+        const cog2 = document.getElementById('cog2');
+        const cog3 = document.getElementById('cog3');
+        const cog4 = document.getElementById('cog4');
+        const cog5 = document.getElementById('cog5');
+        let angle = 0;
+
+        function animate() {
+            angle += 0.25;
+            // Center large cogwheel
+            cog1.style.transform = `translate(200px, 200px) rotate(${angle}deg)`;
+            // Top cogwheel
+            cog2.style.transform = `translate(250px, 45px) rotate(${-angle * 2}deg)`;
+            // Right cogwheel
+            cog3.style.transform = `translate(430px, 250px) rotate(${-angle * 2}deg)`;
+            // Bottom cogwheel
+            cog4.style.transform = `translate(250px, 430px) rotate(${-angle * 2}deg)`;
+            // Left cogwheel
+            cog5.style.transform = `translate(45px, 250px) rotate(${-angle * 2}deg)`;
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
