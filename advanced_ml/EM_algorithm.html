@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -42,7 +42,7 @@
 								<h3>Expectation-Minimization algorithm</h3>
 								<br />
 								Alex Avdiushenko<br />
-								February 20, 2024
+								February 11, 2025
 							</div>
 					</div>
                 </section>
@@ -98,7 +98,7 @@
                     </section>
                     <section>
                         <h3 style="text-align: left">Asymmetry of KL Divergence</h3>
-                        <p style="text-align: left">Example: searching for a similar Distribution</p>
+                        <p style="text-align: left">Example: searching for a similar distribution</p>
 
                         <p>\( KL(? || ?) \) — where to place \( p \)?</p>
                         <div>
@@ -285,9 +285,11 @@
                         <p style="text-align: left">E-step: $\mu_k, \sigma_k^2, \pi_k \to q$</p>
 
                         $$
-                        q_i(z_i{=}j) = p(z_i{=}j|x_i, \theta) = \frac{p(x_i|z_i {=} j, \theta)p(z_i {=} j|\theta)}{p(x_i|\theta)} = \\
-                           = \frac{p(x_i|z_i {=} j, \theta)p(z_i {=} j|\theta)}{\sum\limits_{k=1}^K p(x_i|z_i {=} k, \theta)p(z_i {=} k|\theta)}
-                           = \frac{N(x_i|\mu_j, \sigma_j^2) \pi_j}{\sum\limits_{k=1}^K N(x_i|\mu_k, \sigma_k^2) \pi_k}
+                        q_i(z_i{\scriptsize =}j) =
+                        p(z_i{\scriptsize =}j|x_i, \theta) =
+                        \frac{p(x_i|z_i {\scriptsize =} j, \theta)p(z_i {\scriptsize =} j|\theta)}{p(x_i|\theta)} = \\
+                        \frac{p(x_i|z_i {\scriptsize =} j, \theta)p(z_i {\scriptsize =} j|\theta)}{\sum\limits_{k=1}^K p(x_i|z_i {\scriptsize =} k, \theta)p(z_i {\scriptsize =} k|\theta)} =
+                        \frac{N(x_i|\mu_j, \sigma_j^2) \pi_j}{\sum\limits_{k=1}^K N(x_i|\mu_k, \sigma_k^2) \pi_k}
                         $$
                     </section>
                     <section>
@@ -295,8 +297,8 @@
 
                         $$
                         \begin{align*}
-                        \sum\limits_{i=1}^n \mathscr{L}(q,\theta) &= \sum\limits_{i=1}^n \sum\limits_{k=1}^K q_i(z_i=k) \log\frac{p(x_i|z_i = k, \theta)p(z_i = k|\theta)}{q_i(z_i=k)} \\
-                        &= \sum\limits_{i=1}^n \sum\limits_{k=1}^K q_i(z_i=k) \log\frac{N(x_i|\mu_k, \sigma_k^2)\pi_k}{q_i(z_i=k)}
+                        \sum\limits_{i=1}^n \mathscr{L}(q,\theta) & = \sum\limits_{i=1}^n \sum\limits_{k=1}^K q_i(z_i{\scriptsize =}k) \log\frac{p(x_i|z_i {\scriptsize =} k, \theta)p(z_i {\scriptsize =} k|\theta)}{q_i(z_i{\scriptsize =}k)} \\
+                        & = \sum\limits_{i=1}^n \sum\limits_{k=1}^K q_i(z_i{\scriptsize =}k) \log\frac{N(x_i|\mu_k, \sigma_k^2)\pi_k}{q_i(z_i{\scriptsize =}k)}
                         \end{align*}
                         $$
                     </section>
@@ -304,9 +306,9 @@
                         <p style="text-align: left">Next, as usual, we find the zeros of the derivative:</p>
 
                         $$
-                        \mu_j = \frac{\sum\limits_{i=1}^n q_i(z_i=j)x_i}{\sum\limits_{i=1}^n q_i(z_i=j)};\
-                        \sigma_j^2 = \frac{\sum\limits_{i=1}^n q_i(z_i=j)(x_i-\mu_j)^2}{\sum\limits_{i=1}^n q_i(z_i=j)}\\
-                        \pi_j = \frac{1}{n} \sum\limits_{i=1}^n q_i(z_i = j)
+                        \mu_j = \frac{\sum\limits_{i=1}^n q_i(z_i{\scriptsize =}j)x_i}{\sum\limits_{i=1}^n q_i(z_i{\scriptsize =}j)}; \;
+                        \sigma_j^2 = \frac{\sum\limits_{i=1}^n q_i(z_i{\scriptsize =}j)(x_i-\mu_j)^2}{\sum\limits_{i=1}^n q_i(z_i{\scriptsize =}j)} \\
+                        \pi_j = \frac{1}{n} \sum\limits_{i=1}^n q_i(z_i {\scriptsize =} j)
                         $$
                     </section>
                 </section>
@@ -318,7 +320,7 @@
 
                         <p style="text-align: left">$g_1(x), \dots, g_d(x)$ — new numerical features, $d \leq D$</p>
 
-                        <p><b>Requirement</b>: The old features should be restored as accurately as possible
+                        <p style="text-align: left"><b>Requirement</b>: The old features should be restored as accurately as possible
                             linearly from the new ones on the training set $X^n$:</p>
                         $$ \hat f_j(x) = \sum\limits_{s=1}^d g_s(x) u_{js}, j=1,\dots,D , \forall x \in X $$
                         $$ \sum\limits_{i=1}^n \sum\limits_{j=1}^D (\hat f_j(x_i) - f_j(x_i))^2 \to \min\limits_{\{g_s(x_i)\}, \{u_{js}\}} $$
