@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -42,7 +42,7 @@
 								<h3>Reinforcement learning intro</h3>
 								<br />
 								Alex Avdiushenko<br />
-								March 19, 2024
+								February 18, 2025
 							</div>
 					</div>
                 </section>
@@ -225,7 +225,7 @@
                             <div class="typesetting">
                                 <div style="display: flex; justify-content: space-between;">
                                     <div>
-                                        <h4>Areas:</h4>
+                                        <h4 style="text-align: left">Areas:</h4>
                                         <ul>
                                             <li>advertising banners</li>
                                             <li>recommendations (goods, music, movies etc.)</li>
@@ -233,7 +233,7 @@
                                         </ul>
                                     </div>
                                     <div>
-                                        <h4>Approaches:</h4>
+                                        <h4 style="text-align: left">Approaches:</h4>
                                         <ul>
                                             <li>Thompson sampling</li>
                                             <li>Upper Confidence Bound (UCB)</li>
@@ -255,8 +255,7 @@
                     <section>
                         <h3>Multi-Armed Bandits Disadvantage</h3>
                         <p style="text-align: left">Do not take into account delayed effects. For example, the effect of clickbait in advertising</p>
-
-                        <img src="images/cats_invaders.jpg" alt="Cats" style="width: 45%;border-radius: 5%">
+                        <img src="images/cats_invaders.jpg" alt="Cats" style="width: 35%;border-radius: 5%">
                         <p>SHOCK! Cats want to enslave us</p>
                         <aside class="notes">
                             So you may increase your metrics for some short period of time by clickbait,
@@ -354,7 +353,7 @@
 
                         <div class="fragment">
                             <div class="typesetting">
-                                <p style="text-align: left">That there are a lot of states:</p>
+                                <p style="text-align: left">That there is a lot of states:</p>
                                 <img src="images/starcraft3.jpg" alt="Starcraft" style="width: 80%;border-radius: 5%">
                             </div>
                         </div>
@@ -370,7 +369,7 @@
                             <div class="typesetting">
                                 <ul>
                                     <li>Split the state space into sections and treat them as states</li>
-                                    <li>Get probabilities from $\pi_\theta (a | s)$ machine learning model:
+                                    <li>Get probabilities from $\pi_\theta (a | s)\ - $ machine learning model:
                                         linear model, neural network, random forest
                                         (often these probabilities need to be further specified later)</li>
                                 </ul>
@@ -423,7 +422,7 @@
                                     <li>state $s \in S$</li>
                                     <li>agent action $a \in A$</li>
                                     <li>reward $r \in R$</li>
-                                    <li>transition dynamics (Markov's assumption)
+                                    <li>transition dynamics <span style="color: orange">(Markov's assumption)</span>
                                         $$ P(s_{t+1} | s_t, a_t, \dots, s_{t-i}, a_{t-i}, \dots, s_0, a_0) = P(s_{t+1} | s_t, a_t)$$</li>
                                     <li>win function (Markov's assumption)
                                         $$r_{t} = r(s_t, a_t)$$</li>
@@ -643,7 +642,7 @@
                                     <li>Gets approximation of the optimal value function $Q(s_t, a_t)$
                                         for fixed current network parameters ${\color{orange} w_t}$</li>
                                     <li>Evaluates loss function for training the neural network model $Q(s, a; w)$:
-                                    $$ \mathscr{L} (w) = (Q(s_t, a_t; w) - y_t)^2 $$
+                                    $$ \mathscr{L} (w) = (Q(s_t, a_t; w) - y_t)^2;\ y_t = r_t + \gamma \max_a Q(s_{t+1}, a; w) $$
                                     with stochastic gradient SGD (by mini-batches of length 32):
                                     $$ w_{t+1} = w_{t} - \eta \left(Q(s_t, a_t; w_t) - y_t\right) \nabla_w Q(s_t, a_t; w_t) $$</li>
                                     <li>Also it is better to use two different models for max evaluation and updating
