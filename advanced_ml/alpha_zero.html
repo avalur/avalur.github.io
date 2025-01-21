@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -42,7 +42,7 @@
 								<h3>From AlphaGo to AlphaZero</h3>
 								<br />
 								Alex Avdiushenko<br />
-								March 26, 2024
+								February 25, 2025
 							</div>
 					</div>
                 </section>
@@ -84,8 +84,8 @@
                                 $$
                                 <p style="text-align: left">
                                     Probabilities $Pr_\pi[s]$ are very hard to calculate,
-                                    but we can just play using policy $\pi$, and this gives us
-                                    correct samples from this distribution.</p>
+                                    but we can just play using policy $\pi,$ and this gives us
+                                    correct samples from this distribution</p>
                             </div>
                         </div>
                     </section>
@@ -110,7 +110,7 @@
                         <h3>TD-Gammon (1992)</h3>
                         <div class="fragment">
                             <div class="typesetting">
-                                <p style="text-align: left">TD-Gammon is a computer backgammon program that uses artificial intelligence
+                                <p style="text-align: left">TD-Gammon is a computer gammon program that uses artificial intelligence
                                     and machine learning techniques to play the game at a highly competitive level.
 
                                     Developed by Gerald Tesauro from IBM.</p>
@@ -160,10 +160,10 @@
                             <div class="typesetting">
                                 <h3 style="text-align: left">1960-s: Beginnings</h3>
                                 <ul style="text-align: left">
-                                    <li>The first attempts to program a computer to play Go began in the 1960s.</li>
+                                    <li>The first attempts to program a computer to play Go began in the 1960s</li>
                                     <li>The earliest Go programs could only play on smaller 9x9 or 13x13 boards and
                                     demonstrated limited capabilities due to the complexity of the game and technological constraints.
-                                    1968: Albert Zobrist.</li>
+                                    1968: Albert Zobrist</li>
                                 </ul>
                             </div>
                         </div>
@@ -173,9 +173,9 @@
                                 <h3 style="text-align: left">1980-1990-s: Incremental Improvements</h3>
                                 <ul style="text-align: left">
                                     <li>Throughout the 80s and 90s, Go programs gradually improved with advancements
-                                    in computing power and AI algorithms.</li>
+                                    in computing power and AI algorithms</li>
                                     <li>However, they were still far from matching the skills of human players.
-                                    Goliath, Go Intellect, Handtalk, Goemate.</li>
+                                    Goliath, Go Intellect, Handtalk, Goemate</li>
                                 </ul>
                             </div>
                         </div>
@@ -189,8 +189,8 @@
                             <li class="fragment">At the 2010 European Go Congress MogoTW played 19x19 Go against Catalin Taranu (5p).
                                 MogoTW received a 7-stone handicap and won</li>
                             <li class="fragment">We know that DeepBlue defeated Garry Kasparov in 1997</li>
-                            <li class="fragment">What is the problem? Why is Go harder than Chess for computer?</li>
                         </ul>
+                            <p class="fragment"><span style="color: orange">What is the problem? Why is Go harder than Chess for computer?</span></p>
                     </section>
                     <section>
                         <h3 style="text-align: left">Schematic tree of possible moves in Go</h3>
@@ -271,22 +271,24 @@
                         </div>
                     </section>
                     <section data-background-image="images/lee_sedol.png">
-                        <div class="fragment">
-                            <div class="typesetting">
-                                <h3 style="text-align: left"><p>AlphaGo vs. Lee Sedol</p>
-                                9-15 March 2016</h3>
+                        <span style="color: white">
+                            <div class="fragment">
+                                <div class="typesetting">
+                                    <h3 style="text-align: left;color: white"><p>AlphaGo vs. Lee Sedol</p>
+                                    9-15 March 2016</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="fragment">
-                            <div class="typesetting">
-                                <p style="text-align: left;font-size: 52px"> Forecast was 1 : 4 </p>
+                            <div class="fragment">
+                                <div class="typesetting">
+                                    <p style="text-align: left;font-size: 52px"> Forecast was 1 : 4 </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="fragment">
-                            <div class="typesetting">
-                                <p style="text-align: left;font-size: 52px"> Result was 4 : 1 </p>
+                            <div class="fragment">
+                                <div class="typesetting">
+                                    <p style="text-align: left;font-size: 52px"> Result was 4 : 1 </p>
+                                </div>
                             </div>
-                        </div>
+                        </span>
                         <br><br><br><br><br><br><br><br><br><br><br><br>
                         <aside class="notes">
                             And then, March 2016 became.
@@ -318,9 +320,9 @@
                                     <a href="https://www.nature.com/articles/nature16961">
                                     "Mastering the game of Go with deep neural networks and tree search"</a></li>
                                 <li><strong>March 2016:</strong> AlphaGo plays a five-game match against Lee Sedol,
-                                    one of the world's top Go players, and wins 4:1.</li>
+                                    one of the world's top Go players, and wins 4:1</li>
                                 <li><strong>May 2017:</strong> AlphaGo plays a three-game match against Ke Jie,
-                                    the world No.1 ranked player at the time, and wins 3:0.</li>
+                                    the world No.1 ranked player at the time, and wins 3:0</li>
                             </ul>
                             <p style="text-align: left">The development of AlphaGo was a significant achievement
                             in the field of Artificial Intelligence.</p>
@@ -440,12 +442,12 @@
                             <div class="fragment">
                                 <div class="typesetting">
                                     <ul>
-                                        <li>we have a deep neural network for next move prediction and position evaluation</li>
+                                        <li>we have only one deep neural network for next move prediction and position evaluation</li>
                                         <li>it self-plays and simultaneously builds an MCTS tree</li>
                                         <li>it improves both the NN weights (via RL) and MCTS tree</li>
                                     </ul>
 
-                                    <img src="images/AlphaGoZero.png" style="border-radius: 3%;width: 50%">
+                                    <img src="images/AlphaGoZero.png" style="border-radius: 3%;width: 40%">
                                 </div>
                             </div>
                     </section>
@@ -453,10 +455,10 @@
                         <p style="text-align: left">We minimize</p>
                         $$ Loss = (z-v)^2 - \pi^T \cdot \log p + c \|\theta\|^2 $$
                         <p style="text-align: left">
-                            where $p$ is vector with moves probabilities from NN,
+                            where $p$ is a vector with moves probabilities from NN,
                             $\pi$ — improved by MCTS vector of probabilities,
                             $z \in \mathbb{R}$ and $v \in \mathbb{R}$ are value function estimations from MCTS and NN,
-                            $\theta$ are weights of NN, and $c$ is regularization coefficient.
+                            $\theta$ are weights of NN, and $c$ is regularization coefficient
                         </p>
                     </section>
                 </section>
@@ -478,11 +480,11 @@
                         <br><br>
                         <div class="fragment">
                             <div class="typesetting">
-                                <h3 style="text-align: left">What else can you see?</h3>
+                                <h3 style="text-align: left">What else can you look at?</h3>
                                 <ul>
-                                    <li><a href="https://www.youtube.com/watch?v=KW9KAWmu4nI">Lecture by S. Nikolenko at Computer Science Club (in Russian)</a></li>
-                                    <li><a href="https://spinningup.openai.com/en/latest">Educational resource on RL produced by OpenAI</a></li>
-                                    <li><a href="https://www.davidsilver.uk/teaching/">Intro to RL with David Silver, DeepMind × UCL, 2015</a></li>
+                                    <li><a href="https://spinningup.openai.com/en/latest">Educational resource on RL</a> produced by OpenAI</li>
+                                    <li><a href="https://www.davidsilver.uk/teaching/">Intro to RL</a> with David Silver, DeepMind × UCL, 2015</li>
+                                    <li><a href="https://www.youtube.com/watch?v=KW9KAWmu4nI">Lecture by S. Nikolenko</a> at Computer Science Club (in Russian)</li>
                                 </ul>
                             </div>
                         </div>
