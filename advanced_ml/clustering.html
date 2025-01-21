@@ -36,13 +36,13 @@
 					<div>
 						<img src="images/nup_logo_dark.jpeg" alt="nup_logo" />
 					</div>
-                    <h2>Fundamentals of Machine Learning</h2>
+                    <h2>Advanced Machine Learning</h2>
 					<div class="fragment" style="margin-bottom:20px;">
 							<div class="typesetting">
 								<h3>Semi- and unsupervised learning, clustering</h3>
 								<br />
 								Alex Avdiushenko <br />
-								December 24, 2024
+								February 13, 2025
 							</div>
 					</div>
                 </section>
@@ -267,8 +267,6 @@
                         </table>
                     </section>
                     <section data-background-color="antiquewhite">
-                        <h3>SSL Does Not Reduce to Classification</h3>
-
                         <p style="text-align: left"><strong>Example 2: </strong>Classification methods
                             do not account for the cluster structure of unlabeled data</p>
 
@@ -284,7 +282,10 @@
                     <section data-background-color="antiquewhite">
                         <h3>However, SSL Also Does Not Reduce to Clustering</h3>
 
-                        <p style="text-align: left"><strong>Example 3: </strong>Clustering methods do not consider the priority of labeling over cluster structure</p>
+                        <p style="text-align: left"><strong>Example 3: </strong>
+                            Clustering methods do not consider the priority of labeling over cluster structure.
+                            How to classify objects in clusters:
+                        </p>
 
                         <div align="center">
                           <img style="border-radius: 5%" src="images/two_moons_2.jpg" alt="two_moons_2" width="700" />
@@ -623,9 +624,12 @@
                                     <li><b>Contraction Distance</b>: \( R_t \leq \rho(\mu_U, \mu_V), \forall t \)</li>
                                     <li><b>Expansion Distance</b>: \( R_t \geq \rho(\mu_U, \mu_V), \forall t \)</li>
                                 </ul>
-                                <p style="text-align: left"><b>Theorem</b> (Milligan, 1979): Clustering is monotonic if the conditions
-                                \( \alpha_U \geq 0, \alpha_V \geq 0, \alpha_U + \alpha_V + \beta \geq 1, \min\{\alpha_U, \alpha_V\} + \gamma \geq 0 \) are met<br>
-                                    <br><br>
+                                <br><br>
+                                <div class="r-frame" style="padding-left: 30px">
+                                    <p style="text-align: left"><b>Theorem</b> (Milligan, 1979): Clustering is monotonic if the conditions
+                                    \( \alpha_U \geq 0, \alpha_V \geq 0, \alpha_U + \alpha_V + \beta \geq 1, \min\{\alpha_U, \alpha_V\} + \gamma \geq 0 \) are met
+                                </div>
+                                <br>
                                 \( R^\text{c} \) is not monotonic; \( R^\text{nn} \), \( R^\text{fn} \), \( R^\text{g} \), \( \color{orange}{R^\text{w}} \) are monotonic<br>
                                 \( R^\text{nn} \) is contracting; \( R^\text{fn}, \color{orange}{R^\text{w}} \) are expanding</p>
                             </div>
