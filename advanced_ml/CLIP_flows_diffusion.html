@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -45,7 +45,7 @@
 								<h3>CLIP, flows, and diffusion</h3>
 								<br />
 								Alex Avdiushenko<br />
-								April 2, 2024
+								March 11, 2025
 							</div>
 					</div>
                 </section>
@@ -54,9 +54,9 @@
                         <h3>Contrastive Language–Image Pretraining (CLIP)</h3>
 
                         <img src="images/clip-overview-a.svg" width="50%" style="border-radius: 5%">
-                        <p>It is a neural network model
+                        <p style="text-align: left">It is a neural network model
                             <a href="https://openai.com/research/clip">developed by OpenAI</a> in 2021
-                            that connects the power of vision and language models.</p>
+                            that connects the power of vision and language models</p>
 
                         <aside class="notes">
                             CLIP works by learning to understand and generate a representation
@@ -72,10 +72,10 @@
                             <li>Contrastive pretraining is the next step after Triplet loss</li>
                             <li>Two transformers: one for texts and another one for images (Vision Transformer, Dosovitsky et al., 2020)</li>
                         </ul>
-                        <img src="images/ViT_scheme.png" width="70%" style="border-radius: 5%">
+                        <img src="images/ViT_scheme.png" width="60%" style="border-radius: 5%">
                     </section>
                     <section>
-                        <p>CLIP becomes a very popular source of joint embeddings, for instance, for DALL-E 2:</p>
+                        <p style="text-align: left">CLIP becomes a very popular source of joint embeddings, for example, <br> for DALL-E 2:</p>
                         <img src="images/DALL-E-2-architecture.webp" width="70%" style="border-radius: 5%">
                     </section>
                 </section>
@@ -178,12 +178,13 @@
                                 <p style="text-align: left">where $s(.)$ and $t(.)$ are <em>scale</em> and <em>translation</em>
                                     functions and both map $\mathbb{R}^d \mapsto \mathbb{R}^{D-d}$.
                                     The $\odot$ operation is the element-wise product.
-                                    Now let&rsquo;s check whether this transformation satisfy two basic properties
-                                    for a flow transformation.</p>
+                                </p>
                             </div>
                         </div>
                     </section>
                     <section>
+                        <p style="text-align: left">Now let&rsquo;s check whether this transformation
+                            satisfies two basic properties for a flow transformation.</p>
                         <p style="text-align: left"><strong>Condition 1</strong>: &ldquo;It is easily invertible.&rdquo;</p>
                         <p style="text-align: left">Yes, and it is fairly straightforward.</p>
                         $$
@@ -295,7 +296,7 @@
                             & \tilde{\sigma}(\tilde{\mathbf{z}}_{1:i-1}) = \tilde{\sigma}(\mathbf{x}_{1:i-1}) = \frac{1}{\sigma_i(\mathbf{x}_{1:i-1})}
                         \end{aligned}
                         $$
-                        <p style="text-align: left">Then we would have,</p>
+                        <p style="text-align: left">Then we would have</p>
                         $$
                             \tilde{x}_i \sim p(\tilde{x}_i\vert\tilde{\mathbf{z}}_{1:i}) = \tilde{z}_i \odot \tilde{\sigma}_i(\tilde{\mathbf{z}}_{1:i-1}) + \tilde{\mu}_i(\tilde{\mathbf{z}}_{1:i-1})
                             \text{, where }\tilde{\mathbf{z}} \sim \tilde{\pi}(\tilde{\mathbf{z}})
@@ -308,7 +309,7 @@
                             but the scale and shift terms are autoregressive functions of observed variables
                             from the known distribution $\tilde{\pi}(\tilde{\mathbf{z}})$.
                             See the comparison between MAF and IAF in the following picture.</p>
-                        <img src="images/MAF-vs-IAF.png" style="width: 70%;border-radius: 5%" />
+                        <img src="images/MAF-vs-IAF.png" style="width: 60%;border-radius: 5%" />
                         <p>Comparison of MAF and IAF. The variable with known density is in green while the unknown one is in red.</p>
                     </section>
                     <section>
@@ -503,7 +504,7 @@
                         \begin{aligned}
                             \tilde{\boldsymbol{\mu}}_t
                             &= \frac{\sqrt{\alpha_t}(1 - \bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t} \mathbf{x}_t + \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1 - \bar{\alpha}_t} \frac{1}{\sqrt{\bar{\alpha}_t}}(\mathbf{x}_t - \sqrt{1 - \bar{\alpha}_t}\boldsymbol{\epsilon}_t) \\
-                            &= \color{cyan}{\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_t \Big)}
+                            &= \color{blue}{\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_t \Big)}
                             \end{aligned}
                         $$
                     </section>
@@ -531,9 +532,7 @@
                         $$
                         \begin{aligned}
                         L_\text{VLB}
-                        &= \mathbb{E}_{q(\mathbf{x}_{0:T})} \Big[ \log\frac{q(\mathbf{x}_{1:T}\vert\mathbf{x}_0)}{p_\theta(\mathbf{x}_{0:T})} \Big] \\
-                        &= \mathbb{E}_q \Big[ \log\frac{\prod_{t=1}^T q(\mathbf{x}_t\vert\mathbf{x}_{t-1})}{ p_\theta(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_{t-1} \vert\mathbf{x}_t) } \Big] \\
-                        &= \dots \\
+                        &= \mathbb{E}_{q(\mathbf{x}_{0:T})} \Big[ \log\frac{q(\mathbf{x}_{1:T}\vert\mathbf{x}_0)}{p_\theta(\mathbf{x}_{0:T})} \Big] = \mathbb{E}_q \Big[ \log\frac{\prod_{t=1}^T q(\mathbf{x}_t\vert\mathbf{x}_{t-1})}{ p_\theta(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_{t-1} \vert\mathbf{x}_t) } \Big] = \dots \\
                         &= \mathbb{E}_q \Big[ \log\frac{q(\mathbf{x}_T \vert \mathbf{x}_0)}{p_\theta(\mathbf{x}_T)} + \sum_{t=2}^T \log \frac{q(\mathbf{x}_{t-1} \vert \mathbf{x}_t, \mathbf{x}_0)}{p_\theta(\mathbf{x}_{t-1} \vert\mathbf{x}_t)} - \log p_\theta(\mathbf{x}_0 \vert \mathbf{x}_1) \Big] \\
                         &= \mathbb{E}_q [\underbrace{D_\text{KL}(q(\mathbf{x}_T \vert \mathbf{x}_0) \parallel p_\theta(\mathbf{x}_T))}_{L_T} + \\
                         &+ \sum_{t=2}^T \underbrace{D_\text{KL}(q(\mathbf{x}_{t-1} \vert \mathbf{x}_t, \mathbf{x}_0) \parallel p_\theta(\mathbf{x}_{t-1} \vert\mathbf{x}_t))}_{L_{t-1}} \underbrace{- \log p_\theta(\mathbf{x}_0 \vert \mathbf{x}_1)}_{L_0} ]
@@ -558,7 +557,7 @@
                             from $\mathcal{N}(\mathbf{x}_0; \boldsymbol{\mu}_\theta(\mathbf{x}_1, 1), \boldsymbol{\Sigma}_\theta(\mathbf{x}_1, 1))$.</p>
                     </section>
                     <section>
-                        <h2>Parameterization of $L_t$ for Training Loss</h2>
+                        <h4>Parameterization of $L_t$ for Training Loss</h4>
                         <p style="text-align: left">Recall that we need to learn
                             a neural network to approximate the conditioned
                             probability distributions in the reverse diffusion process,
@@ -576,7 +575,7 @@
                             from the input $\mathbf{x}_t$ at time step $t$:</p>
                         $$
                         \begin{aligned}
-                        \boldsymbol{\mu}_\theta(\mathbf{x}_t, t) &= \color{cyan}{\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_\theta(\mathbf{x}_t, t) \Big)} \\
+                        \boldsymbol{\mu}_\theta(\mathbf{x}_t, t) &= \color{blue}{\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_\theta(\mathbf{x}_t, t) \Big)} \\
                         \text{Thus }\mathbf{x}_{t-1} &= \mathcal{N}(\mathbf{x}_{t-1}; \frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_\theta(\mathbf{x}_t, t) \Big), \boldsymbol{\Sigma}_\theta(\mathbf{x}_t, t))
                         \end{aligned}
                         $$
@@ -608,14 +607,14 @@
                             Latent diffusion model (LDM; <a href="https://arxiv.org/abs/2112.10752">Rombach & Blattmann, et al. 2022</a>)
                             runs the diffusion process in the latent space instead of pixel space,
                             making training cost lower and inference speed faster. <br>
-                            It is motivated by the observation that most bits of an image
+                            The most bits of an image
                             contribute to perceptual details and the semantic and conceptual composition
                             still remains after aggressive compression.
                         </p>
-                        <img src="images/image-distortion-rate.png" alt="image-distortion-rate" style="width: 60%;border-radius: 5%">
+                        <img src="images/image-distortion-rate.png" alt="image-distortion-rate" style="width: 45%;border-radius: 5%">
                     </section>
                     <section>
-                        <h3>The architecture of latent diffusion model</h3>
+                        <h3>The architecture of a latent diffusion model</h3>
                         <img src="images/latent-diffusion-arch.png" alt="latent-diffusion-arch" style="width: 80%;border-radius: 5%">
                     </section>
                     <section>
