@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -45,7 +45,7 @@
 								<h3>Generative and discriminative models</h3>
 								<br />
 								Alex Avdiushenko<br />
-								March 26, 2024
+								March 4, 2025
 							</div>
 					</div>
                 </section>
@@ -55,12 +55,12 @@
 
                         <p style="text-align: left"><strong>Given: </strong>set of objects $X$, set of answers $Y$</p>
 
-                        <p style="text-align: left"><strong>We need to find</strong> distribution $p(y | x)$ — it is <span class="important">Discriminative</span> model</p>
+                        <p style="text-align: left"><strong>We need to find</strong> distribution $p(y | x)$ — it is <span class="important">discriminative</span> model</p>
 
                         <br>
                         <div class="fragment">
                             <div class="typesetting">
-                                <p style="text-align: left">In <span class="important">Generative</span> model,
+                                <p style="text-align: left">In <span class="important">generative</span> model,
                                     we need to find joint distribution $p(x, y)$ and $$p(y | x) \propto  p(x, y)$$</p>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                     <p style="text-align: left">Diffusion based</p>
                                     $$ x \to x_1 = x + \varepsilon_1 \to \dots \to x_n \sim N(0, \Sigma) $$
 
-                                    <p style="text-align: left">Variational auto encoders (VAE) is in slides</p>
+                                    <p style="text-align: left">Variational auto encoders (VAE) are in these slides</p>
                                 </div>
                             </div>
                     </section>
@@ -135,7 +135,7 @@
                                     <ul style="text-align:left;">
                                         <li>Feature generation, for example, to effectively solve supervised learning problems</li>
                                         <li>Dimensionality reduction</li>
-                                        <li>Low loss data compression</li>
+                                        <li>Low-loss data compression</li>
                                         <li>Trainable object vectorization, embeddable in deeper neural network architectures</li>
                                         <li>Generation of synthetic objects similar to real ones</li>
                                     </ul>
@@ -208,6 +208,7 @@
                 </section>
                 <section>
                     <section data-background-color="antiquewhite">
+                        <h3 style="text-align: left">Variational Auto Encoder</h3>
                         <img src="images/vae_trick.png" style="border-radius: 5%" width="90%">
 
                         <p style="text-align: center;font-size: smaller">
@@ -216,7 +217,6 @@
 
                     </section>
                     <section>
-                        <h3 style="text-align: left">Variational Auto Encoder</h3>
                         <div class="fragment">
                             <div class="typesetting">
                                 <p style="text-align: left">A generative model is constructed capable of generating new objects
@@ -225,7 +225,7 @@
                                 <p>$p_\beta(\hat x|z)$ — probabilistic decoder with $\beta$ parameter</p>
                                 $$
                                 \begin{align*}
-                                \mathscr{L}_{VAE}(\alpha, \beta) = \sum\limits_{i=1}^\ell \log p(x_i) = \sum\limits_{i=1}^\ell \log \int q_{\alpha} (z | x_i) \frac{p_{\beta}(x_i|z) p(z)}{q_{\alpha} (z | x_i)} dz \geq \\
+                                \mathscr{L}_{\text{VAE}}(\alpha, \beta) = \sum\limits_{i=1}^\ell \log p(x_i) = \sum\limits_{i=1}^\ell \log \int q_{\alpha} (z | x_i) \frac{p_{\beta}(x_i|z) p(z)}{q_{\alpha} (z | x_i)} dz \geq \\
                                  \geq \sum\limits_{i=1}^\ell \int q_\alpha(z|x_i) \log p_\beta(x_i|z)dz - KL(q_\alpha(z|x_i)\| p( z)) \to \max\limits_{\alpha, \beta}
                                 \end{align*}
                                 $$
@@ -366,7 +366,7 @@
 
                         <div class="fragment">
                             <div class="typesetting">
-                        <h3>It is not an easy question!</h3>
+                        <p>It is not an easy question!</p>
                         <p style="text-align: left">Usual SGD "as is" doesn't work here, therefore
                             in first publications authors:</p>
                         <ol style="text-align: left">
@@ -380,7 +380,7 @@
                         <div class="fragment">
                             <div class="typesetting">
                                 <p style="text-align: left">And this also doesn't work in practice
-                                due to gradient vanishing. The first naive workaround is changing</p>
+                                due to the gradient vanishing. The first naive workaround is changing</p>
                                 $$ L_G = \sum\limits_{i=1}^m \ln(1 - D(G(z_i, {\color{orange}\alpha}), \beta)) \to
                                 L_G^\prime = -\sum\limits_{i=1}^m \ln(D(G(z_i, {\color{orange}\alpha}), \beta))$$
                             </div>
@@ -422,9 +422,9 @@
                         <h3>Wasserstein GAN — 2017, Arjovsky et al.</h3>
                         <p style="text-align: left">WGAN is a variant of GANs that uses the Wasserstein distance
                             to measure the difference between the distribution of the data generated
-                            by the GAN and the real data.</p>
+                            by the GAN and the real data</p>
 
-                        <img src="images/wasserstein-gan-made-easy-1.png" width="60%" style="border-radius: 5%">
+                        <img src="images/wasserstein-gan-made-easy-1.png" width="50%" style="border-radius: 5%">
                         <p style="margin-top: 20px; font-size: 0.9em;">
                             <a href="http://modelai.gettysburg.edu/2020/wgan/Resources/Lesson4/IntuitiveGuideOT.htm">
                                 Source: Mindcodec post</a></p>
@@ -464,14 +464,14 @@
                                 FID score — Frecher Inception Distance</a></li>
                         </ul>
                         <br><br>
-                        <p>It is almost impossible to use these metrics as losses,
+                        <p style="text-align: left">It is almost impossible to use these metrics as losses,
                             since they use a bunch of objects for estimation, not one.</p>
                         <br><br>
                     </section>
                     <section>
                         <h3>StyleGAN Demo</h3>
 					<iframe src="https://www.youtube.com/embed/kSLJriaOumA?autoplay=1"
-							style="width: 100%;height: 800px">
+							style="width: 90%;height: 700px">
 					</iframe>
 
                     <p>Papers are here: <a href="https://nvlabs.github.io/stylegan2/versions.html">
@@ -497,19 +497,23 @@
                                     <li>Explored <strong>Autoencoders</strong> in depth, including their architecture,
                                         applications, and comparison with PCA.
                                         Also, discussed various types like Sparse and Variational Autoencoders</li>
-                                    <li>Highlighted <strong>GANs</strong> and their development over time,
-                                        including DCGAN, LSGAN, and Wasserstein GAN, showcasing their unique features
-                                        and improvements in stability and image generation quality</li>
-                                    <li>Reviewed advanced concepts such as the <strong>Wasserstein distance</strong>
-                                        and its significance in GANs, alongside practical challenges
-                                        and solutions in training GANs</li>
-                                    <li>Concluded with demonstrations of GAN capabilities,
-                                        including <strong>StyleGAN</strong>,
-                                        and discussed metrics for evaluating generative models
-                                        like Inception and FID scores</li>
                                 </ul>
                             </div>
                         </div>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>Highlighted <strong>GANs</strong> and their development over time,
+                                including DCGAN, LSGAN, and Wasserstein GAN, showcasing their unique features
+                                and improvements in stability and image generation quality</li>
+                            <li>Reviewed advanced concepts such as the <strong>Wasserstein distance</strong>
+                                and its significance in GANs, alongside practical challenges
+                                and solutions in training GANs</li>
+                            <li>Concluded with demonstrations of GAN capabilities,
+                                including <strong>StyleGAN</strong>,
+                                and discussed metrics for evaluating generative models
+                                like Inception and FID scores</li>
+                        </ul>
                     </section>
                 </section>
             </div>

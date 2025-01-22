@@ -306,3 +306,11 @@ mnist/*
 /ml_fundament/experiment/
 /ml_fundament/wikimatrix_cache/
 /advanced_ml/promo-video/media/
+/advanced_ml/mnist/
+/advanced_ml/autoencoder-linear/
+/advanced_ml/autoencoder-cnn/
+/advanced_ml/autoencoder-linear/
+/advanced_ml/autoencoder-linear/2/
+/advanced_ml/autoencoder-vae/
+/advanced_ml/cats_and_dogs_filtered/
+/advanced_ml/cats_and_dogs_filtered.zip
