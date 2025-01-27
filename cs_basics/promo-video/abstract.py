@@ -11,6 +11,20 @@ ts_service = GTTSService(lang="en", tld="com")
 def finishScene(self):
     self.play(*[FadeOut(mob) for mob in self.mobjects])
 
+def create_paradigm_box(name, description):
+    box = VGroup(
+        Tex(name, font_size=32, color=BLUE),
+        Tex(description, font_size=24, color=WHITE)
+    ).arrange(DOWN, buff=0.2)
+
+    background = SurroundingRectangle(box, buff=0.3, color=BLUE_A)
+    return VGroup(background, box)
+
+def create_language_list(items):
+    return VGroup(
+        *[Tex(f"• {item}", font_size=24) for item in items]
+    ).arrange(DOWN, aligned_edge=LEFT)
+
 
 class Intro(VoiceoverScene):
     def construct(self):
@@ -18,8 +32,8 @@ class Intro(VoiceoverScene):
         self.set_speech_service(ts_service)
 
         # Create a main title
-        title = Text("Programming Paradigms course", font_size=48)
-        subtitle = Text("Beyond the Code", font_size=36, color=BLUE)
+        title = Tex("Programming Paradigms course", font_size=48)
+        subtitle = Tex("Beyond the Code", font_size=36, color=BLUE)
 
         title_group = VGroup(title, subtitle).arrange(DOWN)
         title_group.to_edge(UP)
@@ -42,7 +56,7 @@ class Intro(VoiceoverScene):
 
         # Languages section
         languages = VGroup(
-            Text("Hands-on Experience:", font_size=36),
+            Tex("Hands-on Experience:", font_size=36),
             create_language_list([
                 "C++ for procedural",
                 "Haskell for functional",
@@ -97,20 +111,61 @@ class Intro(VoiceoverScene):
         self.play(*[FadeOut(mob) for mob in self.mobjects])
 
 
-def create_paradigm_box(name, description):
-    box = VGroup(
-        Text(name, font_size=32, color=BLUE),
-        Text(description, font_size=24, color=WHITE)
-    ).arrange(DOWN, buff=0.2)
+def create_teacher_profiles(teachers_data):
+    profiles = Group()
 
-    background = SurroundingRectangle(box, buff=0.3, color=BLUE_A)
-    return VGroup(background, box)
+    for teacher in teachers_data:
+        try:
+            photo = ImageMobject(teacher["photo_path"])
+            photo.set_height(2.8)
+        except:
+            # Fallback if image not found
+            photo = Rectangle(
+                height=3,
+                width=2.5,
+                color=BLUE_C,
+                fill_opacity=0.3
+            )
+            placeholder_text = Tex("Photo", font_size=24)
+            placeholder_text.move_to(photo.get_center())
+            photo = VGroup(photo, placeholder_text)
 
+        # Create text elements
+        name = Tex(teacher["name"], font_size=24, color=BLUE)
+        specialization = Tex(
+            teacher["specialization"],
+            font_size=20,
+            color=WHITE
+        )
+        experience = Tex(
+            teacher["experience"],
+            font_size=18,
+            color=LIGHT_GRAY
+        )
 
-def create_language_list(items):
-    return VGroup(
-        *[Text(f"• {item}", font_size=24) for item in items]
-    ).arrange(DOWN, aligned_edge=LEFT)
+        # Create a text group
+        text_group = VGroup(name, specialization, experience)
+        text_group.arrange(DOWN, buff=0.2, aligned_edge=LEFT)
+
+        # Create a background card
+        card = Rectangle(
+            height=4.5,
+            width=3,
+            fill_color=DARKER_GRAY,
+            fill_opacity=0.5,
+            stroke_color=BLUE_E
+        )
+
+        # Arrange elements
+        profile = Group(card)
+        photo.move_to(card.get_top() + DOWN * 1.2)
+        text_group.next_to(photo, DOWN, buff=0.3)
+        text_group.set_width(card.width - 0.4)
+
+        profile.add(photo, text_group)
+        profiles.add(profile)
+
+    return profiles
 
 
 class Teachers(VoiceoverScene):
@@ -118,7 +173,7 @@ class Teachers(VoiceoverScene):
         self.set_speech_service(GTTSService(lang="en", tld="com"))
 
         # Main title
-        title = Text("Meet Your Instructors", font_size=48)
+        title = Tex("Meet Your Instructors", font_size=48)
         title.to_edge(UP)
         title_underline = Line(
             start=title.get_left(),
@@ -137,7 +192,7 @@ class Teachers(VoiceoverScene):
             {
                 "name": "Tanya Berlenko",
                 "photo_path": "../images/berlenko.jpg",
-                "specialization": "Prolog and C++",
+                "specialization": "Prolog",
                 "experience": "Expert in Robotics",
             },
             {
@@ -145,10 +200,16 @@ class Teachers(VoiceoverScene):
                 "photo_path": "../images/bragilevsky.jpg",
                 "specialization": "Functional Programming",
                 "experience": "Author of 'Haskell in Depth'",
+            },
+            {
+                "name": "Kirill Krinkin",
+                "photo_path": "../images/krinkin.jpg",
+                "specialization": "C++",
+                "experience": "Expert in CS",
             }
         ]
 
-        teacher_profiles = self.create_teacher_profiles(teachers_data)
+        teacher_profiles = create_teacher_profiles(teachers_data)
         teacher_profiles.arrange(RIGHT, buff=0.5)
         teacher_profiles.next_to(title, DOWN, buff=1)
 
@@ -199,127 +260,98 @@ class Teachers(VoiceoverScene):
         self.wait(2)
         self.play(*[FadeOut(mob) for mob in self.mobjects])
 
-    def create_teacher_profiles(self, teachers_data):
-        profiles = Group()
 
-        for teacher in teachers_data:
-            try:
-                photo = ImageMobject(teacher["photo_path"])
-                photo.set_height(2.8)
-            except:
-                # Fallback if image not found
-                photo = Rectangle(
-                    height=3,
-                    width=2.5,
-                    color=BLUE_C,
-                    fill_opacity=0.3
-                )
-                placeholder_text = Text("Photo", font_size=24)
-                placeholder_text.move_to(photo.get_center())
-                photo = VGroup(photo, placeholder_text)
-
-            # Create text elements
-            name = Text(teacher["name"], font_size=24, color=BLUE)
-            specialization = Text(
-                teacher["specialization"],
-                font_size=20,
-                color=WHITE
-            )
-            experience = Text(
-                teacher["experience"],
-                font_size=18,
-                color=LIGHT_GRAY
-            )
-
-            # Create text group
-            text_group = VGroup(name, specialization, experience)
-            text_group.arrange(DOWN, buff=0.2, aligned_edge=LEFT)
-
-            # Create background card
-            card = Rectangle(
-                height=4.5,
-                width=3,
-                fill_color=DARKER_GRAY,
-                fill_opacity=0.5,
-                stroke_color=BLUE_E
-            )
-
-            # Arrange elements
-            profile = Group(card)
-            photo.move_to(card.get_top() + DOWN * 1.2)
-            text_group.next_to(photo, DOWN, buff=0.3)
-            text_group.set_width(card.width - 0.4)
-
-            profile.add(photo, text_group)
-            profiles.add(profile)
-
-        return profiles
-
-
-class GenerativeAI(VoiceoverScene):
-    def construct(self, FRAME_HEIGHT=config.frame_height, FRAME_WIDTH=config.frame_width):
+class RealWorldRelevance(VoiceoverScene):
+    def construct(self):
         self.set_speech_service(ts_service)
 
-        # Background image setup
-        background = ImageMobject("../images/LLM_sizes.png")
-        background.scale_to_fit_height(FRAME_HEIGHT)
-        background.scale_to_fit_width(FRAME_WIDTH)
-        background.center()
-        background.set_opacity(0.3)
+        # Title
+        title = Tex("Real-World Relevance", font_size=40)
+        subtitle = Tex("Why learn multiple paradigms?", font_size=32, color=BLUE)
 
-        # Main title
-        title = Tex("Generative AI and Large Language Models")
-        title.scale(1.4)
-        title.to_edge(UP)
-        title.set_color_by_gradient(WHITE, PURPLE)  # Changed to purple for a different theme
-        title_box = BackgroundRectangle(title, color=BLACK, fill_opacity=0.7)
+        title_group = VGroup(title, subtitle).arrange(DOWN)
+        title_group.to_edge(UP)
 
-        with self.voiceover(
-                text="""
-                Explore the architectures powering modern AI:
-                - Variational Autoencoders and GANs
-                - Tokenization and embedding techniques
-                - Multi-agent systems
-                - Build practical solutions for LLM challenges
-                """
-        ) as tracker:
-            # Fade in background
+        # Create examples with company logos and descriptions
+        examples = [
+            ("Haskell", "Facebook uses it for spam fighting", "../images/facebook_logo.png"),
+            ("Prolog", "IBM Watson's reasoning engine", "../images/ibm_logo.png"),
+            ("Java", "Runs on 3 billion devices", "../images/java.logo.webp"),
+            ("Python", "Drives AI and Data Science", "../images/python_logo.png")
+        ]
+
+        # Create example boxes
+        example_boxes = []
+        for lang, desc, logo_path in examples:
+            # Create text elements
+            lang_text = Tex(lang, font_size=28, color=BLUE)
+            desc_text = Tex(desc, font_size=20)
+
+            # Try to load logo, use fallback if image not found
+            try:
+                logo = ImageMobject(logo_path)
+                logo.set_height(1)
+            except:
+                logo = Tex("Logo", font_size=24, color=GRAY)
+
+            # Create and style box
+            box_content = Group(
+                logo,
+                lang_text,
+                desc_text
+            ).arrange(DOWN, buff=0.1)
+
+            background = SurroundingRectangle(
+                box_content,
+                buff=0.3,
+                stroke_color=BLUE_A,
+                fill_color=DARKER_GRAY,
+                fill_opacity=0.3
+            )
+
+            example_box = Group(background, box_content)
+            example_boxes.append(example_box)
+
+        # Arrange boxes in a grid (2x2)
+        boxes_group = Group(*example_boxes).arrange_in_grid(rows=2, cols=2, buff=0.25)
+        boxes_group.next_to(title_group, DOWN, buff=0.25)
+
+        # Animation sequence
+        with self.voiceover(text="""
+            Why should you learn multiple programming paradigms?
+            Let's look at how they're used in the real world.
+        """) as tracker:
             self.play(
-                FadeIn(background),
+                Write(title_group),
                 run_time=3
             )
 
-            # Animate title
-            self.play(
-                FadeIn(title_box),
-                Write(title),
-                run_time=3
-            )
-
-            # Create bullet points
-            bullets = VGroup(
-                Tex("• Variational Autoencoders (VAEs) and GANs"),
-                Tex("• Tokenization and embedding techniques"),
-                Tex("• Multi-agent systems and AI orchestration"),
-                Tex("• Practical solutions for LLM challenges")
-            ).arrange(DOWN, aligned_edge=LEFT, buff=0.5)
-            bullets.next_to(title, DOWN, buff=1)
-
-            # Add background boxes for better readability
-            bullet_boxes = VGroup(*[
-                BackgroundRectangle(bullet, color=BLACK, fill_opacity=0.7)
-                for bullet in bullets
-            ])
-
-            # Animate bullets one by one
-            for box, bullet in zip(bullet_boxes, bullets):
+        # Animate each example box
+        for i, box in enumerate(example_boxes):
+            example = examples[i]
+            with self.voiceover(text=f"""
+                {example[0]} is used in industry where {example[1]}.
+            """) as tracker:
                 self.play(
-                    FadeIn(box),
-                    Write(bullet),
-                    run_time=1.5
+                    FadeIn(box, shift=UP),
+                    run_time=2
                 )
 
-        self.wait()
+        # Final emphasis
+        with self.voiceover(text="""
+            Each paradigm brings its own strengths to solve different types of problems.
+        """) as tracker:
+            # Add subtle pulsing animation to all boxes
+            self.play(
+                *[box.animate.scale(1.1) for box in example_boxes],
+                run_time=1
+            )
+            self.play(
+                *[box.animate.scale(1 / 1.1) for box in example_boxes],
+                run_time=1
+            )
+
+        self.wait(2)
         finishScene(self)
 
 
@@ -343,8 +375,11 @@ class CapstoneProjects(VoiceoverScene):
 
         with self.voiceover(
                 text="""
-                Let's explore two exciting capstone projects that will put your skills to the test.
-                First, you'll build your own AlphaZero-like Game AI, and then develop a personal AI assistant.
+                During the course you will implement and present 
+                two exciting capstone projects that will put your skills to the test. . .
+                
+                First, you'll build your own idea in Prolog, and then also develop 
+                an audiosystem in Java with O.O.P.
                 """
         ) as tracker:
             # Fade in background and main title
@@ -352,35 +387,35 @@ class CapstoneProjects(VoiceoverScene):
                 FadeIn(background),
                 FadeIn(main_title_box),
                 Write(main_title),
-                run_time=6
+                run_time=4
             )
 
         # Project 1
-        project1_title = Tex("1. Build Your Own Game AI")
+        project1_title = Tex("1. Project in Prolog")
         project1_title.scale(0.8)
         project1_title.next_to(main_title, DOWN, buff=0.8)
         project1_title.set_color(BLUE)
         project1_box = BackgroundRectangle(project1_title, color=BLACK, fill_opacity=0.7)
 
         project1_bullets = VGroup(
-            Tex("• Implement self-play mechanisms"),
-            Tex("• Design neural network architectures"),
-            Tex("• Apply reinforcement learning principles")
+            Tex("• Suggest your own project to implement"),
+            Tex("• Use Prolog \\texttt{:)}"),
+            Tex("• Apply best practices")
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
         project1_bullets.scale(0.8)
         project1_bullets.next_to(project1_title, DOWN, buff=0.5)
 
         # Project 2
-        project2_title = Tex("2. Personal voice AI Assistant")
+        project2_title = Tex("2. Audio Processing System")
         project2_title.scale(0.8)
         project2_title.next_to(project1_bullets, DOWN, buff=0.8)
         project2_title.set_color(BLUE)
         project2_box = BackgroundRectangle(project2_title, color=BLACK, fill_opacity=0.7)
 
         project2_bullets = VGroup(
-            Tex("• Voice recognition and synthesis"),
-            Tex("• LLM integration"),
-            Tex("• Performance optimization"),
+            Tex("• Audio processing in Java with OOP"),
+            Tex("• Unit and integration testing"),
+            Tex("• Logging and visualizations"),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
         project2_bullets.scale(0.8)
         project2_bullets.next_to(project2_title, DOWN, buff=0.5)
@@ -397,16 +432,16 @@ class CapstoneProjects(VoiceoverScene):
 
         with self.voiceover(
                 text="""
-                The first project challenges you to build an AlphaZero-style AI that masters classic games.
-                You'll implement self-play mechanisms, design neural network architectures,
-                and apply reinforcement learning principles.
+                The first project challenges you to build your own idea in Prolog.
+                You will suggest your own project to implement,
+                and will apply best programming practices.
                 """
         ) as tracker:
             # Animate Project 1
             self.play(
                 FadeIn(project1_box),
                 Write(project1_title),
-                run_time=4
+                run_time=2
             )
 
             # Animate Project 1 bullets
@@ -419,16 +454,17 @@ class CapstoneProjects(VoiceoverScene):
 
         with self.voiceover(
                 text="""
-                The second project involves developing your own personal voice AI assistant.
-                You'll work on voice recognition and synthesis, LLM integration,
-                performance optimization, and system architecture design.
+                The second project involves developing Audiosystem in Java with O.O.P. . .
+                
+                You'll work on audio, enterprise-like Java project, unit and integration testing, 
+                and system architecture design.
                 """
         ) as tracker:
             # Animate Project 2
             self.play(
                 FadeIn(project2_box),
                 Write(project2_title),
-                run_time=4
+                run_time=2
             )
 
             # Animate Project 2 bullets
@@ -448,119 +484,134 @@ class FinalScene(VoiceoverScene):
         self.set_speech_service(ts_service)
 
         # Background setup with a gradient effect
-        background = ImageMobject("../images/Wall-E-from-Grok.jpg")
+        background = ImageMobject("../images/matrix_from_Grok.jpg")
         background.scale_to_fit_height(FRAME_HEIGHT)
         background.scale_to_fit_width(FRAME_WIDTH)
         background.center()
         background.set_opacity(0.3)
 
-        # Create the main message text, split into parts for dramatic effect
-        message_part1 = Text(
-            "Join us to master the technologies shaping our future.",
-            font_size=40
-        )
+        # Create and display a course structure section
+        structure_title = Tex("Course Structure", font_size=40, color=BLUE)
+        structure_title.to_edge(UP)
 
-        message_part2 = Text(
-            "Whether you're aiming to innovate in AI research\nor build practical applications with it.",
-            font_size=36
-        )
+        structure_points = VGroup(
+            Tex("13 weeks of intensive learning", font_size=30),
+            Tex("Balanced mix of theory and practice", font_size=30),
+            Tex("Two project defenses", font_size=30),
+            Tex("Comprehensive final exam", font_size=30)
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
+        structure_points.next_to(structure_title, DOWN, buff=0.5)
 
-        message_part3 = Text(
-            "This course provides the advanced skills you need to succeed.",
-            font_size=40
-        )
+        # Add bullet points
+        bullets = VGroup(*[
+            Tex("•", font_size=30).next_to(point, LEFT, buff=0.2)
+            for point in structure_points
+        ])
 
-        # Arrange the text parts vertically
-        message_group = VGroup(
-            message_part1,
-            message_part2,
-            message_part3
-        ).arrange(DOWN, buff=0.8)
+        structure_group = VGroup(structure_points, bullets)
 
-        # Center the entire text group
-        message_group.center()
+        # Create and position learning outcomes section
+        outcomes_title = Tex("Learning Outcomes", font_size=40, color=BLUE)
+        outcomes_title.next_to(structure_points, DOWN, buff=0.5)
 
-        # Add gradient colors to make it visually appealing
-        message_part1.set_color_by_gradient(BLUE, WHITE)
-        message_part2.set_color(WHITE)
-        message_part3.set_color_by_gradient(WHITE, BLUE)
+        outcomes_points = VGroup(
+            Tex("Think in multiple programming dimensions", font_size=30),
+            Tex("Choose the right tool for each problem", font_size=30),
+            Tex("Understand the evolution of programming", font_size=30),
+            Tex("Master modern programming patterns", font_size=30)
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
+        outcomes_points.next_to(outcomes_title, DOWN, buff=0.5)
+
+        # Add bullet points for outcomes
+        outcomes_bullets = VGroup(*[
+            Tex("•", font_size=30).next_to(point, LEFT, buff=0.2)
+            for point in outcomes_points
+        ])
+
+        outcomes_group = VGroup(outcomes_points, outcomes_bullets)
 
         # Create background boxes for better readability
         boxes = VGroup(*[
-            BackgroundRectangle(text, color=BLACK, fill_opacity=0.7)
-            for text in [message_part1, message_part2, message_part3]
+            BackgroundRectangle(text, color=GRAY, fill_opacity=0.7)
+            for text in [structure_title, outcomes_title]
         ])
 
-        with self.voiceover(
-                text="""
-                Join us to master the technologies shaping our future. 
-                Whether you're aiming to innovate in AI research or 
-                build practical applications with it, 
-                this course provides the advanced skills you need to succeed.
-                """
-        ) as tracker:
-            # Fade in the background with a slight zoom effect
+        # Animation sequence
+        with self.voiceover(text="""
+            Finally let's look at how the course is structured.
+            Over 13 weeks, you'll experience an intensive learning journey,
+            with a careful balance of theory and practice.
+            You'll defend two projects and complete a comprehensive final exam.
+        """) as tracker:
             self.play(
                 FadeIn(background),
-                run_time=2
+                run_time=1
             )
 
-            # Animate each part of the message sequentially
-            # Part 1
             self.play(
                 FadeIn(boxes[0]),
-                Write(message_part1),
-                run_time=2
+                Write(structure_title),
+                run_time=4
             )
 
-            # Part 2
+            # Animate each structure point
+            for point, bullet in zip(structure_points, bullets):
+                self.play(
+                    FadeIn(bullet),
+                    Write(point),
+                    run_time=2.5
+                )
+
+        # Animate outcomes section
+        with self.voiceover(text="""
+            By the end of this course, you'll be able to think in multiple programming dimensions,
+            choose the right tool for each problem,
+            understand how programming has evolved,
+            and master modern programming patterns.
+        """) as tracker:
             self.play(
                 FadeIn(boxes[1]),
-                Write(message_part2),
-                run_time=6
+                Write(outcomes_title),
+                run_time=4
             )
 
-            # Part 3 with a special emphasis
-            self.play(
-                FadeIn(boxes[2]),
-                Write(message_part3),
-                run_time=2
-            )
+            # Animate each outcome point
+            for point, bullet in zip(outcomes_points, outcomes_bullets):
+                self.play(
+                    FadeIn(bullet),
+                    Write(point),
+                    run_time=2.5
+                )
 
-            # Add a subtle pulsing effect to emphasize the final message
-            self.play(
-                *[
-                    box.animate.scale(1.05).set_opacity(0.8)
-                    for box in boxes
-                ],
-                *[
-                    text.animate.scale(1.05)
-                    for text in [message_part1, message_part2, message_part3]
-                ],
-                run_time=1
-            )
+        # Final emphasis animation
+        all_points = VGroup(structure_group, outcomes_group)
+        self.play(
+            all_points.animate.scale(1.05),
+            run_time=1
+        )
+        self.play(
+            all_points.animate.scale(1 / 1.05),
+            run_time=1
+        )
 
-            self.play(
-                *[
-                    box.animate.scale(1 / 1.05).set_opacity(0.7)
-                    for box in boxes
-                ],
-                *[
-                    text.animate.scale(1 / 1.05)
-                    for text in [message_part1, message_part2, message_part3]
-                ],
-                run_time=1
+        # Add background rectangles for better visibility
+        for point in [*structure_points, *outcomes_points]:
+            background = BackgroundRectangle(
+                point,
+                fill_opacity=0.1,
+                buff=0.1,
+                color=BLUE_E
             )
+            self.bring_to_back(background)
 
-        # Hold the final frame for a moment
         self.wait(2)
         finishScene(self)
 
 
 class Full(VoiceoverScene):
     def construct(self):
-        Start.construct(self)
-        RL.construct(self)
-        GenerativeAI.construct(self)
+        Intro.construct(self)
+        Teachers.construct(self)
+        RealWorldRelevance.construct(self)
         CapstoneProjects.construct(self)
         FinalScene.construct(self)
