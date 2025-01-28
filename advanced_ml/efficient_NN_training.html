@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -64,7 +64,7 @@
                                     <h3>Efficient Neural Network Training</h3>
                                     <br />
                                     Alex Avdiushenko<br />
-                                    April 16, 2025
+                                    March 25, 2025
                                 </div>
                         </div>
                     </section>
@@ -352,7 +352,7 @@
                     <li class="fragment">
                       <strong>Mixed Precision Training</strong>
                       <ul class="custom-list">
-                        <li>FP32 requires a large amount of memory; using FP16 reduces memory footprint</li>
+                        <li>FP32 requires a large amount of memory; FP16 reduces memory footprint</li>
                         <li class="minus">FP16 has a smaller range and lower precision,
                             leading to potential issues with gradient updates</li>
                         <li>Solution: Mixed precision with FP32 for weights and FP16 for forward pass,
@@ -362,7 +362,7 @@
                     <li class="fragment">
                       <strong>Multi-GPU Training</strong>
                       <ul class="custom-list">
-                        <li>Data Parallelism (e.g., DDP) and Fully Sharded Data Parallel (FSDP)
+                        <li>Data Parallelism (e.g., DDP) and FSDP
                             help distribute model parameters and computation across GPUs</li>
                         <li class="minus">FSDP is complex to set up but offers better memory efficiency</li>
                       </ul>
