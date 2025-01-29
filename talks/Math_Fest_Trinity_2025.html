@@ -85,6 +85,39 @@
 			ul.custom-list li.lamp::before {
 				content: '💡';
 			}
+			.timeline {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				position: relative;
+				padding-left: 20px;
+			}
+			.timeline::before {
+				content: '';
+				position: absolute;
+				left: 5px;
+				top: 0;
+				bottom: 0;
+				width: 3px;
+				background: orange;
+			}
+			.event {
+				margin-bottom: 40px;
+				position: relative;
+				padding-left: 30px;
+			}
+			.event::before {
+				content: '→';
+				position: absolute;
+				left: 0;
+				top: 5px;
+				font-size: 60px;
+				color: orange;
+			}
+			.highlight {
+				color: #42a5f5;
+				font-style: italic;
+			}
 		</style>
 	</head>
 	<body onload="totalWrapper();">
@@ -264,7 +297,7 @@
 								<a style="color: blue" href="https://en.wikipedia.org/wiki/Monge%27s_theorem">
 									Monge's theorem</a>
 								</li>
-								<li>The final step is <a href="https://en.wikipedia.org/wiki/Desargues%27s_theorem">
+								<li>The final step is <a style="color: blue" href="https://en.wikipedia.org/wiki/Desargues%27s_theorem">
 									Desargues's theorem</a> for triangles $ABC$ and $A_1B_1C_1$
 								</li>
 							</ol>
@@ -792,6 +825,48 @@
 							Students have the opportunity to explore specialized topics and conduct in-depth research in their chosen area of interest.
 						</aside>
 					</section>
+				</section>
+				<section>
+					<h3>Our Upcoming Adventures 🌟🌍</h3>
+					<div class="timeline">
+						<div class="event">
+							<h5>June 2025</h5>
+							<p class="highlight" style="text-align: left">Algorithm and Code Training School</p>
+							<p style="text-align: left">📍 Romania</p>
+						</div>
+
+						<div class="event">
+							<h5>September / October 2025</h5>
+							<p class="highlight">JetBrains Youth Clubs</p>
+							<p>📍 Online: Math, Programming, and AI</p>
+						</div>
+
+						<div class="event">
+							<h5>October / November 2025</h5>
+							<p class="highlight">JetBrains Academy Youth Challenge</p>
+							<p style="text-align: left">📍 Online</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>How to Stay Updated on All Opportunities?</h3>
+					<div class="container">
+						<div class="content column">
+							<p class="highlight">Join Our Discord Community!</p>
+							<div style="text-align: left">
+								<ul>
+									<li>✨ <strong>Quizzes</strong> to challenge your knowledge</li>
+									<li>📅 <strong>Task of the week</strong> to keep your skills sharp</li>
+									<li>📚 <strong>Educational content sharing</strong> to help you grow</li>
+									<li>🌍 <strong>Connect with like-minded people</strong> from around the world!</li>
+								</ul>
+							</div>
+							<p class="link">🔗 <a href="https://jb.gg/youth-discord" style="color: blue">https://jb.gg/youth-discord</a></p>
+						</div>
+						<div class="qr-code column">
+							<img src="images/youth-discord.png" alt="Discord QR Code" width="500">
+						</div>
+					</div>
 				</section>
 				<section>
 					<section>
