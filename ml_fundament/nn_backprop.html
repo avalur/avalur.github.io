@@ -92,21 +92,19 @@
                         </div>
                     </section>
                     <section>
-                        <h3 style="text-align: left">
-                            Linear Model (Reminder)
-                        </h3>
+                        <h3 style="text-align: left">Linear Model (Reminder)</h3>
 
                         <div class="fragment" style="margin-bottom:20px;">
                             <div class="typesetting">
-                                <p style="text-align: left">$f_j: X \to \mathbb{R}$ — numerical features</p>
-                                $$a(x, w) = f(\left< w, x\right>) = f\left(\sum\limits_{j=1}^n w_j f_j(x)+b \right)$$
+                                <p style="text-align: left">$x_j: X \to \mathbb{R}$ — numerical features</p>
+                                $$a(x, w) = f(\left< w, x\right>) = f\left(\sum\limits_{j=1}^n w_j x_j + b \right)$$
 
                                 <p style="text-align: left">where $w_1, \dots, w_n \in \mathbb{R}$ — feature weights, $b$ — bias</p>
 
                                 <p>$f(z)$ — activation function, for example, $\text{sign}(z),\ \frac{1}{1+e^{-z}},\ (z)_+$</p>
 
-                                <div align="center">
-                                    <img class="round" src="../ml_with_python/images/artificial_neuron.jpg" alt="lin_as_nn" width=600 />
+                                <div>
+                                    <img style="border-radius: 5%" src="../ml_with_python/images/artificial_neuron.jpg" alt="lin_as_nn" width=600 />
                                 </div>
                             </div>
                         </div>
