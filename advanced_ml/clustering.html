@@ -27,6 +27,9 @@
 			  clear: both;
 			  display: table;
 			}
+			.important {
+				color: orange;
+			}
 		</style>
     </head>
 	<body onload="totalWrapper();">
@@ -438,6 +441,9 @@
                             </div>
                         </div>
                     </section>
+                    <section>
+                        <h3>Let's have a break!</h3>
+                    </section>
                 </section>
                 <section>
                     <section>
@@ -445,15 +451,15 @@
                         <div class="fragment">
                             <div class="typesetting">
                                 <p style="text-align: left">DBSCAN — Density-Based Spatial Clustering of Applications with Noise</p>
-                                <p style="text-align: left">Consider an object \( x \in U \), and its \( \varepsilon \)-neighborhood \( U_\varepsilon(x) = \{ u \in U: \rho(x,u) \leq \varepsilon\} \)</p>
+                                <p style="text-align: left">Consider an object \( x \in U \), and its \( \varepsilon \)-neighborhood \[ U_\varepsilon(x) = \{ u \in U: \rho(x,u) \leq \varepsilon\} \]</p>
                                 <p style="text-align: left">Each object can be one of three types:</p>
                                 <ul>
-                                    <li>core: having a dense neighborhood, \( |U_\varepsilon (x)| \geq m \)</li>
-                                    <li>border: not core, but in the neighborhood of a core</li>
-                                    <li>noise (outlier): neither core nor border</li>
+                                    <li><span class="important">core</span>: having a dense neighborhood, \( |U_\varepsilon (x)| \geq m \)</li>
+                                    <li><span class="important">border</span>: not core, but in the neighborhood of a core</li>
+                                    <li><span class="important">noise</span> (outlier): neither core nor border</li>
                                 </ul>
                                 <hr>
-                                <p>Ester, Kriegel, Sander, Xu. <em>A density-based algorithm for discovering clusters in large spatial databases with noise.</em> KDD-1996</p>
+                                <p style="text-align: left">Ester, Kriegel, Sander, Xu. <em>A density-based algorithm for discovering clusters in large spatial databases with noise.</em> KDD-1996</p>
                             </div>
                         </div>
                     </section>
@@ -546,7 +552,7 @@
                         <div class="row">
                             <div class="column">
                                 <p>1. Nearest neighbor distance:</p>
-                                <p>\( R^{\text{nn}}_{WS} = \min_{w \in W, \in S} \rho (w,s) \)</p>
+                                <p>\( R^{\text{nn}}_{WS} = \min_{w \in W, s\in S} \rho (w,s) \)</p>
                                 <p>\( \alpha_{U} = \alpha_{V} = \frac12, \beta = 0, \gamma = -\frac12 \)</p>
                             </div>
                             <div class="column">
@@ -556,7 +562,7 @@
                         <div class="row">
                             <div class="column">
                                 <p>2. Farthest neighbor distance:</p>
-                                <p>\( R^{\text{fn}}_{WS} = \max_{w \in W, \in S} \rho (w,s) \)</p>
+                                <p>\( R^{\text{fn}}_{WS} = \max_{w \in W, s\in S} \rho (w,s) \)</p>
                                 <p>\( \alpha_{U} = \alpha_{V} = \frac12, \beta = 0, \gamma = \frac12 \)</p>
                             </div>
                             <div class="column">
