@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -21,12 +21,8 @@
 		<!-- and it's easy to individually load additional languages -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["scikit-learn"] # "numpy", "matplotlib"
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<script>
 			import hljs from "highlight.js";
 
@@ -57,7 +53,7 @@
 					<h3>Functional Programming for Data Science</h3>
 					<br />
 					Alex Avdiushenko <br />
-					February 27, 2024
+					February 20, 2025
 				</section>
 				<section>
 					<section>
@@ -78,8 +74,8 @@
 						<br>
 						<div class="fragment" style="margin-bottom:20px;">
 							<div class="typesetting">
-								<p>You should be as fast as you can in the first three steps and then
-								build a production code within a few days.</p>
+								<p style="text-align: left">You should be as fast as you can in the first three steps and then
+								build a production code within a few days</p>
 							</div>
 						</div>
 					</section>
@@ -103,7 +99,8 @@
 								</li>
 								<li>Object-oriented paradigm (OOP)
 								<ul class="fragment">
-									<li><code>fit-predict</code> is very good example</li>
+									<li><code style="color: white; background-color: orange">fit-predict</code>
+										is great example</li>
 									<li>familiar to developers</li>
 								</ul>
 								</li>
@@ -138,7 +135,7 @@ prices = buffer.readlines()
 					<section data-background-color="antiquewhite">
 									  <h3>FP in Python example</h3>
 <!--language=python-->
-									<py-repl>
+									<script type="py-editor">
 def add(n):
 	def add_n(value):
 		return value + n
@@ -148,7 +145,7 @@ def add(n):
 add_3 = add(3)
 list_ = [1, 2, 5, 7]
 print(list(map(add_3, list_)))
-									</py-repl>
+									</script>
 
 					</section>
 					<section data-background-color="antiquewhite">
@@ -157,7 +154,7 @@ print(list(map(add_3, list_)))
 							<div class="typesetting">
 								<p style="text-align: left">If you need to infer some results from one dataset and apply it to another?
 								For instance, normalization or training a model.
-								<br>
+								<br><br>
 								The idea is to chain function creation:</p>
 								<pre>
 
@@ -169,16 +166,16 @@ print(list(map(add_3, list_)))
 					</section>
                     <section data-background-color="#fdf6e3">
                         <h3>Decision Tree Classifier</h3>
-                        <py-repl>
+                        <script type="py-editor" config='{"packages":["scikit-learn"]}' env="DTC">
                             from sklearn.tree import DecisionTreeClassifier
-							from sklearn.ensemble import RandomForestClassifier
-                        </py-repl>
+                            from sklearn.ensemble import RandomForestClassifier
+                        </script>
                         <p><a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">
                             Nice visual example of DecisionTreeClassifier</a></p>
                     </section>
 					<section data-background-color="antiquewhite">
 <!--language=python-->
-									<py-repl>
+									<script type="py-editor" env="DTC">
 										def create_rf_learner(num_trees):
 											rf = RandomForestClassifier(n_estimators=num_trees)
 
@@ -192,10 +189,14 @@ print(list(map(add_3, list_)))
 												return predict_rf_on
 
 											return train_rf_on
-									</py-repl>
+										print("Ok!")
+									</script>
 					</section>
 					<section data-background-color="antiquewhite">
-						<py-repl>
+						<script type="py-editor" env="DTC">
+							def create_pipeline(steps):
+								pass
+
 							pipeline_preprocessor = create_pipeline([
 							  load_data('path/to/data/'),
 							  add_new_feature_col,
@@ -208,17 +209,17 @@ print(list(map(add_3, list_)))
 							  split_X_Y,
 							  create_rf_learner(42)
 							])
-						</py-repl>
+						</script>
 					</section>
 					<section data-background-color="antiquewhite">
-						<py-repl>
+						<script type="py-editor" env="DTC">
 							pipeline_create_prediction = create_pipeline([
 							  pipeline_preprocessor,
 							  pipeline_rf_creator('train.csv')
 							])
 
 							res = pipeline_create_prediction('test.csv')
-						</py-repl>
+						</script>
 					</section>
 					<section data-background-color="antiquewhite">
 						<h3>Pros and cons</h3>
@@ -230,9 +231,12 @@ print(list(map(add_3, list_)))
 									<li>when you've done with investigations, you simply remove all unused functions</li>
 									<li>but you need to think more during your experiments</li>
 								</ul>
-								<img src="images/fp_meme.png" width="800" style="border-radius: 5%">
 							</div>
 						</div>
+					</section>
+					<section>
+						<h3>Let's have a break!</h3>
+						<img src="images/fp_meme.png" width="800" style="border-radius: 5%">
 					</section>
 				</section>
 				<section>
@@ -241,7 +245,7 @@ print(list(map(add_3, list_)))
 
 						<div class="row">
 						  <div class="column" style="text-align: center">
-							  <img src="images/jax_comp_graph.png" style="border-radius: 5%" width="400">
+							  <img src="images/jax_comp_graph.png" style="border-radius: 5%" width="380">
 						  </div>
 						  <div class="column" style="text-align: left">
 							  <br><br>
@@ -266,9 +270,8 @@ print(list(map(add_3, list_)))
 					</section>
 					<section data-background-color="antiquewhite">
 <!--language=python-->
-						<py-repl>
+						<script type="py-editor">
 from torch import nn
-
 def init_cnn(module):
     """Initialize weights for CNNs."""
     if type(module) == nn.Linear or type(module) == nn.Conv2d:
@@ -288,14 +291,14 @@ class LeNet(nn.Module):
             nn.LazyLinear(84), nn.Sigmoid(),
             nn.LazyLinear(num_classes)
 		)
-						</py-repl>
+						</script>
 					</section>
 					<section data-background-color="antiquewhite">
 <!--language=python-->
-						<py-repl>
+						<script type="py-editor">
 from torch import nn
 
-class LeNet(nn.Module):
+class LeNetFPstyle(nn.Module):
     lr: float = 0.1
     num_classes: int = 10
     kernel_init: FunctionType = nn.initializers.xavier_uniform
@@ -313,7 +316,7 @@ class LeNet(nn.Module):
             nn.Dense(features=84, kernel_init=self.kernel_init()), nn.sigmoid,
             nn.Dense(features=self.num_classes, kernel_init=self.kernel_init())
         ])
-						</py-repl>
+						</script>
 					</section>
 					<section>
 						<h3>Google JAX</h3>
