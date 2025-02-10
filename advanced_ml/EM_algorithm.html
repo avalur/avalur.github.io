@@ -51,15 +51,15 @@
                         <img src="images/kl_div_mem.jpg" alt="kl_div_mem" />
                     </section>
                     <section>
-                        <h2 style="text-align: left">KL divergence</h2>
-                        <p style="text-align: left">Let's start with well-known</p>
+                        <h3 style="text-align: left">KL divergence</h3>
+                        <p style="text-align: left">Let's start with a well-known fact</p>
                         <div class="fragment">
                             <div class="typesetting">
-                                <h3>Jensen's Inequality</h3>
+                                <h4>Jensen's Inequality</h4>
                                 <div class="row">
                                     <div class="column">
                                         <br>
-                                        <p>If \( f(x) \) is a concave (upward-convex) function, then Jensen's inequality holds:</p>
+                                        <p style="text-align: left">If \( f(x) \) is a concave (upward-convex) function, then Jensen's inequality holds:</p>
                                     </div>
                                     <div class="column">
                                         <img style="padding-left: 20%" src="images/concave_function.jpg" alt="concave_function" />
@@ -81,8 +81,9 @@
                         <h3 style="text-align: left">Kullback-Leibler Divergence Between Probability Distributions</h3>
                         <div class="fragment">
                             <div class="typesetting">
-                                <p>\[ KL(p||q) = \int p(x) \log \frac{p(x)}{q(x)} dx \]</p>
-                                <p style="text-align: left"><b>Properties of Kullback-Leibler Divergence:</b></p>
+                                <p style="text-align: left">\[ KL(p||q) = \int p(x) \log \frac{p(x)}{q(x)} dx \]
+                                represents how much information is "lost" when $q$ is used to approximate $p$</p>
+                                <p style="text-align: left"><b>Properties:</b></p>
                                 <ul>
                                     <li>\( KL(p||q) \neq KL(q||p) \) — asymmetry</li>
                                     <li>\( KL(p||q) \geq 0 \) — non-negativity</li>
@@ -97,6 +98,12 @@
                         \leq \log\left( \int p(x) \frac{q(x)}{p(x)}dx\right) = \log\left( \int q(x) dx\right) = \log 1 = 0 \]
                     </section>
                     <section>
+                        <h3 style="text-align: left">Connecting KL Divergence and Cross-Entropy</h3>
+                        <p style="text-align: left">Recall the entropy of $p$: \[ H(p) = -\int p(x) \log p(x) dx \]</p>
+                        <p style="text-align: left">Cross-Entropy: \[ H(p, q) = -\int p(x) \log q(x) dx \]</p>
+                        <p style="text-align: left">KL Divergence: \[ KL(p||q) = -H(p) + H(p,q) \]</p>
+                    </section>
+                    <section>
                         <h3 style="text-align: left">Asymmetry of KL Divergence</h3>
                         <p style="text-align: left">Example: searching for a similar distribution</p>
 
@@ -107,7 +114,7 @@
                     </section>
                     <section>
                         <p style="text-align: left">First argument: mass covering</p>
-                        <p>\( KL(p || q) = \int p(x) \log \frac{p(x)}{q(x)} dx \)</p>
+                        <p>\[ KL(p || q) = \int p(x) \log \frac{p(x)}{q(x)} dx \]</p>
                         <div>
                             <img style="border-radius: 5%" src="images/example_1.jpg" alt="example_1" width="600" />
                         </div>
@@ -191,7 +198,7 @@
 
                         <p style="text-align: left">We can: $$p(X, Z|\theta) \underset{\theta}{\to} \max \text{(complete likelihood)}$$</p>
 
-                        <p style="text-align: left">Let's say in the previous example, $z_i$ is the identifier of the Gaussian from which the $i$-th object is taken.</p>
+                        <p style="text-align: left">Let's say in the previous example, $z_i$ is the identifier of the Gaussian from which the $i$-th object is taken</p>
                     </section>
                     <section>
                         <h3 style="text-align: left">Variational Lower Bound</h3>
@@ -310,6 +317,9 @@
                         \sigma_j^2 = \frac{\sum\limits_{i=1}^n q_i(z_i{\scriptsize =}j)(x_i-\mu_j)^2}{\sum\limits_{i=1}^n q_i(z_i{\scriptsize =}j)} \\
                         \pi_j = \frac{1}{n} \sum\limits_{i=1}^n q_i(z_i {\scriptsize =} j)
                         $$
+                    </section>
+                    <section>
+                        <h3>Let's have a break!</h3>
                     </section>
                 </section>
                 <section>
@@ -464,7 +474,7 @@
                         <div class="fragment">
                             <div class="typesetting">
                                 <ul>
-                                  <li>A common metric between probabilistic distributions is the Kullback-Leibler distance (KL-divergence)</li>
+                                  <li>A common "metric" between probabilistic distributions is the Kullback-Leibler distance (KL-divergence)</li>
                                   <li>The EM algorithm allows iterative solutions to complex problems by dividing them into two steps</li>
                                   <li>Probabilistic Principal Component Analysis used the EM algorithm</li>
                                 </ul>
