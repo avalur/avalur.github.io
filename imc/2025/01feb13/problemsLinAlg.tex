@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Linear Algebra Olympiad Problems}
+
+\begin{center}
+February 2025
+\end{center}
+
+\textbf{Problem 1.}
+Given the matrix
+\[
+A_n = \begin{pmatrix}
+1 & \frac{2}{n} & \frac{6}{n} \\
+\frac{3}{n} & 1 & 0 \\
+-\frac{1}{n} & 0 & 1
+\end{pmatrix}
+\]
+Calculate \( \lim\limits_{n \to \infty} A_n^n \).
+\\
+
+\textbf{Problem 2.}
+Let \( A \) and \( B \) be nonzero matrices of size \( n \times n \), where \( n \geq 2 \).
+It is known that \( ABA = A \). Does it follow that \( BAB = B \)?
+\\
+
+\textbf{Problem 3.}
+Suppose that for matrices \( A \) and \( B \), the equality
+\[
+AB = \alpha A + \beta B
+\]
+holds, where \( \alpha \) and \( \beta \) are some nonzero numbers. Prove that \( BA = AB \).
+\\
+
+\textbf{Problem 4.}
+Let \( A, B, C \) be square matrices of the same size, where \( A \) is non-singular. Prove that if
+\[
+(A - B)CA = B,
+\]
+then
+\[
+AC(A - B) = B.
+\]
+\\
+
+\textbf{Problem 5.}
+Let \( A \) and \( B \) be distinct real square matrices. If
+\[
+A^3 = B^3 \quad \text{and} \quad A^2 B = B^2 A,
+\]
+can the matrix \( A^2 + B^2 \) be invertible?
+\\
+
+\textbf{Problem 6.}
+All elements of a determinant of order three are squares of odd numbers.
+Prove that the determinant is divisible by 64.
+\\
+
+\textbf{Problem 7.}
+Let \( A \) and \( B \) be square matrices such that
+\[
+A^2 = A, \quad B^2 = B, \quad AB = BA.
+\]
+What values can the determinant of the matrix \( A - B \) take?
+\\
+
+\textbf{Problem 8.}
+The matrices \( A \) and \( B \) do not commute, i.e., \( AB \neq BA \). Can it happen that the matrices \( A^2 \) and \( B^2 \) commute?
+\\
+
+\textbf{Problem 9.}
+Compute the determinant of the matrix \( A = (a_{i,j}) \) of size \( n \times n \) with the general term \( a_{i,j} = \max(i, j) \).
+\\
+
+\textbf{Problem 10.}
+Compute the determinant:
+\[
+\begin{vmatrix}
+0 & 1 & 1 & 1 & \dots & 1 \\
+1 & 1 & 0 & 0 & \dots & 0 \\
+1 & 0 & \frac{1}{2} & 0 & \dots & 0 \\
+1 & 0 & 0 & \frac{1}{3} & \dots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & 0 & 0 & 0 & \dots & \frac{1}{n}
+\end{vmatrix}
+\]
+\end{document}
