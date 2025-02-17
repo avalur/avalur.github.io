@@ -69,18 +69,22 @@
                                     based on the training set. And it is called supervised learning.
                                     Or also we found the inner structure in the set of objects, you know, texts or images,
                                     and it is called unsupervised learning, when we haven't answers $y$.
-
-                                    A pretty good illustration of reinforcement learning comes from
-                                    the amazing ability of children to learn to walk.
-
-                                    Initially they have muscles and mostly lie down and sleep.
-                                    There are no any datasets for supervised or unsupervised learning,
-                                    but the whole real physical world is around.
-                                    Then they begin to roll over from their stomach to their back and back,
-                                    then they learn to crawl, sit, stand, and finally, walk and run.
                                 </aside>
                             </div>
                         </div>
+                    </section>
+                    <section data-background-image="images/baby.jpg">
+
+                        <aside class="notes">
+                            A pretty good illustration of reinforcement learning comes from
+                            the amazing ability of children to learn to walk.
+
+                            Initially they have muscles and mostly lie down and sleep.
+                            There are no any datasets for supervised or unsupervised learning,
+                            but the whole real physical world is around.
+                            Then they begin to roll over from their stomach to their back and back,
+                            then they learn to crawl, sit, stand, and finally, walk and run.
+                        </aside>
                     </section>
                     <section>
                         <h3>Real world</h3>
@@ -97,7 +101,7 @@
                     <section>
                         <h3 style="text-align: left">One more motivation</h3>
 
-                        <p>For example, we need to select the main page of a pizzeria website to attract the clients</p>
+                        <p style="text-align: left">For example, we need to select the main page of a pizzeria website to attract the clients</p>
 
                         <div class="row">
                             <div class="column">
@@ -173,10 +177,10 @@
                             </div>
                             <div>
                                 <img src="images/data-kopilkabandit.jpg" alt="Bandit" style="width: 80%;border-radius: 5%">
-                                <p>$\theta_4 = 0.1 (max)$</p>
+                                <p>$\theta_4 = 0.10 (max)$</p>
                             </div>
                         </div>
-                        <p>We do not know the true probabilities, but we want to come up with a strategy that maximizes the payoff (reward)</p>
+                        <p style="text-align: left">We don't know the true probabilities, but we want to come up with a strategy that maximizes the payoff (reward)</p>
                         <aside class="notes">
                             In multi-armed bandits model you have several handles with some winning probabilities theta one, two and so on.
                         </aside>
@@ -225,7 +229,7 @@
                             <div class="typesetting">
                                 <div style="display: flex; justify-content: space-between;">
                                     <div>
-                                        <h4 style="text-align: left">Areas:</h4>
+                                        <h4 style="text-align: left">Areas</h4>
                                         <ul>
                                             <li>advertising banners</li>
                                             <li>recommendations (goods, music, movies etc.)</li>
@@ -233,7 +237,7 @@
                                         </ul>
                                     </div>
                                     <div>
-                                        <h4 style="text-align: left">Approaches:</h4>
+                                        <h4 style="text-align: left">Approaches</h4>
                                         <ul>
                                             <li>Thompson sampling</li>
                                             <li>Upper Confidence Bound (UCB)</li>
@@ -251,6 +255,9 @@
                             The main difference from more general reinforcement learning approach is that
                             there is no environment state in multi-armed bandits.
                         </aside>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/ucb.png" alt="ucb" style="width: 80%;border-radius: 5%">
                     </section>
                     <section>
                         <h3>Multi-Armed Bandits Disadvantage</h3>
@@ -414,6 +421,11 @@
                         </aside>
                     </section>
                     <section>
+                        <h3>Let's have a break!</h3>
+                    </section>
+                </section>
+                <section>
+                    <section>
                         <h3>Markov Decision Process</h3>
                         <div style="display: flex; justify-content: space-between;">
                             <div>
@@ -423,7 +435,7 @@
                                     <li>agent action $a \in A$</li>
                                     <li>reward $r \in R$</li>
                                     <li>transition dynamics <span style="color: orange">(Markov's assumption)</span>
-                                        $$ P(s_{t+1} | s_t, a_t, \dots, s_{t-i}, a_{t-i}, \dots, s_0, a_0) = P(s_{t+1} | s_t, a_t)$$</li>
+                                        $$ P(s_{t+1} | s_t, a_t, \dots, s_{t-i}, a_{t-i}, \dots) = P(s_{t+1} | s_t, a_t)$$</li>
                                     <li>win function (Markov's assumption)
                                         $$r_{t} = r(s_t, a_t)$$</li>
                                     <li>total reward $R = \sum\limits_t r_t$</li>
@@ -483,7 +495,7 @@
                         </div>
                     </section>
                     <section>
-                        <h3>Bellman Equation</h3>
+                        <h3 style="text-align: left">Bellman Equation</h3>
                         <p style="text-align: left">For the Action-Value function $Q$</p>
                         $$ Q_{\pi} (s,a) =
                         \mathbb{E}_\pi \left[r_t + \gamma \sum\limits_{a^\prime} \pi(a^\prime|s^\prime)
@@ -504,7 +516,8 @@
                         \end{align*}
                         $$
 
-                        <p class="r-frame">Note: To use this formula in practice,
+                        <p class="r-frame" style="text-align: left;padding-left: 20px">
+                            Note: To use this formula in practice,
                             we need to know the transition probabilities $P(s^\prime| s, a)$</p>
                     </section>
                     <section>
@@ -628,7 +641,7 @@
                                     <li>Value function $Q(s, a; w)$: ConvNN with input $s$ and $|A|$ outputs</li>
                                 </ul>
 
-                                <p>Source: V.Mnih et al. (DeepMind). Playing Atari with deep reinforcement learning. 2013</p>
+                                <p style="text-align: left">Source: V.Mnih et al. (DeepMind). Playing Atari with deep reinforcement learning. 2013</p>
                             </div>
                         </div>
                     </section>
@@ -696,7 +709,7 @@
                     </section>
                 <section>
                     <h3>The problem of goal alignment</h3>
-                    <iframe width="80%" height="600" src="https://www.youtube.com/embed/tlOIHko8ySg"
+                    <iframe width="80%" height="800" src="https://www.youtube.com/embed/tlOIHko8ySg"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media;
                             gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </section>
@@ -706,7 +719,7 @@
                         <div class="fragment">
                             <div class="typesetting">
                                 <ul>
-                                    <li>We got acquainted with the reinforcement learning problem statement</li>
+                                    <li>We got acquainted with the Reinforcement Learning problem statement</li>
                                     <li>Touched a little multi-armed bandits model</li>
                                     <li>Got acquainted with the methods of cross-entropy, TD-learning and Q-learning</li>
                                     <li>Discussed Deep Q-learning Network</li>
