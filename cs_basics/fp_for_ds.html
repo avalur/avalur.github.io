@@ -94,7 +94,7 @@
 									<li>the fastest: 1-2 days</li>
 									<li>inappropriate for
 										<span style="color: orange;">large or long</span> projects</li>
-									<li>"the notebook approach"</li>
+									<li>"the Jupyter notebook approach"</li>
 								</ul>
 								</li>
 								<li>Object-oriented paradigm (OOP)
@@ -158,7 +158,7 @@ print(list(map(add_3, list_)))
 								The idea is to chain function creation:</p>
 								<pre>
 
-	Model(parameters) -> Fit(training_set) -> Predict(test_set)
+	Model(parameters) -> Fit(train_set) -> Predict(test_set)
 
 								</pre>
 							</div>
@@ -179,8 +179,8 @@ print(list(map(add_3, list_)))
 										def create_rf_learner(num_trees):
 											rf = RandomForestClassifier(n_estimators=num_trees)
 
-											def train_rf_on(training_set):
-												X, Y = training_set
+											def train_rf_on(train_set):
+												X, Y = train_set
 												rf.fit(X, Y)
 
 												def predict_rf_on(external_dataset):
