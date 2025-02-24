@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<title>AI Assited Programming</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
+
+        <!-- Theme used for syntax-highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+		<!-- and it's easy to individually load additional languages -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
+
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+		<script src="../plugin/reveald3.js"></script>
+	    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+		<script>
+			import hljs from "highlight.js";
+
+			hljs.highlightAll();
+		</script>
+		<style>
+			.column {
+			  float: left;
+			  width: 48%;
+			  padding: 2px;
+			}
+			/* Clear floats after image containers */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+		</style>
+</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div>
+						<img src="images/nup_logo_dark.jpeg" alt="nup_logo" />
+					</div>
+					<h2>Programming Paradigms</h2>
+					<h3>AI Assisted Programming</h3>
+					<br />
+					Alex Avdiushenko <br />
+					February 27, 2025
+				</section>
+				<section>
+					<section>
+						<h3>Let's start with an example from math</h3>
+						<p style="text-align: left;font-style: italic;">
+							Prove that the dashed lines pass through one common point
+						</p>
+						<div id="applet_container" style="width: 1200px; height: 400px;align-content: center"></div>
+						<script>
+							var ggbApp = new GGBApplet({
+								"appName": "geometry",
+								"width": 1200,
+								"height": 400,
+								"showToolBar": false,
+								"showAlgebraInput": false,
+								"showMenuBar": false,
+								"appletOnLoad": function(api) {
+									// Define triangle vertices
+									api.evalCommand("A = (-5, -2)");
+									api.evalCommand("B = (6, -2)");
+									api.evalCommand("C = (3, 3)");
+									// Define triangle lines
+									api.evalCommand("a = Line(B, C)");
+									api.evalCommand("b = Line(C, A)");
+									api.evalCommand("c = Line(A, B)");
+									// Draw the triangle
+									api.evalCommand("triangle = Polygon(A, B, C)");
+
+									// Create angle bisector at A
+									api.evalCommand("bisectorA = AngleBisector(B, A, C)");
+									// Find a point on the angle bisector
+									api.evalCommand("D1 = Point(bisectorA, 0.928)");
+									// Create perpendicular lines from D
+									api.evalCommand("perpD1 = PerpendicularLine(D1, c)");
+									// Find intersection points
+									api.evalCommand("E1 = Intersect(perpD1, c)");
+									// Create the circle
+									api.evalCommand("circle1 = Circle(D1, Distance(D1, E1))");
+									api.evalCommand("center1 = Center(circle1)");
+									api.evalCommand("r1 = Radius(circle1)");
+
+									// Create angle bisector at B
+									api.evalCommand("bisectorB = AngleBisector(A, B, C)");
+									// Find a point on the angle bisector
+									api.evalCommand("D2 = Point(bisectorB, 0.865)");
+									// Create perpendicular lines from D
+									api.evalCommand("perpD2 = PerpendicularLine(D2, c)");
+									// Find intersection points
+									api.evalCommand("E2 = Intersect(perpD2, c)");
+									// Create the circle
+									api.evalCommand("circle2 = Circle(D2, Distance(D2, E2))");
+									api.evalCommand("center2 = Center(circle2)");
+									api.evalCommand("r2 = Radius(circle2)");
+
+									// Create angle bisector at C
+									api.evalCommand("bisectorC = AngleBisector(A, C, B)");
+									// Find a point on the angle bisector
+									api.evalCommand("D3 = Point(bisectorC, 0.8)");
+									// Create perpendicular lines from D
+									api.evalCommand("perpD3 = PerpendicularLine(D3, a)");
+									// Find intersection points
+									api.evalCommand("E3 = Intersect(perpD3, a)");
+									// Create the circle
+									api.evalCommand("circle3 = Circle(D3, Distance(D3, E3))");
+									api.evalCommand("center3 = Center(circle3)");
+									api.evalCommand("r3 = Radius(circle3)");
+
+									// Find tangent points
+									api.evalCommand("A1 = Barycenter({center3, center2}, {r2, r3})");
+									api.evalCommand("B1 = Barycenter({center3, center1}, {r1, r3})");
+									api.evalCommand("C1 = Barycenter({center1, center2}, {r2, r1})");
+
+									// Draw segments
+									api.evalCommand("aa = Segment(A, A1)");
+									api.evalCommand("bb = Segment(B, B1)");
+									api.evalCommand("cc = Segment(C, C1)");
+
+									// Customize colors
+									api.evalCommand('SetColor(triangle, 0, 0, 1)');
+									api.evalCommand('SetColor(circle1, 0, 0, 0)');
+									api.evalCommand('SetLineStyle(circle1, 0)');
+									api.evalCommand('SetColor(circle2, 0, 0, 0)');
+									api.evalCommand('SetLineStyle(circle2, 0)');
+									api.evalCommand('SetColor(circle3, 0, 0, 0)');
+									api.evalCommand('SetLineStyle(circle3, 0)');
+									api.evalCommand('SetLineStyle(aa, 2)');
+									api.evalCommand('SetLineStyle(bb, 2)');
+									api.evalCommand('SetLineStyle(cc, 2)');
+
+									// Hide construction elements
+									api.evalCommand('SetVisibleInView(perpD1, 1, false)');
+									api.evalCommand('SetVisibleInView(perpD2, 1, false)');
+									api.evalCommand('SetVisibleInView(perpD3, 1, false)');
+									api.evalCommand('SetVisibleInView(D1, 1, false)');
+									api.evalCommand('SetVisibleInView(E1, 1, false)');
+									api.evalCommand('SetVisibleInView(D2, 1, false)');
+									api.evalCommand('SetVisibleInView(E2, 1, false)');
+									api.evalCommand('SetVisibleInView(D3, 1, false)');
+									api.evalCommand('SetVisibleInView(E3, 1, false)');
+									api.evalCommand('SetVisibleInView(bisectorA, 1, false)');
+									api.evalCommand('SetVisibleInView(bisectorB, 1, false)');
+									api.evalCommand('SetVisibleInView(bisectorC, 1, false)');
+									api.evalCommand('SetVisibleInView(a, 1, false)');
+									api.evalCommand('SetVisibleInView(b, 1, false)');
+									api.evalCommand('SetVisibleInView(c, 1, false)');
+									api.evalCommand('SetVisibleInView(center1, 1, false)');
+									api.evalCommand('SetVisibleInView(center2, 1, false)');
+									api.evalCommand('SetVisibleInView(center3, 1, false)');
+								}
+							}, true);
+
+							window.addEventListener("load", function() {
+								ggbApp.inject("applet_container");
+							});
+						</script>
+					</section>
+					<section data-background-color="white">
+						<img src="images/GPT4_wrong_answer.png" alt="GPT4_wrong_answer">
+						<div class="fragment"
+							 style="border: 5px solid red; position: absolute;
+							 left: 58%; top: 50%;
+							 width: 22%; height: 5%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: red;">
+							Mistake!
+						</div>
+					</section>
+					<section data-background-color="white">
+						<img src="images/GPT4o_wrong.png" alt="GPT4o_wrong">
+						<div class="fragment"
+							 style="border: 5px solid red; position: absolute;
+							 left: 56%; top: 54%;
+							 width: 25%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: red;">
+							Mistake!
+						</div>
+					</section>
+					<section data-background-color="white">
+						<img src="images/GPTo1_correct.png" alt="GPTo1_correct_answer">
+						<div class="fragment"
+							 style="border: 5px solid green; position: absolute;
+							 left: 58%; top: 50%;
+							 width: 46%; height: 5%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: green;">
+							This is amazingly correct!
+						</div>
+					</section>
+					<section data-background-color="white">
+						<img src="images/GPTo1_correct.png" alt="GPTo1_correct_answer">
+						<div class="fragment"
+							 style="border: 5px solid green; position: absolute;
+							 left: 58%; top: 50%;
+							 width: 46%; height: 5%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: green;">
+							This is amazingly correct!
+						</div>
+					</section>
+					<section>
+						<ul>
+							<li><a style="color: blue" href="https://en.wikipedia.org/wiki/Malfatti_circles">
+								Wikipedia article "Malfatti_circles"</a>
+							</li>
+							<li class="fragment">Main steps of the human proof (o3-mini-high and Crok 3 could not find it):
+								<ol>
+									<li>Homotheties for each pair of circles give us centers $A_2, B_2, C_2$</li>
+									<li>These three homotheties centers lie on one line by
+									<a style="color: blue" href="https://en.wikipedia.org/wiki/Monge%27s_theorem">
+										Monge's theorem</a>
+									</li>
+									<li>The final step is <a style="color: blue" href="https://en.wikipedia.org/wiki/Desargues%27s_theorem">
+										Desargues's theorem</a> for triangles $ABC$ and $A_1B_1C_1$
+									</li>
+								</ol>
+							</li>
+							<li class="fragment" style="font-style: italic">And we wait for the next, even smarter version of GPT...</li>
+						</ul>
+					</section>
+					<section data-background-color="lightgray">
+						<h3>The same in coding</h3>
+						<img src="images/o3-benchmark-coding.webp" alt="o3-benchmark-coding" width="1400">
+					</section>
+					<section>
+					  <h4 style="text-align: left">Everybody Has a Brilliant AI Assistant – It Always Ready to Help!</h4>
+					  <ul>
+						<li>✨ Guide your thinking process like a pro</li>
+						<li>🔍 Quickly search for the most relevant information</li>
+						<li>💡 Effortlessly generate insights that spark ideas</li>
+					  </ul>
+					  <br><br>
+					  <h4 class="fragment"
+						  style="text-align: left;color: white;
+							background-color: orange;padding-left: 20px">
+						We can focus on what truly matters: critical thinking, decision-making and verification
+					  </h4>
+					  <aside class="notes">
+						AI technology is evolving at lightning speed, making assistants smarter and more capable every day.
+
+						The real question is: how can we harness this power for learning and working?
+
+						With AI, you’re not alone in the learning process.
+						It helps guide your thinking, searches for valuable insights,
+						and even collaborates to generate ideas.
+						This way, you can dedicate your energy to critical thinking and ensuring the information fits your needs.
+					  </aside>
+					</section>
+					<section>
+					  <h4 style="text-align: left">IT industry is transforming the same way!</h4>
+						  <ul>
+							<li>🤖 AI models now write code better than Juniors and Middles</li>
+							<li>⚡ They do it faster, cheaper, and in any programming language</li>
+							<li>📈 You need to level up to Senior roles!</li>
+						  </ul>
+						  <br><br>
+					  <div class="fragment" style="text-align: left">
+						  <h4 style="text-align: left">Essential Skills for the AI Era:</h4>
+						  <ul>
+							<li>🗣️ Mastering communication with AI models: it's becoming a crucial skill</li>
+							<li>👥 Developing stronger soft skills for human interaction</li>
+						  </ul>
+					  </div>
+					  <br>
+					  <h4 class="fragment" style="text-align: left;color: white;
+							background-color: orange;padding-left: 20px">
+						Focus on what AI can't replace: leadership, architecture decisions, and human collaboration
+					  </h4>
+					  <aside class="notes">
+						The IT landscape is changing dramatically with AI becoming increasingly powerful at coding tasks.
+						While AI handles routine coding, successful developers need to focus on higher-level skills:
+						- Effective communication with both AI and humans
+						- Strategic thinking and system design
+						- Team leadership and collaboration
+						- Problem-solving at a broader scale
+					  </aside>
+					</section>
+					<section>
+						<h4 style="text-align: left">The Future of Software Development with AI</h4>
+						<ul>
+							<li>🔬 Core AI Systems Development:
+								Companies like OpenAI, Anthropic building foundational models
+							</li>
+							<li>🛠️ AI Integration Specialists
+								<ul>
+									<li class="fragment"><i>Tech: JetBrains, VS Code...</i></li>
+									<li class="fragment"><i>Healthcare: Diagnostic systems, medical imaging</i></li>
+									<li class="fragment"><i>Science: Research analysis, lab automation</i></li>
+									<li class="fragment"><i>Manufacturing: Process optimization, quality control</i></li>
+								</ul>
+							</li>
+						</ul>
+						<br><br>
+						<h4 class="fragment" style="text-align: left;color: white;
+							background-color: orange;padding-left: 20px">
+							Two major career paths are emerging: AI core development and domain-specific AI implementation
+						</h4>
+						<aside class="notes">
+							The AI industry is splitting into two main directions:
+							1. Core AI development - creating and improving fundamental AI models and systems
+							2. Domain specialists - implementing and adapting AI solutions for specific industries
+
+							Both paths require deep expertise and offer significant opportunities for growth.
+							The key is choosing where you can provide the most value based on your interests and background.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Problems of
+							<span style="color: white; background-color: orange">vibe coding</span>
+							and losing control</h3>
+						<ul>
+							<li>
+								<a href="https://x.com/levelsio/status/1893679316384244046?s=46&t=dUCVh9akIWxxNUIkrDJwJg">Recent post on X/Twitter</a>
+								from some developer
+							</li>
+							<li>Flagship models are still <a href="https://arxiv.org/pdf/2502.12115">unable to solve</a> real coding tasks</li>
+							<li><a href="https://www.youtube.com/watch?v=Ri3iyi3qFlI">Video</a> about Subagents for fighting
+							hallucinacions and other problems</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Summary</h3>
+						<ul>
+							<li>Example of Hard Mathematical Problem</li>
+							<li>Problems of vibe coding and losing control</li>
+						</ul>
+
+						<br><br>
+						<h4>Let's switch to Demo in PyCharm</h4>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+		</script>
+    </body>
+</html>
