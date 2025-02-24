@@ -96,12 +96,12 @@
                                 the environment, REINFORCE learns a stochastic policy directly.</p>
                             $${\nabla_\theta J(\theta) \propto \sum\limits_s Pr_\pi[s]
                                 \sum\limits_a Q_\pi(s,a) \nabla_\theta \pi(a|s)} = \\
-                                \quad = \mathbb{E}_{\pi} \left[ \sum\limits_a Q_\pi(S_t,a) \nabla_\theta \pi(a|S_t, \theta)\right]$$
+                                \quad = \mathbb{E}_{\pi} \left[ \sum\limits_a Q_\pi(s_t, a) \nabla_\theta \pi(a|s_t, \theta)\right]$$
                             <p style="text-align: left">So the SGD updates are</p>
-                            $$\theta_{t+1} = \theta_{t} + \alpha \sum\limits_a \hat Q_\pi(S_t,a,\theta) \nabla_\theta
-                            \pi(a|S_t, \theta),$$
+                            $$\theta_{t+1} = \theta_{t} + \alpha \sum\limits_a \hat Q_\pi(s_t, a, \theta) \nabla_\theta
+                            \pi(a|s_t, \theta),$$
                             <p style="text-align: left">
-                                where $\hat Q_\pi(S_t,a,\theta)$ is some learned approximation of the action-value function $Q$.</p>
+                                where $\hat Q_\pi(s_t,a,\theta)$ is some learned approximation of the action-value function $Q$</p>
                         </div>
                     </section>
                 </section>
@@ -190,7 +190,7 @@
                                 MogoTW received a 7-stone handicap and won</li>
                             <li class="fragment">We know that DeepBlue defeated Garry Kasparov in 1997</li>
                         </ul>
-                            <p class="fragment"><span style="color: orange">What is the problem? Why is Go harder than Chess for computer?</span></p>
+                            <p class="fragment"><span style="color: white; background-color: orange">What is the problem? Why is Go harder than Chess for computer?</span></p>
                     </section>
                     <section>
                         <h3 style="text-align: left">Schematic tree of possible moves in Go</h3>
@@ -233,6 +233,11 @@
                             to determine, who won.
                         </aside>
                     </section>
+                    <section>
+                        <h3>Let's have a break!</h3>
+                    </section>
+                </section>
+                <section>
                     <section data-background-color="antiquewhite">
                         <h3 style="text-align: left">2000-s: Monte-Carlo Tree Search</h3>
                         <div class="fragment">
