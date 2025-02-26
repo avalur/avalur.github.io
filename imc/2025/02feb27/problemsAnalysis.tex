@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Math Analysis Olympiad Problems}
+
+\begin{center}
+February 2025
+\end{center}
+
+\textbf{Problem 1. Continuity and Differentiability at a Point.}
+Consider the function
+\[
+f(x) = \begin{cases}
+x^2 \sin\left(\frac{1}{x}\right), & x\neq 0, \\
+0, & x=0.
+\end{cases}
+\]
+\begin{enumerate}
+    \item Prove that \(f\) is continuous at \(x=0\).
+    \item Decide whether \(f\) is differentiable at \(x=0\) and, if so, compute \(f'(0)\).
+\end{enumerate}
+\\
+
+\textbf{Problem 2. Lipschitz Continuity via Bounded Derivative.}
+Let \(f:[a,b]\to \mathbb{R}\) be a differentiable function with a bounded derivative; that is, there exists \(M>0\) such that
+\[
+    |f'(x)| \le M \quad \text{for all } x \in (a,b).
+\]
+Prove that \(f\) is Lipschitz continuous on \([a,b]\); i.e., show that for all \(x,y\in [a,b]\),
+\[
+    |f(x)-f(y)| \le M |x-y|.
+\]
+\\
+
+\textbf{Problem 3. A Telescoping Series with Alternating Terms.}
+Study the convergence of the series
+    \[
+    \sum_{n=1}^\infty \left( \frac{(-1)^n}{\sqrt{n+1}} - \frac{(-1)^n}{\sqrt{n}} \right)
+    \]
+Determine whether the series converges absolutely, conditionally or diverges.
+Provide a complete justification.
+\\
+
+\textbf{Problem 4.}
+Let $f \in C^1(a,b)$. Suppose
+\[
+\lim_{x \to a^+} f(x) = +\infty,
+\quad
+\lim_{x \to b^-} f(x) = -\infty,
+\]
+and
+\[
+  f'(x) + f^2(x) \ge -1
+\quad
+\text{for all } x \in (a,b).
+\]
+Prove that $b-a > \pi$ and give an example where $b-a = \pi$.
+\\
+
+\textbf{Problem 5.}
+Let \( f \in C^1[a,b] \), \( f(a) = 0 \) and suppose that \( \lambda \in \mathbb{R} \), \( \lambda > 0 \), is such that
+\[
+|f'(x)| \leq \lambda |f(x)|
+\]
+for all \( x \in [a,b] \). Is it true that \( f(x) = 0 \) for all \( x \in [a,b] \)?
+\\
+
+\textbf{Problem 6.}
+Find \[
+\lim_{N \to \infty} \frac{\ln^2 N}{N} \sum_{k=2}^{N-2} \frac{1}{\ln k \cdot \ln (N-k)}.
+\]
+Note that \( \ln \) denotes the natural logarithm.
+\\
+
+\textbf{Problem 7.}
+Let \( F : (1, \infty) \to \mathbb{R} \) be the function defined by
+\[
+    F(x) := \int_x^{x^2} \frac{dt}{\ln t}
+\]
+Show that \( F \) is one-to-one (i.e., injective) and find the range (i.e., set of values) of \( F \).
+\\
+
+\textbf{Problem 8.}
+Let \( \{b_n\}_{n=0}^{\infty} \) be a sequence of positive real numbers such that \( b_0 = 1 \),
+\[
+b_n = 2 + \sqrt{b_{n-1}} - 2\sqrt{1+\sqrt{b_{n-1}}}.
+\]
+Calculate
+\[
+\sum_{n=1}^{\infty} b_n 2^n.
+\]
+\\
+
+\textbf{Problem 9.}
+Evaluate the definite integral
+\[
+\int_{-\pi}^{\pi} \frac{\sin nx}{(1 + 2^x) \sin x} \,dx,
+\]
+where \( n \) is a natural number.
+\\
+
+\textbf{Problem 10.}
+\begin{itemize}
+    \item[(i)] Prove that
+    \[
+    \lim_{x \to +\infty} \sum_{n=1}^{\infty} \frac{nx}{(n^2 + x)^2} = \frac{1}{2}.
+    \]
+    \item[(ii)] Prove that there is a positive constant \( c \) such that for every \( x \in [1, \infty) \) we have
+    \[
+    \left| \sum_{n=1}^{\infty} \frac{nx}{(n^2 + x)^2} - \frac{1}{2} \right| \leq \frac{c}{x}.
+    \]
+\end{itemize}
+
+\end{document}
