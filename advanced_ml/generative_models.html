@@ -240,7 +240,7 @@
                     <section>
                         $$
                         \sum\limits_{i=1}^\ell
-                        \underbrace{E_{z \sim q_{\alpha}(z|x_i)} \log p_\beta(x_i|z)}_{\text{quality reconstruction}} -
+                        \underbrace{\mathbb{E}_{z \sim q_{\alpha}(z|x_i)} \log p_\beta(x_i|z)}_{\text{quality reconstruction}} -
                         \underbrace{KL(q_\alpha(z|x_i)\| p(z))}_{\text{regularizer by } \alpha}
                         \to \max\limits_{\alpha, \beta}
                         $$
