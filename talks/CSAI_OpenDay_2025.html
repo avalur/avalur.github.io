@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <meta name="description" content="Math Fest at Trinity, Cyprus, 2025">
+        <meta name="author" content="Alex Avdiushenko" />
+        <meta name="keywords" content="BSc Education, Computer Science, universities">
+
+		<title>From Engineering to Biology: Why You Should Master AI</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/serif.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Include Chart.js CDN -->
+		<script src="../plugin/reveald3.js"></script>
+		<style>
+			.column {
+			  float: left;
+			  width: 48%;
+			  padding: 2px;
+			}
+			/* Clear floats after image containers */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			.important {
+				color: orange;
+			}
+			.highlighted {
+				text-align: left;
+				color: white;
+				background-color: orange;
+				padding-left: 20px;
+			}
+			th, td {
+				border: 1px solid black;
+				padding: 10px;
+				text-align: center;
+			}
+			ul.custom-list {
+				list-style: none;
+				padding: 0;
+			}
+			ul.custom-list li::before {
+				content: '➕';
+				margin-right: 8px;
+			}
+			ul.custom-list li.minus::before {
+				content: '➖';
+			}
+			ul.custom-list li.lamp::before {
+				content: '💡';
+			}
+			.highlight {
+				color: #42a5f5;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section id="title">
+					<br>
+						<h3>From Engineering to Biology: <br>
+							Why You Should Master AI</h3>
+					<div class="column">
+						<div class="fig-container no-margin-top" data-file="images/simple_cogwheels_animation.html"
+						style="padding-left: 10%"></div>
+					</div>
+					<div class="column">
+						<br/><br/><br/>
+							<a style="color: blue" href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
+						<p><a style="color: blue;text-decoration: underline;" href="https://avalur.github.io/talks/CSAI_OpenDay_2025.html">
+						This slides at avalur.github.io</a></p>
+					</div>
+					<aside class="notes">
+						Hello everyone!
+						I'm Alex Avdiushenko, and I am happy to have a talk here.
+				  	</aside>
+                </section>
+				<section>
+					<section data-background-color="white">
+						<img src="images/GPT_models_march25.jpeg" alt="GPT4o_wrong">
+					</section>
+					<section>
+					  <h4 style="text-align: left">Everybody Has a Brilliant AI Assistant – It Always Ready to Help!</h4>
+					  <ul>
+						<li>✨ Guide your thinking process like a pro</li>
+						<li>🔍 Quickly search for the most relevant information</li>
+						<li>💡 Effortlessly generate insights that spark ideas</li>
+					  </ul>
+					  <br><br>
+					  <h4 class="fragment highlighted">
+						We can focus on what truly matters: critical thinking, decision-making and verification
+					  </h4>
+					  <aside class="notes">
+						AI technology is evolving at lightning speed, making assistants smarter and more capable every day.
+
+						The real question is: how can we harness this power for learning and working?
+
+						With AI, you’re not alone in the learning process.
+						It helps guide your thinking, searches for valuable insights,
+						and even collaborates to generate ideas.
+						This way, you can dedicate your energy to critical thinking and ensuring the information fits your needs.
+					  </aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3 style="text-align: left">1. Tic-tac-toe with Robot Arm</h3>
+						<div class="column">
+							<br>
+							<ul>
+								<li><strong>General idea</strong>
+									<ul>
+										<li>Implement game with robot arm</li>
+									</ul>
+								</li>
+								<li><strong>Type</strong>
+									<ul>
+										<li>Engineering / Research / Fun</li>
+									</ul>
+								</li>
+								<li><strong>Equipment</strong>
+									<ul>
+										<li>Kinova robot arm</li>
+										<li>Raspberry Pi / Optitrack cameras</li>
+									</ul>
+								</li>
+								<li><strong>Outcome</strong>
+									<ul>
+										<li>Robot wins human</li>
+									</ul>
+								</li>
+							</ul>
+							<br><br><br><br><br>
+							<p class="highlighted"><small>CSAI NUP. Kirill Krinkin. Spring 2025.</small></p>
+						</div>
+						<div class="column">
+							<img src="images/kinova_robot_arm.jpg" alt="kinova_robot_arm" width="80%">
+						</div>
+					</section>
+					<section>
+						<h3 style="text-align: left">AI in Robotics</h3>
+						<img src="images/eureka.png" width="80%"><br>
+						<a href="https://arxiv.org/abs/2310.12931">
+							Eureka: Human-Level Reward Design via Coding LLMs (ICLR 2024)</a>
+					</section>
+					<section>
+						<h3 style="text-align: left">2. Animations in Manim for Solving Geometry Problems</h3>
+						<div class="column">
+							<br>
+							<img src="images/Full_ManimCE_v0.19.0.gif" alt="manim_visualization" width="100%">
+						</div>
+						<div class="column">
+							<ul>
+								<li>Develop specialized geometric tools to enhance Manim's capabilities for geometry problems</li>
+								<li>Create AI system to automatically generate Manim code from problem descriptions</li>
+								<li>Build converter to transform GeoGebra constructions into Manim animations</li>
+							</ul>
+							<br><br><br>
+							<p class="highlighted" style="text-align: right"><small>CSAI NUP. Fedor Baharev. Spring 2025.</small></p>
+							<aside class="notes">
+								Difficulty level: Basic
+								Prerequisites: Geometry fundamentals, aesthetic sense, perfectionist approach
+								Based on 3Blue1Brown's Manim library
+							</aside>
+						</div>
+					</section>
+					<section>
+						<iframe
+								width="1680"
+								height="945"
+								src="https://www.youtube.com/embed/rXhyRFbwXiw"
+								title="YouTube video player"
+								allow="accelerometer; autoplay; clipboard-write;
+								encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen>
+						</iframe>
+					</section>
+					<section data-background-color="white">
+						<h3 style="text-align: left">3. Cryogenic Electron Microscopy</h3>
+						<div class="column">
+							<ul>
+								<li><strong>Machine Learning in Classification:</strong>
+									ML-driven 2D/3D classification using maximum likelihood
+									optimization and PCA for conformational analysis
+								</li>
+								<li><strong>Intelligent Particle Detection:</strong>
+									CNNs revolutionize automated particle recognition,
+									enhancing accuracy over traditional methods
+								</li>
+								<li><strong>Advanced Model Generation:</strong>
+									Modern deep learning approaches using VAEs and GANs enable
+									robust initial 3D structure determination
+								</li>
+							</ul>
+								<aside class="notes">
+									Key AI technologies:
+									- CNNs for particle detection
+									- VAEs and GANs for model generation
+									- ML algorithms for classification and refinement
+								</aside>
+							<br><br><br>
+							<p class="highlighted"><small>CSAI NUP. Fedor Baharev. Spring 2025.</small></p>
+						</div>
+						<div class="column">
+							<img src="images/CryoEM.png" alt="CryoEM" width="60%"><br>
+							<a href="https://www.frontiersin.org/journals/molecular-biosciences/articles/10.3389/fmolb.2024.1473609/full">
+								Semantic segmentation-based detection algorithm for challenging Cryo-EM RNP samples</a>
+						</div>
+					</section>
+					<section data-background-color="white">
+						<h3 style="text-align: left">4. LLM for Generating Astronomy Olympiad Problems</h3>
+						<div class="column">
+							<br><br>
+							<img src="images/LLM_for_astronomy.png" alt="LLM_for_astronomy" width="100%">
+						</div>
+						<div class="column">
+							<ul>
+								<li>
+									<strong>Current Challenge:</strong>
+									Existing LLMs fall short in generating high-quality olympiad problems
+									that match Iternational Olympiad standards
+								</li>
+								<li>
+									<strong>Research Objectives:</strong>
+									Develop specialized datasets and explore novel approaches for training
+									AI models to generate problems
+								</li>
+							</ul>
+							<aside class="notes">
+								Key focus areas:
+								- Gap analysis in current LLM capabilities
+								- Dataset development for problem generation
+								- Problem difficulty classification
+								- Quality matching ЦПМК standards
+							</aside>
+							<br><br><br><br><br><br>
+							<p class="highlighted" style="text-align: right">
+								<small>CSAI NUP. Alex Avdiushenko. Spring 2025.</small></p>
+						</div>
+					</section>
+					<section data-background-color="black">
+						<h3>5. Competition on Boolean Circuit Synthesis:<br>
+						2024 &rightarrow; 2025</h3>
+						<img src="images/iwls2024.png" alt="iwls2024" width="75%"><br>
+							<p class="highlighted">
+								<small>CSAI NUP. Alexander S. Kulikov. Spring 2025.</small>
+							</p>
+					</section>
+				</section>
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				slideNumber: true,
+				showSlideNumber: 'speaker',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				// showNotes: 'separate-page',
+
+				// Activate the scroll view
+				// view: 'scroll',
+				// Force the scrollbar to remain visible
+				// scrollProgress: true,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+			function checkAnswer(element, correctness) {
+				const answers = document.querySelectorAll('.answer');
+				answers.forEach(answer => {
+				// answer.style.pointerEvents = 'none';  // Disable further clicks
+				if (answer === element) {
+				answer.classList.add(correctness);
+			} else {
+				answer.classList.add('shadow');
+			}
+			});
+			}
+
+        </script>
+	</body>
+</html>

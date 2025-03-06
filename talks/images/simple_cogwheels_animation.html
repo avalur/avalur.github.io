@@ -14,12 +14,28 @@
         .cogwheel-large {
             width: 200px;
             height: 200px;
+            /* Add display flex to center the text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Add style for the text */
+        .cogwheel-text {
+            font-size: 46px;
+            font-weight: bold;
+            color: orange;
+            text-align: center;
+            /* Ensure text doesn't rotate with the wheel */
+            transform: rotate(0deg);
         }
     </style>
 </head>
 <body>
     <div id="container" style="position: relative; width: 580px; height: 580px;">
-        <div class="cogwheel cogwheel-large" id="cog1"></div>
+        <div class="cogwheel cogwheel-large" id="cog1">
+            <span class="cogwheel-text">CSAI<br>NUP</span>
+        </div>
         <div class="cogwheel" id="cog2"></div>
         <div class="cogwheel" id="cog3"></div>
         <div class="cogwheel" id="cog4"></div>
@@ -38,6 +54,8 @@
             angle += 0.25;
             // Center large cogwheel
             cog1.style.transform = `translate(200px, 200px) rotate(${angle}deg)`;
+            // Keep the text upright while the wheel rotates
+            cog1.querySelector('.cogwheel-text').style.transform = `rotate(${-angle}deg)`;
             // Top cogwheel
             cog2.style.transform = `translate(250px, 45px) rotate(${-angle * 2}deg)`;
             // Right cogwheel
