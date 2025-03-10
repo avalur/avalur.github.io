@@ -210,7 +210,7 @@
                               \frac{\partial \mathbf{y}_{d+1:D}}{\partial \mathbf{x}_{1:d}} & \text{diag}(\exp(s(\mathbf{x}_{1:d})))
                             \end{bmatrix}
                         $$
-                        <p style="text-align: left">Hence the determinant is simply the product of terms on the diagonal.</p>
+                        <p style="text-align: left">Hence, the determinant is simply the product of terms on the diagonal.</p>
                         $$
                             \det(\mathbf{J})
                             = \prod_{j=1}^{D-d}\exp(s(\mathbf{x}_{1:d}))_j
@@ -359,6 +359,9 @@
                         </ul>
                         <img src="images/soccer_trajectories.png" alt="soccer_trajectories" style="width: 70%;border-radius: 5%">
                     </section>
+                    <section>
+                        <h3>Let's have a break!</h3>
+                    </section>
                 </section>
                 <section>
                     <section>
@@ -421,7 +424,7 @@
                             so $\beta_1 &lt; \beta_2 &lt; \dots &lt; \beta_T$ and therefore $\bar{\alpha}_1 &gt; \dots &gt; \bar{\alpha}_T$.</p>
                     </section>
                     <section>
-                        <h3>Connection with stochastic gradient Langevin dynamics</h3>
+                        <h3>Note: Connection with stochastic gradient Langevin dynamics</h3>
                         <p style="text-align: left">Langevin dynamics is a concept from physics,
                             developed for statistically modeling molecular systems.
                             Combined with stochastic gradient descent, <em>stochastic gradient Langevin dynamics</em>
@@ -586,8 +589,8 @@
                         $$
                         \begin{aligned}
                         L_t
-                        &= \mathbb{E}_{\mathbf{x}_0, \boldsymbol{\epsilon}} \Big[\frac{1}{2 \| \boldsymbol{\Sigma}_\theta(\mathbf{x}_t, t) \|^2_2} \| \color{blue}{\tilde{\boldsymbol{\mu}}_t(\mathbf{x}_t, \mathbf{x}_0)} - \color{green}{\boldsymbol{\mu}_\theta(\mathbf{x}_t, t)} \|^2 \Big] \\
-                        &= \mathbb{E}_{\mathbf{x}_0, \boldsymbol{\epsilon}} \Big[\frac{1}{2  \|\boldsymbol{\Sigma}_\theta \|^2_2} \| \color{blue}{\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_t \Big)} - \color{green}{\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\boldsymbol{\epsilon}}_\theta(\mathbf{x}_t, t) \Big)} \|^2 \Big] \\
+                        &= \mathbb{E}_{\mathbf{x}_0, \boldsymbol{\epsilon}} \Big[\frac{1}{2 \| \boldsymbol{\Sigma}_\theta(\mathbf{x}_t, t) \|^2_2} \| {\color{blue}\tilde{\boldsymbol{\mu}}_t(\mathbf{x}_t, \mathbf{x}_0)} - {\color{green}\boldsymbol{\mu}_\theta(\mathbf{x}_t, t)} \|^2 \Big] \\
+                        &= \mathbb{E}_{\mathbf{x}_0, \boldsymbol{\epsilon}} \Big[\frac{1}{2  \|\boldsymbol{\Sigma}_\theta \|^2_2} \| {\color{blue}\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\epsilon}_t \Big)} - {\color{green}\frac{1}{\sqrt{\alpha_t}} \Big( \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \boldsymbol{\boldsymbol{\epsilon}}_\theta(\mathbf{x}_t, t) \Big)} \|^2 \Big] \\
                         &= \mathbb{E}_{\mathbf{x}_0, \boldsymbol{\epsilon}} \Big[\frac{ (1 - \alpha_t)^2 }{2 \alpha_t (1 - \bar{\alpha}_t) \| \boldsymbol{\Sigma}_\theta \|^2_2} \|\boldsymbol{\epsilon}_t - \boldsymbol{\epsilon}_\theta(\mathbf{x}_t, t)\|^2 \Big] \\
                         &= \mathbb{E}_{\mathbf{x}_0, \boldsymbol{\epsilon}} \Big[\frac{ (1 - \alpha_t)^2 }{2 \alpha_t (1 - \bar{\alpha}_t) \| \boldsymbol{\Sigma}_\theta \|^2_2} \|\boldsymbol{\epsilon}_t - \boldsymbol{\epsilon}_\theta(\sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_t}\boldsymbol{\epsilon}_t, t)\|^2 \Big]
                         \end{aligned}
@@ -638,7 +641,7 @@
                         </div>
                         <div class="fragment">
                             <div class="typesetting">
-                                <p>What else can you look at?</p>
+                                <p style="text-align: left">What else can you look at?</p>
                                 <ul style="text-align:left;">
                                     <li>Implementing a <a href="https://www.youtube.com/watch?v=ZBKpAp_6TGI&t=14s">Stable Diffusion</a></li>
                                     <li>Coding a Multimodal LM <a href="https://www.youtube.com/watch?v=vAmKB7iPkWw">PaliGemma</a></li>
