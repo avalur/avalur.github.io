@@ -3,7 +3,13 @@ Follow the link and download the zip file: https://drive.google.com/file/d/1OU_R
 
 The zip file contains the IDE course that you need to open in JetBrains IDE (PyCharm) with the installed JetBrains Academy plugin:
 
-![InstallPluginCourse](images/InstallPluginCourse.png)
+Browse Courses:
+
+![InstallPluginCourse1](images/InstallPluginCourse1.png)
+
+Open course from disk:
+
+![InstallPluginCourse2](images/InstallPluginCourse2.png)
 
 Then skip the "Introduction" lesson and solve all other exercises.
 
