@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Discrete Math Olympiad Problems}
+
+\begin{center}
+March 2025
+\end{center}
+
+\textbf{Problem 1.}
+Suppose that in a not necessarily commutative ring $R$ the square of any element is $0$.
+Prove that $abc + abc = 0$ for any three elements $a, b, c$.
+\\
+
+\textbf{Problem 2.}
+We throw a dice (which selects one of the numbers $1,2,\dots,6$ with equal probability)
+$n$ times. What is the probability that the sum of the values is divisible by $5$?
+\\
+
+\textbf{Problem 3.}
+Assume that $x_1, \dots, x_n \geq -1$ and $\sum_{i=1}^{n} x_i^3 = 0$.
+Prove that $\sum_{i=1}^{n} x_i \leq \frac{n}{3}$.
+\\
+
+\textbf{Problem 4.}
+Let $\alpha$ be a real number, $1 < \alpha < 2$.
+
+a) Show that $\alpha$ has a unique representation as an infinite product
+\[
+\alpha = \left( 1 + \frac{1}{n_1} \right) \left( 1 + \frac{1}{n_2} \right) \dots
+\]
+where each $n_i$ is a positive integer satisfying
+\[
+n_i^2 \leq n_{i+1}.
+\]
+
+b) Show that $\alpha$ is rational if and only if its infinite product has the following property:
+
+For some $m$ and all $k \geq m$,
+\[
+n_{k+1} = n_k^2.
+\]
+\\
+
+\textbf{Problem 5.}
+Suppose that $F$ is a family of finite subsets of $\mathbb{N}$ and for any two sets $A,B \in F$ we have $A \cap B \neq \emptyset$.
+
+a) Is it true that there is a finite subset $Y$ of $\mathbb{N}$ such that for any $A,B \in F$ we have $A \cap B \cap Y \neq \emptyset$?
+
+b) Is the statement a) true if we suppose in addition that all of the members of $F$ have the same size?
+
+Justify your answers.
+\\
+
+\textbf{Problem 6.}
+Let $X$ be an arbitrary set, let $f$ be a one-to-one function mapping $X$ onto itself.
+Prove that there exist mappings $g_1, g_2 : X \to X$ such that
+\(
+f = g_1 \circ g_2 \ \text{and} \  g_1 \circ g_1 = id = g_2 \circ g_2,
+\)
+where $id$ denotes the identity mapping on $X$.
+\\
+
+\textbf{Problem 7.}
+Prove that the following proposition holds for $n = 3$ and $n = 5$,
+and does not hold for $n = 4$.
+
+\quad ``For any permutation $\pi_1$ of $\{1,2, \dots, n\}$ different from the identity,
+there is a permutation $\pi_2$ such that any permutation $\pi$ can be obtained from $\pi_1$ and $\pi_2$ using only compositions (for example, $\pi = \pi_1 \circ \pi_1 \circ \pi_2 \circ \pi_1$).''
+\\
+
+\textbf{Problem 8.}
+Let $P$ be an algebraic polynomial of degree $n$ having only real zeros
+and real coefficients.
+
+a) Prove that for every real $x$ the following inequality holds:
+\[
+(n - 1)(P'(x))^2 \geq nP(x)P''(x)
+\]
+
+b) Examine the cases of equality.
+\\
+
+\textbf{Problem 9.}
+Let $S$ be the set of all words consisting of the letters $x, y, z$, and consider an equivalence relation $\sim$ on $S$ satisfying the following conditions: for arbitrary words $u, v, w \in S$
+\begin{itemize}
+    \item[(i)] $uu \sim u$;
+    \item[(ii)] if $v \sim w$, then $uv \sim uw$ and $vu \sim wu$.
+\end{itemize}
+Show that every word in $S$ is equivalent to a word of length at most $8$.
+\\
+
+\textbf{Problem 10.}
+\textit{a)} Show that if $(x_i)$ is a decreasing sequence of positive numbers then
+\[
+\left( \sum_{i=1}^{n} x_i^2 \right)^{1/2} \leq \sum_{i=1}^{n} \frac{x_i}{\sqrt{i}}.
+\]
+
+\textit{b)} Show that there is a constant $C$ so that if $(x_i)$ is a decreasing sequence of positive numbers then
+\[
+\sum_{m=1}^{\infty} \frac{1}{\sqrt{m}} \left( \sum_{i=m}^{\infty} x_i^2 \right)^{1/2} \leq C \sum_{i=1}^{\infty} x_i.
+\]
+
+\end{document}
