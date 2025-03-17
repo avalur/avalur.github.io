@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -21,12 +21,8 @@
 		<!-- and it's easy to individually load additional languages -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-<!--		<script defer src="https://pyscript.net/latest/pyscript.js"></script>-->
-<!--		<py-config>-->
-<!--			terminal = false-->
-<!--            packages = ["scikit-learn"] # "numpy", "matplotlib"-->
-<!--		</py-config>-->
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<script>
 			import hljs from "highlight.js";
 
@@ -47,6 +43,12 @@
 			.important {
 				color: orange;
 			}
+			.highlighted {
+				text-align: left;
+				color: white;
+				background-color: orange;
+				padding-left: 20px;
+			}
 			.hierarchy-box { padding: 10px; border-radius: 4px; text-align: center; }
 			.parent { background-color: #aaa; }
 			.child { background-color: #ccc; display: inline-block; margin: 5px; }
@@ -64,10 +66,10 @@
 					<h3>Object-Oriented Programming</h3>
 					<br />
 					Alex Avdiushenko <br />
-					April 2, 2024
+					March 20, 2025
 				</section>
 				<section>
-					<section>
+					<section data-background-color="antiquewhite">
 						<h3 style="text-align: left">The problem</h3>
 						<p style="text-align: left">We need to somehow manage the complexity of
 							the real world to simulate it inside computers.</p>
@@ -75,7 +77,8 @@
 						<div class="fragment">
 							<div class="typesetting">
 								<h3 style="text-align: left">Objects</h3>
-								<p style="text-align: left">Java supports many different kinds of data:</p>
+								<p style="text-align: left">Java supports many different kinds of data.
+									POJO is <span class="highlighted">Plain Old Java Object </span>. </p>
 <!--language=java-->
 									  <pre>
 										  <code class="language-java">
@@ -167,7 +170,7 @@ new Thread(runnable).start();
 						<div class="fragment">
 							<div class="typesetting">
 								<ul>
-									<li>Everything is an object</li>
+									<li>Everything is an object!</li>
 									<li>can <span style="color: orange">create new objects</span> of some type</li>
 									<li>can <span style="color: orange">manipulate objects</span></li>
 									<li>can <span style="color: orange">destroy objects</span></li>
@@ -191,7 +194,7 @@ new Thread(runnable).start();
 						</div>
 						<div class="column">
 							<img src="images/cars_DALL_E.webp" alt="cars_DALL_E" width="70%" style="border-radius: 5%">
-							<p>Objects as real-world entities, classes as blueprints</p>
+							<p>Objects as real-world entities, <br>classes as blueprints</p>
 						</div>
 					</section>
 					<section>
@@ -242,7 +245,7 @@ new Thread(runnable).start();
 					<section data-background-color="antiquewhite">
 						<h3>Define your own types</h3>
 						<p style="text-align: left">
-							Use the <code class="important">class</code> keyword to define a new type in Java.</p>
+							Use the <code class="highlighted">class </code> keyword to define a new type in Java:</p>
 
 
 						<div class="fragment">
@@ -284,14 +287,14 @@ new Thread(runnable).start();
 						<ul>
 							<li>Data and procedures that <span class="important">"belong"</span> to the class</li>
 							<li>
-								<span class="important">Data attributes</span>
+								<span class="highlighted">Data attributes</span>
 								<ul>
 									<li>Think of data as other objects that make up the class</li>
 									<li>For example, a coordinate is made up of two numbers</li>
 								</ul>
 							</li>
 							<li>
-								<span class="important">Methods</span> (procedural attributes)
+								<span class="highlighted">Methods</span> (procedural attributes)
 								<ul>
 									<li>Think of methods as functions that only work with this class</li>
 									<li>How to interact with the object</li>
@@ -332,8 +335,8 @@ public class Coordinate {
 									  </pre>
 							<p style="text-align: left">
 								In Java, you explicitly only pass arguments to the constructor,
-								and <code>this</code> is reference to this current instance of a class.
-								In Python you have to use first argument <code>self</code> for it.</p>
+								and <code class="highlighted">this </code> is reference to this current instance of a class.
+								In Python you have to use first argument <code class="highlighted">self </code> for it.</p>
 							</div>
 						</div>
 					</section>
@@ -393,31 +396,27 @@ public class Coordinate {
 					</section>
 				</section>
 				<section>
-					<section>
+					<section data-background-color="white">
 						<h3>Class Hierarchies in Java</h3>
-						<div style="text-align: center;padding-left: 30%">
-							<div class="hierarchy-box parent" style="width: 45%;">Animal</div>
-							<div style="display: flex; justify-content: left; align-items: center; flex-wrap: wrap;">
-								<div class="hierarchy-box child">Person</div>
-								<div class="hierarchy-box child">Cat</div>
-								<div class="hierarchy-box child">Rabbit</div>
-							</div>
-							<div class="hierarchy-box special" style="width: 15%;font-size: large">Student</div>
+						<div class="column">
+							<img src="images/class_hierarchy.png" alt="class_hierarchy">
 						</div>
-						<br>
-						<ul>
-							<li><span class="important">parent class</span> (superclass)</li>
-							<li><span class="important">child class</span> (subclass)
-								<ul>
-									<li><span class="important">inherits</span>
-										all data and behaviors of parent class</li>
-									<li><span class="important">add</span> more <span class="important">info</span>,
-										<span class="important">add</span> more <span class="important">behavior</span>
-									</li>
-									<li><span class="important">override</span> behavior</li>
-								</ul>
-							</li>
-						</ul>
+						<div class="column">
+							<br><br>
+							<ul>
+								<li><span class="important">parent class</span> (superclass)</li>
+								<li><span class="important">child class</span> (subclass)
+									<ul>
+										<li><span class="important">inherits</span>
+											all data and behaviors of parent class</li>
+										<li><span>add</span> more <span class="important">info</span>,
+											<span>add</span> more <span class="important">behavior</span>
+										</li>
+										<li><span class="important">override</span> behavior</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
 					</section>
 					<section>
 						<h3>Which method to use?</h3>

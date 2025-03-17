@@ -1,0 +1,26 @@
+digraph class_hierarchy {
+    node [shape=box, style="filled", color="black", fillcolor="lightblue", fontname="Arial"];
+    edge [arrowhead=empty, penwidth=1.5];
+
+    // Parent class
+    Animal [fillcolor="#FFD700", label="Animal", fontsize=14, penwidth=2];
+
+    // Child classes
+    Person [fillcolor="#90EE90", label="Person"];
+    Cat [fillcolor="#ADD8E6", label="Cat"];
+    Rabbit [fillcolor="#ADD8E6", label="Rabbit"];
+
+    // Grandchild class
+    Student [fillcolor="#FFA07A", label="Student"];
+
+    // Inheritance relationships
+    Person -> Animal;
+    Cat -> Animal;
+    Rabbit -> Animal;
+    Student -> Person;
+
+    // Layout settings
+    rankdir=TB;
+    nodesep=0.5;
+    ranksep=0.7;
+}
