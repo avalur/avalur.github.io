@@ -1,0 +1,2 @@
+name = "ML Intro"
+packages = ["numpy", "matplotlib", "scikit-learn"]

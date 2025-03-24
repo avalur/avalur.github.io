@@ -224,10 +224,11 @@
                     <section data-background-color="#fdf6e3">
                         <h3>Example: Regression Task, Synthetic Data</h3>
 
-                        <p style="text-align: left">$X = Y = \mathbb{R}$, $\ell = 50$ objects</p>
-
-                        <p>$n = 3$ features: $\{1, x, x^2\}$ or $\{1, x, \sin x\}$</p>
+                        <p style="text-align: left">$X = Y = \mathbb{R}$, $\ell = 50$ objects,
+                            $n = 3$ features: $\{1, x, x^2\}$ or $\{1, x, \sin x\}$</p>
                         <script type="py-editor" config="mlintro.toml" env="exp1">
+                            import matplotlib
+                            matplotlib.use('Agg')
                             import matplotlib.pyplot as plt
 
                             import numpy as np
@@ -236,6 +237,12 @@
                             l = 50
                             x = np.linspace(0, 30, num=l)
                             Y = x + 4*np.sin(x) + 3*np.random.randn(l)
+                            print(x.shape, Y.shape)
+                        </script>
+                    </section>
+                    <section data-background-color="#fdf6e3">
+                        <h3>Dataset creation</h3>
+                        <script type="py-editor" env="exp1">
                             X1 = np.vstack([np.ones_like(x), x, x**2]).T
                             X2 = np.vstack([np.ones_like(x), x, np.sin(x)]).T
                             print(X1.shape, X2.shape)
@@ -251,6 +258,7 @@
                             ax.plot(x_plot, x_plot + 4*np.sin(x_plot), label='real')
                             plt.legend(loc='best')
                             plt.savefig('exp1_train.png')
+                            print("Ok!")
                         </script>
                     </section>
                     <section data-background-color="white">
@@ -296,6 +304,7 @@
                             ax.plot(x_plot, x_plot + 4*np.sin(x_plot), label='real')
                             plt.legend(loc='best')
                             plt.savefig('exp1_res.png')
+                            print("Ok!")
                         </script>
                     </section>
                     <section data-background-color="white">

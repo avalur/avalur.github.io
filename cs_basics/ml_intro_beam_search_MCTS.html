@@ -15,12 +15,8 @@
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-            packages = ["numpy", "matplotlib", "scikit-learn"]
-		</py-config>
+		<link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+		<script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 		<style>
 			.column {
 			  float: left;
@@ -209,25 +205,32 @@
                     <section data-background-color="#fdf6e3">
                         <h3>Example: Regression Task, Synthetic Data</h3>
 
-                        <p style="text-align: left">$X = Y = \mathbb{R}$, $\ell = 50$ objects</p>
-
-                        <p>$n = 3$ features: $\{1, x, x^2\}$ or $\{1, x, \sin x\}$</p>
-                        <py-repl>
+                        <p style="text-align: left">$X = Y = \mathbb{R}$, $\ell = 50$ objects,
+                            $n = 3$ features: $\{1, x, x^2\}$ or $\{1, x, \sin x\}$</p>
+                        <script type="py-editor" config="mlintro.toml" env="exp1">
+                            import matplotlib
+                            matplotlib.use('Agg')
                             import matplotlib.pyplot as plt
+
                             import numpy as np
                             np.random.seed(0)
 
                             l = 50
                             x = np.linspace(0, 30, num=l)
                             Y = x + 4*np.sin(x) + 3*np.random.randn(l)
-
+                            print(x.shape, Y.shape)
+                        </script>
+                    </section>
+                    <section data-background-color="#fdf6e3">
+                        <h3>Dataset creation</h3>
+                        <script type="py-editor" env="exp1">
                             X1 = np.vstack([np.ones_like(x), x, x**2]).T
                             X2 = np.vstack([np.ones_like(x), x, np.sin(x)]).T
                             print(X1.shape, X2.shape)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="exp1">
                             fig, ax = plt.subplots()
                             ax.set_xlabel('x'), ax.set_ylabel('Y')
                             ax.plot(x, Y, '.', label='train points')
@@ -235,11 +238,15 @@
                             x_plot = np.linspace(0, 30, num=1000)
                             ax.plot(x_plot, x_plot + 4*np.sin(x_plot), label='real')
                             plt.legend(loc='best')
-                            fig # plt.show()
-                        </py-repl>
+                            plt.savefig('exp1_train.png')
+                            print("Ok!")
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/exp1_train.png" width="840">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="exp1">
                             from sklearn.linear_model import LinearRegression
 
                             reg1 = LinearRegression(fit_intercept=False)
@@ -249,7 +256,7 @@
                             reg2.fit(X2, Y)
 
                             print("Models have been trained.")
-                        </py-repl>
+                        </script>
                         <div class="fragment important" style="margin-top:20px;">
                             <div class="typesetting">
                                 <div class="r-frame">
@@ -259,7 +266,7 @@
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="exp1">
                             fig, ax = plt.subplots()
                             ax.set_xlabel('x'), ax.set_ylabel('Y')
                             ax.plot(x, Y, '.', label='train points')
@@ -270,8 +277,12 @@
                             ax.plot(x_plot, reg1.predict(X1), label='{1, x, x^2}', linestyle='dashed')
                             ax.plot(x_plot, reg2.predict(X2), label='{1, x, sin(x)}')
                             plt.legend(loc='best')
-                            fig
-                        </py-repl>
+                            plt.savefig('exp1_res.png')
+                            print("Ok!")
+                        </script>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/exp1_res.png" width="840">
                     </section>
                 </section>
                 <section>
