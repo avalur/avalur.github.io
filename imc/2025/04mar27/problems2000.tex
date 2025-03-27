@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{IMC-2000 Problems}
+
+\begin{center}
+Day 1
+\end{center}
+
+\textbf{Problem 1.}
+Is it true that if \( f : [0, 1] \to [0, 1] \) is
+\begin{itemize}
+  \item[a.] monotone-increasing
+  \item[b.] monotone-decreasing
+\end{itemize}
+then there exists an \( x \in [0,1] \) for which \( f(x) = x \)?
+\\
+
+\textbf{Problem 2.}
+Let \( p(x) = x^5 + x \) and \( q(x) = x^5 + x^2 \).
+Find all pairs \( (w, z) \) of complex numbers with \( w \neq z \) for which \( p(w) = p(z) \) and \( q(w) = q(z) \).
+\\
+
+\textbf{Problem 3.}
+\( A \) and \( B \) are square complex matrices of the same size and
+\[
+\operatorname{rank}(AB - BA) = 1.
+\]
+Show that \( (AB - BA)^2 = 0 \).\\
+
+\textbf{Problem 4.}
+a) Show that if \( (x_i) \) is a decreasing sequence of positive numbers then
+\[
+\left( \sum_{i=1}^{n} x_i^2 \right)^{1/2} \leq \sum_{i=1}^{n} \frac{x_i}{\sqrt{i}}.
+\]
+
+\vspace{0.5em}
+
+b) Show that there is a constant \( C \) so that if \( (x_i) \) is a decreasing sequence of positive numbers then
+\[
+\sum_{m=1}^{\infty} \frac{1}{\sqrt{m}} \left( \sum_{i=m}^{\infty} x_i^2 \right)^{1/2} \leq C \sum_{i=1}^{\infty} x_i.
+\]
+\\
+
+\textbf{Problem 5.}
+Let \( R \) be a ring of characteristic zero (not necessarily commutative).
+Let \( e, f \) and \( g \) be idempotent elements of \( R \) satisfying \( e + f + g = 0 \).
+Show that \( e = f = g = 0 \).\\
+
+\noindent
+(\( R \) is of characteristic zero means that, if \( a \in R \) and \( n \) is a positive integer,
+then \( na \neq 0 \) unless \( a = 0 \).
+An idempotent \( x \) is an element satisfying \( x = x^2 \).)
+\\
+
+\textbf{Problem 6.}
+Let \( f : \mathbb{R} \to (0, \infty) \) be an increasing
+differentiable function for which
+\[
+\lim_{x \to \infty} f(x) = \infty
+\]
+and \( f' \) is bounded.\\
+
+Let \( F(x) = \int_0^x f \). Define the sequence \( (a_n) \) inductively by
+\[
+a_0 = 1, \quad a_{n+1} = a_n + \frac{1}{f(a_n)},
+\]
+and the sequence \( (b_n) \) simply by \( b_n = F^{-1}(n) \). Prove that
+\[
+\lim_{n \to \infty} (a_n - b_n) = 0.
+\]
+\\
+
+\newpage
+
+\begin{center}
+Day 2
+\end{center}
+
+\textbf{Problem 1.} \\
+a) Show that the unit square can be partitioned into \( n \) smaller squares for any \( n \) if \( n \) is large enough.\\
+b) Let \( d \geq 2 \). Show that there is a constant \( N(d) \) such that, whenever \( n \geq N(d) \), a \( d \)-dimensional unit cube can be partitioned into \( n \) smaller cubes.
+\\
+
+\textbf{Problem 2.}
+Let \( f \) be continuous and nowhere monotone on \( [0, 1] \). Show that the set of points on which \( f \) attains local minima is dense in \( [0, 1] \).\\
+
+\noindent
+(A function is nowhere monotone if there exists no interval where the function is monotone. A set is dense if each non-empty open interval contains at least one element of the set.)
+\\
+
+\textbf{Problem 3.}
+Let \( p(z) \) be a polynomial of degree \( n \ge 1 \) with
+complex coefficients.
+Prove that there exist at least \( n + 1 \) complex numbers \( z \) for which \( p(z) \) is 0 or 1.
+\\
+
+\textbf{Problem 4.}
+Suppose the graph of a polynomial of degree 6 is tangent to a straight line at 3 points \( A_1, A_2, A_3 \), where \( A_2 \) lies between \( A_1 \) and \( A_3 \).\\
+a) Prove that if the lengths of the segments \( A_1A_2 \) and \( A_2A_3 \) are equal, then the areas of the figures bounded by these segments and the graph of the polynomial are equal as well.\\
+b) Let \( k = \dfrac{A_2A_3}{A_1A_2} \), and let \( K \) be the ratio of the areas of the appropriate figures. Prove that
+\[
+\frac{2}{7}k^5 < K < \frac{7}{2}k^5.
+\]
+\\
+
+\textbf{Problem 5.}
+Let \( \mathbb{R}^+ \) be the set of positive real numbers. Find all functions \( f : \mathbb{R}^+ \to \mathbb{R}^+ \) such that for all \( x, y \in \mathbb{R}^+ \),
+\[
+f(x) f(y f(x)) = f(x + y).
+\]
+\\
+
+\textbf{Problem 6.}
+For an \( m \times m \) real matrix \( A \), \( e^A \) is defined as
+\[
+\sum_{n=0}^{\infty} \frac{1}{n!} A^n.
+\]
+(The sum is convergent for all matrices.)
+
+Prove or disprove that for all real polynomials \( p \) and \( m \times m \) real matrices \( A \) and \( B \), \( p(e^{AB}) \) is nilpotent if and only if \( p(e^{BA}) \) is nilpotent. (A matrix \( A \) is nilpotent if \( A^k = 0 \) for some positive integer \( k \).)
+
+\end{document}
