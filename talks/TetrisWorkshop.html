@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<title>Machine Learning Intro</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/moon.css">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+<style>
+    .column {
+        float: left;
+        width: 48%;
+        padding: 2px;
+    }
+    /* Clear floats after image containers */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    .important {
+        color: orange;
+    }
+    .highlighted {
+        text-align: left;
+        color: white;
+        background-color: orange;
+        padding-left: 20px;
+    }
+
+    /* New table styles */
+    .results-table {
+        border-collapse: collapse;
+        width: 60%;
+        text-align: center;
+        margin: 20px 0;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+
+    .results-table thead tr {
+        background-color: orange;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .results-table th,
+    .results-table td {
+        padding: 12px 15px;
+    }
+
+    .results-table th {
+        font-weight: bold;
+    }
+
+    .results-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .results-table tbody tr:nth-of-type(odd) {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .results-table tbody tr:nth-of-type(even) {
+        background-color: rgba(255,255,255,0.05);
+    }
+</style>
+		</style>
+    </head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                    <h2>🎮 Every Programmer Should Write Tetris! 🚀</h2>
+                    <div>
+                        <img src="images/jb_logo.png" alt="jb_logo" width="25%"/>
+                    </div>
+					<div class="fragment" style="margin-bottom:20px;">
+							<div class="typesetting">
+								<h3>JavaScript, Beam Search and Python w/ AI</h3>
+								<br />
+								Alex Avdiushenko <br />
+								April, 2025
+							</div>
+					</div>
+                </section>
+                <section>
+                    <section>
+                        <h3>Step 1: Look for some implementation of Tetris on the Inrenet</h3>
+                        <img src="images/initial_js_tetris.png" alt="initial_js_tetris" style="border-radius: 5%;width: 55%">
+                        <p>Source: <a href="https://codeincomplete.com/articles/javascript-tetris/">Javascript Tetris, how it works</a></p>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/tetris-pieces.png" alt="tetris-pieces">
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/hex_repr.png" alt="hex_repr" width="60%">
+                    </section>
+                    <section data-background-color="white">
+                        <h3>Features for Heuristic Agent</h3>
+                        <img src="images/FeaturesExample.png" alt="FeaturesExample" width="55%">
+                    </section>
+                    <section>
+                        <h3>Heuristic Agent</h3>
+                            <p class="highlighted">Combine features into a heuristic score:</p>
+                            <p>
+                              (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
+                                $\to\max$
+                            </p>
+                    </section>
+                    <section>
+                        <h3><a href="https://github.com/avalur/tetris-workshop/commit/071a2c06f65ae69891c359041b713cc58ac47b50">The first result</a></h3>
+                        <iframe width="60%" height="600" src="https://www.youtube.com/embed/omamM5vqDEs" allowfullscreen>
+                        </iframe>
+                    </section>
+                    <section>
+                        <h3><a href="https://github.com/avalur/tetris-workshop/commit/e475e30095269568a1637189d2783c38bf01e7ce">Fixed bug in Possible Moves</a></h3>
+                        <iframe width="60%" height="600" src="https://www.youtube.com/embed/aMYQ9akwHP4" allowfullscreen>
+                        </iframe>
+                    </section>
+                    <section>
+                        <h3><a href="https://github.com/avalur/tetris-workshop/commit/03a2a68546319e23e3cc1d098ea18b30ff7e8eb2">Fixed Height calculation, including null-bug</a></h3>
+                        <iframe width="60%" height="600" src="https://www.youtube.com/embed/6EVYichWGOg" allowfullscreen>
+                        </iframe>
+                    </section>
+                    <section>
+                        <h3>Heuristic Agent Results</h3>
+                            <p>
+                              (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
+                                $\to\max$
+                            </p>
+                        <br>
+                        <table class="results-table">
+                            <thead>
+                            <tr>
+                                <th style="text-align: right">Case</th>
+                                <th style="text-align: right">Rows</th>
+                                <th style="text-align: right">Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="text-align: right">Heuristic with bugs</td>
+                                <td style="text-align: right">0</td>
+                                <td style="text-align: right">222</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Fixed Possible Moves</td>
+                                <td style="text-align: right">5</td>
+                                <td style="text-align: right">1 036</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Fixed Heigh calculation</td>
+                                <td style="text-align: right">612</td>
+                                <td style="text-align: right">78 268</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <p class="fragment highlighted">
+                            Ok, but what about Beam Search?
+                        </p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3 style="text-align: left">What is Beam Search?</h3>
+                        <ul>
+                            <li class="fragment">
+                                An approximate search algorithm commonly used in
+                                natural language processing tasks like machine translation and speech recognition</li>
+                            <li class="fragment">
+                                It is a <span class="highlighted">variation of greedy search </span> that explores multiple paths simultaneously,
+                                keeping track of the $k$ most promising paths at each step</li>
+                            <li class="fragment">
+                                <span class="highlighted">Beam search </span> striking a compromise between the efficiency
+                                of <span class="highlighted">greedy search </span> and the optimality of
+                                <span class="highlighted">exhaustive search </span>
+                            </li>
+                        </ul>
+
+                        <a class="fragment" href="href=https://d2l.ai/chapter_recurrent-modern/beam-search.html">
+                            <img src="images/d2l_beam_search.png" alt="beam_search"
+                                style="border-radius: 5%">
+                        </a>
+                    </section>
+                    <section>
+                        <h3><a href="https://github.com/avalur/tetris-workshop/commit/7c65f1685d3a8ccfc706396bb87618905f1cce35">Full Search based on the next piece</a></h3>
+                        <iframe width="60%" height="600" src="https://www.youtube.com/embed/JxoFH1xkhn8" allowfullscreen>
+                        </iframe>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Heuristic Agent Results</h3>
+                            <p>
+                              (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
+                                $\to\max$
+                            </p>
+                        <br>
+                        <table class="results-table">
+                            <thead>
+                            <tr>
+                                <th style="text-align: right">Case</th>
+                                <th style="text-align: right">Rows</th>
+                                <th style="text-align: right">Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="text-align: right">Heuristic with bugs</td>
+                                <td style="text-align: right">0</td>
+                                <td style="text-align: right">222</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Fixed Possible Moves</td>
+                                <td style="text-align: right">5</td>
+                                <td style="text-align: right">1 036</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Fixed Heigh calculation</td>
+                                <td style="text-align: right">612</td>
+                                <td style="text-align: right">78 268</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Full Search w\ Next Piece</td>
+                                <td style="text-align: right">44 301</td>
+                                <td style="text-align: right">5 623 130</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <p class="fragment highlighted">
+                            Time to rewrite it in Python!
+                        </p>
+                    </section>
+                </section>
+                <section>
+                    <section data-background-image="images/junie-eap.png">
+                    </section>
+                    <section>
+                        <p style="text-align: left"><a href="https://www.jetbrains.com/junie/">
+                            Let's trust Junie to do the hard work:
+                        </a></p>
+                        <p class="fragment" style="text-align: left;"><span class="highlighted">Prompt 1: </span> Look at the javascript tetris project and come up with the plan of rewriting it in Python. Write all the details in the `python-tetris/plan.md` file.</p>
+                        <p class="fragment" style="text-align: left;">
+                            <span class="highlighted">Prompt 2: </span> Implement the tetris in Python according to the `python-tetris/plan.md`, but replace the texture.jpg background to the simple gray grid.
+                        </p>
+                        <p class="fragment" style="text-align: left;">
+                            <span class="highlighted">Prompt 3: </span> The game in Python works, but there is no AI mode, only flag for it.
+                        </p>
+                    </section>
+                    <section>
+                        <h3><a href="">It took about 30 min to get</a></h3>
+                        <iframe width="60%" height="600" src="https://www.youtube.com/embed/lZbDbDy-sbI" allowfullscreen>
+                        </iframe>
+                    </section>
+                </section>
+                <section>
+                    <h3>Possible Future Steps</h3>
+                    <ul>
+                        <li>Fix Python version</li>
+                        <li>Join our programs at
+                            <a href="https://lp.jetbrains.com/academy/csai-program/">NUP</a> or
+                            <a href="https://lp.jetbrains.com/software-data-and-technology-constructor-university">CUB</a>
+                        </li>
+                        <li>Rewrite Tetris in C++ or Kotlin</li>
+                        <li>Implement true Beam Search or MCTS</li>
+                        <li>Switch to <a href="https://gist.github.com/reCurs3/7d4eb5b952790e3009337f61c3341074">other game</a> :)</li>
+                    </ul>
+                    <br><br>
+                    <p class="fragment">
+                        <span class="highlighted">Good luck and have fun! </span>
+                    </p>
+                </section>
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+        </script>
+    </body>
+</html>
