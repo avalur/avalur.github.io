@@ -30,6 +30,11 @@
 			.important {
 				color: orange;
 			}
+            .highlighted {
+                text-align: left;
+                color: white;
+                background-color: orange;
+            }
 		</style>
     </head>
 	<body onload="totalWrapper();">
@@ -45,7 +50,7 @@
 								<h3>NLP crash intro</h3>
 								<br />
 								Alex Avdiushenko<br />
-								March 18, 2025
+								April 8, 2025
 							</div>
 					</div>
                 </section>
@@ -62,7 +67,7 @@
                         <h3 style="text-align: left">Problems with WordNet</h3>
                         <div class="column">
                             <ul>
-                                <li>New meaning of words, impossible to keep up-do-data</li>
+                                <li>New meaning of words, impossible to keep up-do-date</li>
                                 <li>Subjective</li>
                                 <li>Manually curated</li>
                                 <li>Impossible to accurately compute word similarity</li>
@@ -77,7 +82,7 @@
                         <p style="text-align: left">
                             A word’s meaning is given by the words that frequently appear close-by.</p><br>
                         <ul class="fragment">
-                            <li>“You shall know a word by the company it keeps” (J. R. Firth 1957)</li>
+                            <li><span class="highlighted">“You shall know a word by the company it keeps”</span> (J. R. Firth 1957)</li>
                             <li>One of the most successful ideas of modern statistical NLP!</li>
                         </ul>
                         <br><br>
@@ -85,23 +90,25 @@
                         When a word $w$ appears in a text, its context is the set of words that appear nearby
                         (within a fixed-size window). We use the many contexts of $w$ to build up
                         a representation of $w$.</p>
-                        <p class="important r-frame fragment" style="text-align: center">
+                        <p class="highlighted r-frame fragment" style="text-align: center">
                             Example: Among all pets, **???** are the best at catching mice.</p>
                     </section>
                     <section>
                         <h3 style="text-align: left">Word2Vec</h3>
                         <h4 style="text-align: left">Motivation</h4>
-                        <p style="text-align: left">One-hot encoding representations:</p>
-                        <ul>
-                            <li>Do not reflect the semantic similarity of words</li>
-                            <li>Have too high dimensionality</li>
-                        </ul>
-                        <div class="fragment" style="margin-top: 1.5cm;">
+                        <div style="margin-top: 1.5cm;">
                             <p style="text-align: left">One-hot simplified example:</p>
                             <ul>
                                 <li>Gym  $\to  [0, 1, 0, 0, 0, 0]$</li>
                                 <li>Sofa $\to  [0, 0, 1, 0, 0, 0]$</li>
                                 <li>Rest $\to  [0, 0, 0, 1, 0, 0]$</li>
+                            </ul>
+                        </div>
+                        <div class="fragment">
+                            <p style="text-align: left">One-hot encoding representations:</p>
+                            <ul>
+                                <li>Do not reflect the semantic similarity of words</li>
+                                <li>Have too high dimensionality</li>
                             </ul>
                         </div>
                     </section>
@@ -158,10 +165,12 @@
                     <section>
                         <h3 style="text-align: left">What’s the problem with this approach?</h3>
                         <div class="fragment">
-                            <p>In the denominator, of course, where all the words of the vocabulary are!</p>
+                            <p>The denominator, of course, where <strong>all the words</strong>
+                                of the vocabulary are!
+                            </p>
                         </div>
                         <div class="fragment" style="margin-top: 1cm;">
-                            <p style="text-align: left"><strong>Mikolov</strong> proposed...</p>
+                            <p style="text-align: left"><strong>Tomas Mikolov</strong> proposed...</p>
                         </div>
                     </section>
                     <section>
@@ -208,7 +217,7 @@
                         </div>
                     </section>
                     <section data-background-color="white">
-                        <img src="images/word_emb_scheme.png" alt="word_emb_scheme" width="60%">
+                        <img src="images/word_emb_scheme.png" alt="word_emb_scheme" width="50%">
                     </section>
                 </section>
                 <section>
@@ -220,7 +229,7 @@
                     <section>
                         <h3>Datasets for pretraining stage</h3>
                         <a href="https://ar5iv.labs.arxiv.org/html/2101.00027">
-                            <img src="images/pile_chart2.png" alt="pile_chart" width="80%">
+                            <img src="images/pile_chart2.png" alt="pile_chart" width="70%">
                         </a>
                     </section>
                     <section>
@@ -280,7 +289,7 @@
                         </div>
                         <div class="fragment">
                             <div class="typesetting">
-                                <p style="text-align: left">What else can you explore?</p>
+                                <p style="text-align: left">What else can you look at?</p>
                                 <ul style="text-align:left;">
                                     <li>Stanford class cs224n:
                                         <a href="https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture09-pretraining-updated.pdf">
