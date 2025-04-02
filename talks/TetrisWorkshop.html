@@ -6,7 +6,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<title>Machine Learning Intro</title>
+		<title>Tetris Workshop</title>
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
@@ -15,68 +15,71 @@
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-<style>
-    .column {
-        float: left;
-        width: 48%;
-        padding: 2px;
-    }
-    /* Clear floats after image containers */
-    .row::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-    .important {
-        color: orange;
-    }
-    .highlighted {
-        text-align: left;
-        color: white;
-        background-color: orange;
-        padding-left: 20px;
-    }
+    <style>
+        .column {
+            float: left;
+            width: 48%;
+            padding: 2px;
+        }
+        /* Clear floats after image containers */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .important {
+            color: orange;
+        }
+        .highlighted {
+            text-align: left;
+            color: white;
+            background-color: orange;
+        }
 
-    /* New table styles */
-    .results-table {
-        border-collapse: collapse;
-        width: 60%;
-        text-align: center;
-        margin: 20px 0;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0,0,0,0.15);
-    }
+        /* New table styles */
+        .results-table {
+            border-collapse: collapse;
+            width: 60%;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
 
-    .results-table thead tr {
-        background-color: orange;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
+        .results-table thead tr {
+            background-color: orange;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .results-table th,
-    .results-table td {
-        padding: 12px 15px;
-    }
+        .results-table th,
+        .results-table td {
+            padding: 12px 15px;
+        }
 
-    .results-table th {
-        font-weight: bold;
-    }
+        .results-table th {
+            font-weight: bold;
+        }
 
-    .results-table tbody tr {
-        border-bottom: 1px solid #dddddd;
-    }
+        .results-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
 
-    .results-table tbody tr:nth-of-type(odd) {
-        background-color: rgba(255,255,255,0.1);
-    }
+        .results-table tbody tr:nth-of-type(odd) {
+            background-color: rgba(255,255,255,0.1);
+        }
 
-    .results-table tbody tr:nth-of-type(even) {
-        background-color: rgba(255,255,255,0.05);
-    }
-</style>
-		</style>
+        .results-table tbody tr:nth-of-type(even) {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* Style for notes */
+        .notes {
+            display: none;
+        }
+    </style>
     </head>
 	<body onload="totalWrapper();">
 		<div class="reveal">
@@ -94,22 +97,62 @@
 								April, 2025
 							</div>
 					</div>
+                    <aside class="notes">
+                        Welcome, everyone! Today we’ll explore why every programmer should try building Tetris at least once.
+                        It’s a fun way to learn key programming concepts. We’ll start with JavaScript, then use Beam Search algorithm
+                        to create playing agent and finally we'll rewrite code in Python.
+                        I’m Alex Avdushenko, and I’m thrilled to guide you through this. Let’s dive in!
+                    </aside>
                 </section>
                 <section>
                     <section>
                         <h3>Step 1: Look for some implementation of Tetris on the Inrenet</h3>
                         <img src="images/initial_js_tetris.png" alt="initial_js_tetris" style="border-radius: 5%;width: 55%">
                         <p>Source: <a href="https://codeincomplete.com/articles/javascript-tetris/">Javascript Tetris, how it works</a></p>
+                        <aside class="notes">
+                            Let's start with the first step in our Tetris journey.
+                            It's always good to research existing implementations before starting your own project.
+                            Here we have a screenshot from a nice JavaScript Tetris tutorial from codeincomplete.com.
+                            This implementation gives us a solid foundation to understand how Tetris works at its core.
+                            It covers all the basic game mechanics—falling pieces, rotation, line clearing, and scoring.
+                        </aside>
                     </section>
                     <section data-background-color="white">
                         <img src="images/tetris-pieces.png" alt="tetris-pieces">
+                        <aside class="notes">
+                            Here we see the seven standard Tetris pieces, also called tetrominoes.
+                            Each piece consists of exactly four blocks arranged in different configurations.
+                            We have the I-piece (the long cyan one), the J-piece (blue), the L-piece (orange),
+                            the O-piece (the yellow square), the S-piece (green), the T-piece (purple),
+                            and the Z-piece (red).
+                            Understanding these pieces and how they rotate and move is fundamental to implementing Tetris.
+                            Each piece has its own unique properties and challenges when it comes to placement and rotation logic.
+                        </aside>
                     </section>
                     <section data-background-color="white">
                         <img src="images/hex_repr.png" alt="hex_repr" width="60%">
+                        <aside class="notes">
+                            This slide shows how we can represent Tetris pieces efficiently using hexadecimal notation.
+                            Each Tetris piece can be represented as a 4x4 grid where each cell is either filled or empty.
+                            By converting this grid to binary (1 for filled cells, 0 for empty) and then to hexadecimal,
+                            we get a compact representation that's easy to work with in code.
+                            This representation also makes rotation operations more straightforward through bitwise operations.
+                            It's an elegant solution for storing and manipulating piece data that saves memory and processing time.
+                        </aside>
                     </section>
                     <section data-background-color="white">
                         <h3>Features for Heuristic Agent</h3>
                         <img src="images/FeaturesExample.png" alt="FeaturesExample" width="55%">
+                        <aside class="notes">
+                            Now let's talk about creating an AI that can play Tetris.
+                            To build a heuristic agent, we need to define features that help evaluate how "good" a particular board state is.
+                            The image shows four critical features we'll use: aggregate height (the sum of the heights of each column),
+                            complete lines (how many rows are filled), holes (empty cells with filled cells above them),
+                            and bumpiness (the sum of differences between adjacent column heights).
+                            These features capture important aspects of a Tetris board state that influence gameplay decisions.
+                            A good Tetris AI needs to balance these factors—minimizing height, holes number, and bumpiness
+                            while maximizing completed lines.
+                        </aside>
                     </section>
                     <section>
                         <h3>Heuristic Agent</h3>
@@ -118,21 +161,45 @@
                               (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
                                 $\to\max$
                             </p>
+                            <aside class="notes">
+                                Here's where we combine those features into a single heuristic score that our agent will try to maximize.
+                                The formula shown here has been derived through experimentation and optimization.
+                                Notice the coefficients: we heavily penalize aggregate height (-0.51) because tall stacks are dangerous.
+                                We give a large positive weight to complete lines (0.76) as that's the goal of the game.
+                                We also penalize holes (-0.36) quite heavily since they make it harder to clear lines.
+                                Finally, we give a smaller penalty to bumpiness (-0.18).
+                                This weighted combination guides our agent to make decisions that result in better game states.
+                                The agent will consider all possible moves and rotations, calculate this score for each resulting board state,
+                                and choose the action that maximizes it.
+                            </aside>
                     </section>
                     <section>
                         <h3><a href="https://github.com/avalur/tetris-workshop/commit/071a2c06f65ae69891c359041b713cc58ac47b50">The first result</a></h3>
                         <iframe width="60%" height="600" src="https://www.youtube.com/embed/omamM5vqDEs" allowfullscreen>
                         </iframe>
+                        <aside class="notes">
+                            The first result is not very good, but it's a good start.
+                            We can see that it's able to play the game, but it's not very smart.
+                            Let's fix that!
+                        </aside>
                     </section>
                     <section>
                         <h3><a href="https://github.com/avalur/tetris-workshop/commit/e475e30095269568a1637189d2783c38bf01e7ce">Fixed bug in Possible Moves</a></h3>
                         <iframe width="60%" height="600" src="https://www.youtube.com/embed/aMYQ9akwHP4" allowfullscreen>
                         </iframe>
+                        <aside class="notes">
+                            After fixing the bug in Possible Moves, the agent is able to play the game better.
+                        </aside>
                     </section>
                     <section>
                         <h3><a href="https://github.com/avalur/tetris-workshop/commit/03a2a68546319e23e3cc1d098ea18b30ff7e8eb2">Fixed Height calculation, including null-bug</a></h3>
                         <iframe width="60%" height="600" src="https://www.youtube.com/embed/6EVYichWGOg" allowfullscreen>
                         </iframe>
+                        <aside class="notes">
+                            The next step is to fix the height calculation.
+                            We can see that the agent is able to play the game much better, but it's still not the end.
+                            Let's sum up the current results!
+                        </aside>
                     </section>
                     <section>
                         <h3>Heuristic Agent Results</h3>
@@ -169,8 +236,13 @@
                         </table>
                         <br>
                         <p class="fragment highlighted">
-                            Ok, but what about Beam Search?
+                            Ok, looks good, but what about Beam Search?
                         </p>
+                        <aside class="notes">
+                            In the table above, we can see all the results.
+                            The heuristic agent without bugs is able to play the game very well,
+                            but what about Beam Search?
+                        </aside>
                     </section>
                 </section>
                 <section>
@@ -181,12 +253,12 @@
                                 An approximate search algorithm commonly used in
                                 natural language processing tasks like machine translation and speech recognition</li>
                             <li class="fragment">
-                                It is a <span class="highlighted">variation of greedy search </span> that explores multiple paths simultaneously,
+                                It is a <span class="highlighted">variation of greedy search</span> that explores multiple paths simultaneously,
                                 keeping track of the $k$ most promising paths at each step</li>
                             <li class="fragment">
-                                <span class="highlighted">Beam search </span> striking a compromise between the efficiency
-                                of <span class="highlighted">greedy search </span> and the optimality of
-                                <span class="highlighted">exhaustive search </span>
+                                <span class="highlighted">Beam search</span> striking a compromise between the efficiency
+                                of <span class="highlighted">greedy search</span> and the optimality of
+                                <span class="highlighted">exhaustive search</span>
                             </li>
                         </ul>
 
@@ -194,11 +266,22 @@
                             <img src="images/d2l_beam_search.png" alt="beam_search"
                                 style="border-radius: 5%">
                         </a>
+                        <aside class="notes">
+                            Beam Search is an optimization algorithm that can help our AI find good moves in Tetris.
+                            Unlike exhaustive search algorithms that explore all possibilities,
+                            Beam Search maintains a limited set of the most promising states at each step.
+                            This makes it particularly well-suited for Tetris where the branching factor can be quite large.
+                            We'll implement this in JavaScript first, focusing on how to evaluate positions based on factors
+                            like holes, height, and completed lines.
+                        </aside>
                     </section>
                     <section>
                         <h3><a href="https://github.com/avalur/tetris-workshop/commit/7c65f1685d3a8ccfc706396bb87618905f1cce35">Full Search based on the next piece</a></h3>
                         <iframe width="60%" height="600" src="https://www.youtube.com/embed/JxoFH1xkhn8" allowfullscreen>
                         </iframe>
+                        <aside class="notes">
+                            We can watch this video endlessly, like the waves of the Mediterranean Sea or a burning fire.
+                        </aside>
                     </section>
                 </section>
                 <section>
@@ -244,21 +327,28 @@
                         <p class="fragment highlighted">
                             Time to rewrite it in Python!
                         </p>
+                        <aside class="notes">
+                            In the end we got more than 5 million points in averaged 2 games!
+                            Time to rewrite it in Python for fun!
+                        </aside>
                     </section>
                 </section>
                 <section>
                     <section data-background-image="images/junie-eap.png">
+                        <aside class="notes">
+                            Junie, smart coding agent from JetBrains, is here to help us.
+                        </aside>
                     </section>
                     <section>
                         <p style="text-align: left"><a href="https://www.jetbrains.com/junie/">
                             Let's trust Junie to do the hard work:
                         </a></p>
-                        <p class="fragment" style="text-align: left;"><span class="highlighted">Prompt 1: </span> Look at the javascript tetris project and come up with the plan of rewriting it in Python. Write all the details in the `python-tetris/plan.md` file.</p>
+                        <p class="fragment" style="text-align: left;"><span class="highlighted">Prompt 1:</span> Look at the javascript tetris project and come up with the plan of rewriting it in Python. Write all the details in the `python-tetris/plan.md` file.</p>
                         <p class="fragment" style="text-align: left;">
-                            <span class="highlighted">Prompt 2: </span> Implement the tetris in Python according to the `python-tetris/plan.md`, but replace the texture.jpg background to the simple gray grid.
+                            <span class="highlighted">Prompt 2:</span> Implement the tetris in Python according to the `python-tetris/plan.md`, but replace the texture.jpg background to the simple gray grid.
                         </p>
                         <p class="fragment" style="text-align: left;">
-                            <span class="highlighted">Prompt 3: </span> The game in Python works, but there is no AI mode, only flag for it.
+                            <span class="highlighted">Prompt 3:</span> The game in Python works, but there is no AI mode, only flag for it.
                         </p>
                     </section>
                     <section>
@@ -270,19 +360,22 @@
                 <section>
                     <h3>Possible Future Steps</h3>
                     <ul>
-                        <li>Fix Python version</li>
+                        <li>Fix a Python implementation</li>
                         <li>Join our programs at
                             <a href="https://lp.jetbrains.com/academy/csai-program/">NUP</a> or
-                            <a href="https://lp.jetbrains.com/software-data-and-technology-constructor-university">CUB</a>
+                            <a href="https://lp.jetbrains.com/software-data-and-technology-constructor-university">CUB</a> 😎
                         </li>
                         <li>Rewrite Tetris in C++ or Kotlin</li>
                         <li>Implement true Beam Search or MCTS</li>
-                        <li>Switch to <a href="https://gist.github.com/reCurs3/7d4eb5b952790e3009337f61c3341074">other game</a> :)</li>
+                        <li>Switch to <a href="https://gist.github.com/reCurs3/7d4eb5b952790e3009337f61c3341074">other game</a> 🙂</li>
                     </ul>
                     <br><br>
                     <p class="fragment">
-                        <span class="highlighted">Good luck and have fun! </span>
+                        <span class="highlighted">Good luck and have fun!</span>
                     </p>
+                    <aside class="notes">
+                        To wrap up, we've seen how implementing Tetris serves as an excellent programming exercise that touches on many fundamental concepts: game loops, user input, collision detection, and state management. By enhancing our implementation with both classical algorithms like Beam Search and modern AI techniques, we've explored how different approaches can solve the same problem. I hope this workshop has inspired you to implement your own version of Tetris and perhaps other classic games as well. Remember, the skills you practice in game development transfer to many other domains of software engineering.
+                    </aside>
                 </section>
             </div>
         </div>
