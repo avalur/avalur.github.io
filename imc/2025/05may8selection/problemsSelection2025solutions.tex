@@ -67,12 +67,12 @@ f'(t) = \frac{f(2t) - f\left(\frac{1}{2}t\right)}{\frac{3}{2}t}. \tag{2}
 Inductively, if $f$ is $k$ times differentiable
 then the right-hand side of (2) is $k$ times differentiable, so the $f'(t)$ on the left-hand side is $k$ times differentiable as well; hence $f$ is $k + 1$ times differentiable.
 
-Now substitute $b = e^{ht}$ and $a = e^{-ht}$ in (1), differentiate three times with respect to $h$ then take limits with $h \to 0$:
+Now substitute $b = e^{h}t$ and $a = e^{-h}t$ in (1), differentiate three times with respect to $h$ then take limits with $h \to 0$:
 \[
-f(e^{ht}) - f(e^{-ht}) - (e^{ht} - e^{-ht})f(t) = 0
+f(e^{h}t) - f(e^{-h}t) - (e^{h}t - e^{-h}t)f'(t) = 0
 \]
 \[
-\left( \frac{\partial}{\partial h} \right)^3 \left( f(e^{ht}) - f(e^{-ht}) - (e^{ht} - e^{-ht})f(t) \right) = 0
+\left( \frac{\partial}{\partial h} \right)^3 \left( f(e^{h}t) - f(e^{-h}t) - (e^{h}t - e^{-h}t)f'(t) \right) = 0
 \]
 \[
 e^{3ht} t^3 f'''(e^{ht}) + 3e^{2ht} t^2 f''(e^{ht}) + e^{ht} t f'(e^{ht}) + e^{-3ht} t^3 f'''(e^{-ht}) + 3e^{-2ht} t^2 f''(e^{-ht}) + e^{-ht} t f'(e^{-ht})
