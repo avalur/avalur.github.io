@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -59,7 +59,7 @@
 				<h3>Programming Patterns and Anti-Patterns</h3>
 				<br />
 				Alex Avdiushenko <br />
-				April 23, 2024
+				May 15, 2025
 			</section>
 			<section>
 				<section>
@@ -88,8 +88,8 @@
 							New patterns developed to address the complexities of distributed systems,
 							focusing on scalability, resilience, and inter-service communication</li>
 						<li class="fragment"><strong class="important">Current Trends and Future Directions:</strong>
-							Design patterns evolve with advancements in AI, machine learning, IoT,
-							emphasizing adaptability, modularity,
+							Design patterns evolve with advancements in AI (agents), machine learning,
+							IoT, emphasizing adaptability, modularity,
 							and interoperability for complex data flows and system integration</li>
 					</ul>
 				</section>
@@ -106,8 +106,7 @@
 							<p style="text-align: left">Design patterns in software are akin
 								to templates used in construction and manufacturing industries.
 								Τhey provide a standardized approach to solving common software design problems.
-								This analogy helps in understanding the importance and
-								utility of design patterns in software development.</p>
+							</p>
 						</div>
 					</div>
 					<div class="fragment">
@@ -133,19 +132,19 @@
 					<ul>
 						<li class="fragment"><strong class="important">Creational Patterns:</strong>
 							Focus on object creation mechanisms, streamlining the instantiation process.
-							Examples include Singleton, Factory Method, Abstract Factory, Builder, and Prototype.</li>
+							Examples include Singleton, Factory Method, Abstract Factory, Builder, and Prototype</li>
 						<li class="fragment"><strong class="important">Structural Patterns:</strong>
 							Deal with arranging objects and classes into larger structures,
 							while maintaining flexibility and efficiency.
-							Examples include Adapter, Composite, Proxy, Flyweight, Facade, Bridge, and Decorator.</li>
+							Examples include Adapter, Composite, Proxy, Flyweight, Facade, Bridge, and Decorator</li>
 						<li class="fragment"><strong class="important">Behavioral Patterns:</strong>
 							Concerned with efficient communication and the assignment of responsibilities between objects.
 							Examples include Strategy, Observer, Command, Iterator, State, Visitor, Template Method,
-							Mediator, and Memento.</li>
+							Mediator, and Memento</li>
 						<li class="fragment"><strong class="important">Concurrency Patterns:</strong>
 							Address multi-threading issues and improve the performance of applications
 							in concurrent environments. Examples include Producer-Consumer, Readers-Writers,
-							and Dining Philosophers.</li>
+							and Dining Philosophers</li>
 					</ul>
 				</section>
 				<section>
@@ -154,15 +153,15 @@
 						<div class="typesetting">
 							<ul>
 								<li><strong class="important">Singleton:</strong> Frameworks use it for managing configurations or connections
-									(e.g., database connections in Spring).</li>
+									(e.g., database connections in Spring)</li>
 								<li><strong class="important">Observer:</strong> Widely used in GUI libraries
-									(e.g., event listeners in JavaScript frameworks).</li>
+									(e.g., event listeners in JavaScript frameworks)</li>
 								<li><strong class="important">Factory Method:</strong>
 									Creation of objects without exposing the instantiation logic
-									(e.g., document object creation in DOM).</li>
+									(e.g., document object creation in DOM)</li>
 								<li><strong class="important">Adapter:</strong>
 									Facilitates communication between modern frameworks and
-									legacy systems or third-party libraries.</li>
+									legacy systems or third-party libraries</li>
 							</ul>
 						<p style="text-align: left">These patterns are fundamental in developing robust, scalable, and maintainable software applications.
 							<a href="https://www.youtube.com/watch?v=mE3qTp1TEbg&list=PLlsmxlJgn1HJpa28yHzkBmUY-Ty71ZUGc">Here is playlist</a>
@@ -187,12 +186,12 @@
 						<ul>
 							<li><strong class="important">Implementation:</strong> Make the constructor private,
 								create a static method that contains the instance logic,
-								ensuring that only one instance is created and returned.</li>
+								ensuring that only one instance is created and returned</li>
 							<li><strong class="important">Use Cases:</strong> Logging, database connections,
-								file managers where a single shared resource is preferable.</li>
+								file managers where a single shared resource is preferable</li>
 							<li><strong class="important">Pros and Cons:</strong>
 								Easy implementation, but can introduce global state into an application,
-								making it harder to test.</li>
+								making it harder to test</li>
 						</ul>
 						</div>
 					</div>
@@ -212,11 +211,11 @@
 							<li><strong class="important">Implementation:</strong>
 								It involves a subject (publisher) and observers (subscribers).
 								The subject maintains a list of observers and notifies
-								them of changes.</li>
+								them of changes</li>
 							<li><strong class="important">Use Cases:</strong> GUI tools,
-								event management, reactive programming.</li>
+								event management, reactive programming</li>
 							<li><strong class="important">Benefits:</strong>
-								Promotes loose coupling, enhancing flexibility and reuse.</li>
+								Promotes loose coupling, enhancing flexibility and reuse</li>
 						</ul>
 						</div>
 					</div>
@@ -233,9 +232,15 @@
 					<div class="fragment">
 						<div class="typesetting">
 							<ul>
-								<li><strong class="important">Implementation:</strong> Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory Method lets a class defer instantiation to subclasses.</li>
-								<li><strong class="important">Use Case:</strong> Frameworks, toolkits where library code needs to create objects without knowing the specific types (classes).</li>
-								<li><strong class="important">Advantages:</strong> Fosters code reusability and scalability; decouples object creation from its usage.</li>
+								<li><strong class="important">Implementation:</strong>
+									Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory Method lets a class defer instantiation to subclasses
+								</li>
+								<li><strong class="important">Use Case:</strong>
+									Frameworks, toolkits where library code needs to create objects without knowing the specific types (classes)
+								</li>
+								<li><strong class="important">Advantages:</strong>
+									Fosters code reusability and scalability; decouples object creation from its usage
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -255,11 +260,14 @@
 							<li><strong class="important">Implementation:</strong>
 								Involves two classes: an "Adapter" that holds an instance
 								of the "Adaptee" class. The adapter implements the target
-								interface and translates calls to the adaptee's interface.</li>
+								interface and translates calls to the adaptee's interface
+							</li>
 							<li><strong class="important">Use Cases:</strong>
-								Integration of new features or libraries into existing applications, cross-platform systems.</li>
+								Integration of new features or libraries into existing applications, cross-platform systems
+							</li>
 							<li><strong class="important">Benefits:</strong>
-								Increases compatibility between classes without changing their source code.</li>
+								Increases compatibility between classes without changing their source code
+							</li>
 						</ul>
 						</div>
 					</div>
@@ -272,9 +280,9 @@
 						<div class="typesetting">
 						<ul>
 							<li><strong class="important">Definition:</strong> An anti-pattern may be commonly used
-								but is ineffective and/or counterproductive in practice.</li>
+								but is ineffective and/or counterproductive in practice</li>
 							<li><strong  class="important">Impact:</strong> Leads to negative consequences,
-								making software harder to maintain, less efficient, and more complex.</li>
+								making software harder to maintain, less efficient, and more complex</li>
 						</ul>
 						</div>
 					</div>
@@ -284,27 +292,37 @@
 					<div class="fragment">
 						<h4>Code-Level Antipatterns</h4>
 						<ul>
-							<li><strong class="important">God Object:</strong> Concentrating too many functions in a single part of the design (class).</li>
-							<li><strong class="important">Spaghetti Code:</strong> Code with a complex and tangled control structure.</li>
+							<li><strong class="important">God Object:</strong> Concentrating too many functions in a single part of the design (class)</li>
+							<li><strong class="important">Spaghetti Code:</strong> Code with a complex and tangled control structure</li>
 						</ul>
 					</div>
 					<div class="fragment">
 						<br>
 						<h4>Architectural Antipatterns</h4>
 						<ul>
-							<li><strong class="important">Golden Hammer:</strong> Over-reliance on a familiar tool or concept, ignoring more suitable approaches.</li>
-							<li><strong class="important">Vendor Lock-in:</strong> Becoming too dependent on a vendor's technologies, making it difficult to switch to another vendor without substantial costs and changes.</li>
-							<li><strong class="important">Lava Flow:</strong> Retaining needless code because of uncertainty about its usage, leading to clutter and complexity.</li>
+							<li><strong class="important">Golden Hammer:</strong>
+								Over-reliance on a familiar tool or concept, ignoring more suitable approaches
+							</li>
+							<li><strong class="important">Vendor Lock-in:</strong>
+								Becoming too dependent on a vendor's technologies, making it difficult to switch to another vendor without substantial costs and changes
+							</li>
+							<li><strong class="important">Lava Flow:</strong>
+								Retaining needless code because of uncertainty about its usage, leading to clutter and complexity
+							</li>
 						</ul>
 					</div>
 				</section>
 				<section>
 					<h4>Project Management Antipatterns</h4>
 					<ul>
-						<li><strong class="important">Adding manpower to a late software project:</strong> Often makes it later due to the ramp-up time needed for new team members.</li>
-						<li><strong class="important">Silver Bullet:</strong> Belief that a new technology, tool, or practice will solve all problems.</li>
+						<li><strong class="important">Adding manpower to a late software project:</strong>
+							Often makes it later due to the ramp-up time needed for new team members
+						</li>
+						<li><strong class="important">Silver Bullet:</strong>
+							Belief that a new technology, tool, or practice will solve all problems
+						</li>
 					</ul>
-					<img class="fragment" src="images/anti-pattern-meme.png" alt="anti-pattern-meme" width="60%">
+					<img class="fragment" src="images/anti-pattern-meme.png" alt="anti-pattern-meme" width="40%">
 				</section>
 				<section>
 					<h3 style="text-align: left">Strategies to Identify and Refactor Anti-Patterns</h3>
@@ -314,14 +332,14 @@
 							for maintaining healthy software architecture and project management practices.</p>
 						<ul>
 							<li><strong class="important">Code Reviews:</strong> Regularly review code with peers to identify complex,
-								tightly coupled, or otherwise problematic code early.</li>
+								tightly coupled, or otherwise problematic code early</li>
 							<li><strong class="important">Refactoring:</strong> Systematically improving code or design
-								without altering its functionality, to remove anti-patterns and improve maintainability.</li>
+								without altering its functionality, to remove anti-patterns and improve maintainability</li>
 							<li><strong class="important">Adopting Best Practices:</strong>
-								Stay informed about and adhere to industry best practices for coding, design, and project management.</li>
+								Stay informed about and adhere to industry best practices for coding, design, and project management</li>
 							<li><strong class="important">Continuous Learning:</strong>
 								Encourage a culture of learning and adaptation,
-								embracing new and more effective patterns and technologies.</li>
+								embracing new and more effective patterns and technologies</li>
 						</ul>
 						</div>
 					</div>
@@ -1711,10 +1729,12 @@ public class CompanyChangeToTdsCompany {
 								<li><strong class="important">Spring Framework (Java):</strong>
 									Employs the Singleton pattern extensively for bean management,
 									ensuring efficient, consistent object access throughout the application
-									lifecycle.</li>
+									lifecycle
+								</li>
 								<li><strong class="important">React (JavaScript):</strong>
 									Uses the Observer pattern to manage state and props changes,
-									enabling dynamic UI updates in response to data modifications.</li>
+									enabling dynamic UI updates in response to data modifications
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -1728,8 +1748,12 @@ public class CompanyChangeToTdsCompany {
 							Even well-established companies encounter and overcome antipatterns,
 							demonstrating resilience and the capacity for continuous improvement.</p>
 						<ul>
-							<li><strong class="important">Netflix's Transition:</strong> Originally faced challenges with the Monolithic Architecture anti-pattern. By adopting a microservices architecture, Netflix enhanced scalability and deployment speeds, showcasing the importance of architectural evolution.</li>
-							<li><strong class="important">Microsoft's GitHub Acquisition:</strong> Demonstrated a strategic move away from the Vendor Lock-in anti-pattern by embracing open source projects and community engagement, broadening their technology stack and innovation potential.</li>
+							<li><strong class="important">Netflix's Transition:</strong>
+								Originally faced challenges with the Monolithic Architecture anti-pattern. By adopting a microservices architecture, Netflix enhanced scalability and deployment speeds, showcasing the importance of architectural evolution
+							</li>
+							<li><strong class="important">Microsoft's GitHub Acquisition:</strong>
+								Demonstrated a strategic move away from the Vendor Lock-in anti-pattern by embracing open source projects and community engagement, broadening their technology stack and innovation potential
+							</li>
 						</ul>
 						<p style="text-align: left">
 							These examples underline the significance of recognizing,
