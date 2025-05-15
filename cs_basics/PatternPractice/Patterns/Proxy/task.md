@@ -1,4 +1,4 @@
-Educational summary of [The Proxy Pattern Explained and Implemented in Java | Structural Design Patterns | Geekific](https://youtu.be/TS5i-uPXLs8):
+Educational summary is in [https://youtu.be/TS5i-uPXLs8](https://youtu.be/TS5i-uPXLs8):
 
 ### **🔗 Proxy Pattern Overview**
 - **🛠️ Structural Design:** Utilizes a proxy to control access to another object, handling operations before or after accessing the object.

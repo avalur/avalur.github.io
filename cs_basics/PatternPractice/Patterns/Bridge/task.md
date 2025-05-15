@@ -1,4 +1,4 @@
-Educational summary of [The Bridge Pattern Explained and Implemented in Java | Structural Design Patterns | Geekific](https://youtu.be/88kAIisOiYs):
+Educational summary is in [https://youtu.be/88kAIisOiYs](https://youtu.be/88kAIisOiYs):
 
 ### **🌉 Bridge Pattern Overview**
 - **🛠️ Structural Design:** Separates an abstraction from its implementation, allowing them to be developed independently.

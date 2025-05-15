@@ -1,4 +1,4 @@
-Educational summary of [The Visitor Pattern Explained and Implemented in Java | Behavioral Design Patterns | Geekific](https://youtu.be/UQP5XqMqtqQ):
+Educational summary is in [https://youtu.be/UQP5XqMqtqQ](https://youtu.be/UQP5XqMqtqQ):
 
 ### **👨‍💻 Visitor Pattern Overview**
   - **🛠️ Behavioral Design:** Separates operations from the objects on which they operate, allowing new operations to be added without modifying the objects.

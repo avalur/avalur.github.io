@@ -1,4 +1,4 @@
-Educational summary of [The Observer Pattern Explained and Implemented in Java | Behavioral Design Patterns | Geekific](https://youtu.be/-oLDJ2dbadA):
+Educational summary is in [https://youtu.be/-oLDJ2dbadA](https://youtu.be/-oLDJ2dbadA):
 
 ### **👀 Observer Pattern Overview**
 - **🛠️ Behavioral Design:** Manages dependencies between objects by allowing objects to observe state changes without being tightly coupled.

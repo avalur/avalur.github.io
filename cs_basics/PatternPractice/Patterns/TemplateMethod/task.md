@@ -1,4 +1,4 @@
-Educational summary of [The Template Method Pattern Explained Implemented in Java | Behavioral Design Patterns | Geekific](https://youtu.be/cGoVDzHvD4A):
+Educational summary is in [https://youtu.be/cGoVDzHvD4A](https://youtu.be/cGoVDzHvD4A):
 
 ### **📐 Template Method Pattern Overview**
 - **🛠️ Behavioral Design:** Structures an algorithm into a method, allowing certain steps to be overridden by subclasses without altering the algorithm's framework.

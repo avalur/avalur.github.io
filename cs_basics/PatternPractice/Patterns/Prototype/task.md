@@ -1,4 +1,4 @@
-Educational summary of [The Prototype Pattern Explained and Implemented in Java | Creational Design Patterns | Geekific](https://youtu.be/DcFhITC9v0E):
+Educational summary is in [https://youtu.be/DcFhITC9v0E](https://youtu.be/DcFhITC9v0E):
 
 ### **🎭 Prototype Pattern Essentials**
 - **🛠️ Creational Flexibility:** Enables cloning objects without dependency on their concrete classes.

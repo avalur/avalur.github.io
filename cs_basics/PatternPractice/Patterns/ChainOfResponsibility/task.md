@@ -1,4 +1,4 @@
-Educational summary of [The Chain of Responsibility Pattern Explained & Implemented | Behavioral Design Patterns | Geekific](https://youtu.be/FafNcoBvVQo):
+Educational summary is in [https://youtu.be/FafNcoBvVQo](https://youtu.be/FafNcoBvVQo):
 
 ### **🔗 Chain of Responsibility Pattern Overview**
 - **🛠️ Behavioral Design:** Organizes handlers to act in a chain, each handling a part of a request and optionally passing it to the next handler.

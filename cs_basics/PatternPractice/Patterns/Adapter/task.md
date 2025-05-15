@@ -1,4 +1,4 @@
-Educational summary of [The Adapter Pattern Explained and Implemented in Java | Structural Design Patterns | Geekific](https://youtu.be/wA3keqCeKtM):
+Educational summary is in [https://youtu.be/wA3keqCeKtM](https://youtu.be/wA3keqCeKtM):
 
 ### **🔌 Adapter Pattern Overview**
 - **🛠️ Structural Design:** Facilitates cooperation between objects with incompatible interfaces.

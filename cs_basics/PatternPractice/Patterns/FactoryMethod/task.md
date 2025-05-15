@@ -1,4 +1,5 @@
-Educational summary of [The Factory Method Pattern Explained and Implemented in Java | Creational Design Patterns | Geekific](https://youtu.be/EdFq_JIThqM):
+Educational summary is in
+[https://www.youtube.com/watch?v=EdFq_JIThqM](https://www.youtube.com/watch?v=EdFq_JIThqM):
 
 ### **🏭 Factory Method Pattern Overview**
 - **🛠️ Creational Design:** Focuses on object creation processes in software design.

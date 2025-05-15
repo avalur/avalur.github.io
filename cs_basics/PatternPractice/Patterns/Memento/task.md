@@ -1,4 +1,4 @@
-Educational summary of [The Memento Pattern Explained and Implemented in Java | Behavioral Design Patterns | Geekific](https://youtu.be/_Q5rXfGuyLQ):
+Educational summary is in [https://youtu.be/_Q5rXfGuyLQ](https://youtu.be/_Q5rXfGuyLQ):
 
 ### **📝 Memento Pattern Overview**
 - **🛠️ Behavioral Design:** Facilitates saving and restoring an object's state without exposing its internal structure.
