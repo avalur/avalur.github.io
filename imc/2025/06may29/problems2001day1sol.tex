@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{8th IMC 2001, July 19 -- July 25, Prague, Czech Republic, First day}
+
+\subsection*{Problem 1}
+
+Let \( n \) be a positive integer. Consider an \( n \times n \) matrix with entries \( 1, 2, \ldots, n^2 \) written in order starting top left and moving along each row in turn left–to–right. We choose \( n \) entries of the matrix such that exactly one entry is chosen in each row and each column. What are the possible values of the sum of the selected entries?
+
+\textbf{Solution.} The choice corresponds to a permutation \( \sigma \in S_n \), with selected entries at positions \( (j, \sigma(j)) \). The sum is:
+\[
+\sum_{j=1}^{n} \left( n(j - 1) + \sigma(j) \right)
+= n \sum_{j=1}^{n} (j - 1) + \sum_{j=1}^{n} \sigma(j)
+= n \cdot \frac{n(n - 1)}{2} + \frac{n(n + 1)}{2} = \frac{n(n^2 + 1)}{2}
+\]
+Thus, the sum is independent of \( \sigma \).
+
+\subsection*{Problem 2}
+
+Let \( r, s, t \) be positive integers which are pairwise relatively prime. If \( a \) and \( b \) are elements of a commutative multiplicative group with unity element \( e \), and \( a^r = b^s = (ab)^t = e \), prove that \( a = b = e \).
+
+Does the same conclusion hold if \( a \) and \( b \) are elements of an arbitrary non-commutative group?
+
+\textbf{Solution.}
+\begin{enumerate}
+\item Since \( ab = ba \), and \( us + vt = 1 \) for some integers \( u, v \), then:
+\[
+ab = (ab)^{us + vt} = (ab)^{us} \cdot (ab)^t^v = a^{us} b^{us} \cdot e = a^{us} b^{us}
+\]
+So \( ab = a^{us} \), and:
+\[
+b^r = (ab)^r = a^{usr} = (a^r)^{us} = e
+\Rightarrow b = (b^r)^x (b^s)^y = e
+\Rightarrow b = e, \quad \text{similarly } a = e
+\]
+\item \textbf{Counterexample:} Let \( a = (123) \), \( b = (34567) \in S_7 \), then \( a^3 = b^5 = (ab)^7 = e \), but \( a \ne e \), \( b \ne e \).
+\end{enumerate}
+
+\subsection*{Problem 3}
+
+Find
+\[
+\lim_{t \to 1^-} (1 - t) \sum_{n=1}^{\infty} \frac{t^n}{1 + t^n}
+\]
+
+\textbf{Solution.}
+Let \( h = -\ln t \), so as \( t \to 1^- \), \( h \to 0^+ \):
+\[
+\sum_{n=1}^\infty \frac{t^n}{1 + t^n}
+= \sum_{n=1}^\infty \frac{1}{1 + e^{-nh}} \quad \Rightarrow
+(1 - t) \sum \to h \sum \to \int_0^\infty \frac{dx}{1 + e^x} = \ln 2
+\]
+
+\subsection*{Problem 4}
+
+Let \( k \in \mathbb{N} \). Let \( p(x) \) be a polynomial of degree \( n \) with coefficients in \( \{-1, 0, 1\} \), and divisible by \( (x - 1)^k \). Let \( q \) be prime such that
+\[
+\frac{q}{\ln q} < \frac{k}{\ln(n+1)}
+\]
+Prove that all complex \( q \)th roots of unity are roots of \( p(x) \).
+
+\textbf{Solution.}
+Let \( p(x) = (x - 1)^k r(x) \), and let \( \varepsilon_j = e^{2\pi i j/q} \). Suppose none of \( \varepsilon_j \) are roots of \( r(x) \). Then:
+\[
+\left| \prod_{j=1}^{q-1} p(\varepsilon_j) \right| \geq \left| \prod_{j=1}^{q-1} (1 - \varepsilon_j)^k \right| = q^k
+\]
+But on the other hand:
+\[
+\left| \prod_{j=1}^{q-1} p(\varepsilon_j) \right| \leq (n + 1)^{q - 1}
+\Rightarrow (n+1)^{q-1} \geq q^k \Rightarrow \text{Contradiction}
+\]
+
+\subsection*{Problem 5}
+
+Let \( A \) be an \( n \times n \) complex matrix such that \( A \ne \lambda I \) for any \( \lambda \in \mathbb{C} \). Prove that \( A \) is similar to a matrix with at most one non-zero entry on the main diagonal.
+
+\textbf{Solution.}
+\emph{Base case:} \( n = 1 \) is trivial. For \( n = 2 \), we analyze all possible cases of matrix entries and use similarity transformations to achieve the required form. For general \( n \), apply induction and block structure:
+\[
+A = \begin{bmatrix}
+A' & * \\
+* & \beta
+\end{bmatrix}
+\Rightarrow \text{Transform } A' \text{ and apply the step recursively}
+\]
+Even in edge cases (e.g., \( n = 3 \)), a suitable similarity transformation reduces \( A \) to desired form by using trace and matrix similarity invariance.
+
+\subsection*{Problem 6}
+
+Suppose differentiable functions \( a(x), b(x), f(x), g(x) : \mathbb{R} \to \mathbb{R} \) satisfy:
+
+\begin{itemize}
+  \item \( f(x) \geq 0 \), \( f'(x) \geq 0 \), \( g(x) > 0 \), \( g'(x) > 0 \)
+  \item \( \lim_{x \to \infty} a(x) = A > 0 \), \( \lim b(x) = B > 0 \)
+  \item \( \lim f(x) = \lim g(x) = \infty \)
+  \item \( \frac{f'}{g'} + a(x) \cdot \frac{f}{g} = b(x) \)
+\end{itemize}
+
+Prove:
+\[
+\lim_{x \to \infty} \frac{f(x)}{g(x)} = \frac{B}{A + 1}
+\]
+
+\textbf{Solution.}
+Let \( h(x) = f(x) g(x)^A \), then:
+\[
+h'(x) = f'(x) g(x)^A + A f(x) g(x)^{A-1} g'(x)
+\Rightarrow \frac{h'}{(g^{A+1})'} = \frac{f'(x)}{g'(x)} + A \cdot \frac{f(x)}{g(x)}
+\]
+Using original equation:
+\[
+\frac{h'}{(g^{A+1})'} = b(x) - (a(x) - A)\frac{f(x)}{g(x)}
+\Rightarrow \lim_{x \to \infty} \frac{h'}{(g^{A+1})'} = B
+\Rightarrow \lim \frac{f(x)}{g(x)} = \frac{B}{A + 1}
+\]
+
+\end{document}

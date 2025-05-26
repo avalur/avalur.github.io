@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{8th IMC 2001, July 19 -- July 25, Prague, Czech Republic, First day}
+
+\subsection*{Problem 1}
+Let \( n \) be a positive integer. Consider an \( n \times n \) matrix with entries \( 1, 2, \ldots, n^2 \) written in order starting top left and moving along each row in turn left–to–right. We choose \( n \) entries of the matrix such that exactly one entry is chosen in each row and each column. What are the possible values of the sum of the selected entries?
+
+\subsection*{Problem 2}
+Let \( r, s, t \) be positive integers which are pairwise relatively prime. If \( a \) and \( b \) are elements of a commutative multiplicative group with unity element \( e \), and \( a^r = b^s = (ab)^t = e \), prove that \( a = b = e \).
+
+Does the same conclusion hold if \( a \) and \( b \) are elements of an arbitrary non-commutative group?
+
+\subsection*{Problem 3}
+Find
+\[
+\lim_{t \to 1^-} (1 - t) \sum_{n=1}^{\infty} \frac{t^n}{1 + t^n}
+\]
+
+\subsection*{Problem 4}
+Let \( k \in \mathbb{N} \). Let \( p(x) \) be a polynomial of degree \( n \) with coefficients in \( \{-1, 0, 1\} \), and divisible by \( (x - 1)^k \). Let \( q \) be prime such that
+\[
+\frac{q}{\ln q} < \frac{k}{\ln(n+1)}
+\]
+Prove that all complex \( q \)th roots of unity are roots of \( p(x) \).
+
+\subsection*{Problem 5}
+Let \( A \) be an \( n \times n \) complex matrix such that \( A \ne \lambda I \) for any \( \lambda \in \mathbb{C} \). Prove that \( A \) is similar to a matrix with at most one non-zero entry on the main diagonal.
+
+
+\subsection*{Problem 6}
+Suppose differentiable functions \( a(x), b(x), f(x), g(x) : \mathbb{R} \to \mathbb{R} \) satisfy:
+
+\begin{itemize}
+  \item \( f(x) \geq 0 \), \( f'(x) \geq 0 \), \( g(x) > 0 \), \( g'(x) > 0 \)
+  \item \( \lim_{x \to \infty} a(x) = A > 0 \), \( \lim b(x) = B > 0 \)
+  \item \( \lim f(x) = \lim g(x) = \infty \)
+  \item \( \frac{f'}{g'} + a(x) \cdot \frac{f}{g} = b(x) \)
+\end{itemize}
+
+Prove:
+\[
+\lim_{x \to \infty} \frac{f(x)}{g(x)} = \frac{B}{A + 1}
+\]
+\end{document}
