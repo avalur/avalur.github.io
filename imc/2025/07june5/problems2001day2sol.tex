@@ -1,0 +1,265 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{8th IMC 2001, July 19 -- July 25, Prague, Czech Republic, Second day}
+
+\subsection*{Problem 1}
+Let $r, s \geq 1$ be integers and $a_0, a_1, \dots, a_{r-1}, b_0, b_1, \dots, b_{s-1}$ be real non-negative numbers such that
+\[
+(a_0 + a_1x + \cdots + a_{r-1}x^{r-1} + x^r)(b_0 + b_1x + \cdots + b_{s-1}x^{s-1} + x^s) = 1 + x + x^2 + \cdots + x^{r+s}.
+\]
+Prove that each $a_i$ and each $b_j$ equals either $0$ or $1$.
+
+\subsection*{Solution}
+Multiply the left-hand side polynomials:
+\[
+a_0 b_0 = 1, \quad a_0 b_1 + a_1 b_0 = 1, \quad \dots
+\]
+From these equations, it follows that $a_0, b_0 \leq 1$. Since $a_0 b_0 = 1$, we get $a_0 = b_0 = 1$. Similarly, from $a_0 b_1 + a_1 b_0 = 1$, one of $a_1, b_1$ equals $0$ while the other equals $1$. Proceeding by induction, all $a_i, b_j$ equal either $0$ or $1$.
+
+\subsection*{Problem 2}
+Let $a_0 = \sqrt{2}$, $b_0 = 2$, and define
+\[
+a_{n+1} = \sqrt{2 - \sqrt{4 - a_n^2}}, \quad
+b_{n+1} = \frac{2b_n}{2 + \sqrt{4 + b_n^2}}.
+\]
+\begin{itemize}
+    \item[a)] Prove that the sequences $(a_n)$ and $(b_n)$ are decreasing and converge to $0$.
+    \item[b)] Prove that $(2^n a_n)$ is increasing, $(2^n b_n)$ is decreasing, and that these two sequences converge to the same limit.
+    \item[c)] Prove that there exists a constant $C>0$ such that for all $n$:
+\[
+0 < b_n - a_n < \frac{C}{8^n}.
+\]
+\end{itemize}
+
+\subsection*{Solution}
+Obviously $a_2 = \sqrt{2} - \sqrt{\sqrt{4 - x^2}} < \sqrt{2}$. Since the function
+\[
+f(x) = \sqrt{2} - \sqrt{\sqrt{4 - x^2}}
+\]
+is increasing on the interval $[0,2]$, the inequality $a_1 > a_2$ implies that $a_2 > a_3$.
+Simple induction ends the proof of monotonicity of $(a_n)$.
+In the same way we prove that $(b_n)$ decreases (just notice that
+\[
+g(x) = \frac{2x}{2 + \sqrt{4 + x^2}} = \frac{2}{2/x + \sqrt{1 + 4/x^2}}).
+\]
+It is a matter of simple manipulation to prove that
+\[
+2f(x) > x \quad \text{for all } x \in (0,2),
+\]
+this implies that the sequence $(2^n a_n)$ is strictly increasing.
+The inequality $2g(x) < x$ for $x \in (0,2)$ implies that the sequence $(2^n b_n)$ strictly decreases.
+By an easy induction one can show that
+\[
+a_n^2 = \frac{4b_n^2}{4 + b_n^2}
+\]
+for positive integers $n$. Since the limit of the decreasing sequence $(2^n b_n)$
+of positive numbers is finite we have
+\[
+\lim 4^n a_n^2 = \lim \frac{4 \cdot 4^n b_n^2}{4 + b_n^2} = \lim 4^n b_n^2.
+\]
+
+We know already that the limits $\lim 2^n a_n$ and $\lim 2^n b_n$ are equal.
+The first of the two is positive because the sequence $(2^n a_n)$ is strictly increasing.
+The existence of a number $C$ follows easily from the equalities
+\[
+2^n b_n - 2^n a_n = \left(4^n b_n^2 - \frac{4^{n+1} b_n^2}{4 + b_n^2} \right) / \left(2^n b_n + 2^n a_n\right) = \frac{(2^n b_n)^4}{4 + b_n^2} \cdot \frac{1}{4^n} \cdot \frac{1}{2^n(b_n + a_n)}
+\]
+and from the existence of positive limits $\lim 2^n b_n$ and $\lim 2^n a_n$.
+
+\textbf{Remark.} The last problem may be solved in a much simpler way by someone
+who is able to make use of sine and cosine. It is enough to notice that
+\[
+a_n = 2 \sin \frac{\pi}{2n+1} \quad \text{and} \quad b_n = 2 \tan \frac{\pi}{2n+1}.
+\]
+
+\subsection*{Problem 3}
+Find the maximum number of points on the unit sphere in $\mathbb{R}^n$ such that
+the distance between any two points is strictly greater than $\sqrt{2}$.
+
+\subsection*{Solution}
+The unit sphere in $\mathbb{R}^n$ is defined by
+\[
+S_{n-1} = \left\{ (x_1, \ldots, x_n) \in \mathbb{R}^n \,\middle|\, \sum_{k=1}^n x_k^2 = 1 \right\}.
+\]
+The distance between the points $X = (x_1, \ldots, x_n)$ and $Y = (y_1, \ldots, y_n)$ is:
+\[
+d^2(X,Y) = \sum_{k=1}^n (x_k - y_k)^2.
+\]
+
+We have
+\[
+d(X,Y) > \sqrt{2} \quad \Leftrightarrow \quad d^2(X,Y) > 2
+\]
+\[
+\Leftrightarrow \quad \sum_{k=1}^n x_k^2 + \sum_{k=1}^n y_k^2 - 2\sum_{k=1}^n x_k y_k > 2
+\]
+\[
+\Leftrightarrow \quad 1 + 1 - 2\sum_{k=1}^n x_k y_k > 2
+\]
+\[
+\Leftrightarrow \quad \sum_{k=1}^n x_k y_k < 0.
+\]
+
+Taking account of the symmetry of the sphere, we can suppose that
+\[
+A_1 = (-1, 0, \ldots, 0).
+\]
+For $X = A_1$, the inequality $\sum_{k=1}^n x_k y_k < 0$ implies $y_1 > 0$, $\forall Y \in M_n$.
+
+Let $X = (x_1, X')$, $Y = (y_1, Y') \in M_n \setminus \{A_1\}$, where $X', Y' \in \mathbb{R}^{n-1}$.
+
+We have
+\[
+\sum_{k=1}^n x_k y_k < 0 \quad \Rightarrow \quad x_1 y_1 + \sum_{k=1}^{n-1} \overline{x_k} \overline{y_k} < 0 \quad \Leftrightarrow \quad \sum_{k=1}^{n-1} x_k' y_k' < 0,
+\]
+where
+\[
+x_k' = \frac{\overline{x_k}}{\sqrt{\sum \overline{x_k}^2}}, \quad y_k' = \frac{\overline{y_k}}{\sqrt{\sum \overline{y_k}^2}}.
+\]
+Therefore
+\[
+(x_1', \ldots, x_{n-1}'), (y_1', \ldots, y_{n-1}') \in S_{n-2}
+\]
+and verifies $\sum_{k=1}^n x_k y_k < 0$.
+
+If $a_n$ is the search number of points in $\mathbb{R}^n$, we obtain
+\[
+a_n \leq 1 + a_{n-1}
+\]
+and $a_1 = 2$ implies that $a_n \leq n+1$.
+
+We show that $a_n = n+1$, giving an example of a set $M_n$ with $(n+1)$ elements satisfying the conditions of the problem.
+\[
+\begin{aligned}
+A_1 &= (-1,0,0,0,\ldots,0,0) \\
+A_2 &= \left(\frac{1}{n}, -c_1, 0,0,\ldots,0,0\right) \\
+A_3 &= \left(\frac{1}{n}, \frac{1}{n-1}c_1, -c_2,0,\ldots,0,0\right) \\
+A_4 &= \left(\frac{1}{n}, \frac{1}{n-1}c_1, \frac{1}{n-1}c_2, -c_3, \ldots,0,0\right) \\
+A_{n-1} &= \left(\frac{1}{n}, \frac{1}{n-1}c_1, \frac{1}{n-2}c_2, \frac{1}{n-3}c_3, \ldots, -c_{n-2},0\right) \\
+A_n &= \left(\frac{1}{n}, \frac{1}{n-1}c_1, \frac{1}{n-2}c_2, \frac{1}{n-3}c_3, \ldots, \frac{1}{2}c_{n-2}, -c_{n-1}\right) \\
+A_{n+1} &= \left(\frac{1}{n}, \frac{1}{n-1}c_1, \frac{1}{n-2}c_2, \frac{1}{n-3}c_3, \ldots, \frac{1}{2}c_{n-2}, c_{n-1}\right)
+\end{aligned}
+\]
+where
+\[
+c_k = \sqrt{\left(1+\frac{1}{n}\right)\left(1 - \frac{1}{n - k + 1}\right)}, \quad k=1,\ldots,n-1.
+\]
+We have
+\[
+\sum_{k=1}^n x_k y_k = -\frac{1}{n} < 0
+\quad \text{and} \quad
+\sum_{k=1}^n x_k^2 = 1, \quad \forall X,Y \in \{A_1,\ldots,A_{n+1}\}.
+\]
+These points are on the unit sphere in $\mathbb{R}^n$ and the distance between any two points is equal to
+\[
+d = \sqrt{2}\sqrt{1+\frac{1}{n}} > \sqrt{2}.
+\]
+
+\textbf{Remark.} For $n=2$ the points form an equilateral triangle in the unit circle; for $n=3$ the four points form a regular tetrahedron and in $\mathbb{R}^n$ the points form an $n$-dimensional regular simplex.
+
+\subsection*{Problem 4}
+Let $A = (a_{k,\ell})_{k,\ell=1}^n$ be an $n \times n$ complex matrix such that for each $1 \leq m \leq n$ and each $1 \leq j_1 < \cdots < j_m \leq n$, the determinant
+\[
+\det(a_{j_k, j_\ell})_{k,\ell=1}^m = 0.
+\]
+Prove that $A^n = 0$ and that there exists a permutation $\sigma \in S_n$ such that the permuted matrix $(a_{\sigma(k), \sigma(\ell)})$ is strictly upper-triangular.
+
+\subsection*{Solution.}
+We will only prove (2), since it implies (1). Consider a directed graph $G$ with $n$ vertices $V_1, \ldots, V_n$ and a directed edge from $V_k$ to $V_\ell$ whenever $a_{k,\ell} \neq 0$. We shall prove that it is acyclic.
+
+Assume that there exists a cycle and take one of minimum length $m$.
+Let $j_1 < \cdots < j_m$ be the vertices the cycle goes through and let $\sigma_0 \in S_n$ be a permutation
+such that $a_{j_k, j_{\sigma_0(k)}} \neq 0$ for $k=1,\ldots,m$.
+Observe that for any other $\sigma \in S_n$ we have $a_{j_k, j_{\sigma(k)}} = 0$ for some $k \in \{1,\ldots,m\}$,
+otherwise we would obtain a different cycle through the same set of vertices and, consequently, a shorter cycle.
+Finally,
+\[
+0 = \det(a_{j_k,j_\ell})_{k,\ell=1,\ldots,m}
+\]
+\[
+= (-1)^{\text{sign } \sigma_0} \prod_{k=1}^m a_{j_k, j_{\sigma_0(k)}} + \sum_{\sigma \neq \sigma_0} (-1)^{\text{sign } \sigma} \prod_{k=1}^m a_{j_k, j_{\sigma(k)}} \neq 0,
+\]
+which is a contradiction.
+
+Since $G$ is acyclic there exists a topological ordering,
+i.e. a permutation $\sigma \in S_n$ such that $k < \ell$ whenever there is an edge
+from $V_{\sigma(k)}$ to $V_{\sigma(\ell)}$. It is easy to see that this permutation solves the problem.
+
+\subsection*{Problem 5}
+Prove that there does not exist a function $f : \mathbb{R} \to \mathbb{R}$ with $f(0) > 0$ satisfying
+\[
+f(x+y) \geq f(x) + y f(f(x)) \quad \forall x,y \in \mathbb{R}.
+\]
+
+\subsection*{Solution.} Suppose that there exists a function satisfying the inequality. If $f(f(x)) \leq 0$ for all $x$, then $f$ is a decreasing function in view of the inequalities
+\[
+f(x+y) \geq f(x) + y f(f(x)) \geq f(x) \quad \text{for any } y \leq 0.
+\]
+Since $f(0) > 0 \geq f(f(x))$, it implies $f(x) > 0$ for all $x$, which is a contradiction. Hence there is a $z$ such that $f(f(z)) > 0$. Then the inequality $f(z+x) \geq f(z) + x f(f(z))$ shows that
+\[
+\lim_{x \to \infty} f(x) = +\infty \quad \text{and therefore} \quad \lim_{x \to \infty} f(f(x)) = +\infty.
+\]
+In particular, there exist $x,y>0$ such that $f(x) \geq 0$, $f(f(x)) > 1$,
+\[
+y \geq \frac{x+1}{f(f(x))-1}
+\]
+and $f(f(x+y+1)) \geq 0$. Then
+\[
+f(x+y) \geq f(x) + y f(f(x)) \geq x + y + 1,
+\]
+and hence
+\[
+\begin{aligned}
+f(f(x+y)) &\geq f(x+y+1) + (f(x+y) - (x+y+1)) f(f(x+y+1)) \\
+&\geq f(x+y+1) \\
+&\geq f(x+y) + f(f(x+y)) \\
+&\geq f(x) + y f(f(x)) + f(f(x+y)) \\
+&> f(f(x+y)).
+\end{aligned}
+\]
+This contradiction completes the solution of the problem.
+
+\subsection*{Problem 6}
+For each positive integer $n$, let
+\[
+f_n(\theta) = \sin(\theta) \sin(2\theta) \cdots \sin(2^n \theta).
+\]
+Prove that for all real $\theta$ and all $n$:
+\[
+|f_n(\theta)| \leq \frac{2}{\sqrt{3}} \, |f_n(\pi/3)|.
+\]
+
+\subsection*{Solution.} We prove that $g(\vartheta) = |\sin \vartheta|\, |\sin(2\vartheta)|^{1/2}$ attains its maximum value $\left(\sqrt{3}/2\right)^{3/2}$ at points $2^k \pi/3$ (where $k$ is a positive integer). This can be seen by using derivatives or a classical bound like
+\[
+|g(\vartheta)| = |\sin \vartheta|\, |\sin(2\vartheta)|^{1/2} = \frac{\sqrt{2}}{\sqrt[4]{3}} \left(\sqrt[4]{\,|\sin \vartheta|\, |\sin \vartheta|\, |\sin \vartheta|\, |\sqrt{3}\cos \vartheta|}\,\right)^2
+\]
+\[
+\leq \frac{\sqrt{2}}{\sqrt[4]{3}} \cdot \frac{3\sin^2 \vartheta + 3\cos^2 \vartheta}{4} = \left(\frac{\sqrt{3}}{2}\right)^{3/2}.
+\]
+
+Hence
+\[
+\left|\frac{f_n(\vartheta)}{f_n(\pi/3)}\right| = \left|\frac{g(\vartheta) \cdot g(2\vartheta)^{1/2} \cdot g(4\vartheta)^{3/4} \cdots g(2^{n-1}\vartheta)^E}{g(\pi/3)\cdot g(2\pi/3)^{1/2} \cdot g(4\pi/3)^{3/4} \cdots g(2^{n-1}\pi/3)^E}\right| \cdot \left|\frac{\sin(2^n \vartheta)}{\sin(2^n \pi/3)}\right|^{1-E/2}
+\]
+\[
+\leq \left|\frac{\sin(2^n \vartheta)}{\sin(2^n \pi/3)}\right|^{1-E/2} \left(\frac{1}{\sqrt[3]{2}}\right)^{1-E/2} \leq \frac{2}{\sqrt{3}}.
+\]
+where $E = \frac{2}{3}(1 - (-1/2)^n)$. This is exactly the bound we had to prove.
+
+
+\end{document}

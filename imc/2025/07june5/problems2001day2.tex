@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{8th IMC 2001, July 19 -- July 25, Prague, Czech Republic, Second day}
+
+\subsection*{Problem 1}
+Let $r, s \geq 1$ be integers and $a_0, a_1, \dots, a_{r-1}, b_0, b_1, \dots, b_{s-1}$ be real non-negative numbers such that
+\[
+(a_0 + a_1x + \cdots + a_{r-1}x^{r-1} + x^r)(b_0 + b_1x + \cdots + b_{s-1}x^{s-1} + x^s) = 1 + x + x^2 + \cdots + x^{r+s}.
+\]
+Prove that each $a_i$ and each $b_j$ equals either $0$ or $1$.
+
+\subsection*{Problem 2}
+Let $a_0 = \sqrt{2}$, $b_0 = 2$, and define
+\[
+a_{n+1} = \sqrt{2 - \sqrt{4 - a_n^2}}, \quad
+b_{n+1} = \frac{2b_n}{2 + \sqrt{4 + b_n^2}}.
+\]
+\begin{itemize}
+    \item[a)] Prove that the sequences $(a_n)$ and $(b_n)$ are decreasing and converge to $0$.
+    \item[b)] Prove that $(2^n a_n)$ is increasing, $(2^n b_n)$ is decreasing, and that these two sequences converge to the same limit.
+    \item[c)] Prove that there exists a constant $C>0$ such that for all $n$:
+\[
+0 < b_n - a_n < \frac{C}{8^n}.
+\]
+\end{itemize}
+
+\subsection*{Problem 3}
+Find the maximum number of points on the unit sphere in $\mathbb{R}^n$ such that
+the distance between any two points is strictly greater than $\sqrt{2}$.
+
+\subsection*{Problem 4}
+Let $A = (a_{k,\ell})_{k,\ell=1}^n$ be an $n \times n$ complex matrix such that for each $1 \leq m \leq n$ and each $1 \leq j_1 < \cdots < j_m \leq n$, the determinant
+\[
+\det(a_{j_k, j_\ell})_{k,\ell=1}^m = 0.
+\]
+Prove that $A^n = 0$ and that there exists a permutation $\sigma \in S_n$ such that the permuted matrix $(a_{\sigma(k), \sigma(\ell)})$ is strictly upper-triangular.
+
+
+\subsection*{Problem 5}
+Prove that there does not exist a function $f : \mathbb{R} \to \mathbb{R}$ with $f(0) > 0$ satisfying
+\[
+f(x+y) \geq f(x) + y f(f(x)) \quad \forall x,y \in \mathbb{R}.
+\]
+
+\subsection*{Problem 6}
+For each positive integer $n$, let
+\[
+f_n(\theta) = \sin(\theta) \sin(2\theta) \cdots \sin(2^n \theta).
+\]
+Prove that for all real $\theta$ and all $n$:
+\[
+|f_n(\theta)| \leq \frac{2}{\sqrt{3}} \, |f_n(\pi/3)|.
+\]
+
+\end{document}
