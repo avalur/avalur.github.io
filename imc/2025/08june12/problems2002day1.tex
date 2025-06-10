@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{9th IMC 2002, July 19 -- 25, Warsaw, Poland, First day}
+
+\section*{First Day}
+
+\subsection*{Problem 1}
+A standard parabola is the graph of a quadratic polynomial $y = x^2 + ax + b$ with leading coefficient 1.
+Three standard parabolas with vertices $V_1, V_2, V_3$ intersect pairwise at points $A_1, A_2, A_3$.
+Let $A \mapsto s(A)$ be the reflection of the plane with respect to the $x$-axis.
+
+Prove that standard parabolas with vertices $s(A_1), s(A_2), s(A_3)$ intersect pairwise at the points
+$s(V_1), s(V_2), s(V_3)$.
+
+\subsection*{Problem 2}
+Does there exist a continuously differentiable function
+$f : \mathbb{R} \to \mathbb{R}$ such that for every $x \in \mathbb{R}$
+we have $f(x) > 0$ and $f'(x) = f(f(x))$?
+
+\subsection*{Problem 3}
+Let $n$ be a positive integer and let
+\[
+a_k = \frac{1}{\binom{n}{k}}, \quad b_k = 2^{k-n}, \quad k = 1, 2, \ldots, n.
+\]
+Show that
+\[
+\sum_{k=1}^{n} \frac{a_k - b_k}{k} = 0.
+\]
+
+\subsection*{Problem 4}
+Let $f: [a, b] \to [a, b]$ be a continuous function and let $p \in [a, b]$.
+Define $p_0 = p$ and $p_{n+1} = f(p_n)$ for $n \geq 0$. Suppose that the set
+\[
+T_p = \{p_n : n = 0, 1, 2, \ldots\}
+\]
+is closed, i.e. if $x \notin T_p$ then there is a $\delta > 0$ such
+that for all $ x' \in T_p $ we have $|x'-x| \geq \delta $.
+Show that $T_p$ has finitely many elements.
+
+\subsection*{Problem 5}
+Prove or disprove the following statements:
+\begin{enumerate}
+\item[(a)] There exists a monotone function $f: [0,1] \to [0,1]$ such that for each $y \in [0,1]$
+ the equation $f(x) = y$ has uncountably many solutions $x$.
+\item[(b)] There exists a continuously differentiable function $f: [0,1] \to [0,1]$ such that
+for each $y \in [0,1]$ the equation $f(x) = y$ has uncountably many solutions $x$?
+\end{enumerate}
+
+\subsection*{Problem 6}
+For an \( n \times n \) matrix \( M \) with real entries, let
+\[
+\|M\| = \sup_{x \in \mathbb{R}^n \setminus \{0\}} \frac{\|Mx\|_2}{\|x\|_2},
+\]
+where \( \|\cdot\|_2 \) denotes the Euclidean norm on \( \mathbb{R}^n \).
+
+Let $A$ be an $n \times n$ real matrix satisfying
+\[
+\|A^k - A^{k-1}\| \leq \frac{1}{2002k}
+\]
+for all $k \geq 1$. Prove that $\|A^k\| \leq 2002$ for all positive integers $k$.
+
+
+\end{document}

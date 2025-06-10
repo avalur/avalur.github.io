@@ -1,0 +1,276 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{9th IMC 2002, July 19 -- 25, Warsaw, Poland, First day}
+
+\section*{First Day}
+
+\subsection*{Problem 1}
+A standard parabola is the graph of a quadratic polynomial $y = x^2 + ax + b$ with leading coefficient 1.
+Three standard parabolas with vertices $V_1, V_2, V_3$ intersect pairwise at points $A_1, A_2, A_3$.
+Let $A \mapsto s(A)$ be the reflection of the plane with respect to the $x$-axis.
+
+Prove that standard parabolas with vertices $s(A_1), s(A_2), s(A_3)$ intersect pairwise at the points
+$s(V_1), s(V_2), s(V_3)$.
+
+\textbf{Solution.}
+First we show that the standard parabola with vertex $V$ contains point $A$
+if and only if the standard parabola with vertex $s(A)$ contains point $s(V)$.
+
+Let $A = (a, b)$ and $V = (v, w)$. The equation of the standard parabola with vertex $V = (v, w)$
+is $y = (x - v)^2 + w$, so it contains point $A$ if and only if $b = (a - v)^2 + w$.
+Similarly, the equation of the parabola with vertex $s(A) = (a, -b)$ is $y = (x - a)^2 - b$;
+it contains point $s(V) = (v, -w)$ if and only if $-w = (v - a)^2 - b$.
+The two conditions are equivalent.
+
+Now assume that the standard parabolas with vertices $V_1$ and $V_2$, $V_1$ and $V_3$,
+$V_2$ and $V_3$ intersect each other at points $A_3, A_2, A_1$, respectively.
+Then, by the statement above, the standard parabolas with vertices $s(A_1)$ and $s(A_2)$, $s(A_1)$
+and $s(A_3)$, $s(A_2)$ and $s(A_3)$ intersect each other at points $V_3, V_2, V_1$, respectively,
+because they contain these points.
+
+\subsection*{Problem 2}
+Does there exist a continuously differentiable function
+$f : \mathbb{R} \to \mathbb{R}$ such that for every $x \in \mathbb{R}$
+we have $f(x) > 0$ and $f'(x) = f(f(x))$?
+
+\textbf{Solution.}
+Assume that there exists such a function. Since $f'(x) = f(f(x)) > 0$,
+the function is strictly monotone increasing.
+
+By monotonicity, $f(x) > 0$ implies $f(f(x)) > f(0)$ for all $x$.
+Thus, $f(0)$ is a lower bound for $f'(x)$, and for all $x < 0$ we have
+\[
+f(x) < f(0) + x \cdot f(0) = (1 + x)f(0).
+\]
+Hence, if $x \leq -1$, then $f(x) \leq 0$, contradicting the property $f(x) > 0$.
+
+So such a function does not exist.
+
+\subsection*{Problem 3}
+Let $n$ be a positive integer and let
+\[
+a_k = \frac{1}{\binom{n}{k}}, \quad b_k = 2^{k-n}, \quad k = 1, 2, \ldots, n.
+\]
+Show that
+\[
+\sum_{k=1}^{n} \frac{a_k - b_k}{k} = 0.
+\]
+
+\textbf{Solution.}
+Since
+\[
+k \binom{n}{k} = n \binom{n-1}{k-1}
+\]
+for all $k \geq 1$, the sum is equivalent to:
+\[
+\frac{2^n}{n} \sum_{k=0}^{n-1} \frac{1}{\binom{n-1}{k}} = \sum_{k=1}^{n} \frac{2^k}{k}.
+\]
+This identity is proven by induction on $n$. (Detailed steps omitted for brevity.)
+
+\subsection*{Problem 4}
+Let $f: [a, b] \to [a, b]$ be a continuous function and let $p \in [a, b]$.
+Define $p_0 = p$ and $p_{n+1} = f(p_n)$ for $n \geq 0$. Suppose that the set
+\[
+T_p = \{p_n : n = 0, 1, 2, \ldots\}
+\]
+is closed, i.e. if $x \notin T_p$ then there is a $\delta > 0$ such
+that for all $ x' \in T_p $ we have $|x'-x| \geq \delta $.
+Show that $T_p$ has finitely many elements.
+
+\textbf{Solution.}
+If $p_m = p_n$ for some $m > n$, then $T_p$ is finite. Otherwise, all points $p_n$ are distinct.
+
+There is a convergent subsequence \(p_{n_k}\) and its limit \(q\) is in \(T_p\).
+Since \(f\) is continuous, \(p_{n_k+1} = f(p_{n_k}) \to f(q)\), so all,
+except for finitely many, points \(p_n\) are accumulation points of \(T_p\).
+Hence we may assume that all of them are accumulation points of \(T_p\).
+Let \(d = \sup \{|p_m - p_n| : m, n \geq 0\}\). Let \(\delta_n\) be
+positive numbers such that \(\sum_{n=0}^{\infty} \delta_n < \frac{d}{2}\).
+Let \(I_n\) be an interval of length less than \(\delta_n\) centered at \(p_n\) such that
+there are infinitely many \(k\)'s such that
+\[
+p_k \notin \bigcup_{j=0}^{n} I_j,
+\]
+this can be done by induction. Let \(n_0 = 0\) and \(n_{m+1}\) be the smallest integer \(k > n_m\) such that
+\[
+p_k \notin \bigcup_{j=0}^{n_m} I_j.
+\]
+Since \(T_p\) is closed, the limit of the subsequence \((p_{n_m})\) must be in \(T_p\),
+but it is impossible because of the definition of the \(I_n\)'s.
+Of course, if the sequence \((p_{n_m})\) is not convergent, we may replace it with its convergent subsequence.
+The proof is finished.
+
+\textit{Remark.} If \(T_p = \{p_1, p_2, \ldots\}\) and each \(p_n\) is
+an accumulation point of \(T_p\), then \(T_p\) is the countable union of
+nowhere dense sets (i.e. the single-element sets \(\{p_n\}\)).
+If \(T\) is closed, then this contradicts the Baire Category Theorem.
+
+\subsection*{Problem 5}
+Prove or disprove the following statements:
+\begin{enumerate}
+\item[(a)] There exists a monotone function $f: [0,1] \to [0,1]$ such that for each $y \in [0,1]$
+ the equation $f(x) = y$ has uncountably many solutions $x$.
+\item[(b)] There exists a continuously differentiable function $f: [0,1] \to [0,1]$ such that
+for each $y \in [0,1]$ the equation $f(x) = y$ has uncountably many solutions $x$?
+\end{enumerate}
+
+\textbf{Solution.}
+(a) Such a function does not exist.
+Each level set is either empty, a singleton, or an interval;
+the intervals are disjoint, hence at most countably many.
+
+(b) Let \( f \) be such a map. Then for each value \( y \) of this map there is
+an \( x_0 \) such that \( y = f(x) \) and \( f'(x) = 0 \),
+because an uncountable set \( \{x : y = f(x)\} \) contains an accumulation point \( x_0 \)
+and clearly \( f'(x_0) = 0 \).
+For every \( \varepsilon > 0 \) and every \( x_0 \) such that \( f'(x_0) = 0 \)
+there exists an open interval \( I_{x_0} \) such that if \( x \in I_{x_0} \)
+then \( |f'(x)| < \varepsilon \). The union of all these intervals \( I_{x_0} \) may be written
+as a union of pairwise disjoint open intervals \( J_n \).
+The image of each \( J_n \) is an interval (or a point) of length \( < \varepsilon \cdot \text{length}(J_n) \)
+due to the Lagrange Mean Value Theorem. Thus the image of the interval \([0,1]\) may be covered
+with the intervals such that the sum of their lengths is \( \varepsilon \cdot 1 = \varepsilon \).
+This is not possible for \( \varepsilon < 1 \).
+
+\textit{Remarks.}
+\begin{enumerate}
+    \item The proof of part (b) is essentially the proof of the easy part of A. Sard’s theorem about measure of the set of critical values of a smooth map.
+    \item If only continuity is required, there exists such a function, e.g. the first coordinate of the very well known Peano curve which is a continuous map from an interval onto a square.
+\end{enumerate}
+
+\subsection*{Problem 6}
+For an \( n \times n \) matrix \( M \) with real entries, let
+\[
+\|M\| = \sup_{x \in \mathbb{R}^n \setminus \{0\}} \frac{\|Mx\|_2}{\|x\|_2},
+\]
+where \( \|\cdot\|_2 \) denotes the Euclidean norm on \( \mathbb{R}^n \).
+
+Let $A$ be an $n \times n$ real matrix satisfying
+\[
+\|A^k - A^{k-1}\| \leq \frac{1}{2002k}
+\]
+for all $k \geq 1$. Prove that $\|A^k\| \leq 2002$ for all positive integers $k$.
+
+\textbf{Solution.}
+\textbf{Lemma 1.}
+Let \((a_n)_{n \geq 0}\) be a sequence of non-negative numbers such that
+\[
+a_{2k} - a_{2k+1} \leq a_k^2, \quad a_{2k+1} - a_{2k+2} \leq a_k a_{k+1}
+\]
+for any \(k \geq 0\) and \(\limsup n a_n < \frac{1}{4}\).
+Then
+\[
+\limsup \sqrt[n]{a_n} < 1.
+\]
+
+\textbf{Proof.}
+Let \(c_l = \sup_{n \geq 2^l} (n+1) a_n\) for \(l \geq 0\).
+We will show that \(c_{l+1} \leq 4 c_l^2\).
+Indeed, for any integer \(n \geq 2^{l+1}\) there exists an integer \(k \geq 2^l\) such that \(n = 2k\) or \(n = 2k+1\).
+In the first case there is:
+\[
+a_{2k} - a_{2k+1} \leq a_k^2 \leq \frac{c_l^2}{(k+1)^2} \leq \frac{4 c_l^2}{2k+1} - \frac{4 c_l^2}{2k+2},
+\]
+whereas in the second case there is:
+\[
+a_{2k+1} - a_{2k+2} \leq a_k a_{k+1} \leq \frac{c_l^2}{(k+1)(k+2)} \leq \frac{4 c_l^2}{2k+2} - \frac{4 c_l^2}{2k+3}.
+\]
+Hence a sequence \(\left(a_n - \frac{4 c_l^2}{n+1}\right)_{n \geq 2^{l+1}}\) is non-decreasing and its terms are non-positive since it converges to zero.
+Therefore:
+\[
+a_n \leq \frac{4 c_l^2}{n+1} \quad \text{for } n \geq 2^{l+1},
+\]
+meaning that \(c_{l+1}^2 \leq 4 c_l^2\).
+This implies that a sequence \(\left((4 c_l)^{2^{-l}}\right)_{l \geq 0}\) is non-increasing and therefore bounded from above by some number \(q \in (0,1)\) since all its terms except finitely many are less than 1.
+Hence \(c_l \leq q^{2^l}\) for \(l\) large enough.
+For any \(n\) between \(2^l\) and \(2^{l+1}\) there is \(a_n \leq \frac{c_l}{n+1} \leq q^{2^l} \leq (\sqrt{q})^n\), yielding:
+\[
+\limsup \sqrt[n]{a_n} \leq \sqrt{q} < 1,
+\]
+yielding \(\limsup \sqrt[n]{a_n} < 1\), which ends the proof.
+
+\textbf{Lemma 2.}
+Let \( T \) be a linear map from \( \mathbb{R}^n \) into itself. Assume that
+\[
+\limsup n \|T^{n+1} - T^n\| < \frac{1}{4}.
+\]
+Then
+\[
+\limsup \|T^{n+1} - T^n\|^{1/n} < 1.
+\]
+In particular, \( T^n \) converges in the operator norm and \( T \) is power bounded.
+
+\textbf{Proof.}
+Put \( a_n = \|T^{n+1} - T^n\| \). Observe that
+\[
+T^{k+m+1} - T^{k+m} = (T^{k+m+2} - T^{k+m+1}) - (T^{k+1} - T^k)(T^{m+1} - T^m),
+\]
+implying that
+\[
+a_{k+m} \leq a_{k+m+1} + a_k a_m.
+\]
+Therefore the sequence \( (a_m)_{m \geq 0} \) satisfies assumptions of Lemma 1 and the assertion of Proposition 1 follows.
+
+\textit{Remarks.}
+\begin{enumerate}
+    \item The theorem proved above holds in the case of an operator \( T \) which maps a normed space \( X \) into itself; \( X \) does not have to be finite dimensional.
+    \item The constant \( \frac{1}{4} \) in Lemma 1 cannot be replaced by any greater number since a sequence \( a_n = \frac{1}{4n} \) satisfies the inequality \( a_{k+m} - a_{k+m+1} \leq a_k a_m \) for any positive integers \( k \) and \( m \) whereas it does not have exponential decay.
+    \item The constant \( \frac{1}{4} \) in Lemma 2 cannot be replaced by any number greater than \( \frac{1}{e} \). Consider an operator \( (Tf)(x) = x f(x) \) on \( L^2([0,1]) \).
+    One can easily check that
+\[
+\limsup \|T^{n+1} - T^n\| = \frac{1}{e},
+\]
+whereas \( T^n \) does not converge in the operator norm. The question whether in general \(\limsup n \|T^{n+1} - T^n\| < \infty\) implies that \( T \) is power bounded remains open.
+
+\textit{Remark.}
+The problem was incorrectly stated during the competition: instead of the inequality
+\[
+\|A^k - A^{k-1}\| \leq \frac{1}{2002^k},
+\]
+the inequality
+\[
+\|A^k - A^{k-1}\| \leq \frac{1}{2002^n}
+\]
+was assumed. If
+\[
+A = \begin{pmatrix}
+1 & \varepsilon \\
+0 & 1
+\end{pmatrix}
+\]
+then
+\[
+A^k = \begin{pmatrix}
+1 & k\varepsilon \\
+0 & 1
+\end{pmatrix}.
+\]
+Therefore,
+\[
+A^k - A^{k-1} = \begin{pmatrix}
+0 & \varepsilon \\
+0 & 0
+\end{pmatrix},
+\]
+so for sufficiently small \( \varepsilon \) the condition is satisfied
+although the sequence \( (\|A^k\|) \) is clearly unbounded.
+
+\end{enumerate}
+
+
+\end{document}
