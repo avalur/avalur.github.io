@@ -1,4 +1,6 @@
 # avalur.github.io
 
-Aleksandr Avdiushenko's personal page
+Repository for courses and materials.
+
+Link to my personal page:
 https://avalur.github.io
