@@ -111,8 +111,8 @@ You will be working with a real-world full-stack application that includes:
 - [futurecoding.ai](https://futurecoding.ai)
 - [AI-zation in startup (in Russian)](https://www.youtube.com/watch?v=YyJr8y4uLo8&t=8037s)
 - [Repomix](https://www.youtube.com/watch?v=PC5y-IyL9SE&t=4s)
-- [Browser MCP](https://www.youtube.com/watch?v=eD5SUj5qqgI)
-- [Official Figma MCP](https://www.youtube.com/watch?v=yO3Wr7DEWF0)
+- [Browser MCP](https://www.youtube.com/watch?v=eD5SUj5qqgI) and [Official Figma MCP](https://www.youtube.com/watch?v=yO3Wr7DEWF0)
+- [Post from Armin Ronacher (creator of Flask)](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
 
 ## Getting Started
 1. Fork the starter repository from [GitHub](https://github.com/avalur/avalur.github.io/blob/master/ai-assisted-programming/)
