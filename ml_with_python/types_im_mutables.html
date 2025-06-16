@@ -10,16 +10,13 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 	</head>
 	<body onload="totalWrapper();">
 		<div class="reveal">
@@ -40,39 +37,39 @@
                 </section>
                 <section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import sys
 
                             def pretty_sizeof(x):
                                 return f'{x} — {sys.getsizeof(x)} bytes'
 
-                            pretty_sizeof(1)
-                        </py-repl>
-                        <py-repl>
+                            print(pretty_sizeof(1))
+                        </script>
+                        <script type="py-editor" env="shared">
                             print(type(1))
                             print([method for method in dir(1) if not method.startswith('__')])
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor">
                             help((1).to_bytes)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                         print('\n'.join(['Size of objects in Python:'] +
                                 [pretty_sizeof(x) for x in (0.0, 1.0)] + [''] +
                                 [pretty_sizeof(x) for x in ("", "a", "ab")] + [''] +
                                 [pretty_sizeof(x) for x in ([], ["a"], ["a", "aaa"], ["a", "aaa", 1.0])] + ['']))
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                         print('\n'.join(['Size of objects in Python:'] +
                                 [pretty_sizeof(x) for x in ((), ("a",), ("a", "aaa"))] + [''] +
                                 [pretty_sizeof(x) for x in (set(), {"a"})] + [''] +
                                 [pretty_sizeof(x) for x in ({}, {1: "a"}, {1: "a", 2: "b"})] + ['']))
-                        </py-repl>
+                        </script>
                     </section>
                 </section>
                 <section>
@@ -110,10 +107,10 @@
                             </div>
                         </div>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
+                            <script type="py-editor">
                                 x = 0
                                 5 / x
-                            </py-repl>
+                            </script>
                         </div>
                     </section>
                     <section>
@@ -126,20 +123,20 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Types in Python</h3>
-                        <py-repl>
+                        <script type="py-editor">
                             a = 2
                             print(type(a))
                             a = True
                             print(type(a))
                             # https://en.wikipedia.org/wiki/George_Boole
                             # «In 1847 Boole published the pamphlet Mathematical Analysis of Logic»
-                        </py-repl>
-                        <py-repl>
-                            max([1, 2]), max({1, 2}), max(1, 2, 3)
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor">
+                            print(max([1, 2]), max({1, 2}), max(1, 2, 3))
+                        </script>
+                        <script type="py-editor">
                             help(max)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p><strong>Strict (strong) typing</strong> — the presence of type consistency safety and
@@ -151,26 +148,26 @@
                             </div>
                         </div>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
-                                2 + "1.0"
-                            </py-repl>
-                            <py-repl>
-                                2 + 1.0
-                            </py-repl>
+                            <script type="py-editor">
+                                print(2 + "1.0")
+                            </script>
+                            <script type="py-editor">
+                                print(2 + 1.0)
+                            </script>
                         </div>
                     </section>
                     <section data-background-color="#fdf6e3">
                                 <h3>Float</h3>
-                                <py-repl>
+                                <script type="py-editor">
                                     a = 1.7976931348623157e+308 + 10009090
                                     b = 1.7976931348623157e+308 + 2323
                                     print(a)
-                                    a == b, id(a) == id(b) # in CPython it is (True, False)
-                                </py-repl>
-                                <py-repl>
+                                    print(a == b, id(a) == id(b)) # in CPython it is (True, False)
+                                </script>
+                                <script type="py-editor">
                                     import sys
-                                    sys.float_info
-                                </py-repl>
+                                    print(sys.float_info)
+                                </script>
                     </section>
                 </section>
                 <section>
@@ -179,36 +176,36 @@
                         <img src="images/guido_python.jpg" alt="guido_python">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor">
                             import this
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>(Im)mutability</h3>
-                        <py-repl>
+                        <script type="py-editor">
                             a = 1.0
                             b = 2.0
                             c = b
 
                             id_b = id(b)
                             b = b + a # the same result is with b += a
-                            id(b) == id_b, id(c) == id_b
-                        </py-repl>
+                            print(id(b) == id_b, id(c) == id_b)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             lst_of_lst = [[1]] * 2
                             lst_of_lst[1][0] = 2
                             print(lst_of_lst)
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             # that's why better to use immutable tuple
                             lst_of_tpl = [(1,)] * 2
                             lst_of_tpl[1][0] = 2
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             print(lst_of_tpl)
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
                         <img src="images/python_immutables.png" style="display: inline-block;">
@@ -217,27 +214,28 @@
                 <section>
                     <section data-background-color="#fdf6e3">
                                 <h3>String (str)</h3>
-                                <py-repl>
+                                <script type="py-editor">
                                     a = "hello"
                                     b = "hello"
-                                    id(a) == id("hello"), id(a) == id(b)
-                                </py-repl>
-                                <py-repl>
+                                    print(id(a) == id("hello"), id(a) == id(b))
+                                </script>
+                                <script type="py-editor">
                                     a = "a" * 100500
                                     b = "a" * 100500
-                                    id(a) == id("a" * 100500), id(a) == id(b)
-                                </py-repl>
-                                <py-repl>
+                                    print(id(a) == id("a" * 100500), id(a) == id(b))
+                                </script>
+                                <script type="py-editor">
                                     import sys
                                     a = sys.intern("a" * 100500)
                                     b = sys.intern("a" * 100500)
-                                    id(a) == id("a" * 100500), id(a) == id(b)
-                                </py-repl>
+                                    print(id(a) == id("a" * 100500), id(a) == id(b))
+                                </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor">
+                            import sys
                             help(sys.intern)
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
                         <h3>Python STR algorithmic complexites</h3>
@@ -261,48 +259,49 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                                 <h3>list</h3>
-                                <py-repl>
-                                    [1, "2", [3]]
-                                </py-repl>
-                                <py-repl>
+                                <script type="py-editor">
+                                    list_ = [1, "2", [3]]
+                                    print(list_)
+                                </script>
+                                <script type="py-editor">
                                     a = 2; b = 3; list_ = [2, 4]
                                     print(f" a -> {id(a)}\n b -> {id(b)}\n list_ -> {id(list_)}", )
                                     for i, el in enumerate(list_):
                                         print(f"list_[{i}] -> {id(el)}")
-                                </py-repl>
-                                <py-repl>
+                                </script>
+                                <script type="py-editor">
                                     a = [1]
                                     b = [1]
-                                    id(a) == id([1]), id(a) == id(b)
-                                </py-repl>
+                                    print(id(a) == id([1]), id(a) == id(b))
+                                </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = [1]
                             b = [2]
                             c = b
                             old_id_b = id(b)
                             b = b + a
-                            a, b, c, id(b) == old_id_b, id(c) == old_id_b
-                        </py-repl>
-                        <py-repl>
+                            print(a, b, c, id(b) == old_id_b, id(c) == old_id_b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a = [1]
                             b = [2]
                             c = b
                             old_id_b = id(b)
                             b += a # same result with b.extend(a) and b.append(1)
-                            a, b, c, id(b) == old_id_b, id(c) == old_id_b
-                        </py-repl>
+                            print(a, b, c, id(b) == old_id_b, id(c) == old_id_b)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <p>Joy of using <a href="https://docs.python.org/3/library/array.html">typed arrays</a> in Python
                             directly from C</p>
-                        <py-repl>
+                        <script type="py-editor">
                             from array import array
 
                             arr = array('H', range(1000))
-                            arr[3]
-                        </py-repl>
+                            print(arr[3])
+                        </script>
                     </section>
                     <section>
                         <h3>list — mutable data type in Python, so its complexities are</h3>
@@ -332,20 +331,20 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                                 <h3>tuple</h3>
-                                <py-repl>
+                                <script type="py-editor" env="shared">
                                     a = (1,)
                                     b = (2,)
                                     c = b
                                     old_id_b = id(b)
                                     b += a
-                                    a, b, c, id(b) == old_id_b, id(c) == old_id_b
-                                </py-repl>
-                                <py-repl>
+                                    print(a, b, c, id(b) == old_id_b, id(c) == old_id_b)
+                                </script>
+                                <script type="py-editor" env="shared">
                                     # what is the final value of tuple_ here and why?
                                     tuple_ = (0, 1, [])
                                     tuple_[2].append(8)
-                                    tuple_
-                                </py-repl>
+                                    print(tuple_)
+                                </script>
                     </section>
                     <section>
                         <h3>tuple — immutable data type in Python, so</h3>
@@ -377,27 +376,27 @@
                 <section>
                     <section data-background-color="#fdf6e3">
                         <h3>dict — dictionaries (associative arrays)</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = {1: 2}
                             b = dict([(1, 2)])
-                            b
-                        </py-repl>
-                        <py-repl>
+                            print(b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a[2] = 3; a[2] = 4
-                            a
-                        </py-repl>
-                        <py-repl>
+                            print(a)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a = {1: 2}
-                            a.get(1), a.get(3), a.get(3, 0)
-                        </py-repl>
-                        <py-repl>
+                            print(a.get(1), a.get(3), a.get(3, 0))
+                        </script>
+                        <script type="py-editor" env="shared">
                             a = {1: 2}
                             a.update({2: 3, 1: 4})
-                            a
-                        </py-repl>
+                            print(a)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             d = {1: 2, 3: 4}
 
                             # newbie
@@ -407,10 +406,10 @@
                             # profi
                             for k in d:
                                 print(k)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             d = {1: 2, 3: 4}
 
                             for k, v in d.items():
@@ -418,35 +417,35 @@
 
                             for v in d.values():
                                 print(v)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             d = {1: 2, 3: 4}
 
                             for k in d:
                                 del d[k]
-                            d
-                        </py-repl>
+                            print(d)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = {1: 2}
                             b = {2: 3, 1: 4}
                             c = b
                             old_id_b = id(b)
                             b.update(a)  # the same as b[1] = 2
-                            a, b, c, id(b) == old_id_b, id(c) == old_id_b
-                        </py-repl>
+                            print(a, b, c, id(b) == old_id_b, id(c) == old_id_b)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor">
                             d = {{1: 2}: 3}
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor">
                             d = {(1,2): 3}
-                            d
-                        </py-repl>
+                            print(d)
+                        </script>
                     </section>
                     <section data-markdown>
                         <textarea data-template>
@@ -465,13 +464,13 @@
                         </textarea>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor">
                             import sys
                             d = {} # not set()
                             print(sys.getsizeof(d), d.__sizeof__())
                             d.clear()
                             print("After clear(): ", sys.getsizeof(d), d.__sizeof__())
-                        </py-repl>
+                        </script>
                         <p><a href="https://docs.python.org/3/library/sys.html#sys.getsizeof">
                             From the Python method documentation</a></p>
 
@@ -490,9 +489,9 @@
                             Programs that use external data (reading program text from a file,
                             input from the keyboard, etc.) are not considered quines.</p>
                         <div class="fragment" style="margin-bottom:20px;">
-                            <py-repl>
+                            <script type="py-editor">
                                 _='_=%r;print(_%%_)';print(_%_)
-                            </py-repl>
+                            </script>
                         </div>
                     </section>
                 </section>
