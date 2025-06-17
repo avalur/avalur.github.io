@@ -10,16 +10,13 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/black.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
 
-		<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-		<script defer src="https://pyscript.net/latest/pyscript.js"></script>
-		<py-config>
-			terminal = false
-		</py-config>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
 	</head>
 	<body onload="totalWrapper();">
 		<div class="reveal">
@@ -41,159 +38,159 @@
                 <section>
                     <section data-background-color="#fdf6e3">
                         <h3>Indexes of Python list</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = list(range(10))
-                            a[2], a[-1], a[-5]  # index: count from zero, forward or backward
-                        </py-repl>
-                        <py-repl>
-                            a[10]
-                        </py-repl>
+                            print(a[2], a[-1], a[-5])  # index: count from zero, forward or backward
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(a[10])
+                        </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <img src="./images/slicing.png" alt="slicing">
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Slices</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = list(range(10))
                             print(a[1:5])  # start included, end excluded
                             print(a[1:-1])
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             a = list(range(10))
                             print(a[1:12:2])   # start, end, step
                             print(a[-1:1:-2])
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             # one line to reverse list
                             print(a[::-1])
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>List comprehensions</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a = [[i] for i in range(10)]
                             a[:5] = a[-5::-1]
-                            a
-                        </py-repl>
-                        <py-repl>
+                            print(a)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a[0][0] = 1000
-                            a
-                        </py-repl>
-                        <py-repl>
+                            print(a)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a = list(range(10))
                             old_id_a = id(a)
                             a[:5] = a[-5::-1]
-                            a, id(a) == old_id_a
-                        </py-repl>
+                            print(a, id(a) == old_id_a)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Unpacking in Python</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             a, b = 0, 1
-                            a, b
-                        </py-repl>
-                        <py-repl>
+                            print(a, b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a, b = b, a
-                            a, b
-                        </py-repl>
-                        <py-repl>
+                            print(a, b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a, b, c = range(3)
-                            b
-                        </py-repl>
-                        <py-repl>
+                            print(b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a, (b, c) = [1, (2, 3)]
-                            a, b, c
-                        </py-repl>
+                            print(a, b, c)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             # fun example
-                            True, True, True == (True, True, True)
-                        </py-repl>
-                        <py-repl>
+                            print(True, True, True == (True, True, True))
+                        </script>
+                        <script type="py-editor" env="shared">
                             # Fibonacci numbers
                             a, b = 1, 1
                             for _ in range(10):
                                 a, b = b, a + b
 
-                            a, b
-                        </py-repl>
+                            print(a, b)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             first, *b = range(5)
-                            first, b
-                        </py-repl>
-                        <py-repl>
+                            print(first, b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a, *b, c, d = range(10)
-                            a, b, c, d
-                        </py-repl>
+                            print(a, b, c, d)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Unpacking in a loop</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                         for a, b in [('This', 1), ('is', 2), ('Test', 3)]:
                             print(a, b, end = ', ')
                         print()
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                         for i, letter in enumerate('hello'):
                             print(i, ' - ', letter, end = ', ')
                         print()
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             a, b, c = range(3)
-                            b
-                        </py-repl>
-                        <py-repl>
+                            print(b)
+                        </script>
+                        <script type="py-editor" env="shared">
                             a, (b, c) = [1, (2, 3)]
-                            a, b, c
-                        </py-repl>
+                            print(a, b, c)
+                        </script>
                     </section>
                 </section>
                 <section>
                     <section data-background-color="#fdf6e3">
                         <h3>Comprehensions</h3>
-                            <py-repl>
+                            <script type="py-editor" env="shared">
                                 lst = [i ** 2 for i in range(15)]
-                                lst
-                            </py-repl>
-                            <py-repl>
-                                {i ** 0.5 for i in range(-3, 3, 1) if i > 0}
-                            </py-repl>
-                            <py-repl>
+                                print(lst)
+                            </script>
+                            <script type="py-editor" env="shared">
+                                print({i ** 0.5 for i in range(-3, 3, 1) if i > 0})
+                            </script>
+                            <script type="py-editor" env="shared">
                                 dct = {i : i ** 3 for i in range(4)}
-                                dct
-                            </py-repl>
-                            <py-repl>
-                                {key if key > 1 else None: value for key, value in dct.items()}
-                            </py-repl>
-                            <py-repl>
-                                " ".join([c for s in ("Nested", "List", "Comprehension") for c in s])
-                            </py-repl>
+                                print(dct)
+                            </script>
+                            <script type="py-editor" env="shared">
+                                print({key if key > 1 else None: value for key, value in dct.items()})
+                            </script>
+                            <script type="py-editor" env="shared">
+                                print(" ".join([c for s in ("Nested", "List", "Comprehension") for c in s]))
+                            </script>
                     </section>
                     <section data-background-color="#ffffff">
                         <img src="./images/collections.png" alt="collections">
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Collections → defaultdict</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             from collections import defaultdict
 
                             dct = defaultdict(float)
-                            float(), dct[2]
-                        </py-repl>
-                        <py-repl>
+                            print(float(), dct[2])
+                        </script>
+                        <script type="py-editor" env="shared">
                             for i in range(2):
                                 if dct[i] == 0:
                                     print("hello")
-                            dct
-                        </py-repl>
+                            print(dct)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Collections → deque</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             from collections import deque
                             q = deque()
 
@@ -202,7 +199,7 @@
 
                             while q:
                                 print(q.pop(), q)
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
                         <h3>Collections → deque → complexities</h3>
@@ -225,81 +222,81 @@
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Collections → OrderedDict</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             from collections import OrderedDict
 
                             data = [(1, 'a'), (3, 'c'), (2, 'b')]
 
                             print(dict(data))
                             print(OrderedDict(data))
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             d = OrderedDict(data)
                             d.move_to_end(2, last=False)
-                            d
-                        </py-repl>
-                        <py-repl>
+                            print(d)
+                        </script>
+                        <script type="py-editor" env="shared">
                             d.popitem(last=True)
-                            d
-                        </py-repl>
+                            print(d)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>Collections → Counter</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             from collections import Counter
 
                             print(Counter("aaabbbbccd"))
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             d = OrderedDict(data)
                             d.move_to_end(2, last=False)
-                            d
-                        </py-repl>
-                        <py-repl>
+                            print(d)
+                        </script>
+                        <script type="py-editor" env="shared">
                             d.popitem(last=True)
-                            d
-                        </py-repl>
-                        <py-repl>
+                            print(d)
+                        </script>
+                        <script type="py-editor" env="shared">
                             row1 = ['never', 'give', 'never', 'let']
                             row2 = ['gona', 'you up', 'gona', 'you down']
 
                             for first, second in zip(row1, row2):
                                 print(first, second)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
                         <h3>More interesting examples in Python</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             # lazy evaluation
-                            not False or non_existant
+                            print(not False or non_existant)
                             # non_existant
-                            non_existant
-                        </py-repl>
-                        <py-repl>
-                            bool("1")
-                        </py-repl>
-                        <py-repl>
-                            1 < 3 < 5
-                        </py-repl>
-                        <py-repl>
-                            False == False != True
-                        </py-repl>
+                            print(non_existant)
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(bool("1"))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(1 < 3 < 5)
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
+                            print(False == False != True)
+                        </script>
+                        <script type="py-editor" env="shared">
                             # equivalent to
                             (False == False) and (False != True)
-                        </py-repl>
-                        <py-repl>
-                            1 < 3 < 5 # equivalent to
-                            (1 < 3) and (3 < 5)
-                        </py-repl>
-                        <py-repl>
-                            None == None
-                        </py-repl>
-                        <py-repl>
-                            None is None
-                        </py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(1 < 3 < 5) # equivalent to
+                            print((1 < 3) and (3 < 5))
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(None == None)
+                        </script>
+                        <script type="py-editor" env="shared">
+                            print(None is None)
+                        </script>
                     </section>
                 </section>
                 <section>
@@ -307,27 +304,27 @@
                         <img src="./images/gc_python_meme.jpg" alt="gc_python_meme">
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import sys
                             print('\n'.join([f'{x}: {sys.getrefcount(x)}' for x in
                                     (1, 3, 5, 127, 127.0, object())]))
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             help(sys.getrefcount)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             x = 128.0
                             sys.getrefcount(x)
                             # in Python interpreter in the console, it will be 3
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             sys.getrefcount(x)
-                        </py-repl>
-                        <py-repl>
+                        </script>
+                        <script type="py-editor" env="shared">
                             sys.getrefcount(float())
-                        </py-repl>
+                        </script>
                         Fun with sys getrefcount
                         <a href="https://groverlab.org/hnbfpr/2017-06-22-fun-with-sys-getrefcount.html">post</a>
                     </section>
@@ -348,7 +345,7 @@
                 <section>
                     <section data-background-color="#fdf6e3">
                         <h3>Never repeat this at home!</h3>
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             def hi(x):
                                 print("Hello,", x)
                                 return None
@@ -359,16 +356,16 @@
                             add_two.__code__ = hi.__code__
 
                             add_two(20)
-                        </py-repl>
+                        </script>
                     </section>
                     <section data-background-color="#fdf6e3">
-                        <py-repl>
+                        <script type="py-editor" env="shared">
                             import dis
                             dis.dis(hi)
-                        </py-repl>
+                        </script>
                     </section>
                     <section>
-    					<div class="fragment" style="margin-bottom:20px;">
+    					<div class="fragment" style="margin-bottom:20px;text-align: left">
 							<div class="typesetting">
                                 LOAD_GLOBAL    namei — Loads the global named co_names[namei] onto the stack <br />
                                 LOAD_CONST    consti — Pushes "co_consts[consti]" onto the stack <br />
@@ -377,10 +374,10 @@
                         </div>
                     </section>
                     <section>
-    					<div class="fragment" style="margin-bottom:20px;">
+    					<div class="fragment" style="margin-bottom:20px;text-align: left">
 							<div class="typesetting">
-                                CALL_FUNCTION    argc — Calls a function. The low byte of argc indicates the number of positional parameters, the high byte the number of keyword parameters. On the stack, the opcode finds the keyword parameters first. For each keyword argument, the value is on top of the key. Below the keyword parameters, the positional parameters are on the stack, with the right-most parameter on top. Below the parameters, the function object to call is on the stack.<br />
-                                POP_TOP — Removes the top-of-stack (TOS) item.
+                                CALL_FUNCTION    argc — Calls a function. The low byte of argc indicates the number of positional parameters, the high byte the number of keyword parameters. On the stack, the opcode finds the keyword parameters first. For each keyword argument, the value is on top of the key. Below the keyword parameters, the positional parameters are on the stack, with the right-most parameter on top. Below the parameters, the function object to call is on the stack<br />
+                                POP_TOP — Removes the top-of-stack (TOS) item
                             </div>
                         </div>
     					<div class="fragment" style="margin-bottom:20px;">
@@ -388,6 +385,7 @@
                             <div class="r-frame"><a href="http://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/">Why Python is slow?</a></div>
                             </div>
                         </div>
+                        <p class="fragment">Thank you for your patience!</p>
                     </section>
                 </section>
             </div>
