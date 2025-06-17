@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numpy, Pandas and ML Quiz - Machine Learning Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Numpy, Pandas and ML Quiz</h1>
+            <p>Test your knowledge of fundamentals</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="numpy-ml-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Numpy, Pandas and ML Quiz for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">8</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the main goal of the NumPy library in Python?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To provide a graphical user interface for Python</li>
+                        <li class="quiz-option" data-correct="true">To work with multi-dimensional arrays or tables</li>
+                        <li class="quiz-option" data-correct="false">To create web applications</li>
+                        <li class="quiz-option" data-correct="false">To manage database connections</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> NumPy (Numerical Python) is primarily designed for working with multi-dimensional arrays and matrices. It provides a powerful N-dimensional array object and various tools for manipulating these arrays, making it essential for numerical computing, data analysis, and scientific calculations in Python.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        Which of the following is a key difference between NumPy arrays and standard Python sequences?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">NumPy arrays can have elements of different types</li>
+                        <li class="quiz-option" data-correct="true">NumPy arrays have a fixed length and all elements must be of the same type</li>
+                        <li class="quiz-option" data-correct="false">Standard Python sequences are faster than NumPy arrays</li>
+                        <li class="quiz-option" data-correct="false">Standard Python sequences are used for numerical computations</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key distinction of NumPy arrays is that they are homogeneous (all elements must be of the same type) and have a fixed size. This constraint allows NumPy to optimize memory usage and perform operations more efficiently. In contrast, standard Python sequences like lists can hold elements of different types and can be dynamically resized. This homogeneity requirement in NumPy arrays is what enables their high performance in numerical computations.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What does the transposition of a 10x2 NumPy array result in?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">A 10x2 array</li>
+                        <li class="quiz-option" data-correct="true">A 2x10 array</li>
+                        <li class="quiz-option" data-correct="false">A 5x4 array</li>
+                        <li class="quiz-option" data-correct="false">A 20x1 array</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> When you transpose a NumPy array, the dimensions are swapped. For a 10x2 array (10 rows and 2 columns), transposition results in a 2x10 array (2 rows and 10 columns). This operation can be performed using array.T or np.transpose(array). The total number of elements remains the same (20), but their arrangement changes by converting rows into columns and vice versa.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the key difference between slicing in NumPy and standard Python?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">NumPy slices create copies, while standard Python slices create views</li>
+                        <li class="quiz-option" data-correct="true">NumPy slices create views, while standard Python slices create copies</li>
+                        <li class="quiz-option" data-correct="false">Both NumPy and standard Python slices create views</li>
+                        <li class="quiz-option" data-correct="false">Both NumPy and standard Python slices create copies</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In NumPy, when you slice an array, you get a view of the original array by default, meaning any changes to the slice will affect the original array. This behavior is different from standard Python lists, where slicing creates a new copy of the data. This design choice in NumPy helps to save memory and improve performance, especially when working with large datasets. If you need a copy in NumPy, you can explicitly create one using the copy() method.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What does numpy convert missing values or strings to in a numpy array of type float64?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">NaN</li>
+                        <li class="quiz-option" data-correct="false">None</li>
+                        <li class="quiz-option" data-correct="false">0</li>
+                        <li class="quiz-option" data-correct="false">Infinity</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> When NumPy encounters missing values (None) or non-numeric strings in an array of type float64, it converts them to NaN (Not a Number). NaN is a special floating-point value used to represent undefined or unrepresentable values. This is different from Python's None and allows NumPy to maintain type consistency while still indicating missing or invalid data in numerical computations.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is a key rule for broadcasting arrays in NumPy?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Dimensions must start from the left and match exactly</li>
+                        <li class="quiz-option" data-correct="true">Dimensions must start from the right and either match or one must be 1</li>
+                        <li class="quiz-option" data-correct="false">All dimensions must be equal to 1</li>
+                        <li class="quiz-option" data-correct="false">Broadcasting is only possible for one-dimensional arrays</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In NumPy's broadcasting rules, array dimensions are compared from right to left (last dimension to first). For two arrays to be broadcastable, each dimension must either be equal, or one of them must be 1. If an array has fewer dimensions, NumPy will pad it with dimensions of size 1 on the left. This rule enables efficient operations between arrays of different shapes without unnecessary data duplication.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is the shape of the resulting vector when multiplying a 2x2 matrix by a 2x1 vector in the context of solving for intersection points?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">2x2</li>
+                        <li class="quiz-option" data-correct="false">1x2</li>
+                        <li class="quiz-option" data-correct="true">2x1</li>
+                        <li class="quiz-option" data-correct="false">1x1</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> When multiplying a 2x2 matrix by a 2x1 vector, the resulting shape follows the matrix multiplication rule: (m×n) × (n×p) = (m×p). In this case, (2×2) × (2×1) = (2×1). This is particularly relevant when solving for intersection points, as the resulting 2x1 vector typically represents the x and y coordinates of the intersection point. The first dimension (2) represents the two spatial coordinates, while the second dimension (1) indicates it's a single point.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the primary advantage of using Pandas over NumPy for handling data?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Pandas supports dynamic typing, while NumPy does not</li>
+                        <li class="quiz-option" data-correct="true">Pandas allows for named rows and columns, making data more intuitive</li>
+                        <li class="quiz-option" data-correct="false">Pandas is faster than NumPy for mathematical operations</li>
+                        <li class="quiz-option" data-correct="false">Pandas does not require indexing, unlike NumPy</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary advantage of Pandas over NumPy is its ability to handle labeled data through named rows (index) and columns. This makes data manipulation and analysis more intuitive and less error-prone, as you can refer to data by meaningful names rather than numerical indices. While NumPy excels at numerical computations with n-dimensional arrays, Pandas is specifically designed for working with tabular data, providing powerful features for data analysis, such as handling missing values, merging datasets, and performing group operations, all while maintaining clear labels for your data.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the purpose of the 'iloc' method in Pandas?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To label rows and columns with names</li>
+                        <li class="quiz-option" data-correct="true">To access data using integer-based indexing</li>
+                        <li class="quiz-option" data-correct="false">To convert a DataFrame into a NumPy array</li>
+                        <li class="quiz-option" data-correct="false">To sort values in a DataFrame</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The 'iloc' (integer location) method in Pandas is specifically designed for integer-based indexing of DataFrames and Series. It allows you to access data by position (0-based integer index) rather than by labels. This is particularly useful when you need to access data by its numerical position, similar to NumPy array indexing. For example, df.iloc[0:5, 2] would select the first 5 rows of the third column, regardless of the index labels. This is in contrast to the 'loc' method, which uses label-based indexing.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        In the context of machine learning tasks, what distinguishes a multi-class classification task from a binary classification task?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">The number of features used</li>
+                        <li class="quiz-option" data-correct="true">The number of classes in the output</li>
+                        <li class="quiz-option" data-correct="false">The type of features (binary or continuous)</li>
+                        <li class="quiz-option" data-correct="false">The use of a feature matrix</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key distinction between multi-class and binary classification lies in the number of possible output classes. Binary classification deals with exactly two possible outcomes (e.g., spam/not spam, positive/negative), while multi-class classification involves three or more possible classes (e.g., classifying digits 0-9, or categorizing images into multiple animal species). This difference affects the choice of algorithms, model architecture, and evaluation metrics. For example, binary classification might use a single decision boundary and metrics like binary cross-entropy, while multi-class problems often require techniques like one-vs-all, softmax activation, and categorical cross-entropy loss.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        In the context of linear regression, what does the 'intercept' parameter represent?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">The slope of the regression line</li>
+                        <li class="quiz-option" data-correct="true">The point where the regression line crosses the y-axis</li>
+                        <li class="quiz-option" data-correct="false">The weight of the first feature in the model</li>
+                        <li class="quiz-option" data-correct="false">The error term in the regression equation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In linear regression, the intercept (often denoted as β₀ or b) represents the value of the dependent variable (y) when all independent variables (x) are zero. Geometrically, it's the point where the regression line crosses the y-axis. In the equation y = mx + b, the intercept is 'b'. This parameter is crucial because it allows the model to fit data that doesn't necessarily pass through the origin (0,0). For example, if predicting house prices based on size, the intercept might represent the base price of a house even if it had zero square feet, accounting for factors like land value or location.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What is the primary purpose of the 'loss function' as described in the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To construct an algorithm based on the training set</li>
+                        <li class="quiz-option" data-correct="true">To evaluate the quality of the model or algorithm</li>
+                        <li class="quiz-option" data-correct="false">To represent objects in a matrix format</li>
+                        <li class="quiz-option" data-correct="false">To predict answers for new objects</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A loss function (also known as cost function or objective function) is fundamental in machine learning as it measures how well a model performs by quantifying the difference between predicted values and actual values. It serves as a metric to evaluate the quality of the model's predictions and guides the optimization process during training. Common examples include Mean Squared Error (MSE) for regression problems and Cross-Entropy Loss for classification tasks. The model training process aims to minimize this loss function, effectively improving the model's predictions by adjusting its parameters based on the feedback provided by the loss function.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        Which of the following is NOT a common loss function for regression tasks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Absolute error</li>
+                        <li class="quiz-option" data-correct="false">Quadratic error</li>
+                        <li class="quiz-option" data-correct="true">Cross entropy</li>
+                        <li class="quiz-option" data-correct="false">Mean squared error</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Cross entropy is not typically used for regression tasks - it's primarily used for classification problems. The other options listed are all common loss functions for regression:
+                        - Mean Absolute Error (MAE or Absolute error): Measures the average magnitude of errors without considering their direction
+                        - Quadratic error/Mean Squared Error (MSE): Squares the errors before averaging, penalizing larger errors more heavily
+                        - Both MAE and MSE are appropriate for regression as they measure the difference between predicted and actual continuous values.
+                        Cross entropy, on the other hand, is designed for classification tasks where we're dealing with probability distributions across discrete classes. It measures the difference between predicted probability distributions and actual class distributions, making it unsuitable for regression problems where we're predicting continuous values.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the primary issue observed when the test score becomes much greater than the train score?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Underfitting</li>
+                        <li class="quiz-option" data-correct="false">Overfitting</li>
+                        <li class="quiz-option" data-correct="true">Data leakage</li>
+                        <li class="quiz-option" data-correct="false">Feature selection bias</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> When the test score is significantly higher than the training score, it typically indicates data leakage - a situation where information from the test set has inadvertently influenced the model training process. This is a serious problem because:
+                        1. It creates an artificially optimistic evaluation of the model's performance
+                        2. It violates the fundamental principle that test data should be completely independent from the training process
+                        3. The model's real-world performance will likely be much worse than indicated
+
+                        This differs from overfitting (where training score > test score) and underfitting (where both scores are poor). Data leakage can occur through various mechanisms, such as:
+                        - Preprocessing the entire dataset before splitting into train/test sets
+                        - Including target-related information in the features
+                        - Using future information in time-series problems
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        What is the primary purpose of using the cross-validation technique in model evaluation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To use all the data for training only</li>
+                        <li class="quiz-option" data-correct="false">To average errors across multiple models for a final result</li>
+                        <li class="quiz-option" data-correct="true">To evaluate model quality using all data for both training and evaluation</li>
+                        <li class="quiz-option" data-correct="false">To reduce the computational complexity of model training</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Cross-validation is a resampling technique that provides a more robust evaluation of a model's performance by using all available data for both training and testing in a systematic way. Here's how it works:
+                        1. The data is divided into k equal-sized folds
+                        2. The model is trained k times, each time using k-1 folds for training and the remaining fold for validation
+                        3. Each data point gets to be in the validation set exactly once
+
+                        This approach has several advantages:
+                        - Makes efficient use of limited data
+                        - Provides a more reliable estimate of model performance
+                        - Helps detect overfitting
+                        - Reduces the impact of random sampling in train/test splits
+
+                        While cross-validation does involve averaging errors across multiple iterations, this is a means to an end rather than the primary purpose. It actually increases computational complexity compared to a single train/test split, but the benefit of more robust evaluation outweighs this cost.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
