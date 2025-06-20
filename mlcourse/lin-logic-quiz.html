@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear and Logical models Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Linear and Logical models Quiz</h1>
+            <p>Test your knowledge of fundamentals</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="lin-logic-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Linear and Logical models Quiz for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">16</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the primary difference between linear regression and binary classification in terms of the model's output?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Linear regression predicts a real number, while binary classification predicts a class label.</li>
+                        <li class="quiz-option" data-correct="false">Linear regression uses a sign function, while binary classification uses a dot product.</li>
+                        <li class="quiz-option" data-correct="false">Linear regression minimizes the mean square loss, while binary classification maximizes accuracy.</li>
+                        <li class="quiz-option" data-correct="false">Linear regression is unsupervised, while binary classification is supervised.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The fundamental difference between linear regression and binary classification lies in their outputs. Linear regression is used for predicting continuous numerical values (real numbers), such as predicting house prices, temperatures, or any quantity that can take on a range of values. Binary classification, on the other hand, predicts discrete class labels from two possible categories (e.g., spam/not spam, positive/negative, yes/no). While both use similar underlying mathematical concepts like linear combinations of features, their output interpretation and loss functions differ significantly due to this fundamental distinction in what they're trying to predict.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        What is the purpose of using a test set in machine learning model evaluation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To train the model with additional data.</li>
+                        <li class="quiz-option" data-correct="true">To evaluate the model's performance on unseen data.</li>
+                        <li class="quiz-option" data-correct="false">To optimize the model's hyperparameters during training.</li>
+                        <li class="quiz-option" data-correct="false">To replace the training set for better accuracy.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The test set serves as a critical component in machine learning model evaluation by providing an unbiased assessment of how well the model generalizes to new, unseen data. The test set must remain completely separate from the training process - it should never be used for training the model or tuning hyperparameters. This separation ensures that the evaluation reflects the model's true performance on real-world data it hasn't encountered before. Using the test set properly helps detect overfitting and provides a realistic estimate of how the model will perform when deployed in production environments.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What does a negative margin indicate in the context of a linear classifier?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">The model is confident in its prediction</li>
+                        <li class="quiz-option" data-correct="false">The model has made a correct classification</li>
+                        <li class="quiz-option" data-correct="true">The model has made an error in classification</li>
+                        <li class="quiz-option" data-correct="false">The model is uncertain about its prediction</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In linear classification, the margin represents the distance between a data point and the decision boundary, multiplied by the correct class label. A negative margin indicates that the data point is on the wrong side of the decision boundary, meaning the classifier has made an error. When the margin is positive, the point is correctly classified and the magnitude indicates confidence (larger positive margin = more confident correct prediction). When the margin is negative, it means the model's prediction disagrees with the true label, resulting in a classification error. This concept is fundamental in algorithms like Support Vector Machines (SVM) where maximizing the margin is a key objective.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary mathematical property used to decrease a function in gradient descent?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Moving along the gradient</li>
+                        <li class="quiz-option" data-correct="true">Moving along the anti-gradient</li>
+                        <li class="quiz-option" data-correct="false">Setting the gradient to zero</li>
+                        <li class="quiz-option" data-correct="false">Increasing the learning rate</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Gradient descent relies on the fundamental mathematical property that the gradient points in the direction of steepest increase of a function. To minimize (decrease) a function, we must move in the opposite direction - along the anti-gradient (negative gradient). This is because the gradient ∇f(x) indicates the direction where the function increases most rapidly, so -∇f(x) points toward the direction of steepest decrease. The algorithm iteratively updates parameters by taking steps proportional to the negative gradient: x_new = x_old - α∇f(x), where α is the learning rate. Setting the gradient to zero finds critical points but doesn't guarantee descent, and simply increasing the learning rate can cause overshooting and instability.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What is the primary mathematical property that gives the Exponential Moving Average (EMA) its name?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">The use of static weights for all errors</li>
+                        <li class="quiz-option" data-correct="true">The exponential decay of weights for previous errors</li>
+                        <li class="quiz-option" data-correct="false">The linear increase of weights for current errors</li>
+                        <li class="quiz-option" data-correct="false">The constant weight for the current error</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The Exponential Moving Average (EMA) gets its name from the exponential decay pattern of weights assigned to previous observations. In EMA, more recent data points receive higher weights, while older data points receive exponentially decreasing weights. Mathematically, if β is the decay factor (typically between 0 and 1), then the weight for an observation that is t time steps old is proportional to β^t. This creates an exponential decay curve where recent observations have the most influence, and the influence of older observations diminishes exponentially over time. This property makes EMA particularly useful in optimization algorithms like Adam, where it helps maintain a running average of gradients while giving more importance to recent updates.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is a key mathematical condition for the optimal initialization of weights based on the dataset?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Features are highly correlated</li>
+                        <li class="quiz-option" data-correct="true">Features are uncorrelated</li>
+                        <li class="quiz-option" data-correct="false">The loss function is linear</li>
+                        <li class="quiz-option" data-correct="false">The learning rate is constant</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Optimal weight initialization methods like Xavier/Glorot and He initialization assume that input features are uncorrelated and have zero mean. When features are uncorrelated, the variance of the weighted sum of inputs can be calculated more straightforwardly, allowing for proper scaling of initial weights. This assumption enables initialization schemes to maintain appropriate variance throughout the network layers, preventing issues like vanishing or exploding gradients during training. When features are highly correlated, the mathematical foundations of these initialization methods break down, potentially leading to suboptimal training dynamics. Preprocessing techniques like PCA or whitening are often used to decorrelate features before training, making the uncorrelated assumption more valid.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is the primary purpose of learning rate scheduling in gradient descent?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the learning rate exponentially</li>
+                        <li class="quiz-option" data-correct="false">To ensure the learning rate remains constant throughout training</li>
+                        <li class="quiz-option" data-correct="true">To effectively find the minimum of the loss function</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for gradient steps</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Learning rate scheduling adjusts the learning rate during training to balance exploration and exploitation for more effective optimization. Early in training, a higher learning rate allows for faster convergence and helps escape local minima by taking larger steps. As training progresses, gradually reducing the learning rate (through schedules like exponential decay, step decay, or cosine annealing) allows for finer adjustments near the minimum, preventing overshooting and enabling more precise convergence. This adaptive approach helps the optimizer navigate the loss landscape more effectively than using a fixed learning rate, which might be too large near convergence (causing oscillation) or too small initially (causing slow progress). The goal is to find the global or best local minimum of the loss function efficiently.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What does the sigmoid function in logistic regression convert the margin into?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">A binary label (-1 or 1)</li>
+                        <li class="quiz-option" data-correct="true">A probability value between 0 and 1</li>
+                        <li class="quiz-option" data-correct="false">A logarithmic loss value</li>
+                        <li class="quiz-option" data-correct="false">A regularization term</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The sigmoid function σ(z) = 1/(1 + e^(-z)) is the key component that transforms the linear margin (z = w^T x + b) into a probability value between 0 and 1. The margin itself can range from negative infinity to positive infinity, but the sigmoid function maps this entire range to the interval (0, 1), making it interpretable as a probability. When the margin is large and positive, the sigmoid approaches 1, indicating high confidence for the positive class. When the margin is large and negative, the sigmoid approaches 0, indicating high confidence for the negative class. When the margin is near zero, the sigmoid is around 0.5, indicating uncertainty. This probabilistic interpretation is what makes logistic regression suitable for binary classification tasks, as it provides not just a classification decision but also a measure of confidence in that decision.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the relationship between the minimization of the standard loss function and the maximization of the probabilistic likelihood in multi-class logistic regression?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They are unrelated tasks</li>
+                        <li class="quiz-option" data-correct="true">Minimizing the standard loss function is equivalent to maximizing the probabilistic likelihood</li>
+                        <li class="quiz-option" data-correct="false">Maximizing the probabilistic likelihood is equivalent to minimizing the regularization term</li>
+                        <li class="quiz-option" data-correct="false">Minimizing the standard loss function is equivalent to minimizing the probabilistic likelihood</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In multi-class logistic regression, the standard loss function (cross-entropy loss) is directly derived from the negative log-likelihood of the probabilistic model. The likelihood function measures how well the model parameters explain the observed data, and we want to maximize this likelihood. However, in practice, we work with the negative log-likelihood because: (1) it converts the product of probabilities into a sum of log-probabilities, which is computationally more stable, and (2) maximizing the likelihood becomes equivalent to minimizing the negative log-likelihood. The cross-entropy loss is exactly this negative log-likelihood, so minimizing the cross-entropy loss is mathematically equivalent to maximizing the probabilistic likelihood. This connection shows that logistic regression has a solid probabilistic foundation - we're finding parameters that make the observed data most probable under our model assumptions.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        Which of the following best describes the role of the 'syndrome' in logical rules?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It ensures that all conditions in a rule must be true</li>
+                        <li class="quiz-option" data-correct="true">It requires that at least a certain number of conditions in a rule are true</li>
+                        <li class="quiz-option" data-correct="false">It minimizes the number of features used in a rule</li>
+                        <li class="quiz-option" data-correct="false">It eliminates the need for threshold conditions in a rule</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In logical rules, a 'syndrome' refers to a threshold mechanism that requires at least a certain minimum number of conditions (or features) in a rule to be satisfied before the rule fires or makes a prediction. Rather than requiring all conditions to be true (which would be a strict AND operation) or just one condition to be true (which would be an OR operation), the syndrome provides a more flexible middle ground. For example, a syndrome of 3 in a rule with 5 conditions means that at least 3 out of the 5 conditions must be true for the rule to activate. This approach is particularly useful in medical diagnosis, fraud detection, and other domains where partial evidence should be sufficient for decision-making, but some minimum level of evidence is still required to ensure reliability. The syndrome thus balances sensitivity and specificity in rule-based systems.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is the relationship between entropy and information gain in logical rule models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Entropy and information gain are inversely related</li>
+                        <li class="quiz-option" data-correct="false">Entropy and information gain are directly proportional</li>
+                        <li class="quiz-option" data-correct="false">Entropy is a subset of information gain</li>
+                        <li class="quiz-option" data-correct="false">Information gain is a subset of entropy</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Entropy and information gain have an inverse relationship in logical rule models and decision trees. Entropy measures the uncertainty or impurity in a dataset - higher entropy means more disorder and mixed class labels, while lower entropy means more homogeneous class distribution. Information gain, on the other hand, measures how much the entropy decreases when we split the data based on a particular feature or condition. Mathematically, Information Gain = Entropy(parent) - Weighted Average of Entropy(children). When a split significantly reduces entropy (creates more homogeneous subsets), the information gain is high. Conversely, when a split doesn't reduce entropy much (subsets remain mixed), the information gain is low. This inverse relationship is fundamental to building effective decision trees and logical rules, as we want to select features that maximize information gain, which corresponds to minimizing the resulting entropy in the child nodes.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What is the combinatorial task involved in calculating the probability of realizing a pair (p, n) in Fisher's exact test?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Choosing p objects from P and n objects from N</li>
+                        <li class="quiz-option" data-correct="false">Calculating the logarithm of the probability</li>
+                        <li class="quiz-option" data-correct="false">Maximizing the fraction of p and n</li>
+                        <li class="quiz-option" data-correct="false">Minimizing the amount of ways to choose p + n elements</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Fisher's exact test involves a combinatorial calculation based on the hypergeometric distribution.
+                        The test examines the probability of observing a particular configuration in a 2x2 contingency table under the null hypothesis of independence.
+                        The combinatorial task is to calculate how many ways we can choose p objects of one type from a total of P available objects of that type,
+                        and simultaneously choose n objects of another type from a total of N available objects of that type.
+                        This is expressed mathematically using binomial coefficients: C(P,p) × C(N,n), where C represents "combinations" or "choose."
+                        The probability is then calculated as this number of favorable outcomes divided by the total number of possible outcomes C(P+N, p+n).
+                        This combinatorial approach allows Fisher's exact test to provide exact p-values rather than asymptotic approximations,
+                        making it particularly valuable for small sample sizes where chi-square tests might not be appropriate.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is the primary method used to convert raw scores to probabilities in logistic regression for multi-class classification?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Sigmoid function</li>
+                        <li class="quiz-option" data-correct="true">Softmax function</li>
+                        <li class="quiz-option" data-correct="false">ReLU function</li>
+                        <li class="quiz-option" data-correct="false">Tanh function</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In multi-class logistic regression, the softmax function is used to convert raw scores (logits) into probabilities. While the sigmoid function is used in binary logistic regression to map scores to probabilities between 0 and 1, multi-class problems require a function that can handle multiple classes simultaneously. The softmax function takes a vector of raw scores and transforms them into a probability distribution where all probabilities sum to 1. Mathematically, for class i, the softmax function is: P(y=i|x) = exp(z_i) / Σ(exp(z_j)) for all classes j. This ensures that: (1) all probabilities are positive, (2) all probabilities sum to exactly 1, and (3) the function is differentiable, making it suitable for gradient-based optimization. The softmax function naturally extends the logistic approach to multiple classes and is the standard choice for multi-class classification in logistic regression, neural networks, and many other machine learning models.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the primary purpose of restricting the 'max depth' parameter in a decision tree model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the model's training accuracy</li>
+                        <li class="quiz-option" data-correct="false">To reduce the model's interpretability</li>
+                        <li class="quiz-option" data-correct="true">To prevent overfitting by limiting the number of logical rules</li>
+                        <li class="quiz-option" data-correct="false">To allow the model to memorize the entire training set</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of restricting the 'max depth' parameter in a decision tree is to prevent overfitting by limiting the complexity of the model. When a decision tree is allowed to grow without depth restrictions, it can become very deep and create highly specific rules that perfectly fit the training data but fail to generalize to new, unseen data. By setting a maximum depth, we control the number of sequential logical conditions (rules) that the tree can create. A shallower tree creates simpler, more general rules that are less likely to memorize noise in the training data. This regularization technique helps achieve better balance between bias and variance - while it may slightly reduce training accuracy, it typically improves validation and test accuracy by creating a model that generalizes better. The max depth parameter is one of several pruning techniques used to control tree complexity, along with minimum samples per leaf, minimum samples per split, and other regularization parameters.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        Which of the following is NOT a valid loss function mentioned in the context of decision trees?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Minus logarithm of probability</li>
+                        <li class="quiz-option" data-correct="false">One minus probability</li>
+                        <li class="quiz-option" data-correct="false">One minus probability squared</li>
+                        <li class="quiz-option" data-correct="true">Square root of probability</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In the context of decision trees, several loss functions are commonly used to measure impurity and guide splitting decisions. The minus logarithm of probability corresponds to the log-loss or cross-entropy loss, which is widely used in classification problems. "One minus probability" represents a simple linear loss function that penalizes incorrect predictions proportionally. "One minus probability squared" is related to the Brier score, which measures the accuracy of probabilistic predictions. However, "square root of probability" is NOT a standard loss function used in decision tree contexts. Loss functions in decision trees typically measure the cost of misclassification or the impurity of nodes, and they should generally decrease as the probability of the correct class increases. The square root of probability would actually increase with higher probabilities of the correct class, making it unsuitable as a loss function. Common impurity measures in decision trees include Gini impurity, entropy (related to log-loss), and misclassification error.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 16 -->
+                <div class="quiz-card" id="question-16" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">16</span>
+                        What is the recommended method for binaryizing a real feature according to the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Divide the feature into equally spaced bins based on the minimum and maximum values</li>
+                        <li class="quiz-option" data-correct="false">Use a random grid to partition the feature values</li>
+                        <li class="quiz-option" data-correct="false">Apply a logarithmic transformation to the feature values</li>
+                        <li class="quiz-option" data-correct="false">Use a Gaussian distribution to bin the feature values</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> When binaryizing real-valued features for use in algorithms that require binary or categorical inputs (such as certain decision tree implementations or association rule mining), the recommended approach is to divide the feature into equally spaced bins based on the minimum and maximum values observed in the data. This method, also known as uniform binning or equal-width binning, creates intervals of equal size across the range of the feature values. For example, if a feature ranges from 0 to 100 and we want 10 bins, each bin would have a width of 10 (0-10, 10-20, etc.). This approach is straightforward, interpretable, and ensures that the entire range of values is covered systematically. While other binning strategies exist (such as equal-frequency binning based on quantiles), the equal-width approach based on min-max values is often the default recommendation because it's simple to implement, easy to understand, and provides a uniform partitioning of the feature space that works well for many applications.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
