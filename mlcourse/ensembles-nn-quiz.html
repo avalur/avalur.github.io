@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensembles and Neural Net Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Ensembles and Neural Net Quiz</h1>
+            <p>Test your knowledge of fundamentals</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="lin-logic-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Ensembles and Neural Net for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">14</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the primary purpose of introducing a new space R in the context of ensemble methods?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the complexity of the base models</li>
+                        <li class="quiz-option" data-correct="true">To incorporate raw scores from multiple base models and construct a final answer</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for base models in the ensemble</li>
+                        <li class="quiz-option" data-correct="false">To simplify the decision tree structure</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In ensemble methods, the introduction of a new space R serves as an intermediary representation layer that captures and combines the raw scores or outputs from multiple base models. Rather than directly combining the final predictions of individual models, space R allows the ensemble to work with the underlying confidence scores, probability distributions, or feature representations produced by each base model. This approach provides more information for the final decision-making process, as raw scores contain more nuanced information than binary classifications. The ensemble method can then apply sophisticated combination techniques (such as weighted averaging, stacking, or meta-learning) in space R to construct a more informed and robust final answer. This intermediate space enables the ensemble to leverage the strengths of different base models more effectively than simple voting schemes.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        What is the primary difference between bagging and the Random Subspace Method (RSM) in machine learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Bagging selects rows of the feature matrix, while RSM selects columns.</li>
+                        <li class="quiz-option" data-correct="false">Bagging selects columns of the feature matrix, while RSM selects rows.</li>
+                        <li class="quiz-option" data-correct="false">Bagging uses all features, while RSM uses a subset of features.</li>
+                        <li class="quiz-option" data-correct="false">Bagging and RSM are identical methods with no differences.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between bagging and the Random Subspace Method (RSM) lies in how they create diversity among ensemble members through different sampling strategies. Bagging (Bootstrap Aggregating) creates diversity by randomly sampling rows (data points/observations) from the training dataset with replacement, creating different bootstrap samples for each base model. Each model sees a different subset of training examples but uses all available features. In contrast, RSM creates diversity by randomly selecting columns (features/attributes) from the feature matrix, so each base model is trained on a different subset of features but uses all training examples. This fundamental difference means bagging addresses variance by training on different data subsets, while RSM addresses the curse of dimensionality and feature correlation by training on different feature subsets. Both methods can be combined (as in Random Forests, which uses both row and column sampling) to create even more robust ensemble methods.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is the main objective of the boosting method in machine learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the variance of the model predictions.</li>
+                        <li class="quiz-option" data-correct="true">To reduce the difference between the target function and the current predictions.</li>
+                        <li class="quiz-option" data-correct="false">To average the predictions of multiple models without any adjustments.</li>
+                        <li class="quiz-option" data-correct="false">To randomly select features for model training.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The main objective of boosting is to iteratively reduce the difference between the target function and the current ensemble predictions by focusing on the errors made by previous models. Unlike bagging methods that train models independently and then average their predictions, boosting uses a sequential approach where each new model is specifically trained to correct the mistakes of the ensemble built so far. In algorithms like AdaBoost, this is achieved by increasing the weights of misclassified examples, forcing subsequent models to pay more attention to difficult cases. In gradient boosting methods like XGBoost and LightGBM, each new model is trained to predict the residuals (errors) of the current ensemble. This sequential error-correction process allows boosting to systematically reduce bias and improve the overall predictive performance. The key insight is that by combining many weak learners, each focused on fixing the errors of its predecessors, boosting can create a strong learner that closely approximates the target function.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary goal of the adaptive boosting algorithm in terms of the number of errors and correct classifications?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Maximize the number of errors and minimize correct classifications</li>
+                        <li class="quiz-option" data-correct="true">Minimize the number of errors and maximize correct classifications</li>
+                        <li class="quiz-option" data-correct="false">Keep the number of errors and correct classifications constant</li>
+                        <li class="quiz-option" data-correct="false">Ignore the number of errors and focus only on correct classifications</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary goal of AdaBoost (Adaptive Boosting) is to minimize the number of errors while maximizing correct classifications through its adaptive weighting mechanism. AdaBoost achieves this by iteratively adjusting the weights of training examples based on classification performance. After each weak learner is trained, AdaBoost increases the weights of misclassified examples and decreases the weights of correctly classified examples. This forces subsequent weak learners to focus more attention on the difficult cases that were previously misclassified. The algorithm also assigns higher voting weights to more accurate weak learners in the final ensemble. Through this adaptive process, AdaBoost systematically reduces the overall error rate by ensuring that each new weak learner addresses the mistakes of the previous ensemble. The theoretical foundation shows that if each weak learner performs better than random guessing, AdaBoost can reduce the training error exponentially and achieve strong generalization performance, effectively minimizing errors and maximizing correct classifications.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What is a key characteristic of weak classifiers used in boosting models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They are highly complex and overfit the data</li>
+                        <li class="quiz-option" data-correct="true">They are simple and often restricted in their structure</li>
+                        <li class="quiz-option" data-correct="false">They are strong classifiers with high accuracy</li>
+                        <li class="quiz-option" data-correct="false">They are only used in gradient boosting, not adaptive boosting</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key characteristic of weak classifiers (also called weak learners) in boosting models is that they are intentionally simple and often restricted in their structure. Weak classifiers are designed to perform only slightly better than random guessing - they have low complexity and high bias but low variance. Common examples include decision stumps (decision trees with only one split), linear classifiers with few features, or shallow decision trees with limited depth. This simplicity is crucial because: (1) it prevents individual models from overfitting, (2) it ensures fast training and prediction times, (3) it allows the boosting algorithm to combine many complementary weak learners effectively, and (4) it provides the theoretical guarantees that boosting can convert weak learners into strong learners. The power of boosting comes from combining hundreds or thousands of these simple models, where each one captures a small piece of the pattern in the data. This approach contrasts with using complex individual models that might overfit and reduce the ensemble's generalization ability.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the primary difference between Stochastic Gradient Boosting (SGB) and standard Gradient Boosting?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">SGB uses the entire dataset for each iteration</li>
+                        <li class="quiz-option" data-correct="true">SGB uses a random sub-sample of the dataset for each iteration</li>
+                        <li class="quiz-option" data-correct="false">SGB does not use a loss function</li>
+                        <li class="quiz-option" data-correct="false">SGB is only applicable to classification tasks</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between Stochastic Gradient Boosting (SGB) and standard Gradient Boosting is that SGB uses a random sub-sample of the dataset for each iteration, while standard Gradient Boosting uses the entire dataset. In standard Gradient Boosting, each weak learner is trained on the complete training set using the residuals from the previous iteration. SGB introduces stochasticity by randomly sampling a fraction (typically 50-80%) of the training data without replacement at each boosting iteration, and the new weak learner is trained only on this subset. This stochastic sampling approach provides several benefits: (1) it reduces overfitting by introducing randomness and preventing the model from memorizing the training data, (2) it improves computational efficiency since each iteration processes fewer samples, (3) it increases model robustness by ensuring that each weak learner sees different data distributions, and (4) it often leads to better generalization performance. SGB combines the benefits of both boosting (sequential error correction) and bagging (data sampling), making it a powerful ensemble technique that inspired later developments like XGBoost and LightGBM.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        Which of the following is a key feature of CatBoost compared to XGBoost and LightGBM?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">CatBoost does not support categorical features</li>
+                        <li class="quiz-option" data-correct="false">CatBoost requires manual conversion of categorical features to numerical ones</li>
+                        <li class="quiz-option" data-correct="true">CatBoost can handle categorical features directly without preprocessing</li>
+                        <li class="quiz-option" data-correct="false">CatBoost is less effective for regression tasks</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key distinguishing feature of CatBoost compared to XGBoost and LightGBM is its ability to handle categorical features directly without requiring manual preprocessing or conversion to numerical values. While XGBoost and LightGBM typically require users to encode categorical variables using techniques like one-hot encoding, label encoding, or target encoding before training, CatBoost has built-in support for categorical features. CatBoost uses sophisticated methods like Ordered Target Statistics and feature combinations to automatically process categorical variables during training. This approach offers several advantages: (1) it eliminates the need for manual feature engineering of categorical variables, (2) it reduces the risk of target leakage that can occur with naive target encoding, (3) it can automatically discover meaningful interactions between categorical features, and (4) it handles high-cardinality categorical features more effectively than traditional encoding methods. This native categorical feature support makes CatBoost particularly user-friendly for datasets with many categorical variables, reducing preprocessing time and often improving model performance on such datasets.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the default recommendation for the weights when stacking models in gradient boosting?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Weights should sum up to one</li>
+                        <li class="quiz-option" data-correct="false">Weights should be negative</li>
+                        <li class="quiz-option" data-correct="false">Weights should not sum up to one</li>
+                        <li class="quiz-option" data-correct="false">Weights should be zero</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The default recommendation for weights when stacking models in gradient boosting is that weights should sum up to one. This constraint ensures that the final prediction is a proper weighted average (convex combination) of the individual model predictions. When weights sum to one, the stacked model's prediction will lie within the range of the individual model predictions, providing stability and interpretability. This approach offers several benefits: (1) it prevents any single model from dominating the ensemble through excessive weighting, (2) it maintains the scale and range of predictions consistent with individual models, (3) it provides a natural regularization effect that helps prevent overfitting, and (4) it makes the ensemble more interpretable as each weight represents the relative contribution of each model. In practice, this is often implemented using techniques like linear regression with non-negative constraints or optimization methods that ensure the weight constraint is satisfied. While there are advanced stacking techniques that may not require this constraint, the sum-to-one recommendation remains the standard best practice for robust model stacking in gradient boosting frameworks.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        Which of the following is NOT a feature of neural networks as discussed in the text?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Excellent performance with homogeneous data like images</li>
+                        <li class="quiz-option" data-correct="false">Ability to handle text data effectively</li>
+                        <li class="quiz-option" data-correct="false">Use of reinforcement learning algorithms for tasks like protein structure prediction</li>
+                        <li class="quiz-option" data-correct="true">Exclusive reliance on linear models for all tasks</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> "Exclusive reliance on linear models for all tasks" is NOT a feature of neural networks. In fact, this statement is fundamentally incorrect about neural networks. Neural networks are specifically designed to capture non-linear relationships and patterns in data through the use of non-linear activation functions (like ReLU, sigmoid, tanh) and multiple layers of interconnected neurons. The power of neural networks comes from their ability to learn complex, non-linear mappings between inputs and outputs. The other options are indeed features of neural networks: (A) Neural networks, particularly Convolutional Neural Networks (CNNs), excel with homogeneous data like images due to their ability to capture spatial hierarchies and local patterns. (B) Neural networks, especially Recurrent Neural Networks (RNNs) and Transformers, are highly effective at handling sequential text data and natural language processing tasks. (C) Neural networks can be combined with reinforcement learning algorithms for complex tasks like protein structure prediction, game playing, and robotics, where the network learns through trial and error with reward signals.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        What is the primary reason a single neuron cannot implement the XOR function?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It lacks sufficient weights</li>
+                        <li class="quiz-option" data-correct="true">It is inherently linear and XOR is a nonlinear function</li>
+                        <li class="quiz-option" data-correct="false">It cannot handle binary inputs</li>
+                        <li class="quiz-option" data-correct="false">It requires more than two input features</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary reason a single neuron cannot implement the XOR function is that it is inherently linear and XOR is a nonlinear function. A single neuron (perceptron) can only learn linearly separable functions - those that can be separated by a straight line (in 2D) or hyperplane (in higher dimensions). The XOR function is not linearly separable because there is no single straight line that can separate the XOR outputs: XOR(0,0)=0, XOR(0,1)=1, XOR(1,0)=1, XOR(1,1)=0. If you plot these points, you'll see that the positive cases (1,1) and (0,0) cannot be separated from the negative cases (0,1) and (1,0) by any single line. This limitation was famously highlighted by Minsky and Papert in 1969, contributing to the first "AI winter." The solution requires multiple layers of neurons (a multi-layer perceptron) where hidden layers can create nonlinear transformations of the input space, allowing the network to learn complex, nonlinear decision boundaries. This fundamental limitation of single neurons demonstrates why deep neural networks with multiple layers are necessary for solving complex, real-world problems that involve nonlinear relationships.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        Why is the dataset divided into batches during training?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the computational complexity of the loss function</li>
+                        <li class="quiz-option" data-correct="true">To increase the frequency of weight updates and improve training efficiency</li>
+                        <li class="quiz-option" data-correct="false">To ensure that the model generalizes better to unseen data</li>
+                        <li class="quiz-option" data-correct="false">To reduce the memory footprint of the training process</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary reason for dividing the dataset into batches during training is to increase the frequency of weight updates and improve training efficiency. This approach, known as mini-batch gradient descent, strikes a balance between batch gradient descent (using the entire dataset) and stochastic gradient descent (using single samples). By processing data in batches, the model can update its weights more frequently than with full-batch processing, leading to faster convergence and more stable training. Mini-batch processing offers several advantages: (1) More frequent weight updates allow the model to learn faster and adapt to patterns in the data more quickly, (2) It provides a good approximation of the true gradient while being computationally more efficient than processing the entire dataset at once, (3) The noise introduced by mini-batches can help the optimizer escape local minima, and (4) It enables better utilization of parallel processing capabilities of modern hardware like GPUs. While memory efficiency is a secondary benefit, the primary motivation is training efficiency through increased update frequency. Batch processing also provides regularization effects and can lead to better generalization, but these are additional benefits rather than the main reason for batching.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What is the primary purpose of calculating gradients in machine learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To determine the accuracy of the model</li>
+                        <li class="quiz-option" data-correct="true">To update the model parameters for minimizing loss</li>
+                        <li class="quiz-option" data-correct="false">To calculate the numerical derivative of the function</li>
+                        <li class="quiz-option" data-correct="false">To perform mini-batch training</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of calculating gradients in machine learning is to update the model parameters for minimizing loss. Gradients represent the direction and magnitude of the steepest increase in the loss function with respect to each parameter. By calculating these gradients, optimization algorithms like gradient descent can determine how to adjust each parameter to reduce the loss function. The gradient points in the direction of maximum increase, so moving in the opposite direction (negative gradient) helps minimize the loss. This process is fundamental to training machine learning models: (1) Forward pass: compute predictions and loss, (2) Backward pass: calculate gradients of loss with respect to all parameters using backpropagation, (3) Parameter update: adjust weights and biases using the gradients (e.g., θ = θ - α∇θL, where α is the learning rate), (4) Repeat until convergence. While gradients are indeed derivatives and can be computed numerically, their primary purpose in ML is optimization, not mathematical computation. Similarly, while gradients are used in mini-batch training, they are not calculated for the purpose of performing mini-batch training itself, but rather to optimize the model parameters within each batch.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is the primary purpose of the backward pass in a computational graph?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To calculate the forward pass values</li>
+                        <li class="quiz-option" data-correct="true">To update the gradients of the loss function with respect to all parameters</li>
+                        <li class="quiz-option" data-correct="false">To visualize the computational graph</li>
+                        <li class="quiz-option" data-correct="false">To perform numerical differentiation manually</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of the backward pass in a computational graph is to update (more precisely, to calculate) the gradients of the loss function with respect to all parameters. The backward pass, also known as backpropagation, is the core algorithm that enables efficient training of neural networks. It works by applying the chain rule of calculus to systematically compute gradients layer by layer, starting from the output (loss) and propagating backward through the network to the input parameters. During the backward pass: (1) The algorithm starts at the loss function output, (2) It computes the gradient of the loss with respect to each intermediate variable and parameter by traversing the computational graph in reverse topological order, (3) The chain rule is applied at each node to combine partial derivatives, (4) Gradients accumulate as they flow backward through the graph, and (5) Finally, gradients with respect to all trainable parameters (weights and biases) are computed and stored. These computed gradients are then used by optimization algorithms (like SGD, Adam) to update the model parameters. The forward pass calculates predictions and loss values, while the backward pass calculates the gradients needed for parameter updates. This automatic differentiation process is what makes training deep neural networks computationally feasible.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the primary task described in the part of lecture devoted to assignment?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Implementing a convolutional neural network</li>
+                        <li class="quiz-option" data-correct="true">Building a two-layer neural network from scratch</li>
+                        <li class="quiz-option" data-correct="false">Using PyTorch to create a neural network</li>
+                        <li class="quiz-option" data-correct="false">Debugging an existing neural network</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary task described in the lecture is building a two-layer neural network from scratch.
+                        This involves implementing the fundamental components of a neural network without relying on high-level frameworks,
+                        which provides a deep understanding of how neural networks work internally.
+                        Building a neural network from scratch typically includes:
+                        (1) Implementing the forward pass to compute predictions, (2) Implementing the backward pass (backpropagation) to calculate gradients,
+                        (3) Creating the parameter update mechanism using optimization algorithms, (4) Defining the network architecture with appropriate layers and activation functions, and
+                        (5) Training the network on data to learn meaningful patterns.
+                        A two-layer neural network consists of an input layer, one hidden layer, and an output layer,
+                        making it a good starting point for understanding neural network fundamentals.
+                        This hands-on approach helps learners understand concepts like weight initialization, activation functions, loss computation,
+                        gradient calculation, and parameter updates without the abstraction that comes with using pre-built frameworks like PyTorch or TensorFlow.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
