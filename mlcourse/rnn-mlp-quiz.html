@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensembles and Neural Net Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Ensembles and Neural Net Quiz</h1>
+            <p>Test your knowledge of fundamentals</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="rnn-mlp-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Ensembles and Neural Net for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">16</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is a key disadvantage of feedforward neural networks mentioned in the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">They require a fixed number of computational steps</li>
+                        <li class="quiz-option" data-correct="false">They cannot handle image data</li>
+                        <li class="quiz-option" data-correct="false">They are limited to binary classification tasks</li>
+                        <li class="quiz-option" data-correct="false">They cannot use backpropagation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key disadvantage of feedforward neural networks is that they require a fixed number of computational steps. Unlike recurrent neural networks (RNNs) or other dynamic architectures, feedforward networks have a static structure where the number of layers and neurons is predetermined and fixed during training and inference. This means they cannot adapt their computational complexity based on the difficulty or complexity of the input. For example, simple inputs and complex inputs both go through the same number of layers and computations, which can be inefficient. This limitation also means that feedforward networks cannot handle variable-length sequences naturally, as they expect fixed-size inputs and produce fixed-size outputs. The other options are incorrect: feedforward networks can handle image data very effectively (especially CNNs), they are not limited to binary classification and can handle multi-class and regression tasks, and they do use backpropagation for training.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        What is the primary function used to compute the next hidden state (ht) in a Recurrent Neural Network (RNN)?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Matrix addition of xt and ht-1</li>
+                        <li class="quiz-option" data-correct="false">Dot product of xt and ht-1</li>
+                        <li class="quiz-option" data-correct="true">Matrix multiplication of xt and ht-1 with parameter matrices, followed by an activation function</li>
+                        <li class="quiz-option" data-correct="false">Element-wise multiplication of xt and ht-1</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In a Recurrent Neural Network (RNN), the primary function used to compute the next hidden state (ht) involves matrix multiplication of the current input (xt) and previous hidden state (ht-1) with their respective parameter matrices, followed by an activation function. The standard RNN formula is: ht = tanh(Wxh * xt + Whh * ht-1 + bh), where Wxh is the input-to-hidden weight matrix, Whh is the hidden-to-hidden weight matrix, and bh is the bias vector. This computation combines information from both the current input and the previous hidden state through learned linear transformations, then applies a non-linear activation function (typically tanh or ReLU) to introduce non-linearity. This structure allows RNNs to maintain memory of previous inputs while processing sequential data. Simple operations like matrix addition, dot products, or element-wise multiplication alone would not provide the necessary complexity and learnable parameters needed for the RNN to effectively model sequential dependencies and learn meaningful representations from time-series data.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is the purpose of the 'character to index' dictionary in the context of the Recurrent Neural Network (RNN) initialization?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To map each character to its frequency in the dataset</li>
+                        <li class="quiz-option" data-correct="true">To assign a unique numerical index to each character</li>
+                        <li class="quiz-option" data-correct="false">To store the probability of each character in the dataset</li>
+                        <li class="quiz-option" data-correct="false">To convert characters into their binary representations</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The 'character to index' dictionary serves to assign a unique numerical index to each character in the vocabulary. This is a crucial preprocessing step for RNNs working with text data because neural networks can only process numerical inputs, not raw text characters. The dictionary creates a mapping where each unique character in the dataset is assigned a distinct integer index (e.g., 'a' → 0, 'b' → 1, 'c' → 2, etc.). This indexing system enables several important functions: (1) It converts text sequences into numerical sequences that can be fed into the RNN, (2) It defines the vocabulary size, which determines the dimensionality of input embeddings and output layers, (3) It enables one-hot encoding where each character index corresponds to a specific position in a binary vector, and (4) It provides a consistent mapping for both training and inference phases. The dictionary doesn't store frequencies, probabilities, or binary representations directly - its primary purpose is simply to create a bijective mapping between characters and integers, allowing the RNN to process textual data numerically while maintaining the ability to convert back to characters for output generation.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary purpose of the cross-entropy loss function in the context of the RNNs?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">To measure the difference between predicted probabilities and ground truth labels</li>
+                        <li class="quiz-option" data-correct="false">To calculate the gradient of the loss function with respect to the parameters</li>
+                        <li class="quiz-option" data-correct="false">To determine the hidden state of the neural network</li>
+                        <li class="quiz-option" data-correct="false">To perform matrix multiplication of the hidden state vector and the parameter matrix</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of the cross-entropy loss function is to measure the difference between predicted probabilities and ground truth labels. Cross-entropy loss is specifically designed for classification tasks where the model outputs probability distributions over classes. It quantifies how far the predicted probability distribution is from the true distribution (typically one-hot encoded labels). The mathematical formula is: Loss = -Σ(yi * log(ŷi)), where yi is the true label (0 or 1) and ŷi is the predicted probability. Cross-entropy loss has several important properties: (1) It penalizes confident wrong predictions more heavily than uncertain wrong predictions, (2) It provides strong gradients when predictions are far from the target, helping with faster convergence, (3) It naturally handles multi-class classification scenarios, and (4) It encourages the model to output well-calibrated probabilities. The other options describe different computational processes: calculating gradients is performed by backpropagation algorithms, determining hidden states is the function of RNN cells, and matrix multiplication is a basic linear algebra operation used throughout neural networks but not the specific purpose of the loss function itself.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What is the primary difference between the inference and training processes in a neural network model as described in the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Inference involves updating parameters, while training does not.</li>
+                        <li class="quiz-option" data-correct="true">Training involves updating parameters, while inference does not.</li>
+                        <li class="quiz-option" data-correct="false">Both inference and training involve updating parameters.</li>
+                        <li class="quiz-option" data-correct="false">Neither inference nor training involves updating parameters.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between inference and training processes is that training involves updating parameters, while inference does not. During the training phase, the neural network learns by iteratively adjusting its weights and biases based on the training data. This process involves: (1) Forward pass to compute predictions, (2) Loss calculation to measure prediction errors, (3) Backward pass (backpropagation) to compute gradients, and (4) Parameter updates using optimization algorithms like SGD or Adam. The goal is to minimize the loss function and improve the model's performance on the training data. In contrast, during inference (also called prediction or evaluation), the model uses its already-learned parameters to make predictions on new, unseen data. The parameters remain fixed and unchanged during inference - only the forward pass is performed to generate outputs. This distinction is crucial because training is computationally expensive and requires labeled data, while inference is typically much faster and can be performed on unlabeled data. The trained model's parameters represent the learned knowledge that enables it to make predictions during inference.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the purpose of storing the sum of squares of all the gradients in the training process?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To initialize the parameters of the model.</li>
+                        <li class="quiz-option" data-correct="false">To perform a forward pass during inference.</li>
+                        <li class="quiz-option" data-correct="true">To use an adaptive gradient method for parameter updates.</li>
+                        <li class="quiz-option" data-correct="false">To shift the segment of data to the right for target preparation.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The purpose of storing the sum of squares of all the gradients is to use an adaptive gradient method for parameter updates. This technique is fundamental to optimization algorithms like Adagrad, RMSprop, and Adam. The sum of squared gradients serves as a running estimate of the gradient magnitudes over time, which enables several important benefits: (1) **Adaptive learning rates**: Parameters that receive large gradients frequently get smaller effective learning rates, while parameters with small gradients get larger effective learning rates, (2) **Per-parameter scaling**: Each parameter gets its own adaptive learning rate based on its historical gradient information, (3) **Improved convergence**: This helps the optimizer navigate different curvatures in the loss landscape more effectively, and (4) **Stability**: It prevents the optimizer from taking too large steps in directions where gradients are typically large. The mathematical formulation typically involves dividing the current gradient by the square root of the accumulated squared gradients (plus a small epsilon for numerical stability). This is not related to parameter initialization, forward pass computations, or data preparation steps - it's specifically a technique for making gradient-based optimization more effective and stable.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is a key disadvantage of the recurrent neural network approach mentioned in the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It requires a large amount of memory</li>
+                        <li class="quiz-option" data-correct="true">The input and output signals must have matching lengths</li>
+                        <li class="quiz-option" data-correct="false">It cannot handle sequential data</li>
+                        <li class="quiz-option" data-correct="false">It is only effective for small datasets</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key disadvantage of the recurrent neural network approach is that the input and output signals must have matching lengths. In the basic RNN architecture described in the lecture, the network processes input sequences step by step and produces an output at each time step, creating a one-to-one correspondence between inputs and outputs. This constraint limits the flexibility of RNNs in several ways: (1) **Fixed sequence length**: The model expects inputs and targets to have the same number of time steps, (2) **Limited application scope**: Many real-world problems require different input and output lengths (e.g., machine translation, summarization, or sequence-to-sequence tasks), (3) **Reduced versatility**: Unlike more advanced architectures like encoder-decoder models or attention mechanisms, basic RNNs cannot easily handle variable-length sequences or tasks where the output length differs from input length. While RNNs excel at handling sequential data (making option C incorrect), and can work with datasets of various sizes (making option D incorrect), this length-matching requirement is indeed a significant architectural limitation that has led to the development of more flexible sequence-to-sequence models and transformer architectures.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the key difference between a vanilla RNN cell and an LSTM cell in the context of encoder-decoder architecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">LSTM cells use a linear layer without activation functions</li>
+                        <li class="quiz-option" data-correct="true">LSTM cells update hidden states using additional vectors C and H</li>
+                        <li class="quiz-option" data-correct="false">Vanilla RNN cells are more suitable for long-term dependencies</li>
+                        <li class="quiz-option" data-correct="false">Vanilla RNN cells generate tokens directly without hidden states</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key difference between a vanilla RNN cell and an LSTM cell is that LSTM cells update hidden states using additional vectors C and H. While vanilla RNN cells maintain only a single hidden state vector that is updated at each time step, LSTM cells introduce a more sophisticated memory mechanism with two separate state vectors: (1) **Cell state (C)**: This acts as the long-term memory that flows through the network with minimal interference, allowing information to be preserved over long sequences, and (2) **Hidden state (H)**: This serves as the short-term memory and output of the cell at each time step. The LSTM architecture uses three gates (forget gate, input gate, and output gate) to control the flow of information between these states, enabling the model to selectively remember, forget, and output information. This dual-state mechanism allows LSTMs to better handle long-term dependencies compared to vanilla RNNs, which suffer from vanishing gradients. Both cell types use activation functions (making option A incorrect), LSTMs are actually better for long-term dependencies (making option C incorrect), and both types use hidden states for token generation (making option D incorrect). The additional C and H vectors are what give LSTMs their superior ability to maintain information across long sequences.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the significance of the special tokens 'S' and 'E' in the dataset preparation process?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">They represent the start and end of a sentence</li>
+                        <li class="quiz-option" data-correct="false">They are used to denote the most frequent letters in the dataset</li>
+                        <li class="quiz-option" data-correct="false">They mark the beginning and end of the dataset</li>
+                        <li class="quiz-option" data-correct="false">They are placeholders for missing data in the dataset</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The special tokens 'S' and 'E' represent the start and end of a sentence in the dataset preparation process. These tokens serve critical functions in sequence-to-sequence models: (1) **Start token ('S')**: Signals the beginning of a sequence, providing a consistent starting point for the model during both training and inference. It helps the decoder understand when to begin generating output, (2) **End token ('E')**: Marks the completion of a sequence, allowing the model to learn when to stop generating tokens. This is essential for variable-length sequences where the model needs to determine the appropriate stopping point, (3) **Training consistency**: These tokens ensure that all sequences have clear boundaries, making the training process more structured and predictable, and (4) **Inference control**: During generation, the model can use these tokens to properly initialize and terminate the sequence generation process. These tokens are not related to letter frequency analysis (making option B incorrect), word boundaries (making option C incorrect), or missing data handling (making option D incorrect). Instead, they are fundamental components of sequence modeling that enable proper sequence boundary detection and generation control in neural language models.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        How are the probabilities for generating new names derived from the statistical matrix?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">By summing the numbers along the rows of the matrix</li>
+                        <li class="quiz-option" data-correct="false">By counting the occurrences of each pair of letters</li>
+                        <li class="quiz-option" data-correct="false">By encoding the characters into numbers using the s2i dictionary</li>
+                        <li class="quiz-option" data-correct="false">By drawing the matrix as a two-dimensional representation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The probabilities for generating new names are derived by summing the numbers along the rows of the matrix.
+                        In a statistical bigram model, the matrix contains counts of character transitions (how often one character follows another).
+                        To convert these counts into probabilities, we need to normalize each row: (1) **Row normalization**: Each row represents all possible next characters that can follow a given character.
+                        The sum of all values in a row gives the total occurrences of that character, (2) **Probability calculation**: To get the probability of transitioning from character A to character B, we divide the count in the matrix cell (A, B) by the sum of all values in row A,
+                        (3) **Mathematical formula**: P(B|A) = count(A,B) / sum(row A), where sum(row A) is the total count of character A appearing in the dataset, and
+                        (4) **Generation process**: During name generation, these probabilities determine the likelihood of selecting each possible next character given the current character. While counting occurrences (option B) is part of building the matrix, character encoding (option C) is for converting text to numbers, and visualization (option D) is for display purposes, the actual probability derivation specifically requires row normalization through summation to convert raw counts into proper probability distributions.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is the purpose of adding 1 to all elements in the original matrix when creating a probability matrix?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To ensure all probabilities are equal</li>
+                        <li class="quiz-option" data-correct="true">To slightly change the probabilities and avoid zero values</li>
+                        <li class="quiz-option" data-correct="false">To make the matrix easier to sum</li>
+                        <li class="quiz-option" data-correct="false">To increase the accuracy of the original data</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The purpose of adding one to all elements in the original matrix when creating a probability matrix is to slightly change the probabilities and avoid zero values. This technique is called **smoothing** or **Laplace smoothing** and serves several important purposes: (1) **Avoiding zero probabilities**: Without smoothing, character pairs that never appeared in the training data would have zero probability, making it impossible to generate names containing those transitions, (2) **Preventing division by zero**: Zero probabilities can cause mathematical issues during calculation and sampling, (3) **Adding robustness**: Smoothing allows the model to generate novel character combinations that weren't present in the training data, increasing creativity in name generation, (4) **Regularization effect**: It prevents the model from being overly confident about transitions that appeared only a few times in the dataset, and (5) **Improved generalization**: The model becomes less rigid and can produce more diverse outputs. Adding one doesn't make probabilities equal (option A), doesn't primarily affect computational ease (option C), and doesn't increase data accuracy but rather adds a bias to handle unseen cases (option D). This smoothing technique is a fundamental concept in statistical language modeling that balances between staying faithful to the training data and allowing for reasonable unseen transitions.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What is the primary goal when implementing machine learning for text generation as described in the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Minimize the loss function</li>
+                        <li class="quiz-option" data-correct="true">Maximize the likelihood of the dataset</li>
+                        <li class="quiz-option" data-correct="false">Generate random sequences of letters</li>
+                        <li class="quiz-option" data-correct="false">Use one-hot encoding for all letters</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary goal when implementing machine learning for text generation is to maximize the likelihood of the dataset. This fundamental principle means: (1) **Likelihood maximization**: The model learns to assign high probabilities to sequences that are similar to those in the training dataset, making the training data as probable as possible under the learned model, (2) **Statistical modeling**: By maximizing likelihood, the model captures the underlying patterns and structure of the text, learning which character sequences are more likely to occur, (3) **Generative capability**: A model that maximizes the likelihood of training data can generate new, similar sequences by sampling from the learned probability distribution, and (4) **Quality assurance**: Higher likelihood typically correlates with better quality generated text that resembles the training examples. While minimizing the loss function (option A) is related, it's actually the means to achieve likelihood maximization (since negative log-likelihood is often used as the loss function). Generating random sequences (option C) would not require machine learning and wouldn't capture data patterns. One-hot encoding (option D) is just a representation technique, not a goal. The core objective is to build a probabilistic model that makes the training data as likely as possible, which enables the generation of new, realistic text sequences.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is the significance of one-hot encoding in the context of the described model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It reduces the dimensionality of the input data</li>
+                        <li class="quiz-option" data-correct="true">It selects a specific row from the weight matrix based on the input letter</li>
+                        <li class="quiz-option" data-correct="false">It directly computes the loss function</li>
+                        <li class="quiz-option" data-correct="false">It performs the softmax operation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The significance of one-hot encoding in the context of the described model is that it selects a specific row from the weight matrix based on the input letter. Here's how this works: (1) **Row selection mechanism**: When a character is one-hot encoded (e.g., 'a' becomes [1,0,0,0,...]), multiplying this vector with the weight matrix effectively selects the row corresponding to that character's position, (2) **Efficient lookup**: Instead of performing full matrix multiplication, one-hot encoding acts as an index selector - the single '1' in the vector picks out the relevant row while all '0's ignore other rows, (3) **Character embeddings**: Each row in the weight matrix represents the learned embedding or feature vector for a specific character, so one-hot encoding retrieves the appropriate character representation, (4) **Mathematical equivalence**: Multiplying a one-hot vector [0,0,1,0,...] with a weight matrix W is mathematically equivalent to directly accessing W[2,:] (the third row), and (5) **Neural network input**: This selected row then becomes the input to subsequent layers of the neural network. One-hot encoding doesn't reduce dimensionality (option A) - it actually increases it from a single character index to a full vector. It doesn't compute loss (option C) or perform softmax (option D) - these are separate operations in the model pipeline.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the role of the regularization term in the loss function?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the size of the model parameters</li>
+                        <li class="quiz-option" data-correct="false">To decrease the log of probability of the ground truth answer</li>
+                        <li class="quiz-option" data-correct="true">To force the model to decrease the sum of squares of all parameters</li>
+                        <li class="quiz-option" data-correct="false">To optimize the learning rate during gradient descent</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The role of the regularization term in the loss function is to force the model to decrease the sum of squares of all parameters. This regularization technique, known as L2 regularization or weight decay, serves several important purposes: (1) **Parameter penalization**: The regularization term adds a penalty proportional to the sum of squares of all model parameters (weights), discouraging large parameter values, (2) **Overfitting prevention**: By keeping parameters small, regularization prevents the model from memorizing the training data too closely, improving generalization to new data, (3) **Smoothness promotion**: Smaller weights lead to smoother decision boundaries and more stable predictions, (4) **Mathematical form**: The regularization term is typically λ∑(w²) where λ is the regularization strength and w represents all model parameters, and (5) **Balance in optimization**: During training, the model must balance between fitting the training data (minimizing prediction error) and keeping parameters small (minimizing regularization penalty). Option A is incorrect because regularization decreases, not increases, parameter magnitudes. Option B describes the primary loss term (negative log-likelihood), not regularization. Option D is incorrect because regularization doesn't directly optimize learning rates - that's handled by optimization algorithms or learning rate schedulers. The regularization term specifically adds a quadratic penalty on parameter values to the overall loss function.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        What is the purpose of the C matrix in the multi-layer perceptron model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To store the probabilities of the next character</li>
+                        <li class="quiz-option" data-correct="true">To encode characters into embeddings</li>
+                        <li class="quiz-option" data-correct="false">To perform the softmax activation</li>
+                        <li class="quiz-option" data-correct="false">To calculate the loss function</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The purpose of the C matrix in the multi-layer perceptron model is to encode characters into embeddings. The C matrix serves as the character embedding lookup table with the following characteristics: (1) **Embedding lookup**: Each row of the C matrix represents a dense vector embedding for a specific character in the vocabulary, transforming discrete character indices into continuous vector representations, (2) **Dimensionality**: If there are V characters in the vocabulary and each embedding has dimension d, then C is a V×d matrix, (3) **Learning representations**: During training, the C matrix learns meaningful representations where similar characters or characters that appear in similar contexts have similar embedding vectors, (4) **Input transformation**: When a character is input to the model (typically as a one-hot vector), it's multiplied with the C matrix to retrieve the corresponding embedding vector, and (5) **Feature extraction**: These embeddings capture semantic and syntactic relationships between characters, providing rich input features for subsequent layers. Option A is incorrect because probabilities are typically stored in the output layer after softmax. Option C is wrong because softmax is an activation function, not a matrix operation. Option D is incorrect because loss calculation involves comparing predictions with targets, not the embedding matrix. The C matrix specifically handles the crucial task of converting discrete character tokens into dense, learnable vector representations that the neural network can effectively process.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 16 -->
+                <div class="quiz-card" id="question-16" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">16</span>
+                        What is the primary purpose of adding trainable embeddings and linear layers to the model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To decrease the context size</li>
+                        <li class="quiz-option" data-correct="false">To reduce the number of parameters</li>
+                        <li class="quiz-option" data-correct="true">To improve the model's ability to predict based on previous letters</li>
+                        <li class="quiz-option" data-correct="false">To simplify the loss function</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of adding trainable embeddings and linear layers to the model is to improve the model's ability to predict based on previous letters. Here's how these components enhance predictive capability: (1) **Rich representations**: Trainable embeddings learn dense, meaningful vector representations for each character, capturing semantic relationships and patterns that simple one-hot encodings cannot provide, (2) **Context integration**: Linear layers process and combine information from multiple previous characters, allowing the model to understand complex patterns and dependencies across the context window, (3) **Feature learning**: The linear layers learn to extract and combine relevant features from the embedded characters, identifying which combinations of previous letters are most informative for predicting the next character, (4) **Non-linear transformations**: When combined with activation functions, linear layers enable the model to learn complex, non-linear relationships between character sequences, and (5) **Increased expressiveness**: More parameters and layers allow the model to capture more sophisticated patterns in the training data, leading to better predictions. Option A is incorrect because these additions don't decrease context size - they actually help the model better utilize the available context. Option B is wrong because adding embeddings and layers increases, not decreases, the parameter count. Option D is incorrect because the loss function remains the same - these components improve what the model learns, not how the loss is calculated.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
