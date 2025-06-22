@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention and Transformers Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Attention and Transformers</h1>
+            <p>Test your understanding</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="rnn-mlp-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Attention and Transformers for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">14</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the primary limitation of vanilla RNNs in tasks like machine translation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They cannot process input sequences from left to right</li>
+                        <li class="quiz-option" data-correct="false">They require input and output sequences to be of different lengths</li>
+                        <li class="quiz-option" data-correct="true">They cannot look at the entire input sequence to make predictions</li>
+                        <li class="quiz-option" data-correct="false">They use a complex activation function that slows down training</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary limitation of vanilla RNNs in tasks like machine translation is that they cannot look at the entire input sequence to make predictions. In traditional RNN architectures, the model processes sequences sequentially and only has access to information from previous time steps when making predictions at the current step. This creates a bottleneck because: (1) **Sequential processing**: RNNs must process tokens one by one in order, without the ability to "look ahead" to future tokens in the sequence, (2) **Information bottleneck**: All information from the input sequence must be compressed into a fixed-size hidden state, which becomes problematic for long sequences, (3) **Context limitation**: When translating, understanding the full context of a sentence is crucial, but vanilla RNNs can only access partial context at each step, and (4) **Long-term dependencies**: Important information from early in the sequence may be forgotten by the time it's needed for translation decisions. This limitation led to the development of attention mechanisms and eventually Transformer architectures, which allow models to access and attend to any part of the input sequence when making predictions. The other options are incorrect: RNNs do process sequences from left to right (that's actually how they work), they don't inherently require different input/output lengths, and their activation functions are typically simple (like tanh or ReLU).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        What is a major disadvantage of the encoder-decoder architecture in RNNs?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">It cannot handle long input sequences efficiently</li>
+                        <li class="quiz-option" data-correct="false">It requires parallel processing for training</li>
+                        <li class="quiz-option" data-correct="false">It uses a different activation function for each layer</li>
+                        <li class="quiz-option" data-correct="false">It cannot be used for machine translation tasks</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A major disadvantage of the encoder-decoder architecture in RNNs is that it cannot handle long input sequences efficiently. This limitation arises from several fundamental issues: (1) **Information bottleneck**: The encoder must compress all information from the input sequence into a single fixed-size context vector (the final hidden state), which becomes inadequate for long sequences, (2) **Vanishing gradients**: As sequences get longer, RNNs suffer from vanishing gradient problems, making it difficult to learn long-term dependencies between distant elements, (3) **Sequential processing**: RNNs process sequences step-by-step, which becomes computationally expensive for long sequences and prevents efficient parallelization, (4) **Memory limitations**: The fixed-size context vector creates a bottleneck where important information from early parts of long sequences may be lost or diluted by the time the decoder needs it, and (5) **Performance degradation**: Empirically, RNN encoder-decoder models show significant performance drops on tasks involving long input sequences compared to shorter ones. This limitation was one of the key motivations for developing attention mechanisms, which allow the decoder to access different parts of the input sequence directly, rather than relying solely on the compressed context vector. The other options are incorrect: RNNs actually require sequential (not parallel) processing, they typically use the same activation function across layers, and encoder-decoder architectures are specifically designed for and widely used in machine translation tasks.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is the primary purpose of the attention mechanism in deep learning models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the computational efficiency of the model</li>
+                        <li class="quiz-option" data-correct="true">To allow the model to focus on specific parts of the input</li>
+                        <li class="quiz-option" data-correct="false">To reduce the number of parameters in the model</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for an encoder-decoder architecture</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of the attention mechanism in deep learning models is to allow the model to focus on specific parts of the input. This fundamental concept revolutionized how neural networks process sequential data: (1) **Selective focus**: Attention enables models to dynamically determine which parts of the input sequence are most relevant for making predictions at each step, rather than treating all input elements equally, (2) **Dynamic weighting**: The mechanism computes attention weights that indicate the importance of each input element, allowing the model to "pay attention" to the most relevant information, (3) **Context awareness**: Instead of relying on a fixed representation, attention allows models to create context-specific representations by combining information from different parts of the input based on their relevance, (4) **Improved performance**: This selective focus significantly improves performance on tasks like machine translation, where different parts of the source sentence are relevant for generating different parts of the target sentence, and (5) **Interpretability**: Attention weights provide insights into which parts of the input the model considers important for each prediction, making the model more interpretable. The other options are incorrect: attention typically increases computational complexity rather than efficiency (option A), it usually adds parameters rather than reducing them (option C), and while attention can be used in various architectures, it doesn't eliminate the need for encoder-decoder structures but rather enhances them (option D). The core innovation of attention is this ability to selectively focus on relevant input information.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary purpose of positional encoding in the transformer model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To add recurrent connections to the model</li>
+                        <li class="quiz-option" data-correct="true">To provide information about the index of each word in the sentence</li>
+                        <li class="quiz-option" data-correct="false">To reduce the dimensionality of the input vectors</li>
+                        <li class="quiz-option" data-correct="false">To replace the need for self-attention mechanisms</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of positional encoding in the transformer model is to provide information about the index of each word in the sentence. This is crucial because: (1) **Position-agnostic attention**: Unlike RNNs that process sequences sequentially, transformers use self-attention mechanisms that are inherently position-agnostic - they can attend to any position in the sequence without knowing where tokens are located, (2) **Order matters**: In natural language, word order is critical for meaning (e.g., "dog bites man" vs "man bites dog"), so the model needs to understand the relative positions of words, (3) **Mathematical encoding**: Positional encodings are mathematical functions (typically sinusoidal) that create unique representations for each position in the sequence, which are added to the word embeddings, (4) **Enabling parallelization**: By encoding position information directly into the embeddings, transformers can process all positions simultaneously rather than sequentially, enabling much faster training and inference, and (5) **Relative position awareness**: The encoding allows the model to learn relationships between words based on their relative distances in the sequence. The other options are incorrect: positional encoding doesn't add recurrent connections (option A) - transformers are designed to avoid recurrence; it doesn't reduce dimensionality (option C) - it adds information while maintaining the same embedding size; and it doesn't replace self-attention (option D) - it works together with self-attention to provide both content and positional information.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What is the primary purpose of layer normalization in the transformer model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the dimensionality of the input vector</li>
+                        <li class="quiz-option" data-correct="true">To adjust the mean and variance of the input vector</li>
+                        <li class="quiz-option" data-correct="false">To reduce the number of trainable parameters</li>
+                        <li class="quiz-option" data-correct="false">To introduce non-linearity into the model</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of layer normalization in the transformer model is to adjust the mean and variance of the input vector. This normalization technique serves several critical functions: (1) **Statistical normalization**: Layer normalization computes the mean and variance across the features of each individual sample and normalizes them to have zero mean and unit variance, stabilizing the distribution of inputs to each layer, (2) **Training stability**: By normalizing the inputs, layer normalization helps prevent the internal covariate shift problem, where the distribution of inputs to each layer changes during training, making optimization more stable and reliable, (3) **Gradient flow**: Normalized inputs help maintain better gradient flow through the deep transformer architecture, reducing problems like vanishing or exploding gradients that can occur in very deep networks, (4) **Faster convergence**: The normalization allows for higher learning rates and faster convergence during training, as the optimizer doesn't need to adapt to constantly changing input distributions, (5) **Mathematical formula**: Layer norm applies the transformation: LN(x) = γ * (x - μ) / σ + β, where μ and σ are the mean and standard deviation computed across features, and γ and β are learned parameters. The other options are incorrect: layer normalization doesn't change dimensionality (option A), it actually adds a small number of parameters (γ and β) rather than reducing them (option C), and it doesn't introduce non-linearity - it's a linear transformation followed by learned affine parameters (option D).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the key difference between the decoder and encoder in the transformer model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">The decoder uses cross attention while the encoder uses self attention</li>
+                        <li class="quiz-option" data-correct="false">The decoder does not use layer normalization</li>
+                        <li class="quiz-option" data-correct="false">The encoder masks future tokens while the decoder does not</li>
+                        <li class="quiz-option" data-correct="false">The decoder uses positional encoding while the encoder does not</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key difference between the decoder and encoder in the transformer model is that the decoder uses cross attention while the encoder uses self attention. However, this statement needs clarification for completeness: (1) **Encoder structure**: The encoder uses only self-attention mechanisms, where each position attends to all positions in the input sequence. The encoder can see the entire input sequence simultaneously and processes it bidirectionally, (2) **Decoder structure**: The decoder is more complex and uses both masked self-attention AND cross-attention. The masked self-attention prevents the decoder from seeing future tokens (maintaining causality), while cross-attention allows the decoder to attend to the encoder's output, (3) **Cross-attention mechanism**: In cross-attention, the queries come from the decoder's previous layer, while the keys and values come from the encoder's output. This allows the decoder to focus on relevant parts of the input sequence when generating each output token, (4) **Autoregressive generation**: The decoder operates autoregressively, generating one token at a time and using previously generated tokens to inform future predictions, unlike the encoder which processes everything in parallel. The other options are incorrect: both encoder and decoder use layer normalization (option B), it's actually the decoder that masks future tokens to prevent information leakage during training (option C), and both encoder and decoder use positional encoding (option D). The fundamental architectural difference lies in the attention mechanisms: encoder uses self-attention only, while decoder uses both masked self-attention and cross-attention to the encoder.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is the primary loss function used during the training of a transformer model for machine translation tasks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Bilingual Evaluation Understudy (BLEU)</li>
+                        <li class="quiz-option" data-correct="true">Cross-Entropy Loss</li>
+                        <li class="quiz-option" data-correct="false">Mean Squared Error</li>
+                        <li class="quiz-option" data-correct="false">Hinge Loss</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary loss function used during the training of a transformer model for machine translation tasks is Cross-Entropy Loss. This choice is fundamental for several reasons: (1) **Classification nature**: Machine translation is essentially a sequence of classification problems, where at each decoding step, the model must predict the next token from the entire vocabulary. Cross-entropy loss is the standard loss function for multi-class classification tasks, (2) **Probability distribution**: The transformer's output layer produces a probability distribution over the vocabulary using softmax activation. Cross-entropy loss measures the difference between this predicted distribution and the true distribution (one-hot encoded target token), (3) **Mathematical formulation**: For each position, the loss is calculated as: L = -log(p_target), where p_target is the predicted probability of the correct target token. The total loss is the sum across all positions and sequences in the batch, (4) **Gradient properties**: Cross-entropy loss provides well-behaved gradients that work effectively with backpropagation, enabling stable training of deep transformer networks, (5) **Teacher forcing**: During training, cross-entropy loss is used with teacher forcing, where the model is trained to predict the next token given the ground truth previous tokens. The other options are incorrect: BLEU (option A) is an evaluation metric used after training to assess translation quality, not a training loss function; Mean Squared Error (option C) is used for regression tasks, not classification; and Hinge Loss (option D) is primarily used for support vector machines and margin-based classifiers. Cross-entropy loss is the standard and most effective choice for training sequence-to-sequence models like transformers.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the primary purpose of the BERT model's encoder in the context of text representation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To generate translations between languages</li>
+                        <li class="quiz-option" data-correct="true">To create contextual embeddings of tokens</li>
+                        <li class="quiz-option" data-correct="false">To calculate BLEU scores for evaluation</li>
+                        <li class="quiz-option" data-correct="false">To perform byte pair encoding</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of the BERT model's encoder in the context of text representation is to create contextual embeddings of tokens. This is fundamental to BERT's revolutionary approach to language understanding: (1) **Bidirectional context**: Unlike traditional models that read text left-to-right or right-to-left, BERT's encoder uses bidirectional self-attention to consider the full context from both directions simultaneously. This allows each token's embedding to be influenced by all other tokens in the sequence, (2) **Dynamic embeddings**: BERT creates contextual embeddings where the same word has different representations depending on its surrounding context. For example, "bank" in "river bank" vs "savings bank" would have different embeddings that capture their distinct meanings, (3) **Deep representation learning**: Through multiple transformer encoder layers (12 in BERT-Base, 24 in BERT-Large), the model builds increasingly sophisticated representations that capture syntactic, semantic, and pragmatic information, (4) **Pre-training objectives**: BERT's encoder is trained using Masked Language Modeling (MLM) and Next Sentence Prediction (NSP) tasks, which force it to learn rich contextual representations that can be fine-tuned for downstream tasks, (5) **Transfer learning foundation**: These contextual embeddings serve as powerful feature representations that can be adapted for various NLP tasks like sentiment analysis, question answering, and named entity recognition. The other options are incorrect: BERT is not designed for translation (option A) - that's more suited to encoder-decoder architectures; BLEU scores (option C) are evaluation metrics, not something BERT calculates; and byte pair encoding (option D) is a tokenization technique used in preprocessing, not the encoder's primary function.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the primary reason for using tokenization instead of a full dictionary in Natural Language Processing?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">To reduce computational complexity</li>
+                        <li class="quiz-option" data-correct="false">To increase the number of characters in the vocabulary</li>
+                        <li class="quiz-option" data-correct="false">To preserve the semantics of words</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for encoding</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary reason for using tokenization instead of a full dictionary in Natural Language Processing is to reduce computational complexity. This is crucial for several practical reasons: (1) **Vocabulary size management**: A full dictionary would contain millions of words across all languages, variants, proper nouns, and technical terms. This massive vocabulary would require enormous embedding matrices and output layers, making models computationally prohibitive, (2) **Memory efficiency**: Each token in the vocabulary requires its own embedding vector. With tokenization (like Byte Pair Encoding or WordPiece), we can represent the same text with a much smaller vocabulary (typically 30K-50K tokens vs millions of dictionary words), dramatically reducing memory requirements, (3) **Out-of-vocabulary handling**: Tokenization techniques can handle unknown words by breaking them into subword units, while a fixed dictionary would struggle with new words, misspellings, or domain-specific terminology, (4) **Training efficiency**: Smaller vocabularies mean smaller softmax layers during training, reducing the computational cost of each forward and backward pass. The softmax computation scales quadratically with vocabulary size, (5) **Representation flexibility**: Subword tokenization can capture morphological patterns and handle word variations more efficiently than storing every possible word form separately. The other options are incorrect: tokenization typically reduces rather than increases vocabulary size (option B); while tokenization can help preserve some semantic relationships through subword patterns, this is a secondary benefit rather than the primary reason (option C); and tokenization is itself a form of encoding, not an elimination of it (option D). The computational efficiency gained through manageable vocabulary sizes is the fundamental driver behind tokenization strategies.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        Which of the following models is described as only the decoder of the transformer architecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">BERT</li>
+                        <li class="quiz-option" data-correct="true">GPT</li>
+                        <li class="quiz-option" data-correct="false">RNN</li>
+                        <li class="quiz-option" data-correct="false">Convolutional Neural Network</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> GPT (Generative Pre-trained Transformer) is described as only the decoder of the transformer architecture. This is a fundamental architectural distinction that defines GPT's capabilities: (1) **Decoder-only architecture**: GPT uses only the decoder portion of the original transformer, specifically the masked self-attention mechanism. It removes the encoder and cross-attention components entirely, creating a streamlined architecture focused on autoregressive text generation, (2) **Masked self-attention**: GPT employs causal (masked) self-attention where each position can only attend to previous positions in the sequence. This prevents the model from "looking ahead" and maintains the autoregressive property essential for text generation, (3) **Autoregressive generation**: Being decoder-only, GPT generates text sequentially, predicting one token at a time based on all previously generated tokens. This makes it ideal for tasks like text completion, story generation, and conversational AI, (4) **Pre-training objective**: GPT is trained using next-token prediction, which aligns perfectly with its decoder-only architecture. It learns to predict the next word in a sequence given all previous words, (5) **Scalability**: The decoder-only design has proven highly scalable, leading to increasingly powerful models like GPT-2, GPT-3, and GPT-4. The other options are incorrect: BERT (option A) uses only the encoder portion of the transformer with bidirectional attention; RNN (option C) and Convolutional Neural Networks (option D) are completely different architectures that predate transformers and don't use the transformer's attention mechanisms at all. GPT's decoder-only design makes it the quintessential generative language model.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is the primary purpose of the masked multi-head attention in the decoder block of a transformer model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To allow the model to look into future tokens</li>
+                        <li class="quiz-option" data-correct="true">To prevent the model from seeing future tokens during training</li>
+                        <li class="quiz-option" data-correct="false">To enhance the model's ability to encode input sequences</li>
+                        <li class="quiz-option" data-correct="false">To reduce the computational complexity of the model</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of the masked multi-head attention in the decoder block of a transformer model is to prevent the model from seeing future tokens during training. This masking mechanism is crucial for maintaining the autoregressive property of sequence generation: (1) **Causal constraint**: The mask ensures that when predicting a token at position i, the model can only attend to tokens at positions 1 through i-1, not to any future positions. This maintains causality in the generation process, (2) **Training consistency**: During training, the entire target sequence is available, but we need to simulate the inference condition where tokens are generated one by one. The mask prevents the model from "cheating" by looking at future ground truth tokens, (3) **Lower triangular masking**: The attention mask is typically implemented as a lower triangular matrix filled with negative infinity values above the diagonal. When softmax is applied, these masked positions receive attention weights of zero, (4) **Parallel training**: Without masking, the model could process the entire sequence in parallel during training but would still need to generate sequentially during inference, creating a train-test mismatch. Masking allows parallel training while maintaining autoregressive constraints, (5) **Mathematical implementation**: For each attention head, the mask is applied before the softmax operation: Attention(Q,K,V) = softmax(QK^T/√d + M)V, where M is the mask matrix. The other options are incorrect: allowing the model to look into future tokens (option A) would violate the autoregressive principle; enhancing encoding ability (option C) is the role of the encoder's self-attention, not the decoder's masked attention; and while masking does have computational implications, reducing complexity (option D) is not its primary purpose - maintaining causality is.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What is the purpose of dividing the result of matrix multiplication by the square root of head size in the attention mechanism?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the variance of the resultant matrix</li>
+                        <li class="quiz-option" data-correct="false">To decrease the computational complexity</li>
+                        <li class="quiz-option" data-correct="true">To preserve unit variance in the attention mechanism</li>
+                        <li class="quiz-option" data-correct="false">To normalize the input embeddings</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The purpose of dividing the result of matrix multiplication by the square root of head size in the attention mechanism is to preserve unit variance in the attention mechanism. This scaling factor is crucial for maintaining stable gradients and effective learning: (1) **Variance preservation**: When computing the dot product QK^T, if Q and K have unit variance and dimension d_k, their dot product will have variance d_k. Dividing by √d_k restores the variance to 1, preventing the attention scores from growing with the embedding dimension, (2) **Softmax stability**: Without scaling, large dot products push the softmax function into regions with extremely small gradients (saturation). The scaling keeps the dot products in a reasonable range, maintaining meaningful gradients during backpropagation, (3) **Mathematical foundation**: If q and k are d_k-dimensional vectors with components drawn from a distribution with unit variance, then q·k has variance d_k. The scaling factor 1/√d_k ensures the scaled dot product maintains unit variance, (4) **Gradient flow**: Proper scaling prevents vanishing gradients in deep networks. Without it, the softmax would produce very sharp distributions (close to one-hot), leading to near-zero gradients for most positions, (5) **Empirical performance**: The √d_k scaling has been shown empirically to work better than other scaling approaches or no scaling at all. It balances the need to prevent softmax saturation while maintaining sufficient gradient signal. The other options are incorrect: the scaling decreases rather than increases variance (option A); it doesn't affect computational complexity significantly (option B); and it operates on attention scores, not input embeddings (option D). This scaling is a key insight from the "Attention Is All You Need" paper that makes transformer training stable and effective.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is the primary difference between a bigram model and a transformer model in text generation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">The bigram model uses fewer tokens as prefix</li>
+                        <li class="quiz-option" data-correct="false">The transformer model uses fewer tokens as prefix</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between a bigram model and a transformer model in text generation is that the bigram model uses fewer tokens as prefix. This fundamental difference affects their context understanding and generation quality: (1) **Bigram limitation**: A bigram model only considers the immediately preceding token (1 token) when predicting the next token. It makes predictions based on P(w_i | w_{i-1}), using just a single word of context, (2) **Transformer advantage**: Transformer models can theoretically attend to all previous tokens in the sequence, limited only by their context window (which can be thousands of tokens in modern models like GPT-3/4). They capture long-range dependencies and complex patterns across the entire context, (3) **Context window comparison**: While a bigram uses exactly 1 token of context, transformers typically use hundreds to thousands of tokens. For example, GPT-3 has a context window of 2048 tokens, and newer models can handle even more, (4) **Quality implications**: The limited context of bigram models results in less coherent text generation, as they cannot maintain consistency over longer passages or understand complex relationships between distant words. Transformers produce much more coherent and contextually appropriate text, (5) **Mathematical representation**: Bigram: P(sentence) = ∏P(w_i | w_{i-1}), while Transformer: P(w_i | w_1, w_2, ..., w_{i-1}) where the attention mechanism allows access to all previous tokens, (6) **Memory and computation**: Bigrams are computationally simple but linguistically limited, while transformers are more complex but capture richer linguistic patterns. The other option is incorrect because it reverse the answer.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the key advantage of transformer models over n-gram models in capturing linguistic dependencies?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Transformers have lower computational requirements</li>
+                        <li class="quiz-option" data-correct="true">Transformers can capture long-range dependencies across the entire sequence</li>
+                        <li class="quiz-option" data-correct="false">N-gram models handle out-of-vocabulary words better</li>
+                        <li class="quiz-option" data-correct="false">Transformers require less training data than n-gram models</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key advantage of transformer models over n-gram models in capturing linguistic dependencies is that transformers can capture long-range dependencies across the entire sequence. This fundamental capability difference makes transformers superior for understanding complex linguistic patterns: (1) **N-gram limitations**: N-gram models (unigram, bigram, trigram, etc.) have a fixed, small context window. A trigram model only considers the previous 2 tokens, a 5-gram considers 4 previous tokens. This severely limits their ability to understand relationships between distant words in a sentence or paragraph, (2) **Transformer flexibility**: Through the self-attention mechanism, transformers can theoretically attend to any position in the input sequence simultaneously. This allows them to capture dependencies between words that are far apart, such as subject-verb agreement across long clauses or thematic consistency across paragraphs, (3) **Dynamic attention**: Unlike n-grams which use fixed context windows, transformers dynamically determine which parts of the sequence are most relevant for each prediction through learned attention weights. This enables more sophisticated understanding of linguistic structure, (4) **Examples of long-range dependencies**: Consider "The cat that was sitting on the mat yesterday is sleeping." An n-gram model might struggle to connect "cat" with "is sleeping" due to the intervening clause, while a transformer can easily maintain this relationship through attention, (5) **Semantic understanding**: Transformers can maintain thematic coherence and semantic consistency across much longer texts because they're not constrained by small, fixed context windows like n-gram models. The other options are incorrect: transformers actually have higher computational requirements (option A), n-gram models typically struggle more with out-of-vocabulary words (option C), and transformers generally require more training data, not less (option D).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
