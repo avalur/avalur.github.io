@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision and Clustering Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Computer Vision and Clustering</h1>
+            <p>Test your understanding</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="computer-vision-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Computer Vision and Clustering for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">14</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the primary difference between object detection and segmentation in computer vision?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Object detection uses bounding boxes, while segmentation uses pixel-level masks</li>
+                        <li class="quiz-option" data-correct="false">Object detection is faster than segmentation</li>
+                        <li class="quiz-option" data-correct="false">Segmentation is less accurate than object detection</li>
+                        <li class="quiz-option" data-correct="false">Object detection is used for classification tasks</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between object detection and segmentation in computer vision lies in their output representation and level of detail. **Object Detection** produces bounding boxes (rectangular regions) that indicate where objects are located in an image, along with class labels and confidence scores. This approach provides coarse localization by defining the approximate spatial extent of objects. **Segmentation**, on the other hand, operates at the pixel level, creating precise masks that outline the exact shape and boundaries of objects. There are two main types: (1) **Semantic segmentation** classifies each pixel into predefined categories, and (2) **Instance segmentation** not only classifies pixels but also distinguishes between different instances of the same class. While object detection is generally faster due to its simpler output representation, segmentation provides much more detailed spatial information. Both techniques serve different purposes: object detection is ideal for applications like autonomous driving where you need to know "where" objects are, while segmentation is crucial for medical imaging, video editing, or any application requiring precise object boundaries. Neither is inherently more accurate than the other - they solve different problems with different levels of granularity.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        What is a key limitation of semantic segmentation compared to instance segmentation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Semantic segmentation cannot distinguish between instances of the same class</li>
+                        <li class="quiz-option" data-correct="false">Semantic segmentation is slower than instance segmentation</li>
+                        <li class="quiz-option" data-correct="false">Semantic segmentation is less accurate than object detection</li>
+                        <li class="quiz-option" data-correct="false">Semantic segmentation cannot handle complex shapes</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key limitation of semantic segmentation compared to instance segmentation is that semantic segmentation cannot distinguish between instances of the same class. This fundamental difference has important implications: (1) **Class-level labeling**: Semantic segmentation assigns each pixel to a class category (e.g., "person", "car", "tree"), but all pixels belonging to the same class receive identical labels, regardless of whether they belong to different individual objects, (2) **Instance ambiguity**: When multiple objects of the same class are present (e.g., three people standing together), semantic segmentation will label all "person" pixels the same way, making it impossible to determine where one person ends and another begins, (3) **Counting limitations**: This makes semantic segmentation unsuitable for tasks requiring object counting, tracking individual instances, or analyzing relationships between specific objects, (4) **Instance segmentation solution**: Instance segmentation addresses this by providing unique identifiers for each individual object instance, even within the same class. For example, it would label pixels as "person_1", "person_2", and "person_3", enabling distinction between different individuals. The other options are incorrect: semantic segmentation is typically faster than instance segmentation (option B) because it's a simpler task; comparing segmentation accuracy to object detection (option C) is not meaningful as they solve different problems; and semantic segmentation can handle complex shapes just as well as instance segmentation (option D) - the limitation is about instance distinction, not shape complexity. This distinction is crucial in applications like autonomous driving, where you need to track individual vehicles, or in medical imaging, where distinguishing between separate cell instances is critical.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is a key parameter to adjust in convolutional layers to prevent the reduction of image dimensions during classification tasks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Stride</li>
+                        <li class="quiz-option" data-correct="false">Kernel Size</li>
+                        <li class="quiz-option" data-correct="true">Padding</li>
+                        <li class="quiz-option" data-correct="false">Activation Function</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key parameter to adjust in convolutional layers to prevent the reduction of image dimensions during classification tasks is **Padding**. This is fundamental to maintaining spatial dimensions in convolutional neural networks: (1) **Dimension preservation**: Without padding, applying a convolution operation naturally reduces the spatial dimensions of the feature map. For example, convolving a 32×32 image with a 3×3 kernel produces a 30×30 output. Padding adds extra pixels (usually zeros) around the input borders to compensate for this reduction, (2) **Same padding**: "Same" padding is specifically designed to maintain the input dimensions. It adds enough padding so that the output has the same height and width as the input when stride=1. The formula is: pad = (kernel_size - 1) / 2, (3) **Valid vs Same**: "Valid" padding means no padding (dimensions reduce), while "Same" padding preserves dimensions. For classification tasks, maintaining spatial resolution is often crucial for preserving fine-grained features, (4) **Edge information preservation**: Padding also ensures that edge pixels contribute equally to the output, preventing the loss of important boundary information that could be critical for classification, (5) **Network depth**: Proper padding allows networks to be deeper without losing spatial resolution too quickly, enabling more layers to extract hierarchical features. The other options are incorrect: **Stride** (option A) actually controls dimension reduction - larger strides reduce dimensions more; **Kernel Size** (option B) affects the receptive field but doesn't directly control dimension preservation; **Activation Function** (option D) processes the values but doesn't affect spatial dimensions at all. Padding is the primary mechanism for controlling spatial dimension changes in convolutional layers.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary purpose of using Intersection over Union (IOU) in object detection?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To measure the accuracy of classification</li>
+                        <li class="quiz-option" data-correct="true">To calculate the distance between bounding boxes</li>
+                        <li class="quiz-option" data-correct="false">To determine the complexity of the model</li>
+                        <li class="quiz-option" data-correct="false">To evaluate the segmentation output</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of using Intersection over Union (IoU) in object detection is to calculate the distance between bounding boxes, specifically to measure how well a predicted bounding box overlaps with the ground truth bounding box. This metric is fundamental to object detection evaluation: (1) **Overlap measurement**: IoU quantifies the spatial overlap between two bounding boxes by calculating the ratio of their intersection area to their union area. The formula is: IoU = Area of Intersection / Area of Union, with values ranging from 0 (no overlap) to 1 (perfect overlap), (2) **Localization quality**: Unlike classification accuracy which only considers whether the correct class was predicted, IoU measures how precisely the object is localized. A high IoU indicates that the predicted bounding box closely matches the true object location, (3) **Detection thresholding**: IoU is used to determine whether a detection is considered a True Positive or False Positive. Typically, predictions with IoU ≥ 0.5 are considered correct detections, though stricter thresholds (0.7, 0.9) are used for more demanding applications, (4) **Non-Maximum Suppression (NMS)**: IoU is crucial in NMS algorithms to eliminate duplicate detections of the same object by suppressing boxes with high IoU overlap, (5) **Mean Average Precision (mAP)**: IoU thresholds are used in computing mAP, the standard evaluation metric for object detection systems. The other options are incorrect: IoU doesn't measure classification accuracy (option A) - it focuses on localization; it doesn't determine model complexity (option C) - it's an evaluation metric, not a model parameter; while IoU can be used for segmentation evaluation (option D), in the context of object detection, its primary purpose is measuring bounding box overlap quality.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What happens to precision and recall when the IoU threshold is set very high?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Precision increases and recall decreases</li>
+                        <li class="quiz-option" data-correct="false">Precision decreases and recall increases</li>
+                        <li class="quiz-option" data-correct="false">Both precision and recall increase</li>
+                        <li class="quiz-option" data-correct="false">Both precision and recall decrease</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> When the IoU threshold is set very high, **precision increases and recall decreases**. This relationship is fundamental to understanding the precision-recall trade-off in object detection: (1) **Stricter criteria**: A high IoU threshold (e.g., 0.9) requires near-perfect overlap between predicted and ground truth bounding boxes. Only the most precisely localized detections will be considered True Positives (TP), while many reasonable detections that would pass lower thresholds become False Positives (FP), (2) **Precision increases**: Precision = TP / (TP + FP). With fewer detections qualifying as TP due to the strict threshold, the ratio of correct predictions among all positive predictions increases. Only the highest-quality detections survive the filtering, making the remaining predictions more reliable, (3) **Recall decreases**: Recall = TP / (TP + FN). Many ground truth objects that were previously correctly detected (at lower IoU thresholds) now become False Negatives (FN) because their predicted boxes don't meet the strict overlap requirement. This reduces the fraction of actual objects that are successfully detected, (4) **Quality vs. Quantity trade-off**: High IoU thresholds prioritize detection quality over quantity. You get fewer detections overall, but those you do get are more precisely localized, (5) **Practical implications**: This trade-off is why different applications use different IoU thresholds - medical imaging might use 0.9 for critical precision, while real-time applications might use 0.5 for better coverage. The other options are incorrect because they don't reflect this fundamental inverse relationship between precision and recall as threshold strictness increases.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the primary purpose of non-maximum suppression in object detection using neural networks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To generate bounding box proposals</li>
+                        <li class="quiz-option" data-correct="true">To filter out bounding boxes with low scores</li>
+                        <li class="quiz-option" data-correct="false">To classify objects within bounding boxes</li>
+                        <li class="quiz-option" data-correct="false">To extract features from the image</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of non-maximum suppression (NMS) in object detection is to **filter out bounding boxes with low scores**, specifically to eliminate duplicate detections of the same object by keeping only the highest-scoring detection among overlapping boxes. This post-processing step is crucial for clean object detection results: (1) **Duplicate elimination**: Object detection models often generate multiple overlapping bounding boxes for the same object. Without NMS, a single car might be detected with 5-10 different boxes, creating cluttered and redundant results, (2) **Algorithm workflow**: NMS works by: (a) sorting all detections by confidence score in descending order, (b) starting with the highest-scoring detection and marking it as selected, (c) calculating IoU between this detection and all remaining detections, (d) suppressing (removing) all detections with IoU above a threshold (typically 0.5) with the selected detection, (e) repeating this process with the next highest-scoring unsuppressed detection, (3) **Score-based filtering**: The core mechanism is indeed filtering based on scores - lower-scoring boxes that overlap significantly with higher-scoring ones are suppressed, ensuring only the most confident detection per object remains, (4) **Clean output**: This results in clean, non-redundant detections where each object is represented by a single, high-confidence bounding box, (5) **Threshold tuning**: The IoU threshold controls aggressiveness - lower thresholds (0.3) are more aggressive in suppression, while higher thresholds (0.7) are more conservative. The other options are incorrect: NMS doesn't generate proposals (option A) - it processes existing detections; it doesn't classify objects (option C) - classification happens earlier in the pipeline; and it doesn't extract features (option D) - feature extraction occurs in the backbone network.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is the key improvement in Fast R-CNN compared to the vanilla approach?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It uses a classic algorithm to join pixels with the same color</li>
+                        <li class="quiz-option" data-correct="true">It extracts features from the entire image before processing bounding boxes</li>
+                        <li class="quiz-option" data-correct="false">It directly predicts bounding box coordinates without feature extraction</li>
+                        <li class="quiz-option" data-correct="false">It eliminates the need for a classification head</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key improvement in Fast R-CNN compared to the vanilla R-CNN approach is that **it extracts features from the entire image before processing bounding boxes**. This architectural change dramatically improves efficiency and performance: (1) **Vanilla R-CNN inefficiency**: The original R-CNN approach was computationally expensive because it extracted features separately for each region proposal. For an image with 2000 proposals, the CNN had to run 2000 times, leading to massive computational redundancy and slow inference times, (2) **Fast R-CNN's shared computation**: Fast R-CNN processes the entire image through the convolutional layers only once, creating a shared feature map. Then, for each region proposal, it extracts features from the corresponding region of this shared feature map using RoI (Region of Interest) pooling, (3) **RoI Pooling mechanism**: This technique allows Fast R-CNN to extract fixed-size features from variable-sized regions in the shared feature map, enabling efficient batch processing of all proposals simultaneously, (4) **Speed improvement**: This approach reduces computation time by orders of magnitude - instead of running the expensive CNN backbone 2000 times, it runs once and then performs lightweight feature extraction for each proposal, (5) **End-to-end training**: Fast R-CNN also introduced joint training of the feature extractor, classifier, and bounding box regressor, making the entire system trainable end-to-end with multi-task loss. The other options are incorrect: Option A describes image segmentation techniques unrelated to R-CNN; Option C is incorrect because Fast R-CNN still uses feature extraction (just more efficiently); Option D is wrong because Fast R-CNN still requires classification heads for object classification and bounding box regression.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the primary reason for skipping feature extraction for each bounding box in object detection using convolutional neural networks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">To reduce computational redundancy</li>
+                        <li class="quiz-option" data-correct="false">To increase the accuracy of classification</li>
+                        <li class="quiz-option" data-correct="false">To improve the resolution of the feature map</li>
+                        <li class="quiz-option" data-correct="false">To enhance the pooling process</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary reason for skipping feature extraction for each bounding box is **to reduce computational redundancy**. This optimization is fundamental to making object detection practical and efficient: (1) **Computational waste in naive approaches**: Early methods like R-CNN would crop each region proposal from the original image and run it through the entire CNN separately. With thousands of proposals per image, this meant running the expensive convolutional operations thousands of times on largely overlapping image regions, creating massive computational redundancy, (2) **Shared computation principle**: Modern approaches (Fast R-CNN, Faster R-CNN, YOLO, etc.) extract features from the entire image once using the convolutional backbone. Since convolutional features are spatially organized, features for any bounding box can be extracted from the shared feature map without recomputing the expensive convolutional operations, (3) **Efficiency gains**: This approach reduces computational cost from O(N × C) to O(C + N), where N is the number of proposals and C is the cost of running the CNN backbone. For typical values (N=2000, C=expensive), this represents orders of magnitude improvement in speed, (4) **Memory efficiency**: Shared feature computation also reduces memory usage since only one feature map needs to be stored instead of features for each individual proposal, (5) **Real-time capability**: This optimization is what enables real-time object detection applications, reducing inference time from minutes to milliseconds. The other options are incorrect: While shared features may have incidental effects on accuracy (option B), the primary motivation is efficiency; feature resolution (option C) is determined by the CNN architecture, not the sharing strategy; and pooling enhancement (option D) is a separate concern addressed by techniques like RoI pooling, not the primary reason for feature sharing.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the primary purpose of using skip connections in Convolutional Neural Networks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the number of parameters in the model</li>
+                        <li class="quiz-option" data-correct="false">To reduce the memory usage and computational time</li>
+                        <li class="quiz-option" data-correct="true">To retain local information lost during downsampling</li>
+                        <li class="quiz-option" data-correct="false">To replace the need for upsampling in the decoder</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of using skip connections in CNNs is **to retain local information lost during downsampling**. This is particularly crucial in tasks requiring detailed spatial information like semantic segmentation, object detection, and medical image analysis: (1) **Information loss problem**: As CNNs downsample images through pooling and strided convolutions, they progressively lose fine-grained spatial details and local features. While this helps capture high-level semantic information, it makes it difficult to produce precise pixel-level outputs or detailed localization, (2) **Skip connection mechanism**: Skip connections directly connect earlier layers (with high spatial resolution but low-level features) to later layers (with low spatial resolution but high-level features). This allows the network to combine both detailed spatial information and semantic understanding, (3) **U-Net architecture example**: In U-Net, skip connections bridge the encoder and decoder paths, allowing the decoder to access detailed features from corresponding encoder layers. This enables precise boundary delineation in segmentation tasks, (4) **ResNet inspiration**: While ResNet skip connections primarily address the vanishing gradient problem, in architectures like U-Net, Feature Pyramid Networks, and others, skip connections specifically preserve spatial information across different scales, (5) **Multi-scale information fusion**: Skip connections enable the network to make decisions based on both local details (edges, textures) and global context (object identity, scene understanding), which is essential for tasks requiring precise spatial accuracy. The other options are incorrect: Skip connections don't primarily increase parameters (option A) - they're usually simple concatenations or additions; they don't reduce computational cost (option B) - they may actually increase it slightly; and they don't replace upsampling (option D) - they complement it by providing additional information during the upsampling process.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        What is the primary difference between clustering and classification in unsupervised learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Clustering uses labeled training data, while classification does not.</li>
+                        <li class="quiz-option" data-correct="true">Clustering does not require labeled training data, while classification does.</li>
+                        <li class="quiz-option" data-correct="false">Clustering is a supervised learning task, while classification is unsupervised.</li>
+                        <li class="quiz-option" data-correct="false">Clustering and classification are identical in their approach.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference is that **clustering does not require labeled training data, while classification does**. This fundamental distinction defines their respective roles in machine learning: (1) **Clustering (Unsupervised)**: Clustering algorithms like K-means, hierarchical clustering, and DBSCAN work with unlabeled data to discover hidden patterns and group similar data points together. The algorithm determines the structure and groupings based solely on the inherent similarities in the data without any prior knowledge of correct categories, (2) **Classification (Supervised)**: Classification algorithms like logistic regression, decision trees, and neural networks require labeled training data where each example has a known correct output. The algorithm learns from these input-output pairs to make predictions on new, unseen data, (3) **Learning paradigms**: Clustering is fundamentally an unsupervised learning task that discovers structure in data, while classification is a supervised learning task that learns to map inputs to predefined categories, (4) **Goal differences**: Clustering aims to find natural groupings in data (exploratory data analysis), while classification aims to predict categories for new instances based on learned patterns from labeled examples, (5) **Evaluation differences**: Clustering evaluation often uses internal metrics (silhouette score, inertia) or requires domain knowledge, while classification can be evaluated using accuracy, precision, recall with known ground truth labels, (6) **Applications**: Clustering is used for customer segmentation, gene analysis, image segmentation without prior categories, while classification is used for spam detection, medical diagnosis, image recognition where categories are predefined. The other options are incorrect: Option A reverses the correct relationship; Option C incorrectly categorizes clustering as supervised; Option D ignores the fundamental differences between these approaches.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is a key challenge in designing clustering algorithms that work successfully in all cases?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">The algorithms are too simple and not specialized enough</li>
+                        <li class="quiz-option" data-correct="true">The algorithms are highly sensitive to the choice of metric</li>
+                        <li class="quiz-option" data-correct="false">The algorithms cannot handle overlapping clusters</li>
+                        <li class="quiz-option" data-correct="false">The algorithms are not capable of handling sparse backgrounds</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key challenge in designing clustering algorithms that work successfully in all cases is that **the algorithms are highly sensitive to the choice of metric**. This fundamental issue affects clustering performance across different data types and problem domains: (1) **Distance metric dependency**: Clustering algorithms rely heavily on distance or similarity metrics to determine which data points belong together. The choice of metric (Euclidean, Manhattan, cosine, Jaccard, etc.) can dramatically change clustering results, and there's no universal metric that works optimally for all data types and structures, (2) **Curse of dimensionality**: In high-dimensional spaces, traditional distance metrics like Euclidean distance become less meaningful as all points appear roughly equidistant. This makes it difficult to design a one-size-fits-all clustering approach that works across different dimensionalities, (3) **Data type sensitivity**: Different data types require different metrics - Euclidean distance works well for continuous numerical data, cosine similarity for text/sparse data, Jaccard for binary data, and Hamming distance for categorical data. No single metric handles all these cases effectively, (4) **Scale and normalization issues**: Features with different scales can dominate distance calculations, requiring careful preprocessing. The choice of normalization method (min-max, z-score, robust scaling) can significantly affect clustering outcomes, (5) **Shape and density assumptions**: Different algorithms assume different cluster shapes (K-means assumes spherical, DBSCAN handles arbitrary shapes), and the distance metric choice interacts with these assumptions, making universal success challenging, (6) **Domain-specific requirements**: What constitutes "similarity" varies across domains - in image processing, pixel similarity differs from semantic similarity; in genomics, sequence similarity has different meanings than expression similarity. The other options are partially addressed by existing methods: Option A is incorrect as algorithms can be quite sophisticated; Option C is handled by fuzzy clustering and mixture models; Option D is addressed by density-based methods like DBSCAN.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        In the context of semi-supervised learning, what is the role of labeled data?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It is the primary source of training for the model.</li>
+                        <li class="quiz-option" data-correct="false">It is used exclusively to validate the model's performance.</li>
+                        <li class="quiz-option" data-correct="true">It helps guide the model but is not as critical as in supervised learning.</li>
+                        <li class="quiz-option" data-correct="false">It is unnecessary and can be entirely replaced by unlabeled data.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In semi-supervised learning, labeled data **helps guide the model but is not as critical as in supervised learning**. This reflects the fundamental nature of semi-supervised learning as a hybrid approach: (1) **Guidance role**: The small amount of labeled data in semi-supervised learning serves as an anchor or guide to provide initial direction for the learning process. It helps establish the basic decision boundaries and class relationships that the model can then extend using the larger unlabeled dataset, (2) **Complementary to unlabeled data**: Unlike pure supervised learning where labeled data is everything, or unsupervised learning where it's absent, semi-supervised learning leverages both types of data synergistically. The labeled data provides explicit supervision while unlabeled data provides additional structure and regularization, (3) **Reduced dependency**: Semi-supervised learning specifically addresses scenarios where obtaining large amounts of labeled data is expensive or impractical. The algorithm is designed to work effectively with limited labeled examples by exploiting the underlying data distribution revealed through unlabeled examples, (4) **Bootstrap mechanism**: The labeled data helps bootstrap the learning process, allowing the model to make initial predictions on unlabeled data, which can then be used through techniques like self-training, co-training, or consistency regularization to improve performance iteratively, (5) **Quality over quantity**: In semi-supervised learning, the quality and representativeness of labeled examples often matters more than their quantity. A few well-chosen labeled examples can effectively guide learning across much larger unlabeled datasets, (6) **Real-world applications**: This approach is particularly valuable in domains like medical imaging (few expert annotations), natural language processing (expensive human labeling), and computer vision (costly manual annotation), where labeled data is scarce but unlabeled data is abundant. The other options are incorrect: Option A describes supervised learning; Option B mischaracterizes the training role; Option D describes unsupervised learning and ignores the fundamental need for some supervision in semi-supervised approaches.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is the primary purpose of using precision and recall in evaluating clustering quality?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">To directly compare clusters to their ground truth labels</li>
+                        <li class="quiz-option" data-correct="false">To measure how well each individual object is grouped</li>
+                        <li class="quiz-option" data-correct="false">To determine the number of clusters produced by the algorithm</li>
+                        <li class="quiz-option" data-correct="false">To calculate the sum of squared inter-cluster distances</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of using precision and recall in evaluating clustering quality is **to directly compare clusters to their ground truth labels**. This represents external evaluation of clustering performance: (1) **External validation approach**: Precision and recall in clustering are external evaluation metrics that require ground truth labels to assess how well the clustering algorithm has recovered the true underlying structure of the data. This is in contrast to internal metrics that evaluate clustering without reference to true labels, (2) **Precision in clustering**: Measures the purity of clusters - for each cluster, what fraction of its members truly belong to the same class according to ground truth. High precision means clusters contain mostly objects from the same true class, indicating low false positive rates within clusters, (3) **Recall in clustering**: Measures the completeness of clusters - for each true class, what fraction of its members are grouped together in the same cluster. High recall means that objects from the same true class are successfully grouped together, indicating low false negative rates, (4) **Pairwise comparison framework**: Often implemented by treating clustering as a pairwise classification problem - for every pair of objects, precision measures how many pairs in the same cluster truly belong together, while recall measures how many pairs that should be together are actually clustered together, (5) **F-measure combination**: Precision and recall are often combined into F-measure to provide a single metric that balances both aspects of clustering quality, similar to their use in classification tasks, (6) **Supervised evaluation context**: These metrics are particularly useful when evaluating clustering algorithms on benchmark datasets with known ground truth, such as image segmentation tasks, document clustering with known categories, or gene expression analysis with known functional groups. The other options describe different aspects: Option B relates more to silhouette analysis or individual object assignment quality; Option C refers to cluster number determination (like elbow method); Option D describes within-cluster sum of squares, an internal metric that doesn't require ground truth labels.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is a key advantage of the DBSCAN clustering algorithm compared to K-means?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It requires specifying the number of clusters in advance</li>
+                        <li class="quiz-option" data-correct="false">It assumes clusters are spherical</li>
+                        <li class="quiz-option" data-correct="true">It automatically determines the number of clusters</li>
+                        <li class="quiz-option" data-correct="false">It performs poorly with noise in the dataset</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key advantage of DBSCAN compared to K-means is that **it automatically determines the number of clusters**. This fundamental difference makes DBSCAN more flexible and practical in many real-world scenarios: (1) **Automatic cluster discovery**: Unlike K-means which requires you to specify the number of clusters (k) beforehand, DBSCAN discovers clusters based on the density of data points. It identifies regions of high density separated by regions of low density, naturally determining how many clusters exist in the data, (2) **No prior knowledge needed**: This eliminates the need for domain expertise or trial-and-error approaches (like the elbow method) to determine the optimal number of clusters. DBSCAN can handle datasets where the true number of clusters is unknown, (3) **Arbitrary cluster shapes**: While K-means assumes spherical clusters with similar sizes, DBSCAN can find clusters of arbitrary shapes - elongated, curved, or irregular clusters that would be poorly handled by K-means, (4) **Robust noise handling**: DBSCAN explicitly identifies and handles noise points (outliers) by marking them as noise rather than forcing them into clusters. K-means assigns every point to a cluster, even outliers that don't truly belong to any cluster, (5) **Density-based approach**: DBSCAN works by finding core points (points with sufficient neighbors within a radius ε), then expanding clusters by connecting density-reachable points. This approach naturally adapts to the local density structure of the data, (6) **Real-world applications**: This makes DBSCAN particularly valuable for applications like anomaly detection, image processing, geolocation clustering, and any scenario where clusters have irregular shapes or where the number of natural groupings is unknown. The other options are incorrect: Option A describes a limitation of K-means, not an advantage of DBSCAN; Option B describes K-means' assumption, not DBSCAN's; Option D is false as DBSCAN actually handles noise very well, unlike K-means which is sensitive to outliers.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        What is the primary structure used to represent the result of agglomerative clustering?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">A scatter plot</li>
+                        <li class="quiz-option" data-correct="true">A tree-like structure</li>
+                        <li class="quiz-option" data-correct="false">A matrix</li>
+                        <li class="quiz-option" data-correct="false">A network graph</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary structure used to represent the result of agglomerative clustering is **a tree-like structure**, specifically called a dendrogram. This hierarchical representation is fundamental to understanding how agglomerative clustering works: (1) **Dendrogram structure**: A dendrogram is a tree diagram that shows the hierarchical relationship between clusters at different levels. The leaves represent individual data points, and the internal nodes represent the merging of clusters. The height of each node indicates the distance or dissimilarity at which clusters were merged, (2) **Bottom-up construction**: Agglomerative clustering starts with each data point as its own cluster and progressively merges the closest pairs of clusters until all points belong to a single cluster. This bottom-up process naturally creates a binary tree structure where each merge operation creates a new internal node, (3) **Multiple clustering solutions**: The dendrogram encodes multiple possible clustering solutions simultaneously. By cutting the tree at different heights, you can obtain different numbers of clusters. A horizontal cut through the dendrogram at any level reveals the cluster assignments at that level of granularity, (4) **Distance information**: The vertical axis of the dendrogram represents the distance or dissimilarity measure used for clustering. This allows you to see not just which points are clustered together, but also how similar or dissimilar the merged clusters are, (5) **Hierarchical relationships**: The tree structure reveals the nested nature of clusters - smaller clusters are contained within larger ones, showing the hierarchical organization of the data. This is particularly valuable for understanding data structure at multiple scales, (6) **Decision support**: The dendrogram helps determine the optimal number of clusters by identifying natural breakpoints - large jumps in the merge distances often indicate good places to cut the tree. The other options don't capture the hierarchical nature: Option A (scatter plot) shows data distribution but not clustering hierarchy; Option C (matrix) might show distances but not the merging process; Option D (network graph) shows connections but not the hierarchical tree structure that's essential to agglomerative clustering.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 16 -->
+                <div class="quiz-card" id="question-16" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">16</span>
+                        What is the primary purpose of Principal Component Analysis (PCA)?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the dimensionality of the data</li>
+                        <li class="quiz-option" data-correct="true">To reduce the dimensionality of the data while preserving variance</li>
+                        <li class="quiz-option" data-correct="false">To classify data into distinct clusters</li>
+                        <li class="quiz-option" data-correct="false">To measure the distance between clusters</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary purpose of Principal Component Analysis (PCA) is **to reduce the dimensionality of the data while preserving variance**. This fundamental goal makes PCA one of the most important techniques in machine learning and data analysis: (1) **Dimensionality reduction**: PCA transforms high-dimensional data into a lower-dimensional representation by finding the directions (principal components) along which the data varies the most. This reduces computational complexity and storage requirements while maintaining the essential structure of the data, (2) **Variance preservation**: The key insight of PCA is that it identifies the linear combinations of original features that capture the maximum variance in the data. The first principal component captures the direction of greatest variance, the second captures the direction of second-greatest variance (orthogonal to the first), and so on, (3) **Curse of dimensionality**: High-dimensional data suffers from various problems including sparsity, increased computational cost, and difficulty in visualization. PCA addresses these issues by projecting data onto a lower-dimensional subspace that retains most of the original information, (4) **Mathematical foundation**: PCA works by computing the eigenvectors and eigenvalues of the covariance matrix. The eigenvectors (principal components) define the directions of maximum variance, while eigenvalues indicate how much variance is explained by each component, (5) **Information retention**: By selecting the top k principal components (those with largest eigenvalues), you can retain a specified percentage of the total variance (e.g., 95% or 99%) while dramatically reducing dimensionality. This allows you to balance between compression and information loss, (6) **Practical applications**: PCA is widely used for data compression, noise reduction, feature extraction, data visualization (projecting to 2D/3D), preprocessing for machine learning algorithms, and exploratory data analysis. It's particularly valuable in fields like image processing, genomics, finance, and computer vision where high-dimensional data is common. The other options are incorrect: Option A describes the opposite of PCA's purpose; Option C describes clustering algorithms like K-means; Option D describes distance metrics used in clustering evaluation, not PCA's primary function.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
