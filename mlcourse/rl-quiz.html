@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL and AlphaZero Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>RL and AlphaZero</h1>
+            <p>Test your understanding</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="rnn-mlp-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">RL and AlphaZero</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">17</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the primary goal of an agent in reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Minimizing the number of actions taken</li>
+                        <li class="quiz-option" data-correct="true">Maximizing a scalar reward</li>
+                        <li class="quiz-option" data-correct="false">Avoiding all punishments</li>
+                        <li class="quiz-option" data-correct="false">Predicting the future state of the environment</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary goal of an agent in reinforcement learning is to maximize a scalar reward signal over time. This fundamental principle defines the entire reinforcement learning paradigm: (1) **Reward maximization**: The agent learns to take actions that lead to the highest cumulative reward, which serves as the objective function for learning optimal behavior, (2) **Long-term optimization**: Rather than focusing on immediate rewards, the agent typically aims to maximize the expected cumulative reward (return) over time, balancing immediate and future gains, (3) **Trial and error learning**: Through interaction with the environment, the agent discovers which actions lead to higher rewards and adjusts its policy accordingly, (4) **Reward signal**: The scalar reward provides feedback about the quality of the agent's actions, serving as the primary learning signal that guides policy improvement, and (5) **Policy optimization**: The agent develops a policy (mapping from states to actions) that maximizes expected rewards, which may involve complex strategies and long-term planning. The other options are incorrect: minimizing actions (option A) is not the primary goal - an agent might need many actions to achieve optimal rewards; avoiding all punishments (option C) is too restrictive and doesn't capture the positive reward-seeking behavior; and predicting future states (option D) might be useful for planning but is not the primary objective - it's a means to the end of maximizing rewards.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        Which of the following assumptions is NOT made in the classical formulation of reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Time is continuous</li>
+                        <li class="quiz-option" data-correct="false">The world is deterministic</li>
+                        <li class="quiz-option" data-correct="false">The model of the world is known</li>
+                        <li class="quiz-option" data-correct="false">The environment is stationary</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The assumption that "Time is continuous" is NOT made in the classical formulation of reinforcement learning. Classical RL operates under several key assumptions, but continuous time is not one of them: (1) **Discrete time steps**: Classical RL assumes that interactions between the agent and environment occur at discrete time steps t = 0, 1, 2, ..., where at each step the agent observes a state, takes an action, and receives a reward, (2) **Sequential decision making**: The discrete time framework naturally supports the sequential nature of decision making, where actions have consequences that unfold over subsequent time steps, (3) **Markov Decision Process (MDP)**: The classical formulation is based on discrete-time MDPs, which are defined over discrete time horizons rather than continuous time intervals. The other assumptions ARE typically made in classical RL: (4) **Deterministic world (B)**: Many classical RL algorithms assume deterministic state transitions, though this is often relaxed to stochastic transitions with known probabilities, (5) **Known model (C)**: Classical dynamic programming approaches like value iteration and policy iteration assume the transition probabilities and reward function are known (model-based RL), and (6) **Stationary environment (D)**: Classical RL assumes the environment's dynamics and reward structure don't change over time, meaning the transition probabilities and reward function remain constant. While modern RL has expanded to handle continuous time (continuous-time RL), stochastic environments, unknown models (model-free RL), and non-stationary settings, the classical formulation primarily deals with discrete-time, well-defined MDPs.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is a key assumption in the definition of a stationary Markov chain?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Transition probabilities depend on time</li>
+                        <li class="quiz-option" data-correct="true">Transition probabilities are independent of time</li>
+                        <li class="quiz-option" data-correct="false">The state space is infinite</li>
+                        <li class="quiz-option" data-correct="false">The action space is continuous</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key assumption in the definition of a stationary Markov chain is that transition probabilities are independent of time. This stationarity assumption is fundamental to the mathematical framework: (1) **Time-invariant transitions**: In a stationary Markov chain, the probability of transitioning from state i to state j remains constant across all time steps. This means P(X_{t+1} = j | X_t = i) = P(X_{s+1} = j | X_s = i) for all time steps t and s, (2) **Mathematical consistency**: Stationarity allows us to define a single transition matrix P where P_{ij} represents the probability of moving from state i to state j, regardless of when this transition occurs, (3) **Analytical tractability**: This assumption enables powerful mathematical analysis, including the computation of long-term behavior, steady-state distributions, and convergence properties that would be much more complex with time-dependent transitions, (4) **Markov property**: Combined with the Markov property (future states depend only on the current state, not the history), stationarity provides the foundation for analyzing the chain's behavior over time, and (5) **Practical applications**: Many real-world systems can be reasonably approximated as stationary over relevant time horizons, making this assumption practically useful. The other options are incorrect: option A is the opposite of stationarity; option C about infinite state spaces is not a requirement (Markov chains can have finite or infinite state spaces); and option D about continuous action spaces is not relevant to Markov chains, which are typically defined for state transitions without explicit actions (that would be Markov Decision Processes).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary object of search in the context of Markov Decision Process Theory?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">The distribution over actions</li>
+                        <li class="quiz-option" data-correct="false">The distribution over states</li>
+                        <li class="quiz-option" data-correct="false">The distribution over rewards</li>
+                        <li class="quiz-option" data-correct="false">The distribution over trajectories</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary object of search in the context of Markov Decision Process (MDP) Theory is the distribution over actions, which defines the policy. This is the fundamental goal of MDP theory: (1) **Policy definition**: A policy π(a|s) is a probability distribution over actions given states, representing the agent's strategy for selecting actions in each state. This distribution over actions is what we optimize to maximize expected rewards, (2) **Decision-making framework**: The entire purpose of solving an MDP is to find the optimal policy that tells the agent which action to take (or what probability distribution over actions to use) in each state, (3) **Optimization target**: All MDP solution methods (value iteration, policy iteration, Q-learning, etc.) ultimately aim to find the optimal action selection strategy, whether deterministic (selecting the best action) or stochastic (optimal probability distribution over actions), (4) **Control vs. prediction**: While we may estimate value functions or state distributions as intermediate steps, the ultimate goal is control - determining the best actions to take, which is captured by the policy as a distribution over actions, and (5) **Mathematical formulation**: The optimal policy π* = argmax_π E[∑ γᵗ r_t | π] is the distribution over actions that maximizes expected cumulative reward. The other options are not the primary search objects: the distribution over states (option B) is determined by the policy and environment dynamics, not something we directly optimize; the distribution over rewards (option C) is determined by the environment's reward function; and the distribution over trajectories (option D) is a consequence of the policy and environment, not the primary object we search for. We search for the policy (distribution over actions) that will induce the best trajectory distribution.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What is the purpose of discounting (gamma) in the context of reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the total reward over time</li>
+                        <li class="quiz-option" data-correct="true">To prioritize receiving rewards in the near term over the distant future</li>
+                        <li class="quiz-option" data-correct="false">To ensure the agent always receives a maximum reward</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for terminal states in the Markov Decision Process</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The purpose of discounting (gamma, γ) in reinforcement learning is to prioritize receiving rewards in the near term over the distant future. This serves several important functions: (1) **Time preference**: The discount factor γ ∈ [0,1] reflects the intuitive notion that immediate rewards are more valuable than future rewards. A reward received now is worth more than the same reward received later, similar to economic concepts of time value, (2) **Mathematical convergence**: Discounting ensures that the cumulative reward ∑_{t=0}^∞ γᵗ rₜ converges to a finite value even in infinite-horizon problems, making the optimization problem well-defined and computationally tractable, (3) **Uncertainty modeling**: Future rewards are inherently more uncertain than immediate rewards. Discounting accounts for this uncertainty by giving less weight to rewards that may not materialize due to unforeseen circumstances, (4) **Behavioral control**: Different values of γ lead to different behaviors - high γ (close to 1) makes the agent more far-sighted and strategic, while low γ makes the agent more myopic and focused on immediate gains, and (5) **Practical necessity**: In many real-world scenarios, getting rewards sooner is genuinely preferable due to opportunity costs, risk factors, or changing conditions. The other options are incorrect: option A suggests discounting increases total reward, but it actually weights rewards differently without changing their absolute values; option C implies guaranteed maximum rewards, but discounting is about temporal weighting, not reward maximization guarantees; and option D about eliminating terminal states is unrelated - discounting helps with convergence but doesn't eliminate the need for proper Markov Decision Process formulation.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the primary advantage of using a simulator in reinforcement learning, according to the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It eliminates the need for a reward function.</li>
+                        <li class="quiz-option" data-correct="true">It allows the agent to collect unlimited data without interacting with the real environment.</li>
+                        <li class="quiz-option" data-correct="false">It ensures that the agent always makes optimal decisions.</li>
+                        <li class="quiz-option" data-correct="false">It reduces the complexity of the state space.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary advantage of using a simulator in reinforcement learning is that it allows the agent to collect unlimited data without interacting with the real environment. This provides several critical benefits: (1) **Safe exploration**: The agent can explore potentially dangerous or costly actions in simulation without risking damage to real-world systems, equipment, or people. This is especially important in domains like robotics, autonomous vehicles, or medical applications, (2) **Unlimited experience**: Simulators can generate vast amounts of training data quickly and cheaply. The agent can run millions of episodes in simulation, gaining experience that would take years or be prohibitively expensive to collect in the real world, (3) **Accelerated learning**: Simulations can run much faster than real-time, allowing rapid iteration and experimentation with different algorithms, hyperparameters, and strategies, (4) **Cost efficiency**: Collecting data through simulation is typically much cheaper than real-world data collection, which may require expensive equipment, human supervision, or consumable resources, (5) **Controlled experimentation**: Simulators provide a controlled environment where specific scenarios can be repeated, variables can be isolated, and systematic testing can be conducted, and (6) **Parallel processing**: Multiple simulation instances can run simultaneously, further accelerating data collection and training. The other options are incorrect: option A about eliminating reward functions is false - simulators still need reward functions; option C about ensuring optimal decisions is wrong - simulators don't guarantee optimality, they just provide a safe training environment; and option D about reducing state space complexity is incorrect - simulators don't inherently simplify the problem structure.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is a key characteristic of model-free reinforcement learning algorithms?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They use a simulator to predict future states</li>
+                        <li class="quiz-option" data-correct="false">They learn the dynamics of the environment explicitly</li>
+                        <li class="quiz-option" data-correct="true">They do not attempt to learn or use a model of the environment's dynamics</li>
+                        <li class="quiz-option" data-correct="false">They rely on meta-heuristics for optimization</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key characteristic of model-free reinforcement learning algorithms is that they do not attempt to learn or use a model of the environment's dynamics. This fundamental distinction defines how these algorithms operate: (1) **Direct policy/value learning**: Model-free methods learn optimal policies or value functions directly from experience without building an explicit model of the environment. They learn what to do in each state without learning how the environment works, (2) **No transition model**: Unlike model-based methods, model-free algorithms don't try to learn the transition probabilities P(s'|s,a) or reward function R(s,a). Instead, they learn from the actual consequences of actions, (3) **Experience-driven**: These algorithms rely on trial-and-error interaction with the environment, using methods like temporal difference learning (Q-learning, SARSA) or policy gradients to improve performance based on observed rewards and state transitions, (4) **Computational simplicity**: By avoiding the complexity of learning and maintaining environment models, these methods can be simpler to implement and require less memory, especially in complex environments where accurate modeling would be difficult, (5) **Robustness to model errors**: Since they don't rely on learned models, model-free methods avoid potential issues with model inaccuracy that could compound over time in planning scenarios, and (6) **Examples**: Classic model-free algorithms include Q-learning, SARSA, policy gradient methods, and actor-critic methods. The other options are incorrect: option A describes model-based methods that use simulators; option B describes the opposite of model-free (learning dynamics explicitly); and option D about meta-heuristics is not a defining characteristic of model-free RL, which typically uses principled learning algorithms based on value functions or policy gradients.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the primary difference between on-policy and off-policy reinforcement learning algorithms?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">On-policy algorithms learn only from their own experience, while off-policy algorithms can learn from other experiences as well</li>
+                        <li class="quiz-option" data-correct="false">On-policy algorithms use meta-heuristics, while off-policy algorithms use value-based methods</li>
+                        <li class="quiz-option" data-correct="false">On-policy algorithms require a simulator, while off-policy algorithms do not</li>
+                        <li class="quiz-option" data-correct="false">On-policy algorithms are model-based, while off-policy algorithms are model-free</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between on-policy and off-policy reinforcement learning algorithms is that on-policy algorithms learn only from their own experience, while off-policy algorithms can learn from other experiences as well. This fundamental distinction has several important implications: (1) **Data source**: On-policy methods (like SARSA, policy gradient methods) learn from data generated by the current policy being improved. They evaluate and improve the same policy that generates the training data. Off-policy methods (like Q-learning, importance sampling methods) can learn from data generated by any policy, including older versions of the policy, other agents, or even human demonstrations, (2) **Exploration vs. exploitation**: On-policy methods must balance exploration and exploitation within the same policy, often using techniques like ε-greedy exploration. Off-policy methods can separate these concerns - they can use an exploratory behavior policy to collect data while learning about an optimal target policy, (3) **Sample efficiency**: Off-policy methods can potentially be more sample efficient because they can reuse old data and learn from diverse experiences. On-policy methods typically discard data from previous policy versions, (4) **Stability and convergence**: On-policy methods often have more stable learning dynamics because they're always learning about the policy they're currently executing. Off-policy methods can be less stable due to the mismatch between behavior and target policies, but often converge faster when they do converge, and (5) **Examples**: SARSA is on-policy (learns about the policy it follows), while Q-learning is off-policy (learns about the optimal policy while potentially following an exploratory policy). The other options are incorrect as they don't capture the fundamental policy-data relationship that defines this distinction.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        Which of the following factors is NOT considered a fundamental criterion for evaluating algorithms in reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Clock time</li>
+                        <li class="quiz-option" data-correct="false">Number of samples or steps of interactions with the environment</li>
+                        <li class="quiz-option" data-correct="false">Computational complexity</li>
+                        <li class="quiz-option" data-correct="true">Simple efficiency</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> "Simple efficiency" is NOT considered a fundamental criterion for evaluating algorithms in reinforcement learning because it is not a well-defined or standard metric in the RL evaluation framework. The legitimate fundamental criteria are: (1) **Clock time (wall-clock time)**: This measures the actual time it takes for an algorithm to run and find a solution. This is crucial in practical applications where training time matters, especially in real-time systems or when computational resources are limited, (2) **Number of samples or steps of interactions with the environment (sample complexity)**: This measures how many interactions with the environment the algorithm needs to achieve good performance. This is often the most critical metric in RL because environment interactions can be expensive, dangerous, or time-consuming in real-world applications, (3) **Computational complexity**: This refers to the computational resources (time and space) required by the algorithm as a function of problem parameters like state space size, action space size, etc. This includes both per-step computational cost and memory requirements, and (4) **Additional standard criteria** include: convergence guarantees, final performance quality, robustness to hyperparameters, and scalability to large state/action spaces. "Simple efficiency" is not a recognized term in reinforcement learning evaluation methodology. The term appears to be either a misstatement or a non-standard phrase that doesn't correspond to any established evaluation criterion. In contrast, the other three options represent well-established and fundamental ways that RL algorithms are compared and evaluated in both academic research and practical applications.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        In the context of reinforcement learning, which class of algorithms is described as being the least efficient in terms of required data volumes?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Policy gradients</li>
+                        <li class="quiz-option" data-correct="false">Value-based approaches</li>
+                        <li class="quiz-option" data-correct="false">Model-based algorithms</li>
+                        <li class="quiz-option" data-correct="true">Evolutionary algorithms</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Evolutionary algorithms are described as being the least efficient in terms of required data volumes in reinforcement learning. This data inefficiency stems from several fundamental characteristics of evolutionary approaches: (1) **Population-based learning**: Evolutionary algorithms maintain a population of candidate solutions (policies) and require evaluating the fitness of each individual in the population. This means they need multiple policy evaluations per generation, requiring significantly more environment interactions than single-agent methods, (2) **No gradient information**: Unlike policy gradient methods that use gradient information to efficiently update policies in promising directions, evolutionary algorithms rely on random mutations and selection. This "black-box" optimization approach requires extensive sampling to discover improvements, (3) **Full episode evaluation**: Each policy in the population typically needs to be evaluated over complete episodes to determine its fitness, leading to high sample requirements. There's no ability to learn incrementally from partial experiences like in temporal difference methods, (4) **Variance in evaluation**: The stochastic nature of both the environment and the evolutionary process means that fitness evaluations can be noisy, requiring multiple evaluations per individual or larger populations to get reliable estimates, and (5) **Generational learning**: Progress happens in discrete generations rather than continuous learning, which can be less efficient in utilizing each piece of experience. In contrast: **Model-based algorithms** are typically the most sample efficient as they learn environment models to plan ahead; **Value-based approaches** like Q-learning can learn efficiently from individual transitions; and **Policy gradients**, while less sample efficient than value methods, still learn from each experience through gradient updates. Evolutionary methods trade sample efficiency for other benefits like simplicity, parallelizability, and the ability to handle non-differentiable objectives.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is the purpose of using frame stacking in Atari games for reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the computational load</li>
+                        <li class="quiz-option" data-correct="true">To make the game fully observable</li>
+                        <li class="quiz-option" data-correct="false">To increase the number of actions available to the agent</li>
+                        <li class="quiz-option" data-correct="false">To compress the game images to a smaller size</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The purpose of using frame stacking in Atari games for reinforcement learning is to make the game fully observable by providing information about motion and temporal dynamics. This technique addresses several critical limitations of single-frame observations: (1) **Partial observability problem**: A single frame in many Atari games doesn't contain complete information about the game state. For example, in games like Pong or Breakout, knowing the current position of the ball isn't sufficient - you also need to know its velocity and direction of movement to make optimal decisions, (2) **Motion and velocity information**: By stacking consecutive frames (typically 4 frames), the agent can infer motion patterns, object velocities, and trajectories. This is crucial for predicting where objects will be in the next time step and making appropriate actions, (3) **Temporal context**: Frame stacking provides temporal context that helps the agent understand sequences of events and their relationships. This is essential for games where timing and sequence of actions matter, (4) **Markov property restoration**: While the underlying Atari game state is Markovian, individual frames are not sufficient to satisfy the Markov property. Frame stacking helps restore this property by including enough historical information to make optimal decisions based solely on the current "stacked" observation, and (5) **Standard implementation**: The typical approach stacks 4 consecutive grayscale frames, creating a 4-channel input to the neural network. This has become a standard preprocessing technique in deep RL for Atari games, first popularized by the DQN paper. The other options are incorrect: frame stacking doesn't reduce computational load (it actually increases it), doesn't change the action space, and while frames might be preprocessed for size, that's not the primary purpose of stacking them.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What are the two main ways an agent can learn its policy and value functions in reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Planning and Model-Free Reinforcement Learning</li>
+                        <li class="quiz-option" data-correct="false">Monte Carlo and TD Learning</li>
+                        <li class="quiz-option" data-correct="false">Griddy and Exploratory Algorithms</li>
+                        <li class="quiz-option" data-correct="false">Policy-Gradient and Value Iteration</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The two main ways an agent can learn its policy and value functions in reinforcement learning are **Planning** and **Model-Free Reinforcement Learning**. This represents the fundamental dichotomy in RL based on whether the agent has access to a model of the environment: (1) **Planning (Model-Based RL)**: In planning, the agent has access to a model of the environment that describes the transition dynamics P(s',r|s,a) and reward function R(s,a). With this model, the agent can: simulate experiences without interacting with the real environment, use dynamic programming methods like value iteration and policy iteration, plan ahead by considering future states and their consequences, and achieve high sample efficiency since the model allows "free" simulated experience. Examples include value iteration, policy iteration, Monte Carlo Tree Search (MCTS), and model-based policy optimization, (2) **Model-Free Reinforcement Learning**: In model-free RL, the agent learns directly from interactions with the environment without building an explicit model. The agent: learns value functions or policies directly from experience, uses methods like temporal difference learning, Monte Carlo methods, or policy gradients, requires real environment interactions for all learning, and is often more robust to model errors since no model is assumed. Examples include Q-learning, SARSA, policy gradient methods, and actor-critic algorithms. The other options represent subcategories or specific methods within these two main approaches: **Monte Carlo and TD Learning** are both model-free methods; **Policy-Gradient and Value Iteration** represent specific techniques rather than the two fundamental approaches; and **"Griddy and Exploratory Algorithms"** is not a standard classification in RL literature. The planning vs. model-free distinction is fundamental because it determines whether the agent needs to learn or have access to environment dynamics.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is the primary reason for using a stochastic policy in reinforcement learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To ensure deterministic action selection</li>
+                        <li class="quiz-option" data-correct="true">To avoid getting stuck in local optima during exploration</li>
+                        <li class="quiz-option" data-correct="false">To simplify the computation of gradients</li>
+                        <li class="quiz-option" data-correct="false">To directly output probabilities from the neural network</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary reason for using a stochastic policy in reinforcement learning is to **avoid getting stuck in local optima during exploration**. This fundamental benefit addresses several critical challenges in RL: (1) **Exploration vs. exploitation trade-off**: Stochastic policies naturally provide exploration by maintaining probability distributions over actions rather than always selecting the seemingly best action. This randomness helps the agent discover potentially better strategies that might not be apparent from current knowledge, (2) **Escaping local optima**: Deterministic policies can get trapped in suboptimal behaviors where the agent consistently chooses actions that seem locally optimal but prevent discovery of globally better strategies. Stochasticity provides a mechanism to occasionally try different actions and potentially escape these traps, (3) **Handling uncertainty**: In environments with uncertainty or when the agent's knowledge is incomplete, maintaining probability distributions over actions allows for more robust decision-making rather than committing to single "best" actions, (4) **Policy gradient optimization**: Stochastic policies enable smooth optimization landscapes for policy gradient methods. The randomness allows for continuous policy improvements through gradient ascent on expected returns, and (5) **Partial observability**: In partially observable environments, stochastic policies can be more effective as they account for the inherent uncertainty about the true state of the environment. The other options are incorrect: **Option A** contradicts the definition of stochasticity; **Option C** is incorrect because stochastic policies actually complicate gradient computation through techniques like REINFORCE or reparameterization tricks; **Option D** describes an implementation detail rather than the fundamental reason for using stochastic policies. While neural networks can output probability distributions, this is a means to implement stochastic policies, not the primary motivation for using them.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the primary method used by TD Gammon to learn how to play backgammon?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Handcrafted rules and search trees</li>
+                        <li class="quiz-option" data-correct="true">Temporal difference learning combined with a neural network</li>
+                        <li class="quiz-option" data-correct="false">Explicit symbolic reasoning</li>
+                        <li class="quiz-option" data-correct="false">Policy optimization methods</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> TD Gammon used **temporal difference learning combined with a neural network** as its primary learning method. This groundbreaking system, developed by Gerald Tesauro in the early 1990s, demonstrated several key innovations: (1) **Temporal Difference Learning**: TD Gammon employed TD(λ) learning, specifically a variant of temporal difference learning that updates value estimates based on the difference between successive predictions. The system learned to evaluate board positions by comparing its current evaluation with evaluations of future positions reached through play, (2) **Neural Network Function Approximation**: Instead of using traditional lookup tables (which would be impractical for backgammon's enormous state space), TD Gammon used a multi-layer perceptron neural network to approximate the value function. The network took the board position as input and output an evaluation of how good that position was, (3) **Self-Play Learning**: The system learned entirely through self-play, playing millions of games against itself and using the TD learning algorithm to gradually improve its position evaluation. This was remarkable because it required no human expertise or handcrafted features beyond the basic board representation, (4) **Bootstrapping**: The TD learning approach allowed the system to learn from incomplete game sequences, updating value estimates based on intermediate positions rather than waiting for final game outcomes, and (5) **Historical Significance**: TD Gammon achieved master-level play and was one of the first major successes of combining neural networks with reinforcement learning, predating and inspiring much of modern deep RL. The other options are incorrect: **handcrafted rules** were minimal in TD Gammon; **symbolic reasoning** was not used; and while the learned policy was optimized, it wasn't through explicit **policy optimization methods** but rather through value function learning that informed move selection.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        Why is Go considered a challenging game for AI compared to chess?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Go has fewer legal moves per turn than chess</li>
+                        <li class="quiz-option" data-correct="true">The branching factor in Go is significantly higher than in chess</li>
+                        <li class="quiz-option" data-correct="false">Go requires less computational power than chess</li>
+                        <li class="quiz-option" data-correct="false">Chess has a more complex evaluation function than Go</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Go is considered a challenging game for AI compared to chess primarily because **the branching factor in Go is significantly higher than in chess**. This fundamental difference creates several computational and strategic challenges: (1) **Massive Branching Factor**: In chess, there are typically around 35 legal moves per position on average. In Go, there can be up to 361 possible moves (one for each intersection on the 19×19 board), with an average branching factor of around 250. This exponential increase makes traditional search algorithms computationally intractable, (2) **State Space Complexity**: The total number of possible board positions in Go is estimated to be around 10^170, compared to approximately 10^50 in chess. This astronomical difference means that exhaustive search or even deep lookahead becomes impossible with traditional methods, (3) **Evaluation Function Difficulty**: Unlike chess, where material count and positional factors can provide reasonable position evaluations, Go positions are extremely difficult to evaluate. The value of stones depends on complex patterns, influence, territory potential, and strategic concepts that are hard to quantify algorithmically, (4) **Long-term Strategic Planning**: Go games can last 200+ moves with strategic implications that span the entire game. The delayed consequences of moves make it difficult to assess the immediate value of positions, and (5) **Pattern Recognition**: Go requires sophisticated pattern recognition and intuitive understanding of complex spatial relationships, which were difficult for traditional AI approaches to handle effectively. This is why breakthrough systems like AlphaGo required revolutionary approaches combining deep neural networks with Monte Carlo Tree Search, rather than the traditional minimax search algorithms that worked well for chess. The other options are incorrect: Go actually has **more** legal moves per turn, requires **more** computational power, and has a **more complex** evaluation function than chess.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 16 -->
+                <div class="quiz-card" id="question-16" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">16</span>
+                        What is the key innovation of Monte Carlo Tree Search (MCTS) in Go programs?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It uses a perfect evaluation function</li>
+                        <li class="quiz-option" data-correct="false">It searches the entire game tree exhaustively</li>
+                        <li class="quiz-option" data-correct="true">It samples random games to focus on promising moves</li>
+                        <li class="quiz-option" data-correct="false">It relies on handcrafted rules for evaluation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The key innovation of Monte Carlo Tree Search (MCTS) in Go programs is that **it samples random games to focus on promising moves**. This revolutionary approach addressed the fundamental challenges of Go through several key mechanisms: (1) **Monte Carlo Sampling**: Instead of trying to evaluate positions using complex heuristics, MCTS plays out random games (called rollouts or playouts) from a given position to the end of the game. The win/loss results of these random games provide statistical estimates of how good different moves are, (2) **Selective Tree Expansion**: MCTS doesn't search all possible moves equally. Instead, it uses the Upper Confidence Bound (UCB) formula to balance exploration of new moves with exploitation of moves that have shown promise in previous simulations. This allows the algorithm to focus computational resources on the most promising parts of the game tree, (3) **Four-Phase Algorithm**: MCTS operates through four main phases: **Selection** (navigate down the tree using UCB), **Expansion** (add new nodes to the tree), **Simulation** (play random games from new positions), and **Backpropagation** (update statistics based on game outcomes), (4) **No Evaluation Function Required**: Unlike traditional minimax search, MCTS doesn't need a sophisticated position evaluation function. The random playouts provide the evaluation, which is particularly valuable in Go where creating good evaluation functions is extremely difficult, (5) **Anytime Algorithm**: MCTS can be stopped at any time and will return the best move found so far, making it practical for real-time play with computational constraints, and (6) **Statistical Confidence**: By running many random simulations, MCTS builds statistical confidence about which moves are likely to be good, automatically focusing more search effort on promising variations. This approach was revolutionary for Go because it bypassed the need for complex position evaluation while still providing effective move selection through statistical sampling. The other options are incorrect: MCTS doesn't use a perfect evaluation function, doesn't search exhaustively, and doesn't rely primarily on handcrafted rules.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 17 -->
+                <div class="quiz-card" id="question-17" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">17</span>
+                        What is a key difference between AlphaGo and AlphaZero in terms of learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">AlphaZero uses human data for training</li>
+                        <li class="quiz-option" data-correct="false">AlphaGo learns purely from self-play</li>
+                        <li class="quiz-option" data-correct="true">AlphaZero uses a single neural network for both policy and value</li>
+                        <li class="quiz-option" data-correct="false">AlphaGo does not use Monte Carlo Tree Search (MCTS)</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key difference between AlphaGo and AlphaZero in terms of learning is that **AlphaZero uses a single neural network for both policy and value**, while AlphaGo used separate networks. This architectural difference represents several important innovations: (1) **Network Architecture**: AlphaGo initially used two separate neural networks - a policy network to predict good moves and a value network to evaluate positions. AlphaZero simplified this to a single network with two output heads: one for policy (move probabilities) and one for value (position evaluation). This shared representation allows the network to learn more efficiently by sharing features between the two tasks, (2) **Learning Paradigm**: AlphaGo was initially trained using supervised learning on human expert games before being refined through self-play. AlphaZero, in contrast, learns entirely from self-play from scratch, starting with random play and gradually improving without any human knowledge beyond the game rules, (3) **Training Efficiency**: The single network architecture in AlphaZero is more computationally efficient and allows for better feature sharing between policy and value estimation. The shared trunk of the network learns representations that are useful for both predicting good moves and evaluating positions, (4) **Generalization**: AlphaZero's approach proved to be more general, successfully mastering multiple games (Go, Chess, Shogi) using the same algorithm and architecture, whereas AlphaGo was specifically designed for Go, and (5) **Simplicity**: The unified architecture eliminates the need to balance and coordinate between separate networks, simplifying the training process and reducing the complexity of the overall system. The other options are incorrect: **AlphaGo** (not AlphaZero) initially used human data for training; **AlphaZero** (not AlphaGo) learns purely from self-play; and both systems use MCTS as a core component of their search strategy.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
