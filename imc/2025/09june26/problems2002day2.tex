@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{9th IMC 2002, July 19 -- 25, Warsaw, Poland}
+
+\section*{Second Day}
+
+\subsection*{Problem 1}
+Compute the determinant of the $n \times n$ matrix $A = [a_{ij}]$, where
+\[
+a_{ij} =
+    \begin{cases}
+        (-1)^{|i-j|}, & \text{if } i \ne j, \\
+        2, & \text{if } i = j.
+    \end{cases}
+\]
+
+\subsection*{Problem 2}
+
+Two hundred students participated in a mathematical contest.
+They had 6 problems to solve. It is known that each problem was correctly solved by at least 120 participants.
+Prove that there must be two participants such that every problem was solved by
+at least one of these two students.
+
+\subsection*{Problem 3}
+
+For each $n \ge 1$ define
+\[
+    a_n = \sum_{k=0}^\infty \frac{k^n}{k!}, \qquad
+    b_n = \sum_{k=0}^\infty \frac{(-1)^k k^n}{k!}.
+\]
+Show that $a_n \cdot b_n$ is an integer.
+
+
+\subsection*{Problem 4}
+In the tetrahedron $OABC$, let $\angle BOC = \alpha$, $\angle COA = \beta$, $\angle AOB = \gamma$.
+Let $\sigma$ be the angle between the faces $OAB$ and $OAC$,
+and $\tau$ the angle between faces $OBA$ and $OBC$. Prove that
+\[
+    \gamma > \beta \cos \sigma + \alpha \cos \tau.
+\]
+
+\subsection*{Problem 5}
+
+Let $A$ be an $n \times n$ complex matrix with $n > 1$. Prove that:
+\[
+    A\bar{A} = I_n \iff \exists S \in \mathrm{GL}_n(\mathbb{C}) \text{ such that } A = S \bar{S}^{-1}.
+\]
+(\(\mathrm{GL}_n(\mathbb{C})\) denotes the set of all \(n \times n\) complex invertible matrices.)
+
+\subsection*{Problem 6}
+
+Let $f : \mathbb{R}^n \to \mathbb{R}$ be convex, with gradient $\nabla f$ defined everywhere and Lipschitz continuous:
+\[
+\exists L > 0 \quad \text{s.t.} \quad \forall x_1, x_2 \in \mathbb{R}^n,\quad \|\nabla f(x_1) - \nabla f(x_2)\| \le L \|x_1 - x_2\|.
+\]
+Prove:
+\[
+\|\nabla f(x_1) - \nabla f(x_2)\|^2 \le L \langle \nabla f(x_1) - \nabla f(x_2), x_1 - x_2 \rangle.
+\]
+
+\end{document}

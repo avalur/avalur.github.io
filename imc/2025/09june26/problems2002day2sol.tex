@@ -1,0 +1,165 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{9th IMC 2002, July 19 -- 25, Warsaw, Poland}
+
+\section*{Second Day}
+
+\subsection*{Problem 1}
+Compute the determinant of the $n \times n$ matrix $A = [a_{ij}]$, where
+\[
+a_{ij} =
+    \begin{cases}
+        (-1)^{|i-j|}, & \text{if } i \ne j, \\
+        2, & \text{if } i = j.
+    \end{cases}
+\]
+
+\textbf{Solution.}
+Add the second row to the first one, then add the third row to the second one, and so on, until adding the $n$th row to the $(n-1)$th. The determinant remains unchanged, and the matrix becomes:
+
+\[
+\begin{vmatrix}
+2 & -1 & +1 & \cdots & \pm 1 & \mp 1 \\
+-1 & 2 & -1 & \cdots & \mp 1 & \pm 1 \\
++1 & -1 & 2 & \cdots & \pm 1 & \mp 1 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+\mp 1 & \pm 1 & \mp 1 & \cdots & 2 & -1 \\
+\pm 1 & \mp 1 & \pm 1 & \cdots & -1 & 2 \\
+\end{vmatrix}
+=
+\begin{vmatrix}
+1 & 1 & 0 & \cdots & 0 & 0 \\
+0 & 1 & 1 & \cdots & 0 & 0 \\
+0 & 0 & 1 & \cdots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & 1 & 1 \\
+\pm 1 & \mp 1 & \pm 1 & \cdots & -1 & 2 \\
+\end{vmatrix}
+\]
+
+Now subtract the first column from the second, then subtract the new second from the third, and so on until subtracting the $(n-1)$th from the $n$th column. The resulting matrix is:
+
+\[
+\begin{vmatrix}
+1 & 0 & 0 & \cdots & 0 & 0 \\
+0 & 1 & 0 & \cdots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & 1 & 0 \\
+0 & 0 & 0 & \cdots & 0 & n+1 \\
+\end{vmatrix} = n + 1.
+\]
+
+\subsection*{Problem 2}
+
+Two hundred students participated in a mathematical contest.
+They had 6 problems to solve. It is known that each problem was correctly solved by at least 120 participants.
+Prove that there must be two participants such that every problem was solved by
+at least one of these two students.
+
+\textbf{Solution.}
+For each pair of students, consider the set of problems not solved by either of them. There are $\binom{200}{2} = 19900$ such pairs.
+
+For each problem, at most 80 students did not solve it. Thus for each problem, at most $\binom{80}{2} = 3160$ pairs of students both failed to solve it. So 6 problems contribute at most $6 \cdot 3160 = 18960$ such sets.
+
+Hence at least $19900 - 18960 = 940$ pairs solved all problems between them. Therefore, at least one such pair exists.
+
+\subsection*{Problem 3}
+
+For each $n \ge 1$ define
+\[
+    a_n = \sum_{k=0}^\infty \frac{k^n}{k!}, \qquad
+    b_n = \sum_{k=0}^\infty \frac{(-1)^k k^n}{k!}.
+\]
+Show that $a_n \cdot b_n$ is an integer.
+
+\textbf{Solution.}
+We show by induction that $a_n/e$ and $b_n e$ are integers.
+
+For $n = 0$, $a_0 = e$, $b_0 = 1/e$.
+
+Assume $a_0, \dotsc, a_n$ and $b_0, \dotsc, b_n$ satisfy the condition. Then:
+\[
+a_{n+1} = \sum_{k=0}^\infty \frac{(k+1)^n}{k!} = \sum_{m=0}^n \binom{n}{m} a_m,
+\]
+and similarly:
+\[
+b_{n+1} = -\sum_{m=0}^n \binom{n}{m} b_m.
+\]
+So both sequences satisfy integer recurrence relations, implying $a_n b_n$ is rational, and in fact an integer.
+
+\subsection*{Problem 4}
+In the tetrahedron $OABC$, let $\angle BOC = \alpha$, $\angle COA = \beta$, $\angle AOB = \gamma$.
+Let $\sigma$ be the angle between the faces $OAB$ and $OAC$,
+and $\tau$ the angle between faces $OBA$ and $OBC$. Prove that
+\[
+    \gamma > \beta \cos \sigma + \alpha \cos \tau.
+\]
+
+\textbf{Solution.}
+Assume $OA = OB = OC = 1$. The spherical areas of triangle sections $AOB, BOC, COA$ are $\frac{1}{2}\gamma, \frac{1}{2}\alpha, \frac{1}{2}\beta$.
+
+Project arcs onto plane $OAB$. The signed areas of the projections of sectors $AOC$ and $BOC$ are $\frac{1}{2} \beta \cos \sigma$ and $\frac{1}{2} \alpha \cos \tau$. Their sum is less than the area of sector $AOB$, i.e., $\frac{1}{2} \gamma$. Multiply by 2 to get the result.
+
+\subsection*{Problem 5}
+
+Let $A$ be an $n \times n$ complex matrix with $n > 1$. Prove that:
+\[
+    A\bar{A} = I_n \iff \exists S \in \mathrm{GL}_n(\mathbb{C}) \text{ such that } A = S \bar{S}^{-1}.
+\]
+(\mathrm{GL}_n(\mathbb{C}) denotes the set of all complex invertible matrices \(n \times n\).)
+
+\textbf{Solution.}
+$(\Leftarrow)$ is trivial: $A = S \bar{S}^{-1} \Rightarrow AA = I$.
+
+$(\Rightarrow)$: Pick $w \in \mathbb{C} \setminus \{0\}$, let $S = wA + w I$. Then:
+\[
+AS = A(wA + wI) = w I + w A = S.
+\]
+If $S$ is not invertible, then $1/w S = A - (w/w)I$ is singular $\Rightarrow w/w$ is eigenvalue of $A$. But $w/w$ can be any complex number on the unit circle. Hence there exists such $w$ for which $S$ is invertible.
+
+\subsection*{Problem 6}
+
+Let $f : \mathbb{R}^n \to \mathbb{R}$ be convex, with gradient $\nabla f$ defined everywhere and Lipschitz continuous:
+\[
+\exists L > 0 \quad \text{s.t.} \quad \forall x_1, x_2 \in \mathbb{R}^n,\quad \|\nabla f(x_1) - \nabla f(x_2)\| \le L \|x_1 - x_2\|.
+\]
+Prove:
+\[
+\|\nabla f(x_1) - \nabla f(x_2)\|^2 \le L \langle \nabla f(x_1) - \nabla f(x_2), x_1 - x_2 \rangle.
+\]
+
+\textbf{Solution.}
+Define
+\[
+g(x) = f(x) - f(x_1) - \langle \nabla f(x_1), x - x_1 \rangle.
+\]
+Then $g$ is convex, differentiable, $g(x_1) = 0$, $\nabla g(x_1) = 0$. Define:
+\[
+y_0 = x_2 - \frac{1}{L} \nabla g(x_2), \quad y(t) = y_0 + t(x_2 - y_0).
+\]
+Using convexity and integration:
+\[
+g(x_2) = g(y_0) + \int_0^1 \langle \nabla g(y(t)), x_2 - y_0 \rangle dt \ge \frac{1}{2L} \|\nabla g(x_2)\|^2.
+\]
+Substituting back:
+\[
+f(x_2) - f(x_1) - \langle \nabla f(x_1), x_2 - x_1 \rangle \ge \frac{1}{2L} \|\nabla f(x_2) - \nabla f(x_1)\|^2.
+\]
+Exchanging $x_1 \leftrightarrow x_2$ and averaging yields the result.
+
+\end{document}
