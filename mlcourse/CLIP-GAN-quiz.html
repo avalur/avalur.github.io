@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIP, fine-tuning and GANs Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>CLIP, fine-tuning and GANs</h1>
+            <p>Test your understanding</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="computer-vision-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">CLIP, fine-tuning and GANs for self-testing</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">17</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the primary motivation for using self-supervised learning in image classification tasks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the computational cost of training models</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for any data preprocessing</li>
+                        <li class="quiz-option" data-correct="true">To address the challenges of collecting and annotating large datasets</li>
+                        <li class="quiz-option" data-correct="false">To improve the accuracy of supervised learning models</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary motivation for using self-supervised learning in image classification tasks is **to address the challenges of collecting and annotating large datasets**. This approach has become increasingly important in modern machine learning: (1) **Annotation bottleneck**: Traditional supervised learning requires massive amounts of manually labeled data, which is expensive, time-consuming, and often requires domain expertise. For image classification, human annotators must examine millions of images and assign correct labels, creating a significant bottleneck in model development, (2) **Scalability issues**: As model complexity increases, the need for labeled data grows exponentially. Self-supervised learning allows models to learn meaningful representations from unlabeled data, which is abundant and freely available, enabling training on much larger datasets, (3) **Pretext tasks**: Self-supervised learning creates artificial supervision signals from the data itself through pretext tasks like image rotation prediction, jigsaw puzzle solving, or masked image modeling. These tasks help the model learn useful visual representations without human annotations, (4) **Transfer learning benefits**: Models pre-trained with self-supervised methods on large unlabeled datasets can be fine-tuned on smaller labeled datasets for specific tasks, often achieving performance comparable to or better than purely supervised approaches while requiring significantly fewer labeled examples, (5) **Cost reduction**: By reducing dependency on labeled data, self-supervised learning dramatically reduces the cost and time required for dataset preparation, making it particularly valuable for domains where expert annotation is expensive (medical imaging, scientific data), (6) **Data abundance**: While labeled data is scarce and expensive, unlabeled images are virtually unlimited through web scraping, institutional datasets, and everyday image collection. Self-supervised learning leverages this abundance effectively. The other options are incorrect: While self-supervised learning may have computational benefits (option A), its primary motivation is addressing data annotation challenges; it doesn't eliminate preprocessing needs (option B); and while it can lead to good performance (option D), the main motivation is reducing dependence on labeled data rather than improving supervised learning directly.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        What is the primary difference between fine-tuning and linear probing in deep learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Fine-tuning changes the backbone weights, while linear probing freezes them</li>
+                        <li class="quiz-option" data-correct="false">Fine-tuning freezes the backbone weights, while linear probing changes them</li>
+                        <li class="quiz-option" data-correct="false">Fine-tuning uses a different loss function than linear probing</li>
+                        <li class="quiz-option" data-correct="false">Fine-tuning and linear probing are identical processes</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between fine-tuning and linear probing is that **fine-tuning changes the backbone weights, while linear probing freezes them**. This fundamental distinction defines two different approaches to transfer learning: (1) **Fine-tuning approach**: In fine-tuning, the entire pre-trained model (backbone + classifier) is trainable. During training, gradients flow through the entire network, updating both the pre-trained backbone weights and the new classifier head. This allows the model to adapt the learned representations to the specific downstream task, potentially achieving better task-specific performance, (2) **Linear probing approach**: In linear probing, the pre-trained backbone network is frozen (weights remain unchanged), and only a new linear classifier layer is trained on top of the fixed feature representations. This approach treats the backbone as a feature extractor and only learns how to map these fixed features to the target classes, (3) **Computational differences**: Fine-tuning requires more computational resources (memory and time) since gradients must be computed and stored for the entire network. Linear probing is much faster and memory-efficient as it only trains the small classifier layer, (4) **Data requirements**: Linear probing works well with limited labeled data and is less prone to overfitting since fewer parameters are being updated. Fine-tuning typically requires more labeled data to avoid overfitting but can achieve better performance when sufficient data is available, (5) **Evaluation purpose**: Linear probing is often used to evaluate the quality of pre-trained representations - if a simple linear classifier performs well on frozen features, it indicates the backbone learned good general representations, (6) **Practical considerations**: Linear probing is preferred for quick prototyping, limited computational resources, or small datasets. Fine-tuning is chosen when maximum performance is needed and sufficient data/compute is available. The other options are incorrect: Option B reverses the correct relationship; Option C is wrong as both typically use the same loss functions (e.g., cross-entropy for classification); Option D ignores the fundamental differences between these transfer learning strategies.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        Which method is generally better for out-of-distribution tasks in deep learning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Fine-tuning</li>
+                        <li class="quiz-option" data-correct="true">Linear probing</li>
+                        <li class="quiz-option" data-correct="false">Both methods are equally effective</li>
+                        <li class="quiz-option" data-correct="false">Neither method is suitable for out-of-distribution tasks</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **Linear probing** is generally better for out-of-distribution (OOD) tasks in deep learning. This counterintuitive result has important implications for transfer learning and model robustness: (1) **Preservation of general representations**: Linear probing keeps the pre-trained backbone frozen, preserving the broad, generalizable features learned during pre-training on large, diverse datasets like ImageNet. These general-purpose representations are more likely to be useful across different domains and distributions than task-specific adaptations, (2) **Prevents overfitting to specific distributions**: By only training the classifier layer, linear probing avoids adapting the feature representations to the specific training distribution. This prevents the model from becoming too specialized to the in-distribution data, which could hurt performance when encountering different distributions, (3) **Maintains learned robustness**: Pre-trained models often learn robust features that capture fundamental visual patterns. Fine-tuning can compromise this robustness by adapting features too specifically to the target domain, potentially losing the ability to handle variations present in OOD data, (4) **Feature transferability**: The frozen backbone features retain their ability to capture general visual patterns (edges, textures, shapes, objects) that may be present across different distributions. Fine-tuning might adapt these features in ways that reduce their transferability to unseen distributions, (5) **Empirical evidence**: Research studies have consistently shown that linear probing often maintains better performance on distribution shifts compared to fine-tuning, particularly when the OOD data differs significantly from the training distribution. This includes domain shifts (natural images → medical images), style transfers, and corrupted inputs, (6) **Regularization effect**: Linear probing acts as a form of implicit regularization that prevents the model from losing the general-purpose features that make it robust to distribution shifts. The other options are incorrect: Fine-tuning (option A) typically performs worse on OOD tasks due to overfitting to the target distribution; the methods are not equally effective (option C) as empirical evidence consistently favors linear probing; and both methods are suitable for OOD tasks (option D), with linear probing being superior.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the relationship between in-domain and out-of-domain vectors as described in the text?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They are parallel</li>
+                        <li class="quiz-option" data-correct="true">They are perpendicular</li>
+                        <li class="quiz-option" data-correct="false">They are identical</li>
+                        <li class="quiz-option" data-correct="false">They are inversely proportional</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **In-domain and out-of-domain vectors are perpendicular** to each other. This geometric relationship has important implications for understanding how models behave across different domains: (1) **Orthogonal feature spaces**: The perpendicular relationship indicates that in-domain and out-of-domain vectors occupy orthogonal subspaces in the feature representation space. This means that the features that are most relevant for in-domain performance are geometrically independent from those that matter for out-of-domain generalization, (2) **Independence of domain-specific information**: When vectors are perpendicular, their dot product is zero, indicating that they share no common directional information. This suggests that the information captured by in-domain vectors does not directly contribute to out-of-domain performance, and vice versa, (3) **Implications for transfer learning**: This perpendicular relationship helps explain why fine-tuning (which adapts features toward in-domain directions) can hurt out-of-domain performance - by moving representations closer to in-domain directions, we may be moving them away from the orthogonal out-of-domain directions, (4) **Linear probing advantage**: The perpendicular relationship supports why linear probing works better for out-of-domain tasks - by keeping the backbone frozen, we preserve the original feature space that may contain both in-domain and out-of-domain relevant directions, rather than biasing toward just the in-domain directions, (5) **Geometric interpretation**: In high-dimensional spaces, perpendicular vectors represent maximum independence - they are as "different" as possible while still being in the same space. This geometric property reflects the fundamental challenge of domain generalization, (6) **Mathematical significance**: The perpendicular relationship (orthogonality) is a precise mathematical concept that provides quantitative insight into why domain transfer is challenging and why certain transfer learning strategies work better than others. The other options are incorrect: Parallel vectors (option A) would suggest similar directional information, which contradicts domain differences; identical vectors (option C) would mean no domain gap exists; inversely proportional (option D) refers to scalar relationships, not vector orientations.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        What happens to the projection on out-of-domain space during fine-tuning, according to the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It increases</li>
+                        <li class="quiz-option" data-correct="false">It decreases</li>
+                        <li class="quiz-option" data-correct="true">It remains unchanged</li>
+                        <li class="quiz-option" data-correct="false">It becomes zero</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **The projection on out-of-domain space remains unchanged during fine-tuning.** This counterintuitive finding has profound implications for understanding why fine-tuning can hurt out-of-domain performance despite improving in-domain results: (1) **Orthogonal decomposition**: Since in-domain and out-of-domain vectors are perpendicular (as established in the previous question), any vector can be decomposed into orthogonal components along these directions. During fine-tuning, changes occur only along the in-domain direction, leaving the out-of-domain component unaffected, (2) **Mathematical invariance**: Due to the orthogonal relationship, when the model parameters are updated during fine-tuning to improve in-domain performance, these updates move the representations in directions that are mathematically orthogonal to the out-of-domain space. This means the projection onto the out-of-domain subspace remains constant, (3) **Why fine-tuning doesn't help OOD**: This unchanged projection explains why fine-tuning doesn't improve out-of-domain performance - the model isn't learning anything new about the out-of-domain directions. All the learning is happening in the perpendicular in-domain space, (4) **Geometric intuition**: Imagine a 2D plane where you can move along the x-axis (in-domain) or y-axis (out-of-domain). Fine-tuning moves you along the x-axis, but your y-coordinate (out-of-domain projection) stays the same. You're getting better at x-tasks but not y-tasks, (5) **Implications for representation learning**: This finding suggests that the out-of-domain capabilities of a model are essentially "frozen" during fine-tuning. The pre-trained representations already contain all the out-of-domain information they will ever have, (6) **Linear probing advantage explained**: Since linear probing doesn't change the backbone representations, it preserves both the in-domain and out-of-domain projections from the pre-trained model, maintaining the original out-of-domain capabilities while still allowing for task-specific classification. The other options are incorrect: The projection doesn't increase (option A) because fine-tuning doesn't add out-of-domain information; it doesn't decrease (option B) due to orthogonality preserving the projection; it doesn't become zero (option D) as that would require the entire out-of-domain component to be eliminated.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the primary issue with random initialization in the first steps of fine-tuning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It leads to overfitting</li>
+                        <li class="quiz-option" data-correct="true">It makes the backbone worse</li>
+                        <li class="quiz-option" data-correct="false">It increases computational cost</li>
+                        <li class="quiz-option" data-correct="false">It improves out-of-domain performance</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **Random initialization makes the backbone worse in the first steps of fine-tuning.** This is a critical insight that helps explain why fine-tuning can be problematic for maintaining pre-trained model quality: (1) **Disruption of pre-trained features**: When new layers (like classification heads) are randomly initialized, they produce random gradients during backpropagation. These random gradients flow back through the pre-trained backbone, causing updates that move the carefully learned representations in arbitrary directions, potentially degrading the quality of the pre-trained features, (2) **Mismatch between random head and learned backbone**: The randomly initialized classification head has no knowledge of the meaningful feature representations that the backbone has learned. This creates a severe mismatch where the head is trying to make sense of sophisticated features using random weights, leading to poor initial performance and chaotic gradient signals, (3) **Gradient noise propagation**: Random initialization creates high-magnitude, noisy gradients in the early training steps. These noisy gradients propagate back through the backbone, causing the pre-trained weights to drift away from their optimal pre-trained values before the head has had a chance to learn meaningful mappings, (4) **Loss of representation quality**: The backbone representations that were carefully optimized during pre-training on large datasets can be corrupted by the random gradient signals from the untrained head. This is particularly problematic because these representations encode valuable general knowledge that took significant computational resources to learn, (5) **Early training instability**: The combination of random initialization and frozen vs. unfrozen layer dynamics creates training instability in the initial epochs. The model must simultaneously learn to map features to outputs while potentially degrading the quality of those very features, (6) **Why linear probing avoids this**: Linear probing keeps the backbone completely frozen, preventing any degradation of pre-trained features. Only the classification layer learns, eliminating the destructive feedback loop between random initialization and backbone quality. The other options are incorrect: While overfitting (option A) can be a concern in fine-tuning, it's not the primary issue with random initialization specifically; computational cost (option C) is not significantly affected by random initialization; and random initialization certainly doesn't improve out-of-domain performance (option D) - it typically hurts it by degrading backbone quality.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is the main advantage of using the LPFT (Linear Problem Fine-Tuning) method?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It avoids changing the backbone entirely</li>
+                        <li class="quiz-option" data-correct="true">It achieves better results in both in-domain and out-of-domain tests</li>
+                        <li class="quiz-option" data-correct="false">It reduces the number of training steps required</li>
+                        <li class="quiz-option" data-correct="false">It eliminates the need for fine-tuning</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **LPFT (Linear Problem Fine-Tuning) achieves better results in both in-domain and out-of-domain tests.** This represents a significant breakthrough in transfer learning methodology, combining the benefits of both linear probing and fine-tuning while avoiding their respective limitations: (1) **Best of both worlds**: Traditional fine-tuning excels at in-domain performance but often hurts out-of-domain generalization. Linear probing maintains out-of-domain performance but may underperform on in-domain tasks. LPFT bridges this gap by achieving strong performance across both domains, (2) **Two-stage optimization strategy**: LPFT typically works by first performing linear probing to learn a good classification head without disturbing the backbone, then carefully fine-tuning the entire model. This staged approach prevents the random initialization problems discussed in previous questions while still allowing the backbone to adapt to the specific task, (3) **Preserving pre-trained knowledge**: By starting with a well-trained linear head, LPFT avoids the destructive early gradients that can degrade backbone quality. The pre-trained representations are preserved during the initial linear probing phase, and subsequent fine-tuning can make more informed updates, (4) **Improved gradient quality**: When fine-tuning begins after linear probing, the classification head already produces meaningful gradients that are aligned with the backbone's feature representations. This leads to more constructive updates to the backbone weights, (5) **Empirical validation**: Research has shown that LPFT consistently outperforms both pure linear probing and traditional fine-tuning across various benchmarks, demonstrating superior performance on both in-domain accuracy and out-of-domain robustness metrics, (6) **Practical implications**: This dual improvement makes LPFT particularly valuable for real-world applications where models need to perform well on their primary task while maintaining robustness to distribution shifts and novel scenarios. The other options are incorrect: LPFT doesn't avoid changing the backbone entirely (option A) - it does fine-tune the backbone after linear probing; it doesn't necessarily reduce training steps (option C) as it involves two stages; and it doesn't eliminate fine-tuning (option D) - rather, it makes fine-tuning more effective by combining it with linear probing.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        What is the primary advantage of using the zero-shot approach in the CLIP model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It requires a large dataset for training</li>
+                        <li class="quiz-option" data-correct="true">It eliminates the need for training examples</li>
+                        <li class="quiz-option" data-correct="false">It uses a small number of classes</li>
+                        <li class="quiz-option" data-correct="false">It performs better than all other models in every dataset</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **Zero-shot approach in CLIP eliminates the need for training examples.** This is the fundamental advantage that makes CLIP revolutionary in computer vision and represents a paradigm shift from traditional supervised learning: (1) **No task-specific training data required**: Unlike traditional machine learning approaches that require labeled training examples for each new task or dataset, CLIP's zero-shot capability allows it to classify images into categories it has never seen during training, simply by using natural language descriptions of those categories, (2) **Immediate deployment**: Zero-shot learning enables immediate application to new domains without the time, cost, and effort required to collect, label, and curate training datasets. This dramatically reduces the barrier to entry for applying AI to new problems, (3) **Leveraging pre-trained knowledge**: CLIP's zero-shot ability comes from its pre-training on massive image-text pairs from the internet. The model learns rich visual-semantic representations that generalize to new categories through natural language understanding, rather than requiring explicit training examples for each category, (4) **Flexible category definition**: With zero-shot learning, categories can be defined on-the-fly using natural language descriptions. This provides unprecedented flexibility compared to fixed classification heads that must be trained for specific, pre-defined categories, (5) **Scalability advantages**: Zero-shot learning scales naturally to an unlimited number of categories without additional training. Traditional approaches require retraining or fine-tuning for each new set of categories, making zero-shot much more efficient for diverse applications, (6) **Real-world applicability**: This capability is particularly valuable in scenarios where obtaining labeled training data is expensive, time-consuming, or impossible - such as rare object categories, specialized domains, or rapidly evolving classification needs, (7) **Generalization power**: Zero-shot performance demonstrates that the model has learned generalizable visual concepts rather than simply memorizing specific training examples, indicating stronger representation learning. The other options are incorrect: Requiring large datasets (option A) is actually a disadvantage, not an advantage; using a small number of classes (option C) is not related to zero-shot capability; and claiming better performance than all other models (option D) is both incorrect and not the primary advantage of zero-shot learning.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the primary purpose of normalizing embeddings in the described image classification process?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the dimensionality of the embeddings</li>
+                        <li class="quiz-option" data-correct="true">To ensure embeddings are on the same scale for accurate distance comparison</li>
+                        <li class="quiz-option" data-correct="false">To remove irrelevant features from the embeddings</li>
+                        <li class="quiz-option" data-correct="false">To speed up the classification process</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **Normalizing embeddings ensures they are on the same scale for accurate distance comparison.** This is crucial for the proper functioning of similarity-based classification systems like CLIP: (1) **Scale invariance**: Without normalization, embeddings can have vastly different magnitudes due to differences in input complexity, model architecture, or training dynamics. An image embedding might have a norm of 100 while a text embedding has a norm of 10. When computing similarity (like cosine similarity or dot product), these magnitude differences would dominate the comparison rather than the actual semantic similarity, (2) **Fair comparison across modalities**: In CLIP's multimodal setting, image and text embeddings are produced by different encoders (vision transformer vs. text transformer). These encoders may naturally produce embeddings with different scales. Normalization ensures that the comparison between image and text embeddings is based on direction/angle rather than magnitude, (3) **Cosine similarity equivalence**: When embeddings are normalized to unit length, computing their dot product is equivalent to computing cosine similarity. This measures the angle between vectors, which is a pure measure of semantic similarity independent of magnitude. This is mathematically expressed as: cos(θ) = (A·B)/(||A||·||B||), which simplifies to A·B when both vectors are normalized, (4) **Consistent distance metrics**: Normalization ensures that distance-based comparisons (like nearest neighbor search) work consistently across different embedding pairs. Without normalization, a high-magnitude embedding would appear "closer" to everything simply due to its scale, not its semantic content, (5) **Numerical stability**: Normalized embeddings help prevent numerical issues that can arise from very large or very small values during similarity computations, leading to more stable and reliable classification results, (6) **Training stability**: During training, normalization helps maintain stable gradients and prevents one modality from dominating the learning process due to scale differences, (7) **Interpretability**: Normalized embeddings make similarity scores more interpretable, as they represent pure angular similarity rather than being confounded by magnitude effects. The other options are incorrect: Normalization doesn't reduce dimensionality (option A) - it preserves all dimensions while adjusting magnitude; it doesn't remove features (option C) - all features remain but are rescaled; while it may have minor computational benefits, speed (option D) is not the primary purpose.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        What role does the 'logit scale' play in the classification process using the CLIP library?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It adjusts the embeddings to fit the model's input requirements</li>
+                        <li class="quiz-option" data-correct="false">It scales the logits to ensure probabilities sum to one</li>
+                        <li class="quiz-option" data-correct="true">It divides the logits by a temperature parameter to control the sharpness of the output distribution</li>
+                        <li class="quiz-option" data-correct="false">It normalizes the logits to prevent overfitting</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **The logit scale divides the logits by a temperature parameter to control the sharpness of the output distribution.** This is a crucial component in CLIP's design that affects how confident and discriminative the model's predictions are: (1) **Temperature scaling mechanism**: The logit scale in CLIP acts as a learnable temperature parameter (often denoted as τ or T) that divides the similarity scores (logits) before applying softmax. Mathematically, if s represents similarity scores, the final probabilities are computed as: P(class_i) = exp(s_i / T) / Σ_j exp(s_j / T), (2) **Controlling prediction confidence**: A smaller temperature (higher logit scale) makes the output distribution sharper and more confident - the model becomes more decisive in its predictions. A larger temperature (lower logit scale) makes the distribution softer and less confident, spreading probability mass more evenly across classes, (3) **Learnable parameter**: Unlike fixed temperature scaling used in some applications, CLIP's logit scale is learned during training. The model automatically discovers the optimal temperature that balances between being too confident (overconfident predictions) and too uncertain (underconfident predictions), (4) **Calibration benefits**: Proper temperature scaling helps calibrate the model's confidence to match its actual accuracy. This means that when CLIP says it's 90% confident about a prediction, it should be correct about 90% of the time in such cases, (5) **Training dynamics**: During training, the logit scale affects the gradients and learning dynamics. A well-tuned temperature helps the model learn more effectively by providing appropriate gradient magnitudes for the contrastive learning objective, (6) **Multimodal alignment**: In CLIP's contrastive learning setup, the temperature parameter is crucial for learning proper alignment between image and text embeddings. It determines how much the model should focus on the most similar pairs versus considering multiple potential matches, (7) **Practical impact**: The logit scale significantly affects practical performance - too high values can make the model overconfident and brittle, while too low values can make it indecisive and less useful for downstream applications. The other options are incorrect: It doesn't adjust embeddings themselves (option A) - it operates on similarity scores; probabilities always sum to one after softmax regardless of scaling (option B); and while it affects model behavior, it's not primarily a regularization technique to prevent overfitting (option D).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is the primary difference between generative and discriminative models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Generative models predict labels, while discriminative models generate data.</li>
+                        <li class="quiz-option" data-correct="true">Generative models sample from a distribution, while discriminative models predict labels based on input data.</li>
+                        <li class="quiz-option" data-correct="false">Generative models use deterministic methods, while discriminative models use probabilistic methods.</li>
+                        <li class="quiz-option" data-correct="false">Generative models focus on classification, while discriminative models focus on regression.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **Generative models sample from a distribution, while discriminative models predict labels based on input data.** This fundamental distinction defines the core purpose and functionality of each model type: (1) **Generative models learn data distributions**: Generative models learn the joint probability distribution P(X, Y) or the data distribution P(X). Their primary goal is to understand how the data is generated and can create new samples that resemble the training data. Examples include GANs (Generative Adversarial Networks), VAEs (Variational Autoencoders), and diffusion models, (2) **Discriminative models learn decision boundaries**: Discriminative models learn the conditional probability P(Y|X) - they focus on the boundary between different classes or the mapping from input to output. Their goal is to distinguish between different categories or predict target values. Examples include logistic regression, SVMs, and most neural network classifiers, (3) **Data generation vs. classification**: Generative models can create new data points by sampling from the learned distribution. For instance, a GAN trained on face images can generate new, realistic-looking faces. Discriminative models, on the other hand, take existing data points and classify them or predict associated labels, (4) **Mathematical perspective**: Generative models model P(X, Y) = P(Y|X) × P(X), learning both the class-conditional distributions and the prior distribution. Discriminative models directly model P(Y|X) without explicitly learning P(X), making them more focused on the decision-making task, (5) **Use cases**: Generative models are used for data augmentation, creating synthetic datasets, image-to-image translation, and creative applications. Discriminative models excel at classification, regression, and prediction tasks where the goal is to make decisions about input data, (6) **Computational considerations**: Generative models often require learning complex distributions and can be computationally intensive. Discriminative models typically focus on decision boundaries and may be more efficient for pure classification tasks, (7) **Hybrid approaches**: Some modern architectures combine both approaches - for example, conditional GANs can both generate data (generative) and be conditioned on class labels (incorporating discriminative elements). The other options are incorrect: Option A reverses the roles; Option C is wrong as both can use probabilistic methods; Option D incorrectly assigns tasks - both types can handle classification and regression depending on their specific implementation.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What role does Gaussian noise play in generative models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It is used to add randomness to the output of discriminative models.</li>
+                        <li class="quiz-option" data-correct="true">It serves as the input to the generator to create samples from a distribution.</li>
+                        <li class="quiz-option" data-correct="false">It is used to calculate the mean and standard deviation of the data distribution.</li>
+                        <li class="quiz-option" data-correct="false">It is a loss function that ensures the generated distribution matches the true distribution.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **Gaussian noise serves as the input to the generator to create samples from a distribution.** This is a fundamental mechanism in many generative models that enables the creation of diverse, realistic samples: (1) **Latent space representation**: In generative models like GANs and VAEs, Gaussian noise (typically sampled from a standard normal distribution N(0,1)) serves as the starting point in the latent space. This noise vector z is fed into the generator network, which learns to transform this simple distribution into the complex data distribution we want to model, (2) **Stochasticity and diversity**: Gaussian noise provides the randomness necessary for generating diverse samples. Each different noise vector results in a different generated sample, allowing the model to produce varied outputs rather than always generating the same result. This stochastic nature is essential for creating realistic and varied synthetic data, (3) **Mathematical foundation**: The choice of Gaussian noise is mathematically convenient because: (a) It's easy to sample from, (b) It has well-defined statistical properties, (c) It can be reparameterized for gradient flow (crucial in VAEs), (d) It serves as a universal approximator for many distributions when transformed through neural networks, (4) **Transformation learning**: The generator learns to transform the simple Gaussian distribution into the complex target distribution. This is conceptually similar to the inverse transform sampling method, but implemented through deep neural networks that can learn highly complex transformations, (5) **Controllable generation**: By manipulating the noise input, we can control the generation process. For example, interpolating between two noise vectors often results in smooth transitions between generated samples, demonstrating that the model has learned meaningful representations, (6) **Training dynamics**: During training, the generator learns to map regions of the Gaussian noise space to different types of outputs. Areas of the noise space become associated with specific features or categories in the generated data, (7) **Practical implementation**: In practice, Gaussian noise is sampled at inference time: z ~ N(0, I), then fed to the trained generator G(z) to produce a synthetic sample. This makes generation both efficient and controllable, (8) **Regularization effect**: In some models like VAEs, the Gaussian noise assumption in the latent space acts as a form of regularization, encouraging the learned representations to be smooth and well-structured. The other options are incorrect: Option A confuses generative and discriminative models; Option C describes statistical analysis rather than the role of noise in generation; Option D describes a loss function concept, not the role of input noise.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        Why does the generator aim to maximize the cross-entropy loss in a GAN?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To improve the quality of the generated samples</li>
+                        <li class="quiz-option" data-correct="true">To make the discriminator make mistakes</li>
+                        <li class="quiz-option" data-correct="false">To reduce the training time</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **The generator aims to maximize the cross-entropy loss to make the discriminator make mistakes.** This is the core adversarial mechanism that drives GAN training: (1) **Adversarial objective**: In the original GAN formulation, the generator and discriminator are engaged in a minimax game. The discriminator tries to minimize its classification error (minimize cross-entropy loss), while the generator tries to maximize the discriminator's error (maximize cross-entropy loss). This creates the adversarial dynamic that gives GANs their name, (2) **Mathematical formulation**: The discriminator's loss for generated samples is: L_D = -log(1 - D(G(z))), where D(G(z)) is the discriminator's probability that the generated sample is real. The generator wants to maximize this loss, which means maximizing -log(1 - D(G(z))). This is equivalent to making D(G(z)) as close to 1 as possible, meaning the discriminator should classify generated samples as real, (3) **Fooling the discriminator**: When the generator maximizes the cross-entropy loss, it's essentially trying to fool the discriminator into misclassifying generated samples as real data. The more successful the generator is at this, the higher the discriminator's loss becomes on generated samples, (4) **Training dynamics**: This adversarial setup creates a feedback loop: as the generator gets better at fooling the discriminator, the discriminator must improve to maintain its ability to distinguish real from fake. This pushes both networks to improve continuously, (5) **Practical implementation**: In practice, instead of maximizing -log(1 - D(G(z))), many implementations minimize -log(D(G(z))) for the generator. This is mathematically equivalent in terms of the optimal solution but provides better gradients during training, especially early in training when the discriminator is very confident, (6) **Equilibrium goal**: The ultimate goal is to reach a Nash equilibrium where the generator produces samples so realistic that the discriminator can only guess randomly (D(G(z)) = 0.5 for all z). At this point, the discriminator's cross-entropy loss is maximized because it cannot distinguish between real and generated samples, (7) **Quality emergence**: While the direct objective is to fool the discriminator, this adversarial process indirectly leads to improved sample quality. The generator must produce increasingly realistic samples to continue fooling an improving discriminator. The other options miss the core adversarial mechanism: Option A (minimizing discriminator accuracy) is a consequence but not the direct objective; Option B (improving quality) is an indirect result, not the direct optimization target; Option D (reducing training time) is not related to the loss maximization objective.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the primary purpose of the reparameterization trick in a Variational Autoencoder (VAE)?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To increase the complexity of the model</li>
+                        <li class="quiz-option" data-correct="true">To allow gradient flow through the encoder during training</li>
+                        <li class="quiz-option" data-correct="false">To reduce the reconstruction loss</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for a prior distribution</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **The reparameterization trick allows gradient flow through the encoder during training.** This is a crucial technique that makes VAE training possible through standard backpropagation: (1) **The sampling problem**: In a VAE, the encoder produces parameters (μ and σ) of a distribution, and we need to sample from this distribution to get the latent code z. However, the sampling operation z ~ N(μ, σ²) is not differentiable - you cannot compute gradients through a random sampling operation using standard backpropagation, (2) **Reparameterization solution**: The trick reparameterizes the random variable z as: z = μ + σ ⊙ ε, where ε ~ N(0, I) is sampled from a standard normal distribution, and ⊙ denotes element-wise multiplication. This transforms the non-differentiable sampling operation into a differentiable computation, (3) **Gradient flow enablement**: With reparameterization, gradients can now flow through the encoder parameters. The randomness is moved to ε (which doesn't depend on model parameters), while z becomes a deterministic function of μ, σ, and the fixed random ε. This allows ∂z/∂μ = 1 and ∂z/∂σ = ε, making backpropagation possible, (4) **Training dynamics**: During training, for each data point, we: (a) Sample ε from N(0, I), (b) Compute z = μ + σ ⊙ ε using encoder outputs μ and σ, (c) Pass z through the decoder, (d) Compute reconstruction and KL losses, (e) Backpropagate gradients through the entire network including the encoder, (5) **Mathematical elegance**: The reparameterization maintains the same probability distribution - z still follows N(μ, σ²) - but expresses it in a way that's compatible with gradient-based optimization. This is a form of the "pathwise derivative" approach to stochastic optimization, (6) **Variance reduction**: The reparameterization trick also helps reduce the variance of gradient estimates compared to other methods like REINFORCE, leading to more stable training, (7) **Extension to other distributions**: While commonly explained with Gaussian distributions, the reparameterization trick can be extended to other distributions (e.g., using the inverse CDF method), making it a general technique for variational inference, (8) **Critical for VAE success**: Without this trick, VAEs would be much harder to train effectively. Early attempts at variational autoencoders struggled precisely because of the difficulty in getting gradients through stochastic layers. The other options are incorrect: Option A misunderstands the purpose - it's about enabling training, not increasing complexity; Option C confuses the mechanism with the outcome - it enables gradient flow, which then helps optimize all losses; Option D is wrong as VAEs still require and use prior distributions (typically N(0, I)).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        Which of the following best describes the role of the Kullback-Leibler (KL) divergence in a VAE?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It measures the difference between the input and output distributions</li>
+                        <li class="quiz-option" data-correct="true">It ensures the latent space distribution is close to a standard normal distribution</li>
+                        <li class="quiz-option" data-correct="false">It minimizes the reconstruction error</li>
+                        <li class="quiz-option" data-correct="false">It increases the randomness in the latent space</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **The KL divergence ensures the latent space distribution is close to a standard normal distribution.** This is a fundamental regularization mechanism in VAEs that shapes the latent space structure: (1) **VAE loss decomposition**: The VAE loss consists of two main components: L_VAE = Reconstruction Loss + β × KL Divergence Loss. The reconstruction loss ensures the decoder can recreate the input, while the KL divergence serves as a regularization term that constrains the latent space, (2) **Mathematical formulation**: The KL divergence in VAEs measures the difference between the encoder's output distribution q(z|x) and the prior distribution p(z), typically N(0, I): KL[q(z|x) || p(z)] = KL[N(μ, σ²) || N(0, I)]. For Gaussian distributions, this has a closed-form solution: KL = ½ Σ(σ² + μ² - 1 - log(σ²)), (3) **Regularization purpose**: The KL term acts as a regularizer that prevents the encoder from learning arbitrary distributions for different inputs. Without this constraint, the encoder might map each input to a completely different region of latent space, making the space discontinuous and preventing meaningful interpolation, (4) **Latent space structure**: By encouraging q(z|x) to be close to N(0, I), the KL divergence ensures that: (a) The latent space has a well-defined structure, (b) Different data points are encoded to overlapping regions, (c) Interpolation between latent codes produces meaningful results, (d) We can generate new samples by sampling from N(0, I) and passing through the decoder, (5) **Preventing overfitting**: The KL regularization prevents the model from using the latent space as a simple lookup table. Without it, the encoder could map each training example to a unique point in latent space, and the decoder could memorize the mapping, leading to perfect reconstruction but poor generalization, (6) **Balancing trade-off**: The KL term creates a trade-off between reconstruction accuracy and latent space regularity. A higher KL weight (β) leads to more regular latent spaces but potentially worse reconstructions, while lower weights allow better reconstructions but less structured latent spaces, (7) **Enabling generation**: By keeping the latent distribution close to N(0, I), we can generate new samples by: (a) Sampling z ~ N(0, I), (b) Passing z through the trained decoder, (c) Getting a generated sample that should resemble the training data, (8) **Variational inference foundation**: The KL divergence emerges naturally from the variational inference framework. VAEs maximize the Evidence Lower BOund (ELBO), which decomposes into reconstruction likelihood minus KL divergence between approximate and prior distributions. The other options are incorrect: Option A confuses input-output reconstruction (handled by reconstruction loss) with latent space regularization; Option C describes the reconstruction loss, not the KL divergence; Option D misunderstands the effect - KL divergence actually constrains randomness by forcing structure onto the latent space.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 16 -->
+                <div class="quiz-card" id="question-16" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">16</span>
+                        What is the main reason mode collapse occurs in generative adversarial networks (GANs)?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">The generator tries to map multiple modes into a single normal distribution</li>
+                        <li class="quiz-option" data-correct="true">The generator maximizes the probability of generating samples from a single mode</li>
+                        <li class="quiz-option" data-correct="false">The discriminator fails to distinguish between real and fake images</li>
+                        <li class="quiz-option" data-correct="false">The latent space is not structured properly</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **The generator maximizes the probability of generating samples from a single mode.** Mode collapse occurs when the generator finds it more profitable to focus on fooling the discriminator with samples from just one or a few modes rather than capturing the full diversity of the real data distribution: (1) **Optimization dynamics**: The generator's objective is to maximize the probability that the discriminator classifies its samples as real. If the generator discovers that samples from a particular mode (e.g., a specific type of face or digit) consistently fool the discriminator, it may concentrate on generating only those types of samples because they yield higher rewards, (2) **Local optima problem**: GANs are susceptible to local optima where the generator gets stuck producing samples from a limited subset of the data distribution. Once the generator finds a "winning strategy" (a mode that reliably fools the discriminator), gradient descent may not provide sufficient incentive to explore other modes, especially if those modes are initially harder to generate convincingly, (3) **Discriminator limitations**: The discriminator may not be sophisticated enough to detect that the generator is only covering part of the distribution. If the discriminator can't distinguish between a generator that covers all modes versus one that only covers a subset well, it provides misleading feedback that reinforces the collapse, (4) **Sequential training issues**: In standard GAN training, the generator and discriminator are updated alternately. This can lead to situations where the generator adapts to the current discriminator's weaknesses, but when the discriminator updates, it may not immediately recognize that diversity has been lost, allowing the collapse to persist, (5) **Mathematical perspective**: Mode collapse can be understood through the lens of the Jensen-Shannon divergence that GANs implicitly minimize. The generator might find it easier to minimize this divergence by perfectly matching a subset of the real distribution rather than imperfectly matching the entire distribution, (6) **Gradient information**: The generator receives gradient information based on how well its current samples fool the discriminator. If samples from one mode provide strong gradients while samples from other modes provide weak or conflicting gradients, the generator will naturally gravitate toward the mode with clearer learning signals, (7) **Diversity vs. quality trade-off**: There's often an implicit trade-off between sample diversity and sample quality. The generator might sacrifice diversity to achieve higher quality in a narrower domain, especially if the discriminator is more sensitive to quality than diversity, (8) **Common manifestations**: Mode collapse typically appears as: (a) The generator producing very similar samples regardless of different noise inputs, (b) Missing entire categories or types of data that exist in the training set, (c) Lack of interpolation diversity when moving through latent space, (d) Sudden drops in sample diversity during training. The other options are incorrect: Option A misunderstands the mapping direction - the issue isn't mapping modes to normal distributions but focusing on limited modes; Option C describes discriminator failure, but mode collapse can occur even when the discriminator is functioning; Option D refers to latent space structure, which is more relevant to VAEs than to the adversarial dynamics causing mode collapse in GANs.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 17 -->
+                <div class="quiz-card" id="question-17" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">17</span>
+                        What is a common goal of recent works on diffusion models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the quality of generated images</li>
+                        <li class="quiz-option" data-correct="false">To increase the number of steps required for sampling</li>
+                        <li class="quiz-option" data-correct="true">To increase the speed of sampling</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for forward propagation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> **To increase the speed of sampling.** This is one of the most active areas of research in diffusion models, as the original formulations require hundreds or thousands of sampling steps, making them computationally expensive for practical applications: (1) **The sampling bottleneck**: Traditional diffusion models like DDPM (Denoising Diffusion Probabilistic Models) require iterative denoising over many timesteps (typically 1000 steps) to generate high-quality samples. Each step requires a forward pass through the neural network, making sampling very slow compared to GANs or VAEs which can generate samples in a single forward pass, (2) **Recent acceleration approaches**: Multiple research directions have emerged to address this: (a) **Fewer-step sampling**: Methods like DDIM (Denoising Diffusion Implicit Models) allow deterministic sampling with fewer steps while maintaining quality, (b) **Fast sampling schedulers**: Techniques that optimize the noise schedule to require fewer denoising steps, (c) **Distillation methods**: Training smaller, faster models to mimic the behavior of larger diffusion models, (d) **Progressive distillation**: Iteratively reducing the number of sampling steps while maintaining quality, (e) **Consistency models**: New architectures that can generate samples in as few as 1-4 steps, (3) **Practical motivation**: Speed improvements are crucial for real-world applications: (a) **Real-time generation**: Applications like interactive image editing, video generation, and real-time creative tools require fast sampling, (b) **Computational cost**: Reducing sampling steps dramatically decreases inference time and computational requirements, (c) **Mobile deployment**: Faster sampling enables deployment on resource-constrained devices, (d) **Scalability**: Batch generation becomes more feasible with faster per-sample generation, (4) **Quality-speed trade-offs**: Recent research focuses on maintaining high sample quality while reducing sampling time. This involves: (a) Better noise schedules that preserve important information across fewer steps, (b) Improved network architectures that can make more accurate predictions per step, (c) Advanced training techniques that optimize for few-step sampling, (d) Hybrid approaches combining multiple acceleration techniques, (5) **Specific recent advances**: Notable improvements include: (a) **LCM (Latent Consistency Models)**: Generating high-quality images in 2-4 steps, (b) **Progressive Distillation**: Halving the number of steps repeatedly while maintaining quality, (c) **DPM-Solver**: Advanced numerical solvers for faster sampling, (d) **PNDM (Pseudo Numerical Methods)**: Better integration methods for fewer steps, (e) **Score-based generative models**: Alternative formulations that enable faster sampling, (6) **Competitive landscape**: Speed improvements help diffusion models compete better with GANs in terms of practical usability while maintaining their advantages in training stability and sample quality, (7) **Research impact**: The focus on sampling speed has led to fundamental insights about the diffusion process, better understanding of which timesteps are most critical, and development of more efficient architectures. The other options are clearly incorrect: Option A (reducing quality) contradicts the goal of maintaining or improving quality; Option B (increasing steps) goes against the primary research direction; Option D (eliminating forward propagation) is technically impossible since neural networks fundamentally require forward passes for inference.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
