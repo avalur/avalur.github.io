@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diffusion and NLP Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Diffusion and NLP</h1>
+            <p>Test your understanding</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="nlp-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Diffusion and NLP</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">15</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        What is the core idea behind the diffusion models' image generation process?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Generating images in a single step</li>
+                        <li class="quiz-option" data-correct="true">Denoising the image in multiple steps</li>
+                        <li class="quiz-option" data-correct="false">Using a deterministic process for image generation</li>
+                        <li class="quiz-option" data-correct="false">Creating images from a single noise distribution</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The core idea behind diffusion models' image generation process is denoising the image in multiple steps. This fundamental approach defines how diffusion models work: (1) **Forward diffusion process**: During training, noise is gradually added to real images over many timesteps until they become pure noise, creating a sequence from clean image to noise, (2) **Reverse denoising process**: The model learns to reverse this process by predicting and removing noise at each step, gradually transforming random noise back into coherent images, (3) **Step-by-step refinement**: Unlike GANs that generate images in one forward pass, diffusion models perform iterative denoising, with each step removing a small amount of noise and improving image quality, (4) **Learned noise prediction**: The neural network is trained to predict the noise that was added at each timestep, allowing it to subtract this predicted noise to recover a cleaner version of the image, (5) **Controlled generation**: This multi-step process allows for fine-grained control over the generation process and typically produces high-quality, diverse images with good mode coverage. The other options are incorrect: option A (single step) describes GANs rather than diffusion models; option C (deterministic process) is wrong because diffusion models involve stochastic sampling; and option D (single noise distribution) oversimplifies the process - while it starts with noise, the key is the iterative denoising across multiple steps that gradually transforms this noise into meaningful images.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        Why is X_0 essential when reversing the process to obtain X_{T-1} from X_T?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Because X_0 is needed to calculate the exact value of X_{T-1}</li>
+                        <li class="quiz-option" data-correct="true">Because X_0 provides additional dependencies to estimate the probability of X_{T-1}</li>
+                        <li class="quiz-option" data-correct="false">Because X_0 is required to sample different X_Ts from the same X_{T-1}</li>
+                        <li class="quiz-option" data-correct="false">Because X_0 is necessary to eliminate the Gaussian noise in the distribution</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> X_0 is essential when reversing the process to obtain X_{T-1} from X_T because X_0 provides additional dependencies to estimate the probability of X_{T-1}. This reflects a fundamental aspect of diffusion model mathematics: (1) **Posterior distribution conditioning**: The true reverse process distribution q(X_{T-1}|X_T, X_0) is tractable and Gaussian when conditioned on both X_T and the original clean image X_0. Without X_0, the reverse distribution q(X_{T-1}|X_T) would be intractable and non-Gaussian, (2) **Mathematical tractability**: By conditioning on X_0, we can derive the exact analytical form of the posterior distribution, which has a closed-form Gaussian solution. This allows us to compute the mean and variance exactly for training the denoising network, (3) **Training objective**: During training, the model learns to approximate the true reverse distribution q(X_{T-1}|X_T, X_0) by predicting the noise or the denoised image. Having access to X_0 provides the ground truth needed to compute this target distribution, (4) **Reparameterization insight**: The conditioning on X_0 enables the reparameterization trick that allows diffusion models to predict the noise directly rather than trying to model the complex reverse transition, and (5) **Variance schedule**: The dependence on X_0 allows for optimal variance scheduling in the reverse process, ensuring stable and high-quality generation. The other options are incorrect: option A suggests exact calculation rather than probability estimation; option C reverses the causality (X_T comes from X_{T-1}, not vice versa); and option D misunderstands the role of Gaussian noise, which is inherent to the diffusion process rather than something to be eliminated.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is the primary focus when predicting noise in the described model?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Predicting the mean of the previous distribution</li>
+                        <li class="quiz-option" data-correct="false">Predicting the variance of the previous distribution</li>
+                        <li class="quiz-option" data-correct="true">Predicting the noise generated from a standard normal distribution</li>
+                        <li class="quiz-option" data-correct="false">Predicting the previous image directly</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary focus when predicting noise in diffusion models is predicting the noise generated from a standard normal distribution. This represents a key insight in the design of diffusion models: (1) **Noise prediction parameterization**: Instead of directly predicting the denoised image or distribution parameters, diffusion models are typically trained to predict the noise ε that was added at each timestep. This noise is sampled from a standard normal distribution N(0,I), (2) **Reparameterization benefits**: By predicting the noise directly, the model can use the reparameterization trick: X_{t-1} = (X_t - √(1-α_t) * ε_predicted) / √α_t + σ_t * z, where z is new random noise. This formulation is more stable and effective than predicting means or variances directly, (3) **Training objective**: The loss function typically minimizes ||ε - ε_θ(X_t, t)||², where ε is the actual noise that was added and ε_θ is the predicted noise. This creates a clear, well-defined learning target, (4) **Standard normal assumption**: The noise added at each forward diffusion step is sampled from a standard normal distribution, so predicting this specific type of noise aligns with the forward process design, and (5) **Computational efficiency**: Predicting noise is computationally simpler and more stable than predicting complex distribution parameters or attempting to directly reconstruct the previous image state. The other options are less optimal approaches: predicting means (A) or variances (B) directly is more complex and less stable; predicting the previous image directly (D) is harder to learn and doesn't leverage the mathematical structure of the diffusion process as effectively as noise prediction.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the primary role of 'betas' in the context of diffusion models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">To control the degree of noise added at each step</li>
+                        <li class="quiz-option" data-correct="false">To determine the quality of the generated images</li>
+                        <li class="quiz-option" data-correct="false">To speed up the sampling process</li>
+                        <li class="quiz-option" data-correct="false">To ensure the diversity of the generated samples</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary role of 'betas' (β_t) in diffusion models is to control the degree of noise added at each step during the forward diffusion process. This is fundamental to how diffusion models operate: (1) **Noise schedule definition**: The beta values β_t define the variance schedule for adding noise at each timestep t. Specifically, at each step, noise is added according to q(X_t|X_{t-1}) = N(X_t; √(1-β_t)X_{t-1}, β_t I), where β_t controls how much noise is added, (2) **Forward process control**: Betas determine how quickly the image degrades from clean to pure noise. Small β_t values add little noise (slow degradation), while larger values add more noise (faster degradation). Typically, β_t increases over time to gradually corrupt the image, (3) **Mathematical relationship**: The cumulative effect of betas is captured by α_t = 1 - β_t and ᾱ_t = ∏(α_s) for s≤t, which allows direct sampling at any timestep: q(X_t|X_0) = N(X_t; √ᾱ_t X_0, (1-ᾱ_t)I), (4) **Training and sampling**: The beta schedule affects both the training process (by determining the noise levels the model must learn to denoise) and the sampling process (by defining the reverse steps), and (5) **Design choices**: Common beta schedules include linear, cosine, or learned schedules, each affecting the balance between training stability and generation quality. The other options describe indirect effects rather than the primary role: while betas may influence image quality (B), sampling speed (C), and sample diversity (D), their fundamental purpose is to parametrize the noise addition process. The beta schedule is the core mechanism that defines how much noise is added at each diffusion step.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        Why is it essential to choose faster scheduling for text domain diffusion compared to image domain?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Text domain requires higher quality samples</li>
+                        <li class="quiz-option" data-correct="true">Text domain is discrete, making it easier for the model to distinguish tokens even with added noise</li>
+                        <li class="quiz-option" data-correct="false">Text domain diffusion models are inherently slower</li>
+                        <li class="quiz-option" data-correct="false">Text domain diffusion models generate more diverse samples</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> It is essential to choose faster scheduling for text domain diffusion compared to image domain because text domain is discrete, making it easier for the model to distinguish tokens even with added noise. This fundamental difference between discrete and continuous domains has several important implications: (1) **Discrete vs. continuous nature**: Text consists of discrete tokens from a finite vocabulary, while images are continuous pixel values. This discrete structure means that even with noise added, the underlying token identities can often still be recovered or distinguished more easily than corrupted pixel values, (2) **Noise tolerance**: In the discrete text space, small amounts of noise may not significantly obscure the token identity, whereas in continuous image space, small noise additions can meaningfully alter pixel values. This means text can handle faster corruption schedules without losing essential information, (3) **Information density**: Each token in text carries high semantic information density - changing one token can dramatically alter meaning. This discrete semantic structure allows for faster scheduling because the model can still extract meaningful information even with more aggressive noise schedules, (4) **Embedding space considerations**: Text diffusion often works in continuous embedding spaces rather than directly on discrete tokens, but the underlying discrete structure still influences the optimal scheduling. The model can leverage the discrete nature to maintain distinguishability between different token embeddings, and (5) **Computational efficiency**: Faster scheduling reduces the number of denoising steps needed, which is particularly beneficial for text generation where the discrete nature allows this acceleration without significant quality loss. The other options don't capture this fundamental discrete vs. continuous distinction: quality requirements (A), inherent speed (C), and diversity (D) are not the primary reasons for different scheduling approaches between text and image domains.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        What is the main purpose of using an encoder-decoder architecture in the image generation pipeline?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To reduce the size of the input image</li>
+                        <li class="quiz-option" data-correct="true">To compress images into latent vectors while preserving useful information</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for text embeddings</li>
+                        <li class="quiz-option" data-correct="false">To speed up the diffusion process</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The main purpose of using an encoder-decoder architecture in the image generation pipeline is to compress images into latent vectors while preserving useful information. This is particularly important in latent diffusion models (LDMs): (1) **Latent space compression**: The encoder compresses high-dimensional images (e.g., 512×512×3 = 786,432 dimensions) into much lower-dimensional latent representations (e.g., 64×64×4 = 16,384 dimensions). This dramatic dimensionality reduction makes the diffusion process computationally feasible while maintaining semantic content, (2) **Information preservation**: Unlike simple downsampling or lossy compression, the encoder is trained to preserve the most semantically important information needed for high-quality reconstruction. The autoencoder learns to retain features that matter for visual perception while discarding redundant information, (3) **Perceptual quality**: The encoder-decoder is typically trained with perceptual losses (like LPIPS) and adversarial losses to ensure that the latent representation captures perceptually relevant features. This means the compressed representation maintains the visual quality necessary for generation, (4) **Computational efficiency**: By performing diffusion in the compressed latent space rather than raw pixel space, the model requires significantly less memory and computation. This enables training and inference on larger, higher-resolution images that would be prohibitive in pixel space, (5) **Stable training**: The latent space often has better statistical properties for diffusion training - it's more Gaussian-like and has reduced redundancy compared to raw pixel space, leading to more stable training dynamics. While option A mentions size reduction, it misses the crucial aspect of information preservation. Options C and D describe secondary benefits rather than the main purpose. The core insight is that encoder-decoder architectures enable efficient diffusion by working in a compressed but information-rich latent space.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        What is the primary goal of the Stable Diffusion Model when encoding images and text prompts?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To create distinct embeddings for images and text prompts</li>
+                        <li class="quiz-option" data-correct="true">To ensure embeddings of similar text prompts and images are close</li>
+                        <li class="quiz-option" data-correct="false">To generate low-resolution toy images</li>
+                        <li class="quiz-option" data-correct="false">To eliminate the need for a text encoder</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary goal of the Stable Diffusion Model when encoding images and text prompts is to ensure embeddings of similar text prompts and images are close in the shared embedding space. This alignment is crucial for effective text-to-image generation: (1) **Cross-modal alignment**: Stable Diffusion relies on a shared embedding space where semantically similar text descriptions and their corresponding images have similar vector representations. This alignment is typically achieved through models like CLIP (Contrastive Language-Image Pre-training), which learns to map text and images to the same embedding space, (2) **Semantic similarity preservation**: When a text prompt describes an image (e.g., "a red car"), the embedding of that text should be close to the embedding of actual images of red cars. This proximity in embedding space enables the diffusion model to generate images that match the text description, (3) **Conditioning mechanism**: During generation, the text embedding serves as a conditioning signal that guides the diffusion process. The closer the text embedding is to the desired image embedding, the more effectively the model can generate an appropriate image, (4) **Training objective**: The model is trained so that text prompts and their corresponding images have aligned embeddings. This is often achieved through contrastive learning, where matching text-image pairs are pulled together in embedding space while non-matching pairs are pushed apart, and (5) **Generation quality**: The quality of text-to-image generation directly depends on how well the text and image embeddings are aligned. Poor alignment leads to generated images that don't match the text prompts. The other options are incorrect: creating distinct embeddings (A) would prevent effective conditioning; generating low-resolution images (C) is not the encoding goal; and eliminating the text encoder (D) would make text-to-image generation impossible. The key insight is that cross-modal alignment in the embedding space is fundamental to Stable Diffusion's ability to generate images from text descriptions.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        Which of the following models uses a matrix of word co-occurrence statistics to derive word vectors?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Word2Vec</li>
+                        <li class="quiz-option" data-correct="true">GloVe</li>
+                        <li class="quiz-option" data-correct="false">Transformers</li>
+                        <li class="quiz-option" data-correct="false">BERT</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> GloVe (Global Vectors for Word Representation) is the model that uses a matrix of word co-occurrence statistics to derive word vectors. Here's how GloVe differs from the other approaches: (1) **GloVe methodology**: GloVe explicitly constructs a word-word co-occurrence matrix X, where X_ij represents how often word i appears in the context of word j across the entire corpus. The model then factorizes this matrix to learn word vectors that capture the global statistical information about word co-occurrences, (2) **Mathematical foundation**: GloVe optimizes the objective function: J = Σ f(X_ij)(w_i^T w̃_j + b_i + b̃_j - log X_ij)², where w_i and w̃_j are word vectors, b_i and b̃_j are bias terms, and f(X_ij) is a weighting function. This directly uses the co-occurrence statistics X_ij, (3) **Global vs. local statistics**: Unlike Word2Vec, which uses local context windows during training, GloVe leverages global corpus statistics by pre-computing the entire co-occurrence matrix, combining the benefits of global matrix factorization and local context methods, (4) **Comparison with other models**: Word2Vec (A) uses neural networks with skip-gram or CBOW architectures and doesn't explicitly construct co-occurrence matrices; Transformers (C) use attention mechanisms and don't rely on pre-computed co-occurrence statistics; BERT (D) is a transformer-based model that uses masked language modeling and doesn't use explicit co-occurrence matrices, and (5) **Advantages**: By using global co-occurrence statistics, GloVe can capture word relationships that might be missed by purely local methods, while being more computationally efficient than some neural approaches since the statistics are pre-computed. The key distinguishing feature of GloVe is its explicit use of the global word co-occurrence matrix as the foundation for learning word representations.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the primary function of a tokenizer in the context of using transformers for text classification?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To generate attention matrices</li>
+                        <li class="quiz-option" data-correct="true">To translate words into embeddings</li>
+                        <li class="quiz-option" data-correct="false">To train the transformer model from scratch</li>
+                        <li class="quiz-option" data-correct="false">To visualize the heat map of attention</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary function of a tokenizer in the context of using transformers for text classification is to translate words into embeddings. More specifically, the tokenizer converts raw text into numerical representations that the transformer model can process: (1) **Text preprocessing**: The tokenizer first breaks down raw text into tokens (subwords, words, or characters depending on the tokenization strategy). For example, "Hello world!" might be tokenized into ["Hello", "world", "!"] or into subword tokens like ["Hel", "lo", "world", "!"], (2) **Vocabulary mapping**: Each token is then mapped to a unique integer ID based on the model's vocabulary. For instance, "Hello" might map to ID 7592, "world" to ID 2088, and "!" to ID 999, (3) **Embedding lookup**: These integer IDs are then used to look up corresponding embedding vectors from the model's embedding matrix. Each token ID corresponds to a learned dense vector (e.g., 768-dimensional for BERT-base), (4) **Input preparation**: The tokenizer also adds special tokens (like [CLS] for classification or [SEP] for separation), handles padding for batch processing, and creates attention masks to indicate which tokens are actual content versus padding, (5) **Subword tokenization**: Modern tokenizers like WordPiece (BERT), SentencePiece (T5), or Byte-Pair Encoding (GPT) can handle out-of-vocabulary words by breaking them into subword units, ensuring the model can process any text input. The other options are incorrect: attention matrices (A) are generated by the transformer's attention mechanism, not the tokenizer; the tokenizer doesn't train the model (C) but prepares input for training/inference; and attention visualization (D) is a separate analysis tool. The tokenizer's core role is the essential preprocessing step that converts human-readable text into the numerical format required by transformer models.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        In the context of transformer models, what is the significance of having multiple attention heads within a single layer?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Each head processes a different sentence</li>
+                        <li class="quiz-option" data-correct="true">Each head focuses on different aspects of the same sentence</li>
+                        <li class="quiz-option" data-correct="false">Each head is responsible for a different layer of the model</li>
+                        <li class="quiz-option" data-correct="false">Each head generates a separate output for each word</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In transformer models, the significance of having multiple attention heads within a single layer is that each head focuses on different aspects of the same sentence. This multi-head attention mechanism provides several key benefits: (1) **Diverse attention patterns**: Each attention head learns different types of relationships between words. For example, one head might focus on syntactic relationships (like subject-verb connections), another on semantic relationships (like noun-adjective pairs), and another on long-range dependencies (like pronouns and their antecedents), (2) **Parallel processing of information**: Multiple heads allow the model to simultaneously attend to information from different representation subspaces at different positions. Each head has its own learned query (Q), key (K), and value (V) matrices, enabling it to capture different types of patterns in the data, (3) **Increased representational capacity**: By having multiple heads (typically 8-16 in models like BERT or GPT), the model can capture a richer set of relationships within the same computational layer. This is more efficient than simply making the attention mechanism larger, (4) **Specialization through training**: During training, different heads naturally specialize in different linguistic phenomena. Research has shown that some heads focus on syntactic structures, others on coreference resolution, and others on semantic relationships, (5) **Robustness and redundancy**: Multiple heads provide redundancy - if one head fails to capture an important relationship, others might compensate. This makes the model more robust to different types of input. The outputs from all heads are concatenated and linearly projected to form the final attention output. The other options are incorrect: heads don't process different sentences (A) - they all work on the same input; they're not responsible for different layers (C) - they're all within the same layer; and they don't generate separate outputs per word (D) - their outputs are combined. The key insight is that multi-head attention enables the model to simultaneously capture multiple types of relationships and patterns within the same sentence.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        What is the primary difference between BERT and GPT in terms of text processing?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">BERT processes text bidirectionally, while GPT processes text unidirectionally.</li>
+                        <li class="quiz-option" data-correct="false">BERT is used for text generation, while GPT is used for text understanding.</li>
+                        <li class="quiz-option" data-correct="false">BERT reads text from left to right, while GPT reads text from right to left.</li>
+                        <li class="quiz-option" data-correct="false">BERT is trained on smaller datasets, while GPT is trained on larger datasets.</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary difference between BERT and GPT in terms of text processing is that BERT processes text bidirectionally, while GPT processes text unidirectionally. This fundamental architectural difference shapes how each model understands and generates text: (1) **BERT's bidirectional processing**: BERT (Bidirectional Encoder Representations from Transformers) can see the entire context - both left and right - when processing each token. During training, BERT uses masked language modeling where random tokens are masked, and the model predicts them using context from both directions. This allows BERT to build rich contextual representations by considering the full sentence context, (2) **GPT's unidirectional processing**: GPT (Generative Pre-trained Transformer) processes text from left to right only, using causal (autoregressive) attention. Each token can only attend to previous tokens in the sequence, not future ones. This constraint is essential for text generation because the model must predict the next token based only on what it has seen so far, (3) **Architectural implications**: BERT uses encoder-only architecture with bidirectional self-attention, making it excellent for understanding tasks like classification, question answering, and named entity recognition. GPT uses decoder-only architecture with causal self-attention, making it naturally suited for text generation tasks, (4) **Training objectives**: BERT's masked language modeling requires bidirectional context to predict masked tokens effectively. GPT's next-token prediction requires unidirectional processing to maintain the autoregressive property necessary for generation, (5) **Use case alignment**: BERT's bidirectional nature makes it superior for tasks requiring deep understanding of complete contexts, while GPT's unidirectional nature makes it ideal for generating coherent, contextually appropriate text. The other options are incorrect: both models can be used for various tasks (B); GPT reads left-to-right, not right-to-left (C); and dataset size varies by model version, not by architecture type (D). The bidirectional vs. unidirectional processing difference is the core architectural distinction that determines each model's strengths and optimal use cases.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        Which parameter in GPT can be adjusted to control the creativity of the generated text?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Top K</li>
+                        <li class="quiz-option" data-correct="false">Top P</li>
+                        <li class="quiz-option" data-correct="true">Temperature</li>
+                        <li class="quiz-option" data-correct="false">Masking</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Temperature is the primary parameter in GPT that can be adjusted to control the creativity of the generated text. Here's how temperature affects text generation: (1) **Temperature scaling**: Temperature is applied to the logits (raw model outputs) before converting them to probabilities using softmax. The formula is: P(token) = exp(logit/T) / Σ exp(logit_i/T), where T is the temperature value, (2) **Low temperature (0.1-0.7)**: Makes the model more deterministic and conservative. Lower temperature values sharpen the probability distribution, making the model more likely to choose high-probability tokens. This results in more predictable, coherent, but potentially repetitive text, (3) **High temperature (1.0-2.0)**: Makes the model more creative and random. Higher temperature values flatten the probability distribution, giving lower-probability tokens a better chance of being selected. This results in more diverse, creative, but potentially less coherent text, (4) **Temperature = 1.0**: Uses the original probability distribution without modification, representing the model's "natural" behavior as learned during training, (5) **Extreme values**: Temperature approaching 0 makes the model nearly deterministic (always choosing the most likely token), while very high temperature (>2.0) makes selection nearly random. While the other parameters also influence text generation, they serve different purposes: **Top-K (A)** limits the vocabulary to the K most likely tokens at each step, affecting diversity but not directly controlling creativity; **Top-P (B)** (nucleus sampling) selects from the smallest set of tokens whose cumulative probability exceeds P, also affecting diversity but in a different way than temperature; **Masking (D)** is used in BERT's training (not GPT generation) and refers to hiding tokens during training. Temperature is unique because it directly modifies the probability distribution's shape, making it the most direct and intuitive way to control the creativity-coherence trade-off in GPT's text generation.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        What is a key limitation of GPT models when they encounter a context with no correct answer?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They will refuse to answer</li>
+                        <li class="quiz-option" data-correct="false">They will generate a random response</li>
+                        <li class="quiz-option" data-correct="true">They will guess something that sounds plausible</li>
+                        <li class="quiz-option" data-correct="false">They will ask for clarification</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A key limitation of GPT models when they encounter a context with no correct answer is that they will guess something that sounds plausible. This phenomenon is commonly known as "hallucination" and represents a fundamental challenge in language model behavior: (1) **Inherent generation bias**: GPT models are trained to always generate the next token in a sequence. They don't have an inherent mechanism to recognize when there's insufficient information or when no correct answer exists. The model's objective is to produce coherent, contextually appropriate text, not to assess the validity or existence of an answer, (2) **Pattern matching over truth**: GPT models excel at pattern recognition and generating text that follows learned linguistic patterns. When faced with a question that has no answer, they tend to generate responses that sound plausible based on similar patterns they've seen during training, even if the content is factually incorrect or fabricated, (3) **Overconfidence in generation**: The model doesn't distinguish between cases where it has strong evidence for an answer versus cases where it's making educated guesses. It generates responses with similar confidence levels regardless of the underlying certainty, leading to plausible-sounding but potentially incorrect answers, (4) **Lack of uncertainty quantification**: Unlike humans who might say "I don't know" or express uncertainty, GPT models typically generate definitive-sounding responses even when the information is unavailable or when multiple contradictory possibilities exist, (5) **Training data influence**: The model generates responses based on patterns from training data, which may not always contain explicit examples of "no answer" scenarios, leading to a bias toward providing some form of answer. The other options are incorrect: GPT models rarely refuse to answer (A) unless specifically trained to do so; they don't generate truly random responses (B) but rather plausible-sounding ones; and they don't typically ask for clarification (D) unless prompted to do so. This limitation highlights the importance of fact-checking and verification when using GPT models, especially for factual questions or scenarios where accuracy is critical.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        What is the primary advantage of using LoRA (Low-Rank Adaptation) for fine-tuning GPT models?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It requires retraining the entire model</li>
+                        <li class="quiz-option" data-correct="true">It updates only a small part of the model, saving memory and training time</li>
+                        <li class="quiz-option" data-correct="false">It eliminates the need for any training data</li>
+                        <li class="quiz-option" data-correct="false">It increases the model's parameter count significantly</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The primary advantage of using LoRA (Low-Rank Adaptation) for fine-tuning GPT models is that it updates only a small part of the model, saving memory and training time. LoRA represents a breakthrough in parameter-efficient fine-tuning with several key benefits: (1) **Parameter efficiency**: LoRA keeps the original pre-trained weights frozen and introduces small, trainable low-rank matrices that capture the adaptation. Instead of updating all parameters (which could be billions in large models), LoRA only trains a tiny fraction - typically 0.1-1% of the original parameters. For example, fine-tuning a 7B parameter model might only require training 10-70M additional parameters, (2) **Memory savings**: Since the original model weights remain frozen, you don't need to store gradients or optimizer states for the entire model during training. This dramatically reduces GPU memory requirements, making it possible to fine-tune large models on consumer hardware that couldn't handle full fine-tuning, (3) **Training speed**: With fewer parameters to update, training time is significantly reduced. The computational overhead is minimal because LoRA uses low-rank matrix decomposition (A×B where A and B are much smaller than the original weight matrix), (4) **Storage efficiency**: After training, you only need to save the small LoRA weights alongside the original model. Multiple task-specific LoRA adaptations can be stored and swapped efficiently, allowing one base model to serve multiple specialized purposes, (5) **Mathematical foundation**: LoRA is based on the hypothesis that the weight updates during fine-tuning have a low intrinsic rank. It decomposes the weight update matrix ΔW into two smaller matrices: ΔW = A×B, where A and B have much lower dimensionality, (6) **Preserves general knowledge**: By keeping the original weights frozen, LoRA maintains the model's general capabilities while adding task-specific knowledge through the adaptation layers. The other options are incorrect: LoRA specifically avoids retraining the entire model (A); it still requires training data for the specific task (C); and it actually adds very few parameters compared to the original model size (D). LoRA has revolutionized fine-tuning by making it accessible and efficient for practitioners with limited computational resources.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        Which of the following tasks was NOT mentioned as being explored in the lecture?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Text classification</li>
+                        <li class="quiz-option" data-correct="false">Question answering</li>
+                        <li class="quiz-option" data-correct="true">Image recognition</li>
+                        <li class="quiz-option" data-correct="false">Text duration</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Image recognition was NOT mentioned as being explored in the lecture. This quiz focuses on Natural Language Processing (NLP) concepts and techniques, which deal specifically with text and language understanding rather than computer vision tasks: (1) **Text classification** was mentioned as a fundamental NLP task where models categorize text into predefined classes or categories, such as sentiment analysis, topic classification, or spam detection, (2) **Question answering** was discussed as an important NLP application where models understand questions and provide relevant answers based on context or knowledge, demonstrating reading comprehension capabilities, (3) **Text duration** was mentioned in the context of NLP tasks and analysis, relating to temporal aspects of text processing and understanding, (4) **Image recognition** is a computer vision task, not an NLP task. While modern multimodal models can handle both text and images, image recognition itself involves processing visual data to identify objects, scenes, or patterns in images - which is outside the scope of traditional NLP that focuses on language understanding and processing. The distinction is important because: **NLP tasks** involve understanding, processing, and generating human language in text form, including tasks like translation, summarization, sentiment analysis, named entity recognition, and text generation. **Computer vision tasks** like image recognition involve processing and understanding visual information, including object detection, image classification, face recognition, and scene understanding. While there are emerging multimodal approaches that combine both domains (like vision-language models), the core NLP concepts and techniques discussed in this text are specifically focused on language processing rather than visual recognition tasks.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
