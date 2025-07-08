@@ -94,7 +94,7 @@
 								<h3>JavaScript, Beam Search and Python w/ AI</h3>
 								<br />
 								Alex Avdiushenko <br />
-								May, 2025
+								July, 2025
 							</div>
 					</div>
                     <aside class="notes">
@@ -156,8 +156,8 @@
                     </section>
                     <section>
                         <h3>Heuristic Agent</h3>
-                            <p class="highlighted">Combine features into a heuristic score:</p>
-                            <p>
+                            <p style="text-align: left">Combine features into a heuristic score:</p>
+                            <p class="highlighted" style="padding-left: 20px">
                               (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
                                 $\to\max$
                             </p>
@@ -203,7 +203,7 @@
                     </section>
                     <section>
                         <h3>Heuristic Agent Results</h3>
-                            <p>
+                            <p class="highlighted" style="padding-left: 20px">
                               (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
                                 $\to\max$
                             </p>
@@ -211,9 +211,9 @@
                         <table class="results-table">
                             <thead>
                             <tr>
-                                <th style="text-align: right">Case</th>
-                                <th style="text-align: right">Rows</th>
-                                <th style="text-align: right">Score</th>
+                                <th style="text-align: center">Case</th>
+                                <th style="text-align: center">Rows</th>
+                                <th style="text-align: center">Score</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -235,7 +235,7 @@
                             </tbody>
                         </table>
                         <br>
-                        <p class="fragment highlighted">
+                        <p class="fragment highlighted" style="padding-left: 20px">
                             Ok, looks good, but what about Beam Search?
                         </p>
                         <aside class="notes">
@@ -251,7 +251,7 @@
                         <ul>
                             <li class="fragment">
                                 An approximate search algorithm commonly used in
-                                natural language processing tasks like machine translation and speech recognition</li>
+                                Natural Language Processing (NLP) tasks like machine translation and speech recognition</li>
                             <li class="fragment">
                                 It is a <span class="highlighted">variation of greedy search</span> that explores multiple paths simultaneously,
                                 keeping track of the $k$ most promising paths at each step</li>
@@ -287,7 +287,7 @@
                 <section>
                     <section>
                         <h3>Heuristic Agent Results</h3>
-                            <p>
+                            <p class="highlighted" style="padding-left: 20px">
                               (-0.51 * aggHeight + 0.76 * completeLines - 0.36 * holes - 0.18 * bumpiness)
                                 $\to\max$
                             </p>
@@ -295,9 +295,9 @@
                         <table class="results-table">
                             <thead>
                             <tr>
-                                <th style="text-align: right">Case</th>
-                                <th style="text-align: right">Rows</th>
-                                <th style="text-align: right">Score</th>
+                                <th style="text-align: center">Case</th>
+                                <th style="text-align: center">Rows</th>
+                                <th style="text-align: center">Score</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -324,7 +324,7 @@
                             </tbody>
                         </table>
                         <br>
-                        <p class="fragment highlighted">
+                        <p class="fragment highlighted" style="padding-left: 20px">
                             Time to rewrite it in Python!
                         </p>
                         <aside class="notes">
@@ -341,18 +341,20 @@
                     </section>
                     <section>
                         <p style="text-align: left"><a href="https://www.jetbrains.com/junie/">
-                            Let's trust Junie to do the hard work:
+                            Trust Junie to do the hard work:
                         </a></p>
-                        <p class="fragment" style="text-align: left;"><span class="highlighted">Prompt 1:</span> Look at the javascript tetris project and come up with the plan of rewriting it in Python. Write all the details in the `python-tetris/plan.md` file.</p>
+                        <p class="fragment" style="text-align: left;"><span class="highlighted">Prompt 1:</span> Look at the javascript tetris project and come up with the plan of rewriting it in Python.
+                            Write all the details in the <span style="background-color: black">`python-tetris/plan.md`</span> file.</p>
                         <p class="fragment" style="text-align: left;">
-                            <span class="highlighted">Prompt 2:</span> Implement the tetris in Python according to the `python-tetris/plan.md`, but replace the texture.jpg background to the simple gray grid.
+                            <span class="highlighted">Prompt 2:</span> Implement the tetris in Python according to the <span style="background-color: black">`python-tetris/plan.md`</span>,
+                            but replace the <span style="background-color: black">`texture.jpg`</span> background to the simple gray grid.
                         </p>
                         <p class="fragment" style="text-align: left;">
-                            <span class="highlighted">Prompt 3:</span> The game in Python works, but there is no AI mode, only flag for it.
+                            <span class="highlighted">Prompt 3 (fixing bug):</span> The game in Python works, but there is no AI mode, only flag for it.
                         </p>
                     </section>
                     <section>
-                        <h3><a href="">It took about 30 min to get</a></h3>
+                        <h3><a href="https://github.com/avalur/tetris-workshop/commit/710fc93b053e048bebdce8dc6f1406a41e6a8301">It took about 30 min to get</a></h3>
                         <iframe width="60%" height="600" src="https://www.youtube.com/embed/lZbDbDy-sbI" allowfullscreen>
                         </iframe>
                     </section>
@@ -360,12 +362,12 @@
                 <section>
                     <h3>Possible Future Steps</h3>
                     <ul>
-                        <li>Fix a Python implementation</li>
+                        <li>Fix Python implementation!</li>
                         <li>Join our programs at
                             <a href="https://lp.jetbrains.com/academy/csai-program/">NUP</a> or
                             <a href="https://lp.jetbrains.com/software-data-and-technology-constructor-university">CUB</a> 😎
                         </li>
-                        <li>Rewrite Tetris in C++ or Kotlin</li>
+                        <li>Rewrite Tetris in <span class="highlighted">C++</span> or <span class="highlighted">Kotlin</span></li>
                         <li>Implement true Beam Search or MCTS</li>
                         <li>Switch to <a href="https://gist.github.com/reCurs3/7d4eb5b952790e3009337f61c3341074">other game</a> 🙂</li>
                     </ul>
