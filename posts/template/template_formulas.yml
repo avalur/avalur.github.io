@@ -1,0 +1,5 @@
+formula1: "\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}"
+formula2: "\\frac{\\partial}{\\partial t}\\psi(x,t) = \\frac{i\\hbar}{2m}\\frac{\\partial^2}{\\partial x^2}\\psi(x,t) + V(x)\\psi(x,t)"
+formula3: "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} ax + by \\\\ cx + dy \\end{pmatrix}"
+formula4: "\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t} \\quad \\text{and} \\quad \\nabla \\times \\vec{B} = \\mu_0\\vec{J} + \\mu_0\\epsilon_0\\frac{\\partial \\vec{E}}{\\partial t}"
+formula5: "\\sigma^2 = \\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2 \\quad \\text{where} \\quad \\mu = \\frac{1}{N}\\sum_{i=1}^{N}x_i"
