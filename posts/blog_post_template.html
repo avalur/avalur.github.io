@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Blog Post Title</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                ready: function () {
+                    MathJax.startup.defaultReady();
+                    // Add copy buttons after MathJax is ready
+                    setTimeout(addMathCopyButtons, 100);
+                }
+            }
+        };
+    </script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <script src="./js/utils.js"></script>
+    <!-- Prism.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Your Blog Post Title Here</h1>
+            <p class="subtitle">A compelling subtitle that summarizes your post</p>
+            <div class="meta">
+                <span class="author">By Your Name</span>
+                <span>•</span>
+                <span class="date">January 15, 2024</span>
+                <span>•</span>
+                <span>5 min read</span>
+            </div>
+        </header>
+
+        <article class="content">
+            <p>This is your opening paragraph. Start with something engaging that draws the reader in. You can write naturally and include <strong>bold text</strong> and <em>italic text</em> for emphasis.</p>
+
+            <h2>Section with Math Formulas</h2>
+            <p>You can include inline math like this: The famous equation $E = mc^2$ changed our understanding of physics. Or you can display block equations with copy functionality:</p>
+
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}"></div>
+            </div>
+
+            <p>More complex formulas work too - hover over them to see the copy button:</p>
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\frac{\partial}{\partial t}\psi(x,t) = \frac{i\hbar}{2m}\frac{\partial^2}{\partial x^2}\psi(x,t) + V(x)\psi(x,t)$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\frac{\partial}{\partial t}\psi(x,t) = \frac{i\hbar}{2m}\frac{\partial^2}{\partial x^2}\psi(x,t) + V(x)\psi(x,t)"></div>
+            </div>
+
+            <p>Here's a matrix equation with proper LaTeX formatting:</p>
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}"></div>
+            </div>
+
+            <h2>Including Images</h2>
+            <p>Images are easy to include and will be responsive:</p>
+
+            <div class="image-container">
+                <img src="https://via.placeholder.com/600x300/4a90e2/ffffff?text=Your+Image+Here" alt="Description of your image">
+                <div class="image-caption">Caption describing what this image shows</div>
+            </div>
+
+            <h3>Code Examples with Syntax Highlighting</h3>
+            <p>You can include inline code like <code>print("Hello World")</code> or beautifully highlighted code blocks:</p>
+
+            <div class="code-block">
+                <div class="code-header">Python</div>
+                <pre class="line-numbers"><code class="language-python">def fibonacci(n):
+        """Calculate the nth Fibonacci number using recursion."""
+        if n <= 1:
+            return n
+        return fibonacci(n-1) + fibonacci(n-2)
+
+    # Example usage with list comprehension
+    fib_sequence = [fibonacci(i) for i in range(10)]
+    print(f"First 10 Fibonacci numbers: {fib_sequence}")
+
+    # More efficient iterative approach
+    def fibonacci_iterative(n):
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a</code></pre>
+            </div>
+
+            <h2>Advanced Mathematical Examples</h2>
+            <p>Here are some more complex mathematical formulas you can copy:</p>
+
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} \quad \text{and} \quad \nabla \times \vec{B} = \mu_0\vec{J} + \mu_0\epsilon_0\frac{\partial \vec{E}}{\partial t}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} \quad \text{and} \quad \nabla \times \vec{B} = \mu_0\vec{J} + \mu_0\epsilon_0\frac{\partial \vec{E}}{\partial t}"></div>
+            </div>
+
+            <p>Statistical formulas with summations:</p>
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\sigma^2 = \frac{1}{N}\sum_{i=1}^{N}(x_i - \mu)^2 \quad \text{where} \quad \mu = \frac{1}{N}\sum_{i=1}^{N}x_i$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\sigma^2 = \frac{1}{N}\sum_{i=1}^{N}(x_i - \mu)^2 \quad \text{where} \quad \mu = \frac{1}{N}\sum_{i=1}^{N}x_i"></div>
+            </div>
+
+            <h2>Lists and Quotes</h2>
+            <p>Here's what this enhanced template now includes:</p>
+            <ul>
+                <li><strong>Syntax highlighting</strong> for 200+ programming languages</li>
+                <li><strong>Line numbers</strong> for better code reference</li>
+                <li><strong>Math formula copying</strong> - hover over formulas to copy LaTeX</li>
+                <li><strong>Copy-to-clipboard functionality</strong> for both code and math</li>
+                <li><strong>GitHub-inspired color scheme</strong> for familiar look</li>
+                <li><strong>Responsive design</strong> that works on mobile</li>
+            </ul>
+
+            <blockquote>
+                "Mathematics is the language with which God has written the universe." – Galileo Galilei
+            </blockquote>
+
+            <h2>Conclusion</h2>
+            <p>This enhanced template now provides both code syntax highlighting and LaTeX formula copying functionality. Readers can easily copy mathematical expressions for use in their own documents, papers, or LaTeX editors.</p>
+
+            <p>The copy functionality works seamlessly - just hover over any block equation and click the "Copy LaTeX" button. Perfect for academic blogs, mathematical tutorials, and scientific documentation!</p>
+        </article>
+    </div>
+
+    <!-- Toast notification element -->
+    <div id="copyToast" class="copy-toast"></div>
+
+</body>
+</html>
