@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts | Your Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .post-image.tech {
+            background: linear-gradient(135deg, #4A89DC 0%, #5a67d8 100%);
+        }
+
+        .post-image.ai {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .post-image.education {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .post-image.research {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .post-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .post-category {
+            background: #e6f3ff;
+            color: #2c5aa0;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .post-category.tech {
+            background: #e6f3ff;
+            color: #2c5aa0;
+        }
+
+        .post-category.ai {
+            background: #fdf2f8;
+            color: #be185d;
+        }
+
+        .post-category.education {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .post-category.research {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .post-excerpt {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: #f7fafc;
+            color: #4a5568;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
+            color: #4A89DC;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .read-more:hover {
+            color: #2c5aa0;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .search-filter {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #4A89DC;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            background: #4A89DC;
+            color: white;
+            border-color: #4A89DC;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            background: #f8fafc;
+        }
+
+        .newsletter-signup {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 12px;
+        }
+
+        .newsletter-signup h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .newsletter-signup p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .newsletter-button:hover {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .filter-tabs {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Blog Posts 📝</h1>
+        <p>Thoughts, tutorials, and insights on technology, AI, math, and education</p>
+    </div>
+
+    <div class="content">
+        <!-- Posts Grid -->
+        <div class="posts-grid">
+            <article class="post-card">
+                <div class="post-image ai">
+                    🤖
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <div class="post-date">
+                            📅 <span>August 5, 2025</span>
+                        </div>
+                        <div class="post-category ai">AI & Math</div>
+                    </div>
+
+                    <h2 class="post-title">LLM Math Reasoning Evaluation</h2>
+
+                    <p class="post-excerpt">
+                        An experimental evaluation of state-of-the-art large language models
+                        (GPT, DeepSeek, Gemini, Claude, and Grok) on challenging university-level
+                        mathematics problems from the International Mathematics Competition (IMC) 2025.
+
+                        The goal is to assess how close publicly available AI models have come to
+                        human-level mathematical reasoning and problem-solving capabilities.
+                    </p>
+
+                    <div class="post-tags">
+                        <span class="tag">LLM</span>
+                        <span class="tag">Math</span>
+                        <span class="tag">2025</span>
+                        <span class="tag">International Mathematics Competition</span>
+                    </div>
+
+                    <div class="post-actions">
+                        <a href="https://avalur.github.io/posts/LLM-math-reasoning-eval/index.html" class="read-more">
+                            Read More →
+                        </a>
+                        <div class="post-stats">
+                            <div class="stat">
+                                ⏱️ <span>12 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+<!--            <article class="post-card">-->
+<!--                <div class="post-image tech">-->
+<!--                    💻-->
+<!--                </div>-->
+<!--                <div class="post-content">-->
+<!--                    <div class="post-meta">-->
+<!--                        <div class="post-date">-->
+<!--                            📅 <span>March 15, 2025</span>-->
+<!--                        </div>-->
+<!--                        <div class="post-category tech">Technology</div>-->
+<!--                    </div>-->
+
+<!--                    <h2 class="post-title">Building Modern Web Applications with Python</h2>-->
+
+<!--                    <p class="post-excerpt">-->
+<!--                        A comprehensive guide to creating scalable web applications using Python frameworks.-->
+<!--                        Learn best practices, design patterns, and deployment strategies.-->
+<!--                    </p>-->
+
+<!--                    <div class="post-tags">-->
+<!--                        <span class="tag">Python</span>-->
+<!--                        <span class="tag">Web Development</span>-->
+<!--                        <span class="tag">Flask</span>-->
+<!--                        <span class="tag">Django</span>-->
+<!--                    </div>-->
+
+<!--                    <div class="post-actions">-->
+<!--                        <a href="#" class="read-more">-->
+<!--                            Read More →-->
+<!--                        </a>-->
+<!--                        <div class="post-stats">-->
+<!--                            <div class="stat">-->
+<!--                                👁️ <span>1.2k</span>-->
+<!--                            </div>-->
+<!--                            <div class="stat">-->
+<!--                                💬 <span>24</span>-->
+<!--                            </div>-->
+<!--                            <div class="stat">-->
+<!--                                ⏱️ <span>8 min</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="post-card">-->
+<!--                <div class="post-image education">-->
+<!--                    🎓-->
+<!--                </div>-->
+<!--                <div class="post-content">-->
+<!--                    <div class="post-meta">-->
+<!--                        <div class="post-date">-->
+<!--                            📅 <span>March 5, 2025</span>-->
+<!--                        </div>-->
+<!--                        <div class="post-category education">Education</div>-->
+<!--                    </div>-->
+
+<!--                    <h2 class="post-title">Effective Teaching Methods in the Digital Age</h2>-->
+
+<!--                    <p class="post-excerpt">-->
+<!--                        Exploring innovative approaches to education that leverage technology-->
+<!--                        while maintaining human connection and engagement.-->
+<!--                    </p>-->
+
+<!--                    <div class="post-tags">-->
+<!--                        <span class="tag">Education</span>-->
+<!--                        <span class="tag">Digital Learning</span>-->
+<!--                        <span class="tag">Pedagogy</span>-->
+<!--                        <span class="tag">Technology</span>-->
+<!--                    </div>-->
+
+<!--                    <div class="post-actions">-->
+<!--                        <a href="#" class="read-more">-->
+<!--                            Read More →-->
+<!--                        </a>-->
+<!--                        <div class="post-stats">-->
+<!--                            <div class="stat">-->
+<!--                                👁️ <span>856</span>-->
+<!--                            </div>-->
+<!--                            <div class="stat">-->
+<!--                                💬 <span>18</span>-->
+<!--                            </div>-->
+<!--                            <div class="stat">-->
+<!--                                ⏱️ <span>6 min</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="post-card">-->
+<!--                <div class="post-image research">-->
+<!--                    🔬-->
+<!--                </div>-->
+<!--                <div class="post-content">-->
+<!--                    <div class="post-meta">-->
+<!--                        <div class="post-date">-->
+<!--                            📅 <span>February 28, 2025</span>-->
+<!--                        </div>-->
+<!--                        <div class="post-category research">Research</div>-->
+<!--                    </div>-->
+
+<!--                    <h2 class="post-title">Latest Developments in Computer Vision</h2>-->
+
+<!--                    <p class="post-excerpt">-->
+<!--                        A deep dive into recent breakthroughs in computer vision research,-->
+<!--                        including practical applications and future directions.-->
+<!--                    </p>-->
+
+<!--                    <div class="post-tags">-->
+<!--                        <span class="tag">Computer Vision</span>-->
+<!--                        <span class="tag">Research</span>-->
+<!--                        <span class="tag">Deep Learning</span>-->
+<!--                        <span class="tag">AI</span>-->
+<!--                    </div>-->
+
+<!--                    <div class="post-actions">-->
+<!--                        <a href="#" class="read-more">-->
+<!--                            Read More →-->
+<!--                        </a>-->
+<!--                        <div class="post-stats">-->
+<!--                            <div class="stat">-->
+<!--                                👁️ <span>1.8k</span>-->
+<!--                            </div>-->
+<!--                            <div class="stat">-->
+<!--                                💬 <span>32</span>-->
+<!--                            </div>-->
+<!--                            <div class="stat">-->
+<!--                                ⏱️ <span>15 min</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </article>-->
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>💡 Join <a href="https://t.me/TechneNotes">Telegram channel</a> and share your thoughts!</p>
+    </div>
+</div>
+
+<script>
+    // Simple filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const searchBar = document.querySelector('.search-bar');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // Add your filter logic here
+            });
+        });
+
+        searchBar.addEventListener('input', function() {
+            // Add your search logic here
+            console.log('Searching for:', this.value);
+        });
+    });
+</script>
+</body>
+</html>

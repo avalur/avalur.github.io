@@ -1,113 +1,329 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Public Talks</title>
-<style>
-#talks {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 80%;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Talks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-#talks td, #talks th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
 
-#talks tr:nth-child(even){background-color: #f2f2f2;}
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
 
-#talks tr:hover {background-color: #ddd;}
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
 
-#talks th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4A89DC;
-  color: white;
-}
-</style>
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .table-container {
+      padding: 2rem;
+      overflow-x: auto;
+    }
+
+    #talks {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    #talks th {
+      background: linear-gradient(135deg, #4A89DC 0%, #5a67d8 100%);
+      color: white;
+      padding: 1.2rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: none;
+    }
+
+    #talks th:first-child {
+      border-top-left-radius: 12px;
+    }
+
+    #talks th:last-child {
+      border-top-right-radius: 12px;
+    }
+
+    #talks td {
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+      font-size: 0.9rem;
+    }
+
+    #talks tr:last-child td {
+      border-bottom: none;
+    }
+
+    #talks tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    #talks tr:hover {
+      background-color: #e6f3ff;
+      transform: translateY(-1px);
+      transition: all 0.2s ease;
+    }
+
+    #talks a {
+      color: #4A89DC;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    #talks a:hover {
+      color: #2c5aa0;
+      text-decoration: underline;
+    }
+
+    .date-cell {
+      font-weight: 500;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .venue-cell {
+      max-width: 250px;
+    }
+
+    .topic-cell {
+      font-weight: 500;
+      color: #2d3748;
+    }
+
+    .links-cell {
+      min-width: 200px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e6f3ff;
+      color: #2c5aa0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin: 0.25rem 0.25rem 0.25rem 0;
+    }
+
+    .online-badge {
+      background: #f0fff4;
+      color: #22543d;
+    }
+
+    .offline-badge {
+      background: #fef5e7;
+      color: #c05621;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      .header {
+        padding: 2rem 1rem;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .table-container {
+        padding: 1rem;
+      }
+
+      #talks th,
+      #talks td {
+        padding: 0.8rem 0.6rem;
+        font-size: 0.85rem;
+      }
+
+      .venue-cell {
+        max-width: 200px;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      font-size: 0.9rem;
+      background: #f8fafc;
+    }
+  </style>
 </head>
 <body>
+<div class="container">
+  <div class="header">
+    <h1>Public Talks 🗣️</h1>
+    <p>Speaking engagements, workshops, and educational content</p>
+  </div>
 
-<h3>Public Talks 🗣 </h3>
+  <div class="table-container">
+    <table id="talks">
+      <thead>
+      <tr>
+        <th>Venue</th>
+        <th>Date</th>
+        <th>Topic</th>
+        <th>Resources</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="venue-cell">
+          <strong>Kolla Culture Family, Limassol</strong><br>
+          <a href="https://www.linkedin.com/posts/reflect-festival_reflectfest-reflectfestival-doersunited-activity-7330469036335484928-t2nJ">Reflect Festival</a>
+          <span class="badge offline-badge">Offline</span>
+        </td>
+        <td class="date-cell">May 16, 2025</td>
+        <td class="topic-cell">Panel: Opportunities for Gen Z in Tech & Investment</td>
+        <td class="links-cell">
+          <a href="https://reflectfest.com/speaker/alexander-avdiushenko/">Speaker Page</a><br>
+          <small>With <a href="https://reflectfest.com/speaker/niloufar-gharavi/">Niloufar Gharavi</a>,
+            <a href="https://reflectfest.com/speaker/alexander-shkuratov-2/">Alexander Shkuratov</a>,
+            <a href="https://reflectfest.com/speaker/rosa-maria-blanco-macia/">Rosa Maria Blanco</a></small>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong>Tetris Workshop</strong><br>
+          High School Students
+          <span class="badge online-badge">Online</span>
+        </td>
+        <td class="date-cell">May 5, 2025</td>
+        <td class="topic-cell">Every Programmer Should Write Tetris!</td>
+        <td class="links-cell">
+          <a href="https://youtu.be/nctQ_wI6nUo">🎥 YouTube</a><br>
+          <a href="https://avalur.github.io/talks/TetrisWorkshop.html">📊 Slides</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong><a href="https://lp.jetbrains.com/academy/csai-program/#events-and-news">CSAI BSc at NUP</a></strong><br>
+          Cyprus
+          <span class="badge online-badge">Livestream</span>
+        </td>
+        <td class="date-cell">Mar 11, 2025</td>
+        <td class="topic-cell">From Engineering to Biology: Why You Should Master AI</td>
+        <td class="links-cell">
+          <a href="https://www.youtube.com/live/YhWvANxh9nI?si=2V2mlSE-Frm9THBQ&t=777">🎥 YouTube</a><br>
+          <a href="https://avalur.github.io/talks/CSAI_OpenDay_2025.html">📊 Slides</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong><a href="https://mathfest.xyz/">International MathFest 2025</a></strong><br>
+          Trinity Private School, Cyprus
+          <span class="badge offline-badge">Offline</span>
+        </td>
+        <td class="date-cell">Feb 8, 2025</td>
+        <td class="topic-cell">AI in School Math and IT</td>
+        <td class="links-cell">
+          <a href="https://avalur.github.io/talks/Math_Fest_Trinity_2025.html">📊 Slides</a><br>
+          <small>No recording available</small>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong><a href="https://docs.google.com/spreadsheets/d/1_Nc0_pvP-iZh-kXaRFD-KBGVbBADOzMGQ2ONG4Lg-uY/edit?gid=718245106#gid=718245106">AI Paphos Summit</a></strong><br>
+          Cyprus
+          <span class="badge offline-badge">Offline</span>
+        </td>
+        <td class="date-cell">Nov 22, 2024</td>
+        <td class="topic-cell">Self-improving Educational Content That Adapts to the Student</td>
+        <td class="links-cell">
+          <a href="https://avalur.github.io/talks/SelfImprovingEdTech.html">📊 Slides</a><br>
+          <small>No recording available</small>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong><a href="https://blog.jetbrains.com/education/2024/09/24/livestream-build-a-2024-ml-course-from-scratch-insights-and-teaching-strategies-with-jetbrains/">JetBrains</a></strong>
+          <span class="badge online-badge">Livestream</span>
+        </td>
+        <td class="date-cell">Oct 1, 2024</td>
+        <td class="topic-cell">Build a 2024 ML Course from Scratch: Insights & Teaching Strategies</td>
+        <td class="links-cell">
+          <a href="https://www.youtube.com/watch?v=Ad1G2KVEjhw">🎥 YouTube</a><br>
+          <a href="https://avalur.github.io/talks/MLEduKeyParts.html">📊 Slides</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong><a href="https://blog.jetbrains.com/education/2024/05/13/livestream-how-to-study-effectively-with-chatgpt/">JetBrains</a></strong>
+          <span class="badge online-badge">Livestream</span>
+        </td>
+        <td class="date-cell">May 22, 2024</td>
+        <td class="topic-cell">How to Study Effectively With ChatGPT</td>
+        <td class="links-cell">
+          <a href="https://www.youtube.com/watch?v=ArBKDfHKAk8">🎥 YouTube</a><br>
+          <a href="https://avalur.github.io/talks/StudyingWithAI.html#/title">📊 Slides</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="venue-cell">
+          <strong><a href="https://lp.jetbrains.com/cyprus-open-events/">Cyprus Open Talks</a></strong><br>
+          NUP
+          <span class="badge offline-badge">Offline</span>
+        </td>
+        <td class="date-cell">Dec 18, 2023</td>
+        <td class="topic-cell">Developing Critical Thinking in the Era of ChatGPT</td>
+        <td class="links-cell">
+          <a href="https://www.youtube.com/watch?v=hX08s8OJo3c&feature=youtu.be">🎥 YouTube</a><br>
+          <a href="https://avalur.github.io/talks/OC_critical_thinking_2023.html#/title">📊 Slides</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-<table id="talks">
-  <tr>
-    <th>Where?</th>
-    <th>When?</th>
-    <th>What?</th>
-    <th>Links?</th>
-  </tr>
-  <tr>
-    <td>
-      Kolla Culture Family, Limassol,
-      <a href="https://www.linkedin.com/posts/reflect-festival_reflectfest-reflectfestival-doersunited-activity-7330469036335484928-t2nJ">
-        Reflect
-      </a>
-    </td>
-    <td>May 16, 2025</td>
-    <td>Panel: Opportunities for Gen Z in Tech & Investment
-    </td>
-    <td><a href="https://reflectfest.com/speaker/alexander-avdiushenko/">Offline</a>
-      with <a href="https://reflectfest.com/speaker/niloufar-gharavi/">Niloufar Gharavi</a>,
-      <a href="https://reflectfest.com/speaker/alexander-shkuratov-2/">Alexander Shkuratov</a>,
-      <a href="https://reflectfest.com/speaker/rosa-maria-blanco-macia/">Rosa Maria Blanco</a>
-    </td>
-  </tr>
-  <tr>
-    <td>Tetris Workshop for high school students,
-      Online
-    </td>
-    <td>May 5, 2025</td>
-    <td>Every Programmer Should Write Tetris!</td>
-    <td><a href="https://youtu.be/nctQ_wI6nUo">Youtube</a>, <a href="https://avalur.github.io/talks/TetrisWorkshop.html">slides</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://lp.jetbrains.com/academy/csai-program/#events-and-news">
-      CSAI BSc at NUP Explained</a>,
-      Cyprus, Livestream</td>
-    <td>March 11, 2025</td>
-    <td>From Engineering to Biology: Why You Should Master AI</td>
-    <td><a href="https://www.youtube.com/live/YhWvANxh9nI?si=2V2mlSE-Frm9THBQ&t=777">Youtube</a>, <a href="https://avalur.github.io/talks/CSAI_OpenDay_2025.html">slides</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://mathfest.xyz/">
-      International MathFest 2025</a>,
-      Cyprus, Trinity Private School, offline</td>
-    <td>February 8, 2025</td>
-    <td>AI in School Math and IT</td>
-    <td>Without recording, <a href="https://avalur.github.io/talks/Math_Fest_Trinity_2025.html">slides</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://docs.google.com/spreadsheets/d/1_Nc0_pvP-iZh-kXaRFD-KBGVbBADOzMGQ2ONG4Lg-uY/edit?gid=718245106#gid=718245106">
-      AI Paphos Summit</a>,
-      Cyprus, offline</td>
-    <td>November 22, 2024</td>
-    <td>Self-improving Educational Content That Adapts to the Student</td>
-    <td>Without recording, <a href="https://avalur.github.io/talks/SelfImprovingEdTech.html">slides</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://blog.jetbrains.com/education/2024/09/24/livestream-build-a-2024-ml-course-from-scratch-insights-and-teaching-strategies-with-jetbrains/">JetBrains</a>,
-      Livestream</td>
-    <td>October 1, 2024</td>
-    <td>Build a 2024 ML Course from Scratch:
-      Insights & Teaching Strategies with JetBrains</td>
-    <td><a href="https://www.youtube.com/watch?v=Ad1G2KVEjhw">Youtube</a>, <a href="https://avalur.github.io/talks/MLEduKeyParts.html">slides</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://blog.jetbrains.com/education/2024/05/13/livestream-how-to-study-effectively-with-chatgpt/">JetBrains</a>, Livestream</td>
-    <td>May 22, 2024</td>
-    <td>How to Study Effectively With ChatGPT</td>
-    <td><a href="https://www.youtube.com/watch?v=ArBKDfHKAk8">Youtube</a>, <a href="https://avalur.github.io/talks/StudyingWithAI.html#/title">slides</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://lp.jetbrains.com/cyprus-open-events/">Cyprus Open Talks</a>, NUP</td>
-    <td>December 18, 2023</td>
-    <td>Developing Critical Thinking in the Era of ChatGPT</td>
-    <td><a href="https://www.youtube.com/watch?v=hX08s8OJo3c&feature=youtu.be">Youtube</a>, <a href="https://avalur.github.io/talks/OC_critical_thinking_2023.html#/title">slides</a></td>
-  </tr>
-</table>
-
+  <div class="footer">
+    <p>📧 For speaking inquiries and collaborations, please reach out!</p>
+  </div>
+</div>
 </body>
 </html>
