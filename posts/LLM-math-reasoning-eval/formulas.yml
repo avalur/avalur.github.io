@@ -1,0 +1,4 @@
+formula1: "\\int_{-1}^{1} f(x)\\,\\mathrm{d}x = 0
+  \\quad\\text{and}\\quad
+  f(1) = f(-1) = 1"
+formula2: "\\int_{-1}^{1} \\bigl(f''(x)\\bigr)^2 \\,\\mathrm{d}x \\;\\ge\\; 15,"

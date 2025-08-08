@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage[a4paper, margin=1cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+
+\title{IMC 2025}
+\author{}
+\date{}
+
+\begin{document}
+
+    \maketitle
+
+    \section*{Day 1}
+
+    \subsection*{Problem 1}
+    Let $P \in \mathbb{R}[x]$ be a polynomial with real coefficients, and suppose $\deg(P)\ge2$. For every $x\in\mathbb{R}$, let $\ell_x\subset\mathbb{R}^2$ denote the line tangent to the graph of $P$ at the point $(x,P(x))$.
+
+    \begin{enumerate}
+        \item[(a)] Suppose that the degree of $P$ is odd. Show that
+        \[
+            \bigcup_{x\in\mathbb{R}}\ell_x \;=\; \mathbb{R}^2.
+        \]
+        \item[(b)] Does there exist a polynomial of even degree for which the above equality still holds?
+    \end{enumerate}
+
+    \subsection*{Problem 2}
+    Let $f:\mathbb{R}\to\mathbb{R}$ be a twice continuously differentiable function, and suppose that
+    \[
+        \int_{-1}^{1} f(x)\,\mathrm{d}x = 0
+        \quad\text{and}\quad
+        f(1) = f(-1) = 1.
+    \]
+    Prove that
+    \[
+        \int_{-1}^{1} \bigl(f''(x)\bigr)^2 \,\mathrm{d}x \;\ge\; 15,
+    \]
+    and find all such functions for which equality holds.
+
+    \subsection*{Problem 3}
+    Denote by $\mathcal{S}$ the set of all real symmetric $2025\times2025$ matrices of rank~1 whose entries take values $-1$ or $+1$. Let $A,B\in\mathcal{S}$ be matrices chosen independently uniformly at random. Find the probability that $A$ and $B$ commute, i.e., $AB = BA$.
+
+    \subsection*{Problem 4}
+    Let $a$ be an even positive integer. Find all real numbers $x$ such that
+    \[
+        \left\lfloor \sqrt[a]{b^a + x} \cdot b^{a-1} \right\rfloor
+        \;=\; b^a + \left\lfloor \frac{x}{a} \right\rfloor
+    \]
+    holds for every positive integer $b$.
+    (Here $\lfloor x\rfloor$ denotes the largest integer that is no greater than $x$.)
+
+    \subsection*{Problem 5}
+    For a positive integer $n$, let $[n] = \{1,2,\dots,n\}$. Denote by $S_n$ the set of all bijections from $[n]$ to $[n]$, and let $T_n$ be the set of all maps from $[n]$ to $[n]$. Define the order $\operatorname{ord}(\tau)$ of a map $\tau\in T_n$ as the number of distinct maps in the set
+    \[
+        \{\tau,\;\tau\circ\tau,\;\tau\circ\tau\circ\tau,\;\dots\},
+    \]
+    where $\circ$ denotes composition.  Finally, let
+    \[
+        f(n) \;=\;\max_{\tau\in S_n}\operatorname{ord}(\tau)
+        \quad\text{and}\quad
+        g(n) \;=\;\max_{\tau\in T_n}\operatorname{ord}(\tau).
+    \]
+    Prove that
+    \[
+        g(n) \;<\; f(n) \;+\; n^{0.501}
+    \]
+    for sufficiently large $n$.
+
+    \section*{Day 2}
+
+    \subsection*{Problem 6}
+    Let $f:(0,\infty)\to\mathbb{R}$ be a continuously differentiable function, and let $b>a>0$ be real numbers such that
+    \[
+        f(a) = f(b) = k.
+    \]
+    Prove that there exists a point $\xi \in (a,b)$ such that
+    \[
+        f(\xi) - \xi f'(\xi) = k.
+    \]
+
+    \subsection*{Problem 7}
+    Let $\mathbb{Z}_{>0}$ be the set of positive integers. Find all nonempty subsets $M \subseteq \mathbb{Z}_{>0}$ satisfying both of the following properties:
+    \begin{enumerate}
+        \item[(a)] If $x \in M$, then $2x \in M$.
+        \item[(b)] If $x,y \in M$ and $x + y$ is even, then $\tfrac{x + y}{2} \in M$.
+    \end{enumerate}
+
+    \subsection*{Problem 8}
+    For an $n\times n$ real matrix $A\in M_n(\mathbb{R})$, denote by $A^R$ its counter-clockwise $90^\circ$ rotation.  For example,
+    \[
+        \begin{bmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            7 & 8 & 9
+        \end{bmatrix}^R
+        =
+        \begin{bmatrix}
+            3 & 6 & 9 \\
+            2 & 5 & 8 \\
+            1 & 4 & 7
+        \end{bmatrix}.
+    \]
+    Prove that if $A = A^R$ then for any eigenvalue $\lambda$ of $A$, we have $\Re\lambda = 0$ or $\Im\lambda = 0$.
+
+    \subsection*{Problem 9}
+    Let $n$ be a positive integer. Consider the following random process which produces a sequence of $n$ distinct positive integers $X_1,X_2,\dots,X_n$. First, $X_1$ is chosen randomly with
+    \[
+        \mathbb{P}(X_1 = i) = 2^{-i}
+        \quad\text{for every positive integer }i.
+    \]
+    For $1 \le j \le n-1$, having chosen $X_1,\dots,X_j$, arrange the remaining positive integers in increasing order as $n_1 < n_2 < \cdots$, and choose $X_{j+1}$ randomly with
+    \[
+        \mathbb{P}(X_{j+1} = n_i) = 2^{-i}
+        \quad\text{for every positive integer }i.
+    \]
+    Let $Y_n = \max\{X_1,\dots,X_n\}$. Show that
+    \[
+        \mathbb{E}[Y_n]
+        \;=\;
+        \sum_{i=1}^{n}\frac{2^i}{2^i - 1},
+    \]
+    where $\mathbb{E}[Y_n]$ is the expected value of $Y_n$.
+
+    \subsection*{Problem 10}
+    For any positive integer $N$, let $S_N$ be the number of pairs of integers $1 \le a,b \le N$ such that the number
+    \[
+        (a^2 + a)\,(b^2 + b)
+    \]
+    is a perfect square. Prove that the limit
+    \[
+        \lim_{N\to\infty}\frac{S_N}{N}
+    \]
+    exists and find its value.
+
+\end{document}

@@ -1,0 +1,346 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{Mathematical Problems Collection}
+\fancyfoot[C]{\thepage}
+
+\title{Mathematical Problems Collection}
+\author{Generated from JSON Data}
+\date{\today}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{solution}{Solution}
+
+\begin{document}
+
+    \maketitle
+    \tableofcontents
+    \newpage
+\section{Problem 1}
+
+\subsection{Solution to Problem 1, variant 1}
+
+\subsection*{Part (a)}
+
+Let $P$ be a polynomial of odd degree $n \geq 3$ (since $\deg(P) \geq 2$ and odd). For any point $(X, Y) \in \mathbb{R}^2$, consider the equation that must hold for $(X, Y)$ to lie on the tangent line $\ell_x$ at $(x, P(x))$:
+
+\[
+Y = P(x) + P'(x)(X - x).
+\]
+
+Rearrange this equation as:
+
+\[
+P(x) + P'(x)(X - x) - Y = 0.
+\]
+
+Define the function $g(x) = P(x) + P'(x)(X - x) - Y$. Since $P$ is a polynomial, $g(x)$ is also a polynomial in $x$. Let $P(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_0$ with $a_n \neq 0$. Then $P'(x) = n a_n x^{n-1} + (n-1) a_{n-1} x^{n-2} + \cdots$. The leading term of $g(x)$ comes from $P(x)$ and $-x P'(x)$:
+
+\begin{itemize}
+\item $P(x)$ contributes $a_n x^n$.
+\item $-x P'(x)$ contributes $-x \cdot (n a_n x^{n-1}) = -n a_n x^n$.
+\end{itemize}
+
+Thus, the leading term of $g(x)$ is $a_n x^n - n a_n x^n = a_n (1 - n) x^n$. Since $n \geq 2$, $1 - n \neq 0$ and $a_n \neq 0$, so $\deg(g) = n$, which is odd.
+
+A polynomial of odd degree has at least one real root because it tends to $+\infty$ as $x \to +\infty$ and to $-\infty$ as $x \to -\infty$ (or vice-versa, depending on the leading coefficient), and by the intermediate value theorem, it must cross zero. Therefore, there exists a real number $x$ such that $g(x) = 0$, meaning that $(X, Y)$ lies on the tangent line $\ell_x$.
+
+This holds for every $(X, Y) \in \mathbb{R}^2$, so $\bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2$.
+
+\subsection*{Solution to Part (b)}
+
+No, there does not exist a polynomial of even degree for which $\bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2$.
+
+To see this, suppose $P$ has even degree $n \geq 2$. For a fixed $X \in \mathbb{R}$, define the function $h_X(x) = P(x) + P'(x)(X - x)$. As in part (a), $h_X(x)$ is a polynomial in $x$ of degree $n$, even, with leading coefficient $a_n (1 - n) \neq 0$ since $n \geq 2$.
+
+Because the degree is even:
+\begin{itemize}
+\item If the leading coefficient is positive, then $h_X(x) \to +\infty$ as $|x| \to \infty$, so $h_X(x)$ has a global minimum $m_X$, and its range is $[m_X, \infty)$.
+\item If the leading coefficient is negative, then $h_X(x) \to -\infty$ as $|x| \to \infty$, so $h_X(x)$ has a global maximum $M_X$, and its range is $(-\infty, M_X]$.
+\end{itemize}
+
+In both cases, the range of $h_X(x)$ is not all of $\mathbb{R}$. For example:
+\begin{itemize}
+\item If the range is $[m_X, \infty)$, then for any $Y < m_X$, there is no $x$ such that $h_X(x) = Y$.
+\item If the range is $(-\infty, M_X]$, then for any $Y > M_X$, there is no $x$ such that $h_X(x) = Y$.
+\end{itemize}
+
+This means that for each $X$, there exist values of $Y$ such that the point $(X, Y)$ does not lie on any tangent line $\ell_x$. Therefore, $\bigcup_{x \in \mathbb{R}} \ell_x \neq \mathbb{R}^2$.
+
+Since this argument holds for any even degree polynomial, no such polynomial exists that satisfies the equality.
+
+Final answer for part (b): No.
+
+\subsection{Solution to Problem 1, variant 2}
+
+\subsection*{Part (a)}
+Let $P$ be a polynomial of odd degree $n \geq 2$ with real coefficients. For any point $(a, b) \in \mathbb{R}^2$, we need to show that there exists some $x \in \mathbb{R}$ such that the tangent line $\ell_x$ to the graph of $P$ at $(x, P(x))$ passes through $(a, b)$.
+
+The equation of the tangent line at $x$ is given by:
+\[
+Y - P(x) = P'(x)(X - x).
+\]
+Substituting $(X, Y) = (a, b)$ yields:
+\[
+b - P(x) = P'(x)(a - x),
+\]
+which can be rearranged as:
+\[
+b = P(x) + P'(x)(a - x).
+\]
+Define the function $g_a : \mathbb{R} \to \mathbb{R}$ by:
+\[
+g_a(x) = P(x) + P'(x)(a - x).
+\]
+Since $P$ is a polynomial of degree $n$, $P'$ is a polynomial of degree $n-1 \geq 1$ (as $n \geq 2$). The expression for $g_a(x)$ is:
+\[
+g_a(x) = P(x) + a P'(x) - x P'(x).
+\]
+The term of highest degree in $g_a(x)$ arises from $P(x)$ and $-x P'(x)$. Let $P(x) = c_n x^n + c_{n-1} x^{n-1} + \cdots + c_0$ with $c_n \neq 0$. Then:
+\[
+P'(x) = n c_n x^{n-1} + (n-1) c_{n-1} x^{n-2} + \cdots,
+\]
+\[
+x P'(x) = n c_n x^n + (n-1) c_{n-1} x^{n-1} + \cdots.
+\]
+The leading terms in $g_a(x)$ are:
+\[
+P(x) \text{ contributes } c_n x^n, \quad -x P'(x) \text{ contributes } -n c_n x^n,
+\]
+so the coefficient of $x^n$ in $g_a(x)$ is:
+\[
+c_n - n c_n = c_n (1 - n).
+\]
+Since $n \geq 2$ and odd, $1 - n \neq 0$ and $c_n \neq 0$, so $g_a(x)$ is a polynomial of degree $n$. As $n$ is odd, $g_a(x)$ is an odd-degree polynomial. An odd-degree polynomial is surjective from $\mathbb{R}$ to $\mathbb{R}$ because $\lim_{x \to \infty} g_a(x) = \pm \infty$ and $\lim_{x \to -\infty} g_a(x) = \mp \infty$ (depending on the sign of the leading coefficient), and by the intermediate value theorem, it takes all real values.
+
+Therefore, for any fixed $a$ and any $b \in \mathbb{R}$, there exists $x \in \mathbb{R}$ such that $g_a(x) = b$, meaning:
+\[
+b = P(x) + P'(x)(a - x).
+\]
+This implies that the tangent line at $x$ passes through $(a, b)$. Hence, for every $(a, b) \in \mathbb{R}^2$, there is a tangent line containing it, and:
+\[
+\bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2.
+\]
+
+\subsection*{Part (b)}
+We need to determine if there exists a polynomial $P$ of even degree at least 2 such that $\bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2$.
+
+Suppose $P$ has even degree $n \geq 2$. For any fixed $a \in \mathbb{R}$, define $g_a(x) = P(x) + P'(x)(a - x)$. As derived in part (a), $g_a(x)$ is a polynomial of degree $n$ (since the leading coefficient $c_n (1 - n) \neq 0$ for $n \geq 2$).
+
+A non-constant polynomial of even degree is not surjective from $\mathbb{R}$ to $\mathbb{R}$. If the leading coefficient is positive, then $\lim_{|x| \to \infty} g_a(x) = +\infty$, so $g_a(x)$ has a global minimum and does not take values less than this minimum. If the leading coefficient is negative, then $\lim_{|x| \to \infty} g_a(x) = -\infty$, so $g_a(x)$ has a global maximum and does not take values greater than this maximum. In either case, there exists some $b \in \mathbb{R}$ such that $g_a(x) \neq b$ for all $x \in \mathbb{R}$.
+
+This means that for each $a \in \mathbb{R}$, there is a $b \in \mathbb{R}$ such that the point $(a, b)$ is not on any tangent line $\ell_x$. Therefore, $\bigcup_{x \in \mathbb{R}} \ell_x \neq \mathbb{R}^2$ for any even-degree polynomial of degree at least 2.
+
+Thus, no such polynomial exists.
+
+    \subsection{Solution for Problem 1, variant 3}
+
+    \subsubsection*{Part (a)}
+    Let $P \in \mathbb{R}[x]$ be a polynomial of odd degree $n \geq 2$ with real coefficients. Fix an arbitrary point $(X, Y) \in \mathbb{R}^2$. The goal is to show that $(X, Y)$ lies on the tangent line to the graph of $P$ at some point $(a, P(a))$ for some $a \in \mathbb{R}$.
+
+    The tangent line to the graph of $P$ at $x = a$ has the equation:
+    \[
+        y - P(a) = P'(a)(x - a).
+    \]
+    The point $(X, Y)$ lies on this line if and only if:
+    \[
+        Y - P(a) = P'(a)(X - a),
+    \]
+    which rearranges to:
+    \[
+        Y = P(a) + P'(a)(X - a).
+    \]
+    Define the function $g: \mathbb{R} \to \mathbb{R}$ by:
+    \[
+        g(a) = P(a) + P'(a)(X - a).
+    \]
+    This is a polynomial in $a$ for fixed $X$. Let $P(a) = c_n a^n + c_{n-1} a^{n-1} + \cdots + c_0$ with $c_n \neq 0$. The derivative is $P'(a) = n c_n a^{n-1} + (n-1) c_{n-1} a^{n-2} + \cdots + c_1$. Then:
+    \[
+        g(a) = P(a) + P'(a)(X - a) = P(a) + X P'(a) - a P'(a).
+    \]
+    The leading term of $g(a)$ comes from the highest-degree terms in $P(a)$ and $-a P'(a)$:
+    \begin{itemize}
+        \item $P(a)$ has leading term $c_n a^n$.
+        \item $-a P'(a)$ has leading term $-a \cdot n c_n a^{n-1} = -n c_n a^n$.
+    \end{itemize}
+    Combining these, the coefficient of $a^n$ is $c_n - n c_n = (1 - n) c_n$.
+
+    Since $\deg(P) = n \geq 2$ and $n$ is odd, $n \geq 3$. Thus, $1 - n \neq 0$ and $c_n \neq 0$, so $\deg(g) = n$, which is odd. The leading coefficient is $(1 - n) c_n$, which is nonzero.
+
+    A real polynomial of odd degree is surjective onto $\mathbb{R}$ by the intermediate value theorem because as $a \to \infty$, $g(a) \to \infty$ if the leading coefficient is positive, or $g(a) \to -\infty$ if the leading coefficient is negative, and similarly in the opposite direction as $a \to -\infty$. Thus, $g(a)$ takes every real value as $a$ varies over $\mathbb{R}$.
+
+    In particular, for the fixed $X$ and any $Y$, there exists some $a \in \mathbb{R}$ such that $g(a) = Y$. This means:
+    \[
+        Y = P(a) + P'(a)(X - a),
+    \]
+    so $(X, Y)$ lies on the tangent line at $(a, P(a))$.
+
+    Since $(X, Y)$ was arbitrary, every point in $\mathbb{R}^2$ lies on some tangent line to the graph of $P$. Therefore:
+    \[
+        \bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2.
+    \]
+
+    \subsubsection*{Part (b)}
+    No, there does not exist a polynomial of even degree at least 2 for which $\bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2$.
+
+    Suppose $P$ has even degree $n \geq 2$. For a fixed $X \in \mathbb{R}$, define $g(a) = P(a) + P'(a)(X - a)$ as in part (a). As before, $g(a)$ is a polynomial in $a$ of degree $n$ (even), with leading coefficient $(1 - n) c_n \neq 0$ (since $n \geq 2$ and $c_n \neq 0$).
+
+    A real polynomial of even degree
+
+    \subsection{Final Solution to the Problem 1}
+
+    \subsubsection*{Part (a)}
+    Let $P$ be a polynomial of odd degree $n \geq 2$ with real coefficients. Fix an arbitrary point $(X, Y) \in \mathbb{R}^2$. The tangent line to the graph of $P$ at a point $(a, P(a))$ has the equation:
+    \[
+        y - P(a) = P'(a)(x - a).
+    \]
+    The point $(X, Y)$ lies on this tangent line if and only if:
+    \[
+        Y = P(a) + P'(a)(X - a).
+    \]
+    Define the function $g: \mathbb{R} \to \mathbb{R}$ by:
+    \[
+        g(a) = P(a) + P'(a)(X - a) - Y.
+    \]
+    This is a polynomial in $a$ for fixed $X$ and $Y$. Let $P(a) = c_n a^n + c_{n-1} a^{n-1} + \cdots + c_0$ with $c_n \neq 0$. The derivative is $P'(a) = n c_n a^{n-1} + (n-1) c_{n-1} a^{n-2} + \cdots$. Substituting into $g(a)$:
+    \begin{itemize}
+        \item $P(a)$ has leading term $c_n a^n$.
+        \item $-a P'(a)$ has leading term $-a \cdot n c_n a^{n-1} = -n c_n a^n$.
+    \end{itemize}
+    The leading term of $g(a)$ is $c_n a^n - n c_n a^n = (1 - n) c_n a^n$.
+
+    Since $\deg(P) = n \geq 2$ and $n$ is odd, $n \geq 3$. Thus, $1 - n \neq 0$ and $c_n \neq 0$, so $\deg(g) = n$, which is odd. The leading coefficient is $(1 - n) c_n$, which is nonzero.
+
+    A real polynomial of odd degree takes all real values (it is surjective) by the intermediate value theorem. Therefore, there exists $a \in \mathbb{R}$ such that $g(a) = 0$, meaning:
+    \[
+        Y = P(a) + P'(a)(X - a).
+    \]
+    Thus, $(X, Y)$ lies on the tangent line at $(a, P(a))$. Since $(X, Y)$ was arbitrary, every point in $\mathbb{R}^2$ lies on some tangent line, so:
+    \[
+        \bigcup_{x \in \mathbb{R}} \ell_x = \mathbb{R}^2.
+    \]
+
+    \subsubsection*{Part (b)}
+    No, there does not exist a polynomial of even degree at least 2 for which the union of all tangent lines covers $\mathbb{R}^2$.
+
+    Suppose $P$ has even degree $n \geq 2$. For a fixed $X \in \mathbb{R}$, define the polynomial in $a$:
+    \[
+        h_X(a) = P(a) + P'(a)(X - a).
+    \]
+    As in part (a), $h_X(a)$ is a polynomial of degree $n$ (even), with leading coefficient $(1 - n) c_n \neq 0$. A real polynomial of even degree is not surjective: if the leading coefficient is positive, $h_X(a) \to +\infty$ as $|a| \to \infty$, so it has a global minimum and misses all values below it; if negative, it has a global maximum and misses all values above it. Thus, for each $X$, there exists some $Y$ (e.g., below the global minimum or above the global maximum) such that $h_X(a) \neq Y$ for all $a$, meaning:
+    \[
+        Y \neq P(a) + P'(a)(X - a)
+    \]
+    for all $a$. Therefore, the point $(X, Y)$ does not lie on any tangent line. Since this holds for every even-degree polynomial, no such polynomial exists.
+
+    \textbf{Final answer for (b):} No.
+    \[
+        \boxed{\text{no}}
+    \]
+
+\section{Problem 2}
+    The problem requires proving that $\int_{-1}^{1} [f''(x)]^2 \, dx \geq 15$ for any twice continuously differentiable function $f: \mathbb{R} \to \mathbb{R}$ satisfying $\int_{-1}^{1} f(x) \, dx = 0$ and $f(1) = f(-1) = 1$, and finding all functions achieving equality.
+
+    \subsection*{Proof of the Inequality}
+    To solve this, consider the minimization of the functional $\int_{-1}^{1} [f''(x)]^2 \, dx$ subject to the constraints. Using the calculus of variations with the integral constraint $\int_{-1}^{1} f(x) \, dx = 0$ and boundary conditions $f(-1) = f(1) = 1$, the Euler-Lagrange equation yields $f^{(4)}(x) = \lambda$ for some constant $\lambda$. Thus, the minimizer is a quartic polynomial:
+    \[
+        f(x) = a x^4 + b x^3 + c x^2 + d x + e.
+    \]
+    The constraints are:
+    \begin{enumerate}
+        \item $f(1) = a + b + c + d + e = 1$,
+        \item $f(-1) = a - b + c - d + e = 1$,
+        \item $\int_{-1}^{1} f(x) \, dx = 0$.
+    \end{enumerate}
+
+    Adding the first two constraints gives $2a + 2c + 2e = 2$, so:
+    \[
+        a + c + e = 1. \quad (1)
+    \]
+    Subtracting them gives $2b + 2d = 0$, so:
+    \[
+        b + d = 0. \quad (2)
+    \]
+    The integral constraint simplifies using symmetry (odd functions integrate to zero):
+    \[
+        \int_{-1}^{1} (a x^4 + c x^2 + e) \, dx = 2 \left[ \frac{a x^5}{5} + \frac{c x^3}{3} + e x \right]_0^1 = 2 \left( \frac{a}{5} + \frac{c}{3} + e \right) = 0,
+    \]
+    so:
+    \[
+        \frac{a}{5} + \frac{c}{3} + e = 0. \quad (3)
+    \]
+
+    The second derivative is:
+    \[
+        f''(x) = 12a x^2 + 6b x + 2c.
+    \]
+    Then:
+    \[
+        [f''(x)]^2 = (12a x^2 + 6b x + 2c)^2 = 144a^2 x^4 + 144ab x^3 + 36b^2 x^2 + 48ac x^2 + 24bc x + 4c^2.
+    \]
+    Integrating from $-1$ to $1$, the odd terms ($144ab x^3$ and $24bc x$) vanish, and the even part gives:
+    \begin{align*}
+        \int_{-1}^{1} [f''(x)]^2 \, dx &= 2 \int_0^1 (144a^2 x^4 + (36b^2 + 48ac) x^2 + 4c^2) \, dx \\
+        &= 2 \left[ \frac{144a^2}{5} + (12b^2 + 16ac) + 4c^2 \right] \\
+        &= \frac{288a^2}{5} + 24b^2 + 32ac + 8c^2.
+    \end{align*}
+
+    Since $24b^2 \geq 0$ and equality holds only if $b = 0$ (and thus $d = 0$ from (2)), set $b = d = 0$. The constraints reduce to:
+    \begin{itemize}
+        \item $a + c + e = 1$,
+        \item $\frac{a}{5} + \frac{c}{3} + e = 0$.
+    \end{itemize}
+
+    Subtracting the second from the first:
+    \[
+        (a + c + e) - \left( \frac{a}{5} + \frac{c}{3} + e \right) = 1 - 0 \implies \frac{4a}{5} + \frac{2c}{3} = 1.
+    \]
+    Solving for $c$:
+    \[
+        c = \frac{3}{2} - \frac{6a}{5}.
+    \]
+    Substitute into the integral:
+    \[
+        I(a) = \frac{288a^2}{5} + 32a \left( \frac{3}{2} - \frac{6a}{5} \right) + 8 \left( \frac{3}{2} - \frac{6a}{5} \right)^2 = \frac{768}{25} a^2 + \frac{96}{5} a + 18.
+    \]
+    This quadratic in $a$ has a minimum at:
+    \[
+        a = -\frac{96/5}{2 \cdot 768/25} = -\frac{5}{16}.
+    \]
+    Then:
+    \[
+        c = \frac{3}{2} - \frac{6}{5} \left( -\frac{5}{16} \right) = \frac{15}{8}, \quad e = 1 - \left( -\frac{5}{16} \right) - \frac{15}{8} = -\frac{9}{16}.
+    \]
+    For $f(x) = -\frac{5}{16} x^4 + \frac{15}{8} x^2 - \frac{9}{16}$:
+    \[
+        f''(x) = \frac{15}{4} (1 - x^2), \quad [f''(x)]^2 = \frac{225}{16} (1 - 2x^2 + x^4),
+    \]
+    and:
+    \[
+        \int_{-1}^{1} [f''(x)]^2 \, dx = \frac{225}{16} \int_{-1}^{1} (1 - 2x^2 + x^4) \, dx = 15.
+    \]
+    For any other function satisfying the constraints, strict convexity and the Euler-Lagrange equation ensure the integral is at least 15, with equality only for this quartic polynomial.
+
+    \subsection*{Functions Achieving Equality}
+    Equality holds if and only if:
+    \[
+        f(x) = -\frac{5}{16} x^4 + \frac{15}{8} x^2 - \frac{9}{16}.
+    \]
+
+    \textbf{Final answer:} The minimum value of the integral is 15, achieved by the function $f(x) = -\frac{5}{16} x^4 + \frac{15}{8} x^2 - \frac{9}{16}$. For all other such functions, the integral exceeds 15.
+
+    \boxed{15}
+\end{document}

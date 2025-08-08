@@ -1,0 +1,2396 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{GPT o3 Solutions}
+\fancyfoot[C]{\thepage}
+
+\title{GPT o3 Solutions}
+\author{Generated from JSON Data}
+\date{\today}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{solution}{Solution}
+
+\begin{document}
+
+    \maketitle
+    \tableofcontents
+    \newpage
+
+    \section{Problem 1, Day 1}
+
+    \subsection{Variant 1}
+    \begin{problem}
+        Let $P(x)=c_{n}x^{n}+c_{n-1}x^{n-1}+\cdots+c_{0}$, $n:=\deg P\geq2$ and denote by $\ell_x$ the tangent line to the graph of $P$ at $(x,P(x))$, $\ell_x : y = P(x)+P'(x)(t-x)$, $t\in\mathbb{R}$. For a fixed point $(a,b)\in\mathbb{R}^2$ introduce the auxiliary polynomial $F_{a,b}(x)=P(x)+P'(x)(a-x)-b$. A point $(a,b)$ lies on the line $\ell_x$ iff $F_{a,b}(x)=0$. Hence $(a,b)\in\bigcup_{x\in\mathbb{R}}\ell_x \Leftrightarrow F_{a,b}$ has a real zero.
+
+        \textbf{(a) P of odd degree}
+
+        Put $n=\deg P$ ($n$ odd) and let $c_n\neq0$ be the leading coefficient. From the definition we obtain the leading term of $F_{a,b}$:
+        \[F_{a,b}(x)=P(x)-xP'(x)+aP'(x)-b =(1-n)c_nx^{n}+ \text{(lower-degree terms)}.\]
+
+        Because $n\geq3$ is odd, $x^{n}\to+\infty$ when $x\to+\infty$ and $x^{n}\to-\infty$ when $x\to-\infty$. The coefficient $(1-n)c_n\neq0$ changes neither sign nor parity, so
+        \[\lim_{x\to+\infty}F_{a,b}(x)=-\text{sign}(c_n)\cdot\infty, \quad \lim_{x\to-\infty}F_{a,b}(x)=+\text{sign}(c_n)\cdot\infty.\]
+
+        Hence $F_{a,b}$ takes opposite signs for sufficiently large positive and negative $x$. By the Intermediate Value Theorem $F_{a,b}$ possesses a real root. Consequently, for every $(a,b)\in\mathbb{R}^2$ there exists $x$ with $F_{a,b}(x)=0$, i.e. $(a,b)\in\ell_x$. Therefore $\bigcup_{x\in\mathbb{R}}\ell_x = \mathbb{R}^2$ when $\deg P$ is odd.
+
+        \textbf{(b) No polynomial of even degree works}
+
+        Assume now that $n=\deg P$ is even ($n\geq2$) and let $c_n$ be the leading coefficient. Again the leading term of $F_{a,b}$ is $(1-n)c_nx^{n}$. Because $n$ is even, $x^{n}$ has the same sign at $\pm\infty$; hence the sign of $F_{a,b}(x)$ at both ends is determined by $-(n-1)c_n$:
+        \begin{itemize}
+            \item If $c_n>0$ then $F_{a,b}(x)\to-\infty$ as $x\to\pm\infty$, thus $F_{a,b}(x)$ is bounded above: $\exists M(a)$ with $F_{a,b}(x)\leq M(a)$ $\forall x$.
+            \item If $c_n<0$ then $F_{a,b}(x)\to+\infty$ as $x\to\pm\infty$, thus $F_{a,b}(x)$ is bounded below: $\exists m(a)$ with $F_{a,b}(x)\geq m(a)$ $\forall x$.
+        \end{itemize}
+
+        Take, for instance, the first case ($c_n>0$). Choose $b>M(a)$. Then $F_{a,b}(x)<0$ for all $x$, so it has no real zero and $(a,b)$ does not lie on any tangent line. Analogously, in the second case pick $b<m(a)$. Therefore for every polynomial of even degree there exist points in $\mathbb{R}^2$ that are not met by any tangent line, and the equality $\bigcup_{x\in\mathbb{R}}\ell_x = \mathbb{R}^2$ can never hold.
+
+        \textbf{Final answer}
+        \begin{enumerate}[(a)]
+            \item If $\deg P$ is odd, the union of all tangent lines of $P$ equals the entire plane $\mathbb{R}^2$.
+            \item No polynomial of even degree enjoys this property; for every even-degree polynomial the union of its tangent lines omits at least one (in fact, infinitely many) points of $\mathbb{R}^2$.
+        \end{enumerate}
+    \end{problem}
+
+    \textit{Time taken: 42.65 seconds}
+
+    \subsection{Variant 2}
+    \begin{problem}
+        Let $T := \{(u , v) \in \mathbb{R}^2 \mid \exists x\in\mathbb{R} : v = P(x)+P'(x)(u-x)\} = \bigcup_{x\in\mathbb{R}} \ell_x$ (the right--hand side is exactly the set of all points that lie on some tangent line to the graph of $P$).
+
+        \textbf{(a) P has odd degree}
+
+        Let $n = \deg P \geq 2$ be odd and write $P(x)=a_nx^n+\ldots$ with $a_n\neq0$. Fix an arbitrary point $(u , v)\in\mathbb{R}^2$ and consider the polynomial
+        \[Q(x) := v - (P(x)+P'(x)(u-x)) = v -P(x) -uP'(x)+xP'(x).\]
+
+        Because $P'(x)$ has degree $n-1$, the term $xP'(x)$ again has degree $n$, the same as $P(x)$. The leading coefficient of $Q$ is $-a_n + n a_n = (n-1)a_n \neq 0$, so $\deg Q = n$. Since $n$ is odd, $\lim_{x\to+\infty} Q(x)$ and $\lim_{x\to-\infty} Q(x)$ have opposite signs; hence, by the Intermediate Value Theorem, $Q$ possesses a real root $x_0$. For this $x_0$ we have $v = P(x_0)+P'(x_0)(u-x_0)$, i.e. $(u , v)$ lies on the tangent line $\ell_{x_0}$. Because the choice of $(u , v)$ was arbitrary, every point of $\mathbb{R}^2$ belongs to at least one $\ell_x$: $\bigcup_{x\in\mathbb{R}} \ell_x = \mathbb{R}^2$. $\square$
+
+        \textbf{(b) No polynomial of even degree enjoys this property}
+
+        Assume, to the contrary, that $P$ has even degree $n\geq2$ and that the equality still holds. Multiplying $P$ by $-1$ reflects its graph (and all its tangent lines) across the $x$--axis, so without loss of generality we may assume that its leading coefficient $a_n$ is positive. Fix a real number $u$ and define $f_u(x) := P(x)+P'(x)(u-x)$.
+
+        For fixed $u$ the set of ordinates of points of $T$ with abscissa $u$ is the range of $f_u$:
+        $\{ v \in \mathbb{R} \mid (u , v) \in T \} = f_u(\mathbb{R})$.
+
+        \textbf{Dominant term of $f_u$.} Using $P(x)\approx a_nx^n$ and $P'(x)\approx n a_nx^{n-1}$ we get, for large $|x|$,
+        \[f_u(x) = a_nx^n + n a_nx^{n-1}(u-x) = -(n-1)a_nx^n + n a_nu x^{n-1} + \text{lower-order terms}.\]
+
+        Because $n$ is even and $a_n>0$, the leading coefficient $-(n-1)a_n$ is negative, so $\lim_{x\to\pm\infty} f_u(x) = -\infty$.
+
+        Consequently $f_u$ is continuous and tends to $-\infty$ at both ends; hence it attains a finite maximum $M(u) := \max_{x\in\mathbb{R}} f_u(x) < +\infty$.
+
+        Choose any ordinate $v > M(u)$. Then $v \notin f_u(\mathbb{R})$, i.e. the point $(u , v)$ belongs to no tangent line, contradicting the assumption. Therefore such an equality is impossible for an even--degree polynomial.
+
+        Hence:
+        \begin{itemize}
+            \item For odd degree the union of all tangent lines is the whole plane.
+            \item For even degree this never happens.
+        \end{itemize}
+
+        \textbf{Final answer}
+        \begin{enumerate}[(a)]
+            \item If $\deg P$ is odd, $\bigcup_{x\in\mathbb{R}} \ell_x = \mathbb{R}^2$.
+            \item No polynomial of even degree has this property.
+        \end{enumerate}
+    \end{problem}
+
+    \textit{Time taken: 67.52 seconds}
+
+    \subsection{Variant 3}
+    \begin{problem}
+        Let $\ell_x : y = P(x)+P'(x)(t-x)$ ($t\in\mathbb{R}$) be the tangent line to the graph of $P$ at $(x ,P(x))$. For a point $(u ,v)\in\mathbb{R}^2$ we have $(u ,v)\in\ell_x \Leftrightarrow v = P(x)+P'(x)(u-x)$.
+
+        Denote $F_{u,v}(x)=P(x)+P'(x)(u-x)-v$.
+
+        $F_{u,v}$ is a polynomial in $x$ of the same degree $n = \deg P$ ($\geq2$); its leading coefficient is $c = (1-n)a_n$ ($a_n$ is the leading coefficient of $P$).
+
+        \textbf{(a) n odd}
+
+        Because $n$ is odd, $F_{u,v}$ is an odd--degree polynomial. Hence
+        \[\lim_{x\to+\infty} F_{u,v}(x) = \text{sgn}(c)\cdot\infty , \quad \lim_{x\to-\infty} F_{u,v}(x)= -\text{sgn}(c)\cdot\infty.\]
+
+        Therefore $F_{u,v}$ attains both positive and negative values; by the Intermediate Value Theorem there exists $x_0$ with $F_{u,v}(x_0)=0$. With this $x_0$, the condition is fulfilled, so $(u ,v)$ lies on the tangent at $x_0$. Since $(u ,v)$ was arbitrary, $\bigcup_{x\in\mathbb{R}} \ell_x = \mathbb{R}^2$. $\square$
+
+        \textbf{(b) n even}
+
+        Now $n$ is even, so $x^n$ has the same sign for $x\to\pm\infty$. Consequently $F_{u,v}$ has the same limit at $+\infty$ and $-\infty$:
+        \[\lim_{|x|\to\infty} F_{u,0}(x)= +\infty \text{ if } c>0, \quad -\infty \text{ if } c<0.\]
+
+        Thus $F_{u,0}$ is bounded below when $c>0$ and bounded above when $c<0$. Fix any abscissa $u_0$. Put $m = \inf_{x\in\mathbb{R}} F_{u_0,0}(x)$ (if $c>0$) or $M = \sup_{x\in\mathbb{R}} F_{u_0,0}(x)$ (if $c<0$). Choose $v_0 < m$ when $c>0$, or $v_0 > M$ when $c<0$. For every $x$ we then have $F_{u_0,v_0}(x)=F_{u_0,0}(x)-v_0>0$ (or $<0$), so $F_{u_0,v_0}$ never vanishes. Hence no tangent line passes through $(u_0 ,v_0)$. The union of tangent lines is therefore a proper subset of $\mathbb{R}^2$.
+
+        Consequently there is no real polynomial of even degree whose tangents cover the whole plane.
+
+        \textbf{Final answer}
+        \begin{enumerate}[(a)]
+            \item For every real polynomial of odd degree ($\geq2$) the union of all its tangent lines is $\mathbb{R}^2$.
+            \item No polynomial of even degree enjoys this property; its tangent lines never fill the entire plane.
+        \end{enumerate}
+    \end{problem}
+
+    \textit{Time taken: 59.98 seconds}
+
+    \subsection{Final Solution}
+    \begin{solution}
+        Let $P(x)=c_nx^{\,n}+c_{n-1}x^{\,n-1}+\cdots+c_0$ ($c_n\neq0$), $n:=\deg P$. For every $x\in\mathbb{R}$ the tangent line to the graph of $P$ at $(x ,P(x))$ is $\ell_x : y = P(x)+P'(x)(t-x)$ ($t\in\mathbb{R}$).
+
+        Put $F_{a,b}(x):=P(x)+P'(x)(a-x)-b$ ($(a,b)\in\mathbb{R}^2$).
+
+        Because $(a ,b)$ lies on $\ell_x$ iff $F_{a,b}(x)=0$, we have $\bigcup_{x\in\mathbb{R}}\ell_x = \mathbb{R}^2 \Leftrightarrow F_{a,b}$ has a real root for every $(a,b)$.
+
+        \textbf{Degree and leading coefficient of $F_{a,b}$.} Since $P'(x)$ has degree $n-1$, the term $xP'(x)$ has degree $n$, while $aP'(x)$ has degree $n-1$. Hence ($n\geq2$) $\deg F_{a,b}=n$, with leading coefficient $(1-n)c_n$.
+
+        \textbf{1. Odd degree $n\geq3$}
+
+        Here $n$ is odd and $(1-n)c_n\neq0$, so the leading term $(1-n)c_nx^{\,n}$ dominates and satisfies
+        \[\lim_{x\to+\infty}F_{a,b}(x)=-\text{sgn}(c_n)\cdot\infty, \quad \lim_{x\to-\infty}F_{a,b}(x)= +\text{sgn}(c_n)\cdot\infty.\]
+
+        Thus $F_{a,b}$ takes both signs; by the Intermediate Value Theorem it possesses a real zero. Since this is true for every $(a,b)$, we have: $\bigcup_{x\in\mathbb{R}}\ell_x = \mathbb{R}^2$ for every polynomial of odd degree $\geq3$.
+
+        \textbf{2. Even degree $n$ ($n\geq2$)}
+
+        Now $x^{\,n}$ has the same sign at $\pm\infty$, so by the leading coefficient
+        \[\lim_{|x|\to\infty}F_{a,b}(x)= -\infty \text{ if } c_n>0, \quad +\infty \text{ if } c_n<0.\]
+
+        Fix an abscissa $a_0$. In the first case $F_{a_0,0}$ is bounded above; choose $b$ larger than that upper bound. Then $F_{a_0,b}(x)<0$ for all $x$, so it has no real root and $(a_0 ,b)$ is missed by every tangent line. In the second case $F_{a_0,0}$ is bounded below; pick $b$ smaller than that lower bound and argue analogously. Hence $\bigcup_{x\in\mathbb{R}}\ell_x \neq \mathbb{R}^2$ for every polynomial of even degree.
+
+        \textbf{3. Degree 1 (linear polynomials)}
+
+        If $P(x)=mx+k$ ($m\neq0$) every tangent line coincides with the graph itself, so their union is that single straight line, not the entire plane.
+
+        \textbf{Conclusion}
+
+        The union of all tangent lines to the graph of a real polynomial $P$ covers the whole plane $\mathbb{R}^2$ exactly when $P$ has odd degree at least 3; it never does so for even degree or for linear (degree 1) polynomials.
+
+        \textbf{Final answer} The union $\bigcup_{x\in\mathbb{R}}\ell_x$ equals $\mathbb{R}^2$ if and only if $\deg P$ is odd and $\geq3$; for even degree or degree 1 the union of tangent lines is a proper subset of $\mathbb{R}^2$.
+    \end{solution}
+
+    \textbf{Timing Information:}
+    Final solution time: 21.89 seconds
+    Total problem time: 192.04 seconds
+
+    \newpage
+
+    \section{Problem 2}
+
+    \subsection{Variant 1}
+        Put
+        $$H = \{f \in C^2[-1,1] : f(-1) = f(1) = 1, \int_{-1}^{1} f(x)dx = 0\}.$$
+        On $H$ introduce the quadratic functional
+
+        $$J(f) = \int_{-1}^{1} (f''(x))^2 dx.$$
+
+        We show that the minimum of $J$ on $H$ equals 15 and determine the unique minimiser.
+
+
+        \subsubsection*{Existence of a minimiser}
+
+        $H$ is a closed affine subspace of the Hilbert space $H^2(-1,1)$ with inner product $\langle u,v \rangle = \int_{-1}^{1} u''(x)v''(x)dx$.
+        Because $J$ is the squared norm coming from this inner product, it is strictly convex and weakly lower--semicontinuous, hence it attains its minimum on the non-empty set $H$. The minimiser is unique.
+
+    \subsubsection*{Euler--Lagrange equation}
+
+        Let $g \in H$ be the minimiser and $h$ be an arbitrary $C^2$--function with $h(\pm 1) = 0$ and $\int_{-1}^{1} h = 0$.
+        For every real $\varepsilon$, $g + \varepsilon h$ still belongs to $H$, so
+        \begin{align}
+            0 &= \frac{d}{d\varepsilon}\bigg|_{\varepsilon=0} J(g + \varepsilon h) \\
+            &= 2 \int_{-1}^{1} g'' h'' dx. \tag{1}
+        \end{align}
+
+        Thus $g''$ is $L^2$--orthogonal to $\{h'': h \text{ as above}\}$.
+
+        Introduce three Lagrange multipliers $\alpha, \beta, \gamma$ for the three linear constraints, and consider
+
+        $$F(f) = \int_{-1}^{1}(f'')^2dx + \alpha\int_{-1}^{1}f(x)dx + \beta(f(1)-1) + \gamma(f(-1)-1).$$
+
+        Take a $C^2$ variation $f + \varepsilon\eta$ with $\eta$ arbitrary but $\eta(\pm 1) = 0$.
+        Computing the first variation and integrating by parts twice gives
+
+        \begin{align}
+            0 &= \frac{dF}{d\varepsilon}\bigg|_{\varepsilon=0} \\
+            &= 2\int_{-1}^{1} f^{(4)} \eta dx + \alpha\int_{-1}^{1} \eta dx + 2[f''\eta']_{-1}^{1}. \tag{2}
+        \end{align}
+
+    Because $\eta$ is arbitrary in the interior of the interval, (2) implies
+
+    $$f^{(4)}(x) = -\alpha / 2 =: k \text{ (constant).} \quad (3)$$
+
+        Because $\eta'$ can be chosen freely at $\pm 1$, the boundary term in (2) forces
+
+        $$f''(-1) = f''(1) = 0. \quad {(4)}$$
+
+
+        Hence the minimiser $g$ is a quartic polynomial satisfying (3)--(4).
+
+        \subsubsection*{Determining the quartic polynomial}
+
+        Write
+        $$g(x) = ax^4 + bx^3 + cx^2 + dx + e \quad (a = k/24).$$
+
+        Then
+        $$g''(x) = 12ax^2 + 6bx + 2c.$$
+
+        Using (4):
+        \begin{align}
+            12a + 6b + 2c &= 0, \\
+            12a - 6b + 2c &= 0 \quad \Rightarrow \quad b = 0, \quad c = -6a. \tag{5}
+        \end{align}
+
+        The boundary values $g(\pm 1) = 1$ give
+        \begin{align}
+            a + c + d + e &= 1, \\
+            a + c - d + e &= 1. \tag{6}
+        \end{align}
+
+        From (6) we get $d = 0$ and $-5a + e = 1$. \quad {(7)}
+
+        Finally the integral condition
+        $$\int_{-1}^{1} g(x)dx = 0$$
+
+        together with (5)--(7) yields
+        $$2a/5 - 4a + 2 + 10a = 0 \quad \Rightarrow \quad a = -5/16. \quad {(8)}$$
+
+        Consequently
+        $$b = d = 0, \quad c = 15/8, \quad e = -9/16.$$
+
+        Thus
+        $$g(x) = -\frac{5}{16}x^4 + \frac{15}{8}x^2 - \frac{9}{16}. \quad {(9)}$$
+
+        \subsubsection*{The minimum value of the functional}
+
+        For (9) we have
+        $$g''(x) = \frac{15}{4}(1-x^2). \quad {(10)}$$
+
+        Therefore
+        \begin{align}
+            J(g) &= (15/4)^2 \int_{-1}^{1}(1-x^2)^2 dx \\
+            &= (225/16) \cdot 2\int_{0}^{1}(1-2x^2+x^4)dx \\
+            &= (225/16) \cdot 2(1 - 2/3 + 1/5) \\
+            &= (225/16) \cdot 16/15 \\
+            &= 15. \tag{11}
+        \end{align}
+
+        \subsubsection*{Optimality and uniqueness}
+
+        Let $f \in H$ be arbitrary and write $h = f - g$ (so $h(\pm 1) = 0$, $\int h = 0$).
+        Then by (1) the cross term vanishes:
+        $$\int_{-1}^{1} g'' h'' dx = 0. \quad {(12)}$$
+
+        Hence
+        \begin{align}
+            J(f) &= \int (g'' + h'')^2 \\
+            &= J(g) + \int (h'')^2 \geq J(g) = 15. \tag{13}
+        \end{align}
+
+        Equality occurs iff $\int(h'')^2 = 0$, i.e. $h'' = 0$, so $h$ is linear.
+        Because $h(\pm 1) = 0$, this linear function is identically zero; thus $f = g$.
+
+        \subsubsection*{Conclusion}
+
+        For every twice continuously differentiable $f : \mathbb{R} \to \mathbb{R}$ with $\int_{-1}^{1}f(x)dx = 0$ and $f(\pm 1) = 1$,
+
+        $$\int_{-1}^{1} (f''(x))^2 dx \geq 15,$$
+
+        and equality holds exactly for the single function
+        $$f(x) = -\frac{5}{16}x^4 + \frac{15}{8}x^2 - \frac{9}{16}.$$
+
+        \textbf{Final answer:}
+        $$\int_{-1}^{1}(f''(x))^2dx \geq 15,$$
+        with equality only for
+        $$f(x) = -\frac{5}{16}x^4 + \frac{15}{8}x^2 - \frac{9}{16}.$$
+
+        \subsection{Variant 2}
+        Let
+        \begin{align}
+            J(f) &= \int_{-1}^{1} (f''(x))^2 \, dx, \\
+            V &= \{f \in C^2[-1,1] : f(1) = f(-1) = 1, \int_{-1}^{1} f = 0\}.
+        \end{align}
+
+        We have to show $J(f) \geq 15$ for every $f \in V$ and to determine those $f$ for which the equality holds.
+
+        \subsubsection*{Existence and shape of the minimiser}
+
+        The functional $J$ is strictly convex and the constraints are linear; hence there is a unique minimiser $g \in V$.
+
+        Take an arbitrary $h \in C^2[-1,1]$ with
+        \begin{align}
+            h(\pm 1) &= 0, \\
+            \int_{-1}^{1} h &= 0,
+        \end{align}
+
+        and consider $f_\varepsilon = g + \varepsilon h$ ($\varepsilon$ real small).
+        Because $f_\varepsilon \in V$, the first variation of $J$ at $g$ must vanish:
+        \begin{align}
+            0 &= \left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0} J(f_\varepsilon) \\
+            &= 2\int_{-1}^{1} g''h''.
+        \end{align}
+
+        Integrating twice by parts and using $h(\pm 1) = 0$ one obtains
+        \begin{equation}
+            \int_{-1}^{1} g''h'' = -g^{(4)} \int_{-1}^{1} h.
+        \end{equation}
+
+        Since $\int h = 0$, the last term is 0, so the stationarity condition is satisfied iff
+        \begin{equation}
+            g^{(4)}(x) = \text{const} := \kappa.
+        \end{equation}
+
+        Consequently $g$ is a polynomial of degree $\leq 4$; write
+        \begin{equation}
+            g(x) = ax^4 + bx^3 + cx^2 + dx + e. \quad {(1)}
+        \end{equation}
+
+        \subsubsection*{Exploiting the symmetry}
+
+        Because the constraints are symmetric with respect to $x \mapsto -x$, the minimiser is even: put $x \to -x$ in (1) and use uniqueness to get $b = d = 0$.
+        Hence
+        \begin{equation}
+            g(x) = ax^4 + cx^2 + e. \quad {(2)}
+        \end{equation}
+
+        \subsubsection*{Solving for the coefficients}
+
+        The three constraints give
+        \begin{align}
+            \text{(i)} \quad &g(1) = a + c + e = 1, \\
+            \text{(ii)} \quad &g(-1) = 1 \quad \text{(same as (i))}, \\
+            \text{(iii)} \quad &\int_{-1}^{1} g = \frac{2a}{5} + \frac{2c}{3} + 2e = 0.
+        \end{align}
+
+        From (i) and (iii):
+        \begin{align}
+            a + c + e &= 1, \\
+            \frac{a}{5} + \frac{c}{3} + e &= 0.
+        \end{align}
+
+        Solving,
+        \begin{equation}
+            12a + 10c = 15. \quad {(3)}
+        \end{equation}
+
+        \subsubsection*{The value of $J$ for an even quartic}
+
+        For $f$ given by (2) one has
+        \begin{equation}
+            f''(x) = 12ax^2 + 2c,
+        \end{equation}
+
+        and therefore
+        \begin{align}
+            J(f) &= \int_{-1}^{1} (12ax^2 + 2c)^2 \, dx \\
+            &= \frac{2}{5} \cdot (12a)^2 + \frac{2}{3} \cdot 0 + (2c)^2 \cdot 2 + \frac{4}{3} \cdot 12a \cdot 2c \\
+            &= \frac{288}{5}a^2 + 8c^2 + 32ac. \tag{4}
+        \end{align}
+
+        \subsubsection*{Minimising $J$ under (3)}
+
+        Set
+        \begin{equation}
+            \Phi(a,c) = \frac{288}{5}a^2 + 8c^2 + 32ac \quad \text{subject to} \quad 12a + 10c = 15.
+        \end{equation}
+
+        Write $c = \frac{15-12a}{10}$ and substitute into $\Phi$; after simplification
+        \begin{equation}
+            \Phi(a) = 24a^2 - 60a + 15.
+        \end{equation}
+
+        This quadratic attains its minimum at $a = -\frac{5}{16}$.
+
+        So indeed $a = -\frac{5}{16}$ and $c = \frac{15}{8}$.
+
+        Then from (i), $e = -\frac{9}{16}$.
+
+        Hence
+        \begin{equation}
+            g(x) = -\frac{5}{16}x^4 + \frac{15}{8}x^2 - \frac{9}{16}. \quad {(5)}
+        \end{equation}
+
+        For this function $J(g) = 15$.
+
+        \subsubsection*{The lower bound for every $f \in V$}
+
+        Write any $f \in V$ in the form $f = g + h$ with $h$ as in Section 1.
+        Because $\int g''h'' = 0$, we have
+        \begin{equation}
+            J(f) = \int (g'' + h'')^2 = \int g''^2 + \int h''^2 \geq \int g''^2 = J(g) = 15.
+        \end{equation}
+
+        \subsubsection*{Equality case}
+
+        Equality $J(f) = 15$ forces $\int h''^2 = 0$, hence $h'' = 0$ and $h$ is linear.
+        The conditions $h(\pm 1) = 0$ then give $h \equiv 0$, so $f = g$.
+
+        \subsubsection*{Result}
+
+        For every twice continuously differentiable function $f$ with
+        \begin{align}
+            \int_{-1}^{1} f(x) \, dx &= 0, \\
+            f(1) = f(-1) &= 1,
+        \end{align}
+
+        one has
+        \begin{equation}
+            \int_{-1}^{1} (f''(x))^2 \, dx \geq 15,
+        \end{equation}
+
+        and equality holds only for
+        \begin{equation}
+            f(x) = -\frac{5}{16}x^4 + \frac{15}{8}x^2 - \frac{9}{16}.
+        \end{equation}
+
+
+    \subsection{Final Solution}
+    Let
+
+    $$H = \{f\in C^2[-1,1] : f(1)=f(-1)=1 ,  \int_{-1}^{1}f(x)dx = 0\}$$
+
+    and set
+
+    $$J(f)=\int_{-1}^{1}(f''(x))^2dx \quad (f\in H).$$
+
+    Our task is to prove
+
+    $$J(f) \geq 15\quad\quad(f\in H) \qquad\qquad\qquad\qquad\qquad\qquad (1)$$
+
+    and find every $f\in H$ with equality.
+
+    \hrulefill
+    \subsubsection*{1. A minimiser exists and is unique}
+    \hrulefill
+
+    Equip $H^2(-1,1)$ with the inner product
+
+    $$\langle u,v\rangle = \int_{-1}^{1} u''(x)v''(x)dx .$$
+
+    Then $J(f)=\langle f,f\rangle$, hence $J$ is strictly convex and weakly lower-semicontinuous.
+    Because $H$ is a non-empty closed affine subspace of this Hilbert space, $J$
+    attains its minimum there and the minimiser is unique.
+    Call this minimiser $g$.
+
+    \hrulefill
+    \subsubsection*{2. Euler-Lagrange equation for $g$}
+    \hrulefill
+
+    Fix $h\in C^2[-1,1]$ with $h(\pm1)=0$ and $\int_{-1}^{1}h=0$.
+    For every $\varepsilon$, $g+\varepsilon h\in H$, so
+
+    $$0 = \frac{d}{d\varepsilon}\bigg|_{\varepsilon=0} J(g+\varepsilon h) = 2\int_{-1}^{1}g''h''dx. \qquad (2)$$
+
+    Thus $g''$ is $L^2$-orthogonal to $\{h'': h \text{ as above}\}$.
+
+    To convert (2) into a differential equation, integrate twice by parts:
+
+    \begin{align}
+        \int g''h''dx &= [g''h']_{-1}^{1} - \int g'''h'dx\\
+        &= [g''h']_{-1}^{1} - [g'''h]_{-1}^{1} + \int g^{(4)}h \, dx.
+    \end{align}
+
+    Because $h(\pm1)=0$, the term $[g'''h]_{-1}^{1}$ vanishes.
+    Since $h'$ can be chosen freely at the endpoints, $[g''h']_{-1}^{1}=0$ forces
+
+    $$g''(-1)=g''(1)=0. \qquad\qquad\qquad\qquad\qquad\qquad\qquad (3)$$
+
+    Because $h$ is arbitrary in the interior, $\int g^{(4)}h \, dx=0$ gives
+
+    $$g^{(4)}(x)=\text{constant}=:\kappa\quad\quad(-1<x<1). \qquad\qquad\qquad (4)$$
+
+    Consequently $g$ is a polynomial of degree $\leq 4$.
+
+    \hrulefill
+    \subsubsection*{3. Determining $g$}
+    \hrulefill
+
+    By symmetry of the constraints $x\mapsto-x$, the minimiser is even; hence write
+
+    $$g(x)=ax^4+cx^2+e\quad\quad(a,c,e \text{ real}). \qquad\qquad\qquad (5)$$
+
+    From (3): $g''(x)=12ax^2+2c$, so $g''(\pm1)=0$ implies
+
+    $$12a+2c=0\quad\Rightarrow\quad c=-6a. \qquad\qquad\qquad\qquad\qquad (6)$$
+
+    Boundary value $g(1)=1$ gives
+
+    $$a+c+e=1\quad\Rightarrow\quad-5a+e=1\quad\Rightarrow\quad e=1+5a. \qquad\qquad (7)$$
+
+    Using $\int_{-1}^{1}g=0$,
+
+    \begin{align}
+        0 &= 2\left( \frac{a}{5} + \frac{c}{3} + e \right)\\
+        &= 2\left( \frac{a}{5} - 2a + e \right) \quad\text{(by (6))},
+    \end{align}
+
+    so
+
+    $$e = 2a - \frac{a}{5} = \frac{9a}{5}. \qquad\qquad\qquad\qquad\qquad\qquad (8)$$
+
+    Equating (7) and (8):
+
+    $$1 + 5a = \frac{9a}{5} \quad\Rightarrow\quad 5 + 25a = 9a \quad\Rightarrow\quad a = -\frac{5}{16}.$$
+
+    Hence
+
+    $$c = -6a = \frac{15}{8},\quad e = -\frac{9}{16}, \qquad\qquad\qquad\qquad (9)$$
+    $$g(x)= -\frac{5}{16}x^{4} + \frac{15}{8}x^{2} - \frac{9}{16}.  \qquad\qquad\qquad (10)$$
+
+    \hrulefill
+    \subsubsection*{4. The minimal value of $J$}
+    \hrulefill
+
+    From (10)
+
+    $$g''(x)=\frac{15}{4}(1-x^2),\quad (g''(x))^2=\frac{225}{16}(1-x^2)^2.$$
+
+    Because $\int_{-1}^{1}(1-x^2)^2dx = \frac{16}{15}$,
+
+    $$J(g)=\frac{225}{16}\cdot\frac{16}{15}=15. \qquad\qquad\qquad\qquad\qquad (11)$$
+
+    \hrulefill
+    \subsubsection*{5. The inequality for every $f\in H$}
+    \hrulefill
+
+    Let $f\in H$ be arbitrary and write $f = g + h$.  Then
+
+    $$h(\pm1)=0,\quad\int_{-1}^{1}h=0 \qquad\qquad\qquad\qquad\qquad\qquad (12)$$
+
+    and, by (2) with $h$ as above, $\int g''h''dx = 0$.  Therefore
+
+    $$J(f)=\int(g''+h'')^2 = J(g)+\int(h'')^2 \geq J(g)=15. \qquad\qquad (13)$$
+
+    \hrulefill
+    \subsubsection*{6. Equality case}
+    \hrulefill
+
+    Equality in (13) forces $\int(h'')^2=0$, hence $h''\equiv 0$, so $h$ is linear.
+    With $h(\pm1)=0$ this gives $h\equiv 0$, i.e. $f=g$.  Thus $g$ is the unique extremal.
+
+    \hrulefill
+    \subsubsection*{Result}
+    \hrulefill
+
+    For every twice continuously differentiable function $f$ with
+
+    $$f(1)=f(-1)=1,\quad\quad\int_{-1}^{1}f(x)dx = 0,$$
+
+    one has
+
+    $$\int_{-1}^{1}(f''(x))^2dx \geq 15,$$
+
+    and equality holds only for
+
+    $$f(x)= -\frac{5}{16}x^{4} + \frac{15}{8}x^{2} - \frac{9}{16}.$$
+
+    \newpage
+
+    \section{Problem 3}
+
+    \subsection{Variant 1}
+        Let
+        \begin{align}
+            A &= vv^T, \quad B = ww^T, \quad v, w \in \{-1, +1\}^n, \quad n = 2025,
+        \end{align}
+        be two matrices from $\mathcal{M}$.
+
+        (For every matrix in $\mathcal{M}$ there are exactly the two representatives $v$ and $-v$; choosing $v$ uniformly from $\{\pm 1\}^n$ therefore produces $A$ uniformly in $\mathcal{M}$, and likewise for $w$ and $B$.)
+
+        \subsection*{When do A and B commute?}
+
+        \begin{align}
+            AB &= vv^T ww^T = (v^T w) v w^T, \\
+            BA &= ww^T vv^T = (w^T v) w v^T = (v^T w) w v^T.
+        \end{align}
+
+        Thus $AB = BA \iff (v^T w) v w^T = (v^T w) w v^T$.
+
+        \begin{itemize}
+            \item If $v^T w = 0$, both sides are the zero matrix and they commute.
+            \item If $v^T w \neq 0$, we must have $v w^T = w v^T$.
+
+            For rank-1 outer products this is possible only when $v$ is a scalar multiple of $w$. With entries $\pm 1$ this forces $v = w$ or $v = -w$, whence $v^T w = \pm n \neq 0$.
+        \end{itemize}
+
+        Because $n = 2025$ is odd, $v^T w$ can never be 0 (a sum of an odd number of $\pm 1$'s is odd). Hence
+        \[
+            AB = BA \iff v = w \text{ or } v = -w.
+        \]
+
+        \subsection*{Probability calculation}
+
+        For fixed $v$, the vector $w$ is chosen independently and uniformly from $\{\pm 1\}^n$, so
+        \begin{align}
+            P(w = v) &= 2^{-n}, \\
+            P(w = -v) &= 2^{-n}.
+        \end{align}
+
+        These events are disjoint, giving
+        \[
+            P(AB = BA) = 2^{-n} + 2^{-n} = 2^{-n+1} = 2^{-2024}.
+        \]
+
+        Therefore the desired probability is $\boxed{2^{-2024}}$.
+
+    \subsection{Variant 2}
+    Let
+
+    $$A = vv^T, \quad B = ww^T \quad \text{with} \quad v, w \in \{-1, +1\}^n, \quad n = 2025.$$
+
+    (Every matrix in $\mathcal{M}$ is of this form; $vv^T = (-v)(-v)^T$, so each matrix corresponds to the pair $\{v, -v\}$.)
+
+    \begin{enumerate}
+        \item When do $A$ and $B$ commute?
+
+        $$AB = v(v^T w)w^T, \quad BA = w(w^T v)v^T.$$
+        With $s = v^T w = w^T v$, we have
+        $$AB = svw^T, \quad BA = swv^T.$$
+
+        \begin{itemize}
+            \item If $s = 0$, then $AB = BA = 0$.
+            But $n = 2025$ is odd, so $v^T w = $ sum of 2025 numbers $\pm 1$, hence odd; $s$ can never be 0.
+            Thus orthogonality cannot occur.
+
+            \item If $s \neq 0$, we need $vw^T = wv^T$.
+            For all $i, j$: $v_i w_j = w_i v_j \Rightarrow v_i / w_i = v_j / w_j = c$ (constant).
+            Hence $v = cw$. Because each coordinate is $\pm 1$, $c = \pm 1$, so $v = \pm w$.
+            In that case $A = vv^T = ww^T$, i.e., the two matrices are identical.
+        \end{itemize}
+
+        Therefore
+        $$AB = BA \quad \Leftrightarrow \quad A = B.$$
+
+        \item Counting the matrices.
+
+        There are $2^n$ vectors with $\pm 1$ entries, and each matrix corresponds to the pair $\{v, -v\}$; hence
+        $$|\mathcal{M}| = \frac{2^n}{2} = 2^{n-1} = 2^{2024}.$$
+
+        \item Probability that two independently, uniformly chosen matrices coincide.
+
+        The second matrix has to equal the first one out of $2^{2024}$ possibilities, so
+        $$P(AB = BA) = \frac{1}{2^{2024}}.$$
+    \end{enumerate}
+
+    \textbf{Final answer:} $2^{-2024}$
+
+    \subsection{Final Solution}
+    Let $n = 2025$ (odd), $V = \{-1,+1\}^n$.
+
+    \textbf{1. Description of the set $\mathcal{A}$}
+
+    For every $v \in V$ the outer product
+    $$A = vv^T$$
+    is a real symmetric rank-1 matrix whose entries are $\pm 1$.
+
+    Conversely, any matrix of this kind equals $vv^T$ for some $v \in V$, and
+    $$vv^T = (-v)(-v)^T,$$
+    so the two opposite vectors represent the same matrix.
+
+    Hence
+    $$|\mathcal{A}| = |V| / 2 = 2^n/2 = 2^{n-1} = 2^{2024}. \quad (1)$$
+
+    \textbf{2. When do two matrices commute?}
+
+    Choose
+    $$A = vv^T, \quad B = ww^T \quad (v,w \in V).$$
+
+    Then
+    $$AB = v(v^Tw)w^T, \quad BA = w(w^Tv)v^T = (v^Tw)wv^T. \quad (2)$$
+
+    Write $s = v^Tw$. Because $n$ is odd, $s$ is the sum of 2025 numbers $\pm 1$ and is therefore a non-zero odd integer.
+
+    Since $s \neq 0$, (2) shows
+    $$AB = BA \Leftrightarrow vw^T = wv^T. \quad (3)$$
+
+    To solve (3), compare the $(i,j)$ entry of both sides:
+    $$v_i w_j = w_i v_j \quad \text{for all } i,j.$$
+
+    Fix any $j$ with $w_j \neq 0$ (all $w_j$ are $\pm 1$). Then for every $i$
+    $$\frac{v_i}{w_i} = \frac{v_j}{w_j} =: c,$$
+    so $v = cw$. Because each coordinate of $v$ and $w$ is $\pm 1$, $c = \pm 1$, i.e.
+    $$v = w \quad \text{or} \quad v = -w. \quad (4)$$
+
+    If (4) holds, $vv^T = ww^T$; thus
+    $$AB = BA \Leftrightarrow A = B. \quad (5)$$
+
+    \textbf{3. Probability computation}
+
+    $A$ and $B$ are chosen independently and uniformly from $\mathcal{A}$. By (5) they commute exactly when they are the same matrix. The second choice must therefore hit one specific matrix out of $|\mathcal{A}|$ possibilities, so
+    $$P(AB = BA) = \frac{1}{|\mathcal{A}|} = \frac{1}{2^{2024}}. \quad \text{(from (1))}$$
+
+    Final answer: $2^{-2024}$
+
+    \section{Problem 4}
+\subsection{Variant 1}
+    Let
+
+    $$x = aq + r, \quad \text{where } q = \lfloor x/a \rfloor \in \mathbb{Z} \text{ and } 0 \leq r < a. \qquad (1)$$
+
+    Put
+
+    $$F_b(x) = (b^a + x)^{1/a} \, b^{a-1} \qquad (b = 1,2,3,\ldots).$$
+
+    The required identity is
+
+    $$\lfloor F_b(x) \rfloor = b^a + q \quad (q \text{ as in } (1)) \qquad (2)$$
+
+    and has to be true for every positive integer $b$.
+
+    \textbf{A. Necessary conditions (take $b = 1$)}
+
+    For $b = 1$ we have $F_1(x) = (1+x)^{1/a}$.
+    Equation (2) turns into
+
+    $$\lfloor (1+x)^{1/a} \rfloor = 1 + q. \qquad (3)$$
+
+    Thus
+
+    \begin{align}
+        1+q &\leq (1+x)^{1/a} < 2+q \quad \Leftrightarrow \\
+        (1+q)^a - 1 &\leq x < (2+q)^a - 1. \qquad (4)
+    \end{align}
+
+    Intersect (4) with $aq \leq x < a(q+1)$ coming from (1).
+
+    (i) $q = -1$
+    Here (4) is $[-1, 0)$ and (1) gives $[-a, 0)$; their intersection is
+
+    $$-1 \leq x < 0. \qquad (5)$$
+
+    (ii) $q = 0$
+    (4) gives $0 \leq x < 2^a - 1$, while (1) gives $0 \leq x < a$.
+    Hence
+
+    $$0 \leq x < a. \qquad (6)$$
+
+    (iii) $q \geq 1$
+
+    The left end of (1) is $aq$.
+    Because $a$ is even and at least 2,
+    $(1+q)^a - 1 > aq$ except when $a = 2$ and $q = 1$, where equality holds.
+    Hence for all even $a \geq 4$ there is no intersection when $q \geq 1$;
+    for $a = 2$ an intersection exists only for $q = 1$, namely
+
+    $$a = 2, \quad q = 1: \quad 3 \leq x < 4. \qquad (7)$$
+
+    Combining (5), (6) and (7) we obtain the only candidates
+
+    \begin{itemize}
+        \item even $a \geq 4$: $-1 \leq x < a$;
+        \item $a = 2$: $-1 \leq x < 2$ or $3 \leq x < 4$. \qquad (8)
+    \end{itemize}
+
+    \textbf{B. Sufficiency}
+
+    Let $x$ satisfy (8) and write $x = aq + r$ as in (1).
+
+    \textbf{B1.} Case $-1 \leq x < 0$ $(q = -1)$.
+    Here $-1 < x \leq 0$, so $-1/b^a \leq x/b^a < 0$ for every $b$.
+    With $t = x/b^a$ we have
+
+    $$0 < (1+t)^{1/a} < 1, \quad \text{so} \quad 0 \leq F_b(x) < b^a.$$
+
+    Also $|x| \leq 1$ implies
+    $$F_b(x) = b^a (1+t)^{1/a} \geq b^a - 1.$$
+
+    Hence $b^a - 1 \leq F_b(x) < b^a$, i.e. $\lfloor F_b(x) \rfloor = b^a - 1 = b^a + q$.
+
+    \textbf{B2.} Case $0 \leq x < a$ $(q = 0)$.
+    Now $0 \leq x/b^a \leq a/b^a < 1$, so $1 < (1+t)^{1/a} \leq 1 + t/a$.
+    Therefore
+
+    $$b^a < F_b(x) \leq b^a + x/a < b^a + 1,$$
+
+    and $\lfloor F_b(x) \rfloor = b^a = b^a + q$.
+
+    \textbf{B3.} The extra interval when $a = 2$: $3 \leq x < 4$ $(q = 1)$.
+    Write $x = 2 + r$ with $1 \leq r < 2$.
+    For $b = 1$, $F_1(x) = \sqrt{1+x} \in [2, 3)$, giving floor $2 = 1 + q$.
+    For $b \geq 2$,
+
+    \begin{align}
+        F_b(x) &= b^2 \sqrt{1+x/b^2} \\
+        &\geq b^2(1 + x/2b^2 - x^2/8b^4) \\
+        &\geq b^2 + 1, \qquad \text{(because } 1 \leq r < 2\text{)}
+    \end{align}
+
+    while
+
+    $$F_b(x) = b^2 \sqrt{1+x/b^2} < b^2 + x/2 \leq b^2 + 2.$$
+
+    Thus $b^2 + 1 \leq F_b(x) < b^2 + 2$ and $\lfloor F_b(x) \rfloor = b^2 + 1 = b^2 + q$.
+
+    Therefore every $x$ listed in (8) fulfils (2).
+
+    \textbf{C. Failure outside the listed sets}
+
+    If $x \geq a$ (and $a \geq 4$) or $x \geq 4$ (when $a = 2$) we have $q \geq 1$ with $q \neq 1$ $(a=2)$
+    and the intersection in (4) is empty.
+    Hence (3), and thus the required identity, already fails for $b = 1$.
+    If $x < -1$ the expression $(b^a + x)^{1/a}$ is not real for $b = 1$.
+    Thus no other $x$ works.
+
+    \textbf{Conclusion}
+
+    For the given even positive integer $a$, the real numbers $x$ satisfying
+
+    $$\lfloor (b^a + x)^{1/a} \, b^{a-1} \rfloor = b^a + \lfloor x/a \rfloor \quad \text{for all positive integers } b$$
+
+    are
+
+    \begin{itemize}
+        \item when $a = 2$: $-1 \leq x < 2$ or $3 \leq x < 4$;
+        \item when $a \geq 4$ even: $-1 \leq x < a$.
+    \end{itemize}
+
+\subsection{Variant 2}
+        Let
+
+        $a \in 2\mathbb{N}$, $x \in \mathbb{R}$, $b \in \mathbb{N}$.
+
+        Put
+
+        $L(b)=\lfloor b^{\,a-1}\sqrt[a]{\,b^{a}+x}\,\rfloor$, \quad
+        $R(b)=b^{a}+\lfloor x/a\rfloor$.
+
+        We have to find all $x$ for which $L(b)=R(b)$ for every positive integer $b$.
+
+        \subsection*{A necessary condition coming from $b = 1$}
+
+        For $b=1$ the equality becomes
+
+        \begin{equation}
+            \lfloor(1+x)^{1/a}\rfloor = 1+\lfloor x/a\rfloor.
+        \end{equation}
+
+        Let $n = \lfloor x/a\rfloor$ (so $n \leq x/a < n+1$).
+        (1) is equivalent to
+
+        \begin{align}
+            n+1 &\leq (1+x)^{1/a} < n+2\\
+            \Leftrightarrow (n+1)^a -1 &\leq x < (n+2)^a -1.
+        \end{align}
+
+        At the same time $x$ belongs to the strip
+
+        \begin{equation}
+            a n \leq x < a(n+1).
+        \end{equation}
+
+        Hence $x$ must lie in the intersection of (2) and (3).
+        Denote
+
+        \begin{align}
+            I_n &= [a n , a(n+1)), \\
+            J_n &= [(n+1)^a-1 , (n+2)^a-1).
+        \end{align}
+
+        We need $I_n \cap J_n \neq \emptyset$.
+
+        \subsection*{Determination of the indices $n$ which give a non-empty intersection}
+
+        \textbf{(i)} $n = -1$
+
+        $I_{-1}= [-a,0)$, $J_{-1}= [-1,0)$.
+        Because $a\geq 2$, $I_{-1}$ contains $J_{-1}$; the intersection is the whole
+        interval $[-1,0)$.
+        (The left end $-1$ is admissible, for it keeps $b^{a}+x \geq 0$ when $b=1$.)
+
+        \textbf{(ii)} $n = 0$
+
+        $I_0=[0,a)$, $J_0=[0,2^a-1)$.
+        $I_0\subset J_0$, so we obtain the interval $[0,a)$.
+
+        \textbf{(iii)} $n \geq 1$
+        For the intersection to be non-empty we need
+
+        \begin{equation}
+        (n+1)^a-1 < a(n+1).
+        \end{equation}
+
+        Because $a\geq 2$, the function $t\mapsto t^a$ grows faster than the linear
+        function $t\mapsto a t$; consequently (4) fails once its left-hand side
+        exceeds the right-hand side. Routine checking gives
+
+        \begin{itemize}
+            \item $a = 2$: (4) is still true for $n = 1$ (because $2 \cdot 2 - 2^2 +1 = 1>0$)
+            and false for $n \geq 2$;
+
+            \item $a \geq 4$: (4) is already false for $n = 1$ (indeed $2^a > 2a+1$).
+        \end{itemize}
+
+        Hence
+
+        \begin{itemize}
+            \item when $a = 2$ an extra interval occurs for $n = 1$, namely
+            $I_1\cap J_1 = [3,4)$;
+
+            \item when $a \geq 4$ there are no further intersections.
+        \end{itemize}
+
+        So (1) forces
+
+        $x \in [-1,0) \cup [0,a)$ (all even $a$),
+        and, only when $a=2$, an additional piece $[3,4)$.
+
+        \subsection*{Sufficiency: each of the obtained intervals works for every $b$}
+
+        Write $t = x/b^{a}$ (so $|t| \leq 1$ because $x \geq -1$).
+
+        A convenient form of $L(b)$ is
+
+        \begin{equation}
+            L(b)=\lfloor\,b^{a}(1+t)^{1/a}\rfloor.
+        \end{equation}
+
+        We treat separately the three possible locations of $x$.
+
+        \subsubsection*{$-1 \leq x < 0$ (then $\lfloor x/a\rfloor = -1$)}
+
+        Here $-1 \leq t < 0$. For $0<r<1$ the Bernoulli inequality gives
+
+        \begin{equation}
+        (1+t)^{r} \geq 1+t.
+        \end{equation}
+
+        With $r = 1/a$ we deduce from (6)
+
+        $(1+t)^{1/a} \geq 1 + t \geq 1 - 1/b^{a}$.
+
+        Multiplying by $b^{a}$ we obtain
+
+        $b^{a} - 1 \leq b^{a}(1+t)^{1/a} < b^{a}$.
+
+        Hence, by (5), $L(b)=b^{a}-1 = R(b)$.
+
+        \subsubsection*{$0 \leq x < a$ (then $\lfloor x/a\rfloor = 0$)}
+
+        Now $0 \leq t < a/b^{a} \leq 1$. Concavity of $(1+t)^{1/a}$ yields
+
+        \begin{equation}
+            1 < (1+t)^{1/a} < 1 + t/a.
+        \end{equation}
+
+        Multiplying by $b^{a}$ and recalling $t = x/b^{a}$ we get
+
+        $b^{a} < b^{a}(1+t)^{1/a} < b^{a} + x/a < b^{a}+1$.
+
+        Thus $L(b)=b^{a}=R(b)$.
+
+        \subsubsection*{$a = 2$, $3 \leq x < 4$ (here $\lfloor x/2\rfloor = 1$)}
+
+        Put $y = x/b^{2}$ (so $0.75 \leq y < 4/b^{2} \leq 1$).
+        For $0 \leq y \leq 1$ we have the two-sided estimate
+
+        \begin{equation}
+            1 + y/2 - y^{2}/8 \leq \sqrt{1+y} < 1 + y/2.
+        \end{equation}
+
+        Multiplying (8) by $b^{2}$ gives
+
+        $b^{2}+1 < b^{2}\sqrt{1+y} < b^{2}+2$.
+
+        Consequently $b^{2}+1 \leq L(b) \leq b^{2}+1$, i.e. $L(b)=b^{2}+1=R(b)$.
+
+        \subsection*{Failure outside the found intervals}
+
+        If $x < -1$ the radicand $1+x$ (when $b=1$) becomes negative.
+        If $x \geq a$ and $x \neq 3,4$ when $a=2$, then with $b=1$ equality (1) is violated.
+        Finally, if $x$ is a non-zero multiple of $a$, then for large $b$ the term
+        $b^{a}(1+t)^{1/a}$ stays strictly below $b^{a}+x/a$, hence
+        $\lfloor\cdot\rfloor$ drops by one and equality again fails.
+
+        So no other $x$ can satisfy the required identity.
+
+        \subsection*{Complete description of the solution set}
+
+        Let $a$ be an even positive integer.
+
+        \begin{itemize}
+            \item If $a = 2$:
+            $$x \in [-1,2) \text{ or } x \in [3,4).$$
+
+            \item If $a \geq 4$:
+            $$x \in [-1, a).$$
+        \end{itemize}
+
+        All these numbers, and only these, fulfil
+
+        $$\lfloor\,b^{a-1}\sqrt[a]{b^{a}+x}\,\rfloor = b^{a}+\lfloor x/a\rfloor$$
+
+        for every positive integer $b$.
+
+
+\subsection{Final Solution}
+        Let $a$ be a fixed even positive integer and let
+
+        $$F_b(x)=b^{\,a-1}\sqrt[a]{\,b^{a}+x}\qquad(b=1,2,\dots ).$$
+
+        The problem asks for all real $x$ for which
+
+        $$\lfloor F_b(x)\rfloor = b^{a}+\lfloor x/a\rfloor\quad\text{for every positive integer } b.\quad(\star)$$
+
+        Throughout write
+        $$x=aq+r\quad\text{with}\quad q:=\lfloor x/a\rfloor\in\mathbb{Z},\quad 0\leq r<a.\quad(1)$$
+
+        \subsection*{A necessary condition coming from $b = 1$}
+
+        For $b=1$, $(\star)$ becomes
+
+        $$\lfloor(1+x)^{1/a}\rfloor = 1+q.\quad(2)$$
+
+        Because $a$ is even, $(1+x)^{1/a}$ is real only if $x\geq-1$, so
+
+        $$x \geq -1.\quad(3)$$
+
+        Inequality (2) is equivalent to
+
+        $$(1+q)^a - 1 \leq x < (2+q)^a - 1.\quad(4)$$
+
+        Together with (1) we need the two half-lines
+
+        $$I_q =[aq,\,a(q+1))\quad\text{and}\quad J_q=[(1+q)^a-1,\,(2+q)^a-1)\quad(5)$$
+
+        to intersect.
+
+        \subsection*{Which $q$ give a non-empty intersection?}
+
+        $q = -1$ : $I_{-1}=[-a,0)$, $J_{-1}=[-1,0) \subset I_{-1}$.
+        Intersection: $[-1,0)$.
+
+        $q = 0$ : $I_0=[0,a)$, $J_0=[0,2^a-1)$.
+        Intersection: $[0,a)$.
+
+        $q \geq 1$ :  we need $(1+q)^a-1 < a(q+1)$.
+        $\bullet$ If $a\geq 4$, this already fails for $q=1$ because $2^a-1 > 2a$.
+        $\bullet$ If $a=2$,
+        $$(1+q)^2-1 = q^2+2q \leq 2q+1 \Rightarrow q^2 \leq 1 \Rightarrow q=1.$$
+        For $q=1$ the intersection is $[3,4)$.
+
+        Hence
+
+        $$x \text{ must belong to}\quad(6)$$
+        $$[-1,0) \cup [0,a)\quad\text{(all even } a\text{)}$$
+        $$\text{and, when } a=2\text{, the additional interval } [3,4).$$
+
+        \subsection*{Sufficiency}
+
+        Rewrite $F_b(x)$:
+
+        $$F_b(x)=b^{a}\left(1+\frac{x}{b^{a}}\right)^{1/a}.\quad(7)$$
+
+        Put $t:=x/b^{a}$ (so $-1\leq t<1$ for every admissible $x$).
+
+        \subsubsection*{$-1 \leq x < 0$ ($q = -1$)}
+
+        Here $-1\leq t<0$ and $0<r:=1/a<1$. Bernoulli's inequality
+        $(1+t)^{r} \geq 1+t$ gives
+
+        $$1-1/b^{a} \leq (1+t)^{1/a} < 1.$$
+
+        Multiplying by $b^{a}$ we get $b^{a}-1 \leq F_b(x)<b^{a}$, hence
+        $\lfloor F_b(x)\rfloor=b^{a}-1=b^{a}+q$.
+
+        \subsubsection*{$0 \leq x < a$ ($q = 0$)}
+
+        Now $0\leq t<a/b^{a}\leq 1$. Concavity of $u\mapsto(1+u)^{1/a}$ yields
+
+        $$1 < (1+t)^{1/a} < 1+t/a.$$
+
+        Multiplying (7) gives
+
+        $$b^{a} < F_b(x) < b^{a}+x/a < b^{a}+1,$$
+
+        so $\lfloor F_b(x)\rfloor=b^{a}=b^{a}+q$.
+
+        \subsubsection*{$a=2$, $3 \leq x < 4$ ($q = 1$)}
+
+        Put $y:=x/b^{2}$ ($0<y<1$ for $b\geq 2$, and $y\in[3,4)$ when $b=1$).
+
+        For $0\leq y\leq 1$ the estimate
+        $\sqrt{1+y} \geq 1+y/2-y^{2}/8$ holds, while $\sqrt{1+y} < 1+y/2$.
+
+        (i) $b=1$: $F_1(x)=\sqrt{1+x}\in[2,3) \Rightarrow \lfloor F_1(x)\rfloor=2=1+q$.
+
+        (ii) $b\geq 2$: Using the two-sided bound and $x<4$,
+
+        $$b^{2}+1 \leq b^{2}\sqrt{1+y} < b^{2}+2,$$
+
+        so $\lfloor F_b(x)\rfloor=b^{2}+1=b^{2}+q$.
+
+        Thus every $x$ listed in (6) satisfies $(\star)$.
+
+        \subsection*{Impossibility of other $x$}
+
+        If $x<-1$, the radicand $1+x$ is negative when $b=1$; if $x\geq a$ (and, when $a=2$, $x\notin[3,4)$), condition (2) already fails for $b=1$. Hence no further $x$ work.
+
+        \subsection*{Solution set}
+
+        For the given even positive integer $a$, equation $(\star)$ holds for all
+        positive integers $b$ iff
+
+        $\bullet$ $a = 2$ : $-1 \leq x < 2$ or $3 \leq x < 4$;
+        $\bullet$ $a \geq 4$ even : $-1 \leq x < a$.
+
+        \subsection*{Final answer}
+
+        If $a=2$: $x\in[\,-1,\,2)\cup[\,3,\,4)$.
+        If $a\geq 4$ even: $x\in[\,-1,\,a)$.
+
+
+\section{Problem 5}
+\subsection{Variant 1}
+    Let $n$ be large and $\tau \in T_n$ arbitrary.
+    Write
+
+    \begin{align}
+        C &= \{x \in [n] : x \text{ lies on a (directed) cycle of } \tau\}, \quad m = |C|, \\
+        h &= \max \{ k \geq 0 : \tau^k(x) \notin C \text{ for some } x \in [n] \}.
+    \end{align}
+
+    Thus $m$ is the number of cyclic points of $\tau$ and $h$ is the largest
+    distance (pre-period) of a point to the set $C$.
+
+    \textbf{1. A simple counting argument}
+
+    After $h$ steps every element of $[n]$ is already on a cycle, so
+    $\tau^{h+q} = \tau^h$ whenever $q$ is a multiple of the least common multiple
+    of the lengths of the cycles contained in $C$. Consequently
+
+    \begin{equation}
+        \text{ord}(\tau) \leq h + L \quad {(1)}
+    \end{equation}
+
+    where
+
+    \begin{equation*}
+        L = \text{lcm}\{\text{lengths of the cycles of } \tau\}.
+    \end{equation*}
+
+    \textbf{2. Bounding $L$}
+
+    Restrict $\tau$ to the set $C$ ($|C| = m$).
+    There it is a permutation, so $L$ is the order of a permutation of $m$
+    letters; hence
+
+    \begin{equation}
+        L \leq f(m) \leq f(n-h) \quad {(2)}
+    \end{equation}
+
+    because $m \leq n-h$ and $f$ is non-decreasing.
+
+    Combining (1) and (2),
+
+    \begin{equation}
+        \text{ord}(\tau) \leq h + f(n-h) \quad {(3)}
+    \end{equation}
+
+    It remains to show
+
+    \begin{equation}
+        h + f(n-h) < f(n) + n^{0.501}. \quad {(4)}
+    \end{equation}
+
+    The estimate will be done separately for ``small'' and ``large'' $h$.
+
+    \rule{\textwidth}{0.4pt}
+    \textbf{A quantitative estimate for $f$}
+
+    Landau (1903) proved
+
+    \begin{equation}
+        \exp((1-\varepsilon)\sqrt{m \log m}) \leq f(m) \leq \exp((1+\varepsilon)\sqrt{m \log m}) \quad {(5)}
+    \end{equation}
+
+    for every $\varepsilon > 0$ and all $m \geq m_0(\varepsilon)$.
+    Fix $\varepsilon = 0.01$ and assume $n \geq N_0$ so that (5) is valid for every $m \leq n$.
+
+    \rule{\textwidth}{0.4pt}
+    \textbf{3. Case $h \leq n^{0.501}$}
+
+    Here $f(n-h) \leq f(n)$, so (3) gives
+
+    \begin{equation}
+        \text{ord}(\tau) \leq f(n) + h \leq f(n) + n^{0.501}, \quad {(6)}
+    \end{equation}
+
+    and (4) is proved in this range.
+
+    \rule{\textwidth}{0.4pt}
+    \textbf{4. Case $h > n^{0.501}$}
+
+    Put $\alpha = h/n$; then $\alpha \geq n^{-0.499}$.
+    Because $f$ is increasing, (3) and (4) are equivalent to
+
+    \begin{equation}
+        f(n) - f(n-h) \geq h - n^{0.501}. \quad {(7)}
+    \end{equation}
+
+    We estimate the left side with (5). Using $\log(n-h) < \log n$,
+
+    \begin{align}
+        \log f(n) - \log f(n-h) &\geq 0.99\sqrt{n \log n} - 1.01\sqrt{(n-h) \log n} \\
+        &= \sqrt{n \log n} \cdot [0.99 - 1.01\sqrt{1-\alpha}].
+    \end{align}
+
+    For $0 < \alpha \leq 1/2$ one has $1 - \sqrt{1-\alpha} \geq \alpha/2$, whence
+
+    \begin{equation}
+        0.99 - 1.01\sqrt{1-\alpha} \geq 0.49\alpha \geq 0.49 n^{-0.499}. \quad {(8)}
+    \end{equation}
+
+    Thus
+
+    \begin{align}
+        \log(f(n)/f(n-h)) &\geq 0.49 n^{-0.499}\sqrt{n \log n} \\
+        &= 0.49 n^{0.001}\sqrt{\log n}. \tag{9}
+    \end{align}
+
+    For sufficiently large $n$ the right side of (9) exceeds $2 \log n$, hence
+
+    \begin{equation}
+        f(n) \geq n^2 f(n-h). \quad {(10)}
+    \end{equation}
+
+    Therefore
+
+    \begin{equation}
+        f(n) - f(n-h) \geq (1 - n^{-2})f(n) \geq \frac{1}{2} f(n). \quad {(11)}
+    \end{equation}
+
+    Because $\sqrt{n \log n} \gg \log n$, (5) implies $f(n) > n^{10}$ for large $n$, so
+
+    \begin{equation}
+        \frac{1}{2} f(n) > n \geq h \quad (> n^{0.501}). \quad {(12)}
+    \end{equation}
+
+    Combining (11) and (12) we obtain
+
+    \begin{equation}
+        f(n) - f(n-h) \geq h - n^{0.501}, \quad {(13)}
+    \end{equation}
+
+    which is exactly the desired inequality (7).
+
+    \rule{\textwidth}{0.4pt}
+    \textbf{5. Completion of the proof}
+
+    Inequality (4) has been verified in both cases. Consequently, for
+    every $\tau \in T_n$
+
+    \begin{equation}
+        \text{ord}(\tau) < f(n) + n^{0.501} \quad {(14)}
+    \end{equation}
+
+    once $n$ is larger than the fixed constant $N_0$ chosen above.
+    Taking the maximum over $\tau$ gives
+
+    \begin{equation*}
+        g(n) < f(n) + n^{0.501}
+    \end{equation*}
+
+    for all sufficiently large $n$, completing the proof.
+
+    \rule{\textwidth}{0.4pt}
+    \textbf{Final answer.}
+
+    For all sufficiently large integers $n$ one has
+    \begin{equation*}
+        g(n) < f(n) + n^{0.501}.
+    \end{equation*}
+
+\subsection{Variant 2}
+    Let
+    \begin{itemize}
+        \item $\tau$ be an arbitrary map in $T_n$,
+        \item $C(\tau)$ the set of points which lie on (directed) cycles of $\tau$,
+        \item $h(\tau)$ the maximal distance of a point of $[n]$ from $C(\tau)$ (``height'' of the forest which is attached to the cycles),
+        \item $\lambda(\tau)$ the least positive integer for which $\tau^\lambda$ acts as the identity on $C(\tau)$ (the eventual period).
+    \end{itemize}
+
+    \begin{equation}
+        |C(\tau)| + h(\tau) \leq n.
+    \end{equation}
+
+    Indeed, the longest directed path which starts outside $C(\tau)$ and ends in $C(\tau)$ contains $h(\tau)$ different non-cyclic vertices which are not counted in $|C(\tau)|$.
+
+    \subsection*{The number of different powers of $\tau$}
+
+    Every power $\tau^k$ ($k \geq 0$) acts identically on all vertices which are at distance $\geq k$ from $C(\tau)$.
+    Consequently the sequence $(\tau^k)_{k \geq 0}$ stabilises after $h(\tau)$ steps and then becomes periodic
+    with period $\lambda(\tau)$. Thus
+
+    \begin{equation}
+        \text{ord}(\tau) = h(\tau) + \lambda(\tau).
+    \end{equation}
+
+
+    \subsection*{$\lambda(\tau)$ is bounded by the Landau function}
+
+    Restricted to $C(\tau)$ the map $\tau$ is a permutation of $|C(\tau)|$ points whose order is $\lambda(\tau)$.
+    Extending this permutation by fixed points on the remaining letters we obtain an element
+    of $S_{n-h(\tau)}$ having the same order. Therefore
+
+    \begin{equation}
+        \lambda(\tau) \leq f(|C(\tau)|) \leq f(n - h(\tau)).
+    \end{equation}
+
+
+    \subsection*{A convenient analytic estimate for $f$}
+
+    Landau proved that there are positive constants $A < B$ such that for all sufficiently large $m$
+
+    \begin{equation}
+        A\sqrt{m \log m} \leq \log f(m) \leq B\sqrt{m \log m}.
+    \end{equation}
+
+    (The lower bound can be obtained constructively from the product of the primes not exceeding
+    $\sqrt{m \log m}$; the upper bound follows from Stirling's formula, but we shall only use the
+    lower one.)
+
+    From (4) we shall need two easy consequences.
+
+    Lemma: Fast growth of $f$.
+
+        If $m$ is large and $s \geq m^{0.501}$ then
+        \begin{equation}
+            f(m+s) \geq (s+1) \cdot f(m).
+        \end{equation}
+
+\subsection*{Proof}
+    Put $g(x) = \sqrt{x \log x}$. For $x \geq m$ we have
+        $$g'(x) = \frac{\log x + 1}{2\sqrt{x \log x}} \geq \frac{1}{2}\frac{\sqrt{\log m}}{\sqrt{x}}.$$
+
+        Hence for each such $x$
+        $$g(x+1) - g(x) \geq \frac{1}{2}\frac{\sqrt{\log m}}{\sqrt{x+1}} \geq \frac{1}{2}\frac{\sqrt{\log m}}{\sqrt{2m}}.$$
+
+        Summing this inequality for $x = m, \ldots, m+s-1$ yields
+        \begin{equation}
+            g(m+s) - g(m) \geq s \cdot \frac{1}{2}\frac{\sqrt{\log m}}{\sqrt{2m}} \geq \frac{1}{4}s \cdot \frac{\sqrt{\log m}}{\sqrt{m}}.
+        \end{equation}
+
+        If $s \geq m^{0.501}$ then the right-hand side of (6) is $\geq c \log(s+1)$ with a fixed $c > 0$,
+        whence by (4)
+        $$\log f(m+s) - \log f(m) \geq \log(s+1) \quad \Rightarrow \quad f(m+s) \geq (s+1)f(m). \qed$$
+
+\subsection*{Lemma}
+    For all large $m$ one has $f(m) > m^2$.
+
+    This follows at once from (4) because $\sqrt{m \log m} > 2 \log m$ when $m$ is large.
+
+
+    \subsection*{Reduction to a one-variable maximisation}
+
+    Put
+    $$\Phi_n(h) = h + f(n-h) \quad (0 \leq h \leq n).$$
+
+    By (2) and (3) we have $\text{ord}(\tau) \leq \Phi_n(h(\tau))$; consequently
+    \begin{equation}
+        g(n) \leq \max_{0 \leq h \leq n} \Phi_n(h).
+    \end{equation}
+
+    \subsection*{Evaluating the maximum}
+
+    Split the range of $h$ into two parts.
+
+    \textbf{(A)} $h \leq n^{0.501}$.
+    Here $\Phi_n(h) \leq h + f(n) \leq f(n) + n^{0.501}$.
+
+    \textbf{(B)} $h \geq n^{0.501}$.
+    Because of (1) we have $n - h \geq n^{0.499}$, so Lemma 2 gives $f(n-h) > n \geq h$.
+    By Lemma 1 (with $m = n-h$ and $s = h$) we obtain
+    \begin{equation}
+        f(n) \geq (h+1) \cdot f(n-h) > h \cdot f(n-h).
+    \end{equation}
+
+    Hence $f(n-h) \leq f(n)/h$ and therefore
+    \begin{equation}
+        \Phi_n(h) = h + f(n-h) \leq h + f(n)/h \leq f(n) + 1 \leq f(n) + n^{0.501}.
+    \end{equation}
+
+    (The last inequality uses $h \geq n^{0.501} \geq 1$ and the fact that $f(n)$ dominates every polynomial for large $n$.)
+
+    Combining (8), (A) and (B) we have shown that for all sufficiently large $n$
+    $$g(n) \leq f(n) + n^{0.501}.$$
+
+    Since both $g(n)$ and $f(n)$ are integers, this inequality is in fact strict.
+
+    \subsection*{Final answer}
+    For every sufficiently large positive integer $n$,
+    $$g(n) < f(n) + n^{0.501}.$$
+
+
+    \subsection{Variant 3}
+    Let
+    \begin{itemize}
+        \item $\tau$ be an arbitrary self-map of $[n]$
+        \item $d(\tau)$ the length of the longest directed path that ends in a cycle
+        \item $C(\tau)$ the set of the elements which lie on the cycles of $\tau$, $|C(\tau)| = c(\tau)$.
+    \end{itemize}
+
+    Write $\tau^k = \tau \circ \ldots \circ \tau$ ($k$-times) and put
+    $L(\tau) = \text{ord}(\tau)$ (= the number of distinct maps among $\tau, \tau^2, \tau^3, \ldots$).
+
+    \subsection*{A general upper bound for $L(\tau)$}
+
+    For every $x \in [n]$ the sequence $(\tau^k(x))_{k \geq 0}$ is eventually periodic.
+    After $d(\tau)$ steps every element has reached a cycle, and from that
+    moment on the map behaves like a permutation of the set $C(\tau)$. Hence
+
+    \begin{equation}
+        L(\tau) \leq d(\tau) + \text{ord}(\sigma),
+    \end{equation}
+
+    where $\sigma$ is the permutation $\tau|_{C(\tau)}$.
+    Call
+
+    $$f(t) = \max\{ \text{ord}(\pi) : \pi \in S_t \}.$$
+
+    Inequality (1) gives
+
+    \begin{equation}
+        L(\tau) \leq d(\tau) + f(c(\tau)).
+    \end{equation}
+
+    Because $c(\tau) \leq n$ and $f$ is increasing,
+
+    \begin{equation}
+        L(\tau) \leq d(\tau) + f(n).
+    \end{equation}
+
+    If $d(\tau) \leq n^{0.501}$ formula (3) already yields
+
+    \begin{equation}
+        L(\tau) \leq f(n) + n^{0.501},
+    \end{equation}
+
+    so the desired theorem is proved in this case.
+    Hence, from now on suppose
+
+    \begin{equation}
+        d := d(\tau) > n^{0.501}.
+    \end{equation}
+
+    \subsection*{A permutation contains almost every point}
+
+    Because a directed path of length $d$ uses $d$ vertices that are \textbf{not}
+    on a cycle, we have
+
+    \begin{equation}
+        c := c(\tau) = n - d.
+    \end{equation}
+
+    With $d > n^{0.501}$ we still have $c = n - d \geq n - n^{0.501} \to \infty$, so
+    $c$ is large.
+
+    \subsection*{Two estimates we shall use}
+
+    A) (Landau, 1903) $\log f(m) = (1 + o(1))\sqrt{m \log m}$.
+
+    B) (Chebyshev/Prime Number Theorem)
+    For every sufficiently large $t$ there is a prime in $(\frac{t}{2}, t]$.
+
+    \subsection*{A prime that does \textbf{not} divide $\text{ord}(\sigma)$}
+
+    Put $\ell := \text{ord}(\sigma)$; by definition $\ell \leq f(c) \leq f(n)$.
+
+    If all primes not exceeding $d$ divided $\ell$, then the \emph{primorial}
+
+    $$P(d) = \prod_{p \leq d} p$$
+
+    would satisfy $P(d) | \ell \leq f(n)$.
+    But, by well-known estimates,
+
+    $$\log P(d) = (1 + o(1)) d \quad \text{(Mertens)}$$
+
+    while, by (7), $\log f(n) = (1 + o(1))\sqrt{n \log n}$.
+
+    For $d > n^{0.501}$ we have $d \gg \sqrt{n \log n}$, so $P(d) > f(n)$ for large $n$,
+    a contradiction. Therefore
+
+    there exists a prime $q \leq d$ that does \textbf{not} divide $\ell$.
+
+    Using (8) we may (and do) choose $q$ with
+
+    \begin{equation}
+        \frac{d}{2} < q \leq d.
+    \end{equation}
+
+    \subsection*{Building a better map}
+
+    Take $q$ vertices among the $d = n - c$ points that do \textbf{not} lie on a
+    cycle and connect them into one $q$-cycle.
+    All remaining $(d - q)$ vertices are mapped directly to one fixed point on
+    a cycle (so their distance to a cycle is now 1).
+
+    Call the new map $\tilde{\sigma}$. What are its properties?
+
+    \begin{itemize}
+        \item The behaviour of $\tau$ on $C$ is untouched, so ord on $C$ is still $\ell$.
+        \item The new $q$-cycle contributes the factor $q$ to the eventual period,
+        and because $q \nmid \ell$ we have
+
+        ord of the permutation part $= \ell q$.
+        \item The longest distance to a cycle in $\tilde{\sigma}$ is at most 1.
+    \end{itemize}
+
+    Hence
+
+    \begin{equation}
+        L(\tilde{\sigma}) \geq \ell q.
+    \end{equation}
+
+    On the other hand, from (2) and (5)
+
+    \begin{equation}
+        L(\tau) \leq d + \ell.
+    \end{equation}
+
+    \subsection*{$\tilde{\sigma}$ beats $\tau$}
+
+    Because $q \geq \frac{d}{2}$ and $q \geq 3$ (for large $n$) we compute
+
+    \begin{align}
+        \ell q - (\ell + d) &= \ell(q - 1) - d \\
+        &\geq \ell\left(\frac{d}{2} - 1\right) - d \\
+        &> 0
+    \end{align}
+
+    (the last inequality uses $\ell \geq 2$ and $d \gg 1$).
+
+    Combining (11), (12) and (13) we get
+
+    $$L(\tilde{\sigma}) > L(\tau),$$
+
+    contradicting the choice of $\tau$ when $L(\tau) = g(n)$.
+
+    Therefore the assumption (5) is impossible; hence every map that
+    achieves the maximal order satisfies $d \leq n^{0.501}$. Plugging this
+    into (3) gives
+
+    \begin{equation}
+        g(n) \leq f(n) + n^{0.501}.
+    \end{equation}
+
+    \subsection*{Conclusion}
+
+    For all sufficiently large $n$ we have proved
+
+    $$g(n) < f(n) + n^{0.501}. \quad \square$$
+
+    \subsection*{Final answer}
+
+    For all sufficiently large $n$,
+
+    $$g(n) \;<\; f(n)\;+\; n^{0.501}.$$
+
+\subsection{Final Solution}
+        Let
+        \begin{itemize}
+            \item $[n] = \{1, 2, \ldots, n\}$,
+            \item $S_n$ the set of permutations of $[n]$,
+            \item $T_n$ the set of all self-maps of $[n]$.
+        \end{itemize}
+
+        For $\tau \in T_n$ write
+        $$\text{ord}(\tau) = |\{\tau, \tau^2, \tau^3, \ldots\}|$$
+        (the number of distinct iterates).
+
+        Denote
+        $$f(n) = \max_{\sigma \in S_n} \text{ord}(\sigma), \quad g(n) = \max_{\tau \in T_n} \text{ord}(\tau).$$
+
+        The goal is to prove
+        $$g(n) < f(n) + n^{0.501} \quad \text{for all sufficiently large } n. \quad (*)$$
+
+        \subsection*{The shape of an arbitrary map}
+
+        For $\tau \in T_n$ let
+        \begin{align}
+            C &= C(\tau) = \{x : x \text{ lies on a (directed) cycle of } \tau\}, \quad m = |C|, \\
+            h &= h(\tau) = \max\{k \geq 0 : \text{some } x \text{ satisfies } \tau^k(x) \in C \text{ but } \tau^{k-1}(x) \notin C\}.
+        \end{align}
+
+        Thus $h$ is the largest distance of a vertex from the set of cycles (the ``height'' of the rooted trees that feed the cycles).
+
+        After $h$ steps every element already sits on a cycle, so afterwards the map repeats with the period of the permutation $\tau|_C$. Consequently
+        $$\text{ord}(\tau) \leq h + L, \quad L = \text{lcm}\{\text{lengths of the cycles of } \tau|_C\}. \quad (1)$$
+
+        Restricted to $C$, $\tau$ is a permutation of $m$ points, hence
+        $$L \leq f(m). \quad (2)$$
+
+        Because there are $h$ non-cyclic vertices on a longest path, $m \leq n - h$; moreover $f$ is increasing, so
+        $$L \leq f(n - h). \quad (3)$$
+
+        Combining (1)--(3) we obtain, for every $\tau \in T_n$,
+        $$\text{ord}(\tau) \leq \Phi_n(h) := h + f(n - h), \quad 0 \leq h \leq n. \quad (4)$$
+
+        \subsection*{Landau's estimate}
+
+        A classical result of Landau states that for every $\varepsilon > 0$ there is $N(\varepsilon)$ such that for all $m \geq N(\varepsilon)$
+        $$\exp((1 - \varepsilon)\sqrt{m \log m}) \leq f(m) \leq \exp((1 + \varepsilon)\sqrt{m \log m}). \quad (5)$$
+
+        Fix $\varepsilon = \frac{1}{4}$ and assume $n \geq N := N(\frac{1}{4})$.
+
+        \subsection*{Bounding $\Phi_n(h)$ when $h$ is small}
+
+        If $h \leq n^{0.501}$ then from (4)
+        $$\Phi_n(h) \leq f(n) + n^{0.501}. \quad (6)$$
+
+        \subsection*{Bounding $\Phi_n(h)$ when $h$ is large}
+
+        Henceforth assume $h \geq n^{0.501}$.
+
+        We first prove that
+        $$f(n) \geq h \cdot f(n - h). \quad (7)$$
+
+        Using (5),
+        $$\log f(n) - \log f(n - h) \geq \frac{3}{4}(\sqrt{n \log n} - \sqrt{(n - h) \log(n - h)}) \quad (8)$$
+
+        Put $g(t) = \sqrt{t \log t}$. For $x \geq 1$,
+        $$g'(x) = \frac{\log x + 1}{2\sqrt{x \log x}} \geq \frac{1}{2}\sqrt{\frac{\log x}{x}}.$$
+
+        Therefore
+        \begin{align}
+            g(n) - g(n - h) &= \int_{n-h}^n g'(x) dx \\
+            &\geq \frac{1}{2}\sqrt{\log(n - h)} \int_{n-h}^n \frac{dx}{\sqrt{x}} \\
+            &= \frac{1}{2}\sqrt{\log(n - h)} \cdot 2(\sqrt{n} - \sqrt{n - h}) \\
+            &\geq \frac{h\sqrt{\log(n-h)}}{2\sqrt{n}}. \quad (9)
+        \end{align}
+
+        Because $h \geq n^{0.501}$, we have $h/\sqrt{n} \geq n^{0.001}$. Hence the right-hand side of (9) is at least $c n^{0.001}\sqrt{\log n}$ for a fixed $c > 0$, and for large $n$ this quantity exceeds $\log h$ (indeed, $\log h \leq \log n$). Combining (8) and (9) we get
+        $$\log f(n) - \log f(n - h) > \log h, \quad \text{whence } f(n) \geq h f(n - h). \quad (10)$$
+
+        Now
+        $$\Phi_n(h) = h + f(n - h) \leq h + \frac{f(n)}{h} \leq f(n) + h \leq f(n) + n^{0.501}. \quad (11)$$
+
+        \subsection*{Maximising $\Phi_n(h)$}
+
+        From (6) and (11) we have $\Phi_n(h) \leq f(n) + n^{0.501}$ for every $0 \leq h \leq n$, so by (4)
+        $$g(n) = \max_{\tau \in T_n} \text{ord}(\tau) \leq \max_{0 \leq h \leq n} \Phi_n(h) \leq f(n) + n^{0.501}. \quad (12)$$
+
+        Because both $g(n)$ and $f(n)$ are integers, inequality (12) is in fact strict once $n \geq N$.
+
+        \subsection*{Conclusion}
+
+        There exists $N_0$ such that for all $n \geq N_0$
+        $$g(n) < f(n) + n^{0.501},$$
+        which is exactly inequality $(*)$.
+
+
+\section{Problem 6, Day 2}
+
+\subsection{Variant 1}
+Let $F(x) = f(x) - k$, $x > 0$.
+
+Because $f(a) = f(b) = k$ we have $F(a) = F(b) = 0$.
+
+\textbf{1. Introduce an auxiliary function}
+$$h: [a,b] \to \mathbb{R}, \quad h(x) = \frac{F(x)}{x} = \frac{f(x) - k}{x}$$
+
+\begin{itemize}
+\item $x \geq a > 0$, so the denominator never vanishes;
+\item $f$ is $C^1$ on $(0,\infty)$, hence $h$ is continuous on $[a,b]$ and differentiable on $(a,b)$.
+\end{itemize}
+
+\textbf{2. Evaluate $h$ at the endpoints:}
+$$h(a) = \frac{0}{a} = 0, \quad h(b) = \frac{0}{b} = 0$$
+
+Thus $h(a) = h(b)$.
+
+\textbf{3. Apply Rolle's theorem to $h$ on $[a,b]$.}
+There exists $\xi \in (a,b)$ such that $h'(\xi) = 0$.
+
+\textbf{4. Compute $h'(x)$:}
+$$h'(x) = \frac{F'(x)x - F(x)}{x^2} = \frac{xf'(x) - (f(x) - k)}{x^2} = -\frac{f(x) - xf'(x) - k}{x^2}$$
+
+Setting $h'(\xi) = 0$ gives
+$$f(\xi) - \xi f'(\xi) - k = 0 \quad \Rightarrow \quad f(\xi) - \xi f'(\xi) = k$$
+
+Hence there exists a point $\xi$ in $(a,b)$ satisfying the required relation.
+
+\textbf{Final answer:} There exists $\xi \in (a,b)$ such that $f(\xi) - \xi f'(\xi) = k$.
+
+\subsection{Final Solution}
+Let $h(x) = \frac{f(x) - k}{x}$, $x \in [a,b] \subset (0,\infty)$.
+
+\textbf{Properties of $h$:}
+\begin{itemize}
+\item Since $a > 0$ and $f$ is $C^1$ on $(0,\infty)$, $h$ is continuous on $[a,b]$ and differentiable on $(a,b)$.
+\item At the endpoints:
+$$h(a) = \frac{f(a) - k}{a} = 0, \quad h(b) = \frac{f(b) - k}{b} = 0$$
+\end{itemize}
+
+Because $h(a) = h(b)$, Rolle's theorem guarantees a point $\xi \in (a,b)$ such that $h'(\xi) = 0$.
+
+\textbf{Compute $h'$ for $x > 0$:}
+$$h'(x) = \frac{xf'(x) - (f(x) - k)}{x^2} = -\frac{f(x) - xf'(x) - k}{x^2}$$
+
+Setting $x = \xi$ and using $h'(\xi) = 0$ yields:
+$$f(\xi) - \xi f'(\xi) - k = 0 \quad \Rightarrow \quad f(\xi) - \xi f'(\xi) = k$$
+
+Thus there exists a point $\xi$ in $(a,b)$ satisfying the required relation.
+
+\textbf{Final answer:} There is $\xi \in (a,b)$ such that $f(\xi) - \xi f'(\xi) = k$.
+
+\section{Problem 7}
+
+\subsection*{Problem Statement}
+Let $M \subset \mathbb{Z}_{>0}$ be a non-empty set that satisfies
+
+\begin{enumerate}
+\item[(a)] $x \in M \Longrightarrow 2x \in M$;
+\item[(b)] $x,y \in M,\; x+y \text{ even} \Longrightarrow \frac{x+y}{2} \in M$.
+\end{enumerate}
+
+\subsection{Variant 1}
+Throughout the solution call the two operations
+\begin{enumerate}
+\item[(i)] doubling: $x \mapsto 2x$;
+\item[(ii)] halved sum: $x,y \mapsto \frac{x+y}{2}\; (x+y \text{ even})$.
+\end{enumerate}
+
+\paragraph{1. M is closed under addition}
+If $x,y \in M$ have the same parity, $m = \frac{x+y}{2} \in M$ by (b) and $x+y = 2m \in M$ by (a).
+If they have opposite parity, $2x,2y \in M$ are even, so
+$x+y = \frac{2x+2y}{2} \in M$.
+Hence
+\begin{equation}
+\text{(c) } x,y \in M \Longrightarrow x+y \in M.
+\end{equation}
+
+Consequently every positive integral multiple of an element of $M$ again lies in $M$.
+
+\paragraph{2. M contains an odd integer}
+Let $m = \min M$. If $m$ is odd we are done.
+If $m$ is even, $2m \in M$ by (a) and $x = \frac{m+2m}{2} = \frac{3m}{2}$ is an integer (because $m$ is even).
+Property (b) puts $x$ into $M$; $x$ is odd, so $M$ indeed contains at least one odd number.
+
+\paragraph{3. The least odd member}
+Denote by $d$ the least odd element of $M$. We now show that every element of $M$ is a multiple of $d$.
+
+\begin{enumerate}
+\item[(i)] Every multiple of $d$ lies in $M$.
+First $d \in M$.
+Suppose $kd \in M\; (k \geq 1)$.
+Then $2kd,\, 2d \in M$ by (a); these two numbers are even, hence
+$\frac{2kd+2d}{2} = (k+1)d \in M$ by (b).
+By induction $kd \in M$ for every $k \in \mathbb{Z}_{>0}$.
+
+\item[(ii)] No other numbers can belong to $M$.
+Assume, for a contradiction, that $x \in M$ and $d \nmid x$.
+Division with remainder gives $x = qd + r\; (q \geq 1,\; 0 < r < d)$.
+The remainder $r$ is necessarily odd (because $d$ and $x$ have opposite parities), hence $r < d$ contradicts the minimality of $d$ once we prove $r \in M$.
+
+To obtain $r$ we use the already established closure properties.
+Because $d \in M$ and $q \geq 1$, property (c) yields $qd \in M$. Now $2x,\, qd \in M$ are both even, so
+\[
+\frac{2x+qd}{2} = qd + r \in M.
+\]
+Repeating the same procedure with the two even members $2x$ and $2(qd+r) = 2qd + 2r$ gives
+\[
+\frac{2x+2qd+2r}{2} = qd + 2r \in M.
+\]
+Continuing in this way we successively obtain the odd numbers $qd+r,\, qd+2r, \dots, qd+qr = q(d+r)$ and finally $r$ itself, a contradiction. Hence no such $x$ exists and every element of $M$ is a multiple of $d$.
+\end{enumerate}
+
+Therefore $M = \{kd \mid k \in \mathbb{Z}_{>0}\}$.
+
+\paragraph{4. The number $d$ is odd}
+By construction $d$ is odd; thus $M$ is the set of positive multiples of an odd integer.
+
+\paragraph{5. Sufficiency}
+Conversely, for an arbitrary odd positive integer $d$ the set $M_d = d\mathbb{Z}_{>0}$ satisfies (a) (obvious) and (b):
+if $x = da,\; y = db$ and $x+y$ is even then $a+b$ is even (because $d$ is odd), so
+\[
+\frac{x+y}{2} = d\,\frac{a+b}{2} \in M_d.
+\]
+
+Hence the required subsets are exactly the sets of all positive multiples of an odd integer.
+
+\textbf{Final answer.}
+All non-empty subsets $M \subseteq \mathbb{Z}_{>0}$ fulfilling (a) and (b) are
+\[
+M = \{\, kd \mid k \in \mathbb{Z}_{>0} \,\},
+\]
+where $d$ is any fixed odd positive integer.
+
+\subsection{Final Solution}
+Let
+\[
+M \subset \mathbb{Z}_{>0}, \quad M \neq \emptyset,
+\]
+satisfy
+\begin{align}
+\text{(a) } &x \in M \Rightarrow 2x \in M, \\
+\text{(b) } &x, y \in M \text{ and } x+y \text{ even} \Rightarrow (x+y)/2 \in M. \quad (\star)
+\end{align}
+
+\paragraph{0. Preliminary: M is closed under addition}
+If $x,y$ have the same parity, put $m := (x+y)/2 \in M$ by $(\star)$; then $x+y = 2m \in M$ by (a).
+If $x,y$ have opposite parity, $2x,2y \in M$ by (a) and the previous line gives
+$x+y = (2x+2y)/2 \in M$. Hence
+\[
+\text{(c) } x, y \in M \Rightarrow x+y \in M.
+\]
+
+\paragraph{1. The g.c.d. of M}
+Let $g := \gcd M$. Because of (c), $g$ is the least positive element of the additive semigroup generated by $M$ and therefore itself belongs to $M$.
+
+\textbf{1.1} $g$ cannot be even.
+Take $g$ ($\in M$) and $2g$ ($\in M$ by (a)); $g$ is even, hence $g+2g$ is even and
+$(g+2g)/2 = 3g/2 \in M$ by $(\star)$. Since $3g/2$ is not divisible by $g$, we obtain a contradiction. Thus $g$ is odd.
+
+From now on $g$ is odd.
+
+\paragraph{2. If $g > 1$, then $M = g\mathbb{Z}_{>0}$}
+\begin{enumerate}
+\item[(i)] Every multiple of $g$ lies in $M$:
+starting from $g \in M$, apply (a) once to get $2g$, and combine $2g$ and $g$ with $(\star)$ to obtain $3g$; combining $2g$ and $3g$ gives $5g$, and so on. A straightforward induction yields $gk \in M$ for every $k \geq 1$.
+
+\item[(ii)] No other numbers occur: by definition of $g$ every element of $M$ is a multiple of $g$. Consequently
+\[
+M = \{ g, 2g, 3g, \ldots \} \quad (g \text{ odd, } g > 1). \quad {(1)}
+\]
+\end{enumerate}
+
+\paragraph{3. The case $g = 1$}
+Put $N := \min M$. We show that all integers $\geq N$ belong to $M$.
+
+\textbf{Step 1} -- $M$ already contains two consecutive integers.
+Because $g=1$, $M$ contains both an even and an odd element. Let $e$ be even, $o$ be odd, and assume $e < o$ (both in $M$). The elements $2e, 2o$ are in $M$ by (a) and $2e+2o$ is even, so $(\star)$ gives $e+o \in M$, which lies strictly between $e$ and $o$. Repeating the procedure we eventually reach $e+1$; hence
+\[
+N, N+1 \in M. \quad {(2)}
+\]
+
+\textbf{Step 2} -- an induction.
+Suppose the block $\{N, N+1, \ldots, N+t\}$ ($t \geq 1$) is already in $M$.
+Two cases.
+
+\begin{itemize}
+\item $N+t+1$ is even.
+Then $2(N+t-1), 2(N+t+1)$ are even and belong to $M$ by (a); their average is $N+t$, which is in $M$. Averaging $N+t$ and $2(N+t) = 2N+2t$ gives $N+t+1 \in M$.
+
+\item $N+t+1$ is odd. Use the same argument with $2(N+t)$ and $2(N+t+2)$.
+\end{itemize}
+
+Thus $N+t+1 \in M$, and induction proves
+\[
+M = \{ n \in \mathbb{Z}_{>0} : n \geq N \}. \quad {(3}
+\]
+
+\paragraph{4. Sufficiency}
+(1) is easily seen to fulfil (a) and $(\star)$ because $g$ is odd.
+In (3) both operations clearly keep every element $\geq N$, so (a) and $(\star)$ hold as well.
+
+\textbf{Final answer.}
+All non-empty subsets $M \subset \mathbb{Z}_{>0}$ that satisfy (a) and (b) are exactly
+\begin{enumerate}
+\item $M = \{ g, 2g, 3g, \ldots \}$ for some fixed odd positive integer $g$;
+\item $M = \{ N, N+1, N+2, \ldots \}$ for some fixed positive integer $N$.
+\end{enumerate}
+
+\section{Problem 8}
+Let
+$$J = (J_{ij}),\quad J_{ij}=\delta_{i,n+1-j}\quad(1\leq i,j\leq n),$$
+
+i.e. $J$ reverses the order of the coordinates.
+$J$ is real, symmetric and orthogonal: $J^T = J$, $J^2 = I$.
+
+\subsection*{1. The ``quarter-turn'' operator}
+For $A\in M_n(\mathbb{R})$ define $A^R$ by rotating the matrix through $90^\circ$:
+
+$$(A^R)_{ij}=A_{j,n+1-i}.$$
+A short computation gives
+
+$$A^R = J A^T.\quad(1)$$
+
+Hence the hypothesis $A = A^R$ is equivalent to
+
+$$A = J A^T \Leftrightarrow A^T = J A.\quad(2)$$
+
+\subsection*{2. Diagonalising $J$}
+Because $J$ is real symmetric, there exists an orthogonal $P$ such that
+
+$$P^T J P = D = \text{diag}(I_r , -I_s),\quad r+s = n.\quad(3)$$
+
+\subsection*{3. The basic equation in the new basis}
+Put
+
+$$B = P^T A P.\quad(4)$$
+
+Taking transposes in (4) and using (2)–(3):
+
+$$B = P^T A P = P^T J A^T P = D B^T.\quad(5)$$
+
+\subsection*{4. Block decomposition}
+Write $B$ conformally with $D$,
+
+$$B = \begin{bmatrix} B_{11} & B_{12} \\ B_{21} & B_{22} \end{bmatrix},\quad B_{11}\in\mathbb{R}^{r\times r},\quad B_{22}\in\mathbb{R}^{s\times s}.\quad(6)$$
+
+Equation (5) yields
+
+$$B_{11}=B_{11}^T,\quad B_{12}=B_{21}^T,\quad B_{21}=-B_{12}^T,\quad B_{22}=-B_{22}^T.$$
+
+Combining the middle two equalities gives $B_{12} = -B_{12}$; hence
+
+$$B_{12}=B_{21}=0.\quad(7)$$
+
+Thus
+
+$$B = \text{diag}(S , K)\text{ with }S^T=S\text{ (real symmetric }r\times r\text{),}$$
+$$K^T=-K\text{ (real skew-symmetric }s\times s\text{).}\quad(8)$$
+
+Because $P$ is orthogonal, $A$ and $B$ are similar and have the same eigenvalues.
+
+\subsection*{5. Spectra of $S$ and $K$}
+\begin{itemize}
+\item A real symmetric matrix $S$ has only real eigenvalues.
+\item A real skew-symmetric matrix $K$ satisfies $K^T = -K$; for any eigenpair $Kx = \lambda x$ ($x \neq 0$),
+
+$$x^TKx = \lambda x^Tx = -x^TK^Tx = -\bar{\lambda} x^Tx \Rightarrow \lambda+ \bar{\lambda} = 0,$$
+
+so $\lambda$ is purely imaginary (or 0).
+\end{itemize}
+
+\subsection*{6. Eigenvalues of $A$}
+The spectrum of $A$ is the union of the spectra of $S$ (real numbers) and $K$ (purely imaginary numbers). Therefore every eigenvalue $\lambda$ of $A$ satisfies
+
+$$\text{Re } \lambda = 0\text{ or }\text{Im } \lambda = 0.$$
+
+\section{Problem 9}
+\subsection*{Problem Statement}
+
+Let $X_1, X_2, \ldots$ be produced successively as follows:
+At every step write the still available positive integers in increasing order and, moving from left to right, flip a fair coin over every entry. The first number that receives a head is taken as the next value $X_i$. (Equivalently, the $i$-th smallest surviving integer is chosen with probability $2^{-i}$.)
+
+For a fixed $n \geq 1$ denote
+\[
+Y_n = \max\{X_1, \ldots, X_n\}.
+\]
+
+We determine $\mathbb{E}[Y_n]$.
+
+\section*{Solution}
+
+\subsection*{The distribution of the maximum}
+
+Fix $m \geq n$.
+Immediately after $k$ ($0 \leq k \leq n-1$) draws have been made at most $m-1-k$ candidates not exceeding $m-1$ are still alive.
+The next draw stays below $m$ iff the head appears among the first $m-k$ coins:
+
+\[
+P(\text{the } (k+1)\text{-st draw} < m) = 1 - 2^{-(m-k)}.
+\]
+
+Since the $n$ draws are independent,
+
+\begin{align}
+P(Y_n < m) &= \prod_{k=0}^{n-1}(1 - 2^{-(m-k)}) \\
+&= \prod_{r=m-n+1}^{m}(1 - 2^{-r}), \quad (m \geq n). \tag{1}
+\end{align}
+
+For $m \leq n$ the probability in (1) is 0.
+Therefore, for every integer $t \geq 1$,
+
+\[
+P(Y_n \geq n+t) = 1 - \prod_{r=t}^{t+n-1}(1 - 2^{-r}). \quad {(2)}
+\]
+
+\subsection*{Writing the expectation through tail probabilities}
+
+Because $\mathbb{E}[Y_n] = \sum_{k \geq 1} P(Y_n \geq k)$ and $P(Y_n \geq k) = 1$ for $k \leq n$,
+
+\begin{align}
+\mathbb{E}[Y_n] &= n + S_n \text{ with} \\
+S_n &= \sum_{t=1}^{\infty} \left[1 - \prod_{r=t}^{t+n-1}(1 - 2^{-r})\right]. \tag{3}
+\end{align}
+
+\subsection*{A convenient decomposition of the summands}
+
+For fixed $t$ define
+\[
+q_{t,k} = 2^{-(t+k)} \prod_{r=t}^{t+k-1}(1 - 2^{-r}), \quad k = 0, 1, \ldots. \quad {(4)}
+\]
+
+$q_{t,k}$ is the probability that among the $n$ factors $(1 - 2^{-t}), \ldots, (1 - 2^{-t-n+1})$ the first one that "fails" is the $(k+1)$-st.
+Consequently
+
+\[
+1 - \prod_{r=t}^{t+n-1}(1 - 2^{-r}) = \sum_{k=0}^{n-1} q_{t,k}. \quad {(5)}
+\]
+
+Insert (5) into (3) and interchange the order of summation:
+
+\begin{align}
+S_n &= \sum_{k=0}^{n-1} S_k, \text{ where} \\
+S_k &= \sum_{t=1}^{\infty} q_{t,k}. \tag{6}
+\end{align}
+
+\subsection*{Evaluation of $S_k$}
+
+Put
+\[
+S_k = \sum_{t=1}^{\infty} 2^{-(t+k)} \prod_{r=t}^{t+k-1}(1 - 2^{-r}). \quad {(7)}
+\]
+
+To compute $S_k$ observe that
+
+\[
+\prod_{r=t}^{t+k-1}(1 - 2^{-r}) = \Pi_t / \Pi_{t+k}, \text{ with } \Pi_s = \prod_{r=s}^{\infty}(1 - 2^{-r}).
+\]
+
+Since $\Pi_{s+1} = \Pi_s/(1 - 2^{-s})$, we have $\Pi_s - \Pi_{s+1} = 2^{-s} \Pi_{s+1}$.
+Therefore
+
+\[
+2^{-(t+k)} \prod_{r=t}^{t+k-1}(1 - 2^{-r}) = (\Pi_t - \Pi_{t+1})/\Pi_{t+k}. \quad {(8)}
+\]
+
+Because $\Pi_t \to 0$ as $t \to \infty$, the series (7) telescopes:
+
+\begin{align}
+S_k &= \sum_{t=1}^{\infty} (\Pi_t - \Pi_{t+1})/\Pi_{t+k} \\
+&= \Pi_1/\Pi_{1+k}. \tag{9}
+\end{align}
+
+Using $\Pi_1/\Pi_{1+k} = \prod_{r=1}^{k}(1 - 2^{-r})$ and the elementary identity
+
+\[
+\prod_{r=1}^{k}(1 - 2^{-r}) = \frac{1}{2^{k+1} - 1}, \quad {(10)}
+\]
+
+we obtain
+
+\[
+S_k = \frac{1}{2^{k+1} - 1}, \quad k = 0, 1, \ldots. \quad {(11)}
+\]
+
+\subsection*{The expected maximum}
+
+Insert (11) into (6):
+
+\[
+S_n = \sum_{k=0}^{n-1} \frac{1}{2^{k+1} - 1} = \sum_{i=1}^{n} \frac{1}{2^i - 1}. \quad {(12)}
+\]
+
+Finally, from (3),
+
+\begin{align}
+\mathbb{E}[Y_n] &= n + \sum_{i=1}^{n} \frac{1}{2^i - 1} \\
+&= \sum_{i=1}^{n} \left(1 + \frac{1}{2^i - 1}\right) \\
+&= \sum_{i=1}^{n} \frac{2^i}{2^i - 1}. \tag{13}
+\end{align}
+
+\section*{Final Answer}
+
+\[
+\boxed{\displaystyle\mathbb{E}[Y_n] = \sum_{i=1}^{n} \frac{2^i}{2^i - 1}}
+\]
+
+\section{Problem 10}
+
+\subsection*{Problem Statement}
+Let
+\[S_N = \#\{(a , b) : 1 \leq a , b \leq N , (a^2+a)(b^2+b) \text{ is a perfect square}\}\]
+
+Our goal is to evaluate
+\[L = \lim_{N\to\infty} S_N / N \qquad (\star)\]
+
+\subsection{Variant 1}
+    Put
+
+    $f(n) = $ the square-free kernel of $n(n+1)$, i.e.
+    $f(n) = \prod_{p \text{ (prime)}} p \quad \text{iff} \quad v_p(n(n+1)) \text{ is odd}$.
+
+    Because $n$ and $n+1$ are coprime, $f(n)$ is square-free and
+
+    $(a^2+a)(b^2+b)$ is a square $\iff f(a) = f(b)$. \qquad (1)
+
+    For $1 \leq n \leq N$ write
+
+    $m_d(N) = |\{n \leq N : f(n) = d\}| \quad (d \text{ square-free})$.
+
+    With (1)
+
+    $S_N = \sum_d m_d(N)^2 = N + \sum_d m_d(N)(m_d(N)-1)$. \qquad (2)
+
+    (the term $N$ comes from the diagonal $a = b$).
+
+    We prove that the second summand in (2) is $o(N)$; then
+
+    $\lim_{N \to \infty} S_N/N = 1$.
+
+    \hrule
+
+    \textbf{1. Estimating $m_d(N)$}
+
+    Put $x = n$, $y = \sqrt{n(n+1)/d}$.
+    Equation $f(n) = d$ is equivalent to
+
+    $x(x+1) = dy^2$. \qquad (3)
+
+    Multiply (3) by 4 and set $X = 2x+1$, $Y = 2y$; then
+
+    $X^2 - 4dY^2 = 1, \quad X \text{ odd}, Y \text{ even}$. \qquad (4)
+
+    (4) is a Pell equation with parameter $D = 4d$.
+    All its positive solutions are obtained from the
+    fundamental solution $(X_1, Y_1)$ by
+
+    $X_k + Y_k\sqrt{D} = (X_1 + Y_1\sqrt{D})^k \quad (k = 0,1,2,\ldots)$.
+
+    Hence the $X$-components grow exponentially:
+
+    $X_k \geq (X_1 + Y_1\sqrt{D})^k/2 \geq \varepsilon_d^k, \quad \varepsilon_d := X_1 + Y_1\sqrt{D} > 1$.
+
+    Consequently the number of solutions of (4) with
+    $X \leq 2N+1$ is at most
+
+    $m_d(N) \leq 1 + \log(2N+1)/\log \varepsilon_d$. \qquad (5)
+
+    Because $\varepsilon_d > \sqrt{D} = 2\sqrt{d}$ we get the useful bound
+
+    $m_d(N) \leq 1 + \log(2N)/\log(2\sqrt{d}) \leq C \cdot \log N/\sqrt{d}$ \qquad (6)
+
+    with an absolute constant $C$.
+
+    \hrule
+
+    \textbf{2. The set of $d$ with $m_d(N) \geq 2$}
+
+    From (6) we have $m_d(N) = 1$ whenever $d > (\log N)^2$.
+    Hence
+
+    $T_N := \{d \text{ square-free} : m_d(N) \geq 2\} \subset \{d \leq (\log N)^2\}$. \qquad (7)
+
+    \hrule
+
+    \textbf{3. The number of ``extra'' pairs}
+
+    Write
+
+    $E_N := \sum_d m_d(N)(m_d(N)-1)$ \quad (the second term in (2)).
+
+    Split the sum into $d \in T_N$ and $d \notin T_N$.
+
+    (i) $d \notin T_N \Rightarrow m_d(N) = 1 \Rightarrow$ contribution 0.
+
+    (ii) For $d \in T_N$ we use (6):
+
+    $m_d(N) \leq C \log N$, so $m_d(N)(m_d(N)-1) \leq C^2(\log N)^2$.
+
+    Because of (7) the number of such $d$ is $\leq (\log N)^2$, whence
+
+    $E_N \leq (\log N)^2 \cdot C^2(\log N)^2 = C^2(\log N)^4 = o(N)$. \qquad (8)
+
+    \hrule
+
+    \textbf{4. Finishing the estimate}
+
+    Insert (8) in (2):
+
+    $S_N = N + E_N = N + o(N)$.
+
+    Therefore
+
+    $\lim_{N \to \infty} S_N/N = 1$.
+
+    \hrule
+
+    \textbf{Final answer:} $1$
+\subsection{Variant 2}
+    Sorry, I was not able to finish.
+
+\subsection{Variant 3}
+        Let
+        \[f(n) = n^2 + n = n(n+1), \quad n \in \mathbb{Z}_{>0}.\]
+
+        For $1 \leq a, b \leq N$ put
+        \[S_N = \#\{(a,b) : f(a)f(b) \text{ is a square}\}.\]
+
+        \subsection*{Reformulation through ``square-free parts''}
+
+        For every $n$ there are unique integers
+        \[n(n+1) = s(n) \cdot t(n)^2, \quad s(n) \text{ square-free}, \; t(n) \geq 1.\]
+
+        Call $s(n)$ the square-free part of $f(n)$.
+        Because consecutive integers are coprime, $s(n)$ is obtained by deleting
+        from $n$ and $n+1$ every prime factor occurring with an even exponent.
+        Consequently
+        \[f(a)f(b) \text{ is a square} \Longleftrightarrow s(a) = s(b).\]
+
+        Hence, putting
+        \[c_N(s) = \#\{1 \leq n \leq N : s(n) = s\},\]
+        we have
+        \begin{equation}
+            S_N = \sum_s c_N(s)^2.
+        \end{equation}
+        (The sum is over all square-free positive integers.)
+
+        \subsection*{An upper bound for the individual multiplicities $c_N(s)$}
+
+        Fix a square-free $s$.
+        Writing $4f(n) = 4n(n+1) = (2n+1)^2 - 1$ we get
+        \[(2n+1)^2 - 4s \cdot t^2 = 1, \quad t = t(n).\]
+
+        Thus every $n$ with $s(n) = s$ furnishes a positive solution $(x,y) = (2n+1, 2t)$
+        of the Pell equation
+        \begin{equation}
+            x^2 - 4s \cdot y^2 = 1.
+        \end{equation}
+
+        Conversely, every solution $(x,y)$ with $x$ odd gives $n = (x-1)/2 \in \mathbb{Z}$.
+        Standard theory of Pell equations says that the total number of
+        positive solutions with $x \leq X$ is $O(\log X)$. With $X = 2N+1$ we obtain
+        \begin{equation}
+            c_N(s) = O(\log N) \quad (\forall s).
+        \end{equation}
+
+        The implicit constant in (3) is absolute.
+
+        \subsection*{A global upper bound for $S_N$}
+
+        From (1) and (3):
+        \begin{align}
+            S_N &= \sum_s c_N(s)^2 \\
+            &\leq \left(\max_s c_N(s)\right) \sum_s c_N(s) \\
+            &= O(\log N) \cdot N \\
+            &= O(N \log N).
+        \end{align}
+
+        \subsection*{A global lower bound for $S_N$}
+
+        Still by (3), every square-free $s$ that actually occurs before $N$ is
+        taken at most $C \log N$ times ($C$ absolute). Hence the number
+        $D_N$ of distinct square-free parts that do occur satisfies
+        \begin{equation}
+            D_N \geq \frac{N}{C \log N}.
+        \end{equation}
+
+        Apply Cauchy's inequality to the family $(c_N(s))_s$:
+        \begin{align}
+            S_N &= \sum_s c_N(s)^2 \\
+            &\geq \frac{\left(\sum_s c_N(s)\right)^2}{D_N} \\
+            &= \frac{N^2}{D_N} \\
+            &\geq \frac{N^2}{N/(C \log N)} \\
+            &= C \cdot N \log N.
+        \end{align}
+
+        Thus
+        \begin{equation}
+            C \cdot N \log N \leq S_N \leq C' \cdot N \log N.
+        \end{equation}
+
+        \subsection*{The order of growth of $S_N / N$}
+
+        Divide (7) by $N$:
+        \begin{equation}
+            C \log N \leq \frac{S_N}{N} \leq C' \log N.
+        \end{equation}
+
+        Because $\log N \to \infty$, the quotient $S_N/N$ grows without bound; in particular
+        \begin{equation}
+            \lim_{N \to \infty} \frac{S_N}{N} = +\infty.
+        \end{equation}
+
+        \subsection*{Conclusion}
+
+        The limit exists in the (extended) real line and equals $+\infty$.
+
+        Final answer: $\displaystyle\boxed{\lim_{N \to \infty} \frac{S_N}{N} = +\infty}$
+
+\subsection{Final Solution}
+        \textbf{Solution.}
+
+        \subsection*{A reformulation}
+        For every positive integer put
+        \[f(n) = n^2 + n = n(n+1), \quad s(n) = \text{square-free part of } f(n).\]
+
+        Because $n$ and $n+1$ are coprime, $s(n)$ is the product of all primes that occur in $f(n)$ with an odd exponent, hence $s(n)$ is square-free. For two positive integers $a,b$ we have
+        \[f(a)f(b) \text{ is a square } \Longleftrightarrow s(a) = s(b). \quad (1)\]
+
+        Indeed, (1) follows by comparing the parities of the exponents of every prime in $f(a)$ and $f(b)$.
+
+        Denote
+        \[m_d(N) = \#\{1 \leq n \leq N : s(n) = d\}, \quad d \text{ square-free}.\]
+
+        With (1)
+        \begin{align}
+            S_N &= \#\{(a,b) \leq N : f(a)f(b) \text{ is a square}\} \\
+            &= \sum_d m_d(N)^2. \quad (2)
+        \end{align}
+
+        Our task is to evaluate $S_N$.
+
+        \subsection*{How large can $m_d(N)$ be?}
+        Fix a square-free $d$ and look at the equation
+        \[n(n+1) = d \cdot k^2, \quad n,k \in \mathbb{Z}_{>0}. \quad (3)\]
+
+        It describes exactly the integers $n$ with $s(n) = d$. Multiply (3) by 4 and set
+        \[X = 2n+1 \; (>0), \quad Y = 2k \; (>0);\]
+
+        then (3) becomes the Pell equation
+        \[X^2 - 4d \cdot Y^2 = 1, \quad X \text{ odd}, \; Y \text{ even}. \quad (4)\]
+
+        Every Pell equation $x^2 - Dy^2 = 1$ ($D$ not a square) has infinitely many positive solutions; ordered by the $x$-coordinate they grow geometrically: if $(X_1, Y_1)$ is the minimal positive solution, then
+        \[X_k + Y_k\sqrt{4d} = (X_1 + Y_1\sqrt{4d})^k \quad (k = 0,1,2,\ldots).\]
+
+        Consequently, for some constant $\varepsilon_d > 1$ that depends only on $d$,
+        \[X_k \geq \varepsilon_d^k.\]
+
+        Hence the number of solutions with $X \leq 2N+1$ (and therefore $n \leq N$) is at most
+        \[m_d(N) \leq 1 + \frac{\log(2N+1)}{\log \varepsilon_d}. \quad (5)\]
+
+        A crude universal estimate is enough for us. Because $\varepsilon_d > 2\sqrt{d}$ (take, for instance, $X_1 + Y_1\sqrt{4d} \geq 1 + 2\sqrt{d}$), we get from (5)
+        \begin{align}
+            m_d(N) &\leq 1 + \frac{\log(2N)}{\log(2\sqrt{d})} \\
+            &\leq C\frac{\log N}{\sqrt{d}} \quad (6)
+        \end{align}
+        with an absolute constant $C$.
+
+        \subsection*{Which $d$ can occur more than once?}
+        If $m_d(N) \geq 2$, then (6) gives
+        \[2 \leq m_d(N) \leq C\frac{\log N}{\sqrt{d}} \Longrightarrow d \leq C^2(\log N)^2. \quad (7)\]
+
+        Thus only square-free $d$ up to $(\text{const.}) \cdot (\log N)^2$ may have multiplicity $\geq 2$. Put
+        \[T_N := \{d \text{ square-free}: m_d(N) \geq 2\}.\]
+
+        By (7) we have
+        \[\#T_N \leq C_1(\log N)^2. \quad (8)\]
+
+        \subsection*{The ``extra'' pairs}
+        Rewrite (2) as
+        \begin{align}
+            S_N &= N + \sum_d m_d(N)\bigl(m_d(N) - 1\bigr) \\
+            &=: N + E_N. \quad (9)
+        \end{align}
+
+        (The term $N$ corresponds to the diagonal $a = b$.)
+
+        If $d \notin T_N$ then $m_d(N) = 1$ and its contribution to $E_N$ is 0. For $d \in T_N$ we combine (6) with (8):
+        \[m_d(N)(m_d(N) - 1) \leq m_d(N)^2 \leq \frac{C^2(\log N)^2}{d}.\]
+
+        Hence, using that $d \leq C^2(\log N)^2$ on $T_N$,
+        \begin{align}
+            E_N &\leq C^2(\log N)^2 \sum_{d \in T_N} \frac{1}{d} \\
+            &\leq C^2(\log N)^2 \sum_{1 \leq d \leq C^2(\log N)^2} \frac{1}{d} \\
+            &= O\bigl((\log N)^2 \log \log N\bigr). \quad (10)
+        \end{align}
+
+        \subsection*{Asymptotics of $S_N$}
+        Because $(\log N)^2 \log \log N = o(N)$, relation (10) together with (9) gives
+        \[S_N = N + o(N) \quad (N \to \infty). \quad (11)\]
+
+        Divide by $N$ and take the limit:
+        \[\lim_{N \to \infty} \frac{S_N}{N} = 1. \quad (12)\]
+
+        \textbf{Final answer: 1}
+
+
+\end{document}

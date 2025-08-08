@@ -1,0 +1,233 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{Deepseek thinking for Problem 2}
+\fancyfoot[C]{\thepage}
+
+\title{Deepseek thinking for Problem 2}
+\author{Generated from JSON Data}
+\date{\today}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{solution}{Solution}
+
+\begin{document}
+
+    We are given that $f: \mathbb{R} \to \mathbb{R}$ is twice continuously differentiable, with $\int_{-1}^{1} f(x) \, dx = 0$ and $f(1) = f(-1) = 1$. We need to prove that $\int_{-1}^{1} [f''(x)]^2 \, dx \geq 15$ and find all functions achieving equality.
+
+    To solve this, we consider the calculus of variations approach. The functional to minimize is $I = \int_{-1}^{1} [f''(x)]^2 \, dx$ subject to the constraints $\int_{-1}^{1} f(x) \, dx = 0$ and $f(-1) = f(1) = 1$. The Euler-Lagrange equation for minimizing $\int [f'']^2 \, dx$ with an integral constraint leads to a fourth-order equation. Thus, we assume the minimizer is a quartic polynomial.
+
+    Set $f(x) = a x^4 + b x^3 + c x^2 + d x + e$.
+
+    \subsection*{Constraints:}
+    \begin{enumerate}
+        \item $f(1) = a + b + c + d + e = 1$
+        \item $f(-1) = a - b + c - d + e = 1$
+        \item $\int_{-1}^{1} f(x) \, dx = 0$
+    \end{enumerate}
+
+    The integral constraint is computed as:
+    \begin{align}
+        \int_{-1}^{1} (a x^4 + b x^3 + c x^2 + d x + e) \, dx = \left[ \frac{a x^5}{5} + \frac{b x^4}{4} + \frac{c x^3}{3} + \frac{d x^2}{2} + e x \right]_{-1}^{1}
+    \end{align}
+
+    Odd functions integrate to zero over symmetric limits, so:
+    \begin{align}
+        \int_{-1}^{1} (a x^4 + c x^2 + e) \, dx &= 2 \int_{0}^{1} (a x^4 + c x^2 + e) \, dx \\
+        &= 2 \left[ \frac{a x^5}{5} + \frac{c x^3}{3} + e x \right]_{0}^{1} \\
+        &= 2 \left( \frac{a}{5} + \frac{c}{3} + e \right)
+    \end{align}
+
+    Set to zero:
+    \begin{align}
+        2 \left( \frac{a}{5} + \frac{c}{3} + e \right) = 0 \implies \frac{a}{5} + \frac{c}{3} + e = 0
+    \end{align}
+
+    Multiplying by 15:
+    \begin{equation}
+        3a + 5c + 15e = 0 \quad \text{(Equation 1)}
+    \end{equation}
+
+    Add the boundary conditions:
+    \begin{align}
+    (a + b + c + d + e) + (a - b + c - d + e) &= 1 + 1 \\
+    \implies 2a + 2c + 2e &= 2 \\
+    \implies a + c + e &= 1 \quad \text{(Equation 2)}
+    \end{align}
+
+    Subtract them:
+    \begin{align}
+    (a + b + c + d + e) - (a - b + c - d + e) &= 1 - 1 \\
+    \implies 2b + 2d &= 0 \\
+    \implies b + d &= 0 \quad \text{(Equation 3)}
+    \end{align}
+
+    \subsection*{Second Derivative:}
+    \begin{align}
+        f'(x) &= 4a x^3 + 3b x^2 + 2c x + d \\
+        f''(x) &= 12a x^2 + 6b x + 2c
+    \end{align}
+
+    The functional is:
+    \begin{equation}
+        I = \int_{-1}^{1} [f''(x)]^2 \, dx = \int_{-1}^{1} (12a x^2 + 6b x + 2c)^2 \, dx
+    \end{equation}
+
+    Expanding the square:
+    \begin{equation}
+    (12a x^2 + 6b x + 2c)^2 = 144a^2 x^4 + 144ab x^3 + 36b^2 x^2 + 48ac x^2 + 24bc x + 4c^2
+    \end{equation}
+
+    Integrating over $[-1, 1]$, the odd terms ($144ab x^3$ and $24bc x$) vanish:
+    \begin{equation}
+        I = \int_{-1}^{1} (144a^2 x^4 + (36b^2 + 48ac) x^2 + 4c^2) \, dx
+    \end{equation}
+
+    The integrals are:
+    \begin{equation}
+        \int_{-1}^{1} x^4 \, dx = \frac{2}{5}, \quad \int_{-1}^{1} x^2 \, dx = \frac{2}{3}, \quad \int_{-1}^{1} dx = 2
+    \end{equation}
+
+    So:
+    \begin{equation}
+        I = 144a^2 \cdot \frac{2}{5} + (36b^2 + 48ac) \cdot \frac{2}{3} + 4c^2 \cdot 2 = \frac{288a^2}{5} + 24b^2 + 32ac + 8c^2
+    \end{equation}
+
+    \subsection*{Minimizing $I$:}
+    From Equation 3, $d = -b$. From Equation 2 and the boundary conditions, for any $b$, as long as $a + c + e = 1$, the boundary conditions are satisfied. Since $I$ contains $b^2$ with a positive coefficient, to minimize $I$, set $b = 0$ (and thus $d = 0$).
+
+    Now solve Equations 1 and 2 for $a$, $c$, and $e$:
+    \begin{align}
+        a + c + e &= 1 \quad \text{(Equation 2)} \\
+        3a + 5c + 15e &= 0 \quad \text{(Equation 1)}
+    \end{align}
+
+    Express $a$ and $c$ in terms of $e$. From Equation 2:
+    \begin{equation}
+        a + c = 1 - e
+    \end{equation}
+
+    From Equations 1 and 2, eliminate variables. Multiply Equation 2 by 3:
+    \begin{equation}
+        3a + 3c + 3e = 3
+    \end{equation}
+
+    Subtract from Equation 1:
+    \begin{align}
+    (3a + 5c + 15e) - (3a + 3c + 3e) &= 0 - 3 \\
+    \implies 2c + 12e &= -3
+    \end{align}
+
+    So:
+    \begin{equation}
+        2c = -12e - 3 \implies c = -6e - \frac{3}{2}
+    \end{equation}
+
+    Then:
+    \begin{align}
+        a &= (1 - e) - c \\
+        &= 1 - e - \left(-6e - \frac{3}{2}\right) \\
+        &= 1 - e + 6e + \frac{3}{2} \\
+        &= \frac{5}{2} + 5e
+    \end{align}
+
+    Substitute into $I$ (with $b=0$):
+    \begin{equation}
+        I = \frac{288}{5} a^2 + 32 a c + 8 c^2
+    \end{equation}
+
+    Substitute $a = \frac{5}{2} + 5e$ and $c = -\frac{3}{2} - 6e$:
+    \begin{equation}
+        I = \frac{288}{5} \left(5e + \frac{5}{2}\right)^2 + 32 \left(5e + \frac{5}{2}\right) \left(-6e - \frac{3}{2}\right) + 8 \left(-6e - \frac{3}{2}\right)^2
+    \end{equation}
+
+    Compute each term:
+    \begin{equation}
+        \left(5e + \frac{5}{2}\right)^2 = 25e^2 + 25e + \frac{25}{4}
+    \end{equation}
+
+    \begin{equation}
+        \frac{288}{5} \left(25e^2 + 25e + \frac{25}{4}\right) = 288(5e^2 + 5e + \frac{5}{4}) = 1440e^2 + 1440e + 360
+    \end{equation}
+
+    \begin{align}
+        \left(5e + \frac{5}{2}\right) \left(-6e - \frac{3}{2}\right) &= 5 \cdot (-6) e^2 + 5 \cdot \left(-\frac{3}{2}\right) e + \frac{5}{2} \cdot (-6) e + \frac{5}{2} \cdot \left(-\frac{3}{2}\right) \\
+        &= -30e^2 - \frac{15}{2}e - 15e - \frac{15}{4} \\
+        &= -30e^2 - \frac{45}{2}e - \frac{15}{4}
+    \end{align}
+
+    \begin{equation}
+        32 \left(-30e^2 - \frac{45}{2}e - \frac{15}{4}\right) = -960e^2 - 720e - 120
+    \end{equation}
+
+    \begin{equation}
+        \left(-6e - \frac{3}{2}\right)^2 = 36e^2 + 18e + \frac{9}{4}
+    \end{equation}
+
+    \begin{equation}
+        8 \left(36e^2 + 18e + \frac{9}{4}\right) = 288e^2 + 144e + 18
+    \end{equation}
+
+    Sum:
+    \begin{align}
+        I &= (1440e^2 + 1440e + 360) + (-960e^2 - 720e - 120) + (288e^2 + 144e + 18) \\
+        &= (1440 - 960 + 288)e^2 + (1440 - 720 + 144)e + (360 - 120 + 18) \\
+        &= 768e^2 + 864e + 258
+    \end{align}
+
+    The minimum occurs at $e = -\frac{864}{2 \cdot 768} = -\frac{864}{1536} = -\frac{9}{16}$. Then:
+    \begin{align}
+        I &= 768 \left(-\frac{9}{16}\right)^2 + 864 \left(-\frac{9}{16}\right) + 258 \\
+        &= 768 \cdot \frac{81}{256} - \frac{864 \cdot 9}{16} + 258 \\
+        &= 3 \cdot 81 - 54 \cdot 9 + 258 \\
+        &= 243 - 486 + 258 = 15
+    \end{align}
+
+    Thus, the minimum is 15, achieved when $b = 0$, $d = 0$, $e = -\frac{9}{16}$, $c = -6e - \frac{3}{2} = -6(-\frac{9}{16}) - \frac{3}{2} = \frac{54}{16} - \frac{24}{16} = \frac{30}{16} = \frac{15}{8}$, $a = \frac{5}{2} + 5e = \frac{5}{2} - \frac{45}{16} = \frac{40}{16} - \frac{45}{16} = -\frac{5}{16}$.
+
+    So:
+    \begin{equation}
+        f(x) = -\frac{5}{16} x^4 + \frac{15}{8} x^2 - \frac{9}{16} = \frac{1}{16} (-5x^4 + 30x^2 - 9)
+    \end{equation}
+
+    This satisfies the constraints:
+    \begin{itemize}
+        \item $f(1) = \frac{1}{16}(-5 + 30 - 9) = \frac{16}{16} = 1 = f(-1)$
+        \item $\int_{-1}^{1} f(x) \, dx = 0$ (as built)
+    \end{itemize}
+
+    For equality, $f''(x) = 12a x^2 + 2c = 12(-\frac{5}{16}) x^2 + 2(\frac{15}{8}) = -\frac{60}{16} x^2 + \frac{30}{8} = -\frac{15}{4} x^2 + \frac{15}{4} = \frac{15}{4} (1 - x^2)$, so:
+    \begin{equation}
+    [f''(x)]^2 = \left( \frac{15}{4} \right)^2 (1 - x^2)^2 = \frac{225}{16} (1 - 2x^2 + x^4)
+    \end{equation}
+
+    Integrating:
+    \begin{align}
+        \int_{-1}^{1} [f''(x)]^2 \, dx &= \frac{225}{16} \int_{-1}^{1} (1 - 2x^2 + x^4) \, dx \\
+        &= \frac{225}{16} \cdot 2 \int_{0}^{1} (1 - 2x^2 + x^4) \, dx \\
+        &= \frac{225}{8} \left[ x - \frac{2x^3}{3} + \frac{x^5}{5} \right]_{0}^{1} \\
+        &= \frac{225}{8} \left(1 - \frac{2}{3} + \frac{1}{5}\right) \\
+        &= \frac{225}{8} \left( \frac{15 - 10 + 3}{15} \right) \\
+        &= \frac{225}{8} \cdot \frac{8}{15} = \frac{225}{15} = 15
+    \end{align}
+
+    Equality holds only for this function, as the minimizer is unique up to the constraints.
+
+    \textbf{Final Answer:}
+    \begin{equation}
+        \boxed{15} \quad \text{for} \quad f(x) = \frac{1}{16} \left( -5x^{4} + 30x^{2} - 9 \right)
+    \end{equation}
+\end{document}

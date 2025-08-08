@@ -1,0 +1,222 @@
+Running benchmark for gpt...
+  gpt - Problem problem_1, variant 1: 42.65s
+  gpt - Problem problem_1, variant 2: 67.52s
+  gpt - Problem problem_1, variant 3: 59.98s
+  gpt - Problem problem_1, final synthesis: 21.89s
+  gpt - Problem problem_2, variant 1: 65.01s
+  gpt - Problem problem_2, variant 2: 53.29s
+  gpt - Problem problem_2, variant 3: 57.83s
+  gpt - Problem problem_2, final synthesis: 24.21s
+  gpt - Problem problem_3, variant 1: 56.97s
+  gpt - Problem problem_3, variant 2: 30.83s
+  gpt - Problem problem_3, variant 3: 25.98s
+  gpt - Problem problem_3, final synthesis: 119.78s
+  gpt - Problem problem_4, variant 1: 132.32s
+  gpt - Problem problem_4, variant 2: 23.51s
+  gpt - Problem problem_4, variant 3: 126.38s
+  gpt - Problem problem_4, final synthesis: 37.20s
+  gpt - Problem problem_5, variant 1: 212.77s
+  gpt - Problem problem_5, variant 2: 114.02s
+  gpt - Problem problem_5, variant 3: 168.56s
+  gpt - Problem problem_5, final synthesis: 27.15s
+  gpt - Problem problem_6, variant 1: 14.48s
+  gpt - Problem problem_6, variant 2: 19.89s
+  gpt - Problem problem_6, variant 3: 19.62s
+  gpt - Problem problem_6, final synthesis: 8.85s
+  gpt - Problem problem_7, variant 1: 351.14s
+  gpt - Problem problem_7, variant 2: 391.85s
+  gpt - Problem problem_7, variant 3: 185.88s
+  gpt - Problem problem_7, final synthesis: 291.36s
+  gpt - Problem problem_8, variant 1: 87.87s
+  gpt - Problem problem_8, variant 2: 88.84s
+  gpt - Problem problem_8, variant 3: 137.19s
+  gpt - Problem problem_8, final synthesis: 15.26s
+  gpt - Problem problem_9, variant 1: 247.25s
+  gpt - Problem problem_9, variant 2: 266.37s
+  gpt - Problem problem_9, variant 3: 198.88s
+  gpt - Problem problem_9, final synthesis: 178.52s
+  gpt - Problem problem_10, variant 1: 199.36s
+  gpt - Problem problem_10, variant 2: 12.31s
+  gpt - Problem problem_10, variant 3: 47.04s
+  gpt - Problem problem_10, final synthesis: 28.64s
+Total time for gpt: 4258.46s
+Completed gpt in 4288.58s
+Running benchmark for deepseek...
+  deepseek - Problem problem_1, variant 1: 332.75s
+  deepseek - Problem problem_1, variant 2: 260.71s
+  deepseek - Problem problem_1, variant 3: 346.84s
+  deepseek - Problem problem_1, final synthesis: 104.05s
+  deepseek - Problem problem_2, variant 1: 384.29s
+  deepseek - Problem problem_2, variant 2: 328.94s
+  deepseek - Problem problem_2, variant 3: 360.52s
+  deepseek - Problem problem_2, final synthesis: 184.13s
+  deepseek - Problem problem_3, variant 1: 349.47s
+  deepseek - Problem problem_3, variant 2: 421.02s
+  deepseek - Problem problem_3, variant 3: 381.71s
+  deepseek - Problem problem_3, final synthesis: 41.21s
+  deepseek - Problem problem_4, variant 1: 359.26s
+  deepseek - Problem problem_4, variant 2: 351.10s
+  deepseek - Problem problem_4, variant 3: 347.73s
+  deepseek - Problem problem_4, final synthesis: 258.52s
+  deepseek - Problem problem_5, variant 1: 369.16s
+  deepseek - Problem problem_5, variant 2: 338.84s
+  deepseek - Problem problem_5, variant 3: 366.03s
+  deepseek - Problem problem_5, final synthesis: 385.65s
+  deepseek - Problem problem_6, variant 1: 300.99s
+  deepseek - Problem problem_6, variant 2: 133.02s
+  deepseek - Problem problem_6, variant 3: 86.98s
+  deepseek - Problem problem_6, final synthesis: 29.19s
+  deepseek - Problem problem_7, variant 1: 312.88s
+  deepseek - Problem problem_7, variant 2: 272.71s
+  deepseek - Problem problem_7, variant 3: 269.88s
+  deepseek - Problem problem_7, final synthesis: 133.20s
+  deepseek - Problem problem_8, variant 1: 284.02s
+  deepseek - Problem problem_8, variant 2: 339.22s
+  deepseek - Problem problem_8, variant 3: 354.90s
+  deepseek - Problem problem_8, final synthesis: 393.41s
+  deepseek - Problem problem_9, variant 1: 462.15s
+  deepseek - Problem problem_9, variant 2: 383.19s
+  deepseek - Problem problem_9, variant 3: 376.92s
+  deepseek - Problem problem_9, final synthesis: 146.35s
+  deepseek - Problem problem_10, variant 1: 319.67s
+  deepseek - Problem problem_10, variant 2: 342.11s
+  deepseek - Problem problem_10, variant 3: 360.62s
+  deepseek - Problem problem_10, final synthesis: 341.79s
+Total time for deepseek: 11915.14s
+Completed deepseek in 11945.74s
+Running benchmark for gemini...
+  gemini - Problem problem_1, variant 1: 114.60s
+  gemini - Problem problem_1, variant 2: 129.62s
+  gemini - Problem problem_1, variant 3: 107.14s
+  gemini - Problem problem_1, final synthesis: 83.57s
+  gemini - Problem problem_2, variant 1: 82.35s
+  gemini - Problem problem_2, variant 2: 64.05s
+  gemini - Problem problem_2, variant 3: 61.49s
+  gemini - Problem problem_2, final synthesis: 92.30s
+  gemini - Problem problem_3, variant 1: 174.32s
+Error calling Gemini API: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+  gemini - Problem problem_3, variant 2: 0.00s
+  gemini - Problem problem_3, variant 3: 178.86s
+  gemini - Problem problem_3, final synthesis: 124.45s
+  gemini - Problem problem_4, variant 1: 212.21s
+  gemini - Problem problem_4, variant 2: 189.02s
+  gemini - Problem problem_4, variant 3: 182.33s
+Error calling Gemini API: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+  gemini - Problem problem_4, final synthesis: 0.00s
+  gemini - Problem problem_5, variant 1: 277.33s
+  gemini - Problem problem_5, variant 2: 287.32s
+  gemini - Problem problem_5, variant 3: 274.37s
+Error calling Gemini API: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+  gemini - Problem problem_5, final synthesis: 0.00s
+  gemini - Problem problem_6, variant 1: 63.20s
+  gemini - Problem problem_6, variant 2: 91.65s
+  gemini - Problem problem_6, variant 3: 67.81s
+  gemini - Problem problem_6, final synthesis: 51.40s
+  gemini - Problem problem_7, variant 1: 210.52s
+  gemini - Problem problem_7, variant 2: 314.45s
+  gemini - Problem problem_7, variant 3: 360.33s
+  gemini - Problem problem_7, final synthesis: 197.76s
+  gemini - Problem problem_8, variant 1: 317.14s
+  gemini - Problem problem_8, variant 2: 79.70s
+  gemini - Problem problem_8, variant 3: 160.56s
+  gemini - Problem problem_8, final synthesis: 95.72s
+  gemini - Problem problem_9, variant 1: 268.86s
+  gemini - Problem problem_9, variant 2: 284.96s
+  gemini - Problem problem_9, variant 3: 242.24s
+  gemini - Problem problem_9, final synthesis: 159.34s
+  gemini - Problem problem_10, variant 1: 441.56s
+Error calling Gemini API: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+  gemini - Problem problem_10, variant 2: 0.00s
+  gemini - Problem problem_10, variant 3: 258.62s
+Error calling Gemini API: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+  gemini - Problem problem_10, final synthesis: 0.00s
+Total time for gemini: 6301.14s
+Completed gemini in 6382.87s
+Running benchmark for claude...
+  claude - Problem problem_1, variant 1: 33.58s
+  claude - Problem problem_1, variant 2: 26.58s
+  claude - Problem problem_1, variant 3: 30.76s
+  claude - Problem problem_1, final synthesis: 38.57s
+  claude - Problem problem_2, variant 1: 97.48s
+  claude - Problem problem_2, variant 2: 50.83s
+  claude - Problem problem_2, variant 3: 46.89s
+  claude - Problem problem_2, final synthesis: 25.10s
+  claude - Problem problem_3, variant 1: 18.59s
+  claude - Problem problem_3, variant 2: 38.71s
+  claude - Problem problem_3, variant 3: 19.68s
+  claude - Problem problem_3, final synthesis: 25.79s
+  claude - Problem problem_4, variant 1: 37.05s
+  claude - Problem problem_4, variant 2: 60.90s
+Error calling Claude API: {'type': 'error', 'error': {'details': None, 'type': 'overloaded_error', 'message': 'Overloaded'}}
+  claude - Problem problem_4, variant 3: 0.00s
+  claude - Problem problem_4, final synthesis: 30.67s
+  claude - Problem problem_5, variant 1: 25.54s
+  claude - Problem problem_5, variant 2: 30.42s
+  claude - Problem problem_5, variant 3: 25.35s
+  claude - Problem problem_5, final synthesis: 23.37s
+  claude - Problem problem_6, variant 1: 14.05s
+  claude - Problem problem_6, variant 2: 11.22s
+  claude - Problem problem_6, variant 3: 14.84s
+  claude - Problem problem_6, final synthesis: 18.55s
+  claude - Problem problem_7, variant 1: 37.64s
+  claude - Problem problem_7, variant 2: 46.51s
+  claude - Problem problem_7, variant 3: 58.63s
+  claude - Problem problem_7, final synthesis: 26.50s
+  claude - Problem problem_8, variant 1: 33.77s
+  claude - Problem problem_8, variant 2: 40.56s
+  claude - Problem problem_8, variant 3: 33.23s
+  claude - Problem problem_8, final synthesis: 44.07s
+  claude - Problem problem_9, variant 1: 48.71s
+  claude - Problem problem_9, variant 2: 48.54s
+  claude - Problem problem_9, variant 3: 28.73s
+  claude - Problem problem_9, final synthesis: 27.79s
+  claude - Problem problem_10, variant 1: 27.40s
+  claude - Problem problem_10, variant 2: 28.05s
+  claude - Problem problem_10, variant 3: 30.26s
+  claude - Problem problem_10, final synthesis: 19.32s
+Total time for claude: 1324.24s
+Completed claude in 1359.58s
+Running benchmark for grok...
+  grok - Problem problem_1, variant 1: 62.42s
+  grok - Problem problem_1, variant 2: 86.26s
+  grok - Problem problem_1, variant 3: 79.78s
+  grok - Problem problem_1, final synthesis: 32.76s
+  grok - Problem problem_2, variant 1: 235.65s
+  grok - Problem problem_2, variant 2: 167.32s
+  grok - Problem problem_2, variant 3: 74.43s
+  grok - Problem problem_2, final synthesis: 121.07s
+  grok - Problem problem_3, variant 1: 193.58s
+  grok - Problem problem_3, variant 2: 164.25s
+  grok - Problem problem_3, variant 3: 181.64s
+  grok - Problem problem_3, final synthesis: 74.08s
+Request failed: HTTPSConnectionPool(host='api.x.ai', port=443): Read timed out. (read timeout=3000), retrying in 5.26 seconds... (attempt 1/2)
+  grok - Problem problem_4, variant 1: 522.63s
+  grok - Problem problem_4, variant 2: 442.48s
+  grok - Problem problem_4, variant 3: 500.87s
+  grok - Problem problem_4, final synthesis: 356.79s
+  grok - Problem problem_5, variant 1: 1431.12s
+  grok - Problem problem_5, variant 2: 1338.53s
+  grok - Problem problem_5, variant 3: 788.52s
+  grok - Problem problem_5, final synthesis: 448.03s
+  grok - Problem problem_6, variant 1: 33.27s
+  grok - Problem problem_6, variant 2: 33.03s
+  grok - Problem problem_6, variant 3: 32.45s
+  grok - Problem problem_6, final synthesis: 30.95s
+  grok - Problem problem_7, variant 1: 705.77s
+  grok - Problem problem_7, variant 2: 903.00s
+  grok - Problem problem_7, variant 3: 505.33s
+  grok - Problem problem_7, final synthesis: 355.56s
+  grok - Problem problem_8, variant 1: 325.16s
+  grok - Problem problem_8, variant 2: 243.97s
+  grok - Problem problem_8, variant 3: 667.66s
+  grok - Problem problem_8, final synthesis: 193.77s
+  grok - Problem problem_9, variant 1: 696.49s
+  grok - Problem problem_9, variant 2: 898.39s
+  grok - Problem problem_9, variant 3: 808.01s
+  grok - Problem problem_9, final synthesis: 950.60s
+  grok - Problem problem_10, variant 1: 859.50s
+  grok - Problem problem_10, variant 2: 642.43s
+  grok - Problem problem_10, variant 3: 692.20s
+  grok - Problem problem_10, final synthesis: 704.98s
+Total time for grok: 17584.73s
+Completed grok in 24799.52s
