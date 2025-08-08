@@ -22,7 +22,7 @@ class BlogTemplateGenerator:
             return {}
     
     def generate_template(self, template_file, formulas_file, output_file, **extra_vars):
-        """Generate template with formulas and any extra variables."""
+        """Generate a template with formulas and any extra variables."""
         
         # Load formulas
         formulas = self.load_formulas(formulas_file)
@@ -68,11 +68,11 @@ def main():
                        default='blog_post_template.html.j2',
                        help='Template file (default: blog_post_template.html.j2)')
     parser.add_argument('--formulas', '-f',
-                       default='template_formulas.yml',
-                       help='Formulas YAML file (default: template_formulas.yml)')
+                       default='formulas.yml',
+                       help='Formulas YAML file (default: formulas.yml)')
     parser.add_argument('--output', '-o',
-                       default='blog_post_template_generated.html',
-                       help='Output HTML file (default: blog_post_template_generated.html)')
+                       default='blog_post_generated.html',
+                       help='Output HTML file (default: blog_post_generated.html)')
     parser.add_argument('--template-dir', '-d',
                        default='./template',
                        help='Directory containing templates (default: ./template)')
