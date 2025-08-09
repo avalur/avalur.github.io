@@ -113,6 +113,7 @@ You will be working with a real-world full-stack application that includes:
 - [Repomix](https://www.youtube.com/watch?v=PC5y-IyL9SE&t=4s)
 - [Browser MCP](https://www.youtube.com/watch?v=eD5SUj5qqgI) and [Official Figma MCP](https://www.youtube.com/watch?v=yO3Wr7DEWF0)
 - [Post from Armin Ronacher (creator of Flask)](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
+- ![Claude Agents Overview](claude-agents.png)
 
 ## Getting Started
 1. Fork the starter repository from [GitHub](https://github.com/avalur/avalur.github.io/blob/master/ai-assisted-programming/)
