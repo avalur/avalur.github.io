@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spirograph — Animated with Tracer (Transparent)</title>
+    <style>
+        :root { --size: 500px; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            background: transparent; /* fully transparent page background */
+            color: #e2e8f0; /* text color (only affects the note) */
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+            "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+        .card {
+            background: transparent; /* transparent container */
+            padding: 4px;
+            border-radius: 8px;
+            box-shadow: none; /* remove shadow to keep everything transparent */
+        }
+        canvas {
+            display: block;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 6px;
+            background: transparent; /* <<< transparent canvas */
+            cursor: pointer;
+        }
+        .note { text-align: center; font-size: 12px; opacity: .85; margin-top: 4px; }
+    </style>
+</head>
+<body>
+<main class="card">
+    <canvas id="myCanvas" width="500" height="500" aria-label="Animated spirograph with moving tracer (transparent)"></canvas>
+    <div class="note">Click to pause/resume</div>
+</main>
+
+<script>
+    (function () {
+        // Parameters of the spirograph (optimized for compact size)
+        var params = {
+            r1: 200,   // first radius
+            r2: 40,    // second radius
+            k: 10      // ratio (multiplier for theta)
+        };
+
+        // Calculate the maximum extent of the spirograph
+        // Max distance from center = r1 + r2 = 200 + 40 = 240
+        var maxRadius = params.r1 + params.r2;
+        var margin = 10; // tiny margin for tracer and line width
+        var canvasSize = (maxRadius * 2) + (margin * 2); // 500px total
+
+        var canvas = document.getElementById('myCanvas');
+        // Ensure alpha channel for transparency (default true, but explicit for clarity)
+        var ctx = canvas.getContext('2d', { alpha: true });
+
+        var tracePath;      // Path2D accumulating the drawn curve
+        var theta;          // current angle parameter
+        var playing = true; // animation state
+        var lastTime = 0;   // last timestamp for dt
+        var rect, dpr, cx, cy; // geometry
+
+        function resize() {
+            rect = canvas.getBoundingClientRect();
+            dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.round(rect.width * dpr);
+            canvas.height = Math.round(rect.height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            cx = rect.width / 2;
+            cy = rect.height / 2;
+        }
+
+        function position(t) {
+            // Parametric sum of circles, matching your original function
+            var x = cx + params.r1 * Math.cos(t) + params.r2 * Math.cos(t * params.k);
+            var y = cy + params.r1 * Math.sin(t) + params.r2 * Math.sin(t * params.k);
+            return { x: x, y: y };
+        }
+
+        function init() {
+            resize();
+            tracePath = new Path2D();
+            theta = 0;
+            var p0 = position(0);
+            tracePath.moveTo(p0.x, p0.y);
+            lastTime = performance.now();
+        }
+
+        function drawFrame(now) {
+            if (!playing) return; // paused
+
+            // Time step (seconds), clamp for tab-thrashing safety
+            var dt = Math.min((now - lastTime) / 1000, 0.05);
+            lastTime = now;
+
+            // Angular speed (radians per second)
+            var speed = 1.8;
+            var step = speed * dt;
+            if (step > 0.06) step = 0.06;
+
+            // Substep integration for smoothness regardless of frame rate
+            var substeps = Math.max(1, Math.ceil(step / 0.01));
+            var ds = step / substeps;
+            for (var i = 0; i < substeps; i++) {
+                theta += ds;
+                var p = position(theta);
+                tracePath.lineTo(p.x, p.y);
+            }
+
+            // Clear the visible canvas (in CSS pixel units thanks to setTransform)
+            // Do NOT paint a background; leave pixels transparent
+            ctx.clearRect(0, 0, rect.width, rect.height);
+
+            // Draw the generating circles with note text color
+            ctx.strokeStyle = 'gray'; // same color as note text
+            ctx.lineWidth = 1.5;
+            ctx.globalAlpha = 0.4; // make them semi-transparent
+
+            // Outer circle (fixed at center)
+            ctx.beginPath();
+            ctx.arc(cx, cy, params.r1, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Inner circle (rolling around the outer circle)
+            var outerPoint = {
+                x: cx + params.r1 * Math.cos(theta),
+                y: cy + params.r1 * Math.sin(theta)
+            };
+            ctx.beginPath();
+            ctx.arc(outerPoint.x, outerPoint.y, params.r2, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Reset alpha for other elements
+            ctx.globalAlpha = 1.0;
+
+            // Style and draw the accumulated path
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#60a5fa'; // blue-400
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.stroke(tracePath);
+
+            // Draw a small moving circle on the circumference of the inner circle
+            // The angle for the point on the inner circle's circumference is different
+            // from the center position - it rotates as the circle rolls
+            var innerCircleAngle = theta * (params.r1 + params.r2) / params.r2;
+            var innerCirclePoint = {
+                x: outerPoint.x + params.r2 * Math.cos(innerCircleAngle),
+                y: outerPoint.y + params.r2 * Math.sin(innerCircleAngle)
+            };
+
+            // Draw the moving circle (tracer) at the current point
+            var tip = position(theta);
+            ctx.beginPath();
+            ctx.arc(tip.x, tip.y, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#fbbf24'; // amber-400
+            ctx.fill();
+
+            // Restart after a short pause when a full cycle completes
+            if (theta >= Math.PI * 2) {
+                playing = false;
+                setTimeout(function () {
+                    playing = true;
+                    init();
+                    requestAnimationFrame(drawFrame);
+                }, 800);
+                return;
+            }
+
+            requestAnimationFrame(drawFrame);
+        }
+
+        // Optional: click to pause/resume
+        canvas.addEventListener('click', function () {
+            playing = !playing;
+            if (playing) {
+                lastTime = performance.now();
+                requestAnimationFrame(drawFrame);
+            }
+        });
+
+        window.addEventListener('resize', function(){
+            // Re-init to keep proportions correct on resize
+            init();
+            if (playing) requestAnimationFrame(drawFrame);
+        });
+
+        // Kick things off
+        init();
+        requestAnimationFrame(drawFrame);
+    })();
+</script>
+</body>
+</html>

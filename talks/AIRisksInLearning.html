@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <meta name="description" content="JetBrains Academy Gathering">
+        <meta name="author" content="Alex Avdiushenko" />
+        <meta name="keywords" content="AI, risks, universities">
+
+		<title>Beyond the Hype: Risks of AI in Learning</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/serif.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Include Chart.js CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="../plugin/reveald3.js"></script>
+		<style>
+			.column {
+			  float: left;
+			  width: 48%;
+			  padding: 2px;
+			}
+			/* Clear floats after image containers */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			.important {
+				color: orange;
+			}
+			.quiz {
+				display: flex;
+				flex-direction: column;
+				margin-top: 20px;
+			}
+			.answer {
+				background-color: #f9f9f9;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				padding: 10px;
+				margin: 5px 0;
+				cursor: pointer;
+				transition: background-color 0.3s, color 0.3s;
+			}
+			.answer.correct {
+				background-color: #d4edda;
+				color: #155724;
+			}
+			.answer.wrong {
+				background-color: #f8d7da;
+				color: #721c24;
+			}
+			.answer.shadow {
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				color: gray;
+			}
+			th, td {
+				border: 1px solid black;
+				padding: 10px;
+				text-align: center;
+			}
+			ul.custom-list {
+				list-style: none;
+				padding: 0;
+			}
+			ul.custom-list li::before {
+				content: '➕';
+				margin-right: 8px;
+			}
+			ul.custom-list li.minus::before {
+				content: '➖';
+			}
+			ul.custom-list li.lamp::before {
+				content: '💡';
+			}
+		</style>
+	</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section id="title">
+					<br>
+						<h2>Beyond the Hype: Risks of AI in Learning</h2>
+					<p><a href="https://avalur.github.io/talks/AIRisksInLearning.html">
+                        avalur.github.io/talks/AIRisksInLearning.html
+                    </a></p>
+					<div class="column">
+                        <iframe src="images/spirograph.html"
+                                style="width: 700px; height: 550px;
+                                border: none; margin-top: 0; display: block;">
+                        </iframe>
+                    </div>
+					<div class="column">
+						<br/><br/><br/><fi>by</fi><br/>
+						<p>Alex Avdiushenko</p>
+							<a href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
+					</div>
+					  <aside class="notes">
+						Hello everyone!
+						I'm Alex Avdiushenko, and I am happy to have a talk here.
+					  </aside>
+                </section>
+				<section data-background-image="images/cheating.png" data-background-size="contain">
+  				    <aside class="notes">
+                        Unstoppable Cheating<br>
+						Current publicly available LLMs are capable of solving any university assignment
+                        for a few minutes. In a year any laptop and mobile phone can be used.
+                        How to check students' understanding and conduct online exams?
+						<br>
+                        Perhaps an even more difficult question is
+                        how to conduct online selection of schoolchildren for university?
+						<br>
+                        Who earned your rating on Codeforce,
+                        who solved Kaggle for you, what do you basically understand and can do without AI?
+					</aside>
+				</section>
+				<section data-background-image="images/botisnot.png" data-background-size="contain">
+  				    <aside class="notes">
+                        Most often, people learn from other people,
+                        a human teacher is needed to act as a role model for the student.
+                        A carbon robot is not made of flesh and blood,
+                        so it cannot be a role model for the student.
+						<br>
+                        Another important point is socialization,
+                        and definitely we need other people to socialize with.
+					</aside>
+				</section>
+				<section data-background-image="images/setandforget.png" data-background-size="contain">
+  				    <aside class="notes">
+                        One of the main properties of a person is the ability to adapt
+                        very quickly, both to changing external conditions
+                        and to the mood and level of students.
+                        Most likely, this can be implemented in AI systems, but not yet.
+					</aside>
+				</section>
+				<section data-background-image="images/upanddown.png" data-background-size="contain">
+  				    <aside class="notes">
+                        Despite the performance benefits then using AI,
+                        people who collaborated with GenAI on one task and
+                        then transitioned to a different,
+                        unaided task consistently reported a decline in intrinsic motivation
+                        and an increase in boredom.
+                        <br>
+                        When AI handles the most challenging parts of work -
+                        like the critical thinking or tailored feedback needed
+                        for performance reviews - it removes what makes tasks engaging.
+                        People feel disconnected from their output and lose their sense
+                        of control over the work.
+					</aside>
+				</section>
+
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				slideNumber: true,
+				showSlideNumber: 'speaker',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				// showNotes: 'separate-page',
+
+				// Activate the scroll view
+				// view: 'scroll',
+				// Force the scrollbar to remain visible
+				// scrollProgress: true,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+			function checkAnswer(element, correctness) {
+				const answers = document.querySelectorAll('.answer');
+				answers.forEach(answer => {
+				// answer.style.pointerEvents = 'none';  // Disable further clicks
+				if (answer === element) {
+				answer.classList.add(correctness);
+			} else {
+				answer.classList.add('shadow');
+			}
+			});
+			}
+
+        </script>
+	</body>
+</html>
