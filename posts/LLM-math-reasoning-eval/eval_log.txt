@@ -220,3 +220,46 @@ Request failed: HTTPSConnectionPool(host='api.x.ai', port=443): Read timed out. 
   grok - Problem problem_10, final synthesis: 704.98s
 Total time for grok: 17584.73s
 Completed grok in 24799.52s
+Running benchmark for gpt5...
+  gpt5 - Problem problem_1, variant 1: 54.07s
+  gpt5 - Problem problem_1, variant 2: 98.04s
+  gpt5 - Problem problem_1, variant 3: 94.43s
+  gpt5 - Problem problem_1, final synthesis: 28.98s
+  gpt5 - Problem problem_2, variant 1: 110.26s
+  gpt5 - Problem problem_2, variant 2: 73.83s
+  gpt5 - Problem problem_2, variant 3: 75.96s
+  gpt5 - Problem problem_2, final synthesis: 77.39s
+  gpt5 - Problem problem_3, variant 1: 131.52s
+  gpt5 - Problem problem_3, variant 2: 84.75s
+  gpt5 - Problem problem_3, variant 3: 74.02s
+  gpt5 - Problem problem_3, final synthesis: 59.52s
+  gpt5 - Problem problem_4, variant 1: 240.45s
+  gpt5 - Problem problem_4, variant 2: 314.75s
+  gpt5 - Problem problem_4, variant 3: 222.75s
+  gpt5 - Problem problem_4, final synthesis: 187.75s
+  gpt5 - Problem problem_5, variant 1: 588.60s
+  gpt5 - Problem problem_5, variant 2: 390.11s
+  gpt5 - Problem problem_5, variant 3: 1036.20s
+  gpt5 - Problem problem_5, final synthesis: 507.37s
+  gpt5 - Problem problem_6, variant 1: 17.02s
+  gpt5 - Problem problem_6, variant 2: 18.44s
+  gpt5 - Problem problem_6, variant 3: 21.07s
+  gpt5 - Problem problem_6, final synthesis: 12.63s
+  gpt5 - Problem problem_7, variant 1: 1153.90s
+  gpt5 - Problem problem_7, variant 2: 460.86s
+  gpt5 - Problem problem_7, variant 3: 1732.58s
+  gpt5 - Problem problem_7, final synthesis: 376.25s
+  gpt5 - Problem problem_8, variant 1: 205.67s
+  gpt5 - Problem problem_8, variant 2: 121.83s
+  gpt5 - Problem problem_8, variant 3: 54.01s
+  gpt5 - Problem problem_8, final synthesis: 51.92s
+  gpt5 - Problem problem_9, variant 1: 178.08s
+  gpt5 - Problem problem_9, variant 2: 5176.12s
+  gpt5 - Problem problem_9, variant 3: 264.70s
+  gpt5 - Problem problem_9, final synthesis: 85.24s
+  gpt5 - Problem problem_10, variant 1: 1150.28s
+  gpt5 - Problem problem_10, variant 2: 396.57s
+  gpt5 - Problem problem_10, variant 3: 502.29s
+  gpt5 - Problem problem_10, final synthesis: 238.08s
+Total time for gpt5: 16668.27s
+Completed gpt5 in 16698.39s
