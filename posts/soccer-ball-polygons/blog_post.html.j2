@@ -281,7 +281,7 @@
                 \sum\limits_{v \in V} \delta(v)=2\pi\chi,
                 $$
                 where $K$ is Gaussian curvature (for a polyhedron it's concentrated at vertices,
-                so the integral over faces is zero).
+                so the integral over faces is zero) and $\chi$ is the Euler characteristic.
                 See: <a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Bonnet_theorem">Gauss-Bonnet theorem</a>.<br>
 
                 For a sphere $\chi=2$, therefore $2\pi\chi = 4\pi$ and we get Descartes' formula
@@ -335,8 +335,9 @@
             From Euler's formula for the torus ($\chi=0$)
             we can easily verify the parameters: $7 - 21 + 14 = 0$.
             However, it is unknown whether similar polyhedra exist for larger $n$,
-            and the next hypothetical solution to the equations is $n=12$, $g=6$.
-
+            and the next hypothetical solution to the equations is $n=12$, $g=6$,
+            where $g$ denotes the <strong>genus</strong>
+            of the surface (the number of “handles”) and $g = \frac{2-\chi}{2}$.
         </article>
 
         <!-- Social Sharing Section -->
@@ -356,7 +357,7 @@
                     LinkedIn
                 </a>
 
-                <a href="https://twitter.com/intent/tweet?url={{ request.url if request else '' }}&text={{ 'LLM Math Reasoning Evaluation' | urlencode }}" class="share-btn twitter" onclick="shareOnTwitter(); return false;" title="Share on X (Twitter)">
+                <a href="https://twitter.com/intent/tweet?url={{ request.url if request else '' }}&text={{ 'Soccer Ball Polygons' | urlencode }}" class="share-btn twitter" onclick="shareOnTwitter(); return false;" title="Share on X (Twitter)">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
