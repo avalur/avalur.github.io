@@ -10,7 +10,7 @@
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
-		<link rel="stylesheet" href="../dist/theme/white.css">
+		<link rel="stylesheet" href="../dist/theme/sky.css">
 
         <!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
@@ -67,11 +67,9 @@
 		.card .text {
 			padding: 20px;
 		}
-        .highlighted {
-            text-align: left;
-            color: white;
-            background-color: orange;
-        }
+		.important {
+			color: orange;
+		}
 		</style>
 </head>
 	<body onload="totalWrapper();">
@@ -116,64 +114,42 @@
 				<section>
 					<section>
 					<h2 style="text-align: left">Course annotation</h2>
-                        <div style="margin-bottom:20px;">
-                            <p class="fragment" style="text-align: left">The aim of the course is to demystify AI.</p>
-                            <ul class="fragment" style="text-align: left">
-                                <li>Starting with Python, Pandas and fundamental machine learning techniques</li>
-                                <li>Exploring statistical learning models,
-                                    linear and logistic regression, decision trees, and ensemble methods</li>
-                                <li>Studying deep learning, covering multi-layer neural networks,
-                                    stochastic gradient descent, backpropagation, optimization techniques, and more</li>
-                                <li>A little bit more advanced topics such as recurrent,
-                                    convolutional neural networks, and general pre-trained transformers (GPT)
-                                    will also be addressed</li>
-                            </ul>
-                            <p class="fragment highlighted" style="text-align: left;padding-left: 20px">
-                                Flipped format with live discussions of course materials,
-                                interesting challenges, and testing your understanding of machine learning
-                            </p>
+                        <div class="fragment" style="margin-bottom:20px;">
+                            <div class="typesetting">
+								<p style="text-align: left">
+									The aim of the course is to demystify AI.
+								  Starting with Python, Pandas and fundamental machine learning techniques,
+								  students will explore statistical learning models, linear and logistic regression,
+								  decision trees, and ensemble methods.
+									<br>
+								  The journey continues into deep learning, covering multi-layer neural networks,
+								  stochastic gradient descent, backpropagation, optimization techniques,
+								  and more. A little bit more advanced topics such as recurrent,
+								  convolutional neural networks, and general pre-trained transformers (GPT) will also be addressed.
+									<br>
+								  Practical coursework, including programming assignments and hands-on projects, will be primarily based on Python and PyTorch.
+								</p>
+							</div>
 						</div>
                         <div class="fragment" style="margin-bottom:20px;">
                             <div class="typesetting">
 							<h2 style="text-align: left">Schedule</h2>
-							<p>On Tuesdays, 9:00 — 12:00. Course starts on October 7</p>
+							<p>On Tuesdays, 9:00 — 12:00. Course starts on October 8</p>
 							</div>
 						</div>
-                    </section>
-                    <section>
-                        <h2 style="text-align: left">What does the flipped course format mean in our case?</h2>
-                        <div style="margin-bottom:20px;">
-                            <p class="fragment" style="text-align: left">You will study theory and solve basic practical tasks through video recordings
-                                and presentations before face-to-face classes.</p>
-                            <p class="fragment" style="text-align: left">In class,
-                                we will discuss the material covered with each student individually or
-                                in small groups to find and eliminate all possible problems and misunderstandings together.</p>
-                        </div>
-                    </section>
-                    <section>
-                        <p style="text-align: left; margin-top: 30px;"><strong>This format has several advantages over traditional lectures:</strong></p>
-                        <ul class="fragment" style="text-align: left">
-                            <li>Each of you will go through the material at your own pace</li>
-                            <li>The course includes a large number of auto-checked tasks and theory quizzes that allow you to get instant feedback and test your knowledge</li>
-                            <li>You can study at any time and continue exactly from where you left off</li>
-                            <li>In homework blocks, you will need to complete and submit at least one item out of three, and you can choose any topic that interests you</li>
-                            <li>There are four assignment blocks in total per semester, with three weeks to complete each one</li>
-                        </ul>
-                    </section>
+					</section>
 					<section>
-						<h3 style="text-align: left">Links</h3>
-                        <ul>
-                            <li>Course Page: <a href="https://avalur.github.io/mlcourse/index.html">
-							https://avalur.github.io/mlcourse/index.html</a></li>
-                            <li><a href="https://t.me/+VKQIlC4OebkxYWRi">Telegram Chat</a></li>
-                            <li>JetBrains LMS: TBD</li>
-                        </ul>
-                        <br><br>
+						<h2 style="text-align: left">Course Page</h2>
+						<p><a href="https://avalur.github.io/ml_fundament.html">
+							https://avalur.github.io/ml_fundament.html</a></p>
+
+						<h2 style="text-align: left">Course Chat</h2>
+						<p><a href="https://t.me/+-7-WN42wn0Y4NTIy">https://t.me/+-7-WN42wn0Y4NTIy</a></p>
 
                         <div class="fragment" style="margin-bottom:20px;">
                             <div class="typesetting">
-								<h3 style="text-align: left">Prerequisites</h3>
-								<p style="text-align: left">Linear algebra, derivatives and gradient, mean and variance, Python</p>
+								<h2 style="text-align: left">Prerequisites</h2>
+								<p>Linear algebra, derivatives and gradient, mean and variance, Python</p>
 							</div>
 						</div>
 					</section>
@@ -182,7 +158,8 @@
 						<table style="width:100%">
 						  <tr>
 							<th>No.</th>
-							<th>One of</th>
+							<th>Topic</th>
+							<th>Type</th>
 							<th>Start</th>
 							<th>Finish</th>
 							<th>Points</th>
@@ -190,65 +167,94 @@
 						  </tr>
 						  <tr>
 							<td>1</td>
-							<td>Introduction to Python<br>
-                                Numpy<br>
-                                Pandas
-                            </td>
-							<td>Sep 30</td>
+							<td>Pandas</td>
+							<td>practice</td>
+							<td>Oct 8</td>
 							<td>Oct 21</td>
 							<td>100</td>
-							<td>20h</td>
+							<td>10 h</td>
 						  </tr>
 						  <tr>
 							<td>2</td>
-							<td>Gradient Descent<br>
-                                Logical Rules and Decision Trees<br>
-                                Binary Classification Competition (Kaggle)
-                            </td>
+							<td>Linear models</td>
+							<td>theory</td>
 							<td>Oct 22</td>
 							<td>Nov 11</td>
 							<td>100</td>
-							<td>20h</td>
+							<td>20 h</td>
+						  </tr>
+						  <tr>
+							<td>3</td>
+							<td>Mini project</td>
+							<td>practice</td>
+							<td>Oct 29</td>
+							<td>Nov 11</td>
+							<td>100</td>
+							<td>15 h</td>
 						  </tr>
 						</table>
 						<hr>
-						<span class="fragment highlighted">Midterm</span>
+						<span class="fragment important">Midterm</span>
 					</section>
 					<section>
 						<table>
 						  <tr>
 							<th>No.</th>
-							<th>One of</th>
+							<th>Topic</th>
+							<th>Type</th>
 							<th>Start</th>
 							<th>Finish</th>
 							<th>Points</th>
 							<th>Est. Time</th>
 						  </tr>
 						  <tr>
-							<td>3</td>
-							<td>Simple Neural Network in Numpy<br>
-                                ML Contest<br>
-                                PyTorch Introduction
-                            </td>
-							<td>Nov 12</td>
-							<td>Dec 2</td>
+							<td>4</td>
+							<td>Binary Classification Competition</td>
+							<td>competition</td>
+							<td>Oct 29</td>
+							<td>Nov 25</td>
 							<td>100</td>
-							<td>20h</td>
+							<td>10 h</td>
 						  </tr>
 						  <tr>
-							<td>4</td>
-							<td>Image Classification Competiton (Kaggle)<br>
-                                Backpropagation and MLP<br>
-                                Transformers
-                            </td>
-							<td>Dec 3</td>
-							<td>Dec 24</td>
+							<td>5</td>
+							<td>Two-layer neural network from scratch</td>
+							<td>practice</td>
+							<td>Nov 5</td>
+							<td>Nov 18</td>
 							<td>100</td>
-							<td>30h</td>
+							<td>10 h</td>
+						  </tr>
+						  <tr>
+							<td>6</td>
+							<td>Backpropagation in GPT-2</td>
+							<td>practice</td>
+							<td>Nov 25</td>
+							<td>Dec 9</td>
+							<td>100</td>
+							<td>10 h</td>
+						  </tr>
+						  <tr>
+							<td>7</td>
+							<td>Image classification competition</td>
+							<td>practice</td>
+							<td>Dec 3</td>
+							<td>Dec 23</td>
+							<td>100</td>
+							<td>20 h</td>
+						  </tr>
+						  <tr>
+							<td>8</td>
+							<td>Building GPT-2 from scratch</td>
+							<td>practice</td>
+							<td>Dec 10</td>
+							<td>Dec 23</td>
+							<td>100</td>
+							<td>10 h</td>
 						  </tr>
 						</table>
 						<hr>
-						<span class="fragment highlighted">Course work</span>
+						<p class="fragment important">Course work</p>
 					</section>
 					<section>
 						<h2 style="text-align: left">Exam</h2>
