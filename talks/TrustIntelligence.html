@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <meta name="description" content="EMCIS 2025 Industry Panel (NUP)">
+        <meta name="author" content="Alex Avdiushenko" />
+        <meta name="keywords" content="Autonomous Futures: Architecting Trust, Intelligence, and Resilience Across the Algorithmic Frontier">
+
+		<title>Trust-by-Design for AI Developer Tools</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/serif.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Include Chart.js CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="../plugin/reveald3.js"></script>
+		<style>
+			.column {
+			  float: left;
+			  width: 48%;
+			  padding: 2px;
+			}
+			/* Clear floats after image containers */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			.important {
+				color: orange;
+			}
+			.quiz {
+				display: flex;
+				flex-direction: column;
+				margin-top: 20px;
+			}
+			.answer {
+				background-color: #f9f9f9;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				padding: 10px;
+				margin: 5px 0;
+				cursor: pointer;
+				transition: background-color 0.3s, color 0.3s;
+			}
+			.answer.correct {
+				background-color: #d4edda;
+				color: #155724;
+			}
+			.answer.wrong {
+				background-color: #f8d7da;
+				color: #721c24;
+			}
+			.answer.shadow {
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				color: gray;
+			}
+			th, td {
+				border: 1px solid black;
+				padding: 10px;
+				text-align: center;
+			}
+			ul.custom-list {
+				list-style: none;
+				padding: 0;
+			}
+			ul.custom-list li::before {
+				content: '➕';
+				margin-right: 8px;
+			}
+			ul.custom-list li.minus::before {
+				content: '➖';
+			}
+			ul.custom-list li.lamp::before {
+				content: '💡';
+			}
+
+            .card-container {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                gap: 20px;
+                margin: 10px;
+            }
+
+            .card {
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 500px;
+                overflow: hidden;
+                transition: transform 0.3s;
+                text-align: center;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+            .card-image {
+                /*width: 100%;*/
+                /*height: 380px;*/
+                object-fit: cover;
+            }
+
+            .card-content {
+                padding: 10px;
+            }
+
+            .card-title {
+                font-size: 1.2em;
+                margin-bottom: 5px;
+            }
+
+            .card-text {
+                font-size: 0.9em;
+                color: #666;
+            }
+        </style>
+	</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section id="title">
+					<br>
+						<h2>Trust-by-Design for AI Developer Tools</h2>
+					<p><a href="https://avalur.github.io/talks/TrustIntelligence.html">
+                        avalur.github.io/talks/TrustIntelligence.html
+                    </a></p>
+					<div class="column">
+                        <iframe src="images/spirograph.html"
+                                style="width: 700px; height: 600px;
+                                border: none; margin-top: 0; display: block;">
+                        </iframe>
+                    </div>
+					<div class="column">
+						<br/><br/><br/><fi>by</fi><br/>
+						<p>Alex Avdiushenko</p>
+							<a href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
+					</div>
+					  <aside class="notes">
+						Hello everyone!
+						I'm Alex Avdiushenko, and I am happy to have a talk here.
+					  </aside>
+                </section>
+				<section>
+                    <h3 style="text-align: left">How to Build Trust?</h3>
+                    <div class="card-container">
+                        <div class="card fragment">
+                            <img src="images/euclid.jpg.webp" alt="Euclid" class="card-image" style="width: 80%">
+                            <div class="card-content">
+                                <h4 class="card-title">Euclid (≈300 BC)</h4>
+                                <p class="card-text">
+                                    Trust through explicit premises:
+                                    small set of postulates → all geometry
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card fragment">
+                            <img src="images/Hilbert.avif" alt="Hilbert" class="card-image" style="width: 70%">
+                            <div class="card-content">
+                                <h4 class="card-title">Hilbert's Program (1920s)</h4>
+                                <p class="card-text">The ambition of "cast-iron" trust:
+                                    Completeness, Consistency, and
+                                    Algorithmic Decidability!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                    Let's start from a little further back:
+                    with an attempt to prove that mathematics can be trusted.
+                    <br>
+                    Actually, Math tried trust-by-design long before software.
+                    We called it axioms. Euclid is the man who turned geometry
+                    from a bag of tricks into a trust engine in the 3rd century BCE:
+                    starting from a few postulates to a whole universe of beautiful conclusions.
+                    <br>
+                    Euclid lived in Ptolemaic Alexandria and compiled in
+                    the Elements what we’d now call a proof SDK:
+                    definitions, axioms, lemmas, theorems — assembled cleanly from simple
+                    to complex. His genius wasn’t “discovering formulas” but the architecture of reasoning:
+                    showing how a vast, consistent world can grow from a tiny set of rules.
+
+                    Euclid built a system of postulates that led to the proof of all 2D geometry.
+                    <br>
+                    David Hilbert not only formulated the 23 problems in Paris in 1900 and introduced Hilbert spaces,
+                    but he also developed a program twenty years later to prove the consistency of mathematics.
+
+                    The lifelong dream of Hilbert was to establish
+                    one formal system that’s complete, consistent, and decidable at the same time.
+					</aside>
+				</section>
+				<section>
+                    <h3 style="text-align: left">Cold Shower of Gödel's Theorems</h3>
+                    <div class="row">
+                        <div class="column" style="text-align: right;width: 30%">
+                            <img src="images/Godel.png" alt="Godel" style="margin-top: 300px;width: 90%;border-radius: 5%;">
+                        </div>
+                        <div class="column" style="width: 70%">
+                            <blockquote style="border-left: 4px solid #ccc; padding-left: 20px; margin: 0; font-size: 0.75em;">
+                                <p style="font-style: italic; text-align: left;margin-bottom: 10px;">
+                                    "Theorem 1: Any consistent formal system F within which a certain amount of elementary
+                                    arithmetic can be carried out is incomplete; i.e., there are statements of the language of F
+                                    which can neither be proved nor disproved in F."
+                                </p>
+                                <p style="font-style: italic;text-align: left; margin-bottom: 10px;">
+                                    "Theorem 2: For any consistent system F within which a certain amount of elementary
+                                    arithmetic can be carried out, the consistency of F cannot be proved in F itself."
+                                </p>
+                                <footer style="text-align: right; font-size: 0.9em;">
+                                    <br><br>
+                                    Kurt Gödel (1931)
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        But in 1931 Gödel showed: no single system can be both powerful and complete —
+                        and it can’t certify its own consistency.
+
+                        It was a shock to the mathematicians and computer scientists worldwide.
+
+                        Gödel was born in Brno and emigrated to USA.
+                        Unfortunately, he lived with severe anxiety and later paranoid delusions.
+                        In the 1970s these led to self-starvation.
+                        He ate only what his wife Adele had previously tried.
+                        When she herself became seriously ill and could not take care of him,
+                        he died eventually in Princeton.
+
+                        Calling it ‘madness’ is misleading: his professional reasoning
+                        remained extraordinarily sharp for decades despite illness.
+                        So he had the combination of genius and mental disorders.
+
+                        Gödel taught us that there is no "single switch of trust":
+                        we need layers - external meta-checks, independent regression evals,
+                        and architectures that can recognize problems and roll back.
+					</aside>
+				</section>
+				<section>
+                    <h3 style="text-align: left">Then How to Build Trust in AI?</h3>
+                    <div class="row">
+                        <div class="column" style="text-align: left;width: 30%">
+                            <img src="images/vonNeumann.png" alt="vonNeumann" style="margin-top: 100px;width: 90%;border-radius: 5%;">
+                        </div>
+                        <div class="column" style="text-align: left;width: 70%">
+                            <blockquote style="border-left: 4px solid #ccc; padding-left: 20px; margin: 0; font-size: 0.75em;">
+                                <p style="font-style: italic;text-align: left; margin-bottom: 10px;">
+                                    "Probabilistic Logics and the Synthesis of Reliable Organisms from Unreliable Components."
+                                </p>
+                                <footer style="text-align: right; font-size: 0.9em;">
+                                    <br>
+                                    John von Neumann (1952)
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <p>Pivot to <strong>architecture</strong>: cumulative hierarchies, external verification</p>
+  				    <aside class="notes">
+                        Von Neumann is ready to help us with his architectures.
+                        We used to build reliable dataframes from unreliable lamps,
+                        now we build reliable data centers from unreliable components,
+                        and ahead is the inevitable construction of even more powerful systems
+                        from hallucinatory Large Language Models.
+
+                        That’s our roadmap for AI tools: contracts (policies),
+                        layered checks, and meta-level audits.
+					</aside>
+				</section>
+				<section>
+                    <h3 style="text-align: left">JetBrains' Way:
+                    Trust-by-Design in Dev Tools</h3>
+                    <p style="text-align: left">IDE: Secure and Effective Defaults<br>
+                        <img src="images/IDEA2025.2.png" alt="IDEA2025.2">
+                    </p>
+  				    <aside class="notes">
+                        We are going to talk about trust-by-design in developers' work.
+                        The first old plain layer is the IDE
+                        with syntax and error highlighting,
+                        type checkings, compiler and a bunch of code autocompletion,
+                        created long before the AI era.
+
+                        On one and the same interface you can see
+                         a new layer, where coding agent Junie lives.
+                        It writes code for you autonomously, but we need
+                        some interface to communicate with, check it and
+                        to take full responsibility for the final result.
+					</aside>
+				</section>
+				<section>
+                    <h3 style="text-align: left">Building Resilience: Data → Model → Deploy</h3>
+
+                    <div style="font-size: 0.8em;">
+                        <div class="fragment" style="margin-bottom: 25px;">
+                            <h4 style="color: #2E86AB; text-align: left; margin-bottom: 10px;">📊 Data (contracts, evals, coverage)</h4>
+                            <ul style="text-align: left; font-size: 0.9em;">
+                                <li><strong>Schema contracts:</strong> typed datasets + versions; enforce in PR via
+                                    Qodana checks
+                                    <img src="images/Qodana_logo.svg.png" alt="Qodana_logo"
+                                         style="width: 40px; vertical-align: middle"></li>
+                                <li><strong>Drift/poison eval sets:</strong> store "golden" evals in Git repo; run
+                                    regular data-evals in TeamCity pipelines
+                                    <img src="images/TeamCityLogo.png" alt="TeamCityLogo"
+                                         style="width: 40px; vertical-align: middle"></li>
+                                <li><strong>Synthetic edge-case coverage:</strong> generate rare examples (fuzz/synthetic)
+                                    and publish reports as build artifacts within Datalore
+                                    <img src="images/Datalore.png" alt="Datalore"
+                                         style="width: 40px; vertical-align: middle"></li>
+                            </ul>
+                        </div>
+
+                        <div class="fragment" style="margin-bottom: 25px;">
+                            <h4 style="color: #A23B72; text-align: left; margin-bottom: 10px;">🤖 Model (guardrails, decoding, spec IO)</h4>
+                            <ul style="text-align: left; font-size: 0.9em;">
+                                <li><strong>Guardrails before/after:</strong> input/output validators in Qodana as policy-as-code for prompts/functions</li>
+                                <li><strong>Constrained decoding:</strong> temperature/top-p caps by environment;
+                                    "abstain" paths mapped directly from IDE
+                                    (<img src="images/PyCharm_Icon.svg.png" alt="PyCharm_Icon"
+                                         style="width: 40px; vertical-align: middle">
+                                    /<img src="images/IntelliJ_IDEA_Icon.svg.png" alt="IntelliJ_IDEA_Icon"
+                                         style="width: 40px; vertical-align: middle">)
+                                    to integration tests</li>
+                                <li><strong>Spec-driven function calling:</strong> strictly typed tool-schemas; autogen test fixtures from specifications in TeamCity jobs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <aside class="notes">
+                        Resilience isn't one trick, it's layer upon layer.
+                        Data: first we hold data shape: schemas and versions as contracts.
+                        Qodana in PR stops drift, TeamCity runs regular data-evals, Datalore helps quickly build synthetic coverage for rare cases.
+                        <br>
+                        Model: next, guardrails. We validate input/output and PII,
+                        constrain decoding and add "abstain" as a normal outcome. Functions follow specifications,
+                        test fixtures are generated and run in CI.
+                    </aside>
+                </section>
+                <section>
+                        <div>
+                            <h4 style="color: #F18F01; text-align: left; margin-bottom: 10px;">🚀 Deploy (safe release, fast rollback)</h4>
+                            <ul style="text-align: left; font-size: 0.9em;">
+                                <li><strong>Canary & shadow:</strong> multi-stage rollouts via TeamCity (staging → small % canary → full);
+                                    metrics and alerts in YouTrack
+                                <img src="images/YouTrack_Icon.svg.png" alt="YouTrack_Icon"
+                                         style="width: 40px; vertical-align: middle">
+                                </li>
+                                <li><strong>Circuit breakers:</strong> automatic model shutdown on SLO degradation (latency/quality) — feature flags toggled from TeamCity tasks</li>
+                                <li><strong>Rollbacks & model feature flags:</strong> model versioning as artifacts;
+                                    instant rollback and A/B in TeamCity pipeline; rollback policy documented in Git</li>
+                            </ul>
+                        </div>
+                    <img src="images/JB_AI_penetration.png" alt="JB_AI_penetration" style="width: 50%;border-radius: 5%">
+                    <aside class="notes">
+                        Deploy. We release carefully:
+                        shadow/canary in stages via TeamCity, metrics tied to triggers.
+                        If quality or latency degrades — circuit breaker and instant rollback.
+                        Model is a versioned artifact with feature flags.
+                        In total, we have an end-to-end recipe: contract data → managed model → safe deploy.
+                        <br>
+                        And it works! We have a reliable system and coding agent, that users like and trust.
+                        Our AI assistant penetration overpassed Copilot a few months ago and continues to grow.
+                        And of course there will be more intelligent and as reliable as possible tools in the future.
+                    </aside>
+                </section>
+
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				slideNumber: true,
+				showSlideNumber: 'speaker',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				// showNotes: 'separate-page',
+
+				// Activate the scroll view
+				// view: 'scroll',
+				// Force the scrollbar to remain visible
+				// scrollProgress: true,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+			function checkAnswer(element, correctness) {
+				const answers = document.querySelectorAll('.answer');
+				answers.forEach(answer => {
+				// answer.style.pointerEvents = 'none';  // Disable further clicks
+				if (answer === element) {
+				answer.classList.add(correctness);
+			} else {
+				answer.classList.add('shadow');
+			}
+			});
+			}
+
+        </script>
+	</body>
+</html>
