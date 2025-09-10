@@ -152,6 +152,9 @@
 					  <aside class="notes">
 						Hello everyone!
 						I'm Alex Avdiushenko, and I am happy to have a talk here.
+
+                        Today we discuss trust-by-design in AI tools. And of course,
+                        we will focus on developers, software engineers.
 					  </aside>
                 </section>
 				<section>
@@ -178,27 +181,33 @@
                         </div>
                     </div>
                     <aside class="notes">
-                    Let's start from a little further back:
-                    with an attempt to prove that mathematics can be trusted.
+                    Let's ask ourselves:
+                    how can we build trust in general?
+                    I suggest thinking about trust in mathematics to start communication.
+                    Actually, math tried trust-by-design long before software.
+                    We call it axioms.
                     <br>
-                    Actually, Math tried trust-by-design long before software.
-                    We called it axioms. Euclid is the man who turned geometry
-                    from a bag of tricks into a trust engine in the 3rd century BCE:
+                    And Euclid from Alexandria was the first to formulate a system of postulates
+                    with an attempt to prove that geometry can be trusted.
+                    Euclid is the man who turned geometry
+                    from a bag of tricks into a trust engine in the 3rd century Before Christ Era:
                     starting from a few postulates to a whole universe of beautiful conclusions.
                     <br>
-                    Euclid lived in Ptolemaic Alexandria and compiled in
-                    the Elements what we’d now call a proof SDK:
-                    definitions, axioms, lemmas, theorems — assembled cleanly from simple
+                    He compiled in
+                    the Elements what we would now call a proof SDK:
+                    definitions, axioms, lemmas, theorems — assembled smoothly from simple
                     to complex. His genius wasn’t “discovering formulas” but the architecture of reasoning:
                     showing how a vast, consistent world can grow from a tiny set of rules.
 
-                    Euclid built a system of postulates that led to the proof of all 2D geometry.
+                    Euclid built a system of postulates that led to the proof of all two-dimensional geometry.
                     <br>
-                    David Hilbert not only formulated the 23 problems in Paris in 1900 and introduced Hilbert spaces,
-                    but he also developed a program twenty years later to prove the consistency of mathematics.
+                    Now we move on to David Hilbert. He not only formulated the 23 problems in maths of the 20th century in Paris
+                    he also introduced Hilbert spaces,
+                    and developed a program twenty years later in 1920 to prove the consistency of the whole mathematics.
 
                     The lifelong dream of Hilbert was to establish
                     one formal system that’s complete, consistent, and decidable at the same time.
+                    The system which we can truly trust to.
 					</aside>
 				</section>
 				<section>
@@ -226,24 +235,24 @@
                         </div>
                     </div>
                     <aside class="notes">
-                        But in 1931 Gödel showed: no single system can be both powerful and complete —
-                        and it can’t certify its own consistency.
+                        But maybe you know the devastating result of another mathematician:
+                        in 1931 Gödel showed: no single system can be both powerful and complete —
+                        actually it can’t certify its own consistency.
 
-                        It was a shock to the mathematicians and computer scientists worldwide.
+                        That time it was a shock to the mathematicians and computer scientists worldwide.
 
-                        Gödel was born in Brno and emigrated to USA.
-                        Unfortunately, he lived with severe anxiety and later paranoid delusions.
-                        In the 1970s these led to self-starvation.
+                        The sad fact is that Gödel lived with severe anxiety and later even paranoid delusions.
+                        At the end of his life these led to self-starvation.
                         He ate only what his wife Adele had previously tried.
                         When she herself became seriously ill and could not take care of him,
                         he died eventually in Princeton.
 
-                        Calling it ‘madness’ is misleading: his professional reasoning
+                        Calling it ‘madness’ is a bit misleading: his professional reasoning
                         remained extraordinarily sharp for decades despite illness.
                         So he had the combination of genius and mental disorders.
 
                         Gödel taught us that there is no "single switch of trust":
-                        we need layers - external meta-checks, independent regression evals,
+                        we need layers - external meta-checks, independent evaluations,
                         and architectures that can recognize problems and roll back.
 					</aside>
 				</section>
@@ -267,33 +276,34 @@
                     </div>
                     <p>Pivot to <strong>architecture</strong>: cumulative hierarchies, external verification</p>
   				    <aside class="notes">
-                        Von Neumann is ready to help us with his architectures.
+                        And of course Von Neumann was ready to help us with his architectures.
                         We used to build reliable dataframes from unreliable lamps,
                         now we build reliable data centers from unreliable components,
                         and ahead is the inevitable construction of even more powerful systems
-                        from hallucinatory Large Language Models.
+                        from Large Language Models despite their hallucinations.
 
-                        That’s our roadmap for AI tools: contracts (policies),
+                        That’s our roadmap for AI tools: we need to establish contracts  or policies,
                         layered checks, and meta-level audits.
 					</aside>
 				</section>
 				<section>
                     <h3 style="text-align: left">JetBrains' Way:
                     Trust-by-Design in Dev Tools</h3>
-                    <p style="text-align: left">IDE: Secure and Effective Defaults<br>
+                    <p class="fragment" style="text-align: left">IDE: Secure and Effective Defaults<br>
                         <img src="images/IDEA2025.2.png" alt="IDEA2025.2">
                     </p>
   				    <aside class="notes">
                         We are going to talk about trust-by-design in developers' work.
                         The first old plain layer is the IDE
-                        with syntax and error highlighting,
-                        type checkings, compiler and a bunch of code autocompletion,
+                        with all the syntax and error highlighting,
+                        with type checkings inside for almost any programming language,
+                        compiler and a bunch of code autocompletions,
                         created long before the AI era.
 
                         On one and the same interface you can see
                          a new layer, where coding agent Junie lives.
-                        It writes code for you autonomously, but we need
-                        some interface to communicate with, check it and
+                        It writes code for you autonomously, does all the heavy lifting,
+                        but we need interface to communicate with, check it and
                         to take full responsibility for the final result.
 					</aside>
 				</section>
@@ -336,13 +346,17 @@
                     </div>
 
                     <aside class="notes">
-                        Resilience isn't one trick, it's layer upon layer.
-                        Data: first we hold data shape: schemas and versions as contracts.
-                        Qodana in PR stops drift, TeamCity runs regular data-evals, Datalore helps quickly build synthetic coverage for rare cases.
+                        Building Resilience is not one trick for sure,
+                        it's layer upon layer.
+                        The first layer is Data: we hold data shape via schemas and versions as contracts.
+                        Qodana in PR stops drift, TeamCity runs regular data-evals,
+                        Datalore helps quickly build synthetic coverage for rare cases.
                         <br>
-                        Model: next, guardrails. We validate input/output and PII,
-                        constrain decoding and add "abstain" as a normal outcome. Functions follow specifications,
-                        test fixtures are generated and run in CI.
+                        Now let's switch to the second layer with models.
+                        We must validate input/output and function calls,
+                        should constrain decoding and add "hallucinations" as a normal outcome.
+                        And of course, we need to test the model itself completely.
+                        So tests are written and set up in CI/CD processes.
                     </aside>
                 </section>
                 <section>
@@ -359,17 +373,19 @@
                                     instant rollback and A/B in TeamCity pipeline; rollback policy documented in Git</li>
                             </ul>
                         </div>
-                    <img src="images/JB_AI_penetration.png" alt="JB_AI_penetration" style="width: 50%;border-radius: 5%">
+                    <img class="fragment" src="images/JB_AI_penetration.png" alt="JB_AI_penetration" style="width: 50%;border-radius: 5%">
                     <aside class="notes">
-                        Deploy. We release carefully:
+                        And the third stage is Deploy. We must release carefully:
                         shadow/canary in stages via TeamCity, metrics tied to triggers.
                         If quality or latency degrades — circuit breaker and instant rollback.
                         Model is a versioned artifact with feature flags.
-                        In total, we have an end-to-end recipe: contract data → managed model → safe deploy.
+                        In total, we have an end-to-end recipe: contract data → managed models → safe deploy.
                         <br>
-                        And it works! We have a reliable system and coding agent, that users like and trust.
+                        And it definitely works! We have a reliable system and
+                        for example, coding agent Junie, that users like and trust.
                         Our AI assistant penetration overpassed Copilot a few months ago and continues to grow.
-                        And of course there will be more intelligent and as reliable as possible tools in the future.
+                        And of course there will be more intelligent services from JetBrains,
+                        and they are as reliable and as effective as possible now, at the current moment.
                     </aside>
                 </section>
 
