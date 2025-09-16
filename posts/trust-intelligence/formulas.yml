@@ -1,0 +1,2 @@
+formula1: "p(y|x) = \\frac{p(x|y)p(y)}{\\int p(x|y)p(y)dy}"
+formula2: "\\mathrm{Posterior} = \\frac{\\mathrm{Likelihood}\\cdot \\mathrm{Prior}}{\\mathrm{Evidence}}"

@@ -442,7 +442,7 @@ pre[class*="language-"] {
     display: block;
     margin: 40px auto;
     border-radius: 6px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);*/
 }
 
 .image-caption {
@@ -456,6 +456,7 @@ pre[class*="language-"] {
 
 .image-container {
     margin: 40px 0;
+    background: transparent
 }
 
 /* Links */

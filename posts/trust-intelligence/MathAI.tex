@@ -1,0 +1,68 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,fit,arrows.meta,shadows.blur}
+
+\begin{document}
+\begin{tikzpicture}[
+  font=\sffamily,
+  % Styles
+  layer/.style = {
+    rounded corners=2pt,
+    draw,
+    blur shadow,
+    minimum width=6.2cm,
+    minimum height=1.0cm,
+    align=center
+  },
+  mathcol/.style  = {fill=blue!8,  draw=blue!50!black},
+  aicol/.style    = {fill=green!8, draw=green!50!black},
+  titlebox/.style = {font=\bfseries\large, align=center},
+  subtitl/.style  = {font=\footnotesize\itshape, align=center, text=black!65},
+  link/.style     = {dashed, -{Latex[length=2.3mm]}, thick, opacity=0.8},
+  lab/.style      = {font=\footnotesize, text=black!70}
+]
+
+% Column x-positions
+\def\xM{0}      % Mathematics column
+\def\xA{8.2}    % AI column
+\def\stacksep{0.25} % vertical gap between layers
+
+% ===== Left stack: Mathematics =====
+\node[titlebox, anchor=west] (Mtitle) at (\xM, 6.4) {Mathematics};
+\node[subtitl,  anchor=west] (Msub)   at (\xM, 5.9) {Layered trust from axioms to meta-validation};
+
+% (from bottom to top)
+\node[layer, mathcol] (Max) at (\xM+3.1, 0.6) {Axioms \\ \textit{agreed ground truths}};
+\node[layer, mathcol, above=\stacksep of Max] (Mpf) {Proofs \& Derivations \\ \textit{sound inference rules}};
+\node[layer, mathcol, above=\stacksep of Mpf] (Mth) {Theorems \\ \textit{results built on proofs}};
+\node[layer, mathcol, above=\stacksep of Mth] (Mme) {Meta-Validation \\ \textit{peer review, consistency checks}};
+
+% A bracket around the math stack (optional aesthetic)
+\draw[rounded corners=2pt, blue!40] ([xshift=-0.3cm,yshift=-0.3cm]Max.south west) rectangle
+                                   ([xshift=0.3cm,yshift=0.3cm]Mme.north east);
+
+% ===== Right stack: AI Systems =====
+\node[titlebox, anchor=west] (Atitle) at (\xA, 6.4) {AI Systems};
+\node[subtitl,  anchor=west] (Asub)   at (\xA, 5.9) {Layered trust from components to oversight};
+
+\node[layer, aicol] (Acomp) at (\xA+3.1, 0.6) {Reliable Components \\ \textit{hardware, runtimes, libraries}};
+\node[layer, aicol, above=\stacksep of Acomp] (Aval) {Validation \& Guardrails \\ \textit{schemas, constraints, tests}};
+\node[layer, aicol, above=\stacksep of Aval] (Acore) {Core Model Behavior \\ \textit{training, inference, policies}};
+\node[layer, aicol, above=\stacksep of Acore] (Aovr) {Oversight \\ \textit{human review, automated monitors}};
+
+\draw[rounded corners=2pt, green!40] ([xshift=-0.3cm,yshift=-0.3cm]Acomp.south west) rectangle
+                                     ([xshift=0.3cm,yshift=0.3cm]Aovr.north east);
+
+% ===== Cross-mapping links =====
+\draw[link, blue!60!black] (Max.east)  -- (Acomp.west) node[midway, above, lab]{foundations};
+\draw[link, blue!60!black] (Mpf.east)  -- (Aval.west)  node[midway, above, lab]{rule-based};
+\draw[link, blue!60!black] (Mth.east)  -- (Acore.west) node[midway, above, lab]{emergent};
+\draw[link, blue!60!black] (Mme.east)  -- (Aovr.west)  node[midway, above, lab]{external};
+
+% ===== Axis labels under stacks =====
+\node[lab] at (Acomp.south)[xshift=-4cm,yshift=-0.55cm] {trust grows upward};
+
+\end{tikzpicture}
+\end{document}

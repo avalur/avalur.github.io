@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Trust: Analogy Between Maths and Programming</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- MathJax for mathematical formulas (kept for consistency; not heavily used in this post) -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                ready: function () {
+                    MathJax.startup.defaultReady();
+                    // Add copy buttons after MathJax is ready
+                    setTimeout(addMathCopyButtons, 100);
+                }
+            }
+        };
+    </script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <script src="./js/utils.js"></script>
+    <!-- Prism.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Building Trust: Analogy Between Maths and Programming</h1>
+            <p class="subtitle">From Euclid to Gödel to Von Neumann:
+                building trustworthy AI tooling with layered architecture</p>
+            <div class="meta">
+                <span class="author">Alex Avdiushenko</span>
+                <span>•</span>
+                <span class="date">September 16, 2025</span>
+                <span>•</span>
+                <span>10 min read</span>
+            </div>
+        </header>
+
+        <article class="content">
+            <p>
+                This post is based on my recent talk <a href="https://avalur.github.io/talks/TrustIntelligence.html#/title">"Trust-by-Design for AI Developer Tools"</a>
+                and summarizes a practical
+                approach to building <strong>trustworthy AI systems</strong> for developers. We start with how
+                mathematics sought trust-by-design through axioms and proofs, face the reality brought by Gödel’s
+                theorems, and then pivot to <strong>architectures</strong> that deliver reliability from unreliable
+                components — a mindset crucial for modern AI tooling.
+            </p>
+
+            <div class="image-container">
+                <iframe src="../../talks/images/spirograph.html"
+                        style="width: 100%; height: 600px; border: none; margin-top: 0; display: block;"></iframe>
+                <div class="image-caption">Structured complexity emerging from simple rules</div>
+            </div>
+
+            <h2>How to Build Trust?</h2>
+            <p>
+                Long before software, mathematics pursued <em>trust-by-design</em> via explicit assumptions. Euclid’s
+                postulates built an entire universe of geometry in his book <em>Elements</em>;
+                centuries later, Hilbert aimed for a formal system
+                that’s complete, consistent, and decidable. These were early trust engines.
+                <br>
+                Euclid’s <em>Elements</em> proved so influential that it became the second
+                most widely read book (after the Bible) for over 2000 years!
+                The success of Euclid’s axiomatic method cemented the idea that <em>certainty</em>
+                in knowledge could be constructed from a small foundation of trusted assumptions.
+            </p>
+
+            <div class="image-container">
+                <img src="./trust-intelligence/euclid_transparent.png" alt="Euclid" style="width: 70%">
+                <div class="image-caption">Euclid (≈300 BC): from a few postulates to a consistent world of geometry</div>
+            </div>
+
+            <p>
+                Hilbert epitomized this optimism in the early 20th century, believing that through
+                a complete and consistent set of axioms, all of mathematics could be resolved with absolute rigor.
+                He famously declared <em>“We must know – we will know!”</em>, a bold proclamation
+                (later inscribed on his tombstone) reflecting his conviction that every well-posed
+                mathematical problem is solvable in principle.
+                Hilbert’s program sought to eliminate doubt by proving mathematics internally consistent and complete.
+            </p>
+            <div class="image-container">
+                <img src="./trust-intelligence/hilbert_transparent.png" alt="Hilbert" style="width: 60%">
+                <div class="image-caption">David Hilbert (1920s): the lifelong dream of completeness, consistency, and decidability</div>
+            </div>
+
+            <h2>A Cold Shower from Gödel</h2>
+            <p>
+                In 1931, Kurt Gödel shattered Hilbert’s dream by proving that
+                any sufficiently expressive formal system can’t be both complete and
+                self-certifying for consistency. In simple terms he showed that there is no
+                <em>single switch of trust</em> — we need <strong>layers</strong>:
+                external meta-checks, independent evaluations, and architectures that detect issues and roll back safely.
+
+                This revelation was a shock to mathematicians and logicians worldwide.
+                It meant no single set of axioms could serve as the ultimate foundation of truth –
+                any formal system rich enough to express arithmetic would inevitably contain true statements
+                unprovable within the system, and it could not prove its own consistency.
+            </p>
+            <p>
+                The implications went beyond mathematics. If absolute certainty was unattainable even in arithmetic,
+                then complex real-world systems would also require external checks and balances.<br>
+                Gödel’s personal story also is tragically notable: despite his towering intellectual achievements,
+                he struggled with severe anxiety and paranoia. Near the end of his life in Princeton,
+                he would only eat food prepared by his wife Adele, fearing poisoning; when she was hospitalized
+                and unable to care for him, Gödel refused to eat and tragically died from self-starvation.<br>
+                At the same time, calling it “madness” is misleading – his professional reasoning remained
+                extraordinarily sharp for decades despite his illness.
+                Gödel’s legacy is the combination of genius and human fragility.
+                Importantly, his incompleteness theorems taught science and engineering that
+                <strong>layered trust is not optional</strong>, but a necessity.
+            </p>
+
+            <div class="image-container">
+                <img src="../../talks/images/Godel.png" alt="Kurt Gödel" style="width: 70%; border-radius: 5%">
+                <div class="image-caption">Gödel’s incompleteness theorems: why layered trust is necessary</div>
+            </div>
+
+            <h2>Then How to Build Trust?</h2>
+            <p>John von Neumann, in a 1952 lecture, showed how to synthesize <em>reliable organisms from unreliable components</em>. In essence, he proved that with clever architecture (like redundancy and error-correction),
+                a system made of fallible parts can still deliver very high reliability. This idea — reliability through structure — became a roadmap for modern AI tools: define clear <strong>contracts</strong>, implement <strong>layered checks</strong>, and perform <strong>meta-level audits</strong> on the system’s behavior. <br>
+                In practice, that means no single component is trusted absolutely; each layer is monitored or constrained by another,
+                ensuring that faults can be caught and mitigated at different levels.
+            </p>
+
+            <div class="image-container">
+                <img src="../../talks/images/vonNeumann.png" alt="John von Neumann" style="width: 70%; border-radius: 5%">
+                <div class="image-caption">Von Neumann (1952): reliability through architecture</div>
+            </div>
+
+            <p>Beyond structural architecture, mathematics and computer science also introduce probabilistic methods
+                to build trust under uncertainty. For instance, <strong>Bayes’ theorem</strong> (1763)
+                gives a mathematical rule for updating the probability of a hypothesis given new evidence.
+                In other words, it tells us how much to trust a new piece of data in light of what we already believe,
+                which is why it has been nicknamed an “evidence trust formula”.
+                Bayesian inference allows an AI system to continuously update its confidence as more observations arrive
+                – a crucial aspect of trusted decision-making in domains where no prediction is 100% certain.</p>
+
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $${{ formulas.formula1 }}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="{{ formulas.formula1 }}"></div>
+            </div>
+
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $${{ formulas.formula2 }}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="{{ formulas.formula2 }}"></div>
+            </div>
+
+            <p>
+                In a more modern vein, Leslie Valiant’s <strong>Probably Approximately Correct (PAC) learning</strong>
+                framework (1984) formalized the idea that if an algorithm sees enough representative data,
+                it will “probably” learn an “approximately correct”. PAC theory provides explicit bounds
+                on the likelihood that a learned model will perform well, offering a theoretical guarantee
+                of reliability within quantifiable probability limits.</p>
+
+            <p>Similarly, in information theory, Claude Shannon proved in 1948 that by encoding messages
+                with appropriate redundancy, one can achieve essentially error-free communication over a noisy channel.
+                This result assured engineers that reliability can emerge even in noisy,
+                uncertain environments by design. Across these advances, the theme is consistent:
+                when absolute certainty is unattainable,
+                we can still pursue <em>quantified trust</em> – building systems that have provable limits
+                on their error rates and mechanisms to keep those errors in check.</p>
+
+            <div class="image-container">
+                <img src="./trust-intelligence/Shannon.png" alt="Shannon" style="width: 60%; border-radius: 5%">
+                <div class="image-caption">Claude Shannon (1950s): communication over a noisy channel</div>
+            </div>
+
+            <p>
+                To visualize consider how both mathematics and AI rely on
+                <strong>layered trust architectures</strong>. In mathematics,
+                we start from foundational axioms, build up through proofs to theorems,
+                and then often invoke external consistency checks
+                (peer review, meta-mathematical validation) at the highest level.<br>
+                In AI systems, we begin with reliable low-level components, add layers of validation
+                (data schemas, constraints, guardrails) around a core model,
+                and finally apply oversight – for example, human review or automated monitors that can
+                catch and correct mistakes. The diagram below compares these structures side-by-side.
+            </p>
+
+            <div class="image-container">
+                <img src="./trust-intelligence/MathAI.png" alt="MathAI" style="width: 80%; border-radius: 5%">
+                <div class="image-caption">Validation in Maths and AI Systems</div>
+            </div>
+            <h2>JetBrains’ Way: Trust-by-Design in Dev Tools</h2>
+            <p>
+                Trust for developers starts with the IDE — solid defaults, static analysis, and type-aware tooling — and
+                extends to AI assistants. The same interface now hosts an autonomous coding agent that must be
+                <strong>auditable</strong> and <strong>controllable</strong>:
+                suggestions are visible, testable, and the developer retains final responsibility.
+                In essence, the development environment itself implements many of the layered trust principles described above:
+                the AI’s suggestions are checked against coding standards and tests,
+                and ultimately a human developer vets the changes.
+            </p>
+            <div class="image-container">
+                <img src="../../talks/images/IDEA2025.2.png" alt="IntelliJ IDEA 2025.2" style="width: 80%; border-radius: 5%">
+                <div class="image-caption">A familiar interface with layered intelligence on top</div>
+            </div>
+
+
+            <div class="image-container">
+                <img src="./trust-intelligence/DevActivities.png" alt="DevActivities" style="width: 80%; border-radius: 5%">
+                <div class="image-caption">Top 7 Activities Developers Want AI Help With</div>
+            </div>
+
+            <h2>Takeaways</h2>
+            <ul>
+                <li>Trust isn’t a binary switch; it’s a <strong>stack</strong> of verifications across data, models, and deploy.
+                For us trust is also a process when we are getting to know something and adapting to the new tools, for instance.</li>
+                <li>Architect reliability from the outset: <strong>contracts</strong>, <strong>guardrails</strong>,
+                    <strong>telemetry</strong>, and <strong>rollbacks</strong>.</li>
+                <li>Keep the developer in control: transparency, testability, and clear code.</li>
+            </ul>
+        </article>
+
+        <!-- Social Sharing Section -->
+        <div class="social-sharing">
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url if request else '' }}" class="share-btn facebook" onclick="shareOnFacebook(); return false;" title="Share on Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url if request else '' }}" class="share-btn linkedin" onclick="shareOnLinkedIn(); return false;" title="Share on LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+
+                <a href="https://twitter.com/intent/tweet?url={{ request.url if request else '' }}&text={{ 'Trust-by-Design for AI Developer Tools' | urlencode }}" class="share-btn twitter" onclick="shareOnTwitter(); return false;" title="Share on X (Twitter)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    X (Twitter)
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast notification element -->
+    <div id="copyToast" class="copy-toast"></div>
+
+    <script>
+        // Social sharing functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.title);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+        }
+    </script>
+
+</body>
+</html>

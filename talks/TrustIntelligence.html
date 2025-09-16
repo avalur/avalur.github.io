@@ -439,13 +439,13 @@
 			function checkAnswer(element, correctness) {
 				const answers = document.querySelectorAll('.answer');
 				answers.forEach(answer => {
-				// answer.style.pointerEvents = 'none';  // Disable further clicks
-				if (answer === element) {
-				answer.classList.add(correctness);
-			} else {
-				answer.classList.add('shadow');
-			}
-			});
+    				// answer.style.pointerEvents = 'none';  // Disable further clicks
+	    			if (answer === element) {
+		        		answer.classList.add(correctness);
+			        } else {
+				        answer.classList.add('shadow');
+			        }
+			    });
 			}
 
         </script>
