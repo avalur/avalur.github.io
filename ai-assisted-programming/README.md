@@ -116,6 +116,7 @@ You will be working with a real-world full-stack application that includes:
 ## Getting Started
 1. Fork the starter repository from [GitHub](https://github.com/jetbrains-academy/lms)
 2. Follow the Local Dev Setup instructions in the repository's README.md file
-3. Complete each phase of the agent-ization process
+3. Complete phases of the agent-ization process
+4. Try to implement something from the [list of tasks](./issues.md) or come up with your own ideas
 
 Happy coding and agent-izing!
