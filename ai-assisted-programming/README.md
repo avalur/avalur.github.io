@@ -1,19 +1,16 @@
 # Agent-izing a real Project: Hands-on Practice
 
 ## Intro
-The abilities of current LLMs in Software Engineering (SE) are amazing, and
-the coming of AI Agents and such tools as MCP pushes it forward to new levels of proficiency,
+The abilities of current LLMs in Software Engineering (SE) are amazing, and the coming of AI Agents and such tools as MCP pushes it forward to new levels of proficiency,
 allowing to perform complex human-like iterations automatically.
 
-The paradigm of SE is changing, so we should adapt and become the creators of tech products,
-not only developers.
+The paradigm of SE is changing, so we should adapt and become the creators of tech products, not only developers.
 
 ## Overview
-This hands-on practice is designed to guide you through the process of transforming 
-a traditional full-stack application (Python backend + React frontend) 
+This hands-on practice course is designed to guide you through the process of transforming a traditional full-stack application (Python backend + React frontend) 
 into an AI-friendly project that can be effectively developed with the assistance of AI agents. 
 This process, which we call "agent-ization," involves restructuring code, 
-adding documentation, rules and guard-rails for AI agents 
+adding documentation, rules and guidance for AI agents 
 and implementing specific patterns that make your codebase more amenable to AI-assisted development.
 
 All the theory and simple tasks are here: [futurecoding.ai](https://futurecoding.ai)
@@ -51,14 +48,15 @@ You will be working with a real-world full-stack application that includes:
 
 ### Phase 1: Code Analysis and Documentation
 1. **Repository Analysis**
-   - Clone the provided repository
+   - Fork and clone the [provided repository](https://github.com/jetbrains-academy/lms)
    - Analyze the current structure and identify key parts
+   - Run LMS locally and explore the application's functionality
    - Document the existing architecture and data flow
 
 2. **Documentation Enhancement**
-   - Add comprehensive docstrings to all Python functions and classes
-   - Create JSDoc comments for React components and functions
    - Develop a high-level architecture document that explains system interactions
+   - (optional) Add comprehensive docstrings to all Python functions and classes
+   - (optional) Create JSDoc comments for React components and functions
 
 ### Phase 2: Restructuring for AI Readability
 1. **Backend Restructuring**
@@ -109,15 +107,15 @@ You will be working with a real-world full-stack application that includes:
 
 ## Resources
 - [futurecoding.ai](https://futurecoding.ai)
-- [AI-zation in startup (in Russian)](https://www.youtube.com/watch?v=YyJr8y4uLo8&t=8037s)
-- [Repomix](https://www.youtube.com/watch?v=PC5y-IyL9SE&t=4s)
+- [AI-zation in startup (in Russian)](https://www.youtube.com/watch?v=YyJr8y4uLo8)
 - [Browser MCP](https://www.youtube.com/watch?v=eD5SUj5qqgI) and [Official Figma MCP](https://www.youtube.com/watch?v=yO3Wr7DEWF0)
 - [Post from Armin Ronacher (creator of Flask)](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
-- ![Claude Agents Overview](claude-agents.png)
+
+  ![Claude Agents Overview](./img/claude_agents.png)
 
 ## Getting Started
-1. Fork the starter repository from [GitHub](https://github.com/avalur/avalur.github.io/blob/master/ai-assisted-programming/)
-2. Follow the setup instructions in the repository's README
+1. Fork the starter repository from [GitHub](https://github.com/jetbrains-academy/lms)
+2. Follow the Local Dev Setup instructions in the repository's README.md file
 3. Complete each phase of the agent-ization process
 
 Happy coding and agent-izing!
