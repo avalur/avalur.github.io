@@ -1,0 +1,241 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb,amsfonts,amsmath}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{epsfig}
+
+% =======================================================================
+% Margins --- save forests
+\NeedsTeXFormat{LaTeX2e}
+\oddsidemargin -10 pt       %   Left margin on odd-numbered pages.
+\evensidemargin 10 pt       %   Left margin on even-numbered pages.
+\marginparwidth 1 in        %   Width of marginal notes.
+\oddsidemargin -1.5 true cm %   Note that \oddsidemargin = \evensidemargin
+\evensidemargin -1.5 true cm
+\marginparwidth 0.75 in
+\textwidth 7.5 true in % Width of text line.
+\textheight 26.0 true cm
+\topmargin -2.5 true cm
+
+% =======================================================================
+% Environments problem, solution, remark
+
+\newcount\probcnt
+\newenvironment{problem}[1]{%
+  \global\advance\probcnt1%
+  \goodbreak\medskip\par\noindent\textbf{Problem~\the\probcnt%
+    \if{#1}\empty\else~(#1)\fi.}~}%
+{%
+  \goodbreak
+}
+
+\newenvironment{solution}[1][]{%
+  \goodbreak\smallskip\par\noindent\textbf{Solution{\if#1\empty\else~#1\fi}.}~}%
+{%
+  \goodbreak
+}
+
+\newenvironment{remark}[1][]{
+  \goodbreak\smallskip\par
+  \small
+  \noindent\textbf{Remark{\if#1\empty\else~#1\fi}.}~%
+}{%
+  \goodbreak
+  \normalsize
+}
+
+\newenvironment{lemma}[1][]{
+  \goodbreak\smallskip\par
+  \noindent\textit{Lemma{\if#1\empty\else~#1\fi}.}~%
+}{%
+  \goodbreak\smallskip
+}
+
+\newenvironment{proof}[1][]{
+  \goodbreak\par
+  \noindent\textit{Proof{\if#1\empty\else~#1\fi}.}~%
+}{%
+  \goodbreak\smallskip
+}
+
+
+% =======================================================================
+%%% Some common macros
+\newcommand{\RR}{{\mathbb{R}}}
+\newcommand{\ZZ}{{\mathbb{Z}}}
+\newcommand{\CC}{{\mathbb{C}}}
+\newcommand{\QQ}{{\mathbb{Q}}}
+\newcommand{\NN}{{\mathbb{N}}}
+\newcommand{\tr}{\rm tr}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
+\newcommand{\dz}{\mathrm{d}z}
+\newcommand{\dt}{\mathrm{d}t}
+\newcommand{\du}{\mathrm{d}u}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\rk}{\operatorname{rk}}
+
+% == TITLES ==========================================================
+\begin{document}
+\begin{center}
+  {\Large\textbf{Proposed problems for the
+  International Mathematical Competition 2024}}
+\end{center}
+
+% =======================================================================
+%%% DOCUMENT_BEGIN
+% Do not change the document above this point
+% =======================================================================
+
+% =======================================================================
+% My macros
+% =======================================================================
+% Insert your macros here
+
+% \def\MyMacro{...}
+
+
+% =======================================================================
+
+\begin{problem}{Alex Avdiushenko, Neapolis University Paphos, Cyprus}
+  Let the set $S$ contain $n^2+n-1$ elements.
+  All $n$-element subsets of $S$ are divided into two classes.
+  Prove that among them there exist $n$ pairwise disjoint subsets that belong to the same class.
+  \begin{remark}
+    Relatively hard problem, which can be third or even fourth.
+  \end{remark}
+\end{problem}
+
+% -----------------------------------------------------------------------
+
+\begin{solution}
+We prove by induction the stronger statement that if the set $S$ consists of
+$(n+1)m-1$ elements and all $n$-element subsets of $S$ are divided into two classes,
+then there exists at least $m$ pairwise disjoint subsets that belong to the same class.
+The base case $m=1$ is trivial.
+
+We now carry out the induction step from $m-1$ to $m$.
+Assume all the subsets belong to one class. Then, there is nothing to prove.
+
+Otherwise, let's choose two $n$-element subsets $A$ and $B$ from different classes
+such that their intersection has the maximal cardinality.
+Note that $|A \cap B| = n-1$.
+Indeed, if $|A \cap B| = k < n-1$, then consider the set $C$, derived from $B$ by replacing one element,
+not belonging to the intersection $A \cap B$, with an element from the set $A \setminus B$.
+Then $|A \cap C| = k+1$ and $|B \cap C| = n-1$ and,
+either $A$ and $C$ or $B$ and $C$ will be from different classes.
+
+Now, remove $A \cup B$ from $S$, leaving a set of $(n+1)(m-1)-1$ elements,
+to which the induction hypothesis applies,
+i.e., such that $m-1$ non-intersecting sets from this same class can be found.
+Accordingly, in the set $S$, either $A$ or $B$ will belong to this class.
+\end{solution}
+
+\begin{problem}{Alex Avdiushenko, Neapolis University Paphos, Cyprus}
+Let $R$ be a ring such that if $x^3 = 0$ then $x = 0$.
+Moreover, for any elements $a, b \in R$, the equation $(ab)^2 = a^2 b^2$ holds.
+Prove that the ring is commutative, i.e. for any two elements $a, b \in R$, $ab = ba$.
+\end{problem}
+
+\begin{solution}
+
+  Firstly, $x^2 = 0 \Rightarrow x^3 = 0 \Rightarrow x = 0$.
+
+  Secondly, $ab = 0 \Leftrightarrow ba = 0$, since $ab = 0 \Rightarrow b(ab)a= 0
+  \Rightarrow (ba)^2 = 0 \Rightarrow ba = 0$.
+
+  Thirdly, $a(ba-ab)b = abab-aabb=0 \Rightarrow (ba-ab)ba=0$ and analogously
+  $b(ba-ab)a = 0 \Rightarrow (ba-ab)ab=0$.
+
+  Fourthly and lastly,
+  $(ab-ba)^2 = abab - abba - baab + baba = -(ba-ab)ab + (ba-ab)ba = 0$ and $ab=ba$.
+
+\end{solution}
+
+\begin{problem}{Alex Avdiushenko, Neapolis University Paphos, Cyprus}
+Find the greatest real number \( m \) and the smallest \( M \) such
+that for any positive numbers \( a, b, c, d, e \), the following inequality holds:
+
+\[ m < \frac{a}{a+b} + \frac{b}{b+c} + \frac{c}{c+d} + \frac{d}{d+e} + \frac{e}{e+a} < M \]
+  \begin{remark}
+    An easy problem, which can be first one.
+  \end{remark}
+
+\end{problem}
+
+\begin{solution}
+
+\textbf{Answer:} \( m = 1, M = 4 \).
+
+\textbf{Examples:} \( (1, \varepsilon^4, \varepsilon^3, \varepsilon^2, \varepsilon) \)
+and \( (0, 5^n, 4^n, 3^n, 2^n ) \).
+
+The lower bound can be estimated by replacing the denominator of each fraction with the sum of all the numbers. The upper bound is more complicated:
+
+\begin{eqnarray*}
+\frac{a}{a+b} + \frac{b}{b+c} + \frac{c}{c+d} + \frac{d}{d+e} + \frac{e}{e+a} =
+\frac{1}{1 + \frac{b}{a}} + \frac{1}{1 + \frac{c}{b}} + \frac{1}{1 + \frac{d}{c}} + \frac{1}{1 + \frac{e}{d}} + \frac{1}{1 + \frac{a}{e}} = \\ =
+\frac{1}{1 + x_1} + \frac{1}{1 + x_2} + \frac{1}{1 + x_3} + \frac{1}{1 + x_4} + \frac{1}{1 + x_5}
+\end{eqnarray*}
+
+where \( \Prod x_i = 1 \).
+Let's prove that among the five numbers \( \{x_i\} \),
+there are two whose product is not less than 1.
+It is obvious that if there are two numbers, each not less than 1,
+then their product will also be not less than 1.
+It is also clear that there will be at least one number not less than 1.
+If four of the numbers \( \{x_i\} \) are not greater than 1,
+then the product of any three of these four numbers will also be not greater than 1,
+which means the product of the remaining two will be at least 1.
+Without loss of generality, we can assume \( x_1x_2 \geq 1 \). Then,
+
+\begin{eqnarray*}
+\frac{1}{1+x_1} + \frac{1}{1+x_2} + \frac{1}{1+x_3} + \frac{1}{1+x_4} + \frac{1}{1+x_5}
+= \frac{1 + x_2 + x_1 + 1}{1 + x_2 + x_1 + x_1x_2} + \frac{1}{1+x_3} + \frac{1}{1+x_4} + \frac{1}{1+x_5} \leq \\
+\leq 1 + 1 + 1 + 1 = 4
+\end{eqnarray*}
+
+\begin{remark}
+  Using cyclic replacement of \( a \to b, b \to c, c \to d, d \to e, e \to a \),
+  it can be understood that \( m + M = 5 \), and then the second part of the reasoning is not needed.
+\end{remark}
+
+\end{solution}
+
+
+\begin{problem}{Alex Avdiushenko, Neapolis University Paphos, Cyprus}
+For which positive integer numbers \( n \) does there exist a square matrix
+of order \( n \) with elements 0 and 1, such that its square is a matrix of all ones?
+\end{problem}
+
+\begin{solution}
+
+\textbf{Answer:} For exact squares.
+
+\textbf{Solution:} Let \( U \) be a matrix of all ones.
+Consider the equality \( A^3 = AU = UA \).
+On one side of this matrix, the number of ones in the rows of matrix \( A \) is equal
+to the number of ones in the columns of matrix \( A \).
+It follows that in matrix \( A \), there is the same number of ones
+in each row and in each column, denoted by \( k \).
+
+Now consider the equality \( A^4 = AAU = U^2 \),
+from which we conclude that \( n = k^2 \), where \( n \) is the dimension of the matrices.
+
+It remains to construct examples of matrices \( A \) of order \( k^2 \),
+the square of which is equal to \( U \). To do this, take \( k \) matrices
+of order \( k \) (the first is the identity matrix,
+and each subsequent one is obtained from the previous one by cyclically shifting
+all ones to the right) and form them from the blocks \( k \times k \).
+Next, simply repeat these \( k \) first rows \( (k-1) \) times without changes.
+The square of the resulting matrix \( A \) will be equal to \( U \).
+\end{solution}
+
+% =======================================================================
+% Do not change the document below this point
+%%% DOCUMENT_END
+% =======================================================================
+
+\end{document}
+
