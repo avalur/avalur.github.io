@@ -1,0 +1,12 @@
+formula1: "\\begin{pmatrix}
+            {\\color{green} A_{11}} & {\\color{green} A_{12}} \\\\
+            {\\color{green} A_{21}} & {\\color{green} A_{22}}
+            \\end{pmatrix} \\times
+            \\begin{pmatrix}
+            {\\color{orange} B_{11}} & {\\color{orange} B_{12}} \\\\
+            {\\color{orange} B_{21}} & {\\color{orange} B_{22}}
+            \\end{pmatrix} =
+            \\begin{pmatrix}
+            {\\color{teal} C_{11}} & {\\color{teal} C_{12}} \\\\
+            {\\color{teal} C_{21}} & {\\color{teal} C_{22}}
+            \\end{pmatrix}"

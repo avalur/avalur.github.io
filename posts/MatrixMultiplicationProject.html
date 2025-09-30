@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Multiplication with AlphaEvolve</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+</head>
+<body>
+    <script src="./js/utils.js"></script>
+    <!-- Prism.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Matrix Multiplication with AlphaEvolve</h1>
+            <p class="subtitle">Project in "Algorithm Engineering" course, NUP</p>
+            <div class="meta">
+                <span class="author">Alex Avdiushenko</span>
+                <span>•</span>
+                <span class="date">October 2025</span>
+                <span>•</span>
+                <span>12 min read</span>
+            </div>
+        </header>
+
+        <article class="content">
+            <h2>Introduction</h2>
+            <p>
+                Matrix multiplication is a foundational operation in computer science, powering a wide range of applications –
+                from deep learning model training to 3D graphics transformations.
+                Modern neural networks spend most of their compute time multiplying weight matrices with activations,
+                and 3D rendering pipelines apply successive matrix transforms to rotate or project scenes.
+                Any improvement in matrix multiplication efficiency can thus have far-reaching impact.<br>
+
+                Volker Strassen’s 1969 algorithm was the first to break the $O(n^3)$ time barrier,
+                using a clever divide-and-conquer method to multiply matrices in $O(n^{\log_2 7}) \approx O(n^{2.8074})$
+                operations <a href="https://en.wikipedia.org/wiki/Strassen_algorithm">[wiki]</a>.
+                This remained the best general method for square matrix multiplication for decades,
+                as faster algorithms existed only for huge matrices or special cases.
+                In June 2025, a DeepMind research team introduced AlphaEvolve, an AI-driven system that discovered
+                a faster way to multiply two $4\times 4$ matrices using only 48 scalar multiplications –
+                the first improvement in 56 years over Strassen’s 49-multiplication scheme over a noncommutative ring.
+                This breakthrough, documented
+                in the <a href="https://arxiv.org/pdf/2506.13131" target="_blank" rel="noopener">[AlphaEvolve arXiv paper]</a>,
+                in theory opens a new chapter in matrix algorithms, demonstrating that even long-standing
+                bounds can be beaten by novel techniques.
+            </p>
+
+            <h2>Overall Goal of the Project</h2>
+            <blockquote>You will investigate these algorithmic advancements.
+            You will implement Strassen’s classical fast matrix multiplication and the newly published
+            AlphaEvolve $4\times 4$ algorithm in C++, then benchmark their performance and analyze their trade-offs.
+            By reimplementing these algorithms and testing them on various setups,
+            you will gain a deep understanding of why Strassen’s method stood unchallenged
+            for 56 years and what enabled AlphaEvolve’s improvement.
+            </blockquote>
+
+            <h2>0. Standard $2\times 2$ Matrix Multiplication Algorithm</h2>
+            <p>Given two $2 \times 2$ block matrices $A$ and $B$, we want to compute $C = AB$.
+                The standard algorithm computes each element as a dot product:</p>
+
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\begin{pmatrix} {\color{green} A_{11}} & {\color{green} A_{12}} \\ {\color{green} A_{21}} & {\color{green} A_{22}} \end{pmatrix} \times \begin{pmatrix} {\color{orange} B_{11}} & {\color{orange} B_{12}} \\ {\color{orange} B_{21}} & {\color{orange} B_{22}} \end{pmatrix} = \begin{pmatrix} {\color{teal} C_{11}} & {\color{teal} C_{12}} \\ {\color{teal} C_{21}} & {\color{teal} C_{22}} \end{pmatrix}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\begin{pmatrix} {\color{green} A_{11}} & {\color{green} A_{12}} \\ {\color{green} A_{21}} & {\color{green} A_{22}} \end{pmatrix} \times \begin{pmatrix} {\color{orange} B_{11}} & {\color{orange} B_{12}} \\ {\color{orange} B_{21}} & {\color{orange} B_{22}} \end{pmatrix} = \begin{pmatrix} {\color{teal} C_{11}} & {\color{teal} C_{12}} \\ {\color{teal} C_{21}} & {\color{teal} C_{22}} \end{pmatrix}"></div>
+            </div>
+
+            <p>This gives us the following colored partial products:</p>
+            $$\begin{align}
+            m_1 &= {\color{green} A_{11}} \cdot {\color{orange} B_{11}} \\
+            m_2 &= {\color{green} A_{12}} \cdot {\color{orange} B_{21}} \\
+            m_3 &= {\color{green} A_{11}} \cdot {\color{orange} B_{12}} \\
+            m_4 &= {\color{green} A_{12}} \cdot {\color{orange} B_{22}} \\
+            m_5 &= {\color{green} A_{21}} \cdot {\color{orange} B_{11}} \\
+            m_6 &= {\color{green} A_{22}} \cdot {\color{orange} B_{21}} \\
+            m_7 &= {\color{green} A_{21}} \cdot {\color{orange} B_{12}} \\
+            m_8 &= {\color{green} A_{22}} \cdot {\color{orange} B_{22}}
+            \end{align}$$
+
+            <p>And the final result elements are computed as:</p>
+            $$\begin{align}
+            {\color{teal} C_{11}} &= m_1 + m_2 \\
+            {\color{teal} C_{12}} &= m_3 + m_4 \\
+            {\color{teal} C_{21}} &= m_5 + m_6 \\
+            {\color{teal} C_{22}} &= m_7 + m_8
+            \end{align}$$
+
+            <p>The naive approach requires <span style="color: red;">8</span> matrix multiplications.</p>
+
+            <h2>1. Strassen’s $2\times 2$ Matrix Multiplication Algorithm</h2>
+            In 1969, Volker Strassen astonished
+                the computer science community by showing that matrix multiplication could be performed
+                with fewer multiplications than the conventional $n^3$ method.
+                Strassen’s algorithm multiplies two $2\times 2$ block matrices using only 7 submatrix multiplications (instead of 8),
+                recombining them with addition and subtraction to produce the final product. </p>
+            $$\begin{align}
+            m_1 &= ({\color{green}A_{11}} + {\color{green}A_{22}})\cdot({\color{orange}B_{11}} +
+            {\color{orange}B_{22}}) \\
+            m_2 &= ({\color{green}A_{21}} + {\color{green}A_{22}})\cdot{\color{orange}B_{11}} \\
+            m_3 &= {\color{green}A_{11}}\cdot({\color{orange}B_{12}} - {\color{orange}B_{22}}) \\
+            m_4 &= {\color{green}A_{22}}\cdot({\color{orange}B_{21}} - {\color{orange}B_{11}}) \\
+            m_5 &= ({\color{green}A_{11}} + {\color{green}A_{12}})\cdot{\color{orange}B_{22}} \\
+            m_6 &= ({\color{green}A_{21}} - {\color{green}A_{11}})\cdot({\color{orange}B_{11}} +
+            {\color{orange}B_{12}}) \\
+            m_7 &= ({\color{green}A_{12}} - {\color{green}A_{22}})\cdot({\color{orange}B_{21}} +
+            {\color{orange}B_{22}})
+            \end{align}$$
+
+            <p>These products are then recombined to form the result blocks:</p>
+            $$\begin{align}
+            {\color{teal} C_{11}} &= m_1 + m_4 - m_5 + m_7 \\
+            {\color{teal} C_{12}} &= m_3 + m_5 \\
+            {\color{teal} C_{21}} &= m_2 + m_4 \\
+            {\color{teal} C_{22}} &= m_1 - m_2 + m_3 + m_6
+            \end{align}$$
+
+            <h3>How Strassen Arrived at Discovery</h3>
+
+            <p><strong>1. A Bilinear Approach to the Problem</strong></p>
+
+            <p>Strassen didn't start by trying to improve matrix multiplication directly.
+                He was working on a more general problem - the <strong>rank of bilinear forms</strong> in algebraic complexity theory. The key insight was that matrix multiplication can be represented as a bilinear map:</p>
+
+            $$f: \mathbb{C}^{n \times n} \times \mathbb{C}^{n \times n} \to \mathbb{C}^{n \times n}$$
+
+            <p><strong>2. Tensor Rank and Decomposition</strong></p>
+
+            <p>Strassen understood that the complexity of matrix multiplication is related to the <strong>tensor rank</strong> of the corresponding tensor. For $2 \times 2$ matrices, the naive algorithm gives a rank of 8, but Strassen sought a decomposition with lower rank.
+                The breakthrough came when Strassen realized that operations
+                could be <strong>redistributed</strong>.
+                Instead of computing each element of the result directly,
+                he devised intermediate quantities $m_1, m_2, \ldots, m_7$
+                that simultaneously capture information about multiple elements.</p>
+
+            <p><strong>3. Algebraic Manipulations</strong></p>
+
+            <p>Strassen used classical algebraic tricks:</p>
+            <ul>
+                <li><strong>Linear combinations</strong>: $(A + B)(C + D) = AC + AD + BC + BD$</li>
+                <li><strong>Compensating terms</strong>: if you need $AC$ but computed $(A + B)(C + D)$, subtract the unwanted $AD$, $BC$, $BD$</li>
+                <li><strong>Operation grouping</strong>: multiple result elements can be obtained from the same intermediate products</li>
+            </ul>
+
+            <p>Let's look at the logic behind the first one of Strassen's products:</p>
+
+            $$m_1 = (A_{11} + A_{22})(B_{11} + B_{22})$$
+
+            <p>This product simultaneously "captures" information
+                for the diagonal elements of the result $C_{11}$ and $C_{22}$.
+                Strassen realized that such grouping allows for product operation savings.</p>
+
+            <p><strong>4. Systematic Search</strong></p>
+
+            <p>He didn't guess the formulas randomly. He:</p>
+            <ul>
+                <li>Wrote down a system of equations for all elements $C_{ij}$</li>
+                <li>Searched for ways to express them through a minimal number of products</li>
+                <li>Used algebraic identities to minimize the number of multiplications</li>
+            </ul>
+
+            <h3>Why Was This So Difficult?</h3>
+            <ul>
+                <li>Before Strassen, everyone believed that $n^3$ was the natural lower bound</li>
+                <li><strong>Trade-offs</strong>: Strassen's algorithm requires
+                    more additions and memory - one had to understand that this was an acceptable price</li>
+                <li>The algorithm's power only manifests when recursively applied to large matrices</li>
+            </ul>
+
+            <p>Recursively applying this idea yields an asymptotic complexity
+                of $O(n^{\log_2 7}) \approx O(n^{2.8074})$, beating the standard $O(n^3)$ runtime.
+                This was profound and opened an entire field of research -
+                searching for optimal tensor decompositions for various matrix sizes,
+                which remains an active area of investigation to this day.</p>
+
+            <h2>2. Winograd’s $4\times 4$ Matrix Multiplication Algorithm</h2>
+
+            <p>For $4\times 4$ Matrix Multiplication Strassen's decomposition
+            gives $7\times 7 = 49$ multiplications.
+                In fact, <a href="https://www.scribd.com/document/840040629/Winograd-1968-Algorithm-for-Inner-Product">[Winograd's 1968 paper]</a> on computing inner products
+            faster could be applied to $4\times 4$ matrix multiplication
+            to get a formula using only 48 multiplications.</p>
+
+            <h3>Winograd's Key Insight</h3>
+
+            <p>Winograd's breakthrough came from recognizing the algebraic identity:</p>
+
+            $$a_1b_1 + a_2b_2 = (a_1 + b_2)(a_2 + b_1) - a_1a_2 - b_1b_2$$
+
+            <p>It changes <strong>two</strong> multiplications of ab's into
+               <strong>one</strong> multiplication of ab's and two multiplications involving only a's or only b's.
+                The latter multiplications can be pre-computed and saved when calculating all the innerproducts
+                in a matrix multiplication:</p>
+
+            $$\begin{align}
+            i=1..4, &\text{ 8 multiplications:} \\
+            &p_i = -A_{i1} \times A_{i2} - A_{i3} \times A_{i4} \\
+            \text{another} &\text{ 8 multiplications:} \\
+            &q_i = -B_{1i} \times B_{2i} - B_{3i} \times B_{4i} \\
+            i=1..4,\ &j=1..4\ \text{ finally } 4 \times 4 \times 2 = 32 \text{ multiplications:} \\
+            &C_{ij} = p_i + q_j \\
+            &+ (A_{i1} + B_{2j}) \times (A_{i2} + B_{1j}) + \\
+            &+ (A_{i3} + B_{4j}) \times (A_{i4} + B_{3j})
+            \end{align}$$
+
+            <p>In total, we got $8 + 8 + 32 = 48$ multiplications.
+                When looking at this result from DeepMind in 2025, you might wonder - if Winograd achieved a formula
+                with 48 multiplications back in 1968, what makes the DeepMind result significant? The key difference
+                lies in generality. Winograd's method only works when the matrix entries commute with each other (i.e.,
+                $ab = ba$). In contrast, tensor decomposition formulas like DeepMind's work even over noncommutative
+                rings. This may seem like an obscure distinction, but it becomes highly relevant when dealing with
+                matrices of matrices - a common case in practice. Since matrices themselves don't commute, Winograd's
+                approach can't be used recursively on larger matrices. Tensor decomposition formulas, however, can be
+                applied recursively, making them more powerful for general matrix multiplication.</p>
+
+            <h2>3. What the hell are these tensor decompositions?</h2>
+            <p>Let's return to the Strassen's $2 \times 2$ matrix multiplication algorithm,
+            and rewrite formulas using tensor decomposition.
+            So we still want to calculate the $2 \times 2$ matrix product,
+              but we can represent it as a 3D $4 \times 4 \times 4$ tensor:</p>
+
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\begin{pmatrix} {\color{green} A_{11}} & {\color{green} A_{12}} \\ {\color{green} A_{21}} & {\color{green} A_{22}} \end{pmatrix} \times \begin{pmatrix} {\color{orange} B_{11}} & {\color{orange} B_{12}} \\ {\color{orange} B_{21}} & {\color{orange} B_{22}} \end{pmatrix} = \begin{pmatrix} {\color{teal} C_{11}} & {\color{teal} C_{12}} \\ {\color{teal} C_{21}} & {\color{teal} C_{22}} \end{pmatrix}$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\begin{pmatrix} {\color{green} A_{11}} & {\color{green} A_{12}} \\ {\color{green} A_{21}} & {\color{green} A_{22}} \end{pmatrix} \times \begin{pmatrix} {\color{orange} B_{11}} & {\color{orange} B_{12}} \\ {\color{orange} B_{21}} & {\color{orange} B_{22}} \end{pmatrix} = \begin{pmatrix} {\color{teal} C_{11}} & {\color{teal} C_{12}} \\ {\color{teal} C_{21}} & {\color{teal} C_{22}} \end{pmatrix}"></div>
+            </div>
+
+            <div class="image-container">
+                <img src="./matrix-multiplication/tensor_representation.png" alt="tensor_representation">
+                <div class="image-caption">Tensor representation of $2 \times 2$ matrix multiplication.
+                    For example ${\color{teal} C_{22}} = {\color{green} A_{21}} \cdot {\color{orange} B_{12}} +
+                    {\color{green} A_{22}} \cdot {\color{orange} B_{22}}$
+                </div>
+            </div>
+
+            <p>The tensor $T_{ijk} = 1$ when element $a_{ik}$ multiplied
+                by $b_{kj}$ contributes to $c_{ij}$,
+                following the standard matrix multiplication rule:</p>
+
+            $$c_{ij} = \sum_{k} a_{ik} \cdot b_{kj} \cdot T_{ijk}$$
+
+            <div class="table-container">
+                <table class="formulas-table">
+                    <thead>
+                    <tr>
+                        <th>Intermediate Products</th>
+                        <th>Result Combinations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="padding: 0 20px;">
+                            $$\begin{align}
+                            m_1 &= ({\color{green}A_{11}} + {\color{green}A_{22}})\cdot({\color{orange}B_{11}} +
+                            {\color{orange}B_{22}}) \\
+                            m_2 &= ({\color{green}A_{21}} + {\color{green}A_{22}})\cdot{\color{orange}B_{11}} \\
+                            m_3 &= {\color{green}A_{11}}\cdot({\color{orange}B_{12}} - {\color{orange}B_{22}}) \\
+                            m_4 &= {\color{green}A_{22}}\cdot({\color{orange}B_{21}} - {\color{orange}B_{11}}) \\
+                            m_5 &= ({\color{green}A_{11}} + {\color{green}A_{12}})\cdot{\color{orange}B_{22}} \\
+                            m_6 &= ({\color{green}A_{21}} - {\color{green}A_{11}})\cdot({\color{orange}B_{11}} +
+                            {\color{orange}B_{12}}) \\
+                            m_7 &= ({\color{green}A_{12}} - {\color{green}A_{22}})\cdot({\color{orange}B_{21}} +
+                            {\color{orange}B_{22}})
+                            \end{align}$$
+                        </td>
+                        <td style="padding: 0 20px;">
+                            $$\begin{align}
+                            {\color{teal} C_{11}} &= m_1 + m_4 - m_5 + m_7 \\
+                            {\color{teal} C_{12}} &= m_3 + m_5 \\
+                            {\color{teal} C_{21}} &= m_2 + m_4 \\
+                            {\color{teal} C_{22}} &= m_1 - m_2 + m_3 + m_6
+                            \end{align}$$
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            So Strassen's algorithm in rank-1 tensors decomposition looks like this:
+
+            <div class="image-container">
+                <img src="./matrix-multiplication/one_rank.png" alt="one_rank">
+                <div class="image-caption">One-rank tensor representation of two terms $m_1$ and $m_2$.
+                    Watch carefully for signs in formulas for elements of $\color{teal} C$.
+                </div>
+            </div>
+
+            $$T = \sum\limits_{i=1}^7 u_i \otimes v_i \otimes w_i$$
+
+            <h3>Tensor Game</h3>
+            <p>The tensor game is a game where one player take turns to find some tensor decomposition.
+                Consider the game is played on a $2 \times 2$ matrix $A$ and $B$, and the goal is to find a tensor $T$
+                corresponding to the matrix multiplication.</p>
+            <ol>
+                <li>Starting state $S_0 = T$</li>
+                <li>Your move: choose one-rank tensor $(u_t, v_t, w_t)$</li>
+                <li>New state: $S_{t+1} \leftarrow S_t - u_t \otimes v_t \otimes w_t $</li>
+                <li>Repeat until $S_{t+1} = 0$, reward is -1 per step</li>
+            </ol>
+
+            <h3><a href="https://www.nature.com/articles/s41586-022-05172-4">AlphaTensor</a> Ingredients</h3>
+
+            <h4>1. Special Architecture</h4>
+            <ol>
+                <li>One network to predict value (how close we are to final move) and policy (one-rank tensor $(u_t, v_t, w_t)$),
+                    as in AlphaZero</li>
+                <li>Projections of the original 3D tensor to three 2D features' matrices</li>
+                <li>Sequence of attention operations, each over a set of features belonging to one tensor slice</li>
+            </ol>
+
+            <h4>2. Synthetic Demonstrations</h4>
+            <p>There is assymetry: going from original tensor $T$ to one-rank decomposition is <strong>hard</strong> and
+                going back is very simple.</p>
+
+            <h4>3. Target Diversification</h4>
+            <p>Express the target in several equivalent ways via change of basis (this is clearly just data augmentation :).</p>
+
+            <h4>4. Train a Generalist Agent</h4>
+            <p>Consider all the dimensions of the tensor simultaneously, limiting the maximum only.
+               Actually zero-padding works perfectly for this purpose.</p>
+
+            <h3>AlphaTensor Limitations</h3>
+            We have to use only a finite set of coefficients before multipliers: $F = \{-2, -1, 0, 1, 2\}$.
+            So this method cannot guarantee optimality. It is not a general method for any searched space,
+            only for tensor decompositions.
+
+            <h2>4. Next Step: AlphaEvolve</h2>
+            <blockquote>
+                An evolutionary coding agent to optimize and discover algorithms.
+            </blockquote>
+
+            <p>Key ingredients:
+                <ol>
+                    <li>Creativity of LLMs</li>
+                    <li>Rigorous and automated Evaluation</li>
+                    <li>Diversity of Evolution</li>
+                </ol>
+            </p>
+
+            <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>FunSearch</th>
+                            <th>AlphaEvolve</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>evolve 1 function</td>
+                        <td>evolve entire module</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>up to S-size LLMs</td>
+                        <td>benefits from latest LLMs</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1e6 LLM samples needed</td>
+                        <td>1e3 LLM samples can suffice</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>evaluation must be fast (<= 20 mins)</td>
+                        <td>evaluation can be slow & parallelized</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>feedback only from code execution</td>
+                        <td>can additionally leverage LLM feedback</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>no additional context provided</td>
+                        <td>long context provided</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>evolve Python</td>
+                        <td>evolve any evaluable (string) content</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>evolution: optimize 1 metric</td>
+                        <td>evolution: optimize multiple metrics</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="video-container">
+                <video autoplay muted loop playsinline style="width: 100%;">
+                    <source src="./matrix-multiplication/Code-Evolution-Illustration_compressed_iUJETbv.mp4"
+                            type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-caption" style="text-align: center;">
+                    AlphaEvolve search process visualization, <a href="https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/?utm_source=chatgpt.com">source</a>
+                </div>
+            </div>
+
+            <h2>5. Results for $4 \times 4$ matrix multiplication</h2>
+            <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Multiplications</th>
+                            <th>Additions</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a href="https://en.wikipedia.org/wiki/Matrix_multiplication">Naïve</a></td>
+                        <td>64</td>
+                        <td>48</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://en.wikipedia.org/wiki/Strassen_algorithm">Strassen, 1969</a></td>
+                        <td>49</td>
+                        <td>318 (~132 with optimizations)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.scribd.com/document/840040629/Winograd-1968-Algorithm-for-Inner-Product">Winograd, 1968</a></td>
+                        <td>48</td>
+                        <td>128</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://arxiv.org/abs/2506.13131">AlphaEvolve, 2025</a></td>
+                        <td>48</td>
+                        <td>1264</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://arxiv.org/abs/1904.07683">Rosowski, 2019</a></td>
+                        <td>46</td>
+                        <td>133</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>6. Algorithm Engineering Task for Students</h2>
+            <p>Your task is to implement a benchmark in C++ to measure the performance of the listed algorithms,
+            similar to the table <a href="https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms">Sub-cubic algorithms</a>
+                with also time and memory usage.</p>
+
+            <h3>Part 1: Implementation</h3>
+            <p>Check different matrix sizes and different matrix types (e.g., random, symmetric, etc.).
+            Aim for a clean, well-structured implementation from scratch –
+                do not use any built-in matrix multiplication libraries or Strassen routines.
+                While coding, consider the memory overhead (allocate auxiliary matrices
+                for intermediate computations as needed) and keep track of the number
+                of scalar multiplications and additions being performed (you will use this in analysis).
+            </p>
+
+            <h3>Part 2: Benchmarking the Algorithms</h3>
+            With all the algorithms implemented,
+            the next step is to empirically evaluate their performance.
+            Theoretical operation counts tell us that the AlphaEvolve
+            algorithm uses fewer multiplications than Strassen’s (and far fewer
+            than the $64$ multiplications of the naive $4\times 4$ multiply),
+            but actual runtime depends on many factors:
+            constant factors from additions, memory access patterns, parallelism, etc.
+            By benchmarking, we can observe how these algorithms behave in practice on real hardware.
+            Additionally, we want to see how they scale beyond the base $4\times 4$ case –
+            e.g., can we leverage the 48-multiplication method to multiply larger matrices more quickly
+            via a recursive blocking approach?
+            This experiment will shed light on whether AlphaEvolve’s theoretical advantage translates
+            into real speedups and under what conditions.</p>
+            <p>Design and run a comprehensive set of benchmarks comparing algorithms.
+                You should consider the following scenarios:</p>
+            <ul>
+                <li><strong>Matrix sizes and blocking:</strong>
+                    Test not just $4\times 4$ matrices, but larger sizes as well.
+                    For example, try $8\times 8$, $16\times 16$, $64\times 64$,
+                    up to sizes like $256\times 256$ or $512\times 512$ (if feasible).
+                <li><strong>Real vs Complex data:</strong> Benchmark both algorithms on matrices
+                with real numbers and with complex numbers.
+                Compare the runtime of multiplying real-valued matrices using each algorithm.
+                Then do the same for complex-valued matrices (where a naive algorithm would itself
+                require more operations, since multiplying complex numbers takes
+                multiple real multiplications). This will illustrate how each algorithm
+                benefits different data types.</li>
+                <li><strong>Hardware setups:</strong> Run your benchmarks
+                    on different hardware environments if possible.
+                    At minimum, test on a CPU. If you have access to a GPU or a multi-core processor,
+                    attempt to run the algorithms there as well
+                    (Note: you may need to port your code or use a library to utilize GPU acceleration).
+                    For instance, you might compare a single-threaded CPU execution
+                    to a multi-threaded one, or CPU vs GPU,
+                    to see how well each algorithm parallelizes.
+                    If implementing your own code on GPU is too complex,
+                    you can still compare your CPU implementations to a highly-optimized
+                    GPU matrix multiply (e.g. BLAS or CuBLAS library) for reference.
+                    The goal is to observe how hardware influences the efficacy of these algorithms.</li>
+            </ul>
+            <p>For each test scenario, record metrics such as: the wall-clock running time (in milliseconds or seconds) of each algorithm, and possibly the number of arithmetic operations executed (you can instrument your code to count scalar multiplications and additions). Use sufficiently many trials and/or large enough problem sizes to get stable timing results (to mitigate noise). Organize your benchmark results clearly – for example, you might tabulate the timings for various sizes, or plot the performance curves if you have many data points.</p>
+
+            <h3>Part 3: Analyzing Algorithmic Trade-offs</h3>
+            <p>In the final step, you will analyze and interpret the results of your implementations
+                and experiments. High-level algorithmic improvements do not automatically
+                guarantee practical superiority; this project is an opportunity to understand why.
+                By reflecting on the data and the nature of each algorithm, you will consolidate
+                your understanding of where each approach shines or struggles.
+                This analysis connects theory with practice: you’ll consider factors like
+                arithmetic counts (multiplications vs additions), memory usage, and numerical precision,
+                explaining in your own words how these factors influence performance on real hardware.</p>
+            <p>Write a concise report or summary interpreting the comparative performance
+               algorithms, based on your benchmarking results and implementation experience.
+                In your analysis, address the following points:</p>
+            <ul>
+                <li><strong>Operation counts:</strong> Summarize the theoretical number of multiplications
+                    and additions each algorithm uses. Discuss how this reduction in multiplications affected
+                    your measured performance. Did fewer multiplications generally translate
+                    to faster runtime? Explain how extra additions might diminish the benefit
+                    of saving multiplications, especially on modern CPUs/GPUs where addition
+                    is relatively cheap but not free.
+                    If you counted operations in your code, report the observed counts and confirm
+                    they match the expected formula.</li>
+                <li><strong>Memory overhead and access patterns:</strong> Compare the memory requirements
+                    of the two algorithms. Strassen’s algorithm, for instance, needs auxiliary
+                    matrices to store intermediate sums (in an optimized implementation,
+                    Strassen can be done with a small constant factor more memory,
+                    but naive multiplication can be done in-place with minimal extra space).
+                    AlphaEvolve’s algorithm likely required even more scratch space to hold
+                    many intermediate linear combinations. Describe any memory allocation
+                    and copying that your implementations had to do.
+                    How might this extra memory usage impact performance (consider cache misses and data movement)?
+                    If you ran on large matrices, did you notice any performance issues related to memory
+                    (e.g., higher memory usage causing slowdowns)?</li>
+                <li><strong>Numerical stability:</strong> Reflect on the numerical stability of each approach.
+                    Both Strassen and the AlphaEvolve algorithm use subtractions which can lead to cancellation
+                    and rounding error. Strassen’s algorithm is known to be slightly less stable than
+                    the naive algorithm (because it subtracts large intermediate values).
+                    AlphaEvolve’s algorithm might be even more delicate, given it uses complex multipliers
+                    and many operations – for example, coefficients like $1/2$ and imaginary units could
+                    amplify rounding issues in floating-point arithmetic.
+                    If possible, report on any experiments you did to test stability:
+                    e.g. multiplying matrices with condition number extremes or random data to see
+                    if results diverge or lose accuracy compared to naive multiplication.
+                    Even if you did not explicitly test this, discuss theoretically which algorithm
+                    you expect to introduce more numerical error and why.</li>
+                <li><strong>Hardware and parallelism impact:</strong> Analyze how each algorithm fared across different
+                    hardware setups. For instance, if you tested on a GPU or multi-core CPU,
+                    was either algorithm able to take advantage of parallelism effectively?
+                    Discuss the fact that naive matrix multiplication is highly optimized on modern hardware
+                    (using SIMD instructions, cache blocking, etc.), whereas your implementations
+                    of Strassen/AlphaEvolve might not have benefited from such low-level optimizations.
+                    It’s possible that on a GPU, the straightforward $O(n^3)$ algorithm (as used in libraries)
+                    vastly outperformed your recursive algorithms for all tested sizes,
+                    because those algorithms introduce irregular memory access and cannot use the
+                    GPU’s matrix-multiply units as efficiently. Comment on any such observations:
+                    for example, “On CPU, Strassen began to outperform the naive method for $n > 128$,
+                    but on GPU the naive BLAS routine was faster than both Strassen and AlphaEvolve even at $n=512$,”
+                    etc. Relate this to the trade-off between algorithmic complexity and constant factors:
+                    the cross-over point where an asymptotically faster algorithm wins may be very large,
+                    and highly optimized conventional algorithms (especially on specialized hardware)
+                    can dominate for practical matrix sizes.</li>
+                <li><strong>Overall takeaways:</strong> Conclude with a summary of what you learned.
+                    For example, you might note that while AlphaEvolve’s algorithm is a stunning theoretical
+                    advancement,
+                    its practical benefit is subtle. The reduction of one multiplication
+                    (about a 2% cut in multiplication count for $4\times 4$) is very likely
+                    outweighed by the quadrupling of addition operations and more complex data flow,
+                    which is why Strassen’s algorithm stood unbeaten for so long – any better algorithm
+                    inherently had to be much more complex. You should also mention how this exercise
+                    gave insight into the difficulty of improving matrix multiplication:
+                    even a small $4\times 4$ case required AI assistance and led to an algorithm
+                    with many caveats. Finally, consider the broader implication:
+                    as matrix sizes grow, the slight exponent improvement (from $\approx 2.8074$ to
+                    $\approx 2.7925$ for exponent in the recursive sense) might become noticeable,
+                    but only if implementations can efficiently manage the overhead.
+                    Will future computers benefit from this 48-multiplication algorithm?
+                    Or will practical factors (like memory and stability) limit its use?
+                    Your analysis should demonstrate a nuanced understanding of these questions,
+                    backed by the evidence you gathered in your benchmarks.</li>
+            </ul>
+        </article>
+        <!-- Social Sharing Section -->
+        <div class="social-sharing">
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=" class="share-btn facebook" onclick="shareOnFacebook(); return false;" title="Share on Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="share-btn linkedin" onclick="shareOnLinkedIn(); return false;" title="Share on LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+
+                <a href="https://twitter.com/intent/tweet?url=&text=LLM%20Math%20Reasoning%20Evaluation" class="share-btn twitter" onclick="shareOnTwitter(); return false;" title="Share on X (Twitter)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    X (Twitter)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification element -->
+    <div id="copyToast" class="copy-toast"></div>
+
+    <script>
+        // Social sharing functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.title);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+        }
+    </script>
+
+</body>
+</html>
