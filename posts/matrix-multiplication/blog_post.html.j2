@@ -41,7 +41,7 @@
                 <span>•</span>
                 <span class="date">October 2025</span>
                 <span>•</span>
-                <span>12 min read</span>
+                <span>21 min read</span>
             </div>
         </header>
 
@@ -89,7 +89,7 @@
                 <div class="math-latex-source" style="display: none;" data-latex="{{ formulas.formula1 }}"></div>
             </div>
 
-            <p>This gives us the following colored partial products:</p>
+            <p>This gives us the following partial products:</p>
             $$\begin{align}
             m_1 &= {\color{green} A_{11}} \cdot {\color{orange} B_{11}} \\
             m_2 &= {\color{green} A_{12}} \cdot {\color{orange} B_{21}} \\
@@ -167,17 +167,18 @@
 
             <p>Let's look at the logic behind the first one of Strassen's products:</p>
 
-            $$m_1 = (A_{11} + A_{22})(B_{11} + B_{22})$$
+            $$ m_1 = ({\color{green}A_{11}} + {\color{green}A_{22}}) \cdot
+            ({\color{orange}B_{11}} + {\color{orange}B_{22}}) \\ $$
 
             <p>This product simultaneously "captures" information
-                for the diagonal elements of the result $C_{11}$ and $C_{22}$.
+                for the diagonal elements of the result $\color{teal} C_{11}$ and $\color{teal} C_{22}$.
                 Strassen realized that such grouping allows for product operation savings.</p>
 
             <p><strong>4. Systematic Search</strong></p>
 
             <p>He didn't guess the formulas randomly. He:</p>
             <ul>
-                <li>Wrote down a system of equations for all elements $C_{ij}$</li>
+                <li>Wrote down a system of equations for all elements $\color{teal} C_{ij}$</li>
                 <li>Searched for ways to express them through a minimal number of products</li>
                 <li>Used algebraic identities to minimize the number of multiplications</li>
             </ul>
@@ -258,11 +259,11 @@
                 </div>
             </div>
 
-            <p>The tensor $T_{ijk} = 1$ when element $a_{ik}$ multiplied
-                by $b_{kj}$ contributes to $c_{ij}$,
+            <p>The tensor $T_{ijk} = 1$ when element $A_{ik}$ multiplied
+                by $B_{kj}$ contributes to $C_{ij}$,
                 following the standard matrix multiplication rule:</p>
 
-            $$c_{ij} = \sum_{k} a_{ik} \cdot b_{kj} \cdot T_{ijk}$$
+            $$C_{ij} = \sum_{k} A_{ik} \cdot B_{kj} \cdot T_{ijk}$$
 
             <div class="table-container">
                 <table class="formulas-table">
@@ -313,8 +314,8 @@
             $$T = \sum\limits_{i=1}^7 u_i \otimes v_i \otimes w_i$$
 
             <h3>Tensor Game</h3>
-            <p>The tensor game is a game where one player take turns to find some tensor decomposition.
-                Consider the game is played on a $2 \times 2$ matrix $A$ and $B$, and the goal is to find a tensor $T$
+            <p>The tensor game is a game where one player takes turns to find some tensor decomposition.
+                Consider the game is played on matrices $A$ and $B$, and the goal is to find a tensor $T$
                 corresponding to the matrix multiplication.</p>
             <ol>
                 <li>Starting state $S_0 = T$</li>
@@ -323,18 +324,19 @@
                 <li>Repeat until $S_{t+1} = 0$, reward is -1 per step</li>
             </ol>
 
-            <h3><a href="https://www.nature.com/articles/s41586-022-05172-4">AlphaTensor</a> Ingredients</h3>
+            <h3><a href="https://www.nature.com/articles/s41586-022-05172-4">AlphaTensor</a>
+                Ingredients to Win the Game</h3>
 
             <h4>1. Special Architecture</h4>
             <ol>
-                <li>One network to predict value (how close we are to final move) and policy (one-rank tensor $(u_t, v_t, w_t)$),
+                <li>One neural network to predict value (how close we are to final move) and policy (one-rank tensor $(u_t, v_t, w_t)$),
                     as in AlphaZero</li>
                 <li>Projections of the original 3D tensor to three 2D features' matrices</li>
                 <li>Sequence of attention operations, each over a set of features belonging to one tensor slice</li>
             </ol>
 
             <h4>2. Synthetic Demonstrations</h4>
-            <p>There is assymetry: going from original tensor $T$ to one-rank decomposition is <strong>hard</strong> and
+            <p>There is asymmetry: going from original tensor $T$ to one-rank decomposition is <strong>hard</strong> and
                 going back is very simple.</p>
 
             <h4>3. Target Diversification</h4>
@@ -348,6 +350,14 @@
             We have to use only a finite set of coefficients before multipliers: $F = \{-2, -1, 0, 1, 2\}$.
             So this method cannot guarantee optimality. It is not a general method for any searched space,
             only for tensor decompositions.
+
+            <div class="image-container">
+                <img src="./matrix-multiplication/search_difficulty.png" alt="search_difficulty">
+                <div class="image-caption">The search difficulty is incredible!
+                    Source: <a href="https://www.linkedin.com/in/alexander-novikov-b0a968a6">Alex Novikov</a> talk
+                </div>
+            </div>
+
 
             <h2>4. Next Step: AlphaEvolve</h2>
             <blockquote>
@@ -474,8 +484,12 @@
 
             <h2>6. Algorithm Engineering Task for Students</h2>
             <p>Your task is to implement a benchmark in C++ to measure the performance of the listed algorithms,
-            similar to the table <a href="https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms">Sub-cubic algorithms</a>
-                with also time and memory usage.</p>
+                similar to the table <a href="https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm#Sub-cubic_algorithms">
+                    Sub-cubic algorithms</a>
+                that should also include both time and memory usage metrics.
+                Compare different matrix sizes, types (e.g. random,
+                symmetric), and hardware setups to analyze the trade-offs between algorithmic complexity, memory
+                overhead, numerical stability and parallelism.</p>
 
             <h3>Part 1: Implementation</h3>
             <p>Check different matrix sizes and different matrix types (e.g., random, symmetric, etc.).
