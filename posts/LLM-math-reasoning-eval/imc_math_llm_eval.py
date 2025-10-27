@@ -333,11 +333,11 @@ def main():
         problems = json.load(f)
 
     models = {
-        "gpt": lambda s, u: call_openai("o3-2025-04-16", s, u),
-        # "gpt": lambda s, u: call_openai("gpt-5-2025-08-07", s, u),
+        # "gpt": lambda s, u: call_openai("o3-2025-04-16", s, u),
+        "gpt": lambda s, u: call_openai("gpt-5-2025-08-07", s, u),
         "deepseek": lambda s, u: call_deepseek("deepseek-ai/DeepSeek-R1-0528", s, u),
         "gemini": lambda s, u: call_gemini("gemini-2.5-pro", s, u),
-        "claude": lambda s, u: call_claude("claude-opus-4-20250514", s, u),
+        "claude": lambda s, u: call_claude("claude-opus-4-1-20250805", s, u),
         "grok": lambda s, u: call_grok("grok-4", s, u),
     }
 
