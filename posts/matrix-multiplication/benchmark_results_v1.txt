@@ -1,0 +1,21 @@
+
+--- Benchmark Run: 2025-10-17 18:03:50 ---
+Comment: Numpy float32 (single precision)
+--------------------------------------------------
+Matrix size: 1000x1000 * 1000x1000, Performance: 2.44 TFLOPS
+Matrix size: 2000x2000 * 2000x2000, Performance: 2.70 TFLOPS
+Matrix size: 4000x4000 * 4000x4000, Performance: 2.62 TFLOPS
+
+--- Benchmark Run: 2025-10-17 18:04:31 ---
+Comment: Numpy float64 (double precision)
+--------------------------------------------------
+Matrix size: 1000x1000 * 1000x1000, Performance: 0.65 TFLOPS
+Matrix size: 2000x2000 * 2000x2000, Performance: 0.70 TFLOPS
+Matrix size: 4000x4000 * 4000x4000, Performance: 0.71 TFLOPS
+
+--- Benchmark Run: 2025-10-21 18:36:48 ---
+Comment: float64 C++ version - classical scheme with cash
+==================================================
+Matrix size: 1000x1000 * 1000x1000, Performance: 14.80 GFLOPS
+Matrix size: 2000x2000 * 2000x2000, Performance: 14.76 GFLOPS
+Matrix size: 4000x4000 * 4000x4000, Performance: 14.65 GFLOPS

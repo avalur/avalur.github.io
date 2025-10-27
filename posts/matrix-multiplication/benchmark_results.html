@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .algo-cell {
+            font-weight: 600;
+            color: #2196F3;
+        }
+
+        .number-cell {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight-best {
+            background-color: #c8e6c9;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Matrix Multiplication Benchmark Results</h1>
+
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Algorithm</th>
+            <th>M</th>
+            <th>N</th>
+            <th>K</th>
+            <th>Runs</th>
+            <th>Threads</th>
+            <th>Avg Time (s)</th>
+            <th>Min Time (s)</th>
+            <th>GFLOPS</th>
+            <th>Checksum</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="algo-cell">naive</td>
+            <td class="number-cell">2048</td>
+            <td class="number-cell">2048</td>
+            <td class="number-cell">2048</td>
+            <td class="number-cell">10</td>
+            <td class="number-cell">0</td>
+            <td class="number-cell">1.154</td>
+            <td class="number-cell">1.145</td>
+            <td class="number-cell">14.89</td>
+            <td class="number-cell">2.98e+04</td>
+            <td>✓</td>
+        </tr>
+        <tr>
+            <td class="algo-cell">naive</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">10</td>
+            <td class="number-cell">0</td>
+            <td class="number-cell">9.299</td>
+            <td class="number-cell">9.246</td>
+            <td class="number-cell">14.78</td>
+            <td class="number-cell">1.91e+04</td>
+            <td>✓</td>
+        </tr>
+        <tr>
+            <td class="algo-cell">blocked</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">5</td>
+            <td class="number-cell">0</td>
+            <td class="number-cell">20.129</td>
+            <td class="number-cell">19.992</td>
+            <td class="number-cell">6.83</td>
+            <td class="number-cell">7.94e+04</td>
+            <td>✓</td>
+        </tr>
+        <tr>
+            <td class="algo-cell">gcd_mt_4t</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">5</td>
+            <td class="number-cell">4</td>
+            <td class="number-cell">1.754</td>
+            <td class="number-cell">1.690</td>
+            <td class="number-cell">78.36</td>
+            <td class="number-cell">1.62e+05</td>
+            <td>✓</td>
+        </tr>
+        <tr>
+            <td class="algo-cell">gcd_mt_8t</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">5</td>
+            <td class="number-cell">8</td>
+            <td class="number-cell">1.805</td>
+            <td class="number-cell">1.745</td>
+            <td class="number-cell">76.15</td>
+            <td class="number-cell">1.44e+05</td>
+            <td>✓</td>
+        </tr>
+        <tr>
+            <td class="algo-cell">accelerate</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">5</td>
+            <td class="number-cell">0</td>
+            <td class="number-cell">0.190</td>
+            <td class="number-cell">0.188</td>
+            <td class="number-cell">722.43</td>
+            <td class="number-cell">-2.86e+04</td>
+            <td>✓</td>
+        </tr>
+        <tr class="highlight-best">
+            <td class="algo-cell">metal</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">4096</td>
+            <td class="number-cell">5</td>
+            <td class="number-cell">0</td>
+            <td class="number-cell">0.053</td>
+            <td class="number-cell">0.051</td>
+            <td class="number-cell">2610.30</td>
+            <td class="number-cell">-1.01e+05</td>
+            <td>✓</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
