@@ -1,7 +1,7 @@
 # Simple Makefile for the matrix multiplication benchmark on macOS
 # Requires: clang
 
-CFLAGS   := -O3 -march=armv8.6-a+fp+simd -Wall -Wextra -I.
+CFLAGS   := -O3 -march=armv8.6-a+fp+simd -ffast-math -funroll-loops -Wall -Wextra -I.
 
 SRC      := bench.c
 HDR      := bench.h

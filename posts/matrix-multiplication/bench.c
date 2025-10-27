@@ -78,20 +78,27 @@ static size_t extra_naive(int M, int N, int K, int threads) {
 
 static bool alg_blocked(const double *A, const double *B, double *C, int M, int N, int K, int threads) {
     (void)threads;
-    const int BS = 128 / (int)sizeof(double); // tune: roughly cache line aware
-    for (int ii = 0; ii < M; ii += BS) {
-        int iimax = ii + BS; if (iimax > M) iimax = M;
-        for (int kk = 0; kk < K; kk += BS) {
-            int kkmax = kk + BS; if (kkmax > K) kkmax = K;
+    // Optimal block size for M3: L1 cache is 128KB per core
+    // For doubles: aim for 3 blocks (A_block, B_block, C_block) fitting in L1
+    // Use 64 for better cache utilization and SIMD alignment
+    const int BS = 64;
+    
+    // Reorder loops: tile K first (better for accumulation), then N, then M
+    for (int kk = 0; kk < K; kk += BS) {
+        int kkmax = kk + BS; if (kkmax > K) kkmax = K;
+        for (int ii = 0; ii < M; ii += BS) {
+            int iimax = ii + BS; if (iimax > M) iimax = M;
             for (int jj = 0; jj < N; jj += BS) {
                 int jjmax = jj + BS; if (jjmax > N) jjmax = N;
+                // Inner loops: i-k-j order for better vectorization
                 for (int i = ii; i < iimax; ++i) {
                     for (int k = kk; k < kkmax; ++k) {
                         double aik = A[i*(size_t)K + k];
                         const double *brow = &B[k*(size_t)N + jj];
                         double *crow = &C[i*(size_t)N + jj];
-                        for (int j = jj; j < jjmax; ++j) {
-                            crow[j - jj] += aik * brow[j - jj];
+                        // This inner loop can now be vectorized by compiler
+                        for (int j = 0; j < (jjmax - jj); ++j) {
+                            crow[j] += aik * brow[j];
                         }
                     }
                 }
@@ -106,26 +113,48 @@ static size_t extra_blocked(int M, int N, int K, int threads) {
 }
 
 static bool alg_gcd_mt(const double *A, const double *B, double *C, int M, int N, int K, int threads) {
-    // Parallelize outer i loop in tiles using dispatch_apply
-    int tile = 32; // rows per task; tune later
+    // Use blocking within parallel regions + better work distribution
+    const int BS = 64;  // block size for inner computation
+    int tile = 128;     // increase rows per task to reduce overhead
+    if (M < 512) tile = 32;  // smaller tiles for smaller matrices
+    
     int tasks = (M + tile - 1) / tile;
     dispatch_queue_t q = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
-    (void)threads; // GCD decides; we could add a semaphore to cap concurrency later
-
+    
+    // Optional: cap concurrency if threads parameter is specified
+    dispatch_semaphore_t sem = NULL;
+    if (threads > 0) {
+        sem = dispatch_semaphore_create(threads);
+    }
+    
     dispatch_apply(tasks, q, ^(size_t t){
+        if (sem) dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+        
         int i0 = (int)(t * tile);
         int i1 = i0 + tile; if (i1 > M) i1 = M;
-        for (int i = i0; i < i1; ++i) {
-            for (int k = 0; k < K; ++k) {
-                double aik = A[i*(size_t)K + k];
-                const double *brow = &B[k*(size_t)N];
-                double *crow = &C[i*(size_t)N];
-                for (int j = 0; j < N; ++j) {
-                    crow[j] += aik * brow[j];
+        
+        // Apply blocking within each parallel task
+        for (int kk = 0; kk < K; kk += BS) {
+            int kkmax = kk + BS; if (kkmax > K) kkmax = K;
+            for (int jj = 0; jj < N; jj += BS) {
+                int jjmax = jj + BS; if (jjmax > N) jjmax = N;
+                for (int i = i0; i < i1; ++i) {
+                    for (int k = kk; k < kkmax; ++k) {
+                        double aik = A[i*(size_t)K + k];
+                        const double *brow = &B[k*(size_t)N + jj];
+                        double *crow = &C[i*(size_t)N + jj];
+                        // Vectorizable inner loop
+                        for (int j = 0; j < (jjmax - jj); ++j) {
+                            crow[j] += aik * brow[j];
+                        }
+                    }
                 }
             }
         }
+        
+        if (sem) dispatch_semaphore_signal(sem);
     });
+    
     return true;
 }
 
