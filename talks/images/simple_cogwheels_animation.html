@@ -9,6 +9,10 @@
             height: 125px;
             border-radius: 50%;
             border: 15px dashed #333;
+            /* Add display flex to center the text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .cogwheel-large {
@@ -34,12 +38,20 @@
 <body>
     <div id="container" style="position: relative; width: 580px; height: 580px;">
         <div class="cogwheel cogwheel-large" id="cog1">
-            <span class="cogwheel-text">CSAI<br>NUP</span>
+            <span class="cogwheel-text">IOAI</span>
         </div>
-        <div class="cogwheel" id="cog2"></div>
-        <div class="cogwheel" id="cog3"></div>
-        <div class="cogwheel" id="cog4"></div>
-        <div class="cogwheel" id="cog5"></div>
+        <div class="cogwheel" id="cog2">
+            <span class="cogwheel-text">JB</span>
+        </div>
+        <div class="cogwheel" id="cog3">
+            <span class="cogwheel-text">NUP</span>
+        </div>
+        <div class="cogwheel" id="cog4">
+            <span class="cogwheel-text">???</span>
+        </div>
+        <div class="cogwheel" id="cog5">
+            <span class="cogwheel-text">CCS</span>
+        </div>
     </div>
 
     <script>
