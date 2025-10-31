@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <meta name="description" content="Vibe Coding with Junie">
+        <meta name="author" content="Alex Avdiushenko" />
+        <meta name="keywords" content="VibeCoding, Junie">
+
+		<title>Vibe Coding with Junie</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/moon.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Include Chart.js CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="../plugin/reveald3.js"></script>
+	</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section id="title">
+					<br><br><br>
+						<h2>Vibe Coding with Junie</h2>
+					<div class="column">
+						<a href="https://youtu.be/qhbuKbxJsk8?si=jG10edUWsVoWZWlT">
+							<div class="fig-container no-margin-top" data-file="images/modular-multiplication.html"
+							style="padding-left: 10%"></div>
+						</a>
+					</div>
+					<div class="column">
+						<br/><br/><i>by</i><br/>
+						<p>Alex Avdiushenko</p>
+							<a href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
+					</div>
+                </section>
+				<section>
+					<h3 style="text-align: left">Brief plan</h3>
+					<ol>
+						<li class="fragment">Come up with some exiting idea</li>
+						<li class="fragment">Go to GPT-5 to make an advanced prompt for coding agent</li>
+						<li class="fragment">Run Junie to implement everything</li>
+                        <li class="fragment">Look into the result and fixing bugs with AI</li>
+                        <li class="fragment"><s>Profit</s> Satisfaction and fitness</li>
+					</ol>
+					<br>
+				</section>
+                <section>
+                    <h3 style="text-align: left">Come up with some exiting idea</h3>
+                </section>
+				<section data-background-color="white">
+                    <h3 style="text-align: left">Go to GPT-5 to make an advanced prompt for coding agent</h3>
+                    <img src="images/ChatGPTpromptGen.png" alt="ChatGPTpromptGen.png">
+				</section>
+				<section>
+                    <h3 style="text-align: left; display: flex; align-items: center;">
+                        <img src="images/junie.png" alt="junie" height="70px" style="padding-right: 20px">
+                        to implement everything</h3>
+                    <table>
+                        <tr>
+                            <td><img src="images/JunieFirstStep.png" alt="JunieFirstStep"></td>
+                            <td><img src="images/JunieSecondStep.png" alt="JunieSecondStep.png"></td>
+                        </tr>
+                    </table>
+				</section>
+				<section>
+					<h3 style="text-align: left">Some improvements</h3>
+                    <ul>
+                        <li class="fragment">Junie, update README.md with Run instructions</li>
+                        <li class="fragment">Manually fix dependency:
+                            <code style="font-size: 25px; color: red; background-color: black; padding: 0px; display: block; white-space: pre-line">
+                                failed to load config from
+                                /Users/Aleksandr.Avdiushenko/PycharmProjects/fitness-app/frontend/vite.config.ts
+                                error when starting dev server:
+                                Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@vitejs/plugin-react'
+                                imported from
+                                /Users/Aleksandr.Avdiushenko/PycharmProjects/fitness-app/frontend/vite.config.ts.timestamp-1761905854386-d9cc5c4f6bb72.mjs
+                            </code>
+                        </li>
+                        <li class="fragment">No any tests and <strong>camera usage</strong></li>
+                    </ul>
+				</section>
+                <section>
+                    <table>
+                        <tr>
+                            <img src="images/simple_interface.png" alt="simple_interface.png" width="45%">
+                            <span>   </span>
+                            <img src="images/simple_interface_2.png" alt="simple_interface_2" width="45%">
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				slideNumber: true,
+				showSlideNumber: 'speaker',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				// showNotes: 'separate-page',
+
+  			    // Activate the scroll view
+  				// view: 'scroll',
+  				// Force the scrollbar to remain visible
+  				// scrollProgress: true,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3 ]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+		  // Data for Pie Chart
+		  const data = {
+			labels: [
+			  '44% Yes, all the time',
+			  '25% Yes, once a week',
+			  '19% Not often',
+			  '12% No'
+			],
+			datasets: [{
+			  label: 'Survey Results',
+			  data: [43.8, 25, 18.8, 12.5],
+			  backgroundColor: [
+				'green',
+				'lightgreen',
+				'red',
+				'darkred',
+			  ],
+			  hoverOffset: 4
+			}]
+		  };
+
+		  // Configuration for Chart.js
+		  const config = {
+			type: 'pie',
+			data: data,
+			options: {
+			  responsive: true,
+			  plugins: {
+				legend: {
+				  position: 'top',
+					labels: {
+					  font: {
+						  size: 32
+					  }
+					}
+
+				}
+			  }
+			},
+		  };
+
+		  // Initialize Chart.js Pie Chart
+		  const survey_results = new Chart(
+			document.getElementById('survey_results'),
+			config
+		  );
+        </script>
+    </body>
+</html>
