@@ -92,3 +92,9 @@ body {
   /*padding: 10px;*/
   color: gray;
 }
+
+.highlighted {
+    text-align: left;
+    color: white;
+    background-color: orange;
+}
