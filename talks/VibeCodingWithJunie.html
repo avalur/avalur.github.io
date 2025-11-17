@@ -43,6 +43,14 @@
 						<p>Alex Avdiushenko</p>
 							<a href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
 					</div>
+                    <aside class="notes">
+                        Hello everyone!
+                        I'm Alex Avdiushenko, and I am happy to have a talk here.
+                        Today I suggest discussing the vibe coding with Junie.
+                        Junie is a tool that helps you to create a web app
+                        with an AI-powered coding agent.
+                        It's a great way to learn how to code and to improve your coding skills.
+                    </aside>
                 </section>
 				<section>
                     <section>
@@ -55,11 +63,29 @@
                             <li class="fragment"><s>Profit</s> Satisfaction and <span class="highlighted">fitness</span></li>
                         </ol>
                         <br>
+                        <aside class="notes">
+                            Let me walk you through our journey today. We'll follow five simple steps.
+                            First, we need a spark of inspiration - something that excites us.
+                            <br>
+                            Then, we'll use GPT-5 to craft the perfect instructions for our AI coding agent.
+                            <br>
+                            Next comes a bit of the magic - we let Junie do the heavy lifting and build our app.
+                            <br>
+                            Of course, no code is perfect on the first try, so we'll debug with AI assistance.
+                            <br>
+                            And finally, while we might not make millions yet, we'll gain something even better -
+                            the satisfaction of creating something real and useful!
+                        </aside>
                     </section>
                     <section data-background-color="black">
                         <iframe width="90%" height="800"
                                 src="https://www.youtube.com/embed/XJmdNjV8DW4" allowfullscreen>
                         </iframe>
+                        <aside class="notes">
+                            Before we dive in, let's watch this quick video that demonstrates what we're about to create.
+                            Pay attention to how the technology can transform a simple idea into a working application.
+                            This will give you context for everything we're going to discuss.
+                        </aside>
                     </section>
                     <section>
                         <h3 style="text-align: left">1. Come up with some exiting idea</h3>
@@ -70,81 +96,191 @@
                         </ul>
                         <img class="fragment" style="border-radius: 2%;width: 55%" src="images/agitapp.png" alt="agitapp">
                         <img class="fragment" style="border-radius: 2%;width: 55%" src="images/trainfit.png" alt="trainfit">
+                        <aside class="notes">
+                            Step one is all about finding your passion project. Start with something you genuinely enjoy -
+                            maybe you love running, playing guitar, or doodling during meetings.
+                            <br>
+                            Then ask yourself: how could technology make this activity better or more engaging?
+                            <br>
+                            It's crucial to do your homework here. Look at what already exists in the market.
+                            As you can see on screen, there are apps like Agit and TrainFit that tackle fitness tracking.
+                            Study these solutions - what do they do well? What's missing? This research helps you 
+                            find your unique angle and perspective on how to prompt AI.
+                        </aside>
                     </section>
                     <section data-background-color="white">
                         <h3 style="text-align: left">2. Go to GPT-5 to make an advanced prompt for coding agent</h3>
                         <img src="images/ChatGPTpromptGen.png" alt="ChatGPTpromptGen.png">
+                        <aside class="notes">
+                            Now here's where things get interesting. We're not going to write code ourselves just yet.
+                            Instead, we'll use GPT-5 as our prompt engineer. Think of this as writing a detailed 
+                            specification for another AI. You describe your vision, the features you want, 
+                            the user experience you're imagining - and GPT-5 helps you craft this into a 
+                            comprehensive, technical prompt that coding agent Junie can understand and execute.
+                            This step is critical because a well-crafted prompt means better results from your coding agent.
+                            It's like being a good architect before construction begins.
+                        </aside>
                     </section>
                 </section>
 				<section>
-                    <section>
-                        <h3 style="text-align: left; display: flex; align-items: center;">
-                            3. <img src="images/junie.png" alt="junie" height="70px" style="padding-right: 10px;padding-left: 10px">
-                            to implement everything</h3>
-                        <table>
-                            <tr>
-                                <td><img src="images/JunieFirstStep.png" alt="JunieFirstStep"></td>
-                                <td><img src="images/JunieSecondStep.png" alt="JunieSecondStep.png"></td>
-                            </tr>
-                        </table>
+                        <section>
+                            <h3 style="text-align: left; display: flex; align-items: center;">
+                                3. <img src="images/junie.png" alt="junie" height="70px" style="padding-right: 10px;padding-left: 10px">
+                                to implement everything</h3>
+                            <table>
+                                <tr>
+                                    <td><img src="images/JunieFirstStep.png" alt="JunieFirstStep"></td>
+                                    <td><img src="images/JunieSecondStep.png" alt="JunieSecondStep.png"></td>
+                                </tr>
+                            </table>
+                            <aside class="notes">
+                                Here's where the magic happens! We hand over our carefully crafted prompt to Junie,
+                                our AI coding agent. Watch as Junie breaks down the problem, plans the architecture,
+                                and starts generating code.
+                                <br>
+                                In the first image, you see Junie analyzing the requirements.
+                                <br>
+                                In the second, it's already building out the project structure and writing actual code.
+                                This is vibe-coding at its finest - you're guiding the direction while the AI handles
+                                the heavy implementation details. It's collaborative creation between human and machine.
+                            </aside>
+                        </section>
+                        <section>
+                            <h3 style="text-align: left">4. Some improvements</h3>
+                            <ul>
+                                <li class="fragment">Junie, update README.md with Run instructions</li>
+                                <li class="fragment">Manually fix dependency:
+                                    <code style="font-size: 25px; color: red; background-color: black; padding: 0px; display: block; white-space: pre-line">
+                                        failed to load config from
+                                        /Users/Aleksandr.Avdiushenko/PycharmProjects/fitness-app/frontend/vite.config.ts
+                                        error when starting dev server:
+                                        Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@vitejs/plugin-react'
+                                        imported from
+                                        /Users/Aleksandr.Avdiushenko/PycharmProjects/fitness-app/frontend/vite.config.ts.timestamp-1761905854386-d9cc5c4f6bb72.mjs
+                                    </code>
+                                </li>
+                                <li class="fragment">No any tests and <strong>camera usage</strong></li>
+                            </ul>
+                            <aside class="notes">
+                                Now let's be real - AI isn't perfect, and that's okay! This is the debugging phase.
+                                <br>
+                                First, I asked Junie to improve the documentation by updating the README.
+                                Good documentation is essential for any project.
+                                <br>
+                                Then, we hit a classic dependency issue -
+                                a missing React plugin. Sometimes you need to roll up your sleeves and fix things manually.
+                                That's part of the process.
+                                <br>
+                                Finally, I noticed Junie hadn't implemented tests or
+                                camera functionality yet. These are critical features for our fitness app.
+                                <br>
+                                The key lesson here: AI is a powerful assistant, but you still need to be
+                                both the project manager and the software developer,
+                                catching gaps and guiding the next steps.
+                            </aside>
+                        </section>
+                        <section>
+                            <table>
+                                <tr>
+                                    <img src="images/simple_interface.png" alt="simple_interface.png" width="45%">
+                                    <span>   </span>
+                                    <img src="images/simple_interface_2.png" alt="simple_interface_2" width="45%">
+                                </tr>
+                            </table>
+                            <aside class="notes">
+                                And here's our first working prototype! Look at this simple interface.
+                                On the left, you see the main screen - minimalist and focused.
+                                On the right, we have the exercise tracking view. It's not fancy, but it works!
+                                <br>
+                                This is the beauty of vibe coding - you can go from idea to working prototype
+                                incredibly quickly. Now we have something tangible to test, to show users,
+                                to iterate on. Remember, perfect is the enemy of good. This functional prototype
+                                is far more valuable than a perfectly planned app that doesn't exist yet.
+                            </aside>
+                        </section>
+                        <section>
+                            <h4 style="text-align: left">Actually..There were Milestones in the Plan</h4>
+                            <ul>
+                                <li class="fragment">M1: Repo + scaffolding + plan generator stub</li>
+                                <li class="fragment">M2: Live pose + rep counting baseline + UI</li>
+                                <li class="fragment">M3: Reference templates + DTW analysis + feedback</li>
+                                <li class="fragment">M4: PWA + accessibility + privacy hardening + docs</li>
+                            </ul>
+                            <aside class="notes">
+                                Let me share something important - good project management, even with AI.
+                                Junie actually created a milestone-based development plan. This is smart engineering!
+                                <br>
+                                Milestone one: set up the foundation - the repository, basic structure, and planning tools.
+                                <br>
+                                Milestone two: the core functionality - live pose detection and repetition counting.
+                                <br>
+                                Milestone three: advanced features like reference templates and detailed analysis.
+                                <br>
+                                Milestone four: making it production-ready with progressive web app features,
+                                accessibility support, security hardening, and comprehensive documentation.
+                                <br>
+                                Breaking projects into milestones like this keeps everything organized and achievable.
+                                You're not trying to build everything at once - you're making steady, measurable progress.
+                            </aside>
+                        </section>
+                        <section>
+                            <h4 style="text-align: left">
+                                Implement step-by-stem the M2 part:<br>
+                                Client-side Pose + Real-time Rep Counting + UI
+                            </h4>
+                            <img src="images/M2_implementation.png" alt="M2_implementation">
+                            <aside class="notes">
+                                Let's zoom in on Milestone 2, the heart of our fitness app.
+                                Here we're implementing three critical components working together.
+                                <br>
+                                First, client-side pose detection - this means the app analyzes your body position
+                                right in your browser, no server needed. Privacy-first design!
+                                <br>
+                                Second, real-time repetition counting - the app actually tracks your squats or push-ups
+                                as you do them. Third, the user interface that brings it all together.
+                                You can see in this screenshot how Junie is methodically implementing each piece.
+                                This is where your fitness app becomes real - where technology meets physical activity.
+                            </aside>
+                        </section>
+                        <section>
+                            <h4 style="text-align: left">
+                                Sometimes Junie asks questions
+                            </h4>
+                            <img src="images/JunieAsks.png" alt="JunieAsks">
+                            <aside class="notes">
+                                Here's something I really appreciate about Junie - it doesn't just blindly follow orders.
+                                When it's uncertain or when there are multiple valid approaches, Junie asks questions.
+                                This is intelligent behavior! It's asking for clarification to make better decisions.
+                                <br>
+                                Should we use this library or that one? What's the preferred styling approach?
+                                How do we want to handle edge cases? This collaborative dialogue is what makes
+                                vibe coding so effective. You're not just a user giving commands - you're a partner
+                                in the development process. The AI respects your judgment and seeks your input
+                                when it matters. This is the future of software development.
+                            </aside>
+                        </section>
                     </section>
                     <section>
-                        <h3 style="text-align: left">4. Some improvements</h3>
-                        <ul>
-                            <li class="fragment">Junie, update README.md with Run instructions</li>
-                            <li class="fragment">Manually fix dependency:
-                                <code style="font-size: 25px; color: red; background-color: black; padding: 0px; display: block; white-space: pre-line">
-                                    failed to load config from
-                                    /Users/Aleksandr.Avdiushenko/PycharmProjects/fitness-app/frontend/vite.config.ts
-                                    error when starting dev server:
-                                    Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@vitejs/plugin-react'
-                                    imported from
-                                    /Users/Aleksandr.Avdiushenko/PycharmProjects/fitness-app/frontend/vite.config.ts.timestamp-1761905854386-d9cc5c4f6bb72.mjs
-                                </code>
-                            </li>
-                            <li class="fragment">No any tests and <strong>camera usage</strong></li>
-                        </ul>
+                        <section>
+                            <h3 style="text-align: left">5. It's time to run live-demo!</h3>
+                            <p style="text-align: left">Github repo:
+                                <a href="https://github.com/avalur/fitness-app">fitness-app</a>
+                            </p>
+                            <p class="fragment" style="text-align: left">And may be to discuss it:
+                                <a href="https://www.linkedin.com/posts/aleksandr-avdiushenko_fitness-app-by-junie-demo-activity-7395142234406354944-KNgH">LinkedIn</a>
+                            </p>
+                            <aside class="notes">
+                                And now for the moment of truth - the live demonstration!
+                                This is where we see everything come together in real-time.
+                                I encourage you all to check out the GitHub repository after this presentation.
+                                You can see the full source code, read the documentation, and even try it yourself.
+                                The beauty of this approach is transparency - everything we built is open and accessible.
+                                You can learn from it, modify it, or use it as inspiration for your own projects.
+                                Let's see our fitness app in action and watch it count exercises in real-time!
+                                This is vibe coding - from idea to working application, all powered by AI assistance.
+                            </aside>
+                        </section>
                     </section>
-                    <section>
-                        <table>
-                            <tr>
-                                <img src="images/simple_interface.png" alt="simple_interface.png" width="45%">
-                                <span>   </span>
-                                <img src="images/simple_interface_2.png" alt="simple_interface_2" width="45%">
-                            </tr>
-                        </table>
-                    </section>
-                    <section>
-                        <h4 style="text-align: left">Actually..There were Milestones in the Plan</h4>
-                        <ul>
-                            <li class="fragment">M1: Repo + scaffolding + plan generator stub</li>
-                            <li class="fragment">M2: Live pose + rep counting baseline + UI</li>
-                            <li class="fragment">M3: Reference templates + DTW analysis + feedback</li>
-                            <li class="fragment">M4: PWA + accessibility + privacy hardening + docs</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h4 style="text-align: left">
-                            Implement step-by-stem the M2 part:<br>
-                            Client-side Pose + Real-time Rep Counting + UI
-                        </h4>
-                        <img src="images/M2_implementation.png" alt="M2_implementation">
-                    </section>
-                    <section>
-                        <h4 style="text-align: left">
-                            Sometimes Junie asks questions
-                        </h4>
-                        <img src="images/JunieAsks.png" alt="JunieAsks">
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <h3 style="text-align: left">5. It's time to run live-demo!</h3>
-                        <p><a href="https://github.com/avalur/fitness-app">
-                            Github repo: fitness-app
-                        </a></p>
-                    </section>
-                </section>
             </div>
         </div>
 		<script src="../dist/reveal.js"></script>
