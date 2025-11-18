@@ -20,7 +20,9 @@
 	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
 
         <!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+        <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+        <!-- Pointer circle plugin styles -->
+        <link rel="stylesheet" href="../plugin/pointer-circle/pointer-circle.css">
 
 		<!-- Include Chart.js CDN -->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -299,6 +301,9 @@
 		<script src="../plugin/highlight/highlight.js"></script>
 		<script src="../plugin/math/math.js"></script>
 		<script src="../scripts/utils.js"></script>
+        <script src="../plugin/laser/laser.js"></script>
+        <!-- Pointer circle plugin script -->
+        <script src="../plugin/pointer-circle/pointer-circle.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -327,8 +332,8 @@
 				// Bounds for smallest/largest possible scale to apply to content
 				minScale: 0.2,
 				maxScale: 2.0,
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3 ]
-			});
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3, RevealPointerCircle ]
+            });
 
 			Reveal.addEventListener('fragmentshown', function (event) {
 				if (lettersAnimate) {

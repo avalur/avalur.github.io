@@ -1,0 +1,35 @@
+/* Reveal.js Pointer Circle Plugin
+ * Renders a yellow 20px filled circle centered on the native mouse pointer.
+ * Also supports transient stroke canvases for drawing a yellow line while
+ * the left mouse button is pressed. The native cursor remains visible. */
+
+.reveal-pointer-circle {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: #ffd400; /* yellow */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%); /* center the circle on the pointer */
+}
+
+/* A full-viewport canvas used per-stroke; faded out on mouseup */
+.reveal-pointer-stroke {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999; /* just beneath the circle */
+  opacity: 1;
+  will-change: opacity;
+}
+
+.reveal-pointer-stroke.fade-out {
+  opacity: 0;
+  transition: opacity 2s ease-out;
+}
