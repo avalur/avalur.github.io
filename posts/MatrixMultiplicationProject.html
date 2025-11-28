@@ -557,7 +557,7 @@
                algorithms, based on your benchmarking results and implementation experience.
                 In your analysis, address the following points:</p>
             <ul>
-                <li><strong>Operation counts:</strong> Summarize the theoretical number of multiplications
+                <li><strong>Operation counts (5 points):</strong> Summarize the theoretical number of multiplications
                     and additions each algorithm uses. Discuss how this reduction in multiplications affected
                     your measured performance. Did fewer multiplications generally translate
                     to faster runtime? Explain how extra additions might diminish the benefit
@@ -565,7 +565,7 @@
                     is relatively cheap but not free.
                     If you counted operations in your code, report the observed counts and confirm
                     they match the expected formula.</li>
-                <li><strong>Memory overhead and access patterns:</strong> Compare the memory requirements
+                <li><strong>Memory overhead and access patterns (5 points):</strong> Compare the memory requirements
                     of the two algorithms. Strassen’s algorithm, for instance, needs auxiliary
                     matrices to store intermediate sums (in an optimized implementation,
                     Strassen can be done with a small constant factor more memory,
@@ -576,7 +576,7 @@
                     How might this extra memory usage impact performance (consider cache misses and data movement)?
                     If you ran on large matrices, did you notice any performance issues related to memory
                     (e.g., higher memory usage causing slowdowns)?</li>
-                <li><strong>Numerical stability:</strong> Reflect on the numerical stability of each approach.
+                <li><strong>Numerical stability (5 points):</strong> Reflect on the numerical stability of each approach.
                     Both Strassen and the AlphaEvolve algorithm use subtractions which can lead to cancellation
                     and rounding error. Strassen’s algorithm is known to be slightly less stable than
                     the naive algorithm (because it subtracts large intermediate values).
@@ -588,7 +588,7 @@
                     if results diverge or lose accuracy compared to naive multiplication.
                     Even if you did not explicitly test this, discuss theoretically which algorithm
                     you expect to introduce more numerical error and why.</li>
-                <li><strong>Hardware and parallelism impact:</strong> Analyze how each algorithm fared across different
+                <li><strong>Hardware and parallelism impact (5 points):</strong> Analyze how each algorithm fared across different
                     hardware setups. For instance, if you tested on a GPU or multi-core CPU,
                     was either algorithm able to take advantage of parallelism effectively?
                     Discuss the fact that naive matrix multiplication is highly optimized on modern hardware
@@ -604,7 +604,7 @@
                     the cross-over point where an asymptotically faster algorithm wins may be very large,
                     and highly optimized conventional algorithms (especially on specialized hardware)
                     can dominate for practical matrix sizes.</li>
-                <li><strong>Overall takeaways:</strong> Conclude with a summary of what you learned.
+                <li><strong>Overall takeaways (5 points):</strong> Conclude with a summary of what you learned.
                     For example, you might note that while AlphaEvolve’s algorithm is a stunning theoretical
                     advancement,
                     its practical benefit is subtle. The reduction of one multiplication
