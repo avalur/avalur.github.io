@@ -91,10 +91,10 @@
                     </div>
 					<div class="fragment" style="margin-bottom:20px;">
 							<div class="typesetting">
-								<h3>JavaScript, Beam Search and Python w/ AI</h3>
+								<h3>ML, JavaScript, and Beam Search w/ AI</h3>
 								<br />
 								Alex Avdiushenko <br />
-								July, 2025
+								December, 2025
 							</div>
 					</div>
                     <aside class="notes">
@@ -106,7 +106,111 @@
                 </section>
                 <section>
                     <section>
-                        <h3>Step 1: Look for some implementation of Tetris on the Inrenet</h3>
+    					<div class="fragment" style="margin-bottom:20px;">
+                            <img src="../ml_with_python/images/ml_def_from_chatGPT.png" alt="ml_def_from_chatGPT">
+                        </div>
+                    </section>
+                    <section>
+                        <div class="typesetting">
+                            <p style="text-align: left">ML is built using the tools of mathematical statistics,
+                            numerical methods, mathematical analysis, optimization methods, probability theory,
+                                and various techniques for working with data in digital form.</p>
+                            <br />
+                        </div>
+                        <div class="fragment" style="margin-bottom:20px;">
+                            <div class="typesetting">
+                                <p class="r-frame important" style="text-align: left;padding-left: 10px">What is it?</p>
+                            \[\begin{cases}
+                                \frac{\partial \rho}{\partial t} + \frac{\partial(\rho u_{i})}{\partial x_{i}} = 0 \\ \\
+                                \frac{\partial (\rho u_{i})}{\partial t} + \frac{\partial[\rho u_{i}u_{j}]}{\partial x_{j}} = -\frac{\partial p}{\partial x_{i}} + \frac{\partial \tau_{ij}}{\partial x_{j}} + \rho f_{i}
+                              \end{cases}
+                            \]
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <iframe width="1400" height="650" src="https://www.youtube.com/embed/5028bTvDwO8"></iframe>
+                        <div class="fragment" style="margin-bottom:20px;">
+                            <div class="typesetting">
+                                <p>In machine learning, there is no pre-set model with equations...</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 style="text-align: left">Types of Machine Learning</h3>
+                        <div class="fragment" style="margin-bottom:20px;">
+                            <div class="typesetting">
+                                <ul>
+                                  <li><strong class="important">Supervised Learning:</strong> The algorithm is provided with
+                                      <span class="important">labeled</span> training data, and the goal is to learn a general rule
+                                      that maps inputs to outputs</li>
+                                  <li class="fragment"><strong class="important">Unsupervised Learning:</strong> The algorithm is provided with
+                                      <span class="important">unlabeled</span> data and must find the underlying structure in the data,
+                                      like clustering or dimensionality reduction</li>
+                                  <li class="fragment"><strong class="important">Reinforcement Learning:</strong> The algorithm
+                                      <span class="important">learns by interacting</span> with an environment
+                                      and receiving feedback in the form of rewards or penalties</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <p style="text-align: left">Data matrix (objects and features as rows and columns):</p>
+
+                        <p><br />
+                            $F = ||f_j(x_i)||_{\ell\times n} = \left[ {\begin{array}{ccc}
+                           f_1(x_1) & \dots & f_n(x_1) \\
+                             \vdots  & \ddots &   \vdots  \\
+                           f_1(x_\ell) & \dots & f_n(x_\ell)
+                          \end{array} } \right]$
+                        </p><br />
+
+                    </section>
+                    <section>
+                        <h3>Types of tasks</h3>
+
+                        <h4 style="text-align: left">Classification</h4>
+                        <ul>
+                          <li>$Y = \{-1, +1\}$ — binary classification</li>
+                          <li>$Y = \{1, \dots, M\}$ — multiclass classification</li>
+                          <li>$Y = \{0, 1\}^M$ — multiclass with overlapping classes</li>
+                        </ul>
+
+                        <h4 style="text-align: left">Regression</h4>
+                          <p>$Y = \mathbb{R}\ $ or $\ Y = \mathbb{R}^m$</p>
+
+                        <h4 style="text-align: left">Ranking</h4>
+                          $Y$ — finite ordered set
+                    </section>
+                    <section>
+                        <h3>Predictive Model</h3>
+
+                        <p style="text-align: left">A model (predictive model) — a parametric family of functions</p>
+
+                        <p>$A = \{g(x, \theta) | \theta \in \Theta\}$,</p>
+
+                        <p style="text-align: left">where $g: X \times \Theta \to Y$ — a fixed function, $\Theta$ — a set of allowable
+                            values of parameter $\theta$</p>
+
+                        <div class="fragment" style="margin-bottom:20px;">
+                            <div class="typesetting">
+                            <h4 style="text-align: left">Example</h4>
+
+                            <p>Linear model with vector of parameters
+                                $\theta = (\theta_1, \dots, \theta_n), \Theta = \mathbb{R}^n$:</p>
+
+                            <p>$g(x, \theta) = \sum\limits_{j=1}^n \theta_jf_j(x)$ — for regression and ranking,
+                                $Y = \mathbb{R}$</p>
+
+                            <p>$g(x, \theta) = \mathrm{sign}\left(\sum\limits_{j=1}^n \theta_jf_j(x)\right)$ — for classification,
+                                $Y = \{-1, +1\}$</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Tetris, step 1: Look for some implementation of Tetris on the Inrenet</h3>
                         <img src="images/initial_js_tetris.png" alt="initial_js_tetris" style="border-radius: 5%;width: 55%">
                         <p>Source: <a href="https://codeincomplete.com/articles/javascript-tetris/">Javascript Tetris, how it works</a></p>
                         <aside class="notes">
