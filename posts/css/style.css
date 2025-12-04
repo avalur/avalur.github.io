@@ -12,9 +12,148 @@ body {
 }
 
 .container {
-    max-width: 680px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
+}
+
+/* Layout with sidebar */
+.blog-layout {
+    display: flex;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 680px;
+}
+
+/* Table of Contents Sidebar */
+.toc-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.toc-wrapper {
+    position: sticky;
+    top: 40px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+.toc-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e1e4e8;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    margin-bottom: 8px;
+}
+
+.toc-list a {
+    display: block;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    color: #666;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    line-height: 1.4;
+}
+
+.toc-list a:hover {
+    color: #1a73e8;
+    background-color: #f8f9fa;
+    border-left-color: #1a73e8;
+}
+
+.toc-list a.active {
+    color: #1a73e8;
+    background-color: #e8f0fe;
+    border-left-color: #1a73e8;
+    font-weight: 500;
+}
+
+/* Nested TOC items (h3) */
+.toc-list .toc-h3 {
+    padding-left: 28px;
+    font-size: 0.85rem;
+}
+
+.toc-list .toc-h3 a {
+    padding: 4px 12px;
+}
+
+/* Scrollbar styling for TOC */
+.toc-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.toc-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.toc-wrapper::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.toc-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .blog-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .toc-sidebar {
+        width: 100%;
+        order: -1;
+    }
+
+    .toc-wrapper {
+        position: static;
+        max-height: none;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #e1e4e8;
+    }
+
+    .main-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .toc-sidebar {
+        display: none;
+    }
+
+    .blog-layout {
+        display: block;
+    }
 }
 
 .header {

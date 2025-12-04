@@ -53,7 +53,9 @@
             </div>
         </header>
 
-        <article class="content">
+        <div class="blog-layout">
+            <!-- Main Content -->
+            <article class="content main-content">
             <p style="text-align: left"><a href="https://avalur.github.io/posts.html">← Back to all posts</a></p>
             <p>This is your opening paragraph. Start with something engaging that draws the reader in. You can write naturally and include <strong>bold text</strong> and <em>italic text</em> for emphasis.</p>
 
@@ -156,10 +158,9 @@
             <p>This enhanced template now provides both code syntax highlighting and LaTeX formula copying functionality. Readers can easily copy mathematical expressions for use in their own documents, papers, or LaTeX editors.</p>
 
             <p>The copy functionality works seamlessly - just hover over any block equation and click the "Copy LaTeX" button. Perfect for academic blogs, mathematical tutorials, and scientific documentation!</p>
-        </article>
 
-        <!-- Social Sharing Section -->
-        <div class="social-sharing">
+            <!-- Social Sharing Section -->
+            <div class="social-sharing">
             <div class="share-buttons">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url if request else '' }}" class="share-btn facebook" onclick="shareOnFacebook(); return false;" title="Share on Facebook">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -182,14 +183,101 @@
                     X (Twitter)
                 </a>
             </div>
-        </div>
+            </div>
+            </article>
 
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <ul class="toc-list" id="tocList">
+                            <!-- TOC will be generated dynamically by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+        </div>
     </div>
 
     <!-- Toast notification element -->
     <div id="copyToast" class="copy-toast"></div>
 
     <script>
+        // Generate Table of Contents dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.main-content');
+            const tocList = document.getElementById('tocList');
+            const headings = content.querySelectorAll('h2, h3');
+
+            if (headings.length === 0) {
+                // Hide TOC if no headings
+                const tocSidebar = document.querySelector('.toc-sidebar');
+                if (tocSidebar) tocSidebar.style.display = 'none';
+                return;
+            }
+
+            headings.forEach((heading, index) => {
+                // Create ID for heading if it doesn't have one
+                if (!heading.id) {
+                    heading.id = 'heading-' + index;
+                }
+
+                // Create TOC list item
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#' + heading.id;
+                a.textContent = heading.textContent;
+
+                // Add class for h3 items (nested)
+                if (heading.tagName === 'H3') {
+                    li.classList.add('toc-h3');
+                }
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+
+            // Highlight active section on scroll
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            function highlightTOC() {
+                let current = '';
+
+                headings.forEach(heading => {
+                    const sectionTop = heading.offsetTop;
+                    const scrollPos = window.scrollY + 100;
+
+                    if (scrollPos >= sectionTop) {
+                        current = heading.id;
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // Update on scroll
+            window.addEventListener('scroll', highlightTOC);
+            highlightTOC(); // Initial highlight
+
+            // Smooth scroll when clicking TOC links
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+
         // Social sharing functions
         function shareOnFacebook() {
             const url = encodeURIComponent(window.location.href);
