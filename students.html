@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graduate Students - Alexander Avdiushenko</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" media="print" onload="this.media='all'"/>
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"/>
+    </noscript>
+    <link href="css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.2.0" rel="stylesheet">
+    <link href="css/aos.css?ver=1.2.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.2.0" rel="stylesheet">
+    <noscript>
+      <style>
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+      .student-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+      .student-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+      }
+      .student-photo {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin: 0 auto;
+        display: block;
+      }
+      .student-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem 1rem 1rem;
+        text-align: center;
+      }
+      .student-name {
+        color: white;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .student-degree {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .student-body {
+        padding: 1.5rem;
+      }
+      .thesis-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+      .thesis-description {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .defense-date {
+        color: #667eea;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+      }
+    </style>
+  </head>
+  <body id="top">
+    <header class="d-print-none">
+      <div class="container text-center text-lg-left">
+        <div class="py-3 clearfix">
+          <h1 class="site-title mb-0">Alexander Avdiushenko</h1>
+          <div class="site-nav">
+            <nav role="navigation">
+              <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="https://avalur.github.io/" title="Home"><i class="fas fa-home"></i><span class="menu-title"> Home</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://avalur.github.io/teaching.html" title="Teaching"><i class="fas fa-chalkboard-teacher"></i><span class="menu-title"> Teaching</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://avalur.github.io/talks.html" title="Talks"><i class="fas fa-university"></i><span class="menu-title"> Talks</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://avalur.github.io/posts.html" title="Posts"><i class="fas fa-book"></i><span class="menu-title"> Posts</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/aleksandr-avdiushenko/" title="LinkedIn"><i class="fab fa-linkedin"></i><span class="menu-title sr-only">LinkedIn</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/avalur" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-header">
+      <div class="container text-center">
+        <h1 class="display-4 mb-2" data-aos="fade-down">Graduate Students</h1>
+        <p class="lead" data-aos="fade-up" data-aos-delay="100">Supervising talented researchers in their journey</p>
+      </div>
+    </div>
+
+    <div class="container pb-5">
+      <div class="row g-4">
+
+        <!-- Student Card Template - Duplicate and fill this for each student -->
+        <div class="col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay="100">
+          <div class="card student-card shadow">
+            <div class="student-header">
+              <img src="images/students/biktimirov.jpeg" alt="Danila Biktimirov" class="student-photo">
+              <h3 class="student-name">Danila Biktimirov</h3>
+              <div class="student-degree">Bachelor's Degree</div>
+            </div>
+            <div class="student-body">
+              <div class="thesis-title">
+                <i class="fas fa-graduation-cap text-primary me-2"></i>
+                Manga Colorization With Diffusion Models and The Creation of Benchmarking Methods
+              </div>
+              <div class="thesis-description">
+              The purpose of the thesis is to investigate the potential of using diffusion
+              models as a tool for Manga colorization. In addition to selecting the optimal
+              architecture and parameters, the work analyzes the dataset with Manga,
+              its generalizing ability, and in general various methods of comparing and benchmarking models for
+              colorization.
+              <a href="https://github.com/asahium/color-manga">GitHub Repo</a>
+              </div>
+              <div class="defense-date">
+                <i class="far fa-calendar-alt me-2"></i>
+                Defense Date: February 2025
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay="200">
+          <div class="card student-card shadow">
+            <div class="student-header">
+              <img src="images/students/makoyan.jpg" alt="Artem Makoian" class="student-photo">
+              <h3 class="student-name">Artem Makoian</h3>
+              <div class="student-degree">Bachelor's Degree</div>
+            </div>
+            <div class="student-body">
+              <div class="thesis-title">
+                <i class="fas fa-graduation-cap text-primary me-2"></i>
+                Adapting S4 to high-dimensional data
+              </div>
+              <div class="thesis-description">
+                The advancement of machine learning models for sequence data has seen significant progress
+                with the development of the Structured State Space Sequence (S4) architecture.
+                Initially designed for natural language processing (NLP) tasks,
+                S4 has demonstrated superior performance over traditional transformers,
+                particularly in handling long-context dependencies.
+                While transformers have successfully migrated from NLP to computer vision,
+                becoming the state-of-the-art in various tasks, they still face challenges
+                with long-context information.
+                This thesis explores the potential of S4 in the realm of computer vision
+                by adapting it to high-dimensional data.
+                The primary focus is on evaluating S4ND in computer vision tasks
+                involving high-resolution images and long-context information.
+              <a href="https://github.com/MakArtKar/s4nd-experiments">GitHub Repo</a>
+              </div>
+              <div class="defense-date">
+                <i class="far fa-calendar-alt me-2"></i>
+                Defense Date: May 2024
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!--        <div class="col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay="400">-->
+<!--          <div class="card student-card shadow">-->
+<!--            <div class="student-header">-->
+<!--              <img src="images/students/student4.jpg" alt="Student Name" class="student-photo">-->
+<!--              <h3 class="student-name">Student Name</h3>-->
+<!--              <div class="student-degree">Master's Degree</div>-->
+<!--            </div>-->
+<!--            <div class="student-body">-->
+<!--              <div class="thesis-title">-->
+<!--                <i class="fas fa-graduation-cap text-primary me-2"></i>-->
+<!--                Thesis Title Goes Here-->
+<!--              </div>-->
+<!--              <div class="thesis-description">-->
+<!--                Brief description of the thesis work. This section should contain a summary of the research problem,-->
+<!--                methodology, and key findings or expected contributions to the field.-->
+<!--              </div>-->
+<!--              <div class="defense-date">-->
+<!--                <i class="far fa-calendar-alt me-2"></i>-->
+<!--                Defense Date: March 2025-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+      </div>
+    </div>
+
+    <footer class="pt-4 pb-4 text-muted text-center d-print-none">
+      <div class="container">
+        <div class="my-3">
+          <div class="footer-nav">
+            <nav role="navigation">
+              <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link" href="https://github.com/avalur" title="Github"><i class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/ovalur" title="Instagram"><i class="fab fa-instagram"></i><span class="menu-title sr-only">Instagram</span></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="text-small">
+          <div class="mb-1">&copy; Right Resume. All rights reserved.</div>
+          <div>Design - <a href="https://templateflip.com/" target="_blank">TemplateFlip</a></div>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
+    <script src="scripts/aos.js?ver=1.2.0"></script>
+    <script src="scripts/main.js?ver=1.2.0"></script>
+  </body>
+</html>
