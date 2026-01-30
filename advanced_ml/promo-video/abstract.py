@@ -1,12 +1,57 @@
 from manim import *
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.gtts import GTTSService
+from manim_voiceover.services.base import SpeechService
+from manim_voiceover.helper import remove_bookmarks, wav2mp3
+from pathlib import Path
+from TTS.api import TTS
 
-ts_service = GTTSService(lang="en", tld="com")
-# ts_service = AzureService(
-#                 voice="en-US-JennyNeural",
-#                 style="newcast-casual",
-#             )
+
+class SlowCoquiService(SpeechService):
+    """CoquiService с поддержкой length_scale для замедления речи."""
+
+    def __init__(self, model_name, speaker=None, length_scale=1.0, **kwargs):
+        self.tts = TTS(model_name=model_name, progress_bar=True, gpu=False)
+        self.speaker = speaker
+        self.length_scale = length_scale  # >1 = медленнее, <1 = быстрее
+        SpeechService.__init__(self, **kwargs)
+
+    def generate_from_text(self, text: str, cache_dir: str = None, path: str = None, **kwargs) -> dict:
+        if cache_dir is None:
+            cache_dir = self.cache_dir
+
+        input_text = remove_bookmarks(text)
+        input_data = {"input_text": text, "service": "coqui", "speaker": self.speaker, "length_scale": self.length_scale}
+
+        cached_result = self.get_cached_result(input_data, cache_dir)
+        if cached_result is not None:
+            return cached_result
+
+        audio_path = self.get_audio_basename(input_data) + ".mp3"
+        output_path = str(Path(cache_dir) / audio_path)
+        wav_path = Path(output_path).with_suffix(".wav")
+
+        # Генерация с length_scale для контроля скорости
+        self.tts.tts_to_file(
+            text=input_text,
+            speaker=self.speaker,
+            file_path=str(wav_path),
+            length_scale=self.length_scale
+        )
+        wav2mp3(wav_path, output_path)
+
+        return {
+            "input_text": text,
+            "input_data": input_data,
+            "original_audio": audio_path,
+        }
+
+
+# VCTK VITS - p276: дружелюбный, замедленный (1.3 = на 30% медленнее)
+ts_service = SlowCoquiService(
+    model_name="tts_models/en/vctk/vits",
+    speaker="p300",
+    length_scale=1.3
+)
 
 
 def finishScene(self):
@@ -42,12 +87,14 @@ class Start(VoiceoverScene):
 
         with self.voiceover(
                 text="""
-                    Are you ready to dive deep into the cutting edge of artificial intelligence? 
-                    Our Advanced Machine Learning course takes you beyond the basics, 
+                    Are you ready to dive deep into the cutting edge of artificial intelligence?
+                    This Advanced Machine Learning course combines rigorous theory with hands-on implementation,
+                    giving you the skills to build state-of-the-art AI systems yourself. 
+                    It takes you beyond the basics, 
                     exploring the technologies that power systems like AlphaGo,
-                    overperforming humans in games,
-                    ChatGPT, well-known and very popular system by OpenAI, 
-                    and the next generation of AI assistants, 
+                    overperforming humans in games.
+                    Chat GPT, well-known and very popular system by Open AI.
+                    And the next generation of AI assistants, 
                     which now are called AI Agents.
                     """
         ) as tracker:
@@ -102,24 +149,24 @@ class RL(VoiceoverScene):
 
         with self.voiceover(
                 text="""
-                Learn how DeepMind created AlphaGo and evolved it
+                Learn how Deep Mind created AlphaGo and evolved it
                 into AlphaZero:
-                - Understand the mathematics behind self-play
-                - Study deep reinforcement learning principles
-                - Implement Monte Carlo Tree Search in Python
+                - Understand the mathematics behind self-play.
+                - Study deep reinforcement learning principles.
+                - Implement Monte Carlo Tree Search in Python.
                 """
         ) as tracker:
             # First show background with fade
             self.play(
                 FadeIn(background),
-                run_time=4
+                run_time=2
             )
 
             # Then animate the title with its background box
             self.play(
                 FadeIn(title_box),
                 Write(title),
-                run_time=4
+                run_time=2
             )
 
             # Create bullet points
@@ -169,23 +216,23 @@ class GenerativeAI(VoiceoverScene):
         with self.voiceover(
                 text="""
                 Explore the architectures powering modern AI:
-                - Variational Autoencoders and GANs
-                - Tokenization and embedding techniques
-                - Multi-agent systems
-                - Build practical solutions for LLM challenges
+                - Variational Autoencoders and GANs.
+                - Tokenization and embedding techniques.
+                - Multi-agent systems.
+                - Build practical solutions for LLM challenges.
                 """
         ) as tracker:
             # Fade in background
             self.play(
                 FadeIn(background),
-                run_time=3
+                run_time=2
             )
 
             # Animate title
             self.play(
                 FadeIn(title_box),
                 Write(title),
-                run_time=3
+                run_time=2
             )
 
             # Create bullet points
@@ -349,17 +396,17 @@ class FinalScene(VoiceoverScene):
         # Create the main message text, split into parts for dramatic effect
         message_part1 = Text(
             "Join us to master the technologies shaping our future.",
-            font_size=40
+            font_size=36
         )
 
         message_part2 = Text(
             "Whether you're aiming to innovate in AI research\nor build practical applications with it.",
-            font_size=36
+            font_size=32
         )
 
         message_part3 = Text(
             "This course provides the advanced skills you need to succeed.",
-            font_size=40
+            font_size=36
         )
 
         # Arrange the text parts vertically
