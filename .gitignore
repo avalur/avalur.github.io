@@ -317,3 +317,4 @@ mnist/*
 /cs_basics/promo-video/media/
 /advanced_ml/tmp/
 /posts/.env
+/posts/.claude/settings.local.json
