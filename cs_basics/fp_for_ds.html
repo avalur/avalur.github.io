@@ -40,6 +40,11 @@
 			  clear: both;
 			  display: table;
 			}
+			.highlighted {
+				text-align: left;
+				color: white;
+				background-color: orange;
+			}
 		</style>
 </head>
 	<body onload="totalWrapper();">
@@ -53,11 +58,11 @@
 					<h3>Functional Programming for Data Science</h3>
 					<br />
 					Alex Avdiushenko <br />
-					February 20, 2025
+					March 2, 2026
 				</section>
 				<section>
 					<section>
-						<h3>What does a data scientist usually do at work?</h3>
+						<h3>What does a <span class="highlighted">data scientist</span> usually do at work?</h3>
 						<div class="fragment">
 							<div class="typesetting">
 								<p style="text-align: left">Four three-letter abbreviations 😎</p>
@@ -65,17 +70,17 @@
 						</div>
 							<div class="typesetting">
 								<ul>
-									<li class="fragment"><span style="color: orange">ETL</span>: Extract, Transform, Load (30-40% of the time)</li>
-									<li class="fragment"><span style="color: orange">EDA</span>: Exploratory Data Analysis (10-30% of the time)</li>
-									<li class="fragment"><span style="color: orange">POC</span>: Proof of Concept (10-30% of the time)</li>
-									<li class="fragment"><span style="color: orange">MVP</span>: Minimum Viable Product (30-40% of the time)</li>
+									<li class="fragment"><span class="highlighted">ETL</span>: Extract, Transform, Load (30-40% of the time)</li>
+									<li class="fragment"><span class="highlighted">EDA</span>: Exploratory Data Analysis (10-30% of the time)</li>
+									<li class="fragment"><span class="highlighted">POC</span>: Proof of Concept (10-30% of the time)</li>
+									<li class="fragment"><span class="highlighted">MVP</span>: Minimum Viable Product (30-40% of the time)</li>
 								</ul>
 						</div>
 						<br>
 						<div class="fragment" style="margin-bottom:20px;">
 							<div class="typesetting">
 								<p style="text-align: left">You should be as fast as you can in the first three steps and then
-								build a production code within a few days</p>
+								build a production code within a few days.</p>
 							</div>
 						</div>
 					</section>
@@ -89,7 +94,7 @@
 						<div class="fragment">
 							<div class="typesetting">
 							<ol>
-								<li>Big monolithic blocks of code 🕋
+								<li>Big monolithic blocks of code 🧱
 								<ul class="fragment">
 									<li>the fastest: 1-2 days</li>
 									<li>inappropriate for
@@ -156,7 +161,7 @@ print(list(map(add_3, list_)))
 								For instance, normalization or training a model.
 								<br><br>
 								The idea is to chain function creation:</p>
-								<pre>
+								<pre style="background-color: lightgray">
 
 	Model(parameters) -> Fit(train_set) -> Predict(test_set)
 
@@ -165,12 +170,12 @@ print(list(map(add_3, list_)))
 						</div>
 					</section>
                     <section data-background-color="#fdf6e3">
-                        <h3>Decision Tree Classifier</h3>
+                        <h3 style="text-align: left">Decision Tree Classifier</h3>
                         <script type="py-editor" config='{"packages":["scikit-learn"]}' env="DTC">
                             from sklearn.tree import DecisionTreeClassifier
                             from sklearn.ensemble import RandomForestClassifier
                         </script>
-                        <p><a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">
+                        <p style="text-align: left"><a href="https://narrative-flow.github.io/exploratory-study-2/">
                             Nice visual example of DecisionTreeClassifier</a></p>
                     </section>
 					<section data-background-color="antiquewhite">
@@ -228,7 +233,7 @@ print(list(map(add_3, list_)))
 								<ul>
 									<li>building different pipelines from functions is easy</li>
 									<li>unittests are easy to implement</li>
-									<li>when you've done with investigations, you simply remove all unused functions</li>
+									<li>when you're done with investigations, you simply remove all unused functions</li>
 									<li>but you need to think more during your experiments</li>
 								</ul>
 							</div>
@@ -274,7 +279,7 @@ print(list(map(add_3, list_)))
 from torch import nn
 def init_cnn(module):
     """Initialize weights for CNNs."""
-    if type(module) == nn.Linear or type(module) == nn.Conv2d:
+    if isinstance(module, (nn.Linear, nn.Conv2d)):
         nn.init.xavier_uniform_(module.weight)
 
 class LeNet(nn.Module):
@@ -289,19 +294,24 @@ class LeNet(nn.Module):
             nn.Flatten(),
             nn.LazyLinear(120), nn.Sigmoid(),
             nn.LazyLinear(84), nn.Sigmoid(),
-            nn.LazyLinear(num_classes)
-		)
+            nn.LazyLinear(num_classes))
+        self.net.apply(init_cnn)
+
+    def forward(self, x):
+        return self.net(x)
 						</script>
 					</section>
 					<section data-background-color="antiquewhite">
 <!--language=python-->
 						<script type="py-editor">
-from torch import nn
+# Flax (JAX-based) style - note the different API
+from flax import linen as nn
+from typing import Callable
 
 class LeNetFPstyle(nn.Module):
     lr: float = 0.1
     num_classes: int = 10
-    kernel_init: FunctionType = nn.initializers.xavier_uniform
+    kernel_init: Callable = nn.initializers.xavier_uniform
 
     def setup(self):
         self.net = nn.Sequential([
@@ -323,14 +333,14 @@ class LeNetFPstyle(nn.Module):
 						<div class="fragment">
 							<div class="typesetting">
 								<p style="text-align: left">
-									<span style="color: orange">Google JAX</span> is a machine learning framework for transforming numerical functions.
+									<span class="highlighted">Google JAX</span> is a machine learning framework for transforming numerical functions.
 									It is described as bringing together a modified version of autograd
 									(automatic obtaining of the gradient function through differentiation of a function) and
 									TensorFlow's XLA (Accelerated Linear Algebra).
 
-									It is designed to follow the structure and workflow of <span style="color: orange">NumPy</span>
+									It is designed to follow the structure and workflow of <span class="highlighted">NumPy</span>
 									as closely as possible and works with various existing frameworks
-									such as <span style="color: orange">TensorFlow</span> and <span style="color: orange">PyTorch</span>.
+									such as <span class="highlighted">TensorFlow</span> and <span class="highlighted">PyTorch</span>.
 								</p>
 							</div>
 						</div>
@@ -338,7 +348,7 @@ class LeNetFPstyle(nn.Module):
 						<div class="fragment">
 							<div class="typesetting">
 								<p style="text-align: left">
-									The primary functions of <span style="color: orange">JAX</span> are:</p>
+									The primary functions of <span class="highlighted">JAX</span> are:</p>
 								<ul>
 									<li>grad: automatic differentiation</li>
 									<li>jit: compilation</li>
@@ -351,15 +361,15 @@ class LeNetFPstyle(nn.Module):
 				</section>
 				<section>
 					<section>
-						<h3>Summary</h3>
+						<h3 style="text-align: left">Summary</h3>
 						<ul>
-							<li class="fragment"><span style="color: orange">Functional Programming (FP)</span>
+							<li class="fragment"><span class="highlighted">Functional Programming (FP)</span>
 								can be effectively used in Data Science for more organized,
 								testable, and maintainable code</li>
-							<li class="fragment"><span style="color: orange">FP</span> allows for the creation of complex data pipelines using simple, reusable functions</li>
+							<li class="fragment"><span class="highlighted">FP</span> allows for the creation of complex data pipelines using simple, reusable functions</li>
 							<li class="fragment">Moreover, it can make parallelization almost free, which is crucial
 							for handling large datasets and complex computations in data science</li>
-							<li class="fragment">Google's <span style="color: orange">JAX</span> is a powerful tool
+							<li class="fragment">Google's <span class="highlighted">JAX</span> is a powerful tool
 								that brings functional programming principles
 								to machine learning and allows for efficient transformations of numerical functions</li>
 						</ul>
