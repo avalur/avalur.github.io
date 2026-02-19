@@ -1,6 +1,6 @@
 # avalur.github.io
 
-Repository for courses and materials.
+Repository for courses, materials and talks.
 
-Link to my personal page:
-https://avalur.github.io
+My personal page:
+https://avalur.me
