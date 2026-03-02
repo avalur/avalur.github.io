@@ -55,7 +55,7 @@
 					<h3>AI Assisted Programming</h3>
 					<br />
 					Alex Avdiushenko <br />
-					February 27, 2025
+					March 9, 2026
 				</section>
 				<section>
 					<section>
@@ -63,15 +63,26 @@
 						<p style="text-align: left;font-style: italic;">
 							Prove that the dashed lines pass through one common point
 						</p>
-						<div id="applet_container" style="width: 1200px; height: 400px;align-content: center"></div>
+						<div id="applet_container" style="width: 1200px; height: 400px; margin: 0 auto;"></div>
 						<script>
 							var ggbApp = new GGBApplet({
 								"appName": "geometry",
 								"width": 1200,
 								"height": 400,
 								"showToolBar": false,
+								"showResetIcon": false,
+
+								"showMenuBar": true,
 								"showAlgebraInput": false,
-								"showMenuBar": false,
+
+								"enableRightClick": false,
+								"enableLabelDrags": false,
+								"enableShiftDragZoom": false,
+								"errorDialogsActive": false,
+								"useBrowserForJS": true,
+								"allowStyleBar": false,
+								"preventFocus": true,
+								"perspective": "AG",
 								"appletOnLoad": function(api) {
 									// Define triangle vertices
 									api.evalCommand("A = (-5, -2)");
@@ -164,6 +175,9 @@
 									api.evalCommand('SetVisibleInView(center1, 1, false)');
 									api.evalCommand('SetVisibleInView(center2, 1, false)');
 									api.evalCommand('SetVisibleInView(center3, 1, false)');
+									api.setGridVisible(false);
+									api.setAxesVisible(false, false);
+									api.setCoordSystem(-6, 7, -3, 4);
 								}
 							}, true);
 
@@ -196,8 +210,8 @@
 						<img src="images/GPTo1_correct.png" alt="GPTo1_correct_answer">
 						<div class="fragment"
 							 style="border: 5px solid green; position: absolute;
-							 left: 58%; top: 50%;
-							 width: 46%; height: 5%; border-radius: 10px;
+							 left: 58.5%; top: 50%;
+							 width: 45.5%; height: 4%; border-radius: 10px;
 							 text-align: right; font-size: 25px;color: green;">
 							This is amazingly correct!
 						</div>
@@ -207,7 +221,7 @@
 							<li><a style="color: blue" href="https://en.wikipedia.org/wiki/Malfatti_circles">
 								Wikipedia article "Malfatti_circles"</a>
 							</li>
-							<li class="fragment">Main steps of the human proof (o3-mini-high and Crok 3 could not find it):
+							<li class="fragment">Main steps of the human proof (o3-mini-high and Grok 3 could not find it):
 								<ol>
 									<li>Homotheties for each pair of circles give us centers $A_2, B_2, C_2$</li>
 									<li>These three homotheties centers lie on one line by
@@ -225,6 +239,11 @@
 					<section data-background-color="lightgray">
 						<h3>The same in coding</h3>
 						<img src="images/o3-benchmark-coding.webp" alt="o3-benchmark-coding" width="1400">
+					</section>
+					<section data-background-color="white">
+						<h3>The same is everywhere!</h3>
+						<img src="images/gemini_3_deep-think_evals_charts_1.gif"
+							 alt="gemini-3-benchmark" width="1400">
 					</section>
 					<section>
 					  <h4 style="text-align: left">Everybody Has a Brilliant AI Assistant – It Always Ready to Help!</h4>
@@ -384,16 +403,17 @@
 							and losing control</h3>
 						<ul>
 							<li>
-								<a href="https://x.com/levelsio/status/1893679316384244046?s=46&t=dUCVh9akIWxxNUIkrDJwJg">Recent post on X/Twitter</a>
-								from some developer
+								<a href="https://x.com/levelsio/status/1893679316384244046?s=46&t=dUCVh9akIWxxNUIkrDJwJg">
+									Post on X/Twitter</a>
+								from some developer (still happens)
 							</li>
-							<li>Flagship models are still <a href="https://arxiv.org/pdf/2502.12115">unable to solve</a> real coding tasks</li>
+							<li>Flagship models are still <a href="https://arxiv.org/pdf/2502.12115">hard to solve</a> real coding tasks</li>
 							<li><a href="https://www.youtube.com/watch?v=Ri3iyi3qFlI">Video</a> about Subagents for fighting
 							hallucinacions and other problems</li>
 						</ul>
 					</section>
 					<section data-background-color="white">
-						<h3>One more problem (24.02.2025)</h3>
+						<h3>One more important problem (24.02.2025)</h3>
 						<img src="images/price_problem.png" alt="price_problem" width="600">
 					</section>
 				</section>
@@ -402,14 +422,14 @@
 						<br>
 						<h3 style="text-align: left">What else can you look at?</h3>
 						<ul>
-							<li><a href="https://vas3k.com/notes/vibe_coding/">Vibe coding</a> from Vastrik</li>
-							<li>LLM codegen <a href="https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/">workflow</a></li>
+							<li><a href="https://steipete.me/posts/2025/shipping-at-inference-speed">
+								Vibe coding</a> from Peter Steinberger (creator of OpenClaw)</li>
 							<li><a href="https://www.youtube.com/watch?v=XZuwlXNMm04">
 								Short video</a> about using Junie agent</li>
 
 						</ul>
 						<br><br>
-						<p>Let's switch to Demo in PyCharm after the break.</p>
+						<p>Let's switch to Demo in PyCharm after the BREAK</p>
 					</section>
 				</section>
 			</div>
