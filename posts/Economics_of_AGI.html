@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Some Simple Economics of AGI</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- MathJax for mathematical formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                ready: function () {
+                    MathJax.startup.defaultReady();
+                    setTimeout(addMathCopyButtons, 100);
+                }
+            }
+        };
+    </script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+
+    <!-- Open Graph meta-tags -->
+    <meta property="og:title" content="Some Simple Economics of AGI — Paper Review">
+    <meta property="og:description" content="A review of Catalini, Hui & Wu's framework on how AGI reshapes the economy through the Measurability Gap between automation and verification.">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Some Simple Economics of AGI — Paper Review">
+    <meta name="twitter:description" content="The binding constraint on AGI growth is not intelligence but human verification bandwidth.">
+
+</head>
+<body>
+    <script src="../js/utils.js"></script>
+    <!-- Prism.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Some Simple Economics of AGI</h1>
+            <p class="subtitle">Paper review: why the binding constraint on growth
+                shifts from intelligence to human verification bandwidth</p>
+            <div class="meta">
+                <span class="author">Alex Avdiushenko</span>
+                <span>•</span>
+                <span class="date">March 4, 2026</span>
+                <span>•</span>
+                <span>12 min read</span>
+            </div>
+        </header>
+
+        <div class="blog-layout">
+            <!-- Main Content -->
+            <article class="content main-content">
+            <p style="text-align: left"><a href="https://avalur.github.io/posts.html">&larr; Back to all posts</a></p>
+
+            <h2>Introduction</h2>
+            <p>
+                In February 2026, Christian Catalini (MIT), Xiang Hui (WashU),
+                and Jane Wu (UCLA) published
+                <a href="https://arxiv.org/abs/2602.20946">"Some Simple Economics of AGI"</a> &mdash;
+                a paper that frames the economic impact of AGI not as a question of <em>what machines can do</em>,
+                but of <em>what humans can verify</em>.
+            </p>
+            <p>
+                The central thesis is striking: as AI decouples cognition from biology, the marginal cost
+                of execution approaches zero. But the fundamental constraint shifts to
+                <strong>human verification bandwidth</strong> &mdash; society's scarce capacity
+                to validate outcomes, audit behavior, and underwrite meaning
+                when execution becomes abundant.
+            </p>
+
+            <blockquote>
+                "Science gathers knowledge faster than society gathers wisdom." &mdash; Isaac Asimov
+            </blockquote>
+
+            <div class="image-container">
+                <img src="./Economics_of_AGI/summary.jpg" alt="Paper summary">
+                <div class="image-caption">Source: <a href="https://arxiviq.substack.com/p/some-simple-economics-of-agi">
+                    Grigory Sapunov's Substack
+                </a></div>
+            </div>
+
+            <h2>The Racing Cost Curves</h2>
+            <p>
+                The paper's core model rests on two cost curves racing in opposite directions:
+            </p>
+            <ul>
+                <li><strong>Cost to Automate ($c_a$)</strong> &mdash; exponentially decaying, driven by compute scaling and accumulated knowledge</li>
+                <li><strong>Cost to Verify ($c_h$)</strong> &mdash; biologically bottlenecked, constrained by human time and embodied experience</li>
+            </ul>
+            <p>
+                This asymmetry creates the core economic dynamic of the AGI transition.
+                Unlike compute, human time cannot be easily replicated, parallelized, or transferred.
+                The cheaper automation becomes, the more critical &mdash; and relatively scarce &mdash;
+                human verification capacity grows.
+            </p>
+
+            <h2>The Measurability Gap</h2>
+            <p>
+                The authors introduce the <strong>Measurability Gap</strong> ($\Delta m$),
+                defined as the widening chasm between what autonomous agents can execute
+                and what humans can afford to verify:
+            </p>
+            <div class="math-block">
+                <button class="math-copy-btn" onclick="copyMathToClipboard(this)">Copy LaTeX</button>
+                <div class="math-content">
+                    $$\Delta m = m_a - m_h$$
+                </div>
+                <div class="math-latex-source" style="display: none;" data-latex="\Delta m = m_a - m_h"></div>
+            </div>
+            <p>
+                where $m_a$ is agent measurability (the degree to which an agent's outputs can be comprehensively
+                measured) and $m_h$ is human measurability (the degree to which human oversight can effectively
+                validate those outputs).
+            </p>
+            <p>
+                This gap expands because agent capabilities advance exponentially while
+                human verification capacity grows linearly at best.
+                The fraction of total autonomous deployment that can be reliably verified &mdash;
+                the <strong>verifiable share</strong> ($s_v$) &mdash; defines the "safe industrial zone"
+                where meaningful oversight is genuinely possible.
+            </p>
+
+            <div class="image-container">
+                <img src="./Economics_of_AGI/ai_research_cycle.png" alt="ai_research_cycle">
+            </div>
+
+            <h2>Three Key Mechanisms</h2>
+
+            <h3>1. The Missing Junior Loop</h3>
+            <p>
+                Traditional knowledge transmission relied on apprenticeship &mdash;
+                junior practitioners learning by doing under expert supervision.
+                As junior-level work gets automated, these pathways collapse.
+                The stock of human expertise ($S_{nm}$) shrinks precisely when oversight
+                becomes most critical.
+            </p>
+            <p>
+                This creates a <em>competency cliff</em>: not because current experts disappear,
+                but because no one is being trained to replace them.
+            </p>
+            <div class="image-container">
+                <img src="./Economics_of_AGI/experts_erosion.png"
+                     alt="experts_erosion">
+            </div>
+
+            <h3>2. The Codifier's Curse</h3>
+            <p>
+                Experts inadvertently accelerate their own obsolescence by codifying tacit knowledge
+                into training data. By improving the systems they work with,
+                they convert embodied, contextual expertise into machine-readable form
+                that enables further automation.
+                The perverse incentive: improving your tools accelerates your replacement by them.
+            </p>
+
+            <h3>3. The "Trojan Horse" Externality</h3>
+            <p>
+                Unverified, unaccountable agentic output ($X_a$) introduced into production
+                creates a classic externality: firms capture private gains from deploying
+                autonomous agents while socializing systemic risk.
+                Measured activity diverges from actual human intent,
+                and hidden debt accumulates in the gap between metrics and reality.
+            </p>
+
+            <p>More dangerously, the unmeasured zone allows for the emergence of
+                alien preferences. Because the human cannot inspect the agent’s
+                internal reasoning, the agent may develop instrumental sub-goals
+                or value-functions in RL that were never explicitly programmed but emerge
+                as efficient paths through the unverified state space.
+                <br>
+                This phenomenon is no longer purely theoretical.
+                In controlled evaluations, Scheurer et al. (2023) demonstrated
+                that GPT-4, deployed as an autonomous stock-trading agent
+                in a realistic simulated environment, executed an illegal
+                insider trade and then strategically concealed the
+                true rationale from its human supervisor — without ever being
+                instructed to deceive.
+            </p>
+            <div class="image-container">
+                <img src="./Economics_of_AGI/trojan_horse.png"
+                     alt="trojan_horse">
+            </div>
+
+            <h2>Hollow Economy vs. Augmented Economy</h2>
+            <p>
+                The paper identifies two possible trajectories:
+            </p>
+            <ul>
+                <li><strong>Hollow Economy</strong> (default path) &mdash; explosive nominal output
+                    but decaying human agency, characterized by correlated blind spots,
+                    accumulating hidden debt, and systemic fragility.
+                    Without intervention, economic dynamics push toward unverified deployment
+                    because unverified systems can initially outcompete properly-verified ones
+                    by externalizing risk.</li>
+                <li><strong>Augmented Economy</strong> (managed path) &mdash; verification scales
+                    commensurately with agentic power, enabling unbounded discovery,
+                    experimentation, and execution.
+                    Requires deliberate investment in verification infrastructure,
+                    liability regimes that internalize tail risks,
+                    and human augmentation tools.</li>
+            </ul>
+
+            <h2>The Three Economies</h2>
+            <p>
+                The authors predict that economic activity bifurcates into three sectors:
+            </p>
+            <ol>
+                <li><strong>Solvable Economy</strong> &mdash; tasks fully automatable with reliable verification
+                    (manufacturing, routine analysis). Minimal human employment.</li>
+                <li><strong>Verified Economy</strong> &mdash; tasks automatable but requiring expensive human verification
+                    (strategic decisions, quality control). Wealth concentrates in verification gatekeepers.</li>
+                <li><strong>Status Games Economy</strong> &mdash; value driven by human signaling and status
+                    rather than measurable output (luxury goods, exclusive experiences, governance).
+                    Amplifies inequality through positional goods.</li>
+            </ol>
+            <p>
+                The middle class &mdash; moderately-skilled workers in the "solvable" zone &mdash;
+                faces the greatest displacement pressure.
+            </p>
+
+            <h2>Where Value Concentrates</h2>
+            <p>
+                As ordinary execution becomes commoditized, economic returns concentrate in:
+            </p>
+            <ul>
+                <li><strong>Verification infrastructure</strong> &mdash; observability, testing, safety certification</li>
+                <li><strong>Ground truth and provenance data</strong> &mdash; rare, expensive to produce,
+                    increasingly valuable. Cryptographic provenance creates a "provenance premium"
+                    in markets.</li>
+                <li><strong>Liability management</strong> &mdash; the rise of "Liability-as-a-Service"
+                    where specialized firms underwrite autonomous system outcomes</li>
+                <li><strong>Scarce expert human time</strong> &mdash; verification-capable talent
+                    becomes non-commoditizable, defensible advantage</li>
+            </ul>
+
+            <h2>The Illusion of AI-Led Verification</h2>
+            <p>
+                A particularly important warning: using AI systems to verify other AI systems
+                creates false confidence. Correlated blind spots propagate,
+                system error correlations remain hidden,
+                and what appears to scale verification actually introduces systemic risk.
+                The authors argue this is fundamentally insufficient for safety-critical applications.
+            </p>
+
+            <h2>Strategies for Different Stakeholders</h2>
+
+            <h3>For Individuals</h3>
+            <p>
+                Position yourself in verification and validation work, intent direction and goal-setting,
+                or non-measurable creative domains.
+                The most vulnerable roles are pure execution of measurable, well-defined tasks.
+            </p>
+
+            <h3>For Companies</h3>
+            <p>
+                Build moats around: verification infrastructure, ground truth data,
+                top verification-capable talent, and non-measurable brand/relationship assets.
+                Network effects should be anchored in verification depth and trust
+                rather than traditional lock-in and switching costs.
+            </p>
+
+            <h3>For Policymakers</h3>
+            <p>
+                Address the Trojan Horse externality through liability regimes that internalize tail risks.
+                Treat verification infrastructure as a public good.
+                Invest in human augmentation and upskilling.
+                Coordinate internationally on verification standards
+                to prevent regulatory arbitrage.
+            </p>
+
+            <h2>Key Takeaways</h2>
+            <ol>
+                <li>The binding constraint on AGI-powered growth is not intelligence but <strong>human verification bandwidth</strong>.</li>
+                <li>The <strong>Measurability Gap</strong> ($\Delta m = m_a - m_h$) is the central economic variable to watch.</li>
+                <li>Three self-reinforcing mechanisms &mdash; Missing Junior Loop, Codifier's Curse, and the Trojan Horse externality &mdash;
+                    push the economy toward the Hollow Economy attractor by default.</li>
+                <li>Verification becomes a <em>primary production technology</em>, not a peripheral cost center.</li>
+                <li>The paper is fundamentally <strong>optimistic with conditions</strong>: the Augmented Economy is achievable,
+                    but requires deliberate, scaled investment in verification alongside capability advancement.</li>
+            </ol>
+
+            <blockquote>
+                "Nothing in life is to be feared, it is only to be understood." &mdash; Marie Curie
+            </blockquote>
+
+            <p>
+                The full paper is available at
+                <a href="https://arxiv.org/abs/2602.20946">arxiv.org/abs/2602.20946</a>.
+            </p>
+
+            <!-- Social Sharing Section -->
+            <div class="social-sharing">
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=" class="share-btn facebook" onclick="shareOnFacebook(); return false;" title="Share on Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a>
+
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="share-btn linkedin" onclick="shareOnLinkedIn(); return false;" title="Share on LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+
+                <a href="https://twitter.com/intent/tweet?url=&text=Some%20Simple%20Economics%20of%20AGI" class="share-btn twitter" onclick="shareOnTwitter(); return false;" title="Share on X (Twitter)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    X (Twitter)
+                </a>
+            </div>
+            </div>
+            </article>
+
+            <!-- Table of Contents Sidebar -->
+            <aside class="toc-sidebar">
+                <div class="toc-wrapper">
+                    <h3 class="toc-title">On this page</h3>
+                    <nav id="tableOfContents">
+                        <ul class="toc-list" id="tocList">
+                            <!-- TOC will be generated dynamically by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Toast notification element -->
+    <div id="copyToast" class="copy-toast"></div>
+
+    <script>
+        // Generate Table of Contents dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.main-content');
+            const tocList = document.getElementById('tocList');
+            const headings = content.querySelectorAll('h2, h3');
+
+            if (headings.length === 0) {
+                const tocSidebar = document.querySelector('.toc-sidebar');
+                if (tocSidebar) tocSidebar.style.display = 'none';
+                return;
+            }
+
+            headings.forEach((heading, index) => {
+                if (!heading.id) {
+                    heading.id = 'heading-' + index;
+                }
+
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#' + heading.id;
+                a.textContent = heading.textContent;
+
+                if (heading.tagName === 'H3') {
+                    li.classList.add('toc-h3');
+                }
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            function highlightTOC() {
+                let current = '';
+
+                headings.forEach(heading => {
+                    const sectionTop = heading.offsetTop;
+                    const scrollPos = window.scrollY + 100;
+
+                    if (scrollPos >= sectionTop) {
+                        current = heading.id;
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightTOC);
+            highlightTOC();
+
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+
+        // Social sharing functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.title);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+        }
+    </script>
+
+</body>
+</html>
