@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry} % Adjust the margins of document here.
+
+\usepackage{tikz}                                          % Для простых рисунков в документе
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Algebra and Analysis: IMC Problems 2001--2006}
+
+\begin{center}
+March 2026
+\end{center}
+
+\subsection*{Algebra}
+
+\textbf{Problem 1.} (IMC 2003, Day 2, Problem 1)
+Let \( A \) and \( B \) be \( n \times n \) real matrices such that
+\[
+AB + A + B = 0.
+\]
+Prove that \( AB = BA \).
+\\
+
+\textbf{Problem 2.} (IMC 2003, Day 1, Problem 3)
+Let \( A \) be an \( n \times n \) real matrix such that \( 3A^3 = A^2 + A + I \)
+(\( I \) is the identity matrix). Show that the sequence \( A^k \) converges
+to an idempotent matrix. (A matrix \( B \) is called idempotent if \( B^2 = B \).)
+\\
+
+\textbf{Problem 3.} (IMC 2001, Day 1, Problem 5)
+Let \( A \) be an \( n \times n \) complex matrix such that \( A \neq \lambda I \) for all \( \lambda \in \mathbb{C} \). Prove that \( A \) is similar to a matrix having at most one non-zero entry on the main diagonal.
+\\
+
+\textbf{Problem 4.} (IMC 2002, Day 2, Problem 5)
+Let \( A \) be an \( n \times n \) matrix with complex entries and suppose that \( n > 1 \). Prove that
+\[
+A\overline{A} = I_n \iff \exists\, S \in GL_n(\mathbb{C}) \text{ such that } A = S\overline{S}^{-1}.
+\]
+(If \( A = [a_{ij}] \) then \( \overline{A} = [\overline{a_{ij}}] \), where \( \overline{a_{ij}} \) is the complex conjugate of \( a_{ij} \).)
+\\
+
+\textbf{Problem 5.} (IMC 2002, Day 2, Problem 1)
+Compute the determinant of the \( n \times n \) matrix \( A = [a_{ij}] \), where
+\[
+a_{ij} = \begin{cases} (-1)^{|i-j|}, & \text{if } i \neq j, \\ 2, & \text{if } i = j. \end{cases}
+\]
+\\
+
+\textbf{Problem 6.} (IMC 2005, Day 1, Problem 1)
+Let \( A \) be the \( n \times n \) matrix whose \( (i,j) \)-th entry is \( i + j \) for all \( i, j = 1, 2, \ldots, n \).
+What is the rank of \( A \)?
+\\
+
+\textbf{Problem 7.} (IMC 2005, Day 2, Problem 3)
+In the linear space of all real \( n \times n \) matrices, find the maximum possible dimension
+of a linear subspace \( V \) such that
+\[
+\forall\, X, Y \in V \quad \operatorname{trace}(XY) = 0.
+\]
+(The trace of a matrix is the sum of the diagonal entries.)
+\\
+
+\textbf{Problem 8.} (IMC 2006, Day 1, Problem 3)
+Let \( A \) be an \( n \times n \)-matrix with integer entries and let \( b_1, \ldots, b_k \) be integers satisfying \( \det A = b_1 \cdot \ldots \cdot b_k \). Prove that there exist \( n \times n \)-matrices \( B_1, \ldots, B_k \) with integer entries such that \( A = B_1 \cdot \ldots \cdot B_k \) and \( \det B_i = b_i \) for all \( i = 1, \ldots, k \).
+\\
+
+\textbf{Problem 9.} (IMC 2006, Day 2, Problem 6)
+Let \( A_i, B_i, S_i \) (\( i = 1, 2, 3 \)) be invertible real \( 2 \times 2 \) matrices such that:
+\begin{enumerate}
+    \item not all \( A_i \) have a common real eigenvector;
+    \item \( A_i = S_i^{-1} B_i S_i \) for \( i = 1, 2, 3 \);
+    \item \( A_1 A_2 A_3 = B_1 B_2 B_3 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \).
+\end{enumerate}
+Prove that there is an invertible real \( 2 \times 2 \) matrix \( S \) such that \( A_i = S^{-1} B_i S \) for all \( i = 1, 2, 3 \).
+\\
+
+\textbf{Problem 10.} (IMC 2004, Day 2, Problem 1)
+Let \( A \) be a real \( 4 \times 2 \) matrix and \( B \) be a real \( 2 \times 4 \) matrix such that
+\[
+AB = \begin{pmatrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \\ -1 & 0 & 1 & 0 \\ 0 & -1 & 0 & 1 \end{pmatrix}.
+\]
+Find \( BA \).
+\\
+
+\subsection*{Analysis}
+
+\textbf{Problem 11.} (IMC 2001, Day 1, Problem 3)
+Find
+\[
+\lim_{t \nearrow 1} (1 - t) \sum_{n=1}^{\infty} \frac{t^n}{1 + t^n},
+\]
+where \( t \nearrow 1 \) means that \( t \) approaches 1 from below.
+\\
+
+\textbf{Problem 12.} (IMC 2001, Day 2, Problem 5)
+Let \( \mathbb{R} \) be the set of real numbers. Prove that there is no function \( f : \mathbb{R} \to \mathbb{R} \) with \( f(0) > 0 \), and such that
+\[
+f(x + y) \geq f(x) + y f(f(x)) \quad \text{for all } x, y \in \mathbb{R}.
+\]
+\\
+
+\textbf{Problem 13.} (IMC 2002, Day 1, Problem 2)
+Does there exist a continuously differentiable function \( f : \mathbb{R} \to \mathbb{R} \) such that for every \( x \in \mathbb{R} \) we have \( f(x) > 0 \) and \( f'(x) = f(f(x)) \)?
+\\
+
+\textbf{Problem 14.} (IMC 2003, Day 1, Problem 5)
+Let \( g : [0, 1] \to \mathbb{R} \) be a continuous function and let \( f_n : [0, 1] \to \mathbb{R} \) be a sequence of functions defined by \( f_0(x) = g(x) \) and
+\[
+f_{n+1}(x) = \frac{1}{x} \int_0^x f_n(t)\, dt \quad (x \in (0, 1], \; n = 0, 1, 2, \ldots).
+\]
+Determine \( \lim_{n \to \infty} f_n(x) \) for every \( x \in (0, 1] \).
+\\
+
+\textbf{Problem 15.} (IMC 2003, Day 2, Problem 2)
+Evaluate the limit
+\[
+\lim_{x \to 0+} \int_x^{2x} \frac{\sin^m t}{t^n}\, dt \quad (m, n \in \mathbb{N}).
+\]
+\\
+
+\textbf{Problem 16.} (IMC 2004, Day 1, Problem 3)
+Let \( S_n \) be the set of all sums \( \displaystyle\sum_{k=1}^{n} x_k \), where \( n \geq 2 \), \( 0 \leq x_1, x_2, \ldots, x_n \leq \frac{\pi}{2} \) and
+\[
+\sum_{k=1}^{n} \sin x_k = 1.
+\]
+\begin{itemize}
+    \item[a)] Show that \( S_n \) is an interval.
+    \item[b)] Let \( l_n \) be the length of \( S_n \). Find \( \displaystyle\lim_{n \to \infty} l_n \).
+\end{itemize}
+\
+
+\textbf{Problem 17.} (IMC 2004, Day 2, Problem 5)
+Prove that
+\[
+\int_0^1 \int_0^1 \frac{dx\, dy}{x^{-1} + |\ln y| - 1} \leq 1.
+\]
+\\
+
+\textbf{Problem 18.} (IMC 2005, Day 1, Problem 3)
+Let \( f : \mathbb{R} \to [0, \infty) \) be a continuously differentiable function. Prove that
+\[
+\left| \int_0^1 f^3(x)\, dx - f^2(0) \int_0^1 f(x)\, dx \right|
+\leq \max_{0 \leq x \leq 1} |f'(x)| \left( \int_0^1 f(x)\, dx \right)^2.
+\]
+\\
+
+\textbf{Problem 19.} (IMC 2005, Day 2, Problem 4)
+Prove that if \( f : \mathbb{R} \to \mathbb{R} \) is three times differentiable, then there exists a real number \( \xi \in (-1, 1) \) such that
+\[
+\frac{f'''(\xi)}{6} = \frac{f(1) - f(-1)}{2} - f'(0).
+\]
+\\
+
+\textbf{Problem 20.} (IMC 2006, Day 2, Problem 2)
+Find all functions \( f : \mathbb{R} \to \mathbb{R} \) such that for any real numbers \( a < b \), the image \( f([a, b]) \)
+is a closed interval of length \( b - a \).
+
+\end{document}

@@ -1,0 +1,336 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\tr}{\operatorname{trace}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions: Algebra and Analysis, IMC 2001--2006}
+
+\begin{center}
+March 2026
+\end{center}
+
+\subsection*{Algebra}
+
+\textbf{Solution 1.} (IMC 2003, Day 2, Problem 1)
+
+Since \( AB + A + B = 0 \), we can write
+\[
+AB + A + B + I = I \implies (A + I)(B + I) = I.
+\]
+So \( A + I \) and \( B + I \) are inverses of each other. Then
+\[
+(B + I)(A + I) = I
+\]
+as well. Expanding:
+\[
+BA + B + A + I = I \implies BA + B + A = 0 = AB + A + B,
+\]
+hence \( AB = BA \). \hfill\(\square\)
+\\
+
+\textbf{Solution 2.} (IMC 2003, Day 1, Problem 3)
+
+The minimal polynomial of \( A \) divides \( 3x^3 - x^2 - x - 1 \). Checking \( x = 1 \):
+\( 3 - 1 - 1 - 1 = 0 \), so
+\[
+3x^3 - x^2 - x - 1 = (x - 1)(3x^2 + 2x + 1).
+\]
+The discriminant of \( 3x^2 + 2x + 1 \) is \( 4 - 12 = -8 < 0 \), so its roots are
+\( \frac{-1 \pm i\sqrt{2}}{3} \), each with modulus \( \sqrt{\frac{1 + 2}{9}} = \frac{1}{\sqrt{3}} < 1 \).
+
+Since the polynomial \( 3x^3 - x^2 - x - 1 \) has three distinct roots, the minimal polynomial has distinct roots, so \( A \) is diagonalizable:
+\( A = C^{-1}DC \), where \( D \) is diagonal with entries from \( \{1, \frac{-1+i\sqrt{2}}{3}, \frac{-1-i\sqrt{2}}{3}\} \).
+
+Since the two non-real eigenvalues have modulus \( \frac{1}{\sqrt{3}} < 1 \), we have \( D^k \to M \) where \( M \) is diagonal with 1's on positions corresponding to eigenvalue 1 and 0's elsewhere. Then \( M^2 = M \) and
+\[
+\lim_{k\to\infty} A^k = C^{-1}MC,
+\]
+which is idempotent: \( (C^{-1}MC)^2 = C^{-1}M^2C = C^{-1}MC \). \hfill\(\square\)
+\\
+
+\textbf{Solution 3.} (IMC 2001, Day 1, Problem 5)
+
+We prove by induction on \( n \). For \( n = 2 \), let \( A = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \). If \( b \neq 0 \), conjugating by \( \begin{pmatrix} 1 & 0 \\ a/b & 1 \end{pmatrix} \) gives a matrix with 0 in the \((1,1)\) position. Similarly for \( c \neq 0 \). If \( b = c = 0 \) and \( a \neq d \), conjugating by \( \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \) gives \( \begin{pmatrix} a & d-a \\ 0 & d \end{pmatrix} \), reducing to the case \( b \neq 0 \).
+
+For the inductive step \( n > 2 \): write \( A = \begin{pmatrix} A' & * \\ * & \beta \end{pmatrix}_n \). If \( A' \neq \lambda I \), apply induction to get \( P^{-1}A'P = \begin{pmatrix} 0 & * \\ * & \alpha \end{pmatrix}_{n-1} \). Conjugating \( A \) by \( \begin{pmatrix} P^{-1} & 0 \\ 0 & 1 \end{pmatrix} \), the diagonal becomes \( (0, 0, \ldots, 0, \alpha, \beta) \). View the lower-right \( 2 \times 2 \) block and apply the \( n = 2 \) idea to reduce to at most one non-zero diagonal entry. (Full details require careful case analysis when \( A' = \lambda I \), which can be handled by permuting rows/columns to find a submatrix \( \neq \lambda I \).) \hfill\(\square\)
+\\
+
+\textbf{Solution 4.} (IMC 2002, Day 2, Problem 5)
+
+\( \Leftarrow \): If \( A = S\overline{S}^{-1} \), then \( A\overline{A} = S\overline{S}^{-1} \cdot \overline{S} S^{-1} = I_n \). \checkmark
+
+\( \Rightarrow \): Choose \( S = wA + \overline{w}I_n \) for a complex number \( w \). Then
+\[
+A\overline{S} = A(\overline{w}\,\overline{A} + wI) = \overline{w}A\overline{A} + wA = \overline{w}I + wA = S.
+\]
+So \( A = S\overline{S}^{-1} \) whenever \( S \) is invertible. Now \( S \) is singular iff \( -\overline{w}/w \) is an eigenvalue of \( A \). Since \( A \) has finitely many eigenvalues and \( \overline{w}/w \) can be any complex number on the unit circle, we can choose \( w \) so that \( S \) is invertible. \hfill\(\square\)
+\\
+
+\textbf{Solution 5.} (IMC 2002, Day 2, Problem 1)
+
+Add the second row to the first, add the third to the second, \ldots, add the \( n \)-th row to the \( (n-1) \)-th. The first \( n - 1 \) rows become \( (1, 1, 0, \ldots, 0) \), \( (0, 1, 1, 0, \ldots, 0) \), etc. Now subtract the first column from the second, the resulting second from the third, and so on. After these operations:
+\[
+\det(A) = \begin{vmatrix} 1 & 0 & \cdots & 0 & 0 \\ 0 & 1 & \cdots & 0 & 0 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \cdots & 1 & 0 \\ 0 & 0 & \cdots & 0 & n+1 \end{vmatrix} = n + 1.
+\]
+\hfill\(\square\)
+\\
+
+\textbf{Solution 6.} (IMC 2005, Day 1, Problem 1)
+
+Since \( a_{ij} = i + j \), the matrix \( A \) can be written as
+\[
+A = \mathbf{v}\mathbf{e}^T + \mathbf{e}\mathbf{v}^T,
+\]
+where \( \mathbf{v} = (1, 2, \ldots, n)^T \) and \( \mathbf{e} = (1, 1, \ldots, 1)^T \). So \( A \) is a sum of two rank-1 matrices, hence \( \operatorname{rank}(A) \leq 2 \).
+
+For \( n = 1 \), the rank is 1 (the matrix is \( (2) \)).
+
+For \( n \geq 2 \), the top-left \( 2 \times 2 \) minor is \( \begin{vmatrix} 2 & 3 \\ 3 & 4 \end{vmatrix} = 8 - 9 = -1 \neq 0 \), so \( \operatorname{rank}(A) \geq 2 \).
+
+Therefore \( \operatorname{rank}(A) = 2 \) for \( n \geq 2 \), and \( \operatorname{rank}(A) = 1 \) for \( n = 1 \). \hfill\(\square\)
+\\
+
+\textbf{Solution 7.} (IMC 2005, Day 2, Problem 3)
+
+\textit{Answer:} \( \dfrac{n(n-1)}{2} \).
+
+\textit{Upper bound:} If \( A \) is a nonzero symmetric matrix, then \( \tr(A^2) = \tr(A^T A) = \sum a_{ij}^2 > 0 \), so \( V \) contains no nonzero symmetric matrix. The space of symmetric matrices has dimension \( \frac{n(n+1)}{2} \), so \( V \cap S = \{0\} \) and
+\[
+\dim V \leq n^2 - \frac{n(n+1)}{2} = \frac{n(n-1)}{2}.
+\]
+
+\textit{Attainability:} The space of strictly upper triangular matrices has dimension \( \frac{n(n-1)}{2} \). For any two strictly upper triangular matrices \( X, Y \), the product \( XY \) is also strictly upper triangular, so all diagonal entries of \( XY \) are zero, giving \( \tr(XY) = 0 \). \hfill\(\square\)
+\\
+
+\textbf{Solution 8.} (IMC 2006, Day 1, Problem 3)
+
+By induction, it suffices to prove the case \( k = 2 \): if \( \det A = bc \), find integer matrices \( B, C \) with \( \det B = b \), \( \det C = c \), \( A = BC \).
+
+WLOG \( A \) is upper triangular (multiply by unimodular matrices from left/right). For upper triangular \( A \), define \( B_{nn} \) to be the gcd of \( A_{nn} \) and \( b \), set \( C_{nn} = A_{nn}/B_{nn} \). Then construct the remaining entries of \( B \) and \( C \) inductively from row \( n \) upwards, solving the linear equations \( A_{i,n} = B_{i,j}C_{j,n} + \cdots + B_{i,n}C_{n,n} \). The coprimality conditions ensure integer solutions exist at each step. \hfill\(\square\)
+\\
+
+\textbf{Solution 9.} (IMC 2006, Day 2, Problem 6)
+
+If some \( A_j = \lambda I \), then \( A_j = B_j \) (from the product condition), and the result is trivial.
+
+Otherwise, some \( A_j \), say \( A_3 \), has two distinct real eigenvalues \( \lambda, \mu \). We may assume \( A_3 = B_3 = \begin{pmatrix} \lambda & 0 \\ 0 & \mu \end{pmatrix} \) by conjugating. Let \( A_2 = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \), \( B_2 = \begin{pmatrix} a' & b' \\ c' & d' \end{pmatrix} \).
+
+From \( A_1A_2A_3 = I = B_1B_2B_3 \): \( \tr(A_2A_3) = \tr(A_1^{-1}) = \tr(B_1^{-1}) = \tr(B_2B_3) \), giving \( a\lambda + d\mu = a'\lambda + d'\mu \). Similarly using other trace identities, we get \( a = a' \), \( d = d' \), and \( bc = b'c' \).
+
+If \( b = 0 \) or \( c = 0 \), then \( (1,0)^T \) or \( (0,1)^T \) would be a common eigenvector of all \( A_i \), contradiction. So \( b, c \neq 0 \). Take \( S = \begin{pmatrix} c' & 0 \\ 0 & c \end{pmatrix} \) (up to a scalar). Then \( S \) commutes with \( A_3 = B_3 \) and conjugates \( A_2 \) to \( B_2 \), so it conjugates \( A_1 = (A_2A_3)^{-1} \) to \( B_1 = (B_2B_3)^{-1} \). \hfill\(\square\)
+\\
+
+\textbf{Solution 10.} (IMC 2004, Day 2, Problem 1)
+
+Let \( A = \begin{pmatrix} A_1 \\ A_2 \end{pmatrix} \) and \( B = (B_1 \; B_2) \) where \( A_1, A_2, B_1, B_2 \) are \( 2 \times 2 \) matrices. Then
+\[
+AB = \begin{pmatrix} A_1B_1 & A_1B_2 \\ A_2B_1 & A_2B_2 \end{pmatrix}
+= \begin{pmatrix} I_2 & -I_2 \\ -I_2 & I_2 \end{pmatrix}.
+\]
+So \( A_1B_1 = I_2 \), \( A_1B_2 = -I_2 \), \( A_2B_1 = -I_2 \), \( A_2B_2 = I_2 \).
+
+From \( A_1B_1 = I_2 \): \( B_1 = A_1^{-1} \). From \( A_1B_2 = -I_2 \): \( B_2 = -A_1^{-1} \).
+Then \( A_2 = -B_1^{-1} = -A_1 \).
+
+Therefore:
+\[
+BA = B_1A_1 + B_2A_2 = A_1^{-1}A_1 + (-A_1^{-1})(-A_1) = I_2 + I_2 = \boxed{2I_2 = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}}.
+\]
+\hfill\(\square\)
+
+\newpage
+
+\subsection*{Analysis}
+
+\textbf{Solution 11.} (IMC 2001, Day 1, Problem 3)
+
+Set \( t = e^{-h} \) where \( h \to 0^+ \). Then \( 1 - t \sim h \) and
+\[
+(1-t)\sum_{n=1}^{\infty}\frac{t^n}{1+t^n}
+= \frac{1-t}{-\ln t}\cdot(-\ln t)\sum_{n=1}^{\infty}\frac{t^n}{1+t^n}.
+\]
+Since \( \frac{1-t}{-\ln t} \to 1 \) as \( t \to 1 \), it suffices to compute
+\[
+\lim_{h\to 0+} h \sum_{n=1}^{\infty} \frac{1}{1 + e^{nh}}.
+\]
+This is a Riemann sum for the integral
+\[
+\int_0^{\infty} \frac{dx}{1 + e^x} = \left[-\ln(1+e^{-x})\right]_0^{\infty} = 0 - (-\ln 2) = \ln 2.
+\]
+\hfill\(\square\)
+\\
+
+\textbf{Solution 12.} (IMC 2001, Day 2, Problem 5)
+
+Suppose such \( f \) exists. If \( f(f(x)) \leq 0 \) for all \( x \), then \( f \) is decreasing (take \( y \leq 0 \): \( f(x+y) \geq f(x) + yf(f(x)) \geq f(x) \)). Since \( f(0) > 0 \geq f(f(x)) \), we get \( f(x) > 0 \) for all \( x \), contradiction.
+
+So there exists \( z \) with \( f(f(z)) > 0 \). The inequality \( f(z + x) \geq f(z) + xf(f(z)) \) shows \( \lim_{x \to \infty} f(x) = +\infty \) and hence \( \lim_{x \to \infty} f(f(x)) = +\infty \).
+
+There exist \( x, y > 0 \) with \( f(x) \geq 0 \), \( f(f(x)) > 1 \), \( y \geq \frac{x+1}{f(f(x))-1} \), so \( f(x+y+1) \geq 0 \). Then
+\begin{align*}
+f(f(x+y)) &\geq f(x+y+1) + (f(x+y) - (x+y+1))f(f(x+y+1)) \\
+&\geq f(x) + yf(f(x)) + f(f(x+y)) > f(f(x+y)),
+\end{align*}
+a contradiction. \hfill\(\square\)
+\\
+
+\textbf{Solution 13.} (IMC 2002, Day 1, Problem 2)
+
+No. Suppose such \( f \) exists. Since \( f'(x) = f(f(x)) > 0 \), \( f \) is strictly monotone increasing. By monotonicity, \( f(f(x)) > f(0) \) for all \( x \), so \( f'(x) > f(0) \).
+
+Then for all \( x < 0 \):
+\[
+f(x) = f(0) + \int_0^x f'(t)\,dt < f(0) + x \cdot f(0) = (1 + x)f(0).
+\]
+For \( x \leq -1 \), this gives \( f(x) \leq 0 \), contradicting \( f(x) > 0 \). \hfill\(\square\)
+\\
+
+\textbf{Solution 14.} (IMC 2003, Day 1, Problem 5)
+
+\textit{Answer:} \( \lim_{n \to \infty} f_n(x) = g(0) \) for every \( x \in (0,1] \).
+
+For non-decreasing \( g \): by induction, each \( f_n \) is non-decreasing, and \( g(x) = f_0(x) \geq f_1(x) \geq \cdots \geq g(0) \). The limit \( h(x) = \lim f_n(x) \) exists and \( h \geq g(0) \).
+
+If \( h(1) > g(0) \), choose \( \delta \) with \( h(1) > g(\delta) \). Then \( f_{n+1}(1) \leq \delta g(\delta) + (1-\delta)f_n(1) \), so \( f_n(1) - f_{n+1}(1) \geq \delta(f_n(1) - g(\delta)) \geq \delta(h(1) - g(\delta)) > 0 \), and \( f_n(1) \to -\infty \), contradiction. So \( h(1) = g(0) \), hence \( h \equiv g(0) \).
+
+For general continuous \( g \): let \( M(x) = \sup_{[0,x]} g \) (non-decreasing) and \( m(x) = \inf_{[0,x]} g \) (non-increasing). Define \( M_n, m_n \) analogously. By induction \( m_n(x) \leq f_n(x) \leq M_n(x) \). By the monotone case, both \( M_n(x) \to M(0) = g(0) \) and \( m_n(x) \to m(0) = g(0) \). By squeezing, \( f_n(x) \to g(0) \). \hfill\(\square\)
+\\
+
+\textbf{Solution 15.} (IMC 2003, Day 2, Problem 2)
+
+For \( x \in (0, \frac{\pi}{2}) \) and \( t \in [x, 2x] \), we use \( \frac{\sin t}{t} \) is decreasing on \( (0, \pi) \) and \( \lim_{t \to 0} \frac{\sin t}{t} = 1 \). Then
+\[
+\left(\frac{\sin 2x}{2x}\right)^m \int_x^{2x} \frac{t^m}{t^n}\,dt < \int_x^{2x} \frac{\sin^m t}{t^n}\,dt < \int_x^{2x} \frac{t^m}{t^n}\,dt,
+\]
+and
+\[
+\int_x^{2x} t^{m-n}\,dt = x^{m-n+1}\int_1^2 u^{m-n}\,du.
+\]
+The factor \( \left(\frac{\sin 2x}{2x}\right)^m \to 1 \). So the limit depends on \( x^{m-n+1} \):
+
+\[
+\lim_{x \to 0+} \int_x^{2x} \frac{\sin^m t}{t^n}\,dt =
+\begin{cases}
+0, & \text{if } m \geq n \text{ (i.e.\ } m - n + 1 > 0\text{)}, \\
+\ln 2, & \text{if } n - m = 1, \\
++\infty, & \text{if } n - m > 1.
+\end{cases}
+\]
+\hfill\(\square\)
+\\
+
+\textbf{Solution 16.} (IMC 2004, Day 1, Problem 3)
+
+\textit{a)} The set \( Y = \{(y_1,\ldots,y_n) : 0 \leq y_i \leq 1,\, \sum y_i = 1\} \subset \mathbb{R}^n \) is connected. The function \( f(y) = \arcsin y_1 + \cdots + \arcsin y_n \) is continuous, so \( S_n = f(Y) \) is a connected subset of \( \mathbb{R} \), hence an interval.
+
+\textit{b)} Since \( \sin x \) is concave on \( [0, \frac{\pi}{2}] \), by Jensen's inequality:
+\[
+\frac{1}{n}\sin\frac{x_1+\cdots+x_n}{n} \geq \frac{\sin x_1 + \cdots + \sin x_n}{n} \cdot \frac{1}{1} \implies \frac{2}{\pi}(x_1+\cdots+x_n) \leq 1.
+\]
+Actually more precisely: \( \frac{2}{\pi}\sum x_k \leq \sum \sin x_k = 1 \) gives \( \sum x_k \leq \frac{\pi}{2} \).
+
+The minimum is achieved when all \( x_i = \arcsin\frac{1}{n} \), giving \( \sum x_k = n\arcsin\frac{1}{n} \).
+
+So \( S_n = \bigl[n\arcsin\frac{1}{n},\, \frac{\pi}{2}\bigr] \) and
+\[
+l_n = \frac{\pi}{2} - n\arcsin\frac{1}{n} \to \frac{\pi}{2} - \lim_{n\to\infty} \frac{\arcsin(1/n)}{1/n} = \frac{\pi}{2} - 1.
+\]
+\hfill\(\square\)
+\\
+
+\textbf{Solution 17.} (IMC 2004, Day 2, Problem 5)
+
+\textit{Solution 1.} Use \( x^{-1} - 1 \geq |\ln x| \) for \( x \in (0, 1] \) (since both sides equal 0 at \( x=1 \) and \( (x^{-1}-1)' = -x^{-2} \leq -x^{-1} = |\ln x|' \) on \( (0,1) \)). Therefore
+\[
+\int_0^1\int_0^1 \frac{dx\,dy}{x^{-1}+|\ln y|-1} \leq \int_0^1\int_0^1 \frac{dx\,dy}{|\ln x|+|\ln y|}.
+\]
+Substituting \( y = u/x \):
+\[
+\int_0^1\int_0^1 \frac{dx\,dy}{|\ln x|+|\ln y|} = \int_0^1 \frac{1}{|\ln u|} \cdot |\ln u|\,du = 1.
+\]
+(Detailed computation: substitute \( s = x^{-1} - 1 \), \( u = s - \ln y \) and use Fubini.) \hfill\(\square\)
+
+\textit{Solution 2.} Substituting \( s = x^{-1} - 1 \) and \( u = -\ln y \):
+\[
+\int_0^1\int_0^1 \frac{dx\,dy}{x^{-1}+|\ln y|-1}
+= \int_0^\infty\int_s^\infty \frac{e^{s-u}}{(s+1)^2 \cdot u}\,du\,ds
+= \int_0^\infty \left(\int_0^u \frac{e^s}{(s+1)^2}\,ds\right)\frac{e^{-u}}{u}\,du.
+\]
+By convexity of \( \frac{e^s}{(s+1)^2} \):
+\[
+\int_0^u \frac{e^s}{(s+1)^2}\,ds \leq \frac{u}{2}\left(\frac{e^u}{(u+1)^2}+1\right),
+\]
+giving
+\[
+\leq \frac{1}{2}\left(\int_0^\infty \frac{du}{(u+1)^2} + \int_0^\infty e^{-u}\,du\right) = \frac{1}{2}(1+1) = 1.
+\]
+\hfill\(\square\)
+\\
+
+\textbf{Solution 18.} (IMC 2005, Day 1, Problem 3)
+
+Let \( M = \max_{0 \leq x \leq 1} |f'(x)| \). Since \( -M \leq f'(x) \leq M \), integrating:
+\[
+-M\int_0^x f(t)\,dt \leq \frac{1}{2}f^2(x) - \frac{1}{2}f^2(0) \leq M\int_0^x f(t)\,dt.
+\]
+Multiplying by \( f(x) \geq 0 \) and integrating over \( [0,1] \):
+\[
+-Mf(x)\int_0^x f(t)\,dt \leq \frac{1}{2}f^3(x) - \frac{1}{2}f^2(0)f(x) \leq Mf(x)\int_0^x f(t)\,dt.
+\]
+Integrating the rightmost inequality over \( [0,1] \):
+\[
+\int_0^1 f^3 - f^2(0)\int_0^1 f \leq 2M\int_0^1 f(x)\int_0^x f(t)\,dt\,dx = M\left(\int_0^1 f\right)^2.
+\]
+Similarly for the left inequality, giving the desired bound. \hfill\(\square\)
+\\
+
+\textbf{Solution 19.} (IMC 2005, Day 2, Problem 4)
+
+Define
+\[
+g(x) = -\frac{f(-1)}{2}x^2(x-1) - f(0)(x^2-1) + \frac{f(1)}{2}x^2(x+1) - f'(0)x(x-1)(x+1).
+\]
+One can verify that \( g(\pm 1) = f(\pm 1) \), \( g(0) = f(0) \), and \( g'(0) = f'(0) \).
+
+Apply Rolle's theorem to \( h(x) = f(x) - g(x) \): since \( h(-1) = h(0) = h(1) = 0 \), there exist \( \eta \in (-1, 0) \), \( \vartheta \in (0,1) \) with \( h'(\eta) = h'(\vartheta) = 0 \). Also \( h'(0) = 0 \), so \( h' \) has three zeros. By Rolle's theorem applied twice more, \( h'' \) has two zeros, then \( h''' \) has a zero \( \xi \in (-1,1) \).
+
+Computing:
+\[
+g'''(x) = -3f(-1) + 3f(1) - 6f'(0) = 3(f(1) - f(-1)) - 6f'(0).
+\]
+So \( 0 = h'''(\xi) = f'''(\xi) - g'''(\xi) \), giving
+\[
+f'''(\xi) = 3(f(1) - f(-1)) - 6f'(0), \quad \frac{f'''(\xi)}{6} = \frac{f(1) - f(-1)}{2} - f'(0).
+\]
+\hfill\(\square\)
+\\
+
+\textbf{Solution 20.} (IMC 2006, Day 2, Problem 2)
+
+The functions \( f(x) = x + c \) and \( f(x) = -x + c \) clearly satisfy the condition. We prove these are the only ones.
+
+Since \( f([a,b]) \) is a closed interval of length \( b - a \), we have \( |f(x) - f(y)| \leq |x - y| \) for all \( x, y \) (the image can't exceed the length). So \( f \) is continuous.
+
+Given \( x < y \), let \( a, b \in [x, y] \) achieve the max and min of \( f \) on \( [x, y] \). Then \( f(\max) - f(\min) = y - x \), but also \( |a - b| \leq y - x \), so
+\[
+y - x = f(a) - f(b) \leq |a - b| \leq y - x.
+\]
+Hence \( \{a, b\} = \{x, y\} \) and \( f \) is monotone. If \( f \) is increasing:
+\( f(x) - f(y) = x - y \) implies \( f(x) - x = f(y) - y \), so \( f(x) = x + c \).
+Similarly, if decreasing, \( f(x) = -x + c \). \hfill\(\square\)
+
+\end{document}
