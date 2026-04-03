@@ -4,244 +4,586 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage[version=4]{mhchem}
-\usepackage{stmaryrd}
 \usepackage{enumerate}
 \usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
 \usepackage{tikz}
-\usetikzlibrary{positioning, shapes.geometric, arrows.meta, chains}
-%\usepackage{tikzexternal}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta, chains, fit, calc, decorations.pathreplacing}
 
 % =======================================================================
-% Margins --- save forests
+% Margins
 \NeedsTeXFormat{LaTeX2e}
-\oddsidemargin -10 pt       %   Left margin on odd-numbered pages.
-\evensidemargin 10 pt       %   Left margin on even-numbered pages.
-\marginparwidth 1 in        %   Width of marginal notes.
-\oddsidemargin -1.5 true cm %   Note that \oddsidemargin = \evensidemargin
+\oddsidemargin -10 pt
+\evensidemargin 10 pt
+\marginparwidth 1 in
+\oddsidemargin -1.5 true cm
 \evensidemargin -1.5 true cm
 \marginparwidth 0.75 in
-\textwidth 7.5 true in % Width of text line.
+\textwidth 7.5 true in
 \textheight 26.0 true cm
 \topmargin -2.5 true cm
 
 % =======================================================================
+% Code listings style
+\lstset{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{red!70!black},
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!5},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  tabsize=4,
+  showstringspaces=false
+}
 
-\title{Programming Paradigms (Neapolis University Pafos)
+\title{Programming Paradigms (Neapolis University Pafos) \\
   Assignment 3: Audio Processing System}
 
-%\author{Alex Avdiushenko}
-\date{April 2025}
+\date{April 2026}
 
 \begin{document}
 \maketitle
 
+% ========================================================================
+% Architecture Diagram
+% ========================================================================
 \begin{center}
 \begin{tikzpicture}[
-    node distance = 5mm and 10mm,
-    start chain = going right,
-    box/.style = {rectangle, draw, on chain, align=center, fill=blue!30},
-    process/.style = {rectangle, draw, on chain, align=center, fill=green!30},
-    io/.style = {trapezium, trapezium left angle=70, trapezium right angle=-70, draw, on chain, align=center, fill=red!30}
+    node distance = 6mm and 12mm,
+    box/.style = {rectangle, draw, align=center, minimum width=2.2cm, minimum height=1cm, rounded corners=2pt},
+    source/.style = {box, fill=red!20},
+    proc/.style = {box, fill=green!20},
+    sink/.style = {box, fill=blue!20},
+    chan/.style = {rectangle, draw, fill=yellow!15, minimum width=1.2cm, minimum height=0.7cm,
+                   align=center, font=\scriptsize, rounded corners=1pt},
+    vis/.style = {box, fill=orange!20, dashed},
+    arr/.style = {-Stealth, thick},
 ]
+    % Sources
+    \node[source] (src1) {WAV File\\Source};
+    \node[source, below=8mm of src1] (src2) {Microphone\\Source};
+    \node[source, below=8mm of src2] (src3) {Sine Wave\\Generator};
 
-% Pipeline 1
-    \node[io] (source1) {Source\\(WAV File)};
-    \node[process] (proc1) {Processor\\(Volume Control)};
-    %\node[box] (sink1) {Sink\\(File)};
+    % Input channel
+    \node[chan, right=12mm of src2] (ch1) {Channel};
 
-% Pipeline 2
-    \node[io, below=of source1] (source2) {Source\\(Microphone)};
-    \node[process, right=of source2] (proc2) {Processor\\(Noise Removal)};
-    \node[box, right=of proc2] (sink2) {Sink\\(Speakers)};
+    % Processor chain
+    \node[proc, right=8mm of ch1] (p2) {Volume\\Control};
+    \node[proc, above=8mm of p2] (p1) {Noise\\Gate};
+    \node[proc, below=8mm of p2] (p3) {Mono $\to$\\Stereo};
+    \node[chan, right=8mm of p2] (ch4) {Channel};
 
-% Pipeline 3
-    \node[io, below=of source2] (source3) {Source\\(Network)};
-    \node[process, right=of source3] (proc3) {Processor\\(Mono to Stereo)};
-    \node[box, right=of proc3] (sink3) {Sink\\(File)};
+    % Sinks
+    \node[sink, right=12mm of ch4, yshift=8mm] (snk1) {Speaker\\Sink};
+    \node[sink, right=12mm of ch4, yshift=-8mm] (snk2) {File\\Sink};
 
-% Arrows
-    \draw[-Stealth] (source2.east) -- (proc1.west);
-    \draw[-Stealth] (proc1.east) -- (sink2.west);
-    \draw[-Stealth] (source2.east) -- (proc2.west);
-    \draw[-Stealth] (proc2.east) -- (sink2.west);
-    \draw[-Stealth] (proc2.east) -- (sink3.west);
-    \draw[-Stealth] (source2.east) -- (proc3.west);
-    \draw[-Stealth] (proc3.east) -- (sink3.west);
+    % Visualization (tapping into channel)
+    \node[vis, below=12mm of ch4, xshift=4mm] (vis) {Waveform\\Display};
+
+    % Arrows: sources to input channel
+    \draw[arr] (src1.east) -- (ch1.north west);
+    \draw[arr] (src2.east) -- (ch1.west);
+    \draw[arr] (src3.east) -- (ch1.south west);
+
+    % Pipeline flow
+    \draw[arr] (ch1.north east) -- (p1);
+    \draw[arr] (ch1.east) -- (p2);
+    \draw[arr] (ch1.south east) -- (p3);
+    \draw[arr] (p1) -- (ch4);
+    \draw[arr] (p2) -- (ch4);
+    \draw[arr] (p3) -- (ch4);
+
+    % Sinks
+    \draw[arr] (ch4.north east) -- (snk1.west);
+    \draw[arr] (ch4.south east) -- (snk2.west);
+
+    % Visualization tap
+    \draw[arr, dashed, orange!70!black] (ch4.south) -- (vis.north);
+
+    % Pipeline brace
+    \draw[decorate, decoration={brace, amplitude=6pt, mirror}, thick, gray]
+      ([yshift=-7mm]p3.south west) -- ([yshift=-4mm]vis.south east)
+      node[midway, below=8pt, font=\small\itshape, gray] {ProcessorChain (composable pipeline)};
+
 \end{tikzpicture}
 \end{center}
 
-\textbf{Set-up:} For this assignment, you will create a versatile audio processing
-application in Java that can handle various transformations on audio streams,
-such as volume adjustment, speed modification, noise removal, and channel manipulation
-(mono/stereo). The system should be able to process input from WAV files,
-microphone streams, and other sources.
-Use provided \href{https://github.com/avalur/avalur.github.io/tree/master/cs_basics/oop_project}{Java-project blueprint} for reference.
+\section{Introduction}
 
-\section{Considerations for OOP and Extensibility}
+In this assignment you will design and implement a \textbf{versatile audio processing system} in Java
+that demonstrates core OOP principles in a realistic, non-trivial domain.
+
+The system processes audio as a stream of \textbf{Pulse-Code Modulation (PCM) samples} flowing through a configurable pipeline:
+\textit{sources} produce audio data, \textit{processors} transform it,
+and \textit{sinks} consume the result. All components communicate via thread-safe
+\textit{channels}, and the pipeline is assembled using the \textit{Builder} pattern.
+
+Your system must handle audio at the \textbf{sample level}~--- understanding
+that a ``byte array'' is really a sequence of 16-bit signed integers in little-endian byte order.
+
+Use the provided \href{https://github.com/CSAI-programming-paradigms/oop_project}{Java-project template}
+as your starting point. It contains interfaces, core infrastructure, and one working example
+(VolumeControlStrategy with proper PCM handling) to get you started.
+
+
+\section{Background: PCM Audio Fundamentals}
+
+Before writing audio processors, you must understand how digital audio is represented in memory.
+
+\subsection{What is PCM?}
+
+\textbf{Pulse Code Modulation (PCM)} is the standard way to represent audio digitally.
+An analog sound wave is sampled at regular intervals and each sample is quantized to a fixed number of bits.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Axes
+    \draw[-Stealth] (0,-2.2) -- (0,2.5) node[left] {\small Amplitude};
+    \draw[-Stealth] (-0.3,0) -- (10.5,0) node[below right] {\small Time};
+
+    % Sine wave
+    \draw[blue!60, thick, domain=0:10, samples=200] plot (\x, {1.8*sin(1.2*\x r)});
+
+    % Sample points
+    \foreach \x in {0,0.5,...,10} {
+        \pgfmathsetmacro{\y}{1.8*sin(1.2*\x r)}
+        \fill[red!70!black] (\x, \y) circle (2pt);
+        \draw[red!70!black, thin] (\x, 0) -- (\x, \y);
+    }
+
+    \node[below, font=\small] at (5,-2.5) {
+        Each red dot is one \textbf{sample} (e.g., a 16-bit signed integer)
+    };
+\end{tikzpicture}
+\end{center}
+
+\subsection{Key Parameters}
+
+\begin{itemize}
+    \item \textbf{Sample Rate}: Number of samples per second (e.g., 44\,100~Hz for CD quality).
+    \item \textbf{Bit Depth}: Bits per sample. \textbf{16-bit signed} is standard.
+          Values range from $-32\,768$ to $+32\,767$.
+    \item \textbf{Channels}: Mono (1 channel) or Stereo (2 channels, interleaved: L, R, L, R, \ldots).
+    \item \textbf{Byte Order}: 16-bit samples are stored as 2 bytes in \textbf{little-endian} order
+          (low byte first).
+\end{itemize}
+
+\subsection{Reading a 16-bit Sample from a Byte Array}
+
+\begin{lstlisting}
+// bytes[i] is the low byte, bytes[i+1] is the high byte
+int sample = (bytes[i] & 0xFF) | (bytes[i + 1] << 8);
+
+// Writing back after processing:
+bytes[i]     = (byte) (sample & 0xFF);
+bytes[i + 1] = (byte) ((sample >> 8) & 0xFF);
+\end{lstlisting}
+
+This is the fundamental operation you will use in every audio processor.
+\textbf{Ignoring byte order or treating individual bytes as samples is a common mistake}
+that produces noise instead of processed audio.
+
+
+\section{OOP Principles and Design Patterns}
+
+This project exercises multiple OOP concepts and design patterns:
+
 \begin{enumerate}
-  \item \textbf{Encapsulation}: Keep system details hidden, exposing only what's necessary.
-  \item \textbf{Inheritance}: Use abstract classes and interfaces to define and extend behaviors.
-  \item \textbf{Polymorphism}: Leverage to allow different implementations of audio sources, processors, and consumers.
+    \item \textbf{Encapsulation}: Audio format details, buffer management, and thread synchronization
+          are hidden inside Channel and AudioStream implementations.
+    \item \textbf{Inheritance \& Interfaces}: \texttt{AudioStream}, \texttt{AudioProcessingStrategy},
+          and \texttt{DataPin} define contracts; concrete classes provide implementations.
+    \item \textbf{Polymorphism}: Different sources, processors, and sinks are interchangeable
+          through their interfaces.
+    \item \textbf{Strategy Pattern}: Audio processors implement \texttt{AudioProcessingStrategy},
+          allowing algorithms to be swapped at runtime.
+    \item \textbf{Observer Pattern}: \texttt{ObservableChannel} notifies \texttt{DataPin} subscribers
+          when data arrives, enabling reactive data flow.
+    \item \textbf{Composite Pattern}: \texttt{ProcessorChain} composes multiple strategies into one,
+          applying them sequentially.
+    \item \textbf{Builder Pattern}: \texttt{AudioPipeline.Builder} provides a fluent API for
+          assembling pipelines declaratively.
+    \item \textbf{Factory Pattern}: Create sources, sinks, and processors through factory methods
+          for cleaner instantiation.
 \end{enumerate}
 
-This project challenges you to think about complex system design,
-data flow, and the practical application of OOP principles
-in a real-world scenario, using Java.
-It's a great opportunity to explore advanced programming concepts,
-software architecture, and audio processing techniques.
 
-\section{Core Components and Design Approach}
-\subsection{Audio Stream Abstraction: Interface}
-\begin{enumerate}
-    \item \textbf{Purpose}: Represent a generic audio stream, allowing
-    for different implementations (file, microphone, network).
-    \item \textbf{Key Methods}: `read()`, `write()`, `close()`.
-\end{enumerate}
-This interface forms the foundation for any class that aims to handle audio data within the system,
-ensuring that basic operations like reading, writing, and closing are consistently implemented across various audio sources and destinations.
-Implementing classes will provide the specifics of these operations based on the actual source or destination (e.g., file system, microphone hardware, network connection).
+\section{Core Components}
 
-Next steps would involve creating concrete implementations of this interface for different audio sources and sinks,
-such as a FileAudioStream for reading from and writing to audio files, MicrophoneAudioStream for capturing audio from a microphone,
-or NetworkAudioStream for receiving and sending audio data over the network.
+\subsection{Audio Stream Interface}
 
-\subsection{Audio Processor Framework}
-\begin{enumerate}
-  \item \textbf{Purpose}: Define a framework for various audio processing algorithms (volume control, acceleration, mono/stereo conversion, noise removal, cutting/adding segments).
-  \item \textbf{Design}: Use the Strategy pattern to allow for interchangeable algorithms that can be applied to audio streams.
-\end{enumerate}
+\begin{lstlisting}
+public interface AudioStream {
+    byte[] read() throws IOException;
+    void write(byte[] data) throws IOException;
+    void close() throws IOException;
+}
+\end{lstlisting}
 
-This framework allows you to easily extend the application with new audio processing algorithms
-without modifying the existing codebase, adhering to the open/closed principle.
-To add a new algorithm, you simply implement the AudioProcessingStrategy interface and
-integrate it into the system by setting it as the current strategy in an AudioProcessingContext instance.
+Foundation for any class that handles audio I/O. Implementing classes provide
+the specifics: \\
+\texttt{FileAudioStream} for files, \texttt{MicrophoneAudioStream}
+for microphone input, \texttt{NetworkAudioStream} for network streaming, etc.
 
-\subsection{Channel and Subchannel System}
-\begin{enumerate}
-  \item \textbf{Purpose}: Facilitate the flow of data between sources, processors, and consumers. Support subchannels for metadata, checksums, etc.
-  \item \textbf{Design}: Implement a Channel class with capabilities to buffer data, manage subchannels, and connect to source and sink pins.
-\end{enumerate}
+\subsection{Channel System}
 
-\subsubsection*{Key Features}
-\begin{enumerate}
-  \item Audio Data Buffering: The main audio data buffer uses a BlockingQueue to store audio data bytes, enabling asynchronous data flow between components. The BlockingQueue handles thread-safe data exchange and synchronization.
-  \item Subchannel Management: Subchannels are managed in a map, allowing for dynamic creation and usage. Each subchannel has its own BlockingQueue for buffering, suitable for different types of data, such as metadata or checksums.
-  \item Thread-Safe Operations: The add and take operations for both main audio data and subchannel data are thread-safe, ensuring that data can be added and retrieved reliably in a concurrent environment.
-\end{enumerate}
+\textbf{Channel} buffers audio data between components using a \texttt{BlockingQueue},
+enabling asynchronous, thread-safe producer-consumer flow.
+Subchannels carry metadata (e.g., timestamps, checksums, audio format info).
 
-This design lays the groundwork for a flexible data flow system in your audio processing application,
-supporting complex operations such as metadata management, error checking through checksums,
-and asynchronous processing. The use of blocking queues for buffering also helps in managing flow control,
-reducing the risk of data loss or overflow in high-throughput scenarios.
+\textbf{ObservableChannel} extends Channel with the Observer pattern:
+when data arrives, all subscribed \texttt{DataPin} instances are notified.
 
-\subsection{Data Source and Consumer}
-\begin{enumerate}
-  \item \textbf{Data Sources}: Implementations for reading from WAV files, microphone input, and network streams.
-  \item \textbf{Data Consumers}: Implementations for writing processed audio to files, sending over the network, or outputting to speakers.
-\end{enumerate}
+\subsection{Audio Processing Framework}
 
-\subsubsection*{WAVFileReader}
-This component reads audio data from a WAV file using `AudioSystem.getAudioInputStream` and sends the data to a specified channel.
-It uses a buffer to read chunks of data and then sends these chunks through the channel.
-It's essential to handle various exceptions that might occur during file reading and audio processing.
+The \textbf{Strategy Pattern} powers the processing framework:
 
-\subsubsection*{FileWriter}
-This component listens for audio data from a channel and writes it to a file.
-It uses a `FileOutputStream` for writing data. The loop continuously listens for data from the channel,
-assuming an external mechanism to stop the loop (like a signal or specific data indicating the end of the stream).
+\begin{lstlisting}
+public interface AudioProcessingStrategy {
+    byte[] processAudio(byte[] inputData);
+}
+\end{lstlisting}
 
-Both components interact with the `Channel` class designed earlier,
-showcasing how data sources and consumers can be implemented to work within an audio processing system.
-These examples are simplified and might need additional considerations for error handling, synchronization,
-and performance optimization in a real application.
+Each concrete strategy implements a specific audio transformation.
+The provided \texttt{VolumeControlStrategy} demonstrates proper 16-bit PCM sample handling
+with overflow clipping~--- use it as a reference for your own processors.
 
-\subsection{Pins and Handlers}
-\begin{enumerate}
-  \item \textbf{Purpose}: Define connection points for channels to sources,
-  processors, and consumers. Handlers manage data flow and transformations.
-  \item \textbf{Design}: Utilize the Observer pattern for dynamic data flow control and processing.
-\end{enumerate}
+\textbf{ProcessorChain} implements the \textbf{Composite Pattern}, chaining multiple strategies:
 
-\subsubsection*{Integration and Flow Control}
-In this design, `ObservableChannel` acts as the subject, notifying its observers
-(`DataPin` implementations) about new data.
-`AudioProcessorPin` serves as an observer and handler for data processing,
-utilizing a specified `AudioProcessingStrategy`.
-This setup allows for flexible and dynamic data flow control within the audio processing system,
-adhering to the Observer pattern.
+\begin{lstlisting}
+ProcessorChain chain = new ProcessorChain()
+    .add(new NoiseGateStrategy(500))
+    .add(new VolumeControlStrategy(1.5))
+    .add(new MonoToStereoStrategy());
 
-The system can be extended with more pins and handlers for different processing or output needs,
-showcasing the Observer pattern's power in creating a modular and extensible architecture.
+byte[] result = chain.processAudio(inputData);
+\end{lstlisting}
+
+\subsection{Pipeline Composition (Builder Pattern)}
+
+The \texttt{AudioPipeline} class provides a fluent \textbf{Builder API}
+for assembling complete audio pipelines:
+
+\begin{lstlisting}
+Pipeline pipeline = AudioPipeline.builder()
+    .source(new WAVFileReader(file, inputChannel))
+    .channel(inputChannel)
+    .processor(processorChain)
+    .channel(outputChannel)
+    .sink(new SpeakerConsumer(outputChannel))
+    .sink(new FileWriterConsumer(outFile, outputChannel))
+    .build();
+
+pipeline.start();
+// ... audio flows through the pipeline ...
+pipeline.stop();
+\end{lstlisting}
+
+Students must complete the \texttt{AudioPipeline} implementation, handling thread management,
+graceful shutdown, and error propagation.
+
+\subsection{Pins and Observer Pattern}
+
+\texttt{DataPin} is the observer interface; \texttt{AudioProcessorPin} is a concrete observer
+that retrieves data from an \texttt{ObservableChannel}, applies a processing strategy,
+and forwards the result. This enables reactive, event-driven data flow through the pipeline.
+
+\subsection{Sine Wave Generator}
+
+The blueprint includes a \texttt{SineWaveGenerator}~--- an audio source that produces
+a mathematically perfect sine wave at a configurable frequency.
+Use it to \textbf{test your processors without needing actual WAV files}:
+
+\begin{lstlisting}
+// Generate 2 seconds of 440 Hz tone (A4 note)
+SineWaveGenerator gen = new SineWaveGenerator(440.0, 2.0);
+byte[] audioData = gen.generate();
+\end{lstlisting}
 
 \subsection{Utility Components}
+
+\begin{itemize}
+    \item \textbf{WAVUtils}: Read and write WAV file headers (44-byte RIFF format).
+          Provided in the blueprint~--- essential for any file I/O.
+    \item \textbf{SystemLogger}: Centralized logging utility.
+    \item \textbf{Converter$\langle$T, R$\rangle$}: Generic conversion interface for transformations
+          like Speech-to-Text.
+\end{itemize}
+
+
+\section{The Problems}
+
+\textit{Note: we reserve the right to deduct points for incomprehensible code,
+careless project structure, or solutions that clearly do not understand
+the underlying audio representation (e.g., treating individual bytes as samples).}
+
+% -----------------------------------------------------------------------
+\subsection{Problem 1: Core Audio Pipeline \hfill \textbf{(20 points)}}
+
+Implement a working end-to-end audio pipeline.
+
 \begin{enumerate}
-  \item \textbf{Converters}: Can be used in processing pins or as standalone processing units
-  depending on whether you're implementing STT, TTS, or other conversion functionalities.
-  \item \textbf{Config Management}: For setting up and managing system configurations,
-  potentially through visual representation using JavaFX. The JavaFX user interface (UI)
-  can serve as the central hub for adjusting system settings and configurations, enhancing user interaction.
-  \item \textbf{Logging and Debugging}: Integrated logging for monitoring system operations
-  and aiding in debugging.
+    \item Implement at least \textbf{2 audio sources}. Choose from:
+    \begin{itemize}
+        \item WAV file reader (reading from \texttt{.wav} files on disk)
+        \item Microphone capture (real-time input from system microphone)
+        \item Network stream (receiving audio over TCP/UDP)
+        \item Sine wave / tone generator (already provided as reference)
+    \end{itemize}
+
+    \item Implement at least \textbf{2 audio consumers}. Choose from:
+    \begin{itemize}
+        \item WAV file writer (writing processed audio to \texttt{.wav} files)
+        \item Speaker output (real-time playback through system speakers)
+        \item Network sender (streaming audio over the network)
+    \end{itemize}
+
+    \item Create a \textbf{complete working example} that reads audio from a source,
+          processes it through at least one processor, and sends the result to a consumer.
+
+    \item All sources and consumers must use the Channel infrastructure for data flow
+          and handle \textbf{audio format metadata} properly (sample rate, bit depth, channels).
 \end{enumerate}
 
-By incorporating these utility components, the audio processing system becomes more robust,
-user-friendly, and easier to maintain and debug.
+% -----------------------------------------------------------------------
+\subsection{Problem 2: Audio Processors and Pipeline Composition \hfill \textbf{(25 points)}}
 
-\section{Choosing framework for Java application}
-You have to choose a framework for developing Java applications,
-especially for enterprise-level development.
-In this project we use \textbf{Spring Framework},
-a comprehensive framework, which provides a wide range of features such as dependency injection,
-aspect-oriented programming, transaction management, and more,
-facilitating the creation of high-performing, reusable code.
+Implement audio processing strategies and composable pipelines.
 
-\subsection{Alternatives to Spring Framework}
-Several frameworks offer similar functionality to Spring, each with its own strengths and focus areas.
-Here are a few notable ones:
 \begin{enumerate}
-    \item \textbf{Micronaut}: A modern, JVM-based, full-stack framework for building modular,
-    easily testable microservice and serverless applications.
-    It's designed to be lightweight and fast, with minimal memory footprint and startup time, making it an excellent choice for microservices.
-    \item \textbf{Quarkus}: Known as a Kubernetes-native Java stack,
-    Quarkus is tailored for Java virtual machines (JVMs) and native compilation,
-    optimizing Java specifically for containers and enabling it to become an effective platform
-    for serverless, cloud, and Kubernetes environments.
-    \item \textbf{Helidon}: Developed by Oracle, Helidon is a collection of Java libraries
-    for writing microservices that run on a fast web core powered by Netty.
-    It offers two programming models: Helidon SE, a reactive model, and Helidon MP,
-    an implementation of MicroProfile for a more declarative style of programming akin to Spring.
-    \item \textbf{Vert.x}: A tool-kit for building reactive applications on the JVM.
-    It's event-driven and non-blocking, which means applications can handle
-    a lot of concurrency using a small number of kernel threads.
-    Vert.x lets you write applications in a variety of languages, not just Java.
-    \item \textbf{Dropwizard}: A lightweight framework that lets you quickly build RESTful
-    web services. It bundles together popular libraries like Jetty, Jersey, and Jackson,
-    with a focus on providing you with everything you need to develop production-ready
-    web services in a straightforward, no-fuss package.
+    \item Implement a few from \textbf{4 audio processing strategies},
+          all working with proper 16-bit signed PCM samples:
+    \begin{itemize}
+        \item \textbf{Volume Control}~--- scale sample amplitude with overflow clipping
+              (provided as reference in the blueprint)
+        \item \textbf{Noise Gate}~--- zero out samples below an amplitude threshold
+        \item \textbf{Mono $\leftrightarrow$ Stereo Conversion}~--- duplicate mono samples to both channels,
+              or average stereo channels to mono
+        \item \textbf{One non-trivial DSP algorithm}~--- choose one:
+        \begin{itemize}
+            \item \textit{Echo / Delay}: mix signal with a delayed copy of itself
+            \item \textit{Reverb}: simulate room acoustics (e.g., Schroeder or Freeverb algorithm)
+            \item \textit{Speed / Pitch modification}: resample audio with interpolation
+            \item \textit{Simple Equalizer}: boost/cut frequency bands using filters
+            \item \textit{Compressor / Limiter}: reduce dynamic range
+            \item \textit{Fade In / Fade Out}: gradually change volume over time
+            \item Or propose your own variant!
+        \end{itemize}
+    \end{itemize}
+
+    \item Complete the \texttt{ProcessorChain} implementation to chain multiple strategies
+          via the Composite Pattern. Verify that the order of processors matters
+          (e.g., noise gate before volume boost gives different results than the reverse).
+
+    \item Complete the \texttt{AudioPipeline.Builder} to declaratively construct pipelines
+          with sources, processor chains, and multiple sinks.
 \end{enumerate}
 
-\section{The Problems (Finally)}
-Note: we reserve the opportunity for reviewers to deduct points
-for incomprehensible code or a carelessly designed project.
+% -----------------------------------------------------------------------
+\subsection{Problem 3: Testing \hfill \textbf{(25 points)}}
+
+Write comprehensive tests for each component.
+
 \begin{enumerate}
-  \item \textbf{(20 points)} Implement a few sources and consumers,
-  and create a working example of audio processing.
+    \item \textbf{Unit tests} for:
+    \begin{itemize}
+        \item Each audio processing strategy (verify correct sample transformation,
+              clipping behavior, edge cases with silence / maximum amplitude)
+        \item Channel and ObservableChannel (buffering, blocking, subchannel operations,
+              observer notifications)
+        \item ProcessorChain (verify order of application, empty chain, single processor)
+        \item Sources and consumers (mock hardware where necessary)
+    \end{itemize}
 
-  \item \textbf{(30 points)} Write unit and integration tests for each component.
+    \item \textbf{Integration tests} for:
+    \begin{itemize}
+        \item Complete pipeline: source $\to$ processor chain $\to$ consumer
+        \item Use \texttt{SineWaveGenerator} as a deterministic source for reproducible tests
+        \item Verify that audio data passes through the pipeline correctly
+    \end{itemize}
 
-  \item \textbf{(30 points)} Integrate JavaFX or some other Java library you like
-  for configuration and visualization, make nice UI.
-
-  \item \textbf{(20 points)} Incorporate utility components like other converters,
-  item loggers, and debug tools.
-
-  \item (Lack Of) Challenge Problem:
-  the most educational challenge problem is not something
-  we can reasonably auto-grade or peer assess, so we encourage doing it even
-  though it will not count toward your grade:
-  Make a second version of your solution in a different OOP language:
-  it may be Kotlin, Scala, Rust or even C#.
+    \item Use \textbf{JUnit 5} and \textbf{Mockito} (both included in the blueprint POM).
+          The blueprint includes sample tests~--- follow their patterns.
 \end{enumerate}
+
+% -----------------------------------------------------------------------
+\subsection{Problem 4: UI with Real-time Visualization \hfill \textbf{(30 points)}}
+
+Build a graphical interface for configuring and monitoring the audio pipeline.
+
+\begin{enumerate}
+    \item \textbf{Pipeline Configuration UI} (15 points):
+    \begin{itemize}
+        \item Select audio source type and configure its parameters
+              (e.g., file path, microphone device, network address)
+        \item Select and configure processors with adjustable parameters
+              (e.g., volume slider, noise threshold, echo delay time)
+        \item Select audio consumer(s) and configure output
+        \item Start / Stop controls for pipeline execution
+        \item Status display and logging panel
+    \end{itemize}
+
+    \item \textbf{Real-time Audio Visualization} (15 points):
+    \begin{itemize}
+        \item Display a \textbf{waveform view} (amplitude vs.\ time) that updates
+              in real-time as audio flows through the pipeline
+        \item \textit{OR} display a \textbf{spectrum / level meter} (frequency or amplitude bars)
+        \item The visualization must tap into the channel data without disrupting
+              the audio flow (read from a subchannel or use the Observer pattern)
+        \item Update smoothly at a reasonable frame rate ($\geq$10 FPS)
+    \end{itemize}
+
+    \item Use \textbf{JavaFX} (included in the blueprint) or another Java UI library of your choice
+          (Swing, LibGDX, etc.). If you choose an alternative, justify it briefly in your README.
+\end{enumerate}
+
+\textit{Tip: JavaFX Canvas or a custom Node works well for waveform drawing.
+Use \texttt{Platform.runLater()} for thread-safe UI updates from audio processing threads.}
+
+
+% -----------------------------------------------------------------------
+\subsection{Bonus Challenge \hfill \textbf{(not graded)}}
+
+The most educational challenge is not something we can auto-grade or peer assess,
+so we encourage doing it even though it will not count toward your grade:
+
+\begin{itemize}
+    \item Reimplement (part of) your solution in a different OOP language:
+          Kotlin, Scala, Rust, C\#, or Python.
+    \item Implement pipeline serialization: save and load pipeline configurations
+          to/from JSON or XML files.
+    \item Add a visual pipeline editor where users drag-and-drop
+          source/processor/sink nodes and connect them with wires
+          (one of the best student solutions from last year did this!).
+    \item Integrate a real speech recognition library (e.g., Vosk) as a consumer.
+\end{itemize}
+
+
+\section{Choosing a Framework}
+
+This project uses the \textbf{Spring Framework} for dependency injection and configuration management.
+Spring Boot provides auto-configuration, bean management, and externalized properties.
+
+\subsection{Alternatives}
+If you prefer a different framework, you may use one of these alternatives
+(document your choice in README):
+\begin{enumerate}
+    \item \textbf{Micronaut}~--- lightweight, fast startup, minimal memory footprint.
+    \item \textbf{Quarkus}~--- Kubernetes-native, optimized for containers.
+    \item \textbf{Helidon}~--- Oracle's microservices library with reactive support.
+    \item \textbf{Vert.x}~--- event-driven, non-blocking toolkit.
+    \item \textbf{Plain Java}~--- no framework, manual dependency wiring.
+          Acceptable if you demonstrate clean architecture.
+\end{enumerate}
+
+
+\section{Grading Criteria}
+
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Problem} & \textbf{Points} & \textbf{Key Criteria} \\
+\hline
+1. Core Pipeline & 20 & Working sources, consumers, end-to-end demo \\
+\hline
+2. Processors \& Composition & 25 & 4+ strategies with proper PCM, chain, builder \\
+\hline
+3. Testing & 25 & Unit + integration tests, meaningful coverage \\
+\hline
+4. UI \& Visualization & 30 & Configuration UI + real-time waveform/spectrum \\
+\hline
+\textbf{Total} & \textbf{100} & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Deductions may apply for:}
+\begin{itemize}
+    \item Treating individual bytes as audio samples (ignoring 16-bit PCM format)
+    \item Code that compiles but produces noise/silence instead of correct audio
+    \item Poor code organization, missing documentation, or copy-pasted code without understanding
+    \item Tests that don't actually verify audio correctness (e.g., only checking array length)
+\end{itemize}
+
+\textbf{Bonus points (up to +15) for:}
+\begin{itemize}
+    \item Exceptionally clean architecture or creative design
+    \item Implementing a genuinely interesting DSP algorithm (reverb, pitch shift, etc.)
+    \item Visual pipeline editor or other innovative UI
+    \item Particularly thorough or creative testing
+\end{itemize}
+
+
+\section{Blueprint Structure}
+
+The starter code provides the following (your task is to extend and complete it):
+
+\begin{center}
+\small
+\begin{tabular}{|l|l|}
+\hline
+\textbf{File} & \textbf{Purpose} \\
+\hline
+\texttt{audiostream/AudioStream.java} & Core I/O interface \\
+\texttt{channel/Channel.java} & Thread-safe data buffer with subchannels \\
+\texttt{channel/ObservableChannel.java} & Observer-pattern channel \\
+\texttt{processing/AudioProcessingStrategy.java} & Strategy interface \\
+\texttt{processing/VolumeControlStrategy.java} & Reference: proper PCM processing \\
+\texttt{processing/AudioProcessingContext.java} & Strategy context \\
+\texttt{processing/ProcessorChain.java} & \textit{Skeleton}: composite processor \\
+\texttt{pipeline/Pipeline.java} & Pipeline interface \\
+\texttt{pipeline/AudioPipeline.java} & \textit{Skeleton}: builder-based pipeline \\
+\texttt{pin/DataPin.java} & Observer interface \\
+\texttt{pin/AudioProcessorPin.java} & Concrete observer \\
+\texttt{source/WAVFileReader.java} & Reference source \\
+\texttt{source/SineWaveGenerator.java} & Test tone generator \\
+\texttt{consumer/FileWriter.java} & Reference consumer \\
+\texttt{converter/Converter.java} & Generic converter interface \\
+\texttt{converter/SpeechToTextConverter.java} & Stub converter \\
+\texttt{config/AudioSystemConfig.java} & Spring configuration \\
+\texttt{config/ConfigManagerUI.java} & JavaFX UI skeleton \\
+\texttt{util/SystemLogger.java} & Logging utility \\
+\texttt{util/WAVUtils.java} & WAV header read/write utilities \\
+\hline
+\texttt{test/.../ChannelTest.java} & Sample: channel unit test \\
+\texttt{test/.../VolumeControlStrategyTest.java} & Sample: processor unit test \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\section{Tips and Resources}
+
+\begin{itemize}
+    \item \textbf{Start with SineWaveGenerator}: test your processors on generated tones
+          before attempting file I/O or microphone capture. You can verify correctness
+          mathematically (e.g., doubling volume should double sample values).
+
+    \item \textbf{Java Sound API}: \texttt{javax.sound.sampled} provides
+          \texttt{AudioInputStream}, \texttt{AudioSystem}, \texttt{SourceDataLine} (playback),
+          and \texttt{TargetDataLine} (recording).
+
+    \item \textbf{WAV file format}: A WAV file = 44-byte RIFF header + raw PCM data.
+          Use the provided \texttt{WAVUtils} for header manipulation.
+
+    \item \textbf{Threading}: Audio sources and sinks typically run in their own threads.
+          Use \texttt{BlockingQueue} (already in Channel) for synchronization.
+          Use \texttt{ExecutorService} for managed thread pools.
+
+    \item \textbf{JavaFX Canvas for visualization}: Draw waveforms by mapping sample values
+          to pixel coordinates. Use \texttt{AnimationTimer} or \texttt{Timeline}
+          for smooth updates.
+
+    \item \textbf{Echo/Delay algorithm hint}: maintain a circular buffer of past samples.
+          Output $= $ current sample $+$ gain $\times$ sample from $N$ positions ago.
+
+    \item \textbf{Useful test pattern}: generate a known sine wave, process it,
+          verify mathematical properties of the output (amplitude, zero-crossings, etc.).
+\end{itemize}
 
 \end{document}

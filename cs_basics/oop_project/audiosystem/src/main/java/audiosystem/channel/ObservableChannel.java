@@ -33,4 +33,10 @@ public class ObservableChannel extends Channel {
             pin.notifyDataAvailable();
         }
     }
+
+    public void notifyDataAvailable() {
+        for (DataPin pin : subscribers) {
+            pin.notifyDataAvailable();
+        }
+    }
 }
