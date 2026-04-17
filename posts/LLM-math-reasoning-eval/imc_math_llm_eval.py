@@ -102,7 +102,7 @@ def call_deepseek(model: str, system: str, user: str) -> tuple[str, float]:
         return "Error: NEBIUS_API_KEY not configured", 0
 
     client_nebius = OpenAI(
-        base_url="https://api.studio.nebius.com/v1/",
+        base_url="https://api.tokenfactory.nebius.com/v1/",
         api_key=os.environ.get("NEBIUS_API_KEY")
     )
 
@@ -327,50 +327,96 @@ def benchmark_model(name: str, call_fn, problems: list[dict]) -> list[dict]:
     return all_results
 
 
+def benchmark_single_problem(prob: dict, name: str, call_fn) -> dict:
+    pid = prob["id"]
+    latex = prob["latex"]
+    user_msg = f"Problem {pid}:\n```latex\n{latex}\n```"
+
+    variants = []
+    variant_times = []
+    for i in range(3):
+        out, duration = call_fn(SYSTEM_PROMPT, user_msg)
+        variants.append(out)
+        variant_times.append(duration)
+        print(f"  {name} - Problem {pid}, variant {i+1}: {duration:.2f}s")
+        time.sleep(1)
+
+    synth_prompt = (
+        f"Below are solution drafts for {user_msg}"
+        "Please review them, check logic, "
+        "fix all the possible errors and produce a concise, complete final solution."
+        "Important note: please do not use search. We want to test your ability "
+        "to solve extremely difficult math problems, "
+        "not your ability to search for solutions on the Internet.\n\n"
+    )
+    for idx, sol in enumerate(variants, 1):
+        synth_prompt += f"--- Solution {idx} ---\n{sol}\n\n"
+
+    final_sol, final_duration = call_fn(SYSTEM_PROMPT, synth_prompt)
+    print(f"  {name} - Problem {pid}, final synthesis: {final_duration:.2f}s")
+
+    return {
+        "id": pid,
+        "round": prob.get("round"),
+        "variants": variants,
+        "variant_times": variant_times,
+        "final": final_sol,
+        "final_time": final_duration,
+        "total_problem_time": sum(variant_times) + final_duration
+    }
+
+
 def main():
-    # Load IMC problems
     with open("problems.json", "r") as f:
         problems = json.load(f)
 
     models = {
         # "gpt": lambda s, u: call_openai("o3-2025-04-16", s, u),
-        "gpt": lambda s, u: call_openai("gpt-5-2025-08-07", s, u),
+        "gpt": lambda s, u: call_openai("gpt-5.4", s, u),
         "deepseek": lambda s, u: call_deepseek("deepseek-ai/DeepSeek-R1-0528", s, u),
-        "gemini": lambda s, u: call_gemini("gemini-2.5-pro", s, u),
-        "claude": lambda s, u: call_claude("claude-opus-4-1-20250805", s, u),
-        "grok": lambda s, u: call_grok("grok-4", s, u),
+        "gemini": lambda s, u: call_gemini("gemini-3.1-pro-preview", s, u),
+        "claude": lambda s, u: call_claude("claude-opus-4-6", s, u),
+        "grok": lambda s, u: call_grok("grok-4.20-0309-reasoning", s, u),
     }
 
-    results = {}
+    # results[model_name] = list of problem results
+    results = {name: [] for name in models}
     overall_start_time = time.time()
-    
-    for name, fn in models.items():
-        print(f"Running benchmark for {name}...")
-        model_start_time = time.time()
-        results[name] = benchmark_model(name, fn, problems)
-        model_end_time = time.time()
-        model_total_time = model_end_time - model_start_time
-        
-        # Add a timing summary to results
+
+    # Iterate problem-first: send each problem to all models before moving on
+    for prob in problems:
+        pid = prob["id"]
+        print(f"\n{'='*60}")
+        print(f"=== Problem {pid} ===")
+        print(f"{'='*60}")
+
+        for name, fn in models.items():
+            print(f"\n--- {name} solving {pid} ---")
+            result = benchmark_single_problem(prob, name, fn)
+            results[name].append(result)
+
+            # Save intermediate results per model after each problem
+            with open(f"results_{name}.json", "w") as fout:
+                json.dump(results[name], fout, indent=2)
+
+        print(f"\nAll models finished {pid}.")
+
+    overall_time = time.time() - overall_start_time
+
+    # Add timing summaries per model
+    for name in models:
+        total_model_time = sum(r["total_problem_time"] for r in results[name])
         results[name].append({
             "timing_summary": {
                 "model_name": name,
-                "total_model_time": model_total_time,
+                "total_model_time": total_model_time,
                 "problems_count": len(problems),
-                "average_time_per_problem": model_total_time / len(problems) if problems else 0
+                "average_time_per_problem": total_model_time / len(problems) if problems else 0
             }
         })
-        
-        print(f"Completed {name} in {model_total_time:.2f}s")
-        
-        # Save intermediate results in case of interruption
         with open(f"results_{name}.json", "w") as fout:
             json.dump(results[name], fout, indent=2)
 
-    overall_end_time = time.time()
-    overall_time = overall_end_time - overall_start_time
-
-    # Add overall timing summary
     timing_summary = {
         "overall_benchmark_time": overall_time,
         "models_tested": list(models.keys()),
@@ -378,16 +424,10 @@ def main():
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     }
 
-    # Final output
-    final_results = {
-        "timing_summary": timing_summary,
-        "model_results": results
-    }
-    
     with open("results_all_models.json", "w") as fout:
-        json.dump(final_results, fout, indent=2)
-    
-    print(f"Benchmarking complete in {overall_time:.2f}s. Results saved to results_all_models.json")
+        json.dump({"timing_summary": timing_summary, "model_results": results}, fout, indent=2)
+
+    print(f"\nBenchmarking complete in {overall_time:.2f}s. Results saved to results_all_models.json")
 
 
 if __name__ == "__main__":
