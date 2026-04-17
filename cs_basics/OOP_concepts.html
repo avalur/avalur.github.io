@@ -44,10 +44,9 @@
 				color: orange;
 			}
 			.highlighted {
-				text-align: left;
+				text-align: center;
 				color: white;
 				background-color: orange;
-				padding-left: 20px;
 			}
 			.hierarchy-box { padding: 10px; border-radius: 4px; text-align: center; }
 			.parent { background-color: #aaa; }
@@ -66,7 +65,7 @@
 					<h3>Object-Oriented Programming</h3>
 					<br />
 					Alex Avdiushenko <br />
-					March 20, 2025
+					April 20, 2026
 				</section>
 				<section>
 					<section data-background-color="antiquewhite">
@@ -185,7 +184,7 @@ new Thread(runnable).start();
 					<section>
 						<h3>What are objects?</h3>
 						<div class="column">
-							<p style="text-align: left">A <span style="color: orange">data abstraction</span> that captures..</p>
+							<p style="text-align: left">A <span style="color: orange">data abstraction</span> that captures</p>
 							<ol>
 								<li>an <span style="color: orange">internal representation</span> through data attributes</li>
 								<li>an <span style="color: orange">interface</span> for interacting with an object through methods
@@ -218,21 +217,21 @@ new Thread(runnable).start();
 						</div>
 					</section>
 					<section>
-						<h3>Creating and using your own types with classes</h3>
+						<h3 style="text-align: left">Creating and using your own types with classes</h3>
 						<p style="text-align: left">
 							Make a distinction between <span class="important">creating a class</span>
 							and <span class="important">using an instance</span> of the class</p>
 
 						<div class="fragment">
 							<div class="typesetting">
-							<h3>Creating the Class</h3>
+							<h3 style="text-align: left">Creating the Class</h3>
 							<ul>
 								<li>Defining the class name</li>
 								<li>Defining class attributes</li>
 								<li>For example, someone wrote code to implement a list class</li>
 							</ul>
 
-							<h3>Using the Class</h3>
+							<h3 style="text-align: left">Using the Class</h3>
 							<ul>
 								<li>Creating new <span class="important">instances</span> of objects</li>
 								<li>Doing operations on the instances</li>
@@ -245,7 +244,7 @@ new Thread(runnable).start();
 					<section data-background-color="antiquewhite">
 						<h3>Define your own types</h3>
 						<p style="text-align: left">
-							Use the <code class="highlighted">class </code> keyword to define a new type in Java:</p>
+							Use the <code class="highlighted">class</code> keyword to define a new type in Java:</p>
 
 
 						<div class="fragment">
@@ -272,7 +271,7 @@ new Thread(runnable).start();
 							<li>Similar to methods, indent code indicates which statements are part of the class definition</li>
 							<li>In <span class="important">Java</span>, the word <code class="important">extends</code> is used
 								(instead of <code class="important">(object)</code> in <span class="important">Python</span>)
-								to indicate that a class inherits from another (inheritance will be covered later)</li>
+								to indicate that a class inherits from another</li>
 							<ul>
 								<li><code class="important">Coordinate</code> is a subclass of <code class="important">Object</code>
 									by default in <span class="important">Java</span>, as all classes
@@ -335,8 +334,8 @@ public class Coordinate {
 									  </pre>
 							<p style="text-align: left">
 								In Java, you explicitly only pass arguments to the constructor,
-								and <code class="highlighted">this </code> is reference to this current instance of a class.
-								In Python you have to use first argument <code class="highlighted">self </code> for it.</p>
+								and <code class="highlighted">this</code> is reference to this current instance of a class.
+								In Python you have to use first argument <code class="highlighted">self</code> for it.</p>
 							</div>
 						</div>
 					</section>
@@ -452,7 +451,7 @@ public class Coordinate {
 					</section>
 					<section>
 						<p style="text-align: left">Note: In Java, the Diamond Problem is avoided because
-						Java does not support multiple inheritance for classes.
+						Java does not support <span class="highlighted" >multiple inheritance</span> for classes.
 						However, it can occur with interfaces, and is resolved
 						using explicit method invocation and interface default methods.</p>
 					</section>
