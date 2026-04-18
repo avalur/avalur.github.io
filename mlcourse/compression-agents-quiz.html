@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Compression and Agents Quiz - ML Course</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script src="js/quiz.js"></script>
+    <header>
+        <div class="container">
+            <h1>Model Compression and Agents</h1>
+            <p>Test your understanding</p>
+            <a href="index.html" class="cta-button">Back to Course</a>
+        </div>
+    </header>
+
+    <section class="quiz-container" id="compression-agents-quiz">
+        <div class="container">
+            <div class="quiz-header" onclick="toggleQuiz()">
+                <h2 class="module-category">Model Compression and Agents</h2>
+                <span class="quiz-toggle">▼</span>
+            </div>
+
+            <div class="quiz-content" id="quiz-content">
+                <div class="quiz-progress">
+                    <div>Question <span id="current-question">1</span> of <span id="total-questions">15</span></div>
+                    <div class="quiz-score">Score: <span id="score">0</span>/<span id="total-score">0</span></div>
+                </div>
+
+                <!-- Quiz Question 1 -->
+                <div class="quiz-card" id="question-1">
+                    <div class="quiz-question">
+                        <span class="module-number">1</span>
+                        Which three families of techniques were presented as the main approaches to model compression?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Normalization, Dropout, Data Augmentation</li>
+                        <li class="quiz-option" data-correct="true">Quantization, Pruning, Distillation</li>
+                        <li class="quiz-option" data-correct="false">Tokenization, Embedding, Fine-tuning</li>
+                        <li class="quiz-option" data-correct="false">Regularization, Early Stopping, Cross-validation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The lecture introduced three complementary model compression techniques: (1) <strong>Quantization</strong> keeps the model architecture the same but reduces the number of bits used to represent weights (e.g., Int8 or 4-bit via Q-LoRA), (2) <strong>Pruning</strong> removes parts of the model (individual weights for unstructured pruning, or entire components for structured pruning) while retaining performance, (3) <strong>Distillation</strong> trains a smaller student model to imitate the behavior of a larger teacher model (e.g., DistilBERT). The motivation behind all three is the observation that LLMs are becoming massive and one week of ChatGPT usage is comparable to its training cost — so we need to deploy models cheaply, efficiently, and equitably without sacrificing performance. The underlying insight is that we do not actually need all the parameters for inference, only for training.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 2 -->
+                <div class="quiz-card" id="question-2" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">2</span>
+                        In absolute-maximum (absmax) Int8 quantization, what scaling factor is applied to every element of an Fp16 array?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">255 / sum of absolute values</li>
+                        <li class="quiz-option" data-correct="true">127 / max of absolute values</li>
+                        <li class="quiz-option" data-correct="false">128 / mean of absolute values</li>
+                        <li class="quiz-option" data-correct="false">1 / standard deviation</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The absmax Int8 quantization formula is X_i8 = round(127 · X_f16 / max_ij(|X_f16ij|)). Dividing by the maximum absolute value in the tensor and multiplying by 127 rescales the range into the signed Int8 interval [−127, 127]. For example, in the lecture's worked example [0.5, 20, −0.0001, −0.01, −0.1], the maximum absolute value is 20, so every element is multiplied by 127/20 and rounded, producing [3, 127, 0, 0, −1]. Using the maximum (rather than the mean or a constant) guarantees that no value gets clipped outside the representable range, while still using the full dynamic range of Int8.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 3 -->
+                <div class="quiz-card" id="question-3" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">3</span>
+                        What is the headline result of Q-LoRA (Dettmers et al., 2023)?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It removes the need for any fine-tuning data</li>
+                        <li class="quiz-option" data-correct="false">It doubles the accuracy of full-precision fine-tuning</li>
+                        <li class="quiz-option" data-correct="true">It enables fine-tuning a 65B-parameter model on a single 48GB GPU</li>
+                        <li class="quiz-option" data-correct="false">It eliminates the need for the attention mechanism</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Q-LoRA combines 4-bit quantization of the frozen base model with LoRA adapters that are trained in higher precision. The celebrated result highlighted in the slides is that <strong>you can train (fine-tune) a 65B-parameter model on a single 48GB GPU</strong>. The trick is to (1) quantize the huge base model's weights into 4 bits (massively reducing memory for the frozen backbone), (2) keep the LoRA adapters in higher precision so the learning signal is not degraded, and (3) dequantize weights on-the-fly during matmul. This makes fine-tuning of very large models accessible on commodity hardware — one of the most important practical breakthroughs in democratising LLM research.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 4 -->
+                <div class="quiz-card" id="question-4" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">4</span>
+                        What is the key distinction between pruning and quantization?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Pruning is applied during training, quantization is only post-training</li>
+                        <li class="quiz-option" data-correct="true">Quantization changes the precision of all parameters; pruning sets a subset of parameters to zero and leaves the rest unchanged</li>
+                        <li class="quiz-option" data-correct="false">Pruning works only on CNNs; quantization works only on Transformers</li>
+                        <li class="quiz-option" data-correct="false">Quantization always produces a smaller file size than pruning</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> As stated explicitly in the slides: "<em>Quantization: no parameters are changed, up to k bits of precision. Pruning: a number of parameters are set to zero, the rest are unchanged.</em>" In quantization, every parameter is kept but represented with fewer bits (e.g., Int8 instead of Fp32), so the <em>precision</em> of every weight is reduced. In pruning, the parameters that survive keep their full precision, but a subset of weights are forced to zero. Distillation is a third category in which essentially <em>all</em> parameters change because we train a new, smaller student model from scratch to imitate the teacher. Understanding this taxonomy matters because the three approaches can be combined (e.g., prune + quantize) and because the deployment implications (sparse matmul kernels, low-bit arithmetic units, retraining pipelines) differ.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 5 -->
+                <div class="quiz-card" id="question-5" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">5</span>
+                        Magnitude pruning (See et al. 2016, Han et al. 2015) is classified as which kind of pruning?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="true">Unstructured pruning</li>
+                        <li class="quiz-option" data-correct="false">Structured pruning</li>
+                        <li class="quiz-option" data-correct="false">Gradient-based pruning</li>
+                        <li class="quiz-option" data-correct="false">Reinforcement-learning pruning</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Magnitude pruning zeroes out the X% of weights with the <em>smallest</em> absolute value anywhere in the model. Because the selected weights can sit anywhere in any matrix, the resulting sparsity pattern has no regular structure — this is <strong>unstructured pruning</strong>. Structured pruning, in contrast, removes entire components: whole neurons, attention heads, filters, or even full layers (e.g., Xia et al. 2022). Unstructured pruning often preserves accuracy at very high sparsity levels, but its irregular pattern is hard to accelerate on standard GPUs; structured pruning is easier to speed up in practice because it yields a smaller, dense model, but it usually causes a larger accuracy drop at the same level of parameter reduction, so requires more careful tuning.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 6 -->
+                <div class="quiz-card" id="question-6" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">6</span>
+                        In the "Pruning with only forward passes" method (Dery et al. 2024), why is the avoidance of gradients a valuable property?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Gradients are unavailable for Transformer architectures</li>
+                        <li class="quiz-option" data-correct="true">Structured pruning of big models via backprop is extremely memory-hungry; forward-only evaluation removes that bottleneck</li>
+                        <li class="quiz-option" data-correct="false">Forward passes always produce a better solution than gradient-based methods</li>
+                        <li class="quiz-option" data-correct="false">It allows pruning to be done without any data at all</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The slide's motivation is literally: "Structured pruning of big models requires a lot of memory — can we avoid using gradients?" Computing gradients requires storing the full computation graph and intermediate activations, which for an LLM with billions of parameters can easily exceed GPU memory. The proposed idea is to (1) mask different modules and measure the resulting performance using only forward passes, and (2) fit a regression model that predicts the impact of each mask. This lets you search for good pruning masks on very large models without ever needing a backward pass, trading a little statistical efficiency for a large reduction in memory footprint. The method does still require data (to measure performance) and does not claim to be universally better than gradient-based approaches.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 7 -->
+                <div class="quiz-card" id="question-7" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">7</span>
+                        Which combination of tricks best summarises how DistilBERT (Sanh et al. 2019) is trained?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">Train from scratch with the masked-LM loss only</li>
+                        <li class="quiz-option" data-correct="true">Initialise from alternating BERT layers, then combine a distillation loss with a cosine similarity loss on hidden states (supervised loss adds little)</li>
+                        <li class="quiz-option" data-correct="false">Randomly initialise and train only with reinforcement learning from human feedback</li>
+                        <li class="quiz-option" data-correct="false">Use quantization-aware training with no teacher model at all</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> DistilBERT keeps roughly half the layers and 60% of the parameters of BERT while retaining most of its performance. The recipe in the paper, echoed on the slide, has three ingredients: (1) <strong>Warm-start the student</strong> by initialising its layers from alternating layers of the full BERT teacher — this gives training a much better starting point than random init. (2) <strong>Combine supervised and distillation losses</strong>: the student is trained on the masked-language-model objective <em>and</em> on a KL loss matching the teacher's output distribution. Empirically the supervised loss alone did not help much; most of the gain comes from distillation. (3) <strong>Add a cosine-similarity loss</strong> between the teacher's and student's hidden-state vectors, which forces internal representations to align, not just the output probabilities. Together these tricks let a much smaller model stay close in quality to its teacher.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 8 -->
+                <div class="quiz-card" id="question-8" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">8</span>
+                        In a Sparsely Gated Mixture-of-Experts layer (Shazeer et al. 2017), the gating function is G(x) = softmax(keep_top_k(f_gating(x), k)). What is the role of the keep_top_k operation?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It normalises the expert outputs to sum to one</li>
+                        <li class="quiz-option" data-correct="true">It sets all but the top-k gating scores to −∞ so that softmax assigns zero weight to the non-selected experts, yielding sparse computation</li>
+                        <li class="quiz-option" data-correct="false">It averages the outputs of all experts before softmax</li>
+                        <li class="quiz-option" data-correct="false">It randomly drops k experts as a regularizer</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The formula is keep_top_k(v, k)_i = v_i if v_i is among the top-k entries of v, and −∞ otherwise. Since softmax(−∞) = 0, any expert that is not in the top k receives <em>exactly zero</em> gating weight. Because scalar × tensor = 0 contributes nothing to the final sum, we do not have to compute the outputs of those experts at all. That is the core trick that makes Sparse MoE cheap: we keep a huge total parameter count (all experts) but only execute k of them per token (typically k=1 or 2 in modern MoE models). The other options describe operations that would either destroy the sparsity (option A normalises after softmax rather than before it; option C averages everything; option D is a dropout-style idea unrelated to the gating formula).
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 9 -->
+                <div class="quiz-card" id="question-9" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">9</span>
+                        What is the core trade-off that a Sparse Mixture-of-Experts (SMoE) model like Mixtral-8x7b exploits?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It trades memory for latency by caching activations aggressively</li>
+                        <li class="quiz-option" data-correct="true">It trades high total parameter count for low per-token compute by running only a few experts per input</li>
+                        <li class="quiz-option" data-correct="false">It trades accuracy for interpretability by using shallow experts</li>
+                        <li class="quiz-option" data-correct="false">It trades training cost for inference cost by retraining on every query</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Mixtral-8x7b has 8 experts per MoE block but activates only 2 per token. The total parameter count is therefore large (≈ 47B parameters), yet the <em>active</em> parameter count per forward pass is much smaller (≈ 13B) — giving roughly the compute cost of a 13B model with the capacity of a 47B one. That is the SMoE bargain: <strong>capacity without proportional compute</strong>. The gating network learns to route tokens to the most appropriate experts, so specialisation emerges across experts. The cost of this deal is (a) the memory footprint of keeping all experts in memory, and (b) the added complexity of the learned gating mechanism, which must be kept balanced so that no single expert collapses or is starved of tokens.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 10 -->
+                <div class="quiz-card" id="question-10" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">10</span>
+                        In the LangChain notebook, what does the <code>@tool</code> decorator (with <code>parse_docstring=True</code>) on a Python function achieve?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It caches the function's return value for faster repeated calls</li>
+                        <li class="quiz-option" data-correct="true">It wraps the function as a LangChain Tool whose schema (name, description, argument types) is built from the signature and docstring so an LLM can call it</li>
+                        <li class="quiz-option" data-correct="false">It converts the function into an async generator for streaming</li>
+                        <li class="quiz-option" data-correct="false">It fine-tunes the underlying LLM on the function's examples</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The <code>@tool</code> decorator registers a regular Python function as a <em>Tool</em> that an LLM can invoke. LangChain automatically builds a JSON-schema description from (a) the function name, (b) its type-annotated arguments, and (c) the docstring (with <code>parse_docstring=True</code> it even parses the "Args:" section to produce per-argument descriptions). That schema is then passed to the model via <code>llm.bind_tools([...])</code>. When the user asks something like "What is the temperature in London?", the model responds with a structured tool-call (name + arguments) instead of free text, and the notebook demonstrates executing that call with <code>selected_tool.invoke(tool_call)</code> and appending the result back into the message history so the LLM can produce the final answer. This is the foundation of tool-using (function-calling) agents.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 11 -->
+                <div class="quiz-card" id="question-11" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">11</span>
+                        In the notebook, why are Pydantic <code>BaseModel</code> classes such as <code>CityWeather</code> combined with <code>llm.with_structured_output(...)</code>?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">To train the LLM on domain-specific data</li>
+                        <li class="quiz-option" data-correct="true">To force the LLM to emit output that conforms to a validated, typed schema so downstream code can rely on fields like <code>city</code> and <code>temperature</code></li>
+                        <li class="quiz-option" data-correct="false">To encrypt the LLM's response in transit</li>
+                        <li class="quiz-option" data-correct="false">To translate the response into another human language</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Raw LLM text is fragile to parse — small variations in wording can break a pipeline. Pydantic models solve this by defining a strict, typed schema (e.g., <code>city: str</code>, <code>temperature: float</code>, wrapped in a list via <code>CityWeatherList</code>). LangChain's <code>with_structured_output</code> uses the model's built-in function/tool-calling to constrain the generation to match that schema, and automatically validates the result. This gives you two benefits: (1) the programmer can access values as typed Python attributes (e.g., <code>answer.cities[0].temperature</code>) or convert to JSON via <code>model_dump()</code>, and (2) the LLM is much less likely to produce malformed output, because both the schema and validation are part of the request. Pydantic itself is not training or encrypting anything; it is a structural contract between the LLM and your code.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 12 -->
+                <div class="quiz-card" id="question-12" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">12</span>
+                        What is a <em>vector store</em> such as FAISS in the context of LangChain, and why is it central to Retrieval-Augmented Generation (RAG)?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">A relational database that stores raw text and queries it with SQL</li>
+                        <li class="quiz-option" data-correct="true">A database that stores dense embedding vectors and retrieves the most similar chunks for a query, providing external context to the LLM</li>
+                        <li class="quiz-option" data-correct="false">A cache of previously generated answers from the LLM</li>
+                        <li class="quiz-option" data-correct="false">A compiler that turns English prompts into SQL</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> A vector store efficiently indexes high-dimensional embedding vectors and supports approximate nearest-neighbour search. The notebook's workflow is: (1) load text with a <em>loader</em> (WebBaseLoader, CSVLoader, UnstructuredLoader, ...), (2) split it into chunks with a <em>text splitter</em> like <code>RecursiveCharacterTextSplitter</code>, (3) embed each chunk with <code>OpenAIEmbeddings</code>, (4) insert the embeddings into FAISS via <code>FAISS.from_documents</code>. At query time, the user question is embedded and the store returns the most similar chunks via <code>similarity_search</code> or a <code>retriever</code>. Those retrieved chunks are then injected into the LLM's prompt. This is why vector stores are the heart of RAG: they let the LLM "look things up" in an external, up-to-date knowledge base instead of relying only on its fixed training data, dramatically reducing hallucinations and enabling domain-specific answers.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 13 -->
+                <div class="quiz-card" id="question-13" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">13</span>
+                        In the agentic RAG graph built with LangGraph, the pipeline contains nodes such as <code>agent</code>, <code>retrieve</code>, <code>grade_documents</code>, <code>rewrite</code>, and <code>generate</code>. What is the purpose of <code>grade_documents</code> and <code>rewrite</code>?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">They train the retriever on new user queries</li>
+                        <li class="quiz-option" data-correct="true">They judge whether retrieved documents are relevant; if not, the query is reformulated and retrieval is retried before generation</li>
+                        <li class="quiz-option" data-correct="false">They convert the LLM's text into speech for a voice assistant</li>
+                        <li class="quiz-option" data-correct="false">They prune unused parameters of the underlying LLM</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> Classical RAG is a one-shot pipeline: embed → search → generate. Agentic RAG adds a feedback loop, which is exactly what LangGraph is designed to express — a stateful, multi-node graph with conditional edges. <code>grade_documents</code> uses an LLM to judge whether the retrieved chunks actually answer the user's question. If they do, control flows to <code>generate</code> to produce the final answer. If not, control flows to <code>rewrite</code>, which asks the LLM to reformulate the original question into a better search query, and the loop repeats. This makes retrieval more robust against poorly worded questions and lets the system "reason about" its own search results instead of blindly trusting the first hit. The <code>agent</code> node orchestrates when to call tools (including the retriever tool) versus when to answer directly.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 14 -->
+                <div class="quiz-card" id="question-14" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">14</span>
+                        The slides classify modern LLM-based systems into "Text agent" (e.g., ELIZA), "LLM agent" (e.g., SayCan), and "Reasoning agent" (e.g., ReAct, AutoGPT). What does the Reasoning-agent level add on top of a plain LLM agent?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">It replaces the LLM with symbolic rules</li>
+                        <li class="quiz-option" data-correct="true">It uses the LLM to both <em>reason</em> (e.g., chain-of-thought) and <em>act</em> (tool use, retrieval, code, environment interaction) in interleaved steps</li>
+                        <li class="quiz-option" data-correct="false">It removes the environment and operates purely on static prompts</li>
+                        <li class="quiz-option" data-correct="false">It restricts the LLM to a single pre-defined action per session</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> The slides present three levels: Level 1 (text agents like ELIZA) react with hard-coded rules; Level 2 (LLM agents like SayCan) use an LLM as the action policy but do not explicitly reason; Level 3 (<strong>Reasoning agents</strong>, ReAct/AutoGPT) interleave Thought → Action → Observation → Thought → ... steps, letting the LLM plan and self-correct while also calling tools or interacting with environments. ReAct's empirical advantage is shown in the table: on PaLM-540B, Reason-only scores 29.4 on HotpotQA and Act-only 25.7, but combining them (ReAct) lifts the score to 35.1. The same pattern holds for FEVER (fact checking) and ALFWorld (text games). The intuition is that reasoning helps the agent decide <em>which</em> action to take next, while acting lets the agent fetch external information that cannot be hallucinated.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Question 15 -->
+                <div class="quiz-card" id="question-15" style="display: none;">
+                    <div class="quiz-question">
+                        <span class="module-number">15</span>
+                        Which statement about LangGraph best matches how it was used to build the agentic RAG system in the notebook?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" data-correct="false">LangGraph is a pre-trained language model competing with GPT-4</li>
+                        <li class="quiz-option" data-correct="true">LangGraph is a framework for building stateful, multi-actor LLM applications as explicit graphs of nodes and (possibly conditional) edges, with a shared state such as <code>AgentState</code></li>
+                        <li class="quiz-option" data-correct="false">LangGraph is a visualisation library for neural-network computation graphs</li>
+                        <li class="quiz-option" data-correct="false">LangGraph replaces the need for any LLM by using symbolic rules</li>
+                    </ul>
+                    <div class="quiz-feedback"></div>
+                    <div class="quiz-explanation">
+                        <strong>Explanation:</strong> In the notebook, LangGraph is imported as <code>from langgraph.graph import END, StateGraph, START</code>, and a workflow is assembled with <code>workflow.add_node("agent", agent)</code>, <code>workflow.add_node("retrieve", ToolNode([retriever_tool]))</code>, etc. Nodes are connected by edges, some of them <em>conditional</em> (e.g., after <code>grade_documents</code>, branch to either <code>generate</code> or <code>rewrite</code>). The graph shares an <code>AgentState</code> (a <code>TypedDict</code> whose <code>messages</code> field uses <code>add_messages</code> to accumulate conversation state). That state threads through every node as the graph is executed. This graph-of-actors abstraction is what distinguishes LangGraph from plain LangChain chains: loops, branches, retries and multi-agent coordination become first-class, while the underlying reasoning is still done by LLMs — LangGraph is orchestration, not a model.
+                    </div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button check-answer">Check Answer</button>
+                        <button class="quiz-button show-explanation">Show Explanation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button class="cta-button" id="prev-question" disabled>Previous Question</button>
+                    <button class="cta-button" id="next-question">Next Question</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ML Course. Build your machine learning expertise step by step.</p>
+        </div>
+    </footer>
+</body>
+</html>
