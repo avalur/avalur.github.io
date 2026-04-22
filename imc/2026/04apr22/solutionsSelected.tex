@@ -1,0 +1,233 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions: Selected IMC Problems 2001--2006}
+
+\begin{center}
+April 22, 2026
+\end{center}
+
+\textbf{Problem 1.} (IMC 2001, Day 2, Problem 3)
+Find the maximum number of points on a sphere of radius \( 1 \) in \( \R^n \) such that the distance between any two of these points is strictly greater than \( \sqrt{2} \).
+
+\textbf{Solution.}
+For two unit vectors \( X, Y \in S^{n-1} \),
+\[
+|X - Y| > \sqrt{2} \iff \sum_{k=1}^n (x_k - y_k)^2 > 2 \iff \sum_{k=1}^n x_k y_k < 0.
+\]
+
+Let \( a_n \) be the desired maximum. After a rotation we may place one point at \( A_1 = (-1, 0, \ldots, 0) \). For every other point \( Y = (y_1, \overline{Y}) \) the condition \( \langle A_1, Y \rangle < 0 \) forces \( y_1 > 0 \); in particular \( |\overline{Y}|^2 < 1 \). For two such points \( X, Y \) we have \( x_1 y_1 > 0 \), so
+\[
+\sum_{k=1}^n x_k y_k < 0 \implies \sum_{k=2}^n x_k y_k < 0.
+\]
+Normalising \( \overline{X}, \overline{Y} \) to unit vectors yields \( a_n - 1 \) points on \( S^{n-2} \) with pairwise distance \( > \sqrt{2} \). Hence \( a_n \leq 1 + a_{n-1} \); since \( a_1 = 2 \) (two antipodal points), \( a_n \leq n + 1 \).
+
+Equality is attained by the \( n+1 \) vertices of a regular simplex inscribed in \( S^{n-1} \): their pairwise inner products equal \( -1/n \), so pairwise distances equal \( \sqrt{2}\sqrt{1 + 1/n} > \sqrt{2} \).
+
+\textit{Answer:} \( a_n = n + 1 \). \hfill\(\square\)
+\\
+
+\textbf{Problem 2.} (IMC 2005, Day 2, Problem 2)
+Let \( f : \R \to \R \) be a function such that \( (f(x))^n \) is a polynomial for every integer \( n \geq 2 \). Does it follow that \( f \) itself is a polynomial?
+
+\textbf{Solution.}
+\textit{Yes.} It suffices that \( f^2 \) and \( f^3 \) are polynomials. Put \( p = f^2 \) and \( q = f^3 \). If \( p \equiv 0 \) then \( f \equiv 0 \), done. Otherwise \( q^2 = f^6 = p^3 \not\equiv 0 \). Define the rational function
+\[
+r(x) = \frac{q(x)}{p(x)}.
+\]
+Wherever \( f(x) \neq 0 \), \( r(x) = f(x)^3 / f(x)^2 = f(x) \).
+
+Write \( r = P/Q \) in lowest terms (\( \gcd(P, Q) = 1 \)). Then \( r^2 = P^2/Q^2 \) is also in lowest terms. But
+\[
+r^2 = \frac{q^2}{p^2} = \frac{p^3}{p^2} = p,
+\]
+a polynomial. A rational function in lowest terms is a polynomial iff its denominator is constant, so \( Q \) is constant and \( r \) is a polynomial.
+
+Finally, \( f \) and \( r \) agree except at zeros of \( p \). At any zero \( x_0 \) of \( p \), \( f(x_0)^2 = p(x_0) = 0 \) and \( r(x_0)^2 = p(x_0) = 0 \), so \( f(x_0) = r(x_0) = 0 \). Thus \( f = r \) everywhere. \hfill\(\square\)
+\\
+
+\textbf{Problem 3.} (IMC 2003, Day 1, Problem 4)
+Determine the set of all pairs \( (a, b) \) of positive integers for which the set of positive integers can be decomposed into two sets \( A, B \) such that \( a \cdot A = b \cdot B \).
+
+\textbf{Solution.}
+Clearly \( a \neq b \) (else \( A = B \), but \( A \cap B = \emptyset \)). Setting \( d = \gcd(a, b) \), \( a = d a_1 \), \( b = d b_1 \) with \( \gcd(a_1, b_1) = 1 \), the condition \( a \cdot A = b \cdot B \) is equivalent to \( a_1 \cdot A = b_1 \cdot B \). So WLOG \( \gcd(a, b) = 1 \).
+
+If \( 1 \in A \), then \( a \in a \cdot A = b \cdot B \), so \( b \mid a \), hence \( b = 1 \). Symmetrically, if \( 1 \in B \), then \( a = 1 \). So one of \( a, b \) is \( 1 \).
+
+Conversely, for \( (a, b) = (1, n) \) with \( n \geq 2 \), let \( v_n(k) \) denote the largest integer \( e \geq 0 \) with \( n^e \mid k \) (the \( n \)-adic valuation). Define
+\[
+A = \{k \in \Z_{>0} : v_n(k) \text{ odd}\}, \qquad B = \{k \in \Z_{>0} : v_n(k) \text{ even}\}.
+\]
+Then \( A \sqcup B = \Z_{>0} \), and multiplying by \( n \) increases \( v_n \) by \( 1 \), so \( n \cdot B = A = 1 \cdot A \).
+
+\textit{Answer:} the pairs \( (a, b) \) with \( a \neq b \) and \( a \mid b \) or \( b \mid a \). \hfill\(\square\)
+\\
+
+\textbf{Problem 4.} (IMC 2003, Day 1, Problem 6)
+If all roots of \( f(z) = a_n z^n + \cdots + a_0 \) (real coefficients) lie in the left half-plane \( \operatorname{Re} z < 0 \), then \( a_k a_{k+3} < a_{k+1} a_{k+2} \) for \( k = 0, \ldots, n-3 \).
+
+\textbf{Solution.}
+Factor \( f \) over \( \R \) as a product of linear and quadratic factors. Each linear factor \( kz + l \) with a root \( -l/k \) in the open left half-plane has \( k, l \) of the same sign; each quadratic factor \( pz^2 + qz + r \) with complex-conjugate roots in the left half-plane has \( p, q, r \) of the same sign. Multiplying \( f \) by \( -1 \) if needed, we may assume \textbf{all coefficients \( a_k \) are positive}.
+
+Extend with \( a_j = 0 \) for \( j < 0 \) or \( j > n \), and prove the stronger claim
+\[
+a_k a_{k+3} \leq a_{k+1} a_{k+2} \text{ for all } k \in \Z, \quad \text{with strict inequality for } 0 \leq k \leq n-3.
+\]
+Induct on \( n \). The cases \( n \leq 2 \) are trivial.
+
+For \( n \geq 3 \), choose a real factor \( z^2 + pz + q \) (\( p, q > 0 \)) and write \( f(z) = (z^2 + pz + q) g(z) \) with \( g \) of degree \( n-2 \) with coefficients \( b_0, \ldots, b_{n-2} > 0 \). Then \( a_k = q b_k + p b_{k-1} + b_{k-2} \), and a direct expansion gives
+\begin{align*}
+a_{k+1} a_{k+2} - a_k a_{k+3}
+&= \bigl(b_{k-1} b_k - b_{k-2} b_{k+1}\bigr)
++ p \bigl(b_k^2 - b_{k-2} b_{k+2}\bigr)
++ q \bigl(b_{k-1} b_{k+2} - b_{k-2} b_{k+3}\bigr) \\
+&\quad + p^2 \bigl(b_k b_{k+1} - b_{k-1} b_{k+2}\bigr)
++ q^2 \bigl(b_{k+1} b_{k+2} - b_k b_{k+3}\bigr)
++ pq \bigl(b_{k+1}^2 - b_{k-1} b_{k+3}\bigr).
+\end{align*}
+Each of the six bracketed expressions is non-negative (using the inductive hypothesis for \( g \); for the square terms like \( b_k^2 - b_{k-2} b_{k+2} \), use the identity
+\( b_{k-1}(b_k^2 - b_{k-2} b_{k+2}) = b_{k-2}(b_k b_{k+1} - b_{k-1} b_{k+2}) + b_k(b_{k-1} b_k - b_{k-2} b_{k+1}) \geq 0 \)
+and handle \( b_{k-1} = 0 \) separately). For \( 0 \leq k \leq n-3 \) the term \( p^2 (b_k b_{k+1} - b_{k-1} b_{k+2}) \) is strictly positive, so the inequality is strict. \hfill\(\square\)
+\\
+
+\textbf{Problem 5.} (IMC 2004, Day 2, Problem 6)
+With \( A_n, B_n \) as defined and \( S(M) \) the sum of entries, \( S(A_n^{k-1}) = S(A_k^{n-1}) \).
+
+\textbf{Solution.}
+Let \( F_{n,k} \) be the number of \( n \times k \) \( \{0,1\} \)-matrices with no \( 2 \times 2 \) all-ones sub-square. Transposition gives \( F_{n,k} = F_{k,n} \). We show \( F_{n,k} = S(A_n^{k-1}) \), which finishes the proof.
+
+Encode each column (a \( 0/1 \)-vector of length \( n \)) as an integer \( 0 \leq i < 2^n \) with binary digits \( i_n \ldots i_1 \). Two consecutive columns \( i, j \) are \emph{compatible} (avoid a forbidden \( 2 \times 2 \) block) iff for every adjacent pair of rows \( \ell, \ell - 1 \) we do not have \( i_\ell = i_{\ell-1} = j_\ell = j_{\ell-1} = 1 \). Let \( C^{(n)} \) be the \( 2^n \times 2^n \) compatibility matrix. Then \( F_{n,k} = S\bigl((C^{(n)})^{k-1}\bigr) \) (enumerate all sequences of \( k \) columns).
+
+We show \( C^{(n)} = A_n \) by induction on \( n \). Block indices by the top bits \( i_n, j_n \):
+\begin{itemize}
+    \item \( i_n = 0 \) or \( j_n = 0 \): compatibility of columns reduces to compatibility of the lower \( n-1 \) bits, giving blocks equal to \( C^{(n-1)} = A_{n-1} \). This is the top-left, top-right, and bottom-left blocks of \( A_n \).
+    \item \( i_n = j_n = 1 \): we additionally require \( i_{n-1} j_{n-1} = 0 \), and compatibility of the lower \( n-2 \) bits. This is exactly \( B_{n-1} \) (the bottom-right block of \( A_n \)): starts like \( A_{n-1} \) but the bottom-right \( 2^{n-2} \times 2^{n-2} \) sub-block is zeroed out, since that would correspond to \( i_{n-1} = j_{n-1} = 1 \) too.
+\end{itemize}
+Thus \( C^{(n)} = A_n \), and \( S(A_n^{k-1}) = F_{n,k} = F_{k,n} = S(A_k^{n-1}) \). \hfill\(\square\)
+\\
+
+\textbf{Problem 6.} (IMC 2005, Day 1, Problem 4)
+Find all polynomials \( P(x) = a_n x^n + \cdots + a_0 \) with \( a_n \neq 0 \) such that \( (a_0, \ldots, a_n) \) is a permutation of \( (0, \ldots, n) \) and all roots are rational.
+
+\textbf{Solution.}
+All coefficients are non-negative, so \( P(x) > 0 \) for \( x > 0 \); all real roots are \( \leq 0 \). Rational roots force a factorisation over \( \Z \):
+\[
+P(x) = \prod_{k=1}^n (b_k x + c_k), \qquad b_k > 0, \; c_k \geq 0.
+\]
+At most one \( c_k \) is \( 0 \) (else both \( a_0 \) and \( a_1 \) vanish), so at least \( n-1 \) of the factors have \( b_k + c_k \geq 2 \).
+
+Evaluating at \( x = 1 \):
+\[
+P(1) = \sum_{k=0}^n a_k = 0 + 1 + \cdots + n = \frac{n(n+1)}{2} = \prod_{k=1}^n (b_k + c_k) \geq 2^{n-1}.
+\]
+Hence \( 2^{n-1} \leq n(n+1)/2 \), forcing \( n \leq 4 \). Moreover \( n(n+1)/2 \) must factor as a product of \( n-1 \) integers \( \geq 2 \):
+\begin{itemize}
+    \item \( n = 1 \): \( P(x) = x \).
+    \item \( n = 2 \): \( P(1) = 3 = 1 \cdot 3 \); solutions \( x(x+2) = x^2 + 2x \) and \( x(2x+1) = 2x^2 + x \).
+    \item \( n = 3 \): \( P(1) = 6 = 1 \cdot 2 \cdot 3 \); solutions \( x(x+1)(x+2) = x^3 + 3x^2 + 2x \) and \( x(x+1)(2x+1) = 2x^3 + 3x^2 + x \).
+    \item \( n = 4 \): \( P(1) = 10 \) cannot be written as a product of 3 integers each \( \geq 2 \). No solutions.
+\end{itemize}
+
+\textit{Answer:} \( P(x) \in \{x,\; x^2+2x,\; 2x^2+x,\; x^3+3x^2+2x,\; 2x^3+3x^2+x\} \). \hfill\(\square\)
+\\
+
+\textbf{Problem 7.} (IMC 2005, Day 2, Problem 1)
+\( |M| \leq 2\sqrt{2} \), where \( M = \{x \in \R : |x^2+bx+c| < 1\} \).
+
+\textbf{Solution.}
+Complete the square: \( f(x) = (x + b/2)^2 + d \) where \( d = c - b^2/4 \). With \( u = x + b/2 \):
+\begin{itemize}
+    \item \( d \geq 1 \): \( f \geq 1 \), so \( M = \emptyset \), \( |M| = 0 \).
+    \item \( -1 < d < 1 \): \( |f| < 1 \iff u^2 < 1 - d \), so \( |M| = 2\sqrt{1-d} < 2\sqrt{2} \).
+    \item \( d \leq -1 \): \( |f| < 1 \iff \sqrt{|d|-1} < |u| < \sqrt{|d|+1} \), giving
+    \[
+    |M| = 2\bigl(\sqrt{|d|+1} - \sqrt{|d|-1}\bigr) = \frac{4}{\sqrt{|d|+1} + \sqrt{|d|-1}}.
+    \]
+    This is a decreasing function of \( |d| \geq 1 \), maximised at \( |d| = 1 \): \( |M|_{\max} = \frac{4}{\sqrt{2} + 0} = 2\sqrt{2} \).
+\end{itemize}
+In all cases \( |M| \leq 2\sqrt{2} \). \hfill\(\square\)
+\\
+
+\textbf{Problem 8.} (IMC 2006, Day 1, Problem 1)
+Prove or disprove: (a) continuous + surjective \( \Rightarrow \) monotonic; (b) monotonic + surjective \( \Rightarrow \) continuous; (c) monotonic + continuous \( \Rightarrow \) surjective.
+
+\textbf{Solution.}
+
+\textit{(a) False.} Take \( f(x) = x^3 - x \): continuous and \( \lim_{x \to \pm\infty} f(x) = \pm\infty \) gives surjectivity, but \( f(0) = 0 \), \( f(1/2) = -3/8 \), \( f(1) = 0 \), so \( f \) is not monotonic.
+
+\textit{(b) True.} Assume (WLOG) \( f \) non-decreasing. For \( a \in \R \), the one-sided limits \( L^- = \lim_{x \to a^-} f(x) \) and \( L^+ = \lim_{x \to a^+} f(x) \) exist in \( [-\infty, +\infty] \) with \( L^- \leq f(a) \leq L^+ \). If \( L^- < L^+ \), then \( \operatorname{range}(f) \subseteq (-\infty, L^-] \cup \{f(a)\} \cup [L^+, +\infty) \), missing an open interval — contradicting surjectivity. So \( L^- = L^+ = f(a) \), and \( f \) is continuous at \( a \).
+
+\textit{(c) False.} \( g(x) = \arctan x \) is continuous and strictly increasing, but \( \operatorname{range}(g) = (-\pi/2, \pi/2) \neq \R \). \hfill\(\square\)
+\\
+
+\textbf{Problem 9.} (IMC 2006, Day 1, Problem 5)
+With \( a, b, c, d, e > 0 \), \( a^2+b^2+c^2 = d^2+e^2 \) and \( a^4+b^4+c^4 = d^4+e^4 \), compare \( a^3+b^3+c^3 \) with \( d^3+e^3 \).
+
+\textbf{Solution.}
+\textit{Answer:} \( a^3 + b^3 + c^3 < d^3 + e^3 \).
+
+WLOG \( a \geq b \geq c > 0 \) and \( d \geq e > 0 \). Squaring \( a^2 + b^2 + c^2 = d^2 + e^2 \) and using \( a^4 + b^4 + c^4 = d^4 + e^4 \):
+\[
+a^2 b^2 + a^2 c^2 + b^2 c^2 = d^2 e^2.
+\]
+With \( x = a^2, y = b^2, z = c^2, p = d^2, q = e^2 \), the polynomials \( (t-x)(t-y)(t-z) \) and \( t(t-p)(t-q) \) agree in degrees \( 3, 2, 1 \), so
+\[
+(t-x)(t-y)(t-z) = t(t-p)(t-q) - xyz. \qquad (\star)
+\]
+
+\textit{Ordering.} Evaluate \( (\star) \) at \( t = p \): \( (p-x)(p-y)(p-z) = -xyz < 0 \). If all three factors were negative, then \( x + y + z > 3p \geq p + q \), contradicting \( x + y + z = p + q \). So exactly one factor is negative; since \( x \geq y \geq z \), this forces \( x > p \). Then \( y + z = (p+q) - x < q \leq p \), so \( y, z < q \leq p \). Hence
+\[
+a > d \geq e > b \geq c.
+\]
+
+\textit{Comparison.} Let \( F(r) = a^r + b^r + c^r - d^r - e^r \) for \( r \in \R \). Then \( F(0) = 1 \), \( F(2) = F(4) = 0 \); we want the sign of \( F(3) \).
+
+We claim \( F \) has no zero in \( (0, \infty) \) other than \( r = 2 \) and \( r = 4 \). Writing \( F(r) = \sum_{i=1}^5 \varepsilon_i \alpha_i^r \) with positive bases \( \alpha_1 = a > \alpha_2 = d \geq \alpha_3 = e > \alpha_4 = b \geq \alpha_5 = c \) and signs \( (+, -, -, +, +) \), the sequence of signs has exactly \textbf{2 sign changes} (at positions \( 1 \to 2 \) and \( 3 \to 4 \)). By a generalized Descartes' rule of signs for exponential polynomials (``Laguerre's theorem''), \( F(r) \) has at most \( 2 \) positive real zeros, counted with multiplicity. So \( r = 2, 4 \) are the only zeros.
+
+Since \( F(0) = 1 > 0 \), \( F \) is positive on \( (-\infty, 2) \); by continuity and the absence of other zeros, \( F \) is negative on \( (2, 4) \) and positive on \( (4, \infty) \). In particular,
+\[
+F(3) = (a^3 + b^3 + c^3) - (d^3 + e^3) < 0. \qquad\square
+\]
+\\
+
+\textbf{Problem 10.} (IMC 2006, Day 2, Problem 4)
+With rational \( |v_i - v_j| \) for \( 0 \leq i, j \leq n+1 \) and \( v_0 = 0 \), vectors \( v_1, \ldots, v_{n+1} \in \R^n \) are \( \Q \)-linearly dependent.
+
+\textbf{Solution.}
+If \( v_1, \ldots, v_n \) are already \( \R \)-linearly dependent, they (hence together with \( v_{n+1} \)) are \( \Q \)-linearly dependent by clearing a non-zero real relation to a rational one via a sub-matrix. So assume \( v_1, \ldots, v_n \) are \( \R \)-linearly independent, and write
+\[
+v_{n+1} = \sum_{j=1}^n \lambda_j v_j, \qquad \lambda_j \in \R.
+\]
+We show \( \lambda_j \in \Q \).
+
+By polarization, using \( v_0 = 0 \):
+\[
+\langle v_i, v_j \rangle = \tfrac{1}{2}\bigl( |v_i|^2 + |v_j|^2 - |v_i - v_j|^2 \bigr) \in \Q.
+\]
+The Gram matrix \( A = [\langle v_i, v_j \rangle]_{i,j=1}^n \in \Q^{n \times n} \) is non-singular (since \( v_1, \ldots, v_n \) are linearly independent) and the vector \( w = (\langle v_i, v_{n+1} \rangle)_{i=1}^n \in \Q^n \).
+
+Taking \( \langle \cdot, v_i \rangle \) of both sides of \( v_{n+1} = \sum \lambda_j v_j \):
+\[
+A \lambda = w \implies \lambda = A^{-1} w \in \Q^n.
+\]
+So \( \lambda_j \in \Q \), giving a non-trivial \( \Q \)-linear relation among \( v_1, \ldots, v_{n+1} \). \hfill\(\square\)
+
+\end{document}
