@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\tr}{\operatorname{trace}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions, NUP Selection to IMC 2026}
+
+\begin{center}
+May 5, 2026
+\end{center}
+
+\textbf{Problem 1.} (IMC 2022, Day 1, Problem 1)
+\( f(x) \cdot f(1{-}x) \equiv 1 \) on \( [0,1] \), \( f > 0 \) integrable. Show \( \int_{0}^{1} f \geq 1 \).
+
+\textbf{Solution.} By AM--GM,
+\[
+f(x) + f(1-x) \geq 2\sqrt{f(x) f(1-x)} = 2.
+\]
+Integrating on \( [0, 1/2] \),
+\[
+\int_{0}^{1} f
+= \int_{0}^{1/2} f(x)\, dx + \int_{0}^{1/2} f(1-x)\, dx
+= \int_{0}^{1/2} \bigl(f(x) + f(1-x)\bigr) dx \geq \int_{0}^{1/2} 2\, dx = 1. \qed
+\]
+\\
+
+\textbf{Problem 2.} (IMC 2020, Day 1, Problem 2)
+\( \operatorname{rk}(AB - BA + I) = 1 \implies \tr(ABAB) - \tr(A^2 B^2) = \tfrac{1}{2} n(n-1) \).
+
+\textbf{Solution.}
+Set \( X = AB - BA \). By cyclicity of trace,
+\[
+\tr(X^2) = \tr(ABAB) - \tr(AB^2 A) - \tr(BA^2 B) + \tr(BABA)
+= 2\tr(ABAB) - 2\tr(A^2 B^2),
+\]
+so it suffices to show \( \tr(X^2) = n(n-1) \).
+
+The hypothesis says \( X + I \) has rank \( 1 \), hence eigenvalue \( 0 \) with multiplicity \( n - 1 \). Therefore \( X \) has eigenvalue \( -1 \) of multiplicity \( n - 1 \), and the remaining eigenvalue equals \( \tr(X) - (n-1)\cdot(-1) = 0 + (n-1) = n - 1 \) (since \( \tr(AB - BA) = 0 \)). Hence
+\[
+\tr(X^2) = (n-1) \cdot (-1)^2 + 1 \cdot (n-1)^2 = n(n-1). \qed
+\]
+\\
+
+\textbf{Problem 3.} (IMC 2021, Day 1, Problem 3)
+Find \( \sup\{d : d \text{ is good}\} \) where \emph{good} means there is \( (a_n) \subset (0, d) \) such that \( a_1, \ldots, a_n \) partitions \( [0, d] \) into \( n+1 \) pieces of length \( \leq 1/n \) each.
+
+\textbf{Solution.} \textit{Answer:} \( d^{\star} = \ln 2 \).
+
+\emph{Upper bound} \( d^{\star} \leq \ln 2 \). Fix \( n \) and order the lengths \( 0 \leq \ell_1 \leq \cdots \leq \ell_{n+1} \) of the segments after step \( n \). After placing the next \( k \) points \( a_{n+1}, \ldots, a_{n+k} \), at least \( n + 1 - k \) of the original segments are still untouched, so \( \ell_{n+1-k} \leq 1/(n+k) \). Therefore
+\[
+d = \sum_{i=1}^{n+1} \ell_i \leq \frac{1}{n} + \frac{1}{n+1} + \cdots + \frac{1}{2n} \xrightarrow[n \to \infty]{} \ln 2.
+\]
+
+\emph{Lower bound} \( d^{\star} \geq \ln 2 \). The identity
+\[
+\ln 2 = \sum_{i=1}^{n} \ln\!\left(1 + \frac{1}{n+i-1}\right)
+\]
+gives a partition of \( [0, \ln 2] \) into \( n \) parts, each of length \( \ln(1 + 1/n) < 1/n \). Going from \( n \) to \( n + 1 \) parts replaces \( \ln(1 + 1/n) \) by \( \ln(1 + 1/(2n)) + \ln(1 + 1/(2n+1)) \), which equals \( \ln(1 + 1/n) \); this corresponds to inserting one new point inside the segment of length \( \ln(1 + 1/n) \). Iterating produces an admissible sequence on \( [0, \ln 2] \). The first terms are \( a_1 = \ln \tfrac{3}{2},\, a_2 = \ln \tfrac{5}{4},\, a_3 = \ln \tfrac{7}{4},\, a_4 = \ln \tfrac{9}{8},\, \ldots \) \qed
+\\
+
+\textbf{Problem 4.} (IMC 2020, Day 1, Problem 4)
+Real polynomial with \( p(x+1) - p(x) = x^{100} \). Show \( p(1-t) \geq p(t) \) for \( 0 \leq t \leq 1/2 \).
+
+\textbf{Solution.}
+Since \( p(x+1) - p(x) = x^{100} \), comparing leading terms forces \( \deg p = 101 \) and the leading coefficient \( = 1/101 \); the coefficient \( a_0 \) is free, but does not affect \( p(1-t) - p(t) \). So choose the unique solution \( p_n \) of \( p_n(x+1) - p_n(x) = x^n \) with \( p_n(0) = p_n(1) = 0 \). Differentiating gives the recursion \( p_n'(x) = n p_{n-1}(x) + c_{n-1} \) for some constant.
+
+\emph{Claim:} for every \( n \geq 1 \) and all real \( x \),
+\[
+p_{2n+1}(x) = p_{2n+1}(1 - x), \qquad p_{2n}(x) + p_{2n}(1 - x) = 0, \qquad c_{2n} = 0.
+\]
+
+Proof by induction in \( n \). Base \( p_1(x) = \tfrac{1}{2}x^2 - \tfrac{1}{2}x \) satisfies \( p_1(x) - p_1(1-x) = 0 \). For the step, the derivative of \( p_{2n}(x) + p_{2n}(1-x) \) equals \( 2n\, p_{2n-1}(x) + c_{2n-1} - (2n)\,p_{2n-1}(1-x) - c_{2n-1} = 0 \), so this is a constant which equals \( p_{2n}(0) + p_{2n}(1) = 0 \). Then \( (p_{2n+1}(x) - p_{2n+1}(1-x))' = (2n+1)(p_{2n}(x) + p_{2n}(1-x)) + 2 c_{2n} = 2 c_{2n} \), so \( p_{2n+1}(x) - p_{2n+1}(1-x) = 2 c_{2n} x + b \); evaluating at \( 0, 1 \) gives \( b = 0 \) and \( c_{2n} = 0 \).
+
+In particular \( p_2''(x) = 2 p_1'(x) = 2x - 1 < 0 \) for \( x < 1/2 \), so \( p_2 \) is strictly concave on \( [0, 1/2] \) with \( p_2(0) = p_2(1/2) = 0 \), hence \( p_2(x) > 0 \) on \( (0, 1/2) \). From \( p_4''(x) = 12 p_2(x) > 0 \) on \( (0, 1/2) \), \( p_4 \) is strictly convex with \( p_4(0) = p_4(1/2) = 0 \), so \( p_4 < 0 \) there. By induction \( (-1)^{n-1} p_{2n} > 0 \) on \( (0, 1/2) \). Therefore \( p_{100} \) (with \( n = 50 \) even) is negative on \( (0, 1/2) \), and
+\[
+p(1 - t) - p(t) = p_{100}(1 - t) - p_{100}(t) = -2\, p_{100}(t) > 0
+\]
+for \( 0 < t < 1/2 \), with equality at \( t = 0, 1/2 \). \qed
+\\
+
+
+
+\textbf{Problem 5.} (IMC 2022, Day 2, Problem 8)
+Random circle: \( n \) blue, \( k \) red points; \( m \) := \#vertices of \( F = \operatorname{conv}(\text{red}) \cap \operatorname{conv}(\text{blue}) \). Find \( \E[m] \).
+
+\textbf{Solution.} \textit{Answer:}
+\[
+\E[m] = \frac{2 k n}{n + k - 1} - \frac{2 \cdot k! \cdot n!}{(k + n - 1)!}.
+\]
+
+Scan the \( n + k \) points counterclockwise from a fixed point and read off the colour sequence \( (C_1, \ldots, C_{n+k}) \); regard indices cyclically. Two cases:
+
+\textit{(i) Contiguous case:} all reds are consecutive (and so are all blues). Then the convex hulls do not intersect, so \( m = 0 \), but the cyclic colour sequence has exactly \( 2 \) colour changes.
+
+\textit{(ii) Otherwise} (alternating at least twice): every vertex of \( F \) is the intersection of a red chord (from a red point to its next red neighbour) with a blue chord; one checks that vertices of \( F \) correspond bijectively to colour changes \( C_i C_{i+1} \). So in this case \( m = \#\text{(colour changes)} \).
+
+In either case
+\[
+m = \#\text{(colour changes)} - 2 \cdot \mathbf{1}[\text{case (i)}].
+\]
+
+Each cyclic placement of \( n \) blues among \( n + k \) positions is equally likely, so
+\[
+\Pr[C_i \neq C_{i+1}] = \frac{2 n k}{(n+k)(n+k-1)},
+\]
+and there are \( n + k \) such pairs cyclically, giving \( \E[\#\text{changes}] = \dfrac{2 n k}{n + k - 1} \).
+
+The number of cyclic placements giving case (i) equals \( n + k \) (choose where the red block starts), out of \( \binom{n+k}{n} \) total. So
+\[
+\Pr[\text{case (i)}] = \frac{n + k}{\binom{n+k}{n}} = \frac{n!\, k!}{(n + k - 1)!}.
+\]
+Combining,
+\[
+\E[m] = \frac{2 n k}{n + k - 1} - 2 \cdot \frac{n!\, k!}{(n + k - 1)!}. \qed
+\]
+
+\end{document}

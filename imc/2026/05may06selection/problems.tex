@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{NUP selection to IMC-2026, second round}
+
+\begin{center}
+May 5, 2026 \\
+Time allowed: 5 hours. Each problem is worth 10 points.
+\end{center}
+
+\textbf{Problem 1.} % (IMC 2022, Day 1, Problem 1)
+Let \( f : [0, 1] \to (0, \infty) \) be an integrable function such that \( f(x) \cdot f(1 - x) = 1 \) for all \( x \in [0, 1] \).
+Prove that
+\[
+\int_{0}^{1} f(x)\, dx \geq 1.
+\]
+\\
+
+\textbf{Problem 2.} % (IMC 2020, Day 1, Problem 2)
+Let \( A \) and \( B \) be \( n \times n \) real matrices such that
+\[
+\operatorname{rk}(AB - BA + I) = 1,
+\]
+where \( I \) is the \( n \times n \) identity matrix. Prove that
+\[
+\operatorname{trace}(ABAB) - \operatorname{trace}(A^2 B^2) = \frac{1}{2} n(n - 1).
+\]
+\\
+
+\textbf{Problem 3.} % (IMC 2021, Day 1, Problem 3)
+We say that a positive real number \( d \) is \emph{good} if there exists an infinite sequence
+\( a_1, a_2, a_3, \ldots \in (0, d) \) such that for each \( n \), the points \( a_1, \ldots, a_n \) partition
+the interval \( [0, d] \) into segments of length at most \( 1/n \) each. Find
+\[
+\sup \{\, d \mid d \text{ is good}\,\}.
+\]
+\\
+
+\textbf{Problem 4.} % (IMC 2020, Day 1, Problem 4)
+A polynomial \( p \) with real coefficients satisfies the equation \( p(x + 1) - p(x) = x^{100} \) for all \( x \in \R \).
+Prove that \( p(1 - t) \geq p(t) \) for \( 0 \leq t \leq 1/2 \).
+\\
+
+\textbf{Problem 5.} % (IMC 2022, Day 2, Problem 8)
+Let \( n, k \geq 3 \) be integers, and let \( S \) be a circle. Let \( n \) blue points and \( k \) red points be chosen
+uniformly and independently at random on the circle \( S \). Denote by \( F \) the intersection of the convex hull
+of the red points and the convex hull of the blue points. Let \( m \) be the number of vertices of the convex polygon \( F \)
+(in particular, \( m = 0 \) when \( F \) is empty). Find the expected value of \( m \).
+
+\end{document}
