@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Problem Sheet --- IMC Training}
+
+\begin{center}
+May 13, 2026
+\end{center}
+
+\textbf{Problem 1.} (IMC 2022, Day 1, Problem 2)
+Let \( n \) be a positive integer. Find all \( n \times n \) real matrices \( A \) with only real eigenvalues
+satisfying
+\[
+A + A^k = A^T
+\]
+for some integer \( k \geq n \).
+\\
+
+\textbf{Problem 2.} (IMC 2021, Day 1, Problem 2)
+Let \( n \) and \( k \) be fixed positive integers, and let \( a \) be an arbitrary non-negative integer.
+Choose a random \( k \)-element subset \( X \) of \( \{1, 2, \ldots, k + a\} \) uniformly and, independently of \( X \),
+choose a random \( n \)-element subset \( Y \) of \( \{1, \ldots, k + n + a\} \) uniformly.
+Prove that the probability
+\[
+\mathbb{P}\bigl(\min(Y) > \max(X)\bigr)
+\]
+does not depend on \( a \).
+\\
+
+\textbf{Problem 3.} (IMC 2020, Day 2, Problem 5)
+Find all twice continuously differentiable functions \( f : \R \to (0, +\infty) \) satisfying
+\[
+f''(x)\, f(x) \geq 2\bigl(f'(x)\bigr)^2
+\]
+for all \( x \in \R \).
+\\
+
+\textbf{Problem 4.} (IMC 2022, Day 1, Problem 3)
+Let \( p \) be a prime number. A flea is staying at point \( 0 \) of the real line. At each minute,
+the flea has three possibilities: to stay at its position, or to move by \( 1 \) to the left or to the right.
+After \( p - 1 \) minutes, it wants to be at \( 0 \) again. Denote by \( f(p) \) the number of its strategies to do this.
+Find \( f(p) \) modulo \( p \).
+\\
+
+\textbf{Problem 5.} (IMC 2020, Day 2, Problem 7)
+Let \( G \) be a group and \( n \geq 2 \) be an integer. Let \( H_1 \) and \( H_2 \) be two subgroups of \( G \) that satisfy
+\[
+[G : H_1] = [G : H_2] = n \quad \text{and} \quad [G : (H_1 \cap H_2)] = n(n - 1).
+\]
+Prove that \( H_1 \) and \( H_2 \) are conjugate in \( G \).
+\\
+
+\textbf{Problem 6.} (IMC 2021, Day 2, Problem 8)
+Let \( n \) be a positive integer. At most how many distinct unit vectors can be selected in \( \R^n \)
+such that from any three of them, at least two are orthogonal?
+\\
+
+\textbf{Problem 7.} (IMC 2022, Day 2, Problem 7)
+Let \( A_1, A_2, \ldots, A_k \) be \( n \times n \) idempotent complex matrices such that
+\[
+A_i A_j = -A_j A_i \quad \text{for all } i \neq j.
+\]
+Prove that at least one of the given matrices has rank \( \leq \dfrac{n}{k} \).
+(A matrix \( A \) is called idempotent if \( A^2 = A \).)
+\\
+
+\textbf{Problem 8.} (IMC 2020, Day 2, Problem 8)
+Compute
+\[
+\lim_{n \to \infty} \frac{1}{\log \log n} \sum_{k=1}^{n} (-1)^k \binom{n}{k} \log k.
+\]
+(Here \( \log \) denotes the natural logarithm.)
+\\
+
+\textbf{Problem 9.} (IMC 2021, Day 2, Problem 7)
+Let \( D \subseteq \C \) be an open set containing the closed unit disk \( \{z : |z| \leq 1\} \).
+Let \( f : D \to \C \) be a holomorphic function, and let \( p(z) \) be a monic polynomial. Prove that
+\[
+|f(0)| \leq \max_{|z| = 1} |f(z)\, p(z)|.
+\]
+\\
+
+\textbf{Problem 10.} (IMC 2020, Day 1, Problem 3)
+Let \( d \geq 2 \) be an integer. Prove that there exists a constant \( C(d) \) such that the following holds:
+for any convex polytope \( K \subset \R^d \), which is symmetric about the origin, and any \( \varepsilon \in (0, 1) \),
+there exists a convex polytope \( L \subset \R^d \) with at most \( C(d)\, \varepsilon^{1 - d} \) vertices such that
+\[
+(1 - \varepsilon) K \subseteq L \subseteq K.
+\]
+
+\end{document}

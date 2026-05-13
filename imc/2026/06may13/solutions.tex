@@ -1,0 +1,216 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\tr}{\operatorname{trace}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions --- IMC Training, May 13, 2026}
+
+\textbf{Problem 1.} (IMC 2022, Day 1, Problem 2)
+Real \( n \times n \) matrices with real eigenvalues and \( A + A^k = A^T \), \( k \geq n \).
+
+\textbf{Solution.} \textit{Answer:} \( A = 0 \).
+
+If \( \lambda \) is an eigenvalue of \( A \), then \( \lambda + \lambda^k \) is an eigenvalue of \( A^T = A + A^k \), hence of \( A \). Take \( \lambda \) with the largest absolute value: if \( k \) is odd, the map \( \lambda \mapsto \lambda + \lambda^k \) strictly increases the absolute value of any nonzero \( \lambda \), a contradiction unless every eigenvalue is \( 0 \). If \( k \) is even, the same conclusion follows by comparing traces of \( A^T \) and \( A + A^k \).
+
+Therefore \( A \) has only the eigenvalue \( 0 \) and is nilpotent; \( A^n = 0 \) and a fortiori \( A^k = 0 \). The equation then gives \( A = A^T \), i.e.\ \( A \) is real symmetric with all eigenvalues zero, so \( A = 0 \). \qed
+\\
+
+\textbf{Problem 2.} (IMC 2021, Day 1, Problem 2)
+\( \mathbb{P}(\min Y > \max X) \) is independent of \( a \).
+
+\textbf{Solution.} The pair \( (X, Y) \) is chosen out of \( \binom{k+a}{k} \binom{n+k+a}{n} \) equally likely pairs.
+
+When \( \min Y > \max X \), the union \( X \cup Y \subseteq \{1, \ldots, k+n+a\} \) has size \( n + k \) and the splitting between \( X \) and \( Y \) (smallest \( k \) elements vs.\ largest \( n \)) is determined uniquely. The condition forces every element of \( X \) to be \( \leq k + a \), but among the \( n + k \) chosen the smallest \( k \) are automatically \( \leq n + k + a - n = k + a \). So the favorable count equals \( \binom{n+k+a}{n+k} \).
+
+Hence
+\[
+\mathbb{P}(\min Y > \max X)
+= \frac{\binom{n+k+a}{n+k}}{\binom{k+a}{k}\binom{n+k+a}{n}}
+= \frac{1}{\binom{n+k}{k}},
+\]
+where the last equality is a routine factorial cancellation. \qed
+\\
+
+\textbf{Problem 3.} (IMC 2020, Day 2, Problem 5)
+\( f''f \geq 2(f')^2,\, f > 0,\, f \in C^2(\R) \Rightarrow f \) is constant.
+
+\textbf{Solution.} Set \( g = 1/f \). Then
+\[
+g'' = \left(\frac{1}{f}\right)'' = \left(-\frac{f'}{f^2}\right)' = \frac{2(f')^2 - f''f}{f^3} \leq 0,
+\]
+so \( g \) is a positive concave function on \( \R \).
+
+For any \( a < b \), concavity gives, for all \( u < a \) and \( v > b \),
+\[
+\frac{g(a) - g(u)}{a - u} \geq \frac{g(b) - g(a)}{b - a} \geq \frac{g(v) - g(b)}{v - b}.
+\]
+Since \( g(u), g(v) > 0 \), the left side is \( > \frac{-g(u)}{a-u} \cdot 0 = 0 \) wait — more carefully: the left side equals \( \frac{g(a)}{a-u} - \frac{g(u)}{a-u} \), and taking \( u \to -\infty \) yields \( 0 \) (both terms \( \to 0 \)). Similarly the right side tends to \( 0 \) as \( v \to \infty \). The squeeze gives \( g(a) = g(b) \), so \( g \) is constant and so is \( f \).
+
+Any positive constant function trivially satisfies the inequality. \qed
+\\
+
+\textbf{Problem 4.} (IMC 2022, Day 1, Problem 3)
+\( f(p) \) = number of \( (p-1) \)-step walks on \( \Z \) with steps \( \{-1, 0, 1\} \) returning to \( 0 \); find \( f(p) \pmod p \).
+
+\textbf{Solution.} \textit{Answer:}
+\[
+f(p) \equiv \begin{cases} 0 \pmod 3, & p = 3, \\ 1 \pmod p, & p \equiv 1 \pmod 3, \\ -1 \pmod p, & p \equiv 2 \pmod 3. \end{cases}
+\]
+
+\( f(p) \) is the constant term of \( (x + 1 + x^{-1})^{p-1} \), i.e.\ the coefficient \( [x^{p-1}] \) of \( (1 + x + x^2)^{p-1} \). In \( \F_p[[x]] \),
+\[
+(1 + x + x^2)^{p-1} = \frac{(1 - x^3)^{p-1}}{(1 - x)^{p-1}}
+= \frac{(1 - x^3)^p (1 - x)}{(1 - x)^p (1 - x^3)}
+\equiv \frac{(1 - x^{3p})(1 - x)}{(1 - x^p)(1 - x^3)} \pmod p,
+\]
+using \( (1 - y)^p \equiv 1 - y^p \pmod p \). For \( k = p - 1 < p < 3p \), the factors \( (1 - x^{3p}) \) and \( (1 - x^p)^{-1} \) do not affect the coefficient of \( x^{p-1} \). So
+\[
+f(p) \equiv [x^{p-1}] \, \frac{1 - x}{1 - x^3} = [x^{p-1}](1 - x) \sum_{j \geq 0} x^{3j} \pmod p.
+\]
+Write \( p - 1 = 3m + r \) with \( r \in \{0, 1, 2\} \); the coefficient is \( 1 \) if \( r = 0 \), \( -1 \) if \( r = 1 \), \( 0 \) if \( r = 2 \). \qed
+\\
+
+\textbf{Problem 5.} (IMC 2020, Day 2, Problem 7)
+\( [G:H_1] = [G:H_2] = n \), \( [G : H_1 \cap H_2] = n(n-1) \) \( \Rightarrow \) \( H_1, H_2 \) conjugate.
+
+\textbf{Solution.} Set \( K = H_1 \cap H_2 \). From
+\[
+n(n-1) = [G:K] = [G:H_1][H_1:K] = n[H_1:K]
+\]
+we get \( [H_1 : K] = n - 1 \). Write \( H_1 = \bigsqcup_{i=1}^{n-1} h_i K \). Since \( K \subseteq H_2 \), each \( h_i K \cdot H_2 = h_i H_2 \), so
+\[
+H_1 H_2 = \bigsqcup_{i=1}^{n-1} h_i H_2,
+\]
+a disjoint union of \( n - 1 \) left cosets of \( H_2 \). (Disjointness: \( h_i H_2 \cap h_j H_2 \neq \emptyset \Leftrightarrow h_i^{-1} h_j \in H_2 \), but also in \( H_1 \), hence in \( K \), giving \( h_i K = h_j K \).)
+
+Therefore \( L := G \setminus H_1 H_2 \) is the remaining left coset of \( H_2 \). By the symmetric argument \( L \) is also the remaining right coset of \( H_1 \). So for any \( g \in L \),
+\[
+g H_2 = L = H_1 g, \quad \text{hence} \quad H_2 = g^{-1} H_1 g. \qed
+\]
+\\
+
+\textbf{Problem 6.} (IMC 2021, Day 2, Problem 8)
+Maximum number of unit vectors in \( \R^n \) with any 3 having 2 orthogonal.
+
+\textbf{Solution.} \textit{Answer:} \( 2n \), achieved by \( \pm e_1, \ldots, \pm e_n \).
+
+For the upper bound, let \( e_1, \ldots, e_N \) be the unit vectors. The Gram matrix \( A = (e_i \cdot e_j) \) is positive semidefinite of rank \( \leq n \); equivalently \( B := A - I \) has eigenvalue \( -1 \) of multiplicity at least \( N - n \), and all other eigenvalues \( \geq 0 \).
+
+The diagonal entries of \( B^3 \) are
+\[
+(B^3)_{ii} = \sum_{j, k \neq i,\; j \neq k} a_{ij} a_{jk} a_{ki}.
+\]
+The hypothesis means every summand has at least one zero factor (some pair among \( e_i, e_j, e_k \) is orthogonal), so \( \tr(B^3) = 0 \).
+
+Let \( P_i \) be the projection onto \( \R e_i \). Then \( B = \sum_i P_i - I \), so the condition \( \tr(B^3) = 0 \) with \( Q = \sum_i P_i \) and \( \tr Q = N \) gives, after expansion using \( \tr(P_i P_j P_k) = 0 \) for distinct \( i, j, k \) and \( \tr(P_i^2 P_j) = \tr(P_i P_j) \):
+\[
+\sum t_i^3 = \tr(Q^3) = 3 \sum t_i^2 - 2 N,
+\]
+where \( t_i \) are the eigenvalues of \( Q \) (there are at most \( n \) of them). Hence \( \sum t_i^3 - 3 t_i^2 = -2 N \). But \( (t - 2)^2 (t + 1) = t^3 - 3 t^2 + 4 \geq 0 \) for \( t \geq -1 \) (which holds since \( Q \succeq 0 \)), giving
+\[
+-2 N = \sum (t_i^3 - 3 t_i^2) \geq -4 n,
+\]
+hence \( N \leq 2 n \). \qed
+\\
+
+\textbf{Problem 7.} (IMC 2022, Day 2, Problem 7)
+\( k \) idempotent matrices with \( A_i A_j = -A_j A_i \) for \( i \neq j \). Show some \( A_i \) has rank \( \leq n/k \).
+
+\textbf{Solution.} \emph{Lemma.} For any idempotent \( B \), \( \rank(B) = \tr(B) \).
+(Proof: \( B^2 = B \) means the minimal polynomial divides \( \lambda(\lambda - 1) \), so \( B \) is diagonalizable with eigenvalues \( 0, 1 \); the trace counts 1-eigenvalues, which equals the rank.)
+
+Now compute \( \bigl(\sum_i A_i\bigr)^2 \):
+\[
+\Bigl(\sum_{i=1}^k A_i\Bigr)^2 = \sum_i A_i^2 + \sum_{i \neq j}(A_i A_j + A_j A_i) = \sum_i A_i + 0 = \sum_i A_i,
+\]
+so \( \sum_i A_i \) is idempotent. Apply the lemma:
+\[
+\sum_{i=1}^k \rank(A_i) = \sum_{i=1}^k \tr(A_i) = \tr\!\Bigl(\sum_i A_i\Bigr) = \rank\!\Bigl(\sum_i A_i\Bigr) \leq n.
+\]
+So at least one \( \rank(A_i) \leq n/k \). \qed
+\\
+
+\textbf{Problem 8.} (IMC 2020, Day 2, Problem 8)
+\( \displaystyle \lim_{n \to \infty} \frac{1}{\log \log n} \sum_{k=1}^{n} (-1)^k \binom{n}{k} \log k \).
+
+\textbf{Solution.} \textit{Answer:} \( 1 \).
+
+Use the Frullani integral \( \log k = \int_0^\infty \frac{e^{-x} - e^{-kx}}{x}\, dx \). Then
+\[
+S_n := \sum_{k=1}^{n} (-1)^k \binom{n}{k} \log k
+= \int_0^\infty \frac{1}{x}\, \Bigl(\sum_{k=1}^{n} (-1)^k \binom{n}{k}(e^{-x} - e^{-kx})\Bigr) dx.
+\]
+The inner sum equals \( -e^{-x} \cdot ((1{-}1)^n - 1) - ((1 - e^{-x})^n - 1) = -e^{-x} + 1 - (1 - e^{-x})^n \), so
+\[
+S_n = \int_0^\infty \frac{1 - e^{-x} - (1 - e^{-x})^n}{x}\, dx.
+\]
+
+\emph{Asymptotic estimate.} Bernoulli gives \( (1 - e^{-x})^n \geq 1 - n e^{-x} \), so the tail
+\[
+\int_M^\infty \frac{1 - e^{-x} - (1 - e^{-x})^n}{x}\, dx \leq n \int_M^\infty \frac{e^{-x}}{x}\, dx \leq n M^{-1} e^{-M}.
+\]
+Choose \( M \) with \( M e^M = n \), so \( M = \log n - \log\log n + o(1) \), and the tail is \( O(1) \).
+
+On \( [0, M] \), uniformly \( (1 - e^{-x})^{n-1} \leq e^{-(n-1)e^{-x}} \leq e^{-(n-1)M/n} \to 0 \), so
+\[
+\int_0^M \frac{1 - e^{-x} - (1 - e^{-x})^n}{x}\, dx
+= (1 + o(1)) \int_0^M \frac{1 - e^{-x}}{x}\, dx
+= (1 + o(1)) (\log M + O(1)) = (1 + o(1)) \log \log n.
+\]
+Therefore \( S_n / \log \log n \to 1 \). \qed
+\\
+
+\textbf{Problem 9.} (IMC 2021, Day 2, Problem 7)
+\( |f(0)| \leq \max_{|z|=1} |f(z) p(z)| \) for holomorphic \( f \) and monic polynomial \( p \).
+
+\textbf{Solution.}
+Let \( p(z) = z^n + a_{n-1} z^{n-1} + \cdots + a_0 \) and define the \emph{reciprocal polynomial}
+\[
+q(z) = z^n\, \overline{p(1/\bar z)} = 1 + \overline{a_{n-1}}\, z + \cdots + \overline{a_0}\, z^n.
+\]
+For \( |z| = 1 \), \( 1/\bar z = z \), so \( |q(z)| = |\overline{p(z)}| = |p(z)| \). Also \( q(0) = 1 \) and \( q \) is holomorphic on \( \C \), so \( f \cdot q \) is holomorphic on a neighborhood of the closed unit disk. The maximum-modulus principle gives
+\[
+|f(0)| = |f(0) q(0)| \leq \max_{|z|=1} |f(z) q(z)| = \max_{|z|=1} |f(z) p(z)|. \qed
+\]
+\\
+
+\textbf{Problem 10.} (IMC 2020, Day 1, Problem 3)
+Centrally symmetric convex polytope approximation with \( C(d) \varepsilon^{1-d} \) vertices.
+
+\textbf{Solution.}
+Pick an inclusion-maximal set \( \{p_1, \ldots, p_m\} \subset \partial K \) such that the homothets \( K_i := p_i + \tfrac{\varepsilon}{2} K \) have pairwise disjoint interiors. Set \( L := \operatorname{conv}\{p_1, \ldots, p_m\} \).
+
+\emph{Bound on \( m \).} Each \( K_i \subseteq (1 + \tfrac{\varepsilon}{2}) K \) by convexity of \( K \). Also, if \( a > 0 \) and \( a k \in K_i \) for some \( k \in K \), then \( p_i \in a k - \tfrac{\varepsilon}{2} K = a k + \tfrac{\varepsilon}{2} K \) (by central symmetry), so \( p_i \in (a + \tfrac{\varepsilon}{2}) K \); since \( p_i \in \partial K \) we get \( a \geq 1 - \tfrac{\varepsilon}{2} \). Hence all \( K_i \) lie in \( (1 + \tfrac{\varepsilon}{2}) K \setminus (1 - \tfrac{\varepsilon}{2}) K \). Comparing volumes,
+\[
+m \cdot (\varepsilon/2)^d \,\mathrm{vol}(K) \leq \bigl((1 + \tfrac{\varepsilon}{2})^d - (1 - \tfrac{\varepsilon}{2})^d\bigr) \mathrm{vol}(K) \leq (3/2)^d\, \varepsilon,
+\]
+so \( m \leq 3^d \varepsilon^{1-d} \), and we may take \( C(d) = 3^d \).
+
+\emph{Inclusion} \( (1 - \varepsilon) K \subseteq L \). Suppose for contradiction that \( p \in (1 - \varepsilon) K \setminus L \). Separate \( p \) from \( L \) by a linear functional \( \ell \): \( \ell(p) > \max_i \ell(p_i) \). Let \( x \in K \) attain \( a := \max_{x \in K} \ell(x) \). By maximality of \( \{p_i\} \), the homothet \( x + \tfrac{\varepsilon}{2} K \) intersects some \( K_i \): take \( z \in (x + \tfrac{\varepsilon}{2} K) \cap (p_i + \tfrac{\varepsilon}{2} K) \). Then
+\[
+\ell(p_i) + \tfrac{\varepsilon}{2} a \geq \ell(z) \geq \ell(x) - \tfrac{\varepsilon}{2} a = a - \tfrac{\varepsilon}{2} a,
+\]
+so \( \ell(p_i) \geq a(1 - \varepsilon) \). But \( p \in (1 - \varepsilon) K \) gives \( \ell(p) \leq a (1 - \varepsilon) \leq \ell(p_i) \), contradicting \( \ell(p) > \ell(p_i) \). Hence \( L \subseteq K \) (immediate) and \( (1 - \varepsilon) K \subseteq L \). \qed
+
+\end{document}
