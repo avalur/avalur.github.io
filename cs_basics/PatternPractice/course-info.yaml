@@ -2,6 +2,8 @@ type: marketplace
 title: PatternPractice
 language: English
 summary: Code and tasks to practice OOP pattern implementation.
+vendor:
+  name: Aleksandr Avdiushenko
 programming_language: Java
 content:
   - Patterns
@@ -10,4 +12,5 @@ environment_settings:
 additional_files:
   - name: build.gradle
   - name: settings.gradle
-yaml_version: 2
+  - name: gradle/wrapper/gradle-wrapper.properties
+yaml_version: 5
