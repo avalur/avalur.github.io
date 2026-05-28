@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Problem Sheet --- IMC Training}
+
+\begin{center}
+May 27, 2026
+\end{center}
+
+\textbf{Problem 1.} (IMC 2008, Day 2, Problem 2)
+Two different ellipses are given. One focus of the first ellipse coincides with one focus of the second ellipse.
+Prove that the ellipses have at most two points in common.
+\\
+
+\textbf{Problem 2.} (IMC 2009, Day 1, Problem 1b)
+Suppose that \( f \) and \( g \) are continuous real-valued functions on the real line and \( f(r) \leq g(r) \) for every rational \( r \).
+Prove that \( f(x) \leq g(x) \) for every real \( x \).
+\\
+
+\textbf{Problem 3.} (IMC 2009, Day 1, Problem 3)
+In a town every two residents who are not friends have a friend in common, and no one is a friend of everyone else.
+Let us number the residents from \( 1 \) to \( n \) and let \( a_i \) be the number of friends of the \( i \)-th resident.
+Suppose that
+\(
+\sum_{i=1}^{n} a_i^2 = n^2 - n.
+\)
+Let \( k \) be the smallest number of residents (at least three) who can be seated at a round table in such a way that any two neighbors are friends.
+Determine all possible values of \( k \).
+\\
+
+\textbf{Problem 4.} (IMC 2009, Day 2, Problem 2)
+Suppose \( f : \R \to \R \) is a twice differentiable function satisfying \( f(0) = 1 \), \( f'(0) = 0 \), and for all \( x \in [0, \infty) \),
+\[
+f''(x) - 5 f'(x) + 6 f(x) \geq 0.
+\]
+Prove that for all \( x \in [0, \infty) \),
+\[
+f(x) \geq 3 e^{2x} - 2 e^{3x}.
+\]
+\\
+
+\textbf{Problem 5.} (IMC 2008, Day 2, Problem 1)
+Let \( n, k \) be positive integers and suppose that the polynomial \( x^{2k} - x^k + 1 \) divides \( x^{2n} + x^n + 1 \).
+Prove that \( x^{2k} + x^k + 1 \) divides \( x^{2n} + x^n + 1 \).
+\\
+
+\textbf{Problem 6.} (IMC 2009, Day 2, Problem 3)
+Let \( A, B \in M_n(\C) \) be two \( n \times n \) matrices such that
+\[
+A^2 B + B A^2 = 2 A B A.
+\]
+Prove that there exists a positive integer \( k \) such that \( (AB - BA)^k = 0 \).
+\\
+
+\textbf{Problem 7.} (IMC 2008, Day 1, Problem 6)
+For a permutation \( \sigma = (i_1, i_2, \ldots, i_n) \) of \( (1, 2, \ldots, n) \) define
+\[
+D(\sigma) = \sum_{k=1}^{n} |i_k - k|.
+\]
+Let \( Q(n, d) \) be the number of permutations \( \sigma \) of \( (1, 2, \ldots, n) \) with \( d = D(\sigma) \).
+Prove that \( Q(n, d) \) is even for \( d \geq 2n \).
+\\
+
+\textbf{Problem 8.} (IMC 2021, Day 2, Problem 5)
+Let \( A \) be a real \( n \times n \) matrix and suppose that for every positive integer \( m \) there exists a real symmetric matrix \( B \) such that
+\[
+2021\, B = A^m + B^2.
+\]
+Prove that \( |\det A| \leq 1 \).
+\\
+
+\textbf{Problem 9.} (IMC 2009, Day 1, Problem 4)
+Let \( p(z) = a_0 + a_1 z + a_2 z^2 + \cdots + a_n z^n \) be a complex polynomial.
+Suppose that \( 1 = c_0 \geq c_1 \geq \cdots \geq c_n \geq 0 \) is a sequence of real numbers which is convex
+(i.e.\ \( 2 c_k \leq c_{k-1} + c_{k+1} \) for every \( k = 1, 2, \ldots, n - 1 \)), and consider the polynomial
+\[
+q(z) = c_0 a_0 + c_1 a_1 z + c_2 a_2 z^2 + \cdots + c_n a_n z^n.
+\]
+Prove that
+\[
+\max_{|z| \leq 1} |q(z)| \leq \max_{|z| \leq 1} |p(z)|.
+\]
+\\
+
+\textbf{Problem 10.} (IMC 2021, Day 2, Problem 6)
+For a prime number \( p \), let \( \mathrm{GL}_2(\Z / p\Z) \) be the group of invertible \( 2 \times 2 \) matrices of residues
+modulo \( p \), and let \( S_p \) be the symmetric group on \( p \) elements.
+Show that there is no injective group homomorphism \( \varphi : \mathrm{GL}_2(\Z / p\Z) \to S_p \).
+
+\end{document}

@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\tr}{\operatorname{trace}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions --- IMC Training Sheet, May 27, 2026}
+
+\textbf{Problem 1.} (IMC 2008, Day 2, Problem 2)
+Two ellipses with a common focus have at most two common points.
+
+\textbf{Solution.}
+An ellipse can be described as the locus of points \( X \) such that
+\[
+\frac{|FX|}{\operatorname{dist}(X, \ell)} = e < 1,
+\]
+where \( F \) is a focus, \( \ell \) the corresponding directrix, and \( e \) the eccentricity. If both ellipses share the focus \( F \) with directrices \( \ell_1, \ell_2 \) and eccentricities \( e_1, e_2 \), then a common point \( X \) satisfies
+\[
+e_1 \cdot \operatorname{dist}(X, \ell_1) = |FX| = e_2 \cdot \operatorname{dist}(X, \ell_2).
+\]
+The equation \( e_1 \cdot \operatorname{dist}(X, \ell_1) = e_2 \cdot \operatorname{dist}(X, \ell_2) \) defines at most two lines (the signed-distance functions are affine, so we get \( \pm \) cases). But \( X \) and \( F \) must lie on the same side of each directrix, so only \emph{one} line is relevant. The intersection of one line with an ellipse contains at most two points. \qed
+\\
+
+\textbf{Problem 2.} (IMC 2009, Day 1, Problem 1b)
+Continuous \( f \leq g \) on \( \Q \) \( \Rightarrow \) \( f \leq g \) on \( \R \).
+
+\textbf{Solution.}
+The function \( g - f \) is continuous on \( \R \) and \( (g - f)(r) \geq 0 \) for all rational \( r \). Every real \( x \) is a limit of a sequence \( r_n \) of rationals, so
+\[
+(g - f)(x) = \lim_n (g - f)(r_n) \geq 0,
+\]
+by continuity. \qed
+\\
+
+\textbf{Problem 3.} (IMC 2009, Day 1, Problem 3)
+Graph on \( n \) vertices: \( \sum a_i^2 = n^2 - n \); shortest cycle length \( k \).
+
+\textbf{Solution.} \textit{Answer:} \( k = 5 \) is the only possible value.
+
+Let \( G \) be the friendship graph; the hypothesis is that the diameter is at most \( 2 \), no vertex has degree \( n - 1 \), and \( \sum a_i^2 = n^2 - n \).
+
+Count walks of length \( 2 \): the number of ordered triples \( (v_i, v_j, v_l) \) with \( v_i v_j, v_j v_l \in E \) equals \( \sum_j a_j^2 = n^2 - n \).
+
+Construct an injection \( f \) from ordered pairs \( (v_i, v_j) \) of distinct vertices (there are \( n^2 - n \) of them) to such walks: if \( v_i v_j \notin E \), pick any common neighbour \( v_l \) and set \( f(v_i, v_j) = (v_i, v_l, v_j) \); if \( v_i v_j \in E \), set \( f(v_i, v_j) = (v_i, v_j, v_i) \). Injectivity is easy: a walk \( (v_i, v_j, v_l) \) with \( i \neq l \) can only come from \( (v_i, v_l) \), and \( (v_i, v_j, v_i) \) only from \( (v_i, v_j) \).
+
+So \( \sum a_i^2 \geq n^2 - n \), with equality iff \( f \) is a bijection, i.e.\ \emph{exactly one} common neighbour for each non-edge and \emph{no} common neighbour for each edge. Equivalently, \( G \) has no triangles (\( C_3 \)) or 4-cycles (\( C_4 \)).
+
+If \( G \) has no cycle, it is a forest; but a forest of diameter \( \leq 2 \) is a star, which contradicts the no-vertex-of-degree-\( n-1 \) hypothesis. So \( G \) has cycles, all of length \( \geq 5 \). If a cycle had length \( \geq 6 \), two opposite vertices on it would be at distance \( \geq 3 \) along the cycle, contradicting diameter \( \leq 2 \). Hence the shortest cycle has length exactly \( 5 \). The 5-cycle \( C_5 \) itself realizes all conditions. \qed
+\\
+
+\textbf{Problem 4.} (IMC 2009, Day 2, Problem 2)
+\( f \in C^2[0, \infty) \), \( f(0) = 1, f'(0) = 0 \), \( f'' - 5f' + 6f \geq 0 \) \( \Rightarrow \) \( f(x) \geq 3 e^{2x} - 2 e^{3x} \).
+
+\textbf{Solution.}
+Factor the operator: \( f'' - 5f' + 6f = (D - 3)(D - 2) f \geq 0 \). Set \( g(x) := f'(x) - 2 f(x) \). Then
+\[
+g'(x) - 3 g(x) \geq 0, \qquad \bigl(g(x) e^{-3x}\bigr)' \geq 0,
+\]
+so \( g(x) e^{-3x} \geq g(0) e^{0} = f'(0) - 2 f(0) = -2 \), i.e.\ \( f'(x) - 2 f(x) \geq -2 e^{3x} \).
+
+Apply the same trick again: \( (f(x) e^{-2x})' = (f'(x) - 2 f(x)) e^{-2x} \geq -2 e^{x} \), so \( (f(x) e^{-2x} + 2 e^{x})' \geq 0 \). Hence
+\[
+f(x) e^{-2x} + 2 e^{x} \geq f(0) + 2 = 3,
+\]
+which rearranges to \( f(x) \geq 3 e^{2x} - 2 e^{3x} \). \qed
+\\
+
+\textbf{Problem 5.} (IMC 2008, Day 2, Problem 1)
+\( x^{2k} - x^k + 1 \mid x^{2n} + x^n + 1 \) \( \Rightarrow \) \( x^{2k} + x^k + 1 \mid x^{2n} + x^n + 1 \).
+
+\textbf{Solution.}
+Note \( x^{2k} - x^k + 1 = \Phi_{6k}(x) / \Phi_{2k}(x) \), but a cleaner approach uses roots directly.
+
+The complex root \( \omega = e^{i\pi/(3k)} \) satisfies \( \omega^{2k} - \omega^k + 1 = 0 \) (since \( \omega^k = e^{i\pi/3} \) and \( e^{2i\pi/3} - e^{i\pi/3} + 1 = 0 \)). By the divisibility hypothesis, \( \omega^{2n} + \omega^n + 1 = 0 \), so \( \omega^n = e^{\pm 2\pi i / 3} \). Setting \( n/k = r \), this gives \( e^{i\pi r/3} = e^{\pm 2\pi i / 3} \), i.e.\ \( n = (6c \pm 2) k \) for some integer \( c \).
+
+Now check that any root of \( x^{2k} + x^k + 1 \) is a root of \( x^{2n} + x^n + 1 \). The roots of \( x^{2k} + x^k + 1 \) are \( \zeta = e^{i(2\pi/3 + 2\pi s)/k} \cdot \) various \( k \)-th roots, all satisfying \( \zeta^k = e^{\pm 2\pi i / 3} \). Then \( \zeta^n = \zeta^{(6c \pm 2) k} = (\zeta^k)^{6c \pm 2} = e^{\pm 2\pi i (6c \pm 2)/3} \). Since \( 6c \pm 2 \equiv \pm 2 \pmod 3 \), \( \zeta^n = e^{\pm 4\pi i / 3} = e^{\mp 2\pi i / 3} \). Therefore
+\[
+\zeta^{2n} + \zeta^n + 1 = e^{\mp 4\pi i / 3} + e^{\mp 2\pi i / 3} + 1 = 0. \qed
+\]
+\\
+
+\textbf{Problem 6.} (IMC 2009, Day 2, Problem 3)
+\( A^2 B + B A^2 = 2 ABA \) \( \Rightarrow \) \( AB - BA \) nilpotent.
+
+\textbf{Solution.}
+Let \( X = AB - BA \). Compute the commutator with \( A \):
+\[
+AX - XA = (A^2 B - ABA) - (ABA - BA^2) = A^2 B + BA^2 - 2 ABA = 0.
+\]
+So \( X \) commutes with \( A \). Then for every \( m \geq 0 \),
+\[
+X^{m+1} = X^m \cdot (AB - BA) = A (X^m B) - (X^m B) A,
+\]
+and taking trace (which is cyclic) gives \( \tr(X^{m+1}) = 0 \). The values \( \tr(X), \tr(X^2), \ldots, \tr(X^n) \) being all zero determine the eigenvalues of \( X \) (Newton's identities), forcing every eigenvalue to be \( 0 \). Hence \( X \) is nilpotent: \( X^n = 0 \). \qed
+\\
+
+\textbf{Problem 7.} (IMC 2008, Day 1, Problem 6)
+\( Q(n, d) = \#\{\sigma : D(\sigma) = d\} \) is even for \( d \geq 2n \).
+
+\textbf{Solution.}
+Consider the \( n \times n \) determinant
+\[
+\Delta(x) = \det\!\bigl(x^{|i - j|}\bigr)_{i, j = 1}^{n}.
+\]
+By the Leibniz formula,
+\[
+\Delta(x) = \sum_{\sigma \in S_n} (-1)^{\operatorname{inv}(\sigma)} x^{D(\sigma)},
+\]
+so the coefficient of \( x^d \) in \( \Delta(x) \) has the same parity as \( Q(n, d) \).
+
+Evaluate \( \Delta(x) \) by row-reduction: subtract \( x \cdot \text{(row \(i-1\))} \) from row \( i \) for \( i = n, n-1, \ldots, 2 \), in that order. The resulting matrix is upper-triangular with diagonal entries \( 1, 1 - x^2, 1 - x^2, \ldots, 1 - x^2 \), so
+\[
+\Delta(x) = (1 - x^2)^{n - 1}.
+\]
+This polynomial has degree \( 2(n - 1) < 2n \), so its coefficient of \( x^d \) is \( 0 \) for all \( d \geq 2n - 1 \). In particular it is even for \( d \geq 2n \), and so is \( Q(n, d) \). \qed
+\\
+
+\textbf{Problem 8.} (IMC 2021, Day 2, Problem 5)
+\( 2021 B = A^m + B^2 \) solvable with symmetric \( B \) for every \( m \geq 1 \) \( \Rightarrow \) \( |\det A| \leq 1 \).
+
+\textbf{Solution.}
+Take \( m = 1 \): \( A = 2021 B_1 - B_1^2 \) is symmetric (since \( B_1 \) is), so \( A \) is diagonalizable with real eigenvalues.
+
+Now fix \( m \geq 1 \) and let \( \lambda \) be a real eigenvalue of \( A \). In a common eigenbasis (using diagonalizability of both \( A \) and \( B_m \), and that \( B_m^2 \) commutes with \( A^m \) via the relation), there is a real eigenvalue \( \mu \) of \( B_m \) such that
+\[
+2021 \mu = \lambda^m + \mu^2, \quad \text{i.e.}\quad \mu^2 - 2021 \mu + \lambda^m = 0.
+\]
+The discriminant must be \( \geq 0 \):
+\[
+2021^2 - 4 \lambda^m \geq 0, \qquad \lambda^m \leq \frac{2021^2}{4}.
+\]
+If \( |\lambda| > 1 \), taking \( m \) even and large gives a contradiction. So \( |\lambda| \leq 1 \) for every eigenvalue, and \( |\det A| = \prod |\lambda_i| \leq 1 \). \qed
+\\
+
+\textbf{Problem 9.} (IMC 2009, Day 1, Problem 4)
+Convex \( c_k \), \( q(z) = \sum c_k a_k z^k \), \( p(z) = \sum a_k z^k \). Show \( \max_{|z| \leq 1} |q| \leq \max_{|z| \leq 1} |p| \).
+
+\textbf{Solution.}
+By the maximum principle reduce to \( |z| = 1 \). For \( |z| = 1 \) (so \( 1/\bar z = z \)) the Cauchy formula gives \( a_j = \frac{1}{2\pi} \int_S \frac{p(z)}{z^j}\, |dz| \) for \( 0 \leq j \leq n \) and \( 0 \) otherwise, where \( S = \{|z| = 1\} \). Thus
+\[
+2\pi\, q(w) = \int_S K(w/z)\, p(z)\, |dz|, \qquad K(u) := \sum_{j = -n}^{n} c_{|j|}\, u^j = c_0 + 2 \sum_{j = 1}^{n} c_j\, \operatorname{Re}(u^j).
+\]
+(We may add the conjugate terms for \( j < 0 \) since the corresponding integrals vanish.)
+
+\emph{Claim:} \( K(u) \geq 0 \) for \( u \in S \).
+
+Set \( d_k := c_{k-1} - 2 c_k + c_{k+1} \geq 0 \) (with \( c_{n+1} = 0 \)), so the convexity hypothesis says \( d_k \geq 0 \). One checks by induction (the second difference is the Abel summation) that
+\[
+K(u) = \sum_{k = 1}^{n} d_k F_k(u), \qquad F_k(u) = \sum_{j = -(k-1)}^{k-1} (k - |j|)\, u^j.
+\]
+The function \( F_k \) is the \emph{Fejér kernel}: for \( |u| = 1 \),
+\[
+F_k(u) = \Bigl|1 + u + u^2 + \cdots + u^{k-1}\Bigr|^2 \geq 0.
+\]
+Hence \( K \geq 0 \) on \( S \), and \( \int_S K(u)\, |du| = 2\pi c_0 = 2\pi \). Therefore
+\[
+2\pi |q(w)| \leq \int_S |K(w/z)| \cdot |p(z)|\, |dz| \leq M_p \int_S K\, |du| = 2\pi M_p,
+\]
+where \( M_p = \max_{|z|=1} |p(z)| \). \qed
+\\
+
+\textbf{Problem 10.} (IMC 2021, Day 2, Problem 6)
+No injective homomorphism \( \varphi : \mathrm{GL}_2(\Z/p\Z) \to S_p \).
+
+\textbf{Solution.}
+For \( p = 2 \): \( |\mathrm{GL}_2(\Z/2\Z)| = 6 > 2 = |S_2| \), so no injection exists by cardinality.
+
+For odd prime \( p \), consider the matrices
+\[
+A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \in \mathrm{GL}_2(\Z/p\Z), \qquad B = \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix} \in \mathrm{GL}_2(\Z/p\Z).
+\]
+Direct computation: \( A^p = \begin{pmatrix} 1 & p \\ 0 & 1 \end{pmatrix} = I \) and \( A^k \neq I \) for \( 1 \leq k < p \), so \( A \) has order \( p \). The matrix \( B \) is central with order \( 2 \). They commute, and \( AB \) has order \( \operatorname{lcm}(p, 2) = 2p \).
+
+If \( \varphi \) is an injective homomorphism into \( S_p \), then \( \varphi(AB) \) has order \( 2p \) in \( S_p \). The order of a permutation is the lcm of its cycle lengths; cycle lengths are \( \leq p \) in \( S_p \). For order \( 2p \) the permutation needs cycles whose lcm is \( 2p \), in particular a \( p \)-cycle and a \( 2 \)-cycle, requiring \( p + 2 \leq p \) elements — impossible. (More precisely: the only permutations in \( S_p \) of order divisible by \( p \) are \( p \)-cycles, of order exactly \( p \).) Contradiction. \qed
+
+\end{document}
