@@ -318,3 +318,4 @@ mnist/*
 /advanced_ml/tmp/
 /posts/.env
 /posts/.claude/settings.local.json
+/cs_basics/PatternPractice/build/
