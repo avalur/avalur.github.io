@@ -1,0 +1,195 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\tr}{\operatorname{trace}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions --- IMC Training Sheet, June 10, 2026}
+
+\textbf{Problem 1.} (IMC 2010, Day 1, Problem 1)
+Prove \( \int_a^b (x^2 + 1) e^{-x^2}\, dx \geq e^{-a^2} - e^{-b^2} \).
+
+\textbf{Solution.}
+For \( x > 0 \) we have \( x^2 + 1 \geq 2x \) by AM-GM, hence
+\[
+\int_a^b (x^2 + 1) e^{-x^2}\, dx \;\geq\; \int_a^b 2x\, e^{-x^2}\, dx \;=\; \left[ -e^{-x^2} \right]_a^b \;=\; e^{-a^2} - e^{-b^2}.
+\]
+\hfill\(\square\)
+
+\bigskip
+\textbf{Problem 2.} (IMC 2011, Day 2, Problem 3)
+Compute \( \sum_{n=1}^{\infty} \ln(1 + 1/n) \cdot \ln(1 + 1/(2n)) \cdot \ln(1 + 1/(2n+1)) \).
+
+\textbf{Solution.}
+Set \( \varphi(n) = \ln\!\left(\frac{n+1}{n}\right) \) for \( n \geq 1 \). Then
+\[
+\varphi(2n) + \varphi(2n+1) \;=\; \ln\frac{2n+1}{2n} + \ln\frac{2n+2}{2n+1} \;=\; \ln\frac{n+1}{n} \;=\; \varphi(n).
+\]
+Define \( g(n) = \sum_{k=n}^{2n-1} \varphi(k)^3 \). Using the identity \( (u+v)^3 - u^3 - v^3 = 3(u+v)uv \),
+\[
+g(n) - g(n+1) \;=\; \varphi(n)^3 - \varphi(2n)^3 - \varphi(2n+1)^3 \;=\; 3\,\varphi(n)\,\varphi(2n)\,\varphi(2n+1).
+\]
+Telescoping and noting \( g(N) \to 0 \) as \( N \to \infty \) (since \( \varphi(k) \leq 1/k \) gives \( g(n) \leq n \cdot \varphi(n)^3 \leq 1/n^2 \)),
+\[
+\sum_{n=1}^{\infty} \varphi(n)\,\varphi(2n)\,\varphi(2n+1) \;=\; \tfrac{1}{3}\, g(1) \;=\; \tfrac{1}{3}\, \varphi(1)^3 \;=\; \tfrac{(\ln 2)^3}{3}.
+\]
+\hfill\(\square\)
+
+\bigskip
+\textbf{Problem 3.} (IMC 2014, Day 1, Problem 1)
+Find all pairs \( (a, b) \) for which there exists a unique symmetric \( 2 \times 2 \) matrix with trace \( a \) and determinant \( b \).
+
+\textbf{Solution.}
+Write \( M = \begin{pmatrix} x & z \\ z & y \end{pmatrix} \); the conditions are \( x + y = a \) and \( xy - z^2 = b \). If \( (x, y, z) \) is a solution, so is \( (y, x, -z) \); for uniqueness we need \( x = y \) and \( z = 0 \). Then \( 2x = a \) and \( x^2 = b \), so \( a^2 = 4b \).
+
+Conversely, if \( a^2 = 4b \), then any solution satisfies
+\[
+(x - y)^2 + 4z^2 = (x + y)^2 - 4xy + 4z^2 = a^2 - 4b = 0,
+\]
+forcing \( x = y = a/2 \) and \( z = 0 \). So \( M = \tfrac{a}{2} I \) is the unique solution. \emph{Answer:} pairs with \( a^2 = 4b \). \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 4.} (IMC 2010, Day 1, Problem 3)
+Compute \( \lim_{n \to \infty} (x_1 x_2 \cdots x_n)/x_{n+1} \) where \( x_1 = \sqrt{5}, x_{n+1} = x_n^2 - 2 \).
+
+\textbf{Solution.}
+Let \( y_n = x_n^2 \). Then \( y_1 = 5 \) and \( y_{n+1} = (y_n - 2)^2 \), so \( y_{n+1} - 4 = y_n(y_n - 4) \). Inductively \( y_n > 5 \) for \( n \geq 2 \), so \( y_n \to \infty \). Now
+\[
+\left( \frac{x_1 x_2 \cdots x_n}{x_{n+1}} \right)^2 \;=\; \frac{y_1 y_2 \cdots y_n}{y_{n+1}}.
+\]
+Using \( y_{n+1} - 4 = y_n(y_n - 4) \) iteratively,
+\[
+\frac{y_1 \cdots y_n}{y_{n+1}} \;=\; \frac{y_{n+1} - 4}{y_{n+1}} \cdot \frac{y_1 \cdots y_{n-1}}{y_n - 4} \;=\; \cdots \;=\; \frac{y_{n+1} - 4}{y_{n+1}} \cdot \frac{1}{y_1 - 4} \;=\; \frac{y_{n+1} - 4}{y_{n+1}} \to 1.
+\]
+The original ratio is positive, so the limit is \( 1 \). \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 5.} (IMC 2011, Day 1, Problem 2)
+Does there exist a real \( 3 \times 3 \) matrix \( A \) with \( \tr(A) = 0 \) and \( A^2 + A^t = I \)?
+
+\textbf{Solution.} \emph{Answer: NO.}
+Taking the transpose of \( A^2 + A^t = I \) gives \( (A^t)^2 + A = I \), so \( A = I - (A^t)^2 = I - (I - A^2)^2 = 2A^2 - A^4 \), i.e.,
+\[
+A^4 - 2A^2 + A = 0.
+\]
+The polynomial \( t(t-1)(t^2 + t - 1) \) has roots \( 0, 1, \tfrac{-1 \pm \sqrt{5}}{2} \), which contain all eigenvalues of \( A \). Eigenvalues of \( A^2 \) belong to \( \{0, 1, \tfrac{1 \pm \sqrt{5}}{2}\} \). The conditions \( \tr(A) = 0 \) and \( \tr(A^2) = \tr(I - A^t) = 3 \) constrain three eigenvalues \( \lambda_1 + \lambda_2 + \lambda_3 = 0 \) and \( \lambda_1^2 + \lambda_2^2 + \lambda_3^2 = 3 \) with \( \lambda_i \in \{0, 1, (-1 \pm \sqrt 5)/2\} \). Note \( \lambda_i^2 \in \{0, 1, (3 \pm \sqrt 5)/2\} \), and direct case-checking (the squared values not equal to \( 1 \) are irrational and need to cancel in pairs of equal magnitude, etc.) shows no triple satisfies both equations. \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 6.} (IMC 2010, Day 2, Problem 3)
+Subgroup \( G \leq S_n \): every \( \pi \in G \setminus \{e\} \) has a unique fixed point. Show this fixed point is the same for all \( \pi \).
+
+\textbf{Solution.}
+Let \( G \) act on \( X = \{1, \ldots, n\} \). Write \( G_x = \{ g \in G : g(x) = x \} \) (stabilizer) and \( Gx \) (orbit). The hypothesis gives
+\[
+G = \bigcup_{x \in X} G_x, \qquad G_x \cap G_y = \{e\} \text{ for } x \neq y.
+\]
+Let \( Gx_1, \ldots, Gx_k \) be the distinct orbits; since \( G_y = g G_x g^{-1} \) when \( y = g(x) \), \( |G_y| = |G_x| \) is constant on each orbit. By orbit-stabilizer \( |Gx_i| = |G|/|G_{x_i}| \). Counting:
+\[
+|G| - 1 \;=\; \sum_{i=1}^k \sum_{y \in Gx_i} (|G_y| - 1) \;=\; \sum_{i=1}^k |Gx_i|(|G_{x_i}| - 1) \;=\; \sum_{i=1}^k |G|\left(1 - \tfrac{1}{|G_{x_i}|}\right),
+\]
+hence
+\[
+1 - \tfrac{1}{|G|} \;=\; \sum_{i=1}^k \left(1 - \tfrac{1}{|G_{x_i}|}\right). \tag{*}
+\]
+If two stabilizers \( |G_{x_i}|, |G_{x_j}| \geq 2 \), the right side of \( (*) \) is \( \geq 1 \), contradicting \( 1 - 1/|G| < 1 \). So at most one stabilizer is non-trivial; the others are \( \{e\} \) and contribute zero, forcing the remaining \( |G_{x_k}| = |G| \), i.e., \( G_{x_k} = G \). \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 7.} (IMC 2014, Day 2, Problem 3)
+Show \( |f^{(n)}(x)| < 1/(n+1) \) for \( f(x) = \sin x / x \).
+
+\textbf{Solution.}
+Write
+\[
+\frac{\sin x}{x} \;=\; \int_0^1 \cos(xt)\, dt.
+\]
+Differentiating \( n \) times under the integral sign,
+\[
+f^{(n)}(x) \;=\; \int_0^1 t^n \cdot g_n(xt)\, dt,
+\]
+where \( g_n(u) \in \{ \pm \sin u, \pm \cos u \} \) depending on \( n \pmod 4 \). Since \( |g_n(u)| \leq 1 \), with equality only on a measure-zero set,
+\[
+|f^{(n)}(x)| \;\leq\; \int_0^1 t^n |g_n(xt)|\, dt \;<\; \int_0^1 t^n\, dt \;=\; \frac{1}{n+1}.
+\]
+\hfill\(\square\)
+
+\bigskip
+\textbf{Problem 8.} (IMC 2011, Day 1, Problem 4)
+Prove \( f(t) \) is nondecreasing on \( [0, 1] \), where \( f \) is the inclusion-exclusion sum.
+
+\textbf{Solution.}
+Let \( \Omega = \bigcup_{i=1}^n A_i \). For \( t \in [0, 1] \) construct a random subset \( X \subseteq \Omega \) by including each element of \( \Omega \) independently with probability \( t \). Then for any \( C \subseteq \Omega \),
+\[
+\mathbb{P}(C \subseteq X) \;=\; t^{|C|}.
+\]
+By inclusion-exclusion,
+\[
+\mathbb{P}\bigl( A_1 \subseteq X \text{ or } \cdots \text{ or } A_n \subseteq X \bigr) \;=\; \sum_{k=1}^n \sum_{1 \leq i_1 < \cdots < i_k \leq n} (-1)^{k-1}\, t^{|A_{i_1} \cup \cdots \cup A_{i_k}|} \;=\; f(t).
+\]
+As \( t \) increases, each event \( \{ A_i \subseteq X \} \) becomes more likely (couple by sharing uniform \( U_x \sim \mathrm{Unif}[0,1] \) for each \( x \in \Omega \) and including \( x \) iff \( U_x \leq t \)), so their union too. Hence \( f(t) \) is nondecreasing. \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 9.} (IMC 2010, Day 1, Problem 5)
+Given \( a, b, c \in [-1, 1] \) with \( 1 + 2abc \geq a^2 + b^2 + c^2 \), prove \( 1 + 2(abc)^n \geq a^{2n} + b^{2n} + c^{2n} \).
+
+\textbf{Solution.}
+Consider the symmetric matrix
+\[
+A \;=\; \begin{pmatrix} 1 & a & b \\ a & 1 & c \\ b & c & 1 \end{pmatrix}.
+\]
+Its leading \( 2 \times 2 \) minors are \( 1 - a^2, 1 - b^2, 1 - c^2 \geq 0 \), and \( \det A = 1 + 2abc - a^2 - b^2 - c^2 \geq 0 \). Hence \( A \) is positive semidefinite, so \( A = B^2 \) for some real symmetric \( B \). Let \( x, y, z \) be the rows of \( B \). Then \( |x| = |y| = |z| = 1 \), and \( a = x \cdot y \), \( b = y \cdot z \), \( c = z \cdot x \) (where \( \cdot \) is the Euclidean inner product).
+
+Consider the \( n \)-fold tensor powers \( X = x^{\otimes n}, Y = y^{\otimes n}, Z = z^{\otimes n} \in \R^{3^n} \). Then \( |X| = |Y| = |Z| = 1 \) and \( X \cdot Y = a^n, Y \cdot Z = b^n, Z \cdot X = c^n \). The Gram matrix
+\[
+\begin{pmatrix} 1 & a^n & b^n \\ a^n & 1 & c^n \\ b^n & c^n & 1 \end{pmatrix}
+\]
+is positive semidefinite, so its determinant \( 1 + 2(abc)^n - a^{2n} - b^{2n} - c^{2n} \) is \( \geq 0 \). \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 10.} (IMC 2016, Day 2, Problem 10)
+Prove \( \| A^n \| \leq \frac{n}{\ln 2} \| A \|^{n-1} \).
+
+\textbf{Solution.}
+Set \( r = \| A \| \). The matrix norm is submultiplicative, so \( \| A^k \| \leq r^k \). Let \( \chi(t) = t^n + c_1 t^{n-1} + \cdots + c_n \) be the characteristic polynomial. By Vieta's formulas and \( |\lambda_i| \leq 1 \),
+\[
+|c_k| \;\leq\; \sum_{1 \leq i_1 < \cdots < i_k \leq n} |\lambda_{i_1} \cdots \lambda_{i_k}| \;\leq\; \binom{n}{k}.
+\]
+By Cayley-Hamilton, \( A^n = -(c_1 A^{n-1} + \cdots + c_n I) \), so
+\[
+\| A^n \| \;\leq\; \sum_{k=1}^n \binom{n}{k} r^{n-k} \;=\; (1 + r)^n - r^n.
+\]
+Combined with the trivial bound \( \| A^n \| \leq r^n \):
+\[
+\| A^n \| \;\leq\; \min\bigl( r^n,\; (1+r)^n - r^n \bigr).
+\]
+The two bounds agree when \( r^n = (1+r)^n - r^n \), i.e., \( (1 + 1/r)^n = 2 \), so \( r = r_0 := 1/(2^{1/n} - 1) \). Using \( 2^{1/n} - 1 = e^{(\ln 2)/n} - 1 > (\ln 2)/n \), we get \( r_0 < n/\ln 2 \).
+
+\emph{Case \( r \leq r_0 \):} \( \| A^n \| \leq r^n \leq r_0 \cdot r^{n-1} < \frac{n}{\ln 2}\, r^{n-1} \).
+
+\emph{Case \( r > r_0 \):} The function \( h(r) = ((1+r)^n - r^n)/r^{n-1} \) has all-positive numerator of degree \( n-1 \), so \( h(r) \) is decreasing in \( r \) (for \( r > 0 \)). Hence
+\[
+\| A^n \| \;\leq\; r^{n-1}\, h(r) \;\leq\; r^{n-1}\, h(r_0) \;=\; r^{n-1} \cdot r_0\bigl((1 + 1/r_0)^n - 1\bigr) \;=\; r^{n-1} \cdot r_0 \;<\; \frac{n}{\ln 2}\, r^{n-1}.
+\]
+\hfill\(\square\)
+
+\end{document}

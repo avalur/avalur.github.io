@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Problem Sheet --- IMC Training}
+
+\begin{center}
+June 10, 2026
+\end{center}
+
+\textbf{Problem 1.} (IMC 2010, Day 1, Problem 1)
+Let \( 0 < a < b \). Prove that
+\[
+\int_a^b (x^2 + 1) e^{-x^2}\, dx \;\geq\; e^{-a^2} - e^{-b^2}.
+\]
+\\
+
+\textbf{Problem 2.} (IMC 2011, Day 2, Problem 3)
+Determine the value of
+\[
+\sum_{n=1}^{\infty} \ln\!\left(1 + \tfrac{1}{n}\right) \cdot \ln\!\left(1 + \tfrac{1}{2n}\right) \cdot \ln\!\left(1 + \tfrac{1}{2n+1}\right).
+\]
+\\
+
+\textbf{Problem 3.} (IMC 2014, Day 1, Problem 1)
+Determine all pairs \( (a, b) \) of real numbers for which there exists a unique symmetric \( 2 \times 2 \) matrix \( M \) with real entries satisfying \( \operatorname{trace}(M) = a \) and \( \det(M) = b \).
+\\
+
+\textbf{Problem 4.} (IMC 2010, Day 1, Problem 3)
+Define the sequence \( x_1, x_2, \ldots \) inductively by \( x_1 = \sqrt{5} \) and \( x_{n+1} = x_n^2 - 2 \) for each \( n \geq 1 \). Compute
+\[
+\lim_{n \to \infty} \frac{x_1 \cdot x_2 \cdot x_3 \cdots x_n}{x_{n+1}}.
+\]
+\\
+
+\textbf{Problem 5.} (IMC 2011, Day 1, Problem 2)
+Does there exist a real \( 3 \times 3 \) matrix \( A \) such that \( \operatorname{tr}(A) = 0 \) and \( A^2 + A^t = I \)?
+(Here \( A^t \) is the transpose of \( A \) and \( I \) is the identity matrix.)
+\\
+
+\textbf{Problem 6.} (IMC 2010, Day 2, Problem 3)
+Denote by \( S_n \) the group of permutations of \( (1, 2, \ldots, n) \). Suppose that \( G \) is a subgroup of \( S_n \) such that for every \( \pi \in G \setminus \{e\} \) there exists a unique \( k \in \{1, 2, \ldots, n\} \) with \( \pi(k) = k \). Show that this \( k \) is the same for all \( \pi \in G \setminus \{e\} \).
+\\
+
+\textbf{Problem 7.} (IMC 2014, Day 2, Problem 3)
+Let \( f(x) = \dfrac{\sin x}{x} \) for \( x > 0 \), and let \( n \) be a positive integer. Prove that
+\[
+\left| f^{(n)}(x) \right| < \frac{1}{n+1},
+\]
+where \( f^{(n)} \) denotes the \( n \)-th derivative of \( f \).
+\\
+
+\textbf{Problem 8.} (IMC 2011, Day 1, Problem 4)
+Let \( A_1, A_2, \ldots, A_n \) be finite, nonempty sets. Define the function
+\[
+f(t) = \sum_{k=1}^{n} \sum_{1 \leq i_1 < i_2 < \ldots < i_k \leq n} (-1)^{k-1}\, t^{|A_{i_1} \cup A_{i_2} \cup \ldots \cup A_{i_k}|}.
+\]
+Prove that \( f \) is nondecreasing on \( [0, 1] \).
+\\
+
+\textbf{Problem 9.} (IMC 2010, Day 1, Problem 5)
+Suppose that \( a, b, c \) are real numbers in the interval \( [-1, 1] \) such that
+\[
+1 + 2abc \;\geq\; a^2 + b^2 + c^2.
+\]
+Prove that for all positive integers \( n \),
+\[
+1 + 2(abc)^n \;\geq\; a^{2n} + b^{2n} + c^{2n}.
+\]
+\\
+
+\textbf{Problem 10.} (IMC 2016, Day 2, Problem 10)
+Let \( A \) be an \( n \times n \) complex matrix whose eigenvalues all have absolute value at most \( 1 \). Prove that
+\[
+\| A^n \| \;\leq\; \frac{n}{\ln 2}\, \| A \|^{n-1}.
+\]
+Here \( \| B \| = \sup_{\|x\| \leq 1} \| Bx \| \) and \( \| x \| = \sqrt{\sum_{i=1}^n |x_i|^2} \).
+
+\end{document}
