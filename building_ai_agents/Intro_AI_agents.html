@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<title>From LLM to AI agents</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/beige.css">
+
+        <!-- Theme used for syntax-highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<link rel="stylesheet" href="Intro_AI_agents.css">
+    </head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section>
+	                    <section>
+	                        <div>
+	                            <img src="./images/nup_logo_dark.jpeg" alt="nup_logo" />
+	                        </div>
+	                        <h2>Building AI Agents</h2>
+                        <div class="fragment" style="margin-bottom:20px;">
+                                <div class="typesetting">
+                                    <h3>From LLM to AI agents</h3>
+                                    <br />
+                                    Alex Avdiushenko<br />
+                                    October, 2026
+                                </div>
+                        </div>
+                    </section>
+                    <section class="agent-app-slide" data-background-color="white">
+                        <h3>AI Agent Applications</h3>
+                        <div class="agent-app-content">
+                            <div class="agent-app-cards">
+                                <div class="agent-app-card knowledge fragment">
+                                    <h4>Knowledge & Productivity</h4>
+                                    <ul>
+                                        <li>Personal assistants for research and decisions</li>
+                                        <li>ChatGPT, Perplexity, Google</li>
+                                    </ul>
+                                </div>
+                                <div class="agent-app-card action fragment">
+                                    <h4>Action & Execution</h4>
+                                    <ul>
+                                        <li>Browser agents that navigate, click, fill forms</li>
+                                        <li>Developer agents such as Claude Code and Codex</li>
+                                    </ul>
+                                </div>
+                                <div class="agent-app-card business fragment">
+                                    <h4>Business & Interaction</h4>
+                                    <ul>
+                                        <li>Customer support across channels</li>
+                                        <li>Operations automation and follow-up</li>
+                                    </ul>
+                                </div>
+                                <div class="agent-app-card worlds fragment">
+                                    <h4>Interactive Worlds</h4>
+                                    <ul>
+                                        <li>Game NPCs with adaptive behavior</li>
+                                        <li>Context-aware dialogue and quests</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+	                            <div class="agent-company-logos fragment" aria-label="AI agent application companies">
+	                                <div class="agent-company-logo">
+	                                    <img src="images/openai_logo.svg" alt="OpenAI logo">
+	                                    <span>OpenAI</span>
+	                                </div>
+	                                <div class="agent-company-logo">
+	                                    <img src="images/perplexity_logo.svg" alt="Perplexity logo">
+	                                    <span>Perplexity</span>
+	                                </div>
+	                                <div class="agent-company-logo">
+	                                    <img src="images/google_logo.svg" alt="Google logo">
+	                                    <span>Google</span>
+	                                </div>
+	                                <div class="agent-company-logo">
+	                                    <img src="images/anthropic_logo.svg" alt="Anthropic logo">
+	                                    <span>Anthropic</span>
+	                                </div>
+	                                <div class="agent-company-logo">
+	                                    <img src="images/unity_logo.svg" alt="Unity logo">
+	                                    <span>Unity</span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </section>
+                    <section data-background-color="white">
+                        <h3 style="color: #2d5d39; text-align: left">The Evolution of Human–LLM Interaction</h3>
+                        <table style="font-size: 0.75em; border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr style="background-color: #4a47a3; color: white;">
+                                    <th style="padding: 10px;">Interaction</th>
+                                    <th style="padding: 10px;">Description</th>
+                                    <th style="padding: 10px;">Pattern example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="fragment">
+                                    <td style="padding: 10px;">Prompting</td>
+                                    <td style="padding: 10px;">LLM output has no impact on program flow</td>
+                                    <td style="padding: 10px;"><code>process_llm_output(llm_response)</code></td>
+                                </tr>
+                                <tr style="background-color: #f2f2f2;" class="fragment">
+                                    <td style="padding: 10px;">Router</td>
+                                    <td style="padding: 10px;">LLM determines the basic control flow</td>
+                                    <td style="padding: 10px;"><code>if llm_decision(): path_a() else: path_b()</code></td>
+                                </tr>
+                                <tr class="fragment">
+                                    <td style="padding: 10px;">Tool Calling</td>
+                                    <td style="padding: 10px;">LLM selects the function and arguments</td>
+                                    <td style="padding: 10px;"><code>run_function(llm_chosen_tool, llm_chosen_args)</code></td>
+                                </tr>
+                                <tr style="background-color: #f2f2f2;" class="fragment">
+                                    <td style="padding: 10px;">Multi-step Agent (Autonomous Agent)</td>
+                                    <td style="padding: 10px;">LLM output controls iterations and continuation of program execution</td>
+                                    <td style="padding: 10px;"><code>while llm_should_continue(): execute_next_step()</code></td>
+                                </tr>
+                                <tr class="fragment">
+                                    <td style="padding: 10px;">Multi-Agent System</td>
+                                    <td style="padding: 10px;">One agent process can trigger another agent process</td>
+                                    <td style="padding: 10px;"><code>if llm_trigger(): execute_agent()</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="color: #2d5d39; text-align: left">What Is an AI Agent?</h3>
+                        <div class="fragment" style="text-align: left; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
+                            <p style="font-size: 0.7em; color: #666;">OpenAI Agents SDK presentation [1]:</p>
+                            <p style="font-size: 0.85em; margin-top: 10px;">An agent is an AI application consisting of</p>
+                            <ul style="font-size: 0.8em; margin-left: 40px; list-style-type: disc;">
+                                <li>a <span style="color: #5b56a1; font-weight: bold;">model</span> equipped with</li>
+                                <li><span style="color: #5b56a1; font-weight: bold;">instructions</span> that guide its behavior,</li>
+                                <li>access to <span style="color: #5b56a1; font-weight: bold;">tools</span> that extend its capabilities,</li>
+                                <li>encapsulated in a <span style="color: #5b56a1; font-weight: bold;">runtime</span> with a dynamic lifecycle.</li>
+                            </ul>
+                        </div>
+                        <div class="fragment" style="text-align: left; border: 1px solid #ddd; padding: 20px; border-radius: 5px;">
+                            <p style="font-size: 0.7em; color: #666;">Lilian Weng, LLM Powered Autonomous Agents [2]:</p>
+                            <p style="font-size: 0.9em; margin-top: 10px; color: #5b56a1; font-weight: bold;">
+                                Agent = LLM + memory + planning skills + tool use
+                            </p>
+                        </div>
+                        <div style="margin-top: 40px; font-size: 0.35em; color: #888; text-align: right;">
+                            [1] <a href="https://www.youtube.com/watch?v=joHR2pmxDOE">https://www.youtube.com/watch?v=joHR2pmxDOE</a><br>
+                            [2] <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="color: #2d5d39; text-align: left">What Is an AI Agent?</h3>
+                        <p style="text-align: left; font-size: 0.6em; margin-bottom: 20px;">
+                            Agent = runtime(<span style="color: #5b56a1;">
+                                    AI model + prompts + tools + memory + guardrails + planning skills
+                                </span>)
+                        </p>
+                        <div class="diagram-container" style="position: relative; width: 900px; margin: 0 auto;">
+                            <!-- Agent runtime label -->
+                            <div style="position: absolute; top: 40px; left: 0; font-size: 0.5em; color: #666;">Agent runtime</div>
+
+                            <!-- Memory Section -->
+                            <div class="diagram-box memory-box" style="top: 10px; left: 200px; width: 100px;">Short-term</div>
+                            <div class="diagram-box memory-box" style="top: 6px; left: 370px; width: 100px;">Context</div>
+                            <div class="diagram-box memory-box" style="top: 10px; left: 560px; width: 100px;">Long-term</div>
+
+                            <!-- Memory Lines -->
+                            <div class="connector-line" style="top: 60px; left: 250px; width: 360px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 60px; left: 250px; width: 1px; height: 15px;"></div>
+                            <div class="connector-line" style="top: 55px; left: 430px; width: 1px; height: 37px;"></div>
+                            <div class="connector-line" style="top: 60px; left: 610px; width: 1px; height: 15px;"></div>
+
+                            <div class="diagram-box memory-box" style="top: 95px; left: 370px; width: 100px;">Memory</div>
+                            <div class="connector-line" style="top: 135px; left: 430px; width: 1px; height: 40px;"></div>
+
+                            <!-- Guardrails -->
+                            <div class="guardrails-oval" style="top: 115px; left: 660px;">Guardrails</div>
+
+                            <!-- Tools Section -->
+                            <div class="diagram-box tools-box" style="top: 250px; left: 0; width: 100px;">Calendar()</div>
+                            <div class="diagram-box tools-box" style="top: 310px; left: 0; width: 100px;">Search()</div>
+                            <div class="diagram-box tools-box" style="top: 370px; left: 0; width: 100px;">... more</div>
+
+                            <div class="connector-line" style="top: 275px; left: 105px; width: 35px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 335px; left: 105px; width: 35px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 395px; left: 105px; width: 35px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 275px; left: 140px; width: 1px; height: 120px;"></div>
+                            <div class="connector-line" style="top: 335px; left: 140px; width: 40px; height: 1px;"></div>
+
+                            <div class="diagram-box tools-box" style="top: 300px; left: 180px; width: 80px; height: 50px; font-size: 0.7em;">Tools</div>
+                            <div class="connector-line" style="top: 335px; left: 260px; width: 70px; height: 1px;"></div>
+
+                            <!-- Center: AI Model -->
+                            <div class="diagram-box model-box" style="top: 175px; left: 330px; width: 200px; height: 320px; display: block; padding-top: 10px;">
+                                <div style="margin-bottom: 15px;">AI model</div>
+                                <div class="prompts-box" style="margin: 0 15px; padding: 10px;">
+                                    <div style="font-size: 0.9em; margin-bottom: 8px;">Prompts</div>
+                                    <div class="prompt-item">System</div>
+                                    <div class="prompt-item">User</div>
+                                    <div class="prompt-item">Assistant</div>
+                                </div>
+                            </div>
+
+                            <!-- Planning Section -->
+                            <div class="connector-line" style="top: 335px; left: 530px; width: 70px; height: 1px;"></div>
+                            <div class="diagram-box planning-box" style="top: 300px; left: 590px; width: 110px; height: 50px; font-size: 0.7em;">Planning</div>
+
+                            <div class="connector-line" style="top: 335px; left: 700px; width: 50px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 255px; left: 750px; width: 1px; height: 160px;"></div>
+                            <div class="connector-line" style="top: 255px; left: 750px; width: 30px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 335px; left: 750px; width: 30px; height: 1px;"></div>
+                            <div class="connector-line" style="top: 415px; left: 750px; width: 30px; height: 1px;"></div>
+
+                            <div class="diagram-box planning-box" style="top: 230px; left: 780px; width: 120px;">Reflection</div>
+                            <div class="diagram-box planning-box" style="top: 310px; left: 780px; width: 120px;">Reasoning</div>
+                            <div class="diagram-box planning-box" style="top: 380px; left: 780px; width: 150px;">Subgoal decomposition</div>
+                        </div>
+                    </section>
+                    <section class="os-slide" data-background-color="white">
+                        <h3>LLM as an Operating System</h3>
+                        <div class="os-system-map" aria-label="LLM operating system analogy">
+                            <div class="os-panel os-io">
+                                <div class="os-panel-title">Peripheral devices I/O</div>
+                                <div class="os-panel-main">Multimodal input and output</div>
+                                <div class="os-items">
+                                    <div class="os-item"><span class="os-icon">V</span>video</div>
+                                    <div class="os-item"><span class="os-icon">A</span>audio</div>
+                                    <div class="os-item"><span class="os-icon">T</span>text</div>
+                                </div>
+                            </div>
+
+                            <div class="os-panel os-tools">
+                                <div class="os-panel-title">Software 1.0 tools</div>
+                                <div class="os-panel-main">Classical computer tools</div>
+                                <div class="os-items">
+                                    <div class="os-item"><span class="os-icon">123</span>calculator</div>
+                                    <div class="os-item"><span class="os-icon">Py</span>Python interpreter</div>
+                                    <div class="os-item"><span class="os-icon">sh</span>terminal</div>
+                                </div>
+                            </div>
+
+                            <div class="os-connector os-left-connector"><span>&#8644;</span></div>
+
+                            <div class="os-core-wrap">
+                                <div class="os-core">
+                                    <div class="os-axis-label">CPU</div>
+                                    <div class="os-core-title">LLM</div>
+                                    <div class="os-core-subtitle">Interprets goals, selects actions, and coordinates tools</div>
+                                    <div class="os-core-badges">
+                                        <span class="os-core-badge">reasoning</span>
+                                        <span class="os-core-badge">planning</span>
+                                        <span class="os-core-badge">policy</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="os-connector os-right-connector"><span>&#8644;</span></div>
+
+                            <div class="os-panel os-network">
+                                <div class="os-panel-title">Network</div>
+                                <div class="os-panel-main">External systems</div>
+                                <div class="os-items">
+                                    <div class="os-item"><span class="os-icon">Web</span>browser</div>
+                                    <div class="os-item"><span class="os-icon">API</span>services</div>
+                                    <div class="os-item"><span class="os-icon">LLM</span>other models</div>
+                                </div>
+                            </div>
+
+                            <div class="os-panel os-disk">
+                                <div class="os-panel-title">Disk</div>
+                                <div class="os-panel-main">Persistent state</div>
+                                <div class="os-items">
+                                    <div class="os-item"><span class="os-icon">FS</span>file system</div>
+                                    <div class="os-item"><span class="os-icon">Emb</span>embeddings</div>
+                                    <div class="os-item"><span class="os-icon">DB</span>vector store</div>
+                                </div>
+                            </div>
+
+                            <div class="os-connector os-disk-connector"><span>&#8644;</span></div>
+
+                            <div class="os-context">
+                                <div>
+                                    <div class="os-axis-label">RAM</div>
+                                    <strong>Context window</strong>
+                                    <span>Working memory for the current task</span>
+                                </div>
+                                <span class="os-chip os-memory-chip">limited size</span>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="os-legend fragment">
+                            <div class="os-legend-group">
+                                <div class="os-chip-row">
+                                    <span class="os-chip green">Windows</span>
+                                    <span class="os-chip green">macOS</span>
+                                    <span class="os-chip green">Linux</span>
+                                </div>
+                                <div class="os-legend-label">Traditional OS analogy</div>
+                            </div>
+
+                            <div class="os-legend-group">
+                                <div class="os-chip-row">
+                                    <span class="os-chip violet">GPT</span>
+                                    <span class="os-chip violet">Claude</span>
+                                    <span class="os-chip violet">Gemini</span>
+                                </div>
+                                <div class="os-legend-label">AI model ecosystem</div>
+                            </div>
+
+                            <div class="os-source">
+                                Source: Andrej Karpathy, Intro to Large Language Models<br>
+                                <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">youtube.com/watch?v=zjkBMFhNj_g</a>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="llm-slide" data-background-color="white">
+                        <h3>What Is an LLM</h3>
+                        <p class="llm-definition">
+                            <span style="color: #5b56a1; font-weight: bold;">Large Language Model (LLM)</span> 
+                            is a neural network model trained on a large corpora of text data that
+                            <span style="color: #5b56a1; font-weight: bold;">predicts the next token based on the context</span>
+                        </p>
+
+                        <div class="llm-diagram" aria-label="Large language model training data, files, and neural network">
+                            <div class="llm-corpus">
+                                <svg class="llm-corpus-art" viewBox="0 0 140 140" role="img" aria-label="Chunk of internet text data">
+                                    <defs>
+                                        <radialGradient id="llm-internet-glow" cx="50%" cy="50%" r="58%">
+                                            <stop offset="0%" stop-color="#b9fff5" stop-opacity="0.95"></stop>
+                                            <stop offset="45%" stop-color="#4f88ff" stop-opacity="0.45"></stop>
+                                            <stop offset="100%" stop-color="#050608" stop-opacity="0"></stop>
+                                        </radialGradient>
+                                    </defs>
+                                    <rect width="140" height="140" fill="#050608"></rect>
+                                    <circle cx="70" cy="70" r="67" fill="url(#llm-internet-glow)"></circle>
+                                    <g stroke-width="0.9" stroke-opacity="0.74">
+                                        <line x1="20" y1="31" x2="72" y2="49" stroke="#5be7d3"></line>
+                                        <line x1="72" y1="49" x2="116" y2="35" stroke="#f06cae"></line>
+                                        <line x1="32" y1="95" x2="72" y2="49" stroke="#73b7ff"></line>
+                                        <line x1="32" y1="95" x2="96" y2="105" stroke="#ffcd61"></line>
+                                        <line x1="96" y1="105" x2="116" y2="35" stroke="#5be7d3"></line>
+                                        <line x1="42" y1="24" x2="99" y2="58" stroke="#b69bff"></line>
+                                        <line x1="18" y1="72" x2="99" y2="58" stroke="#5be7d3"></line>
+                                        <line x1="99" y1="58" x2="122" y2="88" stroke="#ffcd61"></line>
+                                        <line x1="55" y1="116" x2="99" y2="58" stroke="#73b7ff"></line>
+                                        <line x1="28" y1="47" x2="122" y2="88" stroke="#f06cae"></line>
+                                        <line x1="28" y1="47" x2="55" y2="116" stroke="#5be7d3"></line>
+                                        <line x1="58" y1="18" x2="18" y2="72" stroke="#ffcd61"></line>
+                                        <line x1="58" y1="18" x2="122" y2="88" stroke="#73b7ff"></line>
+                                        <line x1="74" y1="124" x2="21" y2="107" stroke="#b69bff"></line>
+                                        <line x1="21" y1="107" x2="85" y2="82" stroke="#5be7d3"></line>
+                                        <line x1="85" y1="82" x2="116" y2="35" stroke="#f06cae"></line>
+                                    </g>
+                                    <g>
+                                        <circle cx="20" cy="31" r="3.3" fill="#5be7d3"></circle>
+                                        <circle cx="72" cy="49" r="4" fill="#f6fbff"></circle>
+                                        <circle cx="116" cy="35" r="3.6" fill="#f06cae"></circle>
+                                        <circle cx="32" cy="95" r="3.5" fill="#73b7ff"></circle>
+                                        <circle cx="96" cy="105" r="4.1" fill="#ffcd61"></circle>
+                                        <circle cx="42" cy="24" r="3" fill="#b69bff"></circle>
+                                        <circle cx="99" cy="58" r="3.7" fill="#5be7d3"></circle>
+                                        <circle cx="18" cy="72" r="3.2" fill="#f6fbff"></circle>
+                                        <circle cx="122" cy="88" r="3.8" fill="#73b7ff"></circle>
+                                        <circle cx="55" cy="116" r="3.5" fill="#f06cae"></circle>
+                                        <circle cx="28" cy="47" r="2.9" fill="#ffcd61"></circle>
+                                        <circle cx="58" cy="18" r="3.4" fill="#73b7ff"></circle>
+                                        <circle cx="74" cy="124" r="3.1" fill="#5be7d3"></circle>
+                                        <circle cx="21" cy="107" r="3.3" fill="#f6fbff"></circle>
+                                        <circle cx="85" cy="82" r="4" fill="#b69bff"></circle>
+                                    </g>
+                                </svg>
+                                <div class="llm-caption">Chunk of the internet,<br>~10TB of text</div>
+                            </div>
+
+                            <svg class="llm-flow-arrow" viewBox="0 0 88 28" aria-hidden="true">
+                                <line x1="-10" y1="14" x2="66" y2="14"></line>
+                                <path d="M66 8 L75 14 L66 20 Z"></path>
+                            </svg>
+
+                            <div class="llm-folder-wrap">
+                                <div class="llm-folder">
+                                    <div class="llm-folder-header">
+                                        <span class="llm-folder-nav">&lt; &gt;</span>
+                                        <span class="llm-folder-title">llama-2-70b</span>
+                                    </div>
+
+                                    <div class="llm-files">
+                                        <div class="llm-file">
+                                            <div class="file-icon">
+                                                <div class="file-corner"></div>
+                                            </div>
+                                            <div class="llm-file-label">parameters</div>
+                                        </div>
+
+                                        <div class="llm-file">
+                                            <div class="file-icon">
+                                                <div class="file-corner"></div>
+                                                <span class="llm-file-code">.c</span>
+                                            </div>
+                                            <div class="llm-file-label">run.c</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fragment size-callout llm-param-callout">
+                                    <div class="line"></div>
+                                    <div class="size-label">140GB</div>
+                                </div>
+
+                                <div class="fragment size-callout llm-code-callout">
+                                    <div class="line"></div>
+                                    <div class="size-label">~500 lines<br>of C code</div>
+                                </div>
+                            </div>
+
+                            <svg class="llm-flow-arrow" viewBox="0 0 78 28" aria-hidden="true">
+                                <line x1="3" y1="14" x2="68" y2="14"></line>
+                                <path d="M66 8 L75 14 L66 20 Z"></path>
+                            </svg>
+
+                            <div class="llm-network-card" aria-label="Neural network">
+                                <svg viewBox="0 0 260 130" role="img" aria-label="Neural network diagram">
+                                    <g stroke="#aeb8c2" stroke-width="1.7">
+                                        <line x1="25" y1="32" x2="70" y2="20"></line>
+                                        <line x1="25" y1="32" x2="70" y2="48"></line>
+                                        <line x1="25" y1="32" x2="70" y2="76"></line>
+                                        <line x1="25" y1="58" x2="70" y2="20"></line>
+                                        <line x1="25" y1="58" x2="70" y2="48"></line>
+	                                        <line x1="25" y1="58" x2="70" y2="76"></line>
+	                                        <line x1="25" y1="84" x2="70" y2="48"></line>
+	                                        <line x1="25" y1="84" x2="70" y2="76"></line>
+	                                        <line x1="25" y1="84" x2="70" y2="104"></line>
+	                                        <line x1="70" y1="20" x2="112" y2="20"></line>
+	                                        <line x1="70" y1="20" x2="112" y2="48"></line>
+	                                        <line x1="70" y1="48" x2="112" y2="20"></line>
+	                                        <line x1="70" y1="48" x2="112" y2="76"></line>
+	                                        <line x1="70" y1="76" x2="112" y2="48"></line>
+	                                        <line x1="70" y1="104" x2="112" y2="76"></line>
+	                                        <line x1="70" y1="76" x2="112" y2="104"></line>
+	                                        <line x1="70" y1="104" x2="112" y2="104"></line>
+	                                        <line x1="112" y1="20" x2="154" y2="20"></line>
+	                                        <line x1="112" y1="20" x2="154" y2="48"></line>
+	                                        <line x1="112" y1="48" x2="154" y2="20"></line>
+	                                        <line x1="112" y1="48" x2="154" y2="76"></line>
+	                                        <line x1="112" y1="76" x2="154" y2="48"></line>
+	                                        <line x1="112" y1="76" x2="154" y2="76"></line>
+	                                        <line x1="112" y1="104" x2="154" y2="76"></line>
+                                        <line x1="154" y1="20" x2="196" y2="20"></line>
+                                        <line x1="154" y1="48" x2="196" y2="20"></line>
+                                        <line x1="154" y1="48" x2="196" y2="76"></line>
+                                        <line x1="154" y1="76" x2="196" y2="48"></line>
+                                        <line x1="196" y1="20" x2="237" y2="65"></line>
+                                        <line x1="196" y1="48" x2="237" y2="65"></line>
+                                        <line x1="196" y1="76" x2="237" y2="65"></line>
+                                    </g>
+                                    <g>
+                                        <circle cx="25" cy="32" r="8" fill="#ffb566"></circle>
+                                        <circle cx="25" cy="58" r="8" fill="#ffb566"></circle>
+                                        <circle cx="25" cy="84" r="8" fill="#ffb566"></circle>
+                                        <circle cx="70" cy="20" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="70" cy="48" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="70" cy="76" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="70" cy="104" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="112" cy="20" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="112" cy="48" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="112" cy="76" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="112" cy="104" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="154" cy="20" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="154" cy="48" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="154" cy="76" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="196" cy="20" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="196" cy="48" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="196" cy="76" r="8" fill="#48b7ec"></circle>
+                                        <circle cx="237" cy="65" r="8" fill="#008bd2"></circle>
+                                    </g>
+                                    <g transform="translate(218 80)">
+                                        <rect x="0" y="0" width="26" height="36" fill="#fff" stroke="#d9d9d9"></rect>
+                                        <path d="M18 0 L26 8 H18 Z" fill="#ededed" stroke="#d9d9d9"></path>
+                                        <line x1="7" y1="16" x2="19" y2="16" stroke="#c7c7c7" stroke-width="1.4"></line>
+                                        <line x1="7" y1="22" x2="18" y2="22" stroke="#c7c7c7" stroke-width="1.4"></line>
+                                        <line x1="7" y1="28" x2="14" y2="28" stroke="#c7c7c7" stroke-width="1.4"></line>
+	                                    </g>
+                                </svg>
+	                            </div>
+	                        </div>
+	                    </section>
+	                    <section class="next-token-slide" data-background-color="white">
+	                        <h3>What is an LLM: Next Token Prediction</h3>
+	                        <p class="next-token-definition">
+	                            <strong>Large Language Model (LLM)</strong> is a neural network model trained
+                                on a large corpora of text data
+	                            that <strong>predicts the next token based on the context</strong>
+	                        </p>
+                            <br>
+
+	                        <div class="next-token-flow" aria-label="Next token prediction diagram">
+	                            <div class="next-token-input">
+	                                <div class="next-token-input-title">Start with words</div>
+	                                <div class="next-token-word">cat</div>
+	                                <svg class="next-token-word-arrow" viewBox="0 0 54 18" aria-hidden="true">
+	                                    <line x1="0" y1="9" x2="43" y2="9"></line>
+	                                    <path d="M42 4 L52 9 L42 14 Z"></path>
+	                                </svg>
+	                                <div class="next-token-word">sat</div>
+	                                <svg class="next-token-word-arrow" viewBox="0 0 54 18" aria-hidden="true">
+	                                    <line x1="0" y1="9" x2="43" y2="9"></line>
+	                                    <path d="M42 4 L52 9 L42 14 Z"></path>
+	                                </svg>
+	                                <div class="next-token-word">on</div>
+	                                <svg class="next-token-word-arrow" viewBox="0 0 54 18" aria-hidden="true">
+	                                    <line x1="0" y1="9" x2="43" y2="9"></line>
+	                                    <path d="M42 4 L52 9 L42 14 Z"></path>
+	                                </svg>
+	                                <div class="next-token-word">a</div>
+	                                <svg class="next-token-word-arrow" viewBox="0 0 54 18" aria-hidden="true">
+	                                    <line x1="0" y1="9" x2="43" y2="9"></line>
+	                                    <path d="M42 4 L52 9 L42 14 Z"></path>
+	                                </svg>
+	                            </div>
+
+	                            <div></div>
+
+	                            <div class="next-token-network" aria-label="Neural network predicts next token">
+	                                <svg viewBox="0 0 430 188" role="img" aria-label="Neural network">
+	                                    <g stroke="#aeb8c2" stroke-width="2">
+	                                        <line x1="28" y1="36" x2="82" y2="20"></line>
+	                                        <line x1="28" y1="36" x2="82" y2="62"></line>
+	                                        <line x1="28" y1="36" x2="82" y2="104"></line>
+	                                        <line x1="28" y1="68" x2="82" y2="20"></line>
+	                                        <line x1="28" y1="68" x2="82" y2="62"></line>
+	                                        <line x1="28" y1="68" x2="82" y2="104"></line>
+	                                        <line x1="28" y1="100" x2="82" y2="62"></line>
+	                                        <line x1="28" y1="100" x2="82" y2="104"></line>
+	                                        <line x1="28" y1="132" x2="82" y2="104"></line>
+	                                        <line x1="28" y1="132" x2="82" y2="146"></line>
+
+	                                        <line x1="82" y1="20" x2="134" y2="20"></line>
+	                                        <line x1="82" y1="20" x2="134" y2="62"></line>
+	                                        <line x1="82" y1="62" x2="134" y2="20"></line>
+	                                        <line x1="82" y1="62" x2="134" y2="62"></line>
+	                                        <line x1="82" y1="62" x2="134" y2="104"></line>
+	                                        <line x1="82" y1="104" x2="134" y2="62"></line>
+	                                        <line x1="82" y1="104" x2="134" y2="104"></line>
+	                                        <line x1="82" y1="146" x2="134" y2="104"></line>
+	                                        <line x1="82" y1="146" x2="134" y2="146"></line>
+
+	                                        <line x1="134" y1="20" x2="186" y2="20"></line>
+	                                        <line x1="134" y1="20" x2="186" y2="62"></line>
+	                                        <line x1="134" y1="62" x2="186" y2="20"></line>
+	                                        <line x1="134" y1="62" x2="186" y2="62"></line>
+	                                        <line x1="134" y1="62" x2="186" y2="104"></line>
+	                                        <line x1="134" y1="104" x2="186" y2="62"></line>
+	                                        <line x1="134" y1="104" x2="186" y2="104"></line>
+	                                        <line x1="134" y1="146" x2="186" y2="104"></line>
+	                                        <line x1="134" y1="146" x2="186" y2="146"></line>
+
+	                                        <line x1="186" y1="20" x2="238" y2="20"></line>
+	                                        <line x1="186" y1="20" x2="238" y2="62"></line>
+	                                        <line x1="186" y1="62" x2="238" y2="20"></line>
+	                                        <line x1="186" y1="62" x2="238" y2="62"></line>
+	                                        <line x1="186" y1="62" x2="238" y2="104"></line>
+	                                        <line x1="186" y1="104" x2="238" y2="62"></line>
+	                                        <line x1="186" y1="104" x2="238" y2="104"></line>
+	                                        <line x1="186" y1="146" x2="238" y2="104"></line>
+	                                        <line x1="186" y1="146" x2="238" y2="146"></line>
+
+	                                        <line x1="238" y1="20" x2="292" y2="20"></line>
+	                                        <line x1="238" y1="20" x2="292" y2="62"></line>
+	                                        <line x1="238" y1="62" x2="292" y2="20"></line>
+	                                        <line x1="238" y1="62" x2="292" y2="62"></line>
+	                                        <line x1="238" y1="104" x2="292" y2="62"></line>
+	                                        <line x1="238" y1="104" x2="292" y2="104"></line>
+	                                        <line x1="238" y1="146" x2="292" y2="104"></line>
+
+	                                        <line x1="292" y1="20" x2="374" y2="94"></line>
+	                                        <line x1="292" y1="62" x2="374" y2="94"></line>
+	                                        <line x1="292" y1="104" x2="374" y2="94"></line>
+	                                    </g>
+
+	                                    <g>
+	                                        <circle cx="28" cy="36" r="12" fill="#ffb566"></circle>
+	                                        <circle cx="28" cy="68" r="12" fill="#ffb566"></circle>
+	                                        <circle cx="28" cy="100" r="12" fill="#ffb566"></circle>
+	                                        <circle cx="28" cy="132" r="12" fill="#ffb566"></circle>
+
+	                                        <circle cx="82" cy="20" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="82" cy="62" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="82" cy="104" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="82" cy="146" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="134" cy="20" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="134" cy="62" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="134" cy="104" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="134" cy="146" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="186" cy="20" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="186" cy="62" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="186" cy="104" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="186" cy="146" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="238" cy="20" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="238" cy="62" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="238" cy="104" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="238" cy="146" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="292" cy="20" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="292" cy="62" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="292" cy="104" r="12" fill="#48b7ec"></circle>
+	                                        <circle cx="374" cy="94" r="13" fill="#008bd2"></circle>
+	                                    </g>
+
+	                                    <g transform="translate(386 104)">
+	                                        <rect x="0" y="0" width="34" height="50" fill="#fff" stroke="#d9d9d9"></rect>
+	                                        <path d="M24 0 L34 10 H24 Z" fill="#ededed" stroke="#d9d9d9"></path>
+	                                        <line x1="9" y1="22" x2="24" y2="22" stroke="#c7c7c7" stroke-width="1.8"></line>
+	                                        <line x1="9" y1="30" x2="23" y2="30" stroke="#c7c7c7" stroke-width="1.8"></line>
+	                                        <line x1="9" y1="38" x2="18" y2="38" stroke="#c7c7c7" stroke-width="1.8"></line>
+	                                    </g>
+	                                </svg>
+	                            </div>
+
+	                            <svg class="next-token-output-arrow" viewBox="0 0 62 24" aria-hidden="true">
+	                                <line x1="0" y1="12" x2="49" y2="12"></line>
+	                                <path d="M48 6 L60 12 L48 18 Z"></path>
+	                            </svg>
+
+		                            <div class="next-token-output">mat (97%)</div>
+		                        </div>
+		                    </section>
+	                    <section class="token-origin-slide" data-background-color="white">
+	                        <h3>Tokens: Where Do They Come From</h3>
+	                        <p class="token-origin-subtitle">
+	                            How to encode <span>"I was reading an interesting book in New York"</span>
+	                        </p>
+
+	                        <div class="token-origin-grid">
+	                            <div class="token-origin-card">
+	                                <h4>Character encoding</h4>
+	                                <ul>
+	                                    <li>
+	                                        <span class="token-origin-map">I=1, _=2, w=3, a=4, s=5, r=6,<br>
+	                                        e=7, d=8, i=9, n=10, g=11, t=12,<br>
+	                                        b=13, o=14, k=15, N=16, Y=17</span>
+	                                    </li>
+	                                    <li>
+	                                        <span class="token-origin-seq">1 2 3 4 5 2 6 7 4 8 9 10 11 2 4<br>
+	                                        10 2 9 10 12 7 6 7 5 12 9 10 11<br>
+	                                        2 13 14 14 15 2 9 10 2 16 7 3 2<br>
+	                                        17 14 6 15</span>
+	                                    </li>
+	                                </ul>
+	                                <div class="token-origin-note warn">
+	                                    <span class="token-origin-mark">!</span>
+	                                    <span>
+	                                        <strong>Long sequences</strong>
+	                                        <span class="token-origin-detail">Every character becomes a step for the model.</span>
+	                                    </span>
+	                                </div>
+	                            </div>
+
+	                            <div class="token-origin-card">
+	                                <h4>Word encoding</h4>
+	                                <ul>
+	                                    <li>
+	                                        <span class="token-origin-map">I=1, was=2, reading=3, an=4,<br>
+	                                        interesting=5, book=6, in=7,<br>
+	                                        New=8, York=9</span>
+	                                    </li>
+	                                    <li>
+	                                        <span class="token-origin-seq">1 2 3 4 5 6 7 8 9</span>
+	                                    </li>
+	                                </ul>
+	                                <div class="token-origin-note neutral">
+	                                    <span class="token-origin-mark">?</span>
+	                                    <span>
+	                                        <strong>Huge vocabulary</strong>
+	                                        <span class="token-origin-detail">New words, names, and typos need new ids.</span>
+	                                    </span>
+	                                </div>
+	                            </div>
+
+	                            <div class="token-origin-card">
+	                                <h4>Tokenization</h4>
+	                                <ul>
+	                                    <li>
+	                                        <span class="token-origin-map">I=1, was=2, read=3, ing=4,<br>
+	                                        an=5, interest=6, book=7, in=8,<br>
+	                                        New_York=9</span>
+	                                    </li>
+	                                    <li>
+	                                        <span class="token-origin-seq">1 2 3 4 5 6 4 7 8 9</span>
+	                                    </li>
+	                                </ul>
+	                                <div class="token-origin-note good">
+	                                    <span class="token-origin-mark">OK</span>
+	                                    <span>
+	                                        <strong>Balanced units</strong>
+	                                        <span class="token-origin-detail">Common chunks stay compact, rare words can split.</span>
+	                                    </span>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </section>
+	                    <section>
+	                      <h3 style="text-align: left">Lecture Plan</h3>
+                      <ol>
+                        <li>What is LLM agents?</li>
+                        <li>A brief history of LLM agents
+                        <ul>
+                            <li>In the recent context of “LLM”</li>
+                            <li>In the ancient context of “agents”</li>
+                        </ul></li>
+                        <li>On the future of LLM agents</li>
+                      </ol>
+                    </section>
+                </section>
+                <section>
+                    <section data-background-color="white">
+                        <h3>What is "agent"?</h3>
+                        <ul>
+                            <li class="fragment">
+                                <strong>An "intelligent" system that interacts with some "environment"</strong>
+                                <ul>
+                                    <li>Physical environments: robot, autonomous car, ...</li>
+                                    <li>Digital environments: DQN for Atari, Siri, AlphaGo, ...</li>
+                                    <li>Humans as environments: chatbot</li>
+                                </ul>
+                            </li>
+                            <li class="fragment"><strong>Define "agent" by defining "intelligent" and "environment"</strong>
+                                <ul>
+                                    <li>It changes over time!</li>
+                                    <li>Exercise question: how would you define "intelligent"?</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section data-background-color="white">
+                        <h3>What is "LLM agent"?</h3>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="align-content: center">
+                                <br>
+                                <img src="images/agents_world.png" alt="Agents Diagram" style="width: 600px;padding-left: 40px">
+                            </div>
+                            <div>
+                                <ul>
+                                    <li><strong>Level 1: Text agent</strong>
+                                        <ul>
+                                            <li>Uses text action and observation</li>
+                                            <li>Examples: ELIZA, LSTM-DQN</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Level 2: LLM agent</strong>
+                                        <ul>
+                                            <li>Uses LLM to act</li>
+                                            <li>Examples: SayCan, Language Planner</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Level 3: Reasoning agent</strong>
+                                        <ul>
+                                            <li>Uses LLM to reason and act</li>
+                                            <li>Examples: ReAct, AutoGPT</li>
+                                            <li><strong>The key focus of the field and the talk</strong></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                      <h3>A brief history of LLM agents</h3>
+                        <div class="column">
+                          <ul>
+                            <li class="fragment" data-fragment-index="0"><strong>Reasoning</strong>
+                              <ul>
+                                <li>CoT (Chain of Thought)</li>
+                                <li>Zero-shot CoT</li>
+                                <li>Self-consistency</li>
+                                <li>...</li>
+                              </ul>
+                            </li>
+                            <li class="fragment" data-fragment-index="1"><strong>Acting</strong> (Grounding, tool use, etc.)
+                              <ul>
+                                <li>Game</li>
+                                <li>Robotics</li>
+                                <li>RAG (Retrieval-Augmented Generation)</li>
+                                <li>...</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="column">
+                          <ul>
+                            <li class="fragment" data-fragment-index="2">
+                                $\to$ LLM agent (but not reasoning agent) evolves
+                                into <strong class="important">ReAct</strong> (Reasoning + Acting)</li>
+                            <ul>
+                              <li class="fragment" data-fragment-index="3">New apps/tasks/benchmarks:
+                                <ul>
+                                  <li>Web browsing</li>
+                                  <li>Software engineering (Junie)</li>
+                                  <li>Scientific discovery (Deep Research)</li>
+                                  <li>...</li>
+                                </ul>
+                              </li>
+                              <li class="fragment" data-fragment-index="4">New methods:
+                                <ul>
+                                  <li>Memory, learning, planning, multi-agent...</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </ul>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <h3>RAGs</h3>
+                        <img src="images/RAGs_scheme.png" alt="RAGs_scheme">
+                    </section>
+                    <section data-background-color="white">
+                      <h3>Reasoning OR Acting</h3>
+                      <div class="row">
+                        <div class="column">
+                            <p>CoT</p>
+                            <p>Reasoning Traces $\rightleftarrows$ LM</p>
+                          <ul>
+                            <li>Flexible and general to augment
+                                <strong class="important">test-time compute</strong></li>
+                            <li style="color: red;">Lack of external knowledge and tools</li>
+                          </ul>
+                        </div>
+                        <div class="column fragment">
+                          <p>RAG/Retrieval/Code/Tool use</p>
+                          <p>Actions $\rightleftarrows$ LM $\rightleftarrows$ Env</p>
+                          <ul>
+                            <li>Retrieval</li>
+                            <li>Search engine</li>
+                            <li>Calculator</li>
+                            <li>Weather API</li>
+                            <li>Python</li>
+                            <li>...</li>
+                          </ul>
+                          <ul>
+                            <li style="color: red;">Lack of reasoning</li>
+                            <li>Flexible and general to augment <strong>knowledge, computation, feedback, etc.</strong></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/ReAct.png" alt="ReAct" width="80%">
+                        <p>Source: <a href="https://llmagents-learning.org/slides/llm_agent_history.pdf">
+                            LLM Agents MOOC, Fall 2024</a></p>
+                    </section>
+                    <section data-background-color="white">
+                      <h3>Let's watch the video</h3>
+                      <div style="text-align: center;">
+                        <iframe width="80%" height="700" src="https://www.youtube.com/embed/XZuwlXNMm04"
+                          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                          gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                      </div>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/ReActSpace.png" alt="ReActSpace" width="80%">
+                        <p>Source: <a href="https://llmagents-learning.org/slides/llm_agent_history.pdf">
+                            LLM Agents MOOC, Fall 2024</a></p>
+                    </section>
+                    <section data-background-color="white">
+                        <h3>ReAct is general and effective</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>(NLP tasks)</th>
+                                    <th colspan="2" style="text-align: center">(RL tasks)</th>
+                                </tr>
+                                <tr style="background-color: lightgray">
+                                    <th>PaLM-540B</th>
+                                    <th>HotpotQA <br> (QA)</th>
+                                    <th>FEVER <br> (fact check)</th>
+                                    <th>ALFWorld <br> (Text game)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="background-color: lightgray">Reason</td>
+                                    <td>29.4</td>
+                                    <td>56.3</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: lightgray">Act</td>
+                                    <td>25.7</td>
+                                    <td>58.9</td>
+                                    <td>45</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: lightgray"><strong>ReAct</strong></td>
+                                    <td><strong>35.1</strong></td>
+                                    <td><strong>64.6</strong></td>
+                                    <td><strong>71</strong></td>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left;">Let's talk about..</h3>
+
+                        <div class="row">
+                            <div class="column">
+                                <img src="images/fish-memory-comic.png" alt="Fish Memory Comic" style="width: 55%;">
+                                <p style="text-align: left">So we need a long-term memory</p>
+                                <ul>
+                                    <li>Read and write</li>
+                                    <li>Stores experience, knowledge, skills, ...</li>
+                                    <li>Persists over new experience</li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <p>Code-based controller</p>
+                                <div class="r-frame">
+                                    <p>Instruction: ...</p>
+                                    <p>Thought: ...</p>
+                                    <p>Action: ...</p>
+                                    <p>Observation: ...</p>
+                                    <p>Thought: ...</p>
+                                    <p>...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <div class="row">
+                            <div class="column">
+                              <h3>Programming Task Reflection</h3>
+                              <ul>
+                                <li><strong>Task:</strong> Given two strings of parentheses,
+                                    determine if they are balanced</li>
+                                <li><strong>Trajectory:</strong>
+                                  <code>def match_parens(lst): ... </code>
+                                </li>
+                                <li><strong>Evaluation:</strong>
+                                  <ul>
+                                    <li>Internal or external evaluation:
+                                    <em>Self-generated unit tests fail:</em>
+                                        the function only checks if the counts of parentheses are equal but ignores their order</li>
+                                  </ul>
+                                </li>
+                                <li><strong>Reflection:</strong>
+                                    The function is wrong because it only counts the parentheses, but the order matters for valid balancing</li>
+                              </ul>
+                            </div>
+                            <div class="column">
+                                <br><br>
+                                <img src="images/GPT-4-reflexion.png" alt="GPT-4-reflexion">
+                                <br><br>
+                                <ul style="text-align: left">
+                                    <li>$\to$ <strong>Next Trajectory</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/reflexion_learning.png" alt="reflexion_learning" width="80%">
+                        <p>Source: <a href="https://llmagents-learning.org/slides/llm_agent_history.pdf">
+                            LLM Agents MOOC, Fall 2024</a></p>
+                    </section>
+                    <section data-background-color="white">
+                        <h3>Semantic memory of (reflective) knowledge</h3>
+                        <img src="images/semantic_memory.png" alt="semantic_memory" width="70%">
+                    </section>
+                    <section data-background-color="white">
+                      <h3 style="text-align: left">Cognitive Architectures for Language Agents (CoALA)</h3>
+                      <ul>
+                        <li>Memory</li>
+                        <li>Action space</li>
+                        <li>Decision making</li>
+                      </ul>
+                      <div class="fragment">
+                        <h3 style="text-align: left">Exercise Questions</h3>
+                          <ul>
+                            <li>What distinguishes external environment VS internal memory?</li>
+                            <li>What distinguishes long VS short term memory?</li>
+                          </ul>
+                      </div>
+                    </section>
+                </section>
+                <section>
+                    <section data-background-color="white">
+                          <h3 style="text-align: center">Observation $\to$ (what "language"?) $\to$ Action</h3>
+                          <div style="display: flex; align-items: center; justify-content: center;">
+                            <div class="r-frame" style="margin-right: 50px; text-align: center;">
+                              <h3>Symbolic AI Agent: 1960 - 1990</h3>
+                              <p>
+                                sp {blocks-world*opsub*proposal*clear} <br>
+                                (state &lt;s&gt; ^name blocks-world ^desired &lt;d*1&gt; ^clear &lt;dobject&gt;
+                                &lt;ontop2&gt;) <br>^bottom-block &lt;object&gt;
+                              </p>
+                            </div>
+                            <div class="r-frame" style="margin-left: 50px; text-align: center;">
+                              <h3>(Deep) RL Agent: 1990 - 2020</h3>
+                              <p>
+                                [-0.3432, 2.444, 0.34342, ... <br> 0.4545, 0.443, 3.34234]
+                              </p>
+                            </div>
+                          </div>
+                        <img src="images/timeline.png" alt="timeline.png">
+                        <div class="row">
+                            <div class="column fragment r-frame" style="margin-left: 800px">
+                              <h3>LLM Agent: 2020 - now</h3>
+                              <p style="text-align: left;margin-left: 20px">
+                                  Let’s think step by step… <br>
+                                  The room is dark, so I need a <br>
+                                  lamp, the lamp is in <br>
+                                  bedroom, so I should ...
+                              </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">Symbolic state or neural embedding</h3>
+                        <ul>
+                            <li>Intensive efforts to design or train</li>
+                            <li>Task-specific, hard to generalize</li>
+                        </ul><br><br>
+                        <h3 style="text-align: left">Open-ended natural language</h3>
+                        <ul>
+                            <li>Rich priors from LLMs</li>
+                            <li>Inference-time scalable</li>
+                            <li>General and generalizable</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">
+                            How to evaluate LLM agents?</h3>
+                        <h4>WebShop (2022)</h4>
+                          <div style="text-align: center;">
+                            <img src="images/WebShop.png" alt="WebShop Interface">
+                          </div>
+                          <ul>
+                            <li><strong>Large-scale complex environment</strong> based on 1.16M Amazon products</li>
+                            <li><strong>Automatic reward</strong> based on instruction and product attribute matching</li>
+                            <li><strong>Challenges</strong> language and visual understanding, and decision-making</li>
+                          </ul>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">Web Arena (2023)</h3>
+                        <img src="images/WebArena.png" alt="WebArena.png" width="80%">
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">SWE-Bench (2023)</h3>
+                        <img src="images/SWE-Bench.png" alt="SWE-Bench" width="80%">
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">
+                            <a href="https://arxiv.org/abs/2304.05376">
+                                ChemCrow: ReAct enables discovery of a novel chromophore</a></h3>
+                        <img src="images/ChemCrow.png" alt="ChemCrow.png" width="80%">
+                    </section>
+                </section>
+                <section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">What's Next?</h3>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>
+                                <h4>Training</h4>
+                                <p class="fragment r-frame">FireAct: Toward Language Agent Fine-tuning</p>
+                            </div>
+                            <div>
+                                <h4>Interface</h4>
+                                <p class="fragment r-frame">SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <div>
+                                <h4>Robustness</h4>
+                            </div>
+                            <div>
+                                <h4>Human</h4>
+                                <p class="fragment r-frame">$\tau$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</p>
+                            </div>
+                            <div>
+                                <h4>Benchmark</h4>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left"><a href="https://arxiv.org/abs/2310.05915">FireAct</a>: Training LLM for agents</h3>
+                        <div class="column">
+                            <br><br>
+                          <h4>Establish model-agent synergy:</h4>
+                          <ul>
+                            <li>Improve "agent capabilities" like planning, self-evaluation, calibration</li>
+                            <li>Open-source agent backbone model</li>
+                            <li>Next trillion tokens for model training</li>
+                          </ul>
+                        </div>
+                        <div class="column">
+                            <img src="images/ReActFT.png" alt="ReActFT.png" width="80%">
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left"><a href="https://arxiv.org/abs/2405.15793">SWE-agent</a>:
+                            Agent-Computer Interfaces Enable Automated Software Engineering</h3>
+                        <div class="column">
+                          <h4>LLMs and Humans are Different, So Should Their Interfaces</h4>
+                          <ul>
+                            <li>e.g., humans have smaller short-term memory, so they have to trade off time for space</li>
+                          </ul>
+                            <br><br>
+                          <h4>ACI Design Can Help Us</h4>
+                          <ul>
+                            <li>Better <strong>solve</strong> tasks (without changing the agent)</li>
+                            <li>Better <strong>understand</strong> agents (vs. humans)</li>
+                          </ul>
+                        </div>
+                        <div class="column">
+                            <img src="images/SummarizedSearch.png" alt="SummarizedSearch.png" width="80%">
+                            <img src="images/SWEresults.png" alt="SWEresults.png" width="80%">
+                        </div>
+                    </section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">Human in the loop needs robustness</h3>
+                        <ul>
+                            <li>You need to solve Riemann hypothesis once (one time out of millions)</li>
+                            <li>But you always need to buy tickets correctly</li>
+                        </ul>
+                        <img src="images/t-bench.png" alt="t-bench.png">
+                        <p><a href="https://arxiv.org/pdf/2406.12045">
+                            TAU-bench: A Benchmark for <u>T</u>ool-<u>A</u>gent-<u>U</u>ser</a></p>
+                    </section>
+                    <section data-background-color="white">
+                        <img src="images/job-automation-ladder.png" alt="job-automation-ladder" width="70%">
+                        <p><a href="https://princeton-nlp.github.io/language-agent-impact/">
+                            Language Agents in the Digital World</a></p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3 style="text-align: left">Summary</h3>
+                        <ol>
+                            <li class="fragment">
+                                <strong>LLM Agents Overview</strong>
+                                <ul class="custom-list">
+                                    <li>LLM agents are goal-oriented systems using language models for reasoning and acting</li>
+                                    <li>ReAct combines reasoning and action, improving performance across multiple tasks</li>
+                                    <li class="minus">Challenges: Tool integration and improving autonomous planning</li>
+                                </ul>
+                            </li>
+                            <li class="fragment">
+                                <strong>CoT vs RAG</strong>
+                                <ul class="custom-list">
+                                    <li>Chain of Thought (CoT) focuses on internal reasoning traces, lacking external tools</li>
+                                    <li>RAG augments LLMs by connecting them with external knowledge, feedback, and computation tools</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </section>
+                    <section>
+                        <ol start="3">
+                            <li class="fragment">
+                                <strong>Reflection & Long-term Memory</strong>
+                                <ul class="custom-list">
+                                    <li>Reflection and self-evaluation improve task-solving abilities over iterations</li>
+                                    <li>LLM agents need long-term memory to store and update experience persistently</li>
+                                </ul>
+                            </li>
+                            <li class="fragment">
+                                <strong>Future of LLM Agents</strong>
+                                <ul class="custom-list">
+                                    <li>Training improvements via models like FireAct</li>
+                                    <li>Interfaces tailored for human-agent collaboration (SWE-agent)</li>
+                                    <li>Robustness and evaluation benchmarks such as TAU-bench and WebShop</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </section>
+                </section>
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+        </script>
+    </body>
+</html>
