@@ -1,0 +1,132 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions --- Mock Olympiad, June 28, 2026}
+
+\textbf{Problem 1.} (IMC 2013, Day 2, Problem 1)
+Let \( |z + 1| > 2 \); prove \( |z^3 + 1| > 1 \).
+
+\textbf{Solution.}
+Since \( z^3 + 1 = (z+1)(z^2 - z + 1) \) and \( |z+1| > 2 \), it suffices to prove \( |z^2 - z + 1| \geq \tfrac{1}{2} \). Write \( z + 1 = r e^{i\varphi} \) with \( r = |z+1| > 2 \). Then
+\[
+z^2 - z + 1 = (re^{i\varphi} - 1)^2 - (re^{i\varphi} - 1) + 1 = r^2 e^{2i\varphi} - 3r e^{i\varphi} + 3,
+\]
+so
+\[
+|z^2 - z + 1|^2 = \bigl(r^2 e^{2i\varphi} - 3re^{i\varphi} + 3\bigr)\bigl(r^2 e^{-2i\varphi} - 3re^{-i\varphi} + 3\bigr).
+\]
+Expanding and using \( \cos 2\varphi = 2\cos^2\varphi - 1 \),
+\[
+|z^2 - z + 1|^2 = r^4 + 9r^2 + 9 - (6r^3 + 18r)\cos\varphi + 6r^2(2\cos^2\varphi - 1)
+= 12\left( r\cos\varphi - \frac{r^2 + 3}{4} \right)^2 + \frac{1}{4}(r^2 - 3)^2.
+\]
+The first term is \( \geq 0 \), and since \( r > 2 \) we have \( (r^2 - 3)^2 > 1 \), hence \( |z^2 - z + 1|^2 > \tfrac{1}{4} \). Therefore \( |z^2 - z + 1| > \tfrac{1}{2} \) and \( |z^3 + 1| = |z+1|\,|z^2 - z + 1| > 2 \cdot \tfrac{1}{2} = 1 \). \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 2.} (IMC 2012, Day 1, Problem 2)
+Smallest rank of an \( n \times n \) matrix with zero diagonal and positive off-diagonal entries.
+
+\textbf{Solution.} \emph{Answer:} \( 0 \) for \( n = 1 \), \( 2 \) for \( n = 2 \), and \( \boxed{3} \) for all \( n \geq 3 \).
+
+For \( n = 1 \) the matrix is \( (0) \), rank \( 0 \). For \( n = 2 \) the matrix \( \begin{pmatrix} 0 & b \\ c & 0 \end{pmatrix} \) with \( b, c > 0 \) has determinant \( -bc < 0 \), so rank \( 2 \).
+
+\emph{Lower bound for \( n \geq 3 \):} The first three rows are linearly independent. Suppose \( c_1 R_1 + c_2 R_2 + c_3 R_3 = 0 \). Looking at column \( 1 \) (whose entry in row \( 1 \) is \( 0 \), the others positive), the relation \( c_2 a_{21} + c_3 a_{31} = 0 \) with \( a_{21}, a_{31} > 0 \) forces \( c_2, c_3 \) to have opposite signs or both be zero. The same argument on columns \( 2 \) and \( 3 \) applies to the pairs \( (c_1, c_3) \) and \( (c_1, c_2) \). These three sign conditions can hold only if \( c_1 = c_2 = c_3 = 0 \). Hence rank \( \geq 3 \).
+
+\emph{Construction of rank \( 3 \):} Take \( M = \bigl((i - j)^2\bigr)_{i,j=1}^n \). The diagonal is \( 0 \) and off-diagonal entries are positive squares. Since
+\[
+(i-j)^2 = i^2 \cdot 1 - 2 i \cdot j + 1 \cdot j^2,
+\]
+\( M \) is the sum of three rank-one matrices (outer products \( (i^2)(1) \), \( (i)(j) \), \( (1)(j^2) \)), so \( \rank M \leq 3 \). \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 3.} (IMC 2013, Day 1, Problem 3)
+\( 2n \) students, \( n \) per trip; every pair must meet. Minimum number of trips.
+
+\textbf{Solution.} \emph{Answer:} \( 6 \) for every \( n \geq 2 \).
+
+\emph{Lower bound.} In each trip a student meets \( n - 1 \) others, so to meet all \( 2n - 1 \) classmates each student must go on at least \( 3 \) trips (since \( 2(n-1) < 2n - 1 \)). Thus the total attendance over all trips is at least \( 3 \cdot 2n = 6n \). Each trip contributes \( n \) attendances, so the number of trips is at least \( 6n / n = 6 \).
+
+\emph{Construction with \( 6 \) trips.} If \( n \) is even, split the \( 2n \) students into four equal groups \( A, B, C, D \) (size \( n/2 \) each) and run the trips
+\[
+(A,B),\ (C,D),\ (A,C),\ (B,D),\ (A,D),\ (B,C).
+\]
+Every pair of groups travels together once, so every two students meet.
+
+If \( n \) is odd and divisible by \( 3 \), split into six equal groups \( E,F,G,H,I,J \) and run
+\[
+(E,F,G),\ (E,F,H),\ (G,H,I),\ (G,H,J),\ (E,I,J),\ (F,I,J).
+\]
+
+For the remaining \( n \), write \( n = 2x + 3y \) with \( x, y \geq 1 \) (possible for every \( n \geq 2 \) not covered above), form groups \( A,B,C,D \) of size \( x \) and \( E,F,G,H,I,J \) of size \( y \), and superimpose the two schemes:
+\[
+(A,B,E,F,G),\ (C,D,E,F,H),\ (A,C,G,H,I),\ (B,D,G,H,J),\ (A,D,E,I,J),\ (B,C,F,I,J).
+\]
+In each case every pair of students shares a trip. \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 4.} (IMC 2012, Day 1, Problem 4)
+If \( f \in C^1(\R) \) satisfies \( f'(t) > f(f(t)) \) for all \( t \), prove \( f(f(f(t))) \leq 0 \) for \( t \geq 0 \).
+
+\textbf{Solution.}
+\emph{Lemma 1. It is not the case that \( \lim_{t\to+\infty} f(t) = +\infty \).}
+Suppose \( f(t) \to +\infty \). Pick \( T_1 \) with \( f(t) > 2 \) for \( t > T_1 \), then \( T_2 \) with \( f(t) > T_1 \) for \( t > T_2 \); for \( t > T_2 \) we get \( f'(t) > f(f(t)) > 2 \), so eventually \( f(t) > t \). Then \( f'(t) > f(f(t)) > f(t) \), giving \( f(t) > c\, e^{t} \) for large \( t \). Feeding this back, \( f'(t) > f(f(t)) > c\, e^{f(t)} \), so \( f'(t) e^{-f(t)} > c \); integrating, the left side \( e^{-f(T)} - e^{-f(t)} \) is bounded, while the right side grows without bound --- contradiction.
+
+\emph{Lemma 2. \( f(t) < t \) for all \( t > 0 \).}
+By Lemma 1 there exist arbitrarily large \( t \) with \( f(t) < t \). If the claim failed, by continuity there is \( t_0 > 0 \) with \( f(t_0) = t_0 \). If some \( t \geq t_0 \) has \( f(t) < t_0 \), let \( T = \inf\{ t \geq t_0 : f(t) < t_0 \} \); then \( f(T) = t_0 \) and \( f'(T) > f(f(T)) = f(t_0) = t_0 > 0 \), so \( f > t_0 \) just to the right of \( T \), contradicting the definition of \( T \). Otherwise \( f(t) \geq t_0 \) for all \( t \geq t_0 \), whence \( f'(t) > f(f(t)) \geq t_0 > 0 \) on \( (t_0, \infty) \), forcing \( f(t) \to +\infty \) and contradicting Lemma 1.
+
+\emph{Lemma 3. If \( f(s_1) > 0 \) and \( f(s_2) \geq s_1 \), then \( f(s) > s_1 \) for all \( s > s_2 \). In particular, if \( s_1 \leq 0 \) and \( f(s_1) > 0 \), then \( f(s) > s_1 \) for all \( s > s_1 \).}
+If not, let \( S = \inf\{ s > s_2 : f(s) \leq s_1 \} \), so \( f(S) = s_1 \) and \( f'(S) > f(f(S)) = f(s_1) > 0 \); this produces values \( f < s_1 \) to the left of \( S \) (if \( S > s_2 \)) or \( f > s_1 \) to the right of \( s_2 \) (if \( S = s_2 \)), each a contradiction. The second statement is the case \( s_2 = s_1 \).
+
+\emph{Conclusion.} Suppose, for contradiction, that some \( t_0 > 0 \) has \( f(f(f(t_0))) > 0 \). Put \( t_1 = f(t_0) \), \( t_2 = f(t_1) \), \( t_3 = f(t_2) > 0 \). Using Lemmas 2 and 3 one checks \( t_1, t_2 > 0 \): e.g. if \( t_1 \leq 0 \) then \( f(t_1) \leq 0 \) (otherwise Lemma 3(b) gives \( f(t_0) > t_1 \), impossible), so \( t_2 \leq 0 \), and then \( t_3 = f(t_2) \leq 0 \), contradicting \( t_3 > 0 \). Hence \( 0 < t_3 < t_2 < t_1 < t_0 \) (the strict inequalities from Lemma 2). Now Lemma 3 gives \( f(t) > t_1 \) for \( t > t_0 \) and \( f(t) > t_2 \) for \( t > t_1 \), so for \( t > t_0 \),
+\[
+f'(t) > f(f(t)) > t_2 > 0,
+\]
+forcing \( f(t) \to +\infty \) --- contradicting Lemma 1. Therefore \( f(f(f(t))) \leq 0 \) for all \( t > 0 \), and the case \( t = 0 \) follows by continuity. \hfill\(\square\)
+
+\bigskip
+\textbf{Problem 5.} (IMC 2012, Day 1, Problem 5)
+Prove \( P(X) = X^{2^n}(X + a)^{2^n} + 1 \) is irreducible over \( \Q \), \( a \in \Q \).
+
+\textbf{Solution.}
+\emph{Case \( a = 0 \).} Then \( P(X) = X^{2^{n+1}} + 1 \), whose roots are the primitive \( 2^{n+2} \)-th roots of unity; this is the cyclotomic polynomial \( \Phi_{2^{n+2}} \), hence irreducible.
+
+\emph{Case \( a \neq 0 \).} Substitute \( X = Y - \tfrac{a}{2} \). Then
+\[
+P\!\left(Y - \tfrac{a}{2}\right) = \left(Y - \tfrac{a}{2}\right)^{2^n}\left(Y + \tfrac{a}{2}\right)^{2^n} + 1 = \left(Y^2 - \tfrac{a^2}{4}\right)^{2^n} + 1.
+\]
+In the variable \( Z = Y^2 - \tfrac{a^2}{4} \) this is \( Z^{2^n} + 1 = \Phi_{2^{n+1}}(Z) \), again a cyclotomic (hence irreducible over \( \Q \)) polynomial; in particular it has no factor that is a polynomial in \( Y^2 \) other than constants and itself.
+
+Suppose \( P \) is reducible; then so is \( Q(Y) := \left(Y^2 - \tfrac{a^2}{4}\right)^{2^n} + 1 \). Write \( Q(Y) = \prod_i f_i(Y)^{m_i} \) with distinct monic irreducible \( f_i \). Since \( Q(Y) = Q(-Y) \) (it is a polynomial in \( Y^2 \)), the multiset of factors is invariant under \( Y \mapsto -Y \). No \( f_i \) is itself a polynomial in \( Y^2 \) (else it would give such a factor of \( Z^{2^n}+1 \)), so \( f_i(-Y) \neq \pm f_i(Y) \) is impossible to fix each factor; the factors pair up as \( f_{i'}(Y) = \pm f_i(-Y) \). Collecting one member of each pair gives a monic \( f(Y) \) of degree \( 2^n \) with
+\[
+Q(Y) = f(Y)\, f(-Y).
+\]
+Let \( b = f(0) \in \Q \). Comparing constant terms, \( Q(0) = \left(\tfrac{a^2}{4}\right)^{2^n} + 1 = f(0)f(0) = b^2 \). Setting \( c = \left(\tfrac{a}{2}\right)^{2^{n-1}} \in \Q \setminus \{0\} \), this reads
+\[
+c^4 + 1 = b^2.
+\]
+But the Diophantine equation \( c^4 + 1 = b^2 \), i.e. \( c^4 + 1^4 = b^2 \), has no solution with \( c \neq 0 \): this is a special case of Fermat's theorem that \( x^4 + y^4 = z^2 \) has only trivial solutions (proved by infinite descent --- a minimal positive solution yields, via the parametrization of primitive Pythagorean triples applied twice, a strictly smaller one). This contradiction shows \( P \) is irreducible. \hfill\(\square\)
+
+\end{document}
