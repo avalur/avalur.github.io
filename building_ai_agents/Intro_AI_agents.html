@@ -21,7 +21,7 @@
 		<div class="reveal">
 			<div class="slides">
                 <section>
-	                    <section>
+                    <section>
 	                        <div>
 	                            <img src="./images/nup_logo_dark.jpeg" alt="nup_logo" />
 	                        </div>
@@ -35,6 +35,8 @@
                                 </div>
                         </div>
                     </section>
+                </section>
+                <section>
                     <section class="agent-app-slide" data-background-color="white">
                         <h3>AI Agent Applications</h3>
                         <div class="agent-app-content">
@@ -135,7 +137,7 @@
                     <section data-background-color="white">
                         <h3 style="color: #2d5d39; text-align: left">What Is an AI Agent?</h3>
                         <div class="fragment" style="text-align: left; border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
-                            <p style="font-size: 0.7em; color: #666;">OpenAI Agents SDK presentation [1]:</p>
+                            <p style="font-size: 0.7em; color: #666;">OpenAI Agents SDK presentation:</p>
                             <p style="font-size: 0.85em; margin-top: 10px;">An agent is an AI application consisting of</p>
                             <ul style="font-size: 0.8em; margin-left: 40px; list-style-type: disc;">
                                 <li>a <span style="color: #5b56a1; font-weight: bold;">model</span> equipped with</li>
@@ -145,14 +147,13 @@
                             </ul>
                         </div>
                         <div class="fragment" style="text-align: left; border: 1px solid #ddd; padding: 20px; border-radius: 5px;">
-                            <p style="font-size: 0.7em; color: #666;">Lilian Weng, LLM Powered Autonomous Agents [2]:</p>
+                            <p style="font-size: 0.7em; color: #666;">Lilian Weng, LLM Powered Autonomous Agents [1]:</p>
                             <p style="font-size: 0.9em; margin-top: 10px; color: #5b56a1; font-weight: bold;">
                                 Agent = LLM + memory + planning skills + tool use
                             </p>
                         </div>
                         <div style="margin-top: 40px; font-size: 0.35em; color: #888; text-align: right;">
-                            [1] <a href="https://www.youtube.com/watch?v=joHR2pmxDOE">https://www.youtube.com/watch?v=joHR2pmxDOE</a><br>
-                            [2] <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a>
+                            [1] <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a>
                         </div>
                     </section>
                     <section data-background-color="white">
@@ -240,9 +241,9 @@
                                 <div class="os-panel-title">Software 1.0 tools</div>
                                 <div class="os-panel-main">Classical computer tools</div>
                                 <div class="os-items">
-                                    <div class="os-item"><span class="os-icon">123</span>calculator</div>
+                                    <div class="os-item"><span class="os-icon">123</span>Calculator</div>
                                     <div class="os-item"><span class="os-icon">Py</span>Python interpreter</div>
-                                    <div class="os-item"><span class="os-icon">sh</span>terminal</div>
+                                    <div class="os-item"><span class="os-icon">sh</span>Terminal</div>
                                 </div>
                             </div>
 
@@ -321,6 +322,8 @@
                             </div>
                         </div>
                     </section>
+                </section>
+                <section>
                     <section class="llm-slide" data-background-color="white">
                         <h3>What Is an LLM</h3>
                         <p class="llm-definition">
@@ -705,18 +708,142 @@
 	                            </div>
 	                        </div>
 	                    </section>
-	                    <section>
-	                      <h3 style="text-align: left">Lecture Plan</h3>
-                      <ol>
-                        <li>What is LLM agents?</li>
-                        <li>A brief history of LLM agents
-                        <ul>
-                            <li>In the recent context of “LLM”</li>
-                            <li>In the ancient context of “agents”</li>
-                        </ul></li>
-                        <li>On the future of LLM agents</li>
-                      </ol>
-                    </section>
+	                    <section data-background-color="white">
+	                        <h3 style="color: #2d5d39; text-align: left">Autoregression</h3>
+	                        <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AutoregressionSchema.gif" alt="Autoregression Schema" width="80%">
+	                        <p style="font-size: 0.5em; text-align: left;">Source: <a href="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AutoregressionSchema.gif">Hugging Face Agents Course</a></p>
+	                    </section>
+	                    <section class="special-tokens-slide" data-background-color="white">
+	                        <h3 style="color: #2d5d39; text-align: left">Tokens: Special Tokens</h3>
+	                        <ul style="font-size: 0.85em; text-align: left">
+	                            <li>Reserved tokens with predefined functions</li>
+	                            <li>Do not represent normal text</li>
+	                            <li>Control model behavior and structure inputs/outputs</li>
+	                        </ul>
+	                        <br>
+                            <h3 style="color: #2d5d39; text-align: left">Examples</h3>
+                            <ul style="font-size: 0.85em; text-align: left">
+	                            <li>EOS tokens: <code>&lt;eos&gt;</code>, <code>&lt;|endoftext|&gt;</code> — stop generation</li>
+	                            <li>Chat roles: <code>&lt;|user|&gt;</code>, <code>&lt;|assistant|&gt;</code>, <code>&lt;|system|&gt;</code></li>
+	                            <li>Control tokens: <code>&lt;translate&gt;</code>, <code>&lt;summarize&gt;</code>, <code>&lt;formal&gt;</code></li>
+	                        </ul>
+                        </section>
+	                    <section data-background-color="white">
+	                        <h3 style="color: #2d5d39; text-align: left">Softmax Temperature</h3>
+	                        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 10px;">
+	                            <img src="https://miro.medium.com/v2/resize:fit:700/0*J8gIAZofl6MlfLUK.jpeg" alt="Softmax Logits" width="45%">
+	                            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; width: 38%;">
+                                    <img src="https://miro.medium.com/v2/resize:fit:700/0*7xj72SjtNHvCMQlV.jpeg" alt="Temperature Effects" width="100%">
+	                                <img src="https://miro.medium.com/v2/resize:fit:400/1*p1iKxUJcXDlSEZCpMCwNgg.gif" alt="Temperature Scaling GIF" width="90%">
+	                            </div>
+	                        </div>
+	                        <p style="font-size: 0.5em; text-align: left;">Source: <a href="https://medium.com/@harshit158/softmax-temperature-5492e4007f71">Medium: Softmax Temperature by Harshit Sharma</a></p>
+	                    </section>
+	                    <section class="llm-training-slide" data-background-color="white">
+	                        <h3 style="color: #2d5d39; text-align: left; font-size: 1.5em; margin-bottom: 28px;">How LLMs Are Trained</h3>
+	                        <div style="display: grid; grid-template-columns: 120px 1fr 42px 1fr 42px 1fr; grid-template-rows: 74px 42px 86px 52px 112px; gap: 10px 14px; align-items: center; color: #285548;">
+	                            <div style="grid-column: 1; grid-row: 1; font-weight: bold; font-size: 0.64em; text-align: left;">Training<br>Steps</div>
+	                            <div style="grid-column: 2; grid-row: 1; background: #8fb0bd; color: white; min-height: 74px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.56em; line-height: 1.12; text-align: center;">
+	                                Self-supervised<br>Pre-training
+	                            </div>
+	                            <div style="grid-column: 4; grid-row: 1; background: #8fb0bd; color: white; min-height: 74px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.54em; line-height: 1.12; text-align: center;">
+	                                Supervised<br>Instruction<br>Fine-tuning
+	                            </div>
+	                            <div style="grid-column: 6; grid-row: 1; background: #8fb0bd; color: white; min-height: 74px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.52em; line-height: 1.12; text-align: center;">
+	                                Reinforcement learning<br>from human feedback<br>(RLHF)
+	                            </div>
+
+	                            <div style="grid-column: 1; grid-row: 3; font-weight: bold; font-size: 0.64em; text-align: left;">Models</div>
+	                            <div style="grid-column: 2; grid-row: 3; border: 3px solid #8aa8ae; background: white; min-height: 72px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.56em; line-height: 1.15; text-align: center;">
+	                                Foundational<br>LLM Model
+	                            </div>
+	                            <div style="grid-column: 3; grid-row: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #285548; font-size: 0.38em; line-height: 1.1;">
+	                                <span>Next</span>
+	                                <span style="font-size: 2.2em; line-height: 0.9;">&rarr;</span>
+	                            </div>
+	                            <div style="grid-column: 4; grid-row: 3; border: 3px solid #8aa8ae; background: white; min-height: 72px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.56em; line-height: 1.15; text-align: center;">
+	                                SFT LLM Model
+	                            </div>
+	                            <div style="grid-column: 5; grid-row: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #285548; font-size: 0.38em; line-height: 1.1;">
+	                                <span>Next</span>
+	                                <span style="font-size: 2.2em; line-height: 0.9;">&rarr;</span>
+	                            </div>
+	                            <div style="grid-column: 6; grid-row: 3; border: 3px solid #8aa8ae; background: white; min-height: 72px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.56em; line-height: 1.15; text-align: center;">
+	                                RLHF LLM Model
+	                            </div>
+
+	                            <div style="grid-column: 2; grid-row: 4; display: flex; align-items: center; justify-content: center; color: #285548; font-size: 0.46em; line-height: 1;">
+	                                <span>Train</span>
+	                                <span style="font-size: 1.4em; margin-left: 10px;">&uarr;</span>
+	                            </div>
+	                            <div style="grid-column: 4; grid-row: 4; display: flex; align-items: center; justify-content: center; color: #285548; font-size: 0.46em; line-height: 1;">
+	                                <span>Train</span>
+	                                <span style="font-size: 1.4em; margin-left: 10px;">&uarr;</span>
+	                            </div>
+	                            <div style="grid-column: 6; grid-row: 4; display: flex; align-items: center; justify-content: center; color: #285548; font-size: 0.46em; line-height: 1;">
+	                                <span>Train</span>
+	                                <span style="font-size: 1.4em; margin-left: 10px;">&uarr;</span>
+	                            </div>
+
+	                            <div style="grid-column: 1; grid-row: 6; font-weight: bold; font-size: 0.64em; text-align: left;">Datasets</div>
+	                            <div style="grid-column: 2; grid-row: 6; border: 3px solid #0f4f67; background: white; min-height: 82px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.5em; line-height: 1.15; text-align: center;">
+	                                Wiki, Articles, Books,<br>Web sites…
+	                            </div>
+	                            <div style="grid-column: 4; grid-row: 6; border: 3px solid #0f4f67; background: white; min-height: 82px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.5em; line-height: 1.15; text-align: center;">
+	                                Human instructions<br>&amp; responses
+	                            </div>
+	                            <div style="grid-column: 6; grid-row: 6; border: 3px solid #0f4f67; background: white; min-height: 82px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; padding: 10px 12px; font-size: 0.5em; line-height: 1.15; text-align: center;">
+	                                Human annotated<br>scores of LLM outputs
+	                            </div>
+	                            <div style="grid-column: 6; grid-row: 5; display: grid; grid-template-rows: auto 10px auto; gap: 0; align-items: center;">
+	                                <div style="border: 3px solid #f6a6c6; background: white; box-sizing: border-box; padding: 9px 10px; font-size: 0.5em; line-height: 1.15; text-align: center;">
+	                                    Reward Model<br>(RM)
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </section>
+	                    <section data-background-color="white">
+	                        <h3 style="color: #2d5d39; text-align: left">LLMs: Key Takeaways</h3>
+	                        <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; text-align: left; font-size: 0.55em;">
+	                            <div>
+	                                <p style="margin-bottom: 10px;">LLMs operate on <span style="color: #5b56a1;">tokens (including special ones)</span>, not words or meaning</p>
+	                                <ul style="margin-bottom: 20px;">
+	                                    <li>Billing and context limits</li>
+	                                    <li>Prompt structure and context formatting matter</li>
+	                                </ul>
+	                                <p style="margin-bottom: 10px;">LLMs predict the <span style="color: #5b56a1;">next token based on probabilities</span></p>
+	                                <ul style="margin-bottom: 20px;">
+	                                    <li>temperature</li>
+	                                    <li>hallucinations
+	                                        <ul style="list-style-type: circle; margin-top: 5px;">
+	                                            <li style="color: #5b56a1;">We automate everything that can be automated</li>
+	                                            <li style="color: #5b56a1;">And we AI-ify everything that can't</li>
+	                                        </ul>
+	                                    </li>
+	                                </ul>
+	                                <p style="margin-bottom: 10px;">Strengths:</p>
+	                                <ul style="margin-bottom: 20px;">
+	                                    <li>Language tasks (summarization, paraphrasing, text/code generation)</li>
+	                                    <li>Structured reasoning patterns, tool use, file/table processing</li>
+	                                </ul>
+	                                <p style="margin-bottom: 10px;">Limitations:</p>
+	                                <ul>
+	                                    <li>Precise algorithmic/symbolic tasks</li>
+	                                    <li>Up-to-date knowledge (post-training events)</li>
+	                                    <li>Long multi-step planning and persistent memory</li>
+	                                </ul>
+	                            </div>
+	                            <div>
+	                                <div style="background-color: #f0f7ff; border: 1px solid #c2e0ff; padding: 15px; border-radius: 5px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 25px;">
+	                                    <span style="background-color: #5b56a1; color: white; padding: 0px 6px; border-radius: 4px; font-size: 1.2em; line-height: 1.2;">&#10145;</span>
+	                                    <p style="margin: 0; line-height: 1.3; color: #333;">Many limitations can be mitigated in agents using tools and memory.</p>
+	                                </div>
+	                                <div style="text-align: center;">
+	                                    <img src="https://media.makeameme.org/created/spoilers-spoilers-everywhere-rkfxwc.jpg" alt="Spoilers Everywhere Meme" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </section>
                 </section>
                 <section>
                     <section data-background-color="white">
@@ -1140,6 +1267,24 @@
                         <img src="images/job-automation-ladder.png" alt="job-automation-ladder" width="70%">
                         <p><a href="https://princeton-nlp.github.io/language-agent-impact/">
                             Language Agents in the Digital World</a></p>
+                    </section>
+                </section>
+                <section>
+                    <section data-background-color="white">
+                        <h3 style="text-align: left">Practice</h3>
+                        <p>Notebooks for this intensive:</p>
+                        <ul>
+                            <li>
+                                <a href="intro_practice/Intro_AI_Agents_part1.ipynb">
+                                    Part 1: LLMs (Local Inference, External APIs, Strengths & Weaknesses)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="intro_practice/Intro_AI_Agents_part2.ipynb">
+                                    Part 2: First Agent (τ²-bench, Airline Agent Task, Agent Development)
+                                </a>
+                            </li>
+                        </ul>
                     </section>
                 </section>
                 <section>

@@ -319,3 +319,5 @@ mnist/*
 /posts/.env
 /posts/.claude/settings.local.json
 /cs_basics/PatternPractice/build/
+/building_ai_agents/.env
+/building_ai_agents/intro_practice/tau2-bench/

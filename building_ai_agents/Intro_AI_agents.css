@@ -751,6 +751,9 @@ ul.custom-list li.lamp::before {
 .os-source a {
 	color: var(--os-violet);
 }
+.special-tokens-slide li {
+	text-align: left;
+}
 .agent-app-slide {
 	--app-green: #2d5d39;
 	--app-violet: #5b56a1;
