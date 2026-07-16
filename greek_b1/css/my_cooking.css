@@ -1,0 +1,399 @@
+:root {
+	--cook-cream: #fff8ed;
+	--cook-sand: #f3dfc1;
+	--cook-ink: #302823;
+	--cook-olive: #6c7654;
+	--cook-terracotta: #bf694b;
+	--cook-berry: #a84d62;
+	--cook-fire: #d48339;
+	--cook-blue: #6f9caf;
+}
+
+.reveal {
+	background:
+		radial-gradient(circle at 14% 16%, rgba(191, 105, 75, 0.18), transparent 29%),
+		radial-gradient(circle at 88% 20%, rgba(111, 156, 175, 0.18), transparent 31%),
+		linear-gradient(135deg, var(--cook-cream), #fffdf8 52%, var(--cook-sand));
+	color: var(--cook-ink);
+	font-family: Georgia, 'Times New Roman', serif;
+}
+
+.reveal .slides section {
+	box-sizing: border-box;
+	min-height: 82vh;
+	padding: 44px 54px;
+	border: 1px solid rgba(108, 118, 84, 0.24);
+	border-radius: 30px;
+	background: rgba(255, 248, 237, 0.83);
+	box-shadow: 0 24px 70px rgba(48, 40, 35, 0.12);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal p {
+	color: var(--cook-ink);
+	text-transform: none;
+}
+
+.reveal h1 {
+	font-size: 2.45em;
+	letter-spacing: 0.02em;
+	margin-bottom: 0.25em;
+}
+
+.reveal h2 {
+	font-size: 1.55em;
+	margin-bottom: 0.42em;
+}
+
+.reveal h3 {
+	font-size: 0.86em;
+	margin: 0.22em 0 0.45em;
+}
+
+.eyebrow {
+	margin: 0 0 0.5em !important;
+	color: var(--cook-terracotta) !important;
+	font-size: 0.42em;
+	font-weight: 700;
+	letter-spacing: 0.2em;
+}
+
+.subtitle {
+	color: var(--cook-olive) !important;
+	font-size: 0.9em;
+	font-style: italic;
+	margin-top: 0;
+}
+
+.caption {
+	color: var(--cook-olive) !important;
+	font-size: 0.52em;
+	line-height: 1.42;
+}
+
+.cooking-mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 128px;
+	height: 128px;
+	margin: 28px auto;
+	border-radius: 50%;
+	background: linear-gradient(135deg, var(--cook-terracotta), var(--cook-blue));
+	box-shadow: 0 16px 34px rgba(191, 105, 75, 0.28);
+	color: #fff;
+	font-size: 2.2em;
+}
+
+.daily-layout {
+	display: grid;
+	grid-template-columns: 0.9fr 1.55fr;
+	gap: 30px;
+	align-items: stretch;
+	max-width: 1060px;
+	margin: 28px auto 0;
+	text-align: left;
+}
+
+.daily-intro,
+.choice-card,
+.recipe-copy,
+.overnight-copy,
+.fireplace-copy {
+	box-sizing: border-box;
+	border: 1px solid rgba(191, 105, 75, 0.24);
+	border-radius: 24px;
+	background: rgba(255, 255, 255, 0.7);
+	box-shadow: 0 12px 32px rgba(48, 40, 35, 0.08);
+}
+
+.daily-intro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 28px 30px;
+	text-align: center;
+}
+
+.daily-intro p {
+	margin: 16px 0 0;
+	font-size: 0.72em;
+	line-height: 1.44;
+}
+
+.daily-icon,
+.fire-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: #fff;
+}
+
+.daily-icon {
+	width: 86px;
+	height: 86px;
+	background: linear-gradient(135deg, var(--cook-blue), var(--cook-olive));
+	font-size: 1.55em;
+}
+
+.choice-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 18px;
+}
+
+.choice-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 215px;
+	padding: 28px;
+}
+
+.choice-card > i {
+	color: var(--cook-terracotta);
+	font-size: 1.55em;
+}
+
+.choice-card p {
+	margin: 0;
+	font-size: 0.67em;
+	line-height: 1.42;
+}
+
+.recipe-layout,
+.cake-finish-layout,
+.fireplace-layout {
+	display: grid;
+	align-items: stretch;
+	max-width: 1080px;
+	margin: 22px auto 0;
+	text-align: left;
+}
+
+.recipe-layout {
+	grid-template-columns: 0.85fr 1.15fr;
+	gap: 30px;
+}
+
+.recipe-photo,
+.fireplace-photo {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 12px;
+	border: 1px solid rgba(191, 105, 75, 0.24);
+	border-radius: 26px;
+	background: rgba(255, 255, 255, 0.76);
+	box-shadow: 0 18px 46px rgba(48, 40, 35, 0.12);
+}
+
+.recipe-photo img,
+.fireplace-photo img {
+	display: block;
+	width: 100%;
+	border-radius: 18px;
+	object-fit: cover;
+}
+
+.process-photo img {
+	height: 49vh;
+	object-position: center 78%;
+}
+
+.recipe-photo figcaption {
+	margin: 10px 8px 2px;
+	color: var(--cook-olive);
+	font-size: 0.46em;
+	text-align: center;
+}
+
+.recipe-copy {
+	padding: 24px 30px 22px;
+}
+
+.lead {
+	margin: 0 0 0.8em;
+	font-size: 0.72em;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.recipe-steps {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.recipe-steps li {
+	display: grid;
+	grid-template-columns: 42px 1fr;
+	gap: 13px;
+	align-items: start;
+	padding: 13px 0;
+	border-top: 1px solid rgba(108, 118, 84, 0.18);
+	font-size: 0.59em;
+	line-height: 1.38;
+}
+
+.step-number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: rgba(191, 105, 75, 0.14);
+	color: var(--cook-terracotta);
+	font-weight: 700;
+}
+
+.cake-finish-layout {
+	grid-template-columns: 0.92fr 1.08fr;
+	gap: 32px;
+}
+
+.cake-photo img {
+	height: 49vh;
+	object-position: center 58%;
+}
+
+.overnight-copy {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 22px 30px;
+}
+
+.overnight-step {
+	display: grid;
+	grid-template-columns: 48px 1fr;
+	gap: 16px;
+	align-items: center;
+}
+
+.overnight-step i {
+	color: var(--cook-berry);
+	font-size: 1.3em;
+	text-align: center;
+}
+
+.overnight-step p {
+	margin: 0;
+	font-size: 0.64em;
+	line-height: 1.4;
+}
+
+.arrow {
+	margin: 7px 0 7px 16px;
+	color: var(--cook-terracotta);
+	font-size: 1.35em;
+	line-height: 1;
+}
+
+.enjoy {
+	margin: 20px 0 0 !important;
+	padding: 14px 18px;
+	border-radius: 16px;
+	background: linear-gradient(135deg, rgba(168, 77, 98, 0.11), rgba(191, 105, 75, 0.12));
+	color: var(--cook-berry) !important;
+	font-size: 0.65em;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.fireplace-layout {
+	grid-template-columns: 0.9fr 1.1fr;
+	gap: 34px;
+}
+
+.fireplace-photo img {
+	height: 49vh;
+	object-position: center center;
+}
+
+.fireplace-copy {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 30px 40px;
+	text-align: center;
+}
+
+.fire-icon {
+	width: 88px;
+	height: 88px;
+	margin-bottom: 18px;
+	background: linear-gradient(135deg, var(--cook-fire), var(--cook-berry));
+	box-shadow: 0 12px 28px rgba(212, 131, 57, 0.24);
+	font-size: 1.7em;
+}
+
+.fireplace-copy > p:not(.caption) {
+	margin: 0;
+	font-size: 0.77em;
+	font-weight: 700;
+	line-height: 1.45;
+}
+
+.fireplace-copy .caption {
+	margin: 20px 0 0;
+	max-width: 470px;
+}
+
+.language-switcher {
+	position: fixed;
+	top: 22px;
+	right: 26px;
+	z-index: 30;
+	display: flex;
+	gap: 8px;
+	padding: 8px;
+	border: 1px solid rgba(108, 118, 84, 0.24);
+	border-radius: 999px;
+	background: rgba(255, 248, 237, 0.86);
+	box-shadow: 0 12px 30px rgba(48, 40, 35, 0.12);
+}
+
+.language-switcher button {
+	min-width: 48px;
+	padding: 8px 14px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--cook-olive);
+	font: 700 14px Georgia, 'Times New Roman', serif;
+	cursor: pointer;
+}
+
+.language-switcher button.is-active {
+	background: linear-gradient(135deg, var(--cook-terracotta), var(--cook-blue));
+	color: #fff;
+	box-shadow: 0 8px 18px rgba(191, 105, 75, 0.2);
+}
+
+body.lang-el [data-lang="ru"],
+body.lang-ru [data-lang="el"] {
+	display: none !important;
+}
+
+@media (max-width: 720px) {
+	.reveal .slides section {
+		padding: 34px 32px;
+	}
+
+	.daily-layout,
+	.recipe-layout,
+	.cake-finish-layout,
+	.fireplace-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.choice-grid {
+		grid-template-columns: 1fr;
+	}
+}
