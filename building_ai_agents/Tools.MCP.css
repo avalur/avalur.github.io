@@ -1,0 +1,139 @@
+/* Styles specific to the Tools and MCP presentation. */
+
+.llms-without-tools-slide {
+	color: #294a43;
+	height: 100%;
+	min-height: 640px;
+	position: relative;
+	text-align: left;
+}
+
+.llms-without-tools-slide h3 {
+	color: #294a43;
+	font-size: 1.32em;
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 1.05;
+	margin: 0;
+	text-align: left;
+	text-transform: none;
+}
+
+.llms-without-tools-limitations {
+	font-size: 0.7em;
+	line-height: 1.32;
+	margin: 74px 0 0 47px;
+	padding: 0;
+}
+
+.llms-without-tools-examples {
+	left: 4px;
+	position: absolute;
+	top: 310px;
+}
+
+.llms-without-tools-first-row {
+	display: flex;
+	gap: 25px;
+}
+
+.llms-without-tools-example {
+	background: #27282a;
+	box-sizing: border-box;
+	color: #e0e0e0;
+	font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.24;
+	margin: 0;
+	padding: 9px 12px;
+	text-align: left;
+	text-shadow: none;
+	white-space: pre;
+}
+
+.llms-without-tools-counting {
+	width: 312px;
+}
+
+.llms-without-tools-math {
+	width: 245px;
+}
+
+.llms-without-tools-updates {
+	margin-top: 46px;
+	width: 580px;
+}
+
+.llms-without-tools-actions {
+	margin-top: 46px;
+	width: 678px;
+}
+
+.llms-without-tools-doge {
+	background-color: #fff;
+	background-image: url("images/llms-without-tools-reference.png");
+	background-position: -1000px -65px;
+	background-repeat: no-repeat;
+	background-size: 1252px 641px;
+	height: 260px;
+	position: absolute;
+	right: 4px;
+	top: 58px;
+	width: 245px;
+}
+
+.what-are-tools-slide {
+	color: #294a43;
+	height: 100%;
+	min-height: 640px;
+	position: relative;
+	text-align: left;
+}
+
+.what-are-tools-slide h3 {
+	color: #294a43;
+	font-size: 1.32em;
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 1.05;
+	margin: 0;
+	text-align: left;
+	text-transform: none;
+}
+
+.what-are-tools-definition {
+	font-size: 0.7em;
+	font-weight: 500;
+	line-height: 1.32;
+	margin: 78px 0 0 10px;
+}
+
+.what-are-tools-details {
+	font-size: 0.7em;
+	line-height: 1.3;
+	margin: 70px 0 0 32px;
+}
+
+.what-are-tools-details p {
+	margin: 0 0 18px;
+}
+
+.what-are-tools-details ul {
+	margin: 0;
+	padding-left: 31px;
+}
+
+.what-are-tools-details li {
+	margin: 3px 0;
+	padding-left: 0;
+}
+
+/* Reserved for the diagram the presenter will add from the first presentation. */
+.what-are-tools-image {
+	/*height: 385px;*/
+	position: absolute;
+	right: 0;
+	top: 310px;
+	width: 65%;
+}
