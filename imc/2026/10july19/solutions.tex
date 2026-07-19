@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage[margin=0.7in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing,shapes.geometric,calc,snakes,backgrounds,arrows.meta}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\tr}{\operatorname{trace}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lcm}{\operatorname{lcm}}
+
+\begin{document}
+\pagestyle{plain}
+
+\section*{Solutions --- Mock Olympiad (IMC), Round 2, July 19, 2026}
+
+\bigskip
+
+\noindent\textbf{Problem 1.} (IMC 2015, Day 2, Problem 6)
+
+\medskip
+\noindent We claim that for every \( n \geq 1 \)
+\[
+\frac{1}{\sqrt{n}\,(n+1)} \;<\; \frac{2}{\sqrt{n}} - \frac{2}{\sqrt{n+1}}. \tag{$\ast$}
+\]
+Multiplying $(\ast)$ by \( \sqrt{n}\,(n+1) > 0 \) and using \( \tfrac{\sqrt{n}(n+1)}{\sqrt{n+1}} = \sqrt{n}\sqrt{n+1} = \sqrt{n(n+1)} \), inequality $(\ast)$ becomes
+\[
+1 < 2(n+1) - 2\sqrt{n(n+1)}, \qquad \text{i.e.} \qquad 2\sqrt{n(n+1)} < n + (n+1),
+\]
+which is the AM--GM inequality applied to \( n \) and \( n+1 \) (they are distinct, so it is strict). Summing $(\ast)$ over \( n \geq 1 \), the right-hand side telescopes:
+\[
+\sum_{n=1}^{\infty} \frac{1}{\sqrt{n}\,(n+1)} \;<\; \sum_{n=1}^{\infty} \left( \frac{2}{\sqrt{n}} - \frac{2}{\sqrt{n+1}} \right) = 2. \qquad \blacksquare
+\]
+
+\bigskip
+
+\noindent\textbf{Problem 2.} (IMC 2015, Day 2, Problem 7)
+\quad \textit{Answer: } the limit equals \( 1 \).
+
+\medskip
+\noindent \emph{Lower bound.} For \( A > 1 \) and \( 1 \leq x \leq A \) we have \( A^{1/x} > 1 \), so
+\[
+\frac{1}{A} \int_1^A A^{1/x}\, dx > \frac{1}{A} \int_1^A 1\, dx = 1 - \frac{1}{A}.
+\]
+
+\emph{Upper bound.} Fix \( \delta > 0 \) and \( K > 0 \). For \( A \) large we have \( 1 < 1 + \delta < K \log A < A \). Since \( x \mapsto A^{1/x} \) is decreasing, we bound it on each subinterval by its value at the left endpoint:
+\[
+\frac{1}{A}\int_1^A A^{1/x}\,dx
+= \frac{1}{A}\left( \int_1^{1+\delta} + \int_{1+\delta}^{K\log A} + \int_{K\log A}^{A} \right)
+< \frac{1}{A}\Big( \delta A + K(\log A) A^{\frac{1}{1+\delta}} + A\cdot A^{\frac{1}{K\log A}} \Big).
+\]
+Now \( A^{1/(K\log A)} = e^{1/K} \), so the last expression equals \( \delta + K A^{-\delta/(1+\delta)}\log A + e^{1/K} \). Combining the two bounds,
+\[
+1 - \frac{1}{A} < \frac{1}{A}\int_1^A A^{1/x}\,dx < \delta + K A^{-\delta/(1+\delta)}\log A + e^{1/K}.
+\]
+Letting \( A \to \infty \) (the middle term \( \to 0 \)) yields
+\[
+1 \leq \liminf_{A\to\infty} \frac{1}{A}\int_1^A A^{1/x}\,dx \leq \limsup_{A\to\infty} \frac{1}{A}\int_1^A A^{1/x}\,dx \leq \delta + e^{1/K}.
+\]
+Finally let \( \delta \to 0^+ \) and \( K \to \infty \); the right side tends to \( 1 \). Hence the limit exists and equals \( 1 \). \hfill\( \blacksquare \)
+
+\bigskip
+
+\noindent\textbf{Problem 3.} (IMC 2017, Day 1, Problem 4)
+
+\medskip
+\noindent We use the probabilistic method. Let \( d = 1000 \), and fix a parameter \( p \in (0,1) \). Choose the set \( S \) at random, putting each person into \( S \) independently with probability \( p \).
+
+For a fixed person \( v \), the event ``\( v \in S \) and exactly two of \( v \)'s \( d \) friends lie in \( S \)'' has probability
+\[
+q = p \cdot \binom{d}{2} p^2 (1-p)^{d-2} = \binom{d}{2} p^3 (1-p)^{d-2},
+\]
+since \( v \) is included (probability \( p \)), and independently exactly \( 2 \) of its \( d \) friends are chosen while the other \( d-2 \) are not. Note \( q \) does not depend on \( v \).
+
+Now choose \( p = \dfrac{3}{d+1} \) (the maximizer of \( q \)). Then
+\[
+q = \binom{d}{2}\left(\frac{3}{d+1}\right)^{3}\left(\frac{d-2}{d+1}\right)^{d-2}
+= \frac{27\,d(d-1)}{2(d+1)^3}\left(1 + \frac{3}{d-2}\right)^{-(d-2)}.
+\]
+Using \( \left(1 + \tfrac{3}{d-2}\right)^{d-2} < e^{3} \), we get \( \left(1 + \tfrac{3}{d-2}\right)^{-(d-2)} > e^{-3} \), hence
+\[
+q > \frac{27\,d(d-1)}{2(d+1)^3}\, e^{-3}.
+\]
+For \( d = 1000 \) this gives \( q > \dfrac{27\cdot 1000 \cdot 999}{2\cdot 1001^3}\, e^{-3} \approx 6.7\cdot 10^{-4} > \dfrac{1}{2017} \).
+
+Let \( X \) be the number of persons in \( S \) having exactly two friends in \( S \). By linearity of expectation, \( \E[X] = n q > \dfrac{n}{2017} \). Since \( X \) exceeds its mean for at least one outcome, there is a choice of \( S \) with \( X > \dfrac{n}{2017} \); in particular at least \( n/2017 \) persons in \( S \) have exactly two friends in \( S \). \hfill\( \blacksquare \)
+
+\bigskip
+
+\noindent\textbf{Problem 4.} (IMC 2019, Day 1, Problem 3)
+
+\medskip
+\noindent Set
+\[
+g(x) = x f(x) - \frac{x^2}{2}.
+\]
+Then \( g \) is twice differentiable and
+\[
+g''(x) = \big( x f(x) \big)'' - 1 = \big( 2 f'(x) + x f''(x) \big) - 1 \geq 0,
+\]
+so \( g \) is convex on \( (-1,1) \). A convex function lies above each of its tangent lines; taking the tangent at \( 0 \), with \( g(0) = 0 \) and \( g'(0) = a \), gives \( g(x) \geq a x \) for all \( x \). Therefore
+\[
+\int_{-1}^{1} x f(x)\, dx = \int_{-1}^{1} \left( g(x) + \frac{x^2}{2} \right) dx \geq \int_{-1}^{1} \left( a x + \frac{x^2}{2} \right) dx = 0 + \frac{1}{3} = \frac{1}{3},
+\]
+since \( \int_{-1}^1 a x\, dx = 0 \). \hfill\( \blacksquare \)
+
+\bigskip
+
+\noindent\textbf{Problem 5.} (IMC 2015, Day 2, Problem 10)
+
+\medskip
+\noindent Let \( M = \max_{0 \leq x \leq 1} |p(x)| \). For each positive integer \( k \) put
+\[
+J_k = \int_0^1 p(x)^{2k}\, dx.
+\]
+Since \( p(x)^{2k} \geq 0 \) and is not identically \( 0 \), we have \( 0 < J_k < M^{2k} \). Moreover \( p(x)^{2k} = \sum_{i=0}^{2kn} c_i x^i \) has integer coefficients, so
+\[
+J_k = \sum_{i=0}^{2kn} \frac{c_i}{i+1}
+\]
+is a positive rational whose denominator divides \( \lcm(1, 2, \dots, 2kn+1) \). Being positive, it is therefore at least the reciprocal of that number:
+\[
+J_k \geq \frac{1}{\lcm(1, 2, \dots, 2kn+1)}.
+\]
+By the prime number theorem, \( \log \lcm(1,2,\dots,N) \sim N \) as \( N \to \infty \). Hence for every \( \varepsilon > 0 \) and all large \( k \),
+\[
+\lcm(1,2,\dots,2kn+1) < e^{(1+\varepsilon)(2kn+1)},
+\]
+so
+\[
+M^{2k} > J_k \geq \frac{1}{e^{(1+\varepsilon)(2kn+1)}}, \qquad\text{i.e.}\qquad M > \frac{1}{e^{(1+\varepsilon)\left(n + \frac{1}{2k}\right)}}.
+\]
+Letting \( k \to \infty \) and then \( \varepsilon \to 0^+ \) gives \( M \geq \tfrac{1}{e^n} \). Since \( e \) is transcendental, equality \( M = e^{-n} \) is impossible (it would force a nontrivial algebraic relation for \( e \)), so \( M > \tfrac{1}{e^n} \). \hfill\( \blacksquare \)
+
+\end{document}
