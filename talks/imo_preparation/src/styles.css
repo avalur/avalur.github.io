@@ -1,0 +1,443 @@
+/* Layout: WebGL canvas at the bottom, CSS3D slides above it, HUD on top. */
+
+* { box-sizing: border-box; }
+
+html, body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+	background: #07080c;
+	color: #e8dcc0;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+#stage { position: fixed; inset: 0; }
+
+#gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+#css3d {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;      /* slides are decoration, clicks advance the talk */
+	overflow: hidden;
+}
+
+#hud {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	font-family: "SF Mono", "Menlo", monospace;
+}
+
+/* --- HUD ------------------------------------------------------------------ */
+
+.hud-top {
+	position: absolute;
+	top: 22px; left: 26px;
+	font-family: Georgia, serif;
+	font-size: 20px;
+	letter-spacing: 0.04em;
+	color: rgba(240, 226, 196, 0.72);
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+}
+
+/* Крупная подпись кадра — «Планета Земля» и подобное. */
+.hud-caption {
+	position: absolute;
+	left: 64px;
+	bottom: 110px;
+	max-width: 46vw;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(40px, 5.4vw, 92px);
+	line-height: 1.05;
+	letter-spacing: 0.015em;
+	color: #f6ecd4;
+	text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85), 0 0 60px rgba(0, 0, 0, 0.6);
+	opacity: 0;
+	transform: translateY(18px);
+	transition: opacity 1.1s ease-out, transform 1.1s ease-out;
+}
+.hud-caption.on { opacity: 1; transform: none; }
+
+.hud-counter {
+	position: absolute;
+	right: 24px; bottom: 20px;
+	font-size: 12px;
+	color: rgba(240, 226, 196, 0.4);
+}
+
+.hud-notes {
+	position: absolute;
+	left: 26px; right: 26px; bottom: 44px;
+	max-width: 900px;
+	padding: 12px 16px;
+	font-family: Georgia, serif;
+	font-size: 16px;
+	line-height: 1.45;
+	color: #f3e7c9;
+	background: rgba(18, 14, 10, 0.78);
+	border-left: 3px solid #c8a44e;
+	border-radius: 3px;
+	opacity: 0;
+	transform: translateY(8px);
+	transition: opacity 0.25s, transform 0.25s;
+}
+.hud-notes.on { opacity: 1; transform: none; }
+
+.hud-help {
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -46%) scale(0.97);
+	padding: 22px 28px;
+	background: rgba(16, 13, 9, 0.9);
+	border: 1px solid rgba(200, 164, 78, 0.35);
+	border-radius: 6px;
+	font-size: 13px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s, transform 0.2s;
+}
+.hud-help.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.hud-help h3 { margin: 0 0 12px; font-family: Georgia, serif; font-size: 15px; color: #e6c877; font-weight: normal; }
+.hud-help td { padding: 3px 14px 3px 0; color: rgba(240, 226, 196, 0.85); }
+.hud-help td:first-child { color: #e6c877; white-space: nowrap; }
+
+.hud-dev {
+	position: absolute;
+	left: 26px; bottom: 18px;
+	font-size: 11px;
+	color: rgba(160, 220, 160, 0.6);
+	display: none;
+}
+.hud-dev.on { display: block; }
+
+.hud-flash {
+	position: absolute;
+	top: 22px; right: 24px;
+	padding: 6px 12px;
+	font-size: 12px;
+	background: rgba(16, 13, 9, 0.85);
+	border-radius: 3px;
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+.hud-flash.on { opacity: 1; }
+
+/* --- slides on the blackboard --------------------------------------------- */
+
+.slide-frame {
+	width: 1280px;
+	height: 720px;
+	display: flex;
+}
+
+.slide {
+	flex: 1;
+	padding: 70px 84px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	animation: slide-in 0.55s ease-out both;
+}
+
+/* ?still — freeze the entrance animations (screenshots, printed stills). */
+body.still .slide { animation: none !important; }
+body.still .hud-caption.on { opacity: 1; transform: none; transition: none; }
+
+@keyframes slide-in {
+	from { opacity: 0; transform: translateY(14px); }
+	to { opacity: 1; transform: none; }
+}
+
+/* Chalk: no background at all, so the real 3D blackboard shows through. */
+.slide.chalk {
+	background: transparent;
+	color: #efe9d6;
+	text-shadow: 0 0 5px rgba(255, 255, 255, 0.22);
+}
+.slide.chalk h1 { font-size: 132px; letter-spacing: 0.06em; }
+.slide.chalk .kicker { color: #cfe3c6; }
+
+/* Dark: чёрный фон вместо доски — титульный слайд. Доска зеленоватая, поэтому
+   чёрный кладём прямоугольником поверх неё; узкая рамка доски остаётся видна. */
+.slide.dark {
+	background: #000;
+	color: #f2ecdc;
+	text-shadow: none;
+}
+.slide.dark h1 { font-size: 72px; line-height: 1.14; margin-bottom: 0; }
+/* Регистр в кикере — как написано в слайде: «Larnaka Roof Talks», не КАПСОМ. */
+.slide.dark .kicker { color: #d8c68e; margin-bottom: 40px; text-transform: none; font-size: 30px; letter-spacing: 0.12em; }
+.slide.dark .byline { margin-top: 54px; font-size: 32px; opacity: 0.72; }
+/* Ссылки на слайде — это подпись источника, а не кнопка (слой CSS3D не ловит
+   клики). Браузерный синий на чёрном не читается, поэтому цвет текста плюс
+   тонкая линия снизу. */
+.slide.dark a {
+	color: inherit;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(232, 213, 154, 0.4);
+}
+
+/* Poster: стенд на правой стене. Холст меньше (800×450), поэтому и отбивки
+   меньше — кегли остаются те же, и на узком плакате текст выходит крупнее. */
+.slide.poster {
+	padding: 40px 48px;
+	background: #e8dcbd;
+	color: #2b2118;
+	border: 8px solid #cbb98f;
+	text-shadow: none;
+}
+.slide.poster h2 { margin-bottom: 18px; }
+.slide.poster .note { margin-top: 18px; }
+
+/* Bio: портрет слева, текст справа. Кегль в тексте меньше обычного — колонка
+   вдвое уже слайда, иначе три длинные строки расползаются на весь кадр. */
+.slide.bio { flex-direction: row; align-items: center; gap: 54px; }
+.slide.bio .portrait {
+	flex: none;
+	width: 400px;
+	height: 400px;
+	object-fit: cover;
+	border: 5px solid #2f2a22;
+}
+.slide.bio .bio-text { flex: 1; }
+.slide.bio h2 { font-size: 54px; margin-bottom: 28px; }
+.slide.bio ul { list-style: none; padding-left: 0; font-size: 27px; line-height: 1.45; }
+.slide.bio li { position: relative; margin-bottom: 18px; padding-left: 28px; }
+.slide.bio li::before { content: '—'; position: absolute; left: 0; opacity: 0.5; }
+
+/* Story: рассказ сверху, фотография с подписью снизу.
+   Холст 1280×720 не тянется, а текст правят чаще, чем вёрстку, поэтому высота
+   фотографии не задана: figure забирает остаток колонки, и снимок сам сжимается,
+   если в рассказе прибавилась строка. */
+.slide.story { justify-content: flex-start; gap: 18px; }
+.slide.story h2 { font-size: 46px; margin-bottom: 0; }
+.slide.story p { margin: 0; font-size: 25px; line-height: 1.45; }
+.slide.story ul { list-style: none; margin: 0; padding-left: 0; font-size: 25px; line-height: 1.45; }
+.slide.story li { margin-bottom: 8px; }
+.slide.story li b { font-weight: normal; color: #e8d59a; }
+.slide.story figure {
+	margin: 0;
+	display: flex;
+	align-items: flex-end;
+	gap: 26px;
+	flex: 1 1 auto;
+	min-height: 0;
+}
+/* max-width обязателен: при расчёте min-content высота 100 % не определена, и
+   без него снимок подставляет свою натуральную ширину (1277 px) и растягивает
+   слайд шире холста — текст уезжает за правый край кадра. */
+.slide.story figure img {
+	height: 100%;
+	width: auto;
+	max-width: 680px;
+	object-fit: contain;
+	border: 4px solid #2f2a22;
+	display: block;
+}
+.slide.story figcaption { font-size: 21px; line-height: 1.4; opacity: 0.62; padding-bottom: 6px; }
+
+/* Roster: список «год — имя». Две колонки грида: годы выровнены друг под
+   другом, длинная строка переносится под именем. */
+.slide.roster h2 { font-size: 54px; margin-bottom: 34px; }
+/* Кегль подобран под восемь строк: список ещё вырастет, и лишний ряд не должен
+   выпихивать заголовок за отбивку — холст 1280×720 не тянется. */
+.slide.roster ul {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	column-gap: 34px;
+	row-gap: 16px;
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+	font-size: 30px;
+	line-height: 1.3;
+}
+.slide.roster li { display: contents; }
+.slide.roster .y { color: #e8d59a; white-space: nowrap; }
+/* Многоточие вместо пропущенных лет — в столбце годов. Глиф ⋮ мелкий, поэтому
+   набираем его точками покрупнее и с разрядкой по вертикали. */
+.slide.roster .gap .y {
+	display: inline-block;
+	color: rgba(232, 213, 154, 0.6);
+	font-size: 30px;
+	line-height: 0.62;
+	padding: 2px 0;
+}
+
+/* Санкт-Петербург: обложка книги слева, рассказ справа.
+   Высоту обложки не задаём — строка забирает остаток слайда под заголовком, и
+   снимок сам сжимается, если в тексте прибавится строка (холст 1280×720 не
+   тянется). max-width обязателен по той же причине, что и в .story: при
+   min-content высота 100 % не определена, и без него обложка подставляет свою
+   натуральную ширину (701 px) и выпихивает текст за правый край кадра. */
+.slide.spb { justify-content: flex-start; gap: 30px; }
+.slide.spb h2 { font-size: 54px; margin-bottom: 0; }
+.slide.spb .row {
+	display: flex;
+	align-items: center;
+	gap: 48px;
+	flex: 1 1 auto;
+	min-height: 0;
+}
+.slide.spb .row img {
+	flex: none;
+	height: 100%;
+	width: auto;
+	max-width: 470px;
+	object-fit: contain;
+	border: 4px solid #2f2a22;
+	display: block;
+}
+.slide.spb p { margin: 0; font-size: 28px; line-height: 1.5; }
+
+/* Famous: слева имя с годами и медалями, справа — чем человек известен.
+   Кегли подобраны под шесть строк, из которых две переносятся; седьмая строка
+   на холст 1280×720 уже не влезет — либо ужимать, либо делать второй слайд. */
+.slide.famous h2 { font-size: 50px; margin-bottom: 26px; }
+.slide.famous ul {
+	display: grid;
+	grid-template-columns: minmax(0, 310px) 1fr;
+	column-gap: 34px;
+	row-gap: 18px;
+	margin: 0;
+	padding-left: 0;
+	list-style: none;
+}
+.slide.famous li { display: contents; }
+.slide.famous .who { font-size: 27px; line-height: 1.2; }
+.slide.famous .y {
+	display: block;
+	margin-top: 5px;
+	font-size: 20px;
+	color: #e8d59a;
+	opacity: 0.85;
+}
+/* Буква медали — не жирная, а цветом: золото и бронза читаются с дальнего ряда
+   быстрее, чем начертание. */
+.slide.famous .y b { font-weight: normal; color: #f3d778; }
+.slide.famous .y b.bronze { color: #cd9a6a; }
+.slide.famous .what { font-size: 24px; line-height: 1.35; opacity: 0.92; }
+
+/* Chart: страница из research/ во весь слайд, своими отбивками (?embed).
+   Фон задан и слайду, и самому iframe: пока страница грузится, на чёрной доске
+   не должно мигать белым. */
+.slide.chart { padding: 0; background: #0d0d0d; }
+.slide.chart iframe {
+	flex: 1;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	background: #0d0d0d;
+	display: block;
+}
+
+/* Photo: фотография во всю картину, без отбивок. Пропорции рамы совпадают с
+   пропорциями снимка (см. PANELS в classroom.js), поэтому cover ничего не режет. */
+.slide.photo { padding: 0; background: #12100c; position: relative; }
+.slide.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Плашка со ссылкой на настоящий сайт. Клики по докладу слушает сам WebGL-канвас,
+   а слой CSS3D прозрачен для мыши (pointer-events: none) — поэтому здесь мышь
+   включаем обратно: по плашке открывается сайт, по остальному кадру доклад
+   листается как обычно. */
+.slide.photo .source {
+	position: absolute;
+	right: 20px;
+	bottom: 16px;
+	padding: 9px 16px;
+	background: rgba(16, 13, 9, 0.88);
+	border: 1px solid rgba(200, 164, 78, 0.5);
+	border-radius: 4px;
+	color: #f0e3bd;
+	font-size: 26px;
+	text-decoration: none;
+	white-space: nowrap;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.slide.photo .source:hover { background: rgba(38, 30, 18, 0.95); }
+
+/* Howto: финальный слайд. Заголовок набран точками на холсте (slides/balls.js),
+   .head — пустой блок, который держит под него место в потоке: так вёрстка
+   остаётся здесь, а не разъезжается по двум файлам. Холст лежит поверх всего
+   слайда, чтобы осколки могли разлетаться и над списком. */
+.slide.howto { position: relative; }
+.slide.howto .balls {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+.slide.howto .head { height: 150px; flex: none; }
+.slide.howto ol {
+	margin: 0;
+	padding-left: 1.15em;
+	font-size: 30px;
+	line-height: 1.4;
+}
+.slide.howto li { margin-bottom: 14px; padding-left: 6px; }
+.slide.howto li::marker { color: #e8d59a; }
+/* Ссылка на канал — вторая кликабельная точка доклада: слой CSS3D закрыт для
+   мыши, здесь она включена обратно (как у плашки источника на «Совёнке»). */
+.slide.howto .tg {
+	align-self: flex-start;
+	margin-top: 26px;
+	padding: 8px 18px;
+	border: 1px solid rgba(200, 164, 78, 0.55);
+	border-radius: 5px;
+	color: #f0e3bd;
+	font-size: 27px;
+	text-decoration: none;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.slide.howto .tg:hover { background: rgba(38, 30, 18, 0.95); }
+
+/* Paper: a sheet pinned to the board. */
+.slide.paper {
+	background: #efe3c8;
+	color: #2b2118;
+	border: 10px solid #d9c9a3;
+	box-shadow: inset 0 0 60px rgba(120, 96, 60, 0.25);
+	text-shadow: none;
+}
+
+.slide h1 {
+	margin: 0 0 18px;
+	font-size: 104px;
+	font-weight: normal;
+	line-height: 1;
+}
+
+.slide h2 {
+	margin: 0 0 34px;
+	font-size: 64px;
+	font-weight: normal;
+	line-height: 1.05;
+}
+
+.slide .kicker {
+	font-size: 26px;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	margin-bottom: 26px;
+	opacity: 0.75;
+}
+
+.slide .lead { font-size: 38px; line-height: 1.35; margin: 0; }
+
+.slide ul { margin: 0; padding-left: 1.1em; font-size: 40px; line-height: 1.6; }
+.slide li { margin-bottom: 10px; }
+
+.slide .grid3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 40px;
+	text-align: center;
+}
+.slide .grid3 b { display: block; font-size: 76px; font-weight: normal; }
+.slide .grid3 span { display: block; font-size: 24px; opacity: 0.75; margin-top: 8px; }
+
+.slide .note, .slide .sign { margin-top: 30px; font-size: 20px; opacity: 0.5; }

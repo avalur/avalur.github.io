@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="author" content="Alex Avdiushenko">
+	<meta name="description" content="3D-доклад про ФМШ: пролёт от Земли до Академгородка">
+	<title>ФМШ — 3D-доклад</title>
+
+	<link rel="stylesheet" href="./src/styles.css">
+
+	<!-- Everything is vendored locally: no CDN, no network at showtime. -->
+	<script type="importmap">
+	{
+		"imports": {
+			"three": "./vendor/three/build/three.module.min.js",
+			"three/addons/": "./vendor/three/addons/"
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="stage">
+		<canvas id="gl"></canvas>
+		<div id="css3d"></div>
+		<div id="hud"></div>
+	</div>
+
+	<noscript>
+		<p style="color:#e8dcc0;font:16px Georgia,serif;padding:2rem">
+			Для этого доклада нужен включённый JavaScript и WebGL.
+		</p>
+	</noscript>
+
+	<script type="module" src="./src/main.js"></script>
+</body>
+</html>

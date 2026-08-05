@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Сборная СССР/России на IMO: Москва / Петербург / Регионы</title>
+<script>
+  // ?embed — страница показывается внутри доклада (слайд «Откуда сборная»,
+  // iframe в 3D-сцене). Тему ставим здесь, до первой отрисовки: иначе на чёрной
+  // доске мигнёт белая страница.
+  if (location.search.includes('embed')) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.classList.add('embed');
+  }
+</script>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --moscow:         #2a78d6;
+    --spb:            #eb6834;
+    --regions:        #1baf7a;
+    --unknown:        #d8d6cd;
+    --unknown-text:   #6b6a65;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --page:           #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --grid:           #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --moscow:         #3987e5;
+      --spb:            #d95926;
+      --regions:        #199e70;
+      --unknown:        #33322f;
+      --unknown-text:   #9c9a94;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --page:           #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --grid:           #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --moscow:         #3987e5;
+    --spb:            #d95926;
+    --regions:        #199e70;
+    --unknown:        #33322f;
+    --unknown-text:   #9c9a94;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--page);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .viz-root { background: var(--page); padding: 28px 16px 48px; }
+  .card {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px 20px;
+  }
+  h1 {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+  }
+  .subtitle {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin: 0 0 18px;
+    line-height: 1.5;
+    max-width: 720px;
+  }
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin: 2px 0 14px;
+  }
+  .legend .item { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+  .theme-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .theme-btn:hover { color: var(--text-primary); }
+
+  .chart-wrap { position: relative; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .axis-label { fill: var(--text-muted); font-size: 10.5px; }
+  .gridline { stroke: var(--grid); stroke-width: 1; shape-rendering: crispEdges; }
+  .baseline { stroke: var(--baseline); stroke-width: 1; }
+  .era-line { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 2 3; opacity: 0.7; }
+  .era-label { fill: var(--text-muted); font-size: 10px; font-style: italic; }
+
+  .seg { cursor: default; }
+  .col-hit { fill: transparent; }
+  .col-hit:hover + g .seg,
+  .colgroup:hover .seg { filter: brightness(1.06); }
+
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    min-width: 150px;
+    opacity: 0;
+    transition: opacity 0.08s;
+    z-index: 5;
+  }
+  .tooltip.show { opacity: 1; }
+  .tooltip .t-year { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
+  .tooltip .row { display: flex; justify-content: space-between; gap: 14px; padding: 1px 0; }
+  .tooltip .row .k { display: flex; align-items: center; gap: 6px; }
+  .tooltip .row .key { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; }
+  .tooltip .row .v { font-weight: 600; color: var(--text-primary); }
+  .tooltip .total { margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 11px; }
+
+  details.table-toggle { margin-top: 18px; }
+  details.table-toggle > summary {
+    cursor: pointer;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    user-select: none;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  table.data-table th, table.data-table td {
+    text-align: right;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--grid);
+    color: var(--text-secondary);
+  }
+  table.data-table th:first-child, table.data-table td:first-child { text-align: left; }
+  table.data-table th { color: var(--text-muted); font-weight: 500; }
+  table.data-table td.year-cell { color: var(--text-primary); font-weight: 600; }
+
+  .footnote {
+    margin-top: 14px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 720px;
+  }
+
+  /* --- ?embed: страница внутри слайда доклада ------------------------------
+     Со слайда убираем всё, что руками не потрогать: переключатель темы,
+     таблицу и сноску (её докладчик проговаривает вслух). Карточка занимает
+     весь кадр — рамка и скругление ни к чему, — а кегли крупнее: слайд смотрят
+     с проектора, а не с ноутбука. */
+  :root.embed .viz-root { padding: 0; }
+  :root.embed .card {
+    max-width: none;
+    border: 0;
+    border-radius: 0;
+    padding: 26px 30px 12px;
+    /* карточка на всю высоту кадра: иначе под графиком остаётся полоса фона
+       другого оттенка — на слайде это выглядит как обрезанная страница */
+    min-height: 100vh;
+  }
+  :root.embed .theme-btn,
+  :root.embed details.table-toggle,
+  :root.embed .footnote { display: none; }
+  :root.embed h1 { font-size: 30px; margin-bottom: 8px; }
+  :root.embed .subtitle { font-size: 17px; max-width: none; margin-bottom: 14px; }
+  :root.embed .legend { font-size: 17px; gap: 26px; margin-bottom: 10px; }
+  :root.embed .legend .swatch { width: 14px; height: 14px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <div class="card">
+    <div class="toolbar">
+      <div>
+        <h1>Откуда участники сборной СССР/России на IMO</h1>
+        <p class="subtitle">Доля межнарников по месту учёбы на момент участия (город школы; при
+          отсутствии данных — родной город). 350 участников, 1959–2026, включая нейтральный статус 2022–2025.</p>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button">🌓 тема</button>
+    </div>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="chart-wrap">
+      <svg id="chart" viewBox="0 0 940 380" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <details class="table-toggle">
+      <summary>Показать как таблицу</summary>
+      <div id="tableHolder"></div>
+    </details>
+
+    <p class="footnote">
+      «Регионы» — всё, что не Москва и не Санкт-Петербург/Ленинград (в том числе другие
+      республики СССР). «Нет данных» — город учёбы/рождения не удалось установить по открытым
+      источникам; для 1960-х–1980-х это часто половина команды и больше, для 2011+ — почти всегда 0.
+      Пропущены года без соревнования или без участия сборной СССР: 1960, 1961, 1978, 1980.
+      Источник: <code>participants.csv</code> в этом каталоге.
+    </p>
+  </div>
+</div>
+
+<script>
+const DATA = [{"year":1959,"total":4,"Moscow":0,"SPb":0,"Regions":1,"Unknown":3},{"year":1962,"total":6,"Moscow":3,"SPb":1,"Regions":1,"Unknown":1},{"year":1963,"total":8,"Moscow":0,"SPb":0,"Regions":2,"Unknown":6},{"year":1964,"total":8,"Moscow":3,"SPb":1,"Regions":1,"Unknown":3},{"year":1965,"total":8,"Moscow":3,"SPb":0,"Regions":0,"Unknown":5},{"year":1966,"total":8,"Moscow":1,"SPb":0,"Regions":2,"Unknown":5},{"year":1967,"total":8,"Moscow":2,"SPb":2,"Regions":0,"Unknown":4},{"year":1968,"total":8,"Moscow":0,"SPb":0,"Regions":1,"Unknown":7},{"year":1969,"total":8,"Moscow":2,"SPb":0,"Regions":2,"Unknown":4},{"year":1970,"total":6,"Moscow":1,"SPb":0,"Regions":0,"Unknown":5},{"year":1971,"total":8,"Moscow":3,"SPb":0,"Regions":0,"Unknown":5},{"year":1972,"total":8,"Moscow":1,"SPb":1,"Regions":0,"Unknown":6},{"year":1973,"total":8,"Moscow":0,"SPb":0,"Regions":1,"Unknown":7},{"year":1974,"total":8,"Moscow":0,"SPb":3,"Regions":2,"Unknown":3},{"year":1975,"total":8,"Moscow":1,"SPb":1,"Regions":1,"Unknown":5},{"year":1976,"total":8,"Moscow":1,"SPb":2,"Regions":0,"Unknown":5},{"year":1977,"total":8,"Moscow":1,"SPb":0,"Regions":2,"Unknown":5},{"year":1979,"total":8,"Moscow":1,"SPb":0,"Regions":0,"Unknown":7},{"year":1981,"total":6,"Moscow":0,"SPb":0,"Regions":1,"Unknown":5},{"year":1982,"total":4,"Moscow":0,"SPb":1,"Regions":2,"Unknown":1},{"year":1983,"total":6,"Moscow":0,"SPb":0,"Regions":0,"Unknown":6},{"year":1984,"total":6,"Moscow":0,"SPb":1,"Regions":1,"Unknown":4},{"year":1985,"total":6,"Moscow":0,"SPb":0,"Regions":1,"Unknown":5},{"year":1986,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":1987,"total":6,"Moscow":0,"SPb":2,"Regions":0,"Unknown":4},{"year":1988,"total":6,"Moscow":0,"SPb":2,"Regions":0,"Unknown":4},{"year":1989,"total":6,"Moscow":1,"SPb":2,"Regions":0,"Unknown":3},{"year":1990,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":1991,"total":6,"Moscow":1,"SPb":1,"Regions":1,"Unknown":3},{"year":1992,"total":6,"Moscow":0,"SPb":1,"Regions":1,"Unknown":4},{"year":1993,"total":6,"Moscow":1,"SPb":1,"Regions":1,"Unknown":3},{"year":1994,"total":6,"Moscow":0,"SPb":1,"Regions":1,"Unknown":4},{"year":1995,"total":6,"Moscow":1,"SPb":1,"Regions":0,"Unknown":4},{"year":1996,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":1997,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":1998,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":1999,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":2000,"total":6,"Moscow":0,"SPb":1,"Regions":1,"Unknown":4},{"year":2001,"total":6,"Moscow":0,"SPb":1,"Regions":4,"Unknown":1},{"year":2002,"total":6,"Moscow":0,"SPb":2,"Regions":3,"Unknown":1},{"year":2003,"total":6,"Moscow":0,"SPb":0,"Regions":2,"Unknown":4},{"year":2004,"total":6,"Moscow":0,"SPb":1,"Regions":1,"Unknown":4},{"year":2005,"total":6,"Moscow":0,"SPb":1,"Regions":1,"Unknown":4},{"year":2006,"total":6,"Moscow":1,"SPb":3,"Regions":1,"Unknown":1},{"year":2007,"total":6,"Moscow":1,"SPb":2,"Regions":3,"Unknown":0},{"year":2008,"total":6,"Moscow":0,"SPb":1,"Regions":0,"Unknown":5},{"year":2009,"total":6,"Moscow":0,"SPb":0,"Regions":0,"Unknown":6},{"year":2010,"total":6,"Moscow":1,"SPb":1,"Regions":1,"Unknown":3},{"year":2011,"total":6,"Moscow":2,"SPb":0,"Regions":4,"Unknown":0},{"year":2012,"total":6,"Moscow":1,"SPb":1,"Regions":4,"Unknown":0},{"year":2013,"total":6,"Moscow":2,"SPb":2,"Regions":2,"Unknown":0},{"year":2014,"total":6,"Moscow":1,"SPb":1,"Regions":1,"Unknown":3},{"year":2015,"total":6,"Moscow":2,"SPb":1,"Regions":3,"Unknown":0},{"year":2016,"total":6,"Moscow":3,"SPb":2,"Regions":1,"Unknown":0},{"year":2017,"total":6,"Moscow":2,"SPb":0,"Regions":4,"Unknown":0},{"year":2018,"total":6,"Moscow":2,"SPb":2,"Regions":2,"Unknown":0},{"year":2019,"total":6,"Moscow":4,"SPb":1,"Regions":1,"Unknown":0},{"year":2020,"total":6,"Moscow":3,"SPb":1,"Regions":2,"Unknown":0},{"year":2021,"total":6,"Moscow":3,"SPb":2,"Regions":1,"Unknown":0},{"year":2022,"total":6,"Moscow":1,"SPb":4,"Regions":1,"Unknown":0},{"year":2023,"total":6,"Moscow":0,"SPb":4,"Regions":2,"Unknown":0},{"year":2024,"total":6,"Moscow":0,"SPb":4,"Regions":2,"Unknown":0},{"year":2025,"total":6,"Moscow":1,"SPb":1,"Regions":4,"Unknown":0},{"year":2026,"total":6,"Moscow":2,"SPb":2,"Regions":2,"Unknown":0}];
+
+const CATS = [
+  { key: "Moscow",   label: "Москва",             cssVar: "--moscow" },
+  { key: "SPb",       label: "СПб / Ленинград",    cssVar: "--spb" },
+  { key: "Regions",   label: "Регионы",            cssVar: "--regions" },
+  { key: "Unknown",   label: "Нет данных",         cssVar: "--unknown" },
+];
+
+function cssVar(name) {
+  return getComputedStyle(document.querySelector(".viz-root")).getPropertyValue(name).trim();
+}
+
+function buildLegend() {
+  const legend = document.getElementById("legend");
+  legend.innerHTML = "";
+  CATS.forEach(c => {
+    const item = document.createElement("span");
+    item.className = "item";
+    const sw = document.createElement("span");
+    sw.className = "swatch";
+    sw.style.background = `var(${c.cssVar})`;
+    item.appendChild(sw);
+    const txt = document.createElement("span");
+    txt.textContent = c.label;
+    item.appendChild(txt);
+    legend.appendChild(item);
+  });
+}
+
+const W = 940, H = 380;
+const M = { top: 22, right: 8, bottom: 34, left: 34 };
+const plotW = W - M.left - M.right;
+const plotH = H - M.top - M.bottom;
+
+function render() {
+  const svg = document.getElementById("chart");
+  svg.innerHTML = "";
+  const n = DATA.length;
+  const bandW = plotW / n;
+  const barW = Math.max(2, Math.min(14, bandW - 2));
+
+  const ns = "http://www.w3.org/2000/svg";
+  const g = document.createElementNS(ns, "g");
+  g.setAttribute("transform", `translate(${M.left},${M.top})`);
+  svg.appendChild(g);
+
+  // gridlines at 0/25/50/75/100%
+  [0, 25, 50, 75, 100].forEach(pct => {
+    const y = plotH - (pct / 100) * plotH;
+    const line = document.createElementNS(ns, "line");
+    line.setAttribute("x1", 0); line.setAttribute("x2", plotW);
+    line.setAttribute("y1", y); line.setAttribute("y2", y);
+    line.setAttribute("class", pct === 0 ? "baseline" : "gridline");
+    g.appendChild(line);
+
+    const label = document.createElementNS(ns, "text");
+    label.setAttribute("x", -8); label.setAttribute("y", y + 3);
+    label.setAttribute("text-anchor", "end");
+    label.setAttribute("class", "axis-label");
+    label.textContent = pct + "%";
+    g.appendChild(label);
+  });
+
+  // era reference lines: 1992 (USSR->Russia), 2022 (neutral status begins)
+  function eraLine(year, label) {
+    const idx = DATA.findIndex(d => d.year === year);
+    if (idx === -1) return;
+    const x = idx * bandW + bandW / 2;
+    const line = document.createElementNS(ns, "line");
+    line.setAttribute("x1", x); line.setAttribute("x2", x);
+    line.setAttribute("y1", -14); line.setAttribute("y2", plotH);
+    line.setAttribute("class", "era-line");
+    g.appendChild(line);
+    const flip = x > plotW * 0.62;
+    const t = document.createElementNS(ns, "text");
+    t.setAttribute("x", x + (flip ? -5 : 5));
+    t.setAttribute("y", -6);
+    t.setAttribute("text-anchor", flip ? "end" : "start");
+    t.setAttribute("class", "era-label");
+    t.textContent = label;
+    g.appendChild(t);
+  }
+  eraLine(1992, "Россия");
+
+  // year axis ticks every 5 years (+ first/last), skipping a mult-5 tick
+  // that would collide with the forced last tick
+  const lastYear = DATA[n - 1].year;
+  DATA.forEach((d, i) => {
+    const isEdge = i === 0 || i === n - 1;
+    if (!isEdge) {
+      if (d.year % 5 !== 0) return;
+      if (i === n - 2 && lastYear % 5 !== 0) return; // would collide with last tick
+    }
+    const x = i * bandW + bandW / 2;
+    const t = document.createElementNS(ns, "text");
+    t.setAttribute("x", x); t.setAttribute("y", plotH + 16);
+    t.setAttribute("text-anchor", "middle");
+    t.setAttribute("class", "axis-label");
+    t.textContent = d.year;
+    g.appendChild(t);
+  });
+
+  const tooltip = document.getElementById("tooltip");
+  const wrap = document.querySelector(".chart-wrap");
+
+  DATA.forEach((d, i) => {
+    const x = i * bandW + (bandW - barW) / 2;
+    const colgroup = document.createElementNS(ns, "g");
+    colgroup.setAttribute("class", "colgroup");
+
+    let cursor = 0; // fraction from bottom
+    CATS.forEach(c => {
+      const frac = d.total ? d[c.key] / d.total : 0;
+      if (frac <= 0) return;
+      const yTop = plotH - (cursor + frac) * plotH;
+      const segH = frac * plotH;
+      const inset = segH > 3 ? 1 : 0;
+      const rect = document.createElementNS(ns, "rect");
+      rect.setAttribute("x", x);
+      rect.setAttribute("y", yTop + inset);
+      rect.setAttribute("width", barW);
+      rect.setAttribute("height", Math.max(0, segH - inset * 2));
+      rect.setAttribute("rx", 1.5);
+      rect.setAttribute("fill", `var(${c.cssVar})`);
+      rect.setAttribute("class", "seg");
+      colgroup.appendChild(rect);
+      cursor += frac;
+    });
+
+    // transparent full-height hit target for the whole year-column
+    const hit = document.createElementNS(ns, "rect");
+    hit.setAttribute("x", i * bandW);
+    hit.setAttribute("y", 0);
+    hit.setAttribute("width", bandW);
+    hit.setAttribute("height", plotH);
+    hit.setAttribute("class", "col-hit");
+    hit.style.cursor = "pointer";
+
+    function showTip(evt) {
+      colgroup.style.filter = "brightness(1.06)";
+      const rows = CATS.map(c => {
+        const val = d[c.key];
+        const pct = d.total ? Math.round((val / d.total) * 100) : 0;
+        return `<div class="row"><span class="k"><span class="key" style="background:var(${c.cssVar})"></span>${c.label}</span><span class="v">${val} · ${pct}%</span></div>`;
+      }).join("");
+      tooltip.innerHTML = `<div class="t-year">${d.year}</div>${rows}<div class="total">всего в команде: ${d.total}</div>`;
+      tooltip.classList.add("show");
+      const wrapRect = wrap.getBoundingClientRect();
+      const px = (i + 0.5) * bandW * (wrapRect.width / W) + M.left * (wrapRect.width / W);
+      let left = px - 75;
+      left = Math.max(4, Math.min(left, wrapRect.width - 160));
+      tooltip.style.left = left + "px";
+      tooltip.style.top = "6px";
+    }
+    function hideTip() {
+      colgroup.style.filter = "";
+      tooltip.classList.remove("show");
+    }
+    hit.addEventListener("mouseenter", showTip);
+    hit.addEventListener("mousemove", showTip);
+    hit.addEventListener("mouseleave", hideTip);
+    hit.addEventListener("focus", showTip);
+    hit.addEventListener("blur", hideTip);
+    hit.setAttribute("tabindex", "0");
+    hit.setAttribute("role", "img");
+    hit.setAttribute("aria-label", `${d.year}: Москва ${d.Moscow}, СПб ${d.SPb}, Регионы ${d.Regions}, нет данных ${d.Unknown}, всего ${d.total}`);
+
+    g.appendChild(colgroup);
+    g.appendChild(hit);
+  });
+}
+
+function buildTable() {
+  const holder = document.getElementById("tableHolder");
+  const table = document.createElement("table");
+  table.className = "data-table";
+  const thead = document.createElement("thead");
+  thead.innerHTML = "<tr><th>Год</th><th>Всего</th><th>Москва</th><th>СПб</th><th>Регионы</th><th>Нет данных</th></tr>";
+  table.appendChild(thead);
+  const tbody = document.createElement("tbody");
+  DATA.forEach(d => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="year-cell">${d.year}</td><td>${d.total}</td><td>${d.Moscow}</td><td>${d.SPb}</td><td>${d.Regions}</td><td>${d.Unknown}</td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  holder.innerHTML = "";
+  holder.appendChild(table);
+}
+
+function initTheme() {
+  // В докладе тема всегда тёмная — под цвет доски; выбор, сохранённый на этой
+  // же странице раньше, встроенный слайд не касается.
+  if (document.documentElement.classList.contains("embed")) return;
+  const btn = document.getElementById("themeBtn");
+  const stored = localStorage.getItem("imo-chart-theme");
+  if (stored) document.documentElement.setAttribute("data-theme", stored);
+  btn.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("imo-chart-theme", next);
+  });
+}
+
+buildLegend();
+render();
+buildTable();
+initTheme();
+window.addEventListener("resize", render);
+</script>
+</body>
+</html>
