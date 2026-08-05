@@ -321,3 +321,9 @@ mnist/*
 /cs_basics/PatternPractice/build/
 /building_ai_agents/.env
 /building_ai_agents/intro_practice/tau2-bench/
+
+## Secrets: любой .env на любом уровне, а не только в перечисленных выше папках.
+## Шаблоны (.env.example) остаются в репозитории — по ним заводят свой .env.
+.env
+.env.*
+!.env.example
