@@ -1,0 +1,101 @@
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb,amsmath,amsfonts,amsthm,amscd,latexsym,graphicx,epsfig,colordvi}
+\usepackage[mag=1000,a4paper,left=2cm,right=1.5cm,top=2cm,bottom=1cm,noheadfoot]{geometry}
+\usepackage{graphics}
+\usepackage{arcs}
+\usepackage{verbatim}
+\usepackage[T2A]{fontenc}
+
+\newlength{\logowidth}\setlength{\logowidth}{2.67cm}
+\newlength{\logogap}\setlength{\logogap}{0.4cm}
+
+\def\head#1#2#3{
+    \noindent
+    \begin{minipage}[b]{\dimexpr\linewidth-\logowidth-\logogap\relax}
+        \centering
+        \normalsize
+        { \em
+            \small
+            Летние сборы Новосибирского математического кружка <<Совёнок>>
+
+            Новосибирск, 2026}{\it\ г.}\quad
+            \textbf{{ https://www.sovenok.academy/ }}
+
+        \vspace{5pt}
+        \hrule
+        \vspace{16pt}
+
+        {\LARGE\bf#3}
+
+        \vspace{2pt}
+        {\normalsize\bf#2 $\bullet$ #1 класс}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[b]{\logowidth}
+        \epsfig{file=logo.eps,width=\logowidth}
+    \end{minipage}
+
+    \vspace{6pt}
+    }
+
+\def\raz{{\bf Разминка}}
+
+\def\osn{\medskip
+
+{\bf Основные задачи}}
+
+\def\dop{\medskip
+
+{\bf Дополнительные задачи}}
+
+\def\kratno{\mathrel{\smash{\lower.0ex\hbox{$\,\vdots\,$}}}}
+
+\def\zach#1{
+	\begin{center}{
+                \LARGE
+                \bf #1
+        }\end{center}
+}
+
+\newcounter{taskCounter}
+
+\newcommand{\q}{
+    \addtocounter{taskCounter}{1}
+    {\bf \arabic{taskCounter}. }
+}
+
+\newcounter{taskCountr2}
+
+\newcommand{\rr}{
+    \addtocounter{taskCountr2}{1}
+    {\bf \arabic{taskCountr2}. }
+}
+
+\newcounter{taskCounter3}
+
+\newcommand{\s}{
+    \addtocounter{taskCounter3}{1}
+    {\bf \arabic{taskCounter3}. }
+}
+
+\newcounter{taskCounter4}
+
+\newcommand{\st}{
+    \addtocounter{taskCounter4}{1}
+    {\bf \arabic{taskCounter4}. }
+}
+
+\newcounter{taskCounter5}
+
+\newcommand{\uu}{
+    \addtocounter{taskCounter5}{1}
+    {\bf \arabic{taskCounter5}. }
+}
+
+\newcounter{taskCounter6}
+
+\newcommand{\vv}{
+    \addtocounter{taskCounter6}{1}
+    {\bf \arabic{taskCounter6}. }
+}
