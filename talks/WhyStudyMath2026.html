@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <meta name="description" content="СУНЦ НГУ, Новосибирск, 2026">
+        <meta name="author" content="Александр Авдюшенко" />
+        <meta name="keywords" content="образование, ИИ, наука">
+
+		<title>Зачем учить математику, если ИскИны всё знают лучше нас?</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/serif.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Include Chart.js CDN -->
+		<script src="../plugin/reveald3.js"></script>
+	    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+		<style>
+			.column {
+			  float: left;
+			  width: 48%;
+			  padding: 2px;
+			}
+			/* Clear floats after image containers */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			.important {
+				color: orange;
+			}
+			.quiz {
+				display: flex;
+				flex-direction: column;
+				margin-top: 20px;
+			}
+			.answer {
+				background-color: #f9f9f9;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				padding: 10px;
+				margin: 5px 0;
+				cursor: pointer;
+				transition: background-color 0.3s, color 0.3s;
+			}
+			.answer.correct {
+				background-color: #d4edda;
+				color: #155724;
+			}
+			.answer.wrong {
+				background-color: #f8d7da;
+				color: #721c24;
+			}
+			.answer.shadow {
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				color: gray;
+			}
+			.quiz-slide h3 {
+				font-size: 50px;
+				margin-bottom: 10px;
+			}
+			.quiz-slide .quiz {
+				margin-top: 10px;
+			}
+			.quiz-slide .answer {
+				font-size: 34px;
+				padding: 8px;
+				margin: 4px 0;
+			}
+			.curriculum-table-slide h3 {
+				font-size: 42px;
+				margin-bottom: 12px;
+			}
+			.curriculum-table-slide table {
+				font-size: 26px;
+			}
+			.curriculum-table-slide th,
+			.curriculum-table-slide td {
+				padding: 7px;
+			}
+			.compact-text-slide h3 {
+				font-size: 42px;
+				margin-bottom: 14px;
+			}
+			.compact-text-slide p,
+			.compact-text-slide li {
+				font-size: 30px;
+				line-height: 1.2;
+			}
+			.compact-text-slide p {
+				margin: 0 0 14px;
+			}
+			.compact-text-slide ol {
+				margin-top: 0;
+			}
+			.title-slide > .column:first-of-type {
+				width: 52%;
+			}
+			.title-slide > .column:last-of-type {
+				width: 46%;
+				font-size: 30px;
+			}
+			.title-slide .fig-container {
+				height: 580px !important;
+				padding-left: 0 !important;
+			}
+			.title-slide .iframe-visualization {
+				height: 580px !important;
+			}
+			.image-slide img {
+				display: block;
+				width: auto;
+				max-width: 100%;
+				max-height: 630px;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+			.dense-ai-slide > br {
+				display: none;
+			}
+			.dense-ai-slide h4 {
+				font-size: 38px;
+				line-height: 1.15;
+				margin: 8px 0;
+			}
+			.dense-ai-slide ul {
+				margin-top: 6px;
+				margin-bottom: 10px;
+			}
+			.dense-ai-slide li {
+				font-size: 30px;
+				line-height: 1.15;
+				margin-bottom: 6px;
+			}
+			.timeline-slide h3 {
+				font-size: 50px;
+				margin-bottom: 10px;
+			}
+			.timeline-slide .event {
+				margin-bottom: 14px;
+				padding-left: 24px;
+			}
+			.timeline-slide .event::before {
+				font-size: 40px;
+			}
+			.timeline-slide h5 {
+				font-size: 30px;
+				margin: 4px 0;
+			}
+			.timeline-slide p {
+				font-size: 28px;
+				margin: 6px 0;
+			}
+			.community-slide h3 {
+				font-size: 46px;
+				margin-bottom: 12px;
+			}
+			.community-slide .content {
+				font-size: 26px;
+			}
+			.community-slide .highlight {
+				font-size: 30px;
+				margin: 8px 0;
+			}
+			.community-slide ul {
+				margin: 0 0 8px;
+				padding-left: 28px;
+			}
+			.community-slide li {
+				margin: 5px 0;
+			}
+			.community-slide .link {
+				font-size: 22px;
+				margin: 8px 0;
+			}
+			.community-slide .qr-code img {
+				width: 430px;
+				max-height: 430px;
+				object-fit: contain;
+			}
+			th, td {
+				border: 1px solid black;
+				padding: 10px;
+				text-align: center;
+			}
+			ul.custom-list {
+				list-style: none;
+				padding: 0;
+			}
+			ul.custom-list li::before {
+				content: '➕';
+				margin-right: 8px;
+			}
+			ul.custom-list li.minus::before {
+				content: '➖';
+			}
+			ul.custom-list li.lamp::before {
+				content: '💡';
+			}
+			.timeline {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				position: relative;
+				padding-left: 20px;
+			}
+			.timeline::before {
+				content: '';
+				position: absolute;
+				left: 5px;
+				top: 0;
+				bottom: 0;
+				width: 3px;
+				background: orange;
+			}
+			.event {
+				margin-bottom: 40px;
+				position: relative;
+				padding-left: 30px;
+			}
+			.event::before {
+				content: '→';
+				position: absolute;
+				left: 0;
+				top: 5px;
+				font-size: 60px;
+				color: orange;
+			}
+			.highlight {
+				color: #42a5f5;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+                <section id="title" class="title-slide">
+						<h3>Зачем учить математику, если ИскИны всё знают лучше нас?</h3>
+					<div class="column">
+						<div class="fig-container no-margin-top" data-file="images/modular-multiplication.html"
+						style="padding-left: 10%"></div>
+					</div>
+					<div class="column">
+						<br/><br/><br/>
+							<a style="color: blue" href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
+						<p><a style="color: blue;text-decoration: underline;" href="https://avalur.github.io/talks/WhyStudyMath2026.html">
+						Эта презентация на avalur.github.io</a></p>
+					</div>
+					<aside class="notes">
+						Всем привет!
+						Меня зовут Александр Авдюшенко, и я рад выступать здесь.
+				  	</aside>
+                </section>
+				<section>
+					<section>
+					<h3>Начнём с примера</h3>
+					<p style="text-align: left;font-style: italic;">
+						Докажите, что пунктирные прямые проходят через одну точку
+					</p>
+					<div id="applet_container" style="width: 1200px; height: 400px;align-content: center"></div>
+					<script>
+						var ggbApp = new GGBApplet({
+							"appName": "classic",
+							"perspective": "AG",
+							"width": 1200,
+							"height": 400,
+							"showToolBar": false,
+							"showAlgebraInput": false,
+							"showMenuBar": false,
+							"appletOnLoad": function(api) {
+								// Define triangle vertices
+								api.evalCommand("A = (-5, -2)");
+								api.evalCommand("B = (6, -2)");
+								api.evalCommand("C = (3, 3)");
+								// Define triangle lines
+								api.evalCommand("a = Line(B, C)");
+								api.evalCommand("b = Line(C, A)");
+								api.evalCommand("c = Line(A, B)");
+								// Draw the triangle
+								api.evalCommand("triangle = Polygon(A, B, C)");
+
+								// Create angle bisector at A
+								api.evalCommand("bisectorA = AngleBisector(B, A, C)");
+								// Find a point on the angle bisector
+								api.evalCommand("D1 = Point(bisectorA, 0.928)");
+								// Create perpendicular lines from D
+								api.evalCommand("perpD1 = PerpendicularLine(D1, c)");
+								// Find intersection points
+								api.evalCommand("E1 = Intersect(perpD1, c)");
+								// Create the circle
+								api.evalCommand("circle1 = Circle(D1, Distance(D1, E1))");
+								api.evalCommand("center1 = Center(circle1)");
+								api.evalCommand("r1 = Radius(circle1)");
+
+								// Create angle bisector at B
+								api.evalCommand("bisectorB = AngleBisector(A, B, C)");
+								// Find a point on the angle bisector
+								api.evalCommand("D2 = Point(bisectorB, 0.865)");
+								// Create perpendicular lines from D
+								api.evalCommand("perpD2 = PerpendicularLine(D2, c)");
+								// Find intersection points
+								api.evalCommand("E2 = Intersect(perpD2, c)");
+								// Create the circle
+								api.evalCommand("circle2 = Circle(D2, Distance(D2, E2))");
+								api.evalCommand("center2 = Center(circle2)");
+								api.evalCommand("r2 = Radius(circle2)");
+
+								// Create angle bisector at C
+								api.evalCommand("bisectorC = AngleBisector(A, C, B)");
+								// Find a point on the angle bisector
+								api.evalCommand("D3 = Point(bisectorC, 0.8)");
+								// Create perpendicular lines from D
+								api.evalCommand("perpD3 = PerpendicularLine(D3, a)");
+								// Find intersection points
+								api.evalCommand("E3 = Intersect(perpD3, a)");
+								// Create the circle
+								api.evalCommand("circle3 = Circle(D3, Distance(D3, E3))");
+								api.evalCommand("center3 = Center(circle3)");
+								api.evalCommand("r3 = Radius(circle3)");
+
+								// Find tangent points
+								api.evalCommand("A1 = Barycenter({center3, center2}, {r2, r3})");
+								api.evalCommand("B1 = Barycenter({center3, center1}, {r1, r3})");
+								api.evalCommand("C1 = Barycenter({center1, center2}, {r2, r1})");
+
+								// Draw segments
+								api.evalCommand("aa = Segment(A, A1)");
+								api.evalCommand("bb = Segment(B, B1)");
+								api.evalCommand("cc = Segment(C, C1)");
+
+								// Customize colors
+								api.evalCommand('SetColor(triangle, 0, 0, 1)');
+								api.evalCommand('SetColor(circle1, 0, 0, 0)');
+								api.evalCommand('SetLineStyle(circle1, 0)');
+								api.evalCommand('SetColor(circle2, 0, 0, 0)');
+								api.evalCommand('SetLineStyle(circle2, 0)');
+								api.evalCommand('SetColor(circle3, 0, 0, 0)');
+								api.evalCommand('SetLineStyle(circle3, 0)');
+								api.evalCommand('SetLineStyle(aa, 2)');
+								api.evalCommand('SetLineStyle(bb, 2)');
+								api.evalCommand('SetLineStyle(cc, 2)');
+
+								// Hide construction elements
+								api.evalCommand('SetVisibleInView(perpD1, 1, false)');
+								api.evalCommand('SetVisibleInView(perpD2, 1, false)');
+								api.evalCommand('SetVisibleInView(perpD3, 1, false)');
+								api.evalCommand('SetVisibleInView(D1, 1, false)');
+								api.evalCommand('SetVisibleInView(E1, 1, false)');
+								api.evalCommand('SetVisibleInView(D2, 1, false)');
+								api.evalCommand('SetVisibleInView(E2, 1, false)');
+								api.evalCommand('SetVisibleInView(D3, 1, false)');
+								api.evalCommand('SetVisibleInView(E3, 1, false)');
+								api.evalCommand('SetVisibleInView(bisectorA, 1, false)');
+								api.evalCommand('SetVisibleInView(bisectorB, 1, false)');
+								api.evalCommand('SetVisibleInView(bisectorC, 1, false)');
+								api.evalCommand('SetVisibleInView(a, 1, false)');
+								api.evalCommand('SetVisibleInView(b, 1, false)');
+								api.evalCommand('SetVisibleInView(c, 1, false)');
+								api.evalCommand('SetVisibleInView(center1, 1, false)');
+								api.evalCommand('SetVisibleInView(center2, 1, false)');
+								api.evalCommand('SetVisibleInView(center3, 1, false)');
+								api.setAxesVisible(false, false);
+								api.setGridVisible(false);
+								["triangle", "a_1", "b_1", "c_1", "circle1", "circle2", "circle3", "aa", "bb", "cc"].forEach(function(label) {
+									api.setLabelVisible(label, false);
+								});
+							}
+						}, true);
+
+						window.addEventListener("load", function() {
+							ggbApp.inject("applet_container");
+						});
+					</script>
+				</section>
+					<section class="image-slide" data-background-color="white">
+						<img src="images/GPT4_wrong_answer.png" alt="Неверный ответ GPT-4">
+						<div class="fragment"
+							 style="border: 5px solid red; position: absolute;
+							 left: 59%; top: 50.5%;
+							 width: 22%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: red;">
+							Ошибка!
+						</div>
+					</section>
+					<section class="image-slide" data-background-color="white">
+						<img src="images/GPT4o_wrong.png" alt="Неверный ответ GPT-4o">
+						<div class="fragment"
+							 style="border: 5px solid red; position: absolute;
+							 left: 56.7%; top: 55.5%;
+							 width: 32.5%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: red;">
+							Ошибка!
+						</div>
+					</section>
+					<section class="image-slide" data-background-color="white">
+						<img src="images/GPTo1_correct.png" alt="Верный ответ GPT-o1">
+						<div class="fragment"
+							 style="border: 5px solid green; position: absolute;
+							 left: 57.2%; top: 50%;
+							 width: 34%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: green;">
+							Это верно!
+						</div>
+					</section>
+					<section>
+						<ul>
+							<li><a style="color: blue" href="https://en.wikipedia.org/wiki/Malfatti_circles">
+								Статья «Окружности Мальфатти» в Википедии</a>
+							</li>
+							<li class="fragment">Основные шаги доказательства
+								<ol>
+									<li>Гомотетии для каждой пары окружностей дают нам центры $A_2, B_2, C_2$</li>
+									<li>Эти три центра гомотетии лежат на одной прямой по
+									<a style="color: blue" href="https://en.wikipedia.org/wiki/Monge%27s_theorem">
+										теореме Монжа</a>
+									</li>
+									<li>Последний шаг — применить <a style="color: blue" href="https://en.wikipedia.org/wiki/Desargues%27s_theorem">
+										теорему Дезарга</a> к треугольникам $ABC$ и $A_1B_1C_1$
+									</li>
+								</ol>
+							</li>
+							<li class="fragment" style="font-style: italic">А GPT 5.6 Sol намного умнее:
+								<a href="https://chatgpt.com/s/t_6a930a8d95f881918b2be00eee0a0fe4">вот тут</a> верно посчитал в барицентрических координатах</li>
+						</ul>
+					</section>
+                </section>
+				<section>
+					<h3>То же самое — в программировании</h3>
+					<img src="images/o3-benchmark-coding.webp" alt="Результаты o3 в задачах по программированию" width="1400">
+				</section>
+				<section>
+				  <h4 style="text-align: left">У каждого есть умный ИИ-ассистент — и он всегда готов помочь!</h4>
+				  <ul>
+					<li>✨ Помогает профессионально выстроить ход рассуждений</li>
+					<li>🔍 Быстро находит самую важную информацию</li>
+					<li>💡 Предлагает идеи и помогает находить новые решения</li>
+				  </ul>
+				  <br><br>
+				  <h4 class="fragment"
+					  style="text-align: left;color: white;
+						background-color: orange;padding-left: 20px">
+					Мы можем сосредоточиться на главном: критическом мышлении, принятии решений и проверке результатов
+				  </h4>
+				  <aside class="notes">
+					Технологии ИИ развиваются с огромной скоростью, и ассистенты с каждым днём становятся умнее и способнее.
+
+					Главный вопрос: как использовать эти возможности в учёбе и работе?
+
+					С ИИ вы учитесь не в одиночку.
+					Он помогает направлять рассуждения, искать ценную информацию
+					и вместе с вами генерировать идеи.
+					Благодаря этому вы можете направить силы на критическое осмысление и проверку того, подходит ли информация вашим задачам.
+				  </aside>
+				</section>
+				<section class="dense-ai-slide">
+				  <h4 style="text-align: left">ИТ-индустрия меняется так же!</h4>
+					  <ul>
+						<li>🤖 ИИ-модели уже пишут код лучше многих junior- и middle-разработчиков</li>
+						<li>⚡ Они делают это быстрее, дешевле и на любом языке программирования</li>
+						<li>📈 Нужно развиваться до уровня senior!</li>
+					  </ul>
+					  <br><br>
+				  <div class="fragment" style="text-align: left">
+					  <h4 style="text-align: left">Ключевые навыки в эпоху ИИ</h4>
+					  <ul>
+						<li>🗣️ Умение общаться с ИИ-моделями становится критически важным</li>
+						<li>👥 Нужно развивать гибкие навыки для взаимодействия с людьми</li>
+					  </ul>
+				  </div>
+				  <br>
+				  <h4 class="fragment" style="text-align: left;color: white;
+						background-color: orange;padding-left: 20px">
+					Сосредоточьтесь на том, что ИИ не заменит: лидерстве, архитектурных решениях и взаимодействии с людьми
+				  </h4>
+				  <aside class="notes">
+					ИТ-индустрия стремительно меняется: ИИ всё лучше справляется с программированием.
+					Пока ИИ берёт на себя рутинный код, успешным разработчикам важно сосредоточиться на навыках более высокого уровня:
+					- эффективном общении и с ИИ, и с людьми;
+					- стратегическом мышлении и проектировании систем;
+					- лидерстве и командной работе;
+					- решении задач более широкого масштаба.
+				  </aside>
+				</section>
+				<section class="dense-ai-slide">
+					<h4 style="text-align: left">Будущее разработки программного обеспечения с ИИ</h4>
+					<ul>
+						<li>🔬 Разработка базовых систем ИИ:
+							такие компании, как OpenAI и Anthropic, создают фундаментальные модели
+						</li>
+						<li>🛠️ Специалисты по интеграции ИИ
+							<ul>
+								<li class="fragment"><i>Технологии: JetBrains, VS Code…</i></li>
+								<li class="fragment"><i>Здравоохранение: диагностические системы, медицинская визуализация</i></li>
+								<li class="fragment"><i>Наука: анализ исследований, автоматизация лабораторий</i></li>
+								<li class="fragment"><i>Производство: оптимизация процессов, контроль качества</i></li>
+							</ul>
+						</li>
+					</ul>
+					<br><br>
+					<h4 class="fragment" style="text-align: left;color: white;
+						background-color: orange;padding-left: 20px">
+						Формируются два главных карьерных пути: разработка базовых систем ИИ и внедрение ИИ в конкретных отраслях
+					</h4>
+					<aside class="notes">
+						Индустрия ИИ разделяется на два основных направления:
+						1. Разработка базовых систем ИИ — создание и улучшение фундаментальных моделей и систем
+						2. Отраслевые специалисты — внедрение и адаптация ИИ-решений для конкретных индустрий
+
+						Оба пути требуют глубокой экспертизы и дают большие возможности для роста.
+						Главное — выбрать область, в которой ваши интересы и опыт позволят принести наибольшую пользу.
+					</aside>
+				</section>
+					<section class="quiz-slide">
+						<h3>1. Сколько лет длится бакалавриат по информатике в Европе?</h3>
+						<div class="quiz">
+							<div class="answer" onclick="checkAnswer(this, 'correct')">A. 3 года</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. 3+1 года</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. 4 года</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. 5 лет</div>
+						</div>
+						<aside class="notes">
+							Начнём викторину с базового вопроса
+							о продолжительности бакалавриата по информатике в Европе.
+							<br>
+							Вопрос: сколько обычно длится бакалавриат по информатике в Европе?
+							<br>
+							Выберите один из четырёх вариантов:
+							A. 3 года
+							B. 3+1 года
+							C. 4 года
+							D. 5 лет
+							<br>
+							Подумайте и нажмите на вариант, который считаете правильным.
+							Так можно проверить, что вы уже знаете о структуре этих программ.
+							<br>
+							Правильный ответ — A. Три года — стандартная продолжительность бакалавриата по информатике в Европе.
+						</aside>
+					</section>
+					<section class="quiz-slide">
+						<h3>2. На каком курсе обычно изучают машинное обучение?</h3>
+						<div class="quiz">
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. На первом</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. На втором</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. На третьем</div>
+							<div class="answer" onclick="checkAnswer(this, 'correct')">D. Машинное обучение не входит в обязательную программу</div>
+						</div>
+						<aside class="notes">
+							Следующий вопрос — о том, на каком курсе бакалавриата
+							студенты обычно знакомятся с машинным обучением.
+							<br>
+							Вопрос: на каком курсе обычно преподают машинное обучение?
+							<br>
+							Варианты ответа:
+							A. На первом
+							B. На втором
+							C. На третьем
+							D. Машинное обучение не входит в обязательную программу
+							<br>
+							Подумайте и нажмите на вариант, который считаете правильным.
+							Этот вопрос проверяет, насколько вы представляете место машинного обучения
+							в программах по информатике в разных университетах.
+							<br>
+							К сожалению, правильный ответ — D.
+							В первые три года обучения машинное обучение не входит в число обязательных дисциплин.
+						</aside>
+					</section>
+					<section class="quiz-slide">
+						<h3>3. В каких вузах есть <i>тьюторские занятия?</i></h3>
+						<div class="quiz">
+							<div class="answer" onclick="checkAnswer(this, 'correct')">A. Оксфорд</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. ETH Zurich</div>
+							<div class="answer" onclick="checkAnswer(this, 'correct')">C. Кембридж</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. Imperial College London</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">E. TUM</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">F. EPFL</div>
+						</div>
+						<aside class="notes">
+							Следующий вопрос посвящён особому элементу
+							программ по информатике в некоторых университетах.
+							<br>
+							Вопрос: где используют тьюторские занятия для развития мышления?
+							<br>
+							Выберите один или несколько вариантов:
+							A. Оксфордский университет
+							B. Швейцарская высшая техническая школа Цюриха (ETH Zurich)
+							C. Кембриджский университет
+							D. Имперский колледж Лондона
+							E. Мюнхенский технический университет (TUM)
+							F. Федеральная политехническая школа Лозанны (EPFL)
+							<br>
+							Подумайте и нажмите на вариант, который считаете правильным.
+							Этот вопрос проверяет, знаете ли вы об особых методах преподавания
+							в программах по информатике разных университетов.
+							<br>
+							Правильные ответы — A. Оксфордский университет и C. Кембриджский университет.
+							В обоих университетах тьюторские занятия помогают студентам развивать мышление.
+						</aside>
+					</section>
+					<section class="quiz-slide">
+						<h3>4. Где в бакалавриате по информатике целый семестр изучают физику?</h3>
+						<div class="quiz">
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. Оксфорд</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. ETH Zurich</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. TUM</div>
+							<div class="answer" onclick="checkAnswer(this, 'correct')">D. EPFL</div>
+						</div>
+						<aside class="notes">
+							Следующий вопрос — о дисциплине в программе по информатике,
+							которая не вполне типична для этого направления.
+							<br>
+							Вопрос: в какой программе бакалавриата по информатике есть семестровый курс физики?
+							<br>
+							Правильный ответ — D. Федеральная политехническая школа Лозанны (EPFL).
+						</aside>
+					</section>
+					<section class="quiz-slide">
+						<h3>5. Сколько обязательных дисциплин может быть на первом курсе?</h3>
+						<div class="quiz">
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. 8</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. 10</div>
+							<div class="answer" onclick="checkAnswer(this, 'correct')">C. 12</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. 14</div>
+						</div>
+						<aside class="notes">
+							Следующий вопрос викторины — о числе обязательных дисциплин,
+							которые студенты обычно изучают на первом курсе программы по информатике.
+							<br>
+							Вопрос: каково максимальное число обязательных дисциплин на первом курсе?
+							<br>
+							Выберите один из четырёх вариантов:
+							A. 8
+							B. 10
+							C. 12
+							D. 14
+							<br>
+							Подумайте и нажмите на вариант, который считаете правильным.
+							Этот вопрос проверяет ваше знание структуры и требований
+							программ по информатике на первом курсе.
+							<br>
+							Правильный ответ — C. 12. Это максимальное число обязательных дисциплин,
+							которые студенты обычно изучают на первом курсе программы по информатике.
+						</aside>
+					</section>
+					<section class="quiz-slide">
+						<h3>6. Где можно на год уйти работать, а затем вернуться в бакалавриат?</h3>
+						<div class="quiz">
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. ETH Zurich</div>
+							<div class="answer" onclick="checkAnswer(this, 'correct')">B. UCL</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. Imperial College London</div>
+							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. TUM</div>
+						</div>
+						<aside class="notes">
+							Последний вопрос — об особой возможности, которую предлагает один из университетов:
+							студенты могут получить опыт работы прямо во время учёбы.
+							<br>
+							Вопрос: где можно на год уйти работать в компанию во время бакалавриата,
+							а затем вернуться и завершить обучение?
+							<br>
+							Правильный ответ — B. Университетский колледж Лондона (UCL).
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Что общего у сильных программ по информатике</h3>
+						<ul class="custom-list">
+							<li class="fragment">3 года обучения</li>
+							<li class="fragment">Около трети дисциплин — по выбору</li>
+							<li class="fragment">Как минимум один семестровый проект</li>
+							<li class="fragment"><a href="https://www.cst.cam.ac.uk/files/elephantdraft.pdf" style="color: deepskyblue">Тьюторские занятия</a> для развития мышления</li>
+							<li class="fragment minus">Мало математики</li>
+							<li class="fragment minus">Машинное обучение — по выбору</li>
+						</ul>
+						<aside class="notes">
+							После викторины рассмотрим общие черты ведущих европейских программ бакалавриата по информатике.
+							<br>
+							Обычно эти программы устроены так:
+							- стандартная продолжительность обучения — 3 года;
+							- примерно треть дисциплин можно выбрать;
+							- обязателен как минимум один семестровый проект;
+							- тьюторские занятия помогают развивать мышление;
+							- большое внимание уделяется практическим навыкам и проектному обучению.
+							<br>
+							При этом объём математики и машинного обучения в разных программах различается.
+							Эти различия влияют на общую структуру и направленность обучения.
+						</aside>
+					</section>
+					<section class="compact-text-slide">
+						<h3 style="text-align: left">Важное замечание</h3>
+						<p style="text-align: left" class="fragment"><span class="important">Тьюторские занятия</span>
+							часто заменяют еженедельную проверку заданий.
+							По основным предметам могут быть только годовые экзамены.</p>
+
+						<p style="text-align: left" class="fragment">
+							В <span class="important">Оксфорде</span> для перехода на второй курс
+						    нужно сдать 4 комплексных экзамена по 9 предметам:</p>
+
+						<ol class="fragment">
+							<li>Функциональное программирование, проектирование и анализ алгоритмов</li>
+							<li>Императивное программирование</li>
+							<li>Дискретная математика, теория вероятностей и непрерывная математика</li>
+							<li>Цифровые системы, линейная алгебра и введение в формальные доказательства</li>
+						</ol>
+
+						<aside class="notes">
+							Продолжим. Здесь я хочу подчеркнуть важность тьюторских занятий.
+							<br>
+							В некоторых университетах тьюторские занятия заменяют традиционную еженедельную проверку заданий.
+							Вместо регулярных аттестаций студентов нередко ждут только экзамены по основным предметам в конце первого курса.
+							<br>
+							Например, первый курс в Оксфорде особенно интенсивный.
+							Чтобы перейти на второй курс, студенты должны сдать четыре комплексных экзамена по девяти предметам.
+							Эти экзамены проходят в конце года, а не каждого семестра.
+							<br>
+							В экзамены входят следующие предметы:
+							1. Функциональное программирование, проектирование и анализ алгоритмов
+							2. Императивное программирование
+							3. Дискретная математика, теория вероятностей и непрерывная математика
+							4. Цифровые системы, линейная алгебра и введение в формальные доказательства
+
+							Такая система требует целостного понимания каждого предмета к моменту экзамена
+							и создаёт условия для более глубокого и связного обучения.
+						</aside>
+					</section>
+					<section>
+						<h3 style="text-align: left">Студенческие практические проекты</h3>
+						<ul class="custom-list">
+							<li class="fragment lamp">Индивидуальный проект — может быть частью курса (UCL, Оксфорд)</li>
+							<li class="fragment lamp">Групповой проект — часто от индустриального партнёра (TUM, EPFL, Оксфорд, Делфт)</li>
+							<li class="fragment lamp">Исследовательский проект — обычно завершается дипломной работой (везде, кроме EPFL)</li>
+						</ul>
+						<aside class="notes">
+							Обсудим виды практических проектов, которыми студенты могут заниматься во время обучения.
+							<br>
+							Во-первых, это **индивидуальные проекты**. Они часто встроены в учебные курсы
+							и позволяют студентам применить изученные концепции в более самостоятельной и сфокусированной работе.
+							Такие университеты, как UCL и Оксфорд, часто включают индивидуальные проекты в свои курсы.
+							<br>
+							Во-вторых, это **групповые проекты**. Обычно над ними работают команды,
+							часто совместно с индустриальными партнёрами.
+							Студенты получают опыт командной работы в условиях, близких к реальным,
+							и развивают навыки взаимодействия и коммуникации.
+							TUM, EPFL, Оксфорд и Делфт известны своими групповыми проектами,
+							которые часто проходят при участии индустриальных партнёров.
+							<br>
+							Наконец, есть **исследовательские проекты**. Обычно они завершаются дипломной работой
+							и обязательны в большинстве университетов, кроме EPFL.
+							Исследовательские проекты особенно важны для студентов, которые хотят углубить знания
+							и получить собственные результаты в выбранной области.
+							<br>
+							Каждый тип проектов даёт свой опыт и свои преимущества,
+							помогая подготовиться к будущей карьере в академической среде, индустрии или исследованиях.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section class="curriculum-table-slide">
+						<h3>Почти идеальный бакалавриат: 1-й курс</h3>
+						<table>
+							<tr>
+								<th>1-я четверть</th>
+								<th>2-я четверть</th>
+								<th>3-я четверть</th>
+								<th>4-я четверть</th>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Функции одной переменной и производные</td>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Интегральное исчисление и функции многих переменных</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Алгебра 1</td>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Алгебра 2</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Логика и комбинаторика</td>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Дискретная теория вероятностей и теория графов</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Основы информатики на Python</td>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Алгоритмы и структуры данных 1</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Основы программирования на C</td>
+								<td rowspan="1" style="background-color: #b3cde0;">Парадигмы программирования</td>
+								<td rowspan="1" style="background-color: #ffffcc;">Индивидуальный проект</td>
+							</tr>
+							<tr></tr>
+						</table>
+						<aside class="notes">
+							Рассмотрим пример хорошо структурированной программы бакалавриата по информатике
+							в Университете Неаполис на Кипре.
+
+							Программа первого курса:
+							- функции одной переменной и производные;
+							- интегральное исчисление и функции многих переменных;
+							- алгебра 1 и алгебра 2;
+							- логика и комбинаторика;
+							- дискретная теория вероятностей и теория графов;
+							- основы информатики на Python;
+							- основы программирования на C;
+							- алгоритмы и структуры данных 1;
+							- парадигмы программирования;
+							- тьюторские занятия;
+							- индивидуальный проект.
+
+							Программа даёт прочную основу в математике, логике и программировании,
+							а также возможность учиться через проекты и выполнять индивидуальную работу.
+						</aside>
+					</section>
+					<section class="curriculum-table-slide">
+						<h3>2-й курс</h3>
+						<table>
+							<tr>
+								<th>1-я четверть</th>
+								<th>2-я четверть</th>
+								<th>3-я четверть</th>
+								<th>4-я четверть</th>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Непрерывная теория вероятностей</td>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Математическая статистика</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Основы машинного обучения</td>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Продвинутое машинное обучение</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Алгоритмы и структуры данных 2</td>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Разработка операционных систем</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Архитектура компьютеров</td>
+								<td rowspan="1" style="background-color: orange;">Английский язык для науки</td>
+								<td rowspan="1" style="background-color: orange;">Управление технологическими проектами</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Проекты на Kotlin</td>
+								<td colspan="2" rowspan="1" style="background-color: #ffffcc;">Групповой проект</td>
+							</tr>
+							<tr></tr>
+						</table>
+						<aside class="notes">
+							Программа второго курса Университета Неаполис на Кипре:
+							- непрерывная теория вероятностей;
+							- математическая статистика;
+							- основы машинного обучения;
+							- продвинутое машинное обучение;
+							- алгоритмы и структуры данных 2;
+							- разработка операционных систем;
+							- архитектура компьютеров;
+							- английский язык для науки;
+							- управление технологическими проектами;
+							- тьюторские занятия;
+							- Kotlin;
+							- групповой проект.
+
+							На втором курсе основное внимание уделяется продвинутой математике, машинному обучению, алгоритмам и разработке программного обеспечения.
+						</aside>
+					</section>
+					<section class="curriculum-table-slide">
+						<h3>3-й курс</h3>
+						<table>
+							<tr>
+								<th>1-я четверть</th>
+								<th>2-я четверть</th>
+								<th>3-я четверть</th>
+								<th>4-я четверть</th>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Теоретическая информатика</td>
+								<td colspan="2" rowspan="1" style="background-color: #c7e9c0;">Математика по выбору</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Компиляторы</td>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Робототехника и компьютерное зрение</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #b3cde0;">Системы баз данных</td>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #ffffcc;">Групповой проект</td>
+								<td colspan="2" rowspan="1" style="background-color: #ffffcc;">Групповой проект</td>
+							</tr>
+							<tr></tr>
+						</table>
+						<aside class="notes">
+							Теперь рассмотрим программу третьего курса Университета Неаполис на Кипре:
+							- теоретическая информатика;
+							- математика по выбору / теория информации?;
+							- компиляторы;
+							- робототехника и компьютерное зрение;
+							- системы баз данных;
+							- дисциплины по выбору;
+							- групповой проект.
+
+							На третьем курсе основное внимание уделяется продвинутым темам теоретической информатики, робототехнике, базам данных и разработке программного обеспечения.
+						</aside>
+					</section>
+					<section class="curriculum-table-slide">
+						<h3>4-й курс, заключительный</h3>
+						<table>
+							<tr>
+								<th>1-я четверть</th>
+								<th>2-я четверть</th>
+								<th>3-я четверть</th>
+								<th>4-я четверть</th>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+								<td colspan="2" rowspan="1" style="background-color: indianred;">Дисциплины по выбору</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: orange;">Методы исследования</td>
+								<td colspan="2" rowspan="2" style="background-color: #ffffcc;">Дипломная работа 2</td>
+							</tr>
+							<tr>
+								<td colspan="2" rowspan="1" style="background-color: #ffffcc;">Дипломная работа 1</td>
+							</tr>
+							<tr></tr>
+						</table>
+						<aside class="notes">
+							Наконец, программа четвёртого курса Университета Неаполис на Кипре:
+							- дисциплины по выбору;
+							- методы исследования;
+							- дипломная работа 1;
+							- дипломная работа 2.
+
+							На четвёртом курсе студенты выбирают дисциплины, изучают методы исследования и завершают дипломный проект.
+							Они могут погрузиться в специализированные темы и провести углублённое исследование в выбранной области.
+						</aside>
+					</section>
+				</section>
+				<section class="timeline-slide">
+					<h3>Ближайшие события 🌟🌍</h3>
+					<div class="timeline">
+						<div class="event">
+							<h5>Июнь 2025</h5>
+							<p class="highlight" style="text-align: left">Школа по алгоритмам и программированию</p>
+							<p style="text-align: left">📍 Румыния</p>
+						</div>
+
+						<div class="event">
+							<h5>Сентябрь / октябрь 2025</h5>
+							<p class="highlight">Молодёжные клубы JetBrains</p>
+							<p>📍 Онлайн: математика, программирование и ИИ</p>
+						</div>
+
+						<div class="event">
+							<h5>Октябрь / ноябрь 2025</h5>
+							<p class="highlight">Молодёжный конкурс JetBrains Academy</p>
+							<p style="text-align: left">📍 Онлайн</p>
+						</div>
+					</div>
+				</section>
+				<section class="community-slide">
+					<h3>Как узнавать о новых возможностях?</h3>
+					<div class="container">
+						<div class="content column">
+							<p class="highlight">Присоединяйтесь к нашему сообществу в Discord!</p>
+							<div style="text-align: left">
+								<ul>
+									<li>✨ <strong>Викторины</strong>, чтобы проверить знания</li>
+									<li>📅 <strong>Задача недели</strong>, чтобы поддерживать навыки</li>
+									<li>📚 <strong>Обмен учебными материалами</strong> для вашего развития</li>
+									<li>🌍 <strong>Общение с единомышленниками</strong> со всего мира!</li>
+								</ul>
+							</div>
+							<p class="link">🔗 <a href="https://jb.gg/youth-discord" style="color: blue">https://jb.gg/youth-discord</a></p>
+						</div>
+						<div class="qr-code column">
+							<img src="images/youth-discord.png" alt="QR-код сообщества в Discord" width="500">
+						</div>
+					</div>
+				</section>
+				<section>
+					<section>
+						<h3 style="text-align: left">Темы для жарких дискуссий</h3>
+						<ul class="custom-list">
+							<li class="lamp fragment">Сколько математики нужно в бакалавриате по информатике: 3 дисциплины или 10 из 30?</li>
+							<li class="lamp fragment">Нужны ли отдельные курсы по командной работе, этике и гибким навыкам?</li>
+							<li class="lamp fragment">Каким должен быть идеальный выпускник бакалавриата по информатике?</li>
+						</ul>
+					</section>
+					<aside class="notes">
+						Наконец, обсудим несколько самых спорных тем в образовании по информатике.
+						Их нередко называют «холиварами», потому что они вызывают особенно сильные разногласия.
+						<br>
+						Первый вопрос: **сколько математики нужно в бакалавриате по информатике?**
+						Достаточно примерно 3 дисциплин или их должно быть 10 из 30?
+						Этот спор касается баланса между теоретическими знаниями и практическими навыками.
+						Одни считают, что прочная математическая база необходима для понимания сложных алгоритмов и систем,
+						другие — что чрезмерный акцент на математике мешает практическому освоению программирования и разработки ПО.
+						<br>
+						Второй вопрос: **нужно ли преподавать командную работу, этику и гибкие навыки на отдельных курсах?**
+						В технологической индустрии сотрудничество и этические вопросы становятся всё важнее.
+						Однако интеграция этих навыков в программу, традиционно ориентированную на техническую подготовку, остаётся спорной.
+						Стоит ли выделять для них отдельные дисциплины или лучше встроить их в технические курсы?
+						<br>
+						Наконец, обсудим **идеальный портрет выпускника бакалавриата по информатике**.
+						Какими качествами и навыками он должен обладать? Здесь важны и глубина, и широта знаний,
+						баланс теории и практики, а также личное и профессиональное развитие.
+						<br>
+						Спасибо за внимание. Буду рад ответить на вопросы.
+					</aside>
+				</section>
+            </div>
+        </div>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				slideNumber: true,
+				showSlideNumber: 'speaker',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				// showNotes: 'separate-page',
+
+				// Activate the scroll view
+				// view: 'scroll',
+				// Force the scrollbar to remain visible
+				// scrollProgress: true,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+			function checkAnswer(element, correctness) {
+				const answers = element.closest('.quiz').querySelectorAll('.answer');
+				answers.forEach(answer => {
+				// answer.style.pointerEvents = 'none';  // Disable further clicks
+				if (answer === element) {
+				answer.classList.add(correctness);
+			} else {
+				answer.classList.add('shadow');
+			}
+			});
+			}
+
+        </script>
+	</body>
+</html>
