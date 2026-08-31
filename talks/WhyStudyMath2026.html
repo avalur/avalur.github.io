@@ -26,6 +26,44 @@
 		<script src="../plugin/reveald3.js"></script>
 	    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 		<style>
+			.reveal a,
+			.reveal a:visited {
+				color: blue !important;
+				text-decoration: underline !important;
+			}
+
+			.about-me-slide h2 {
+				margin: 0 0 6px;
+			}
+			.about-me-timeline {
+				position: relative;
+				width: 100%;
+				height: 560px;
+				margin: 0 auto;
+				background: transparent;
+			}
+			.about-me-timeline .fragment {
+				position: absolute !important;
+				width: 160px;
+				margin: 0;
+				font-size: 20px;
+				line-height: 1.08;
+				text-align: center;
+				background: transparent;
+			}
+			.about-me-timeline img {
+				display: block;
+				width: auto !important;
+				max-width: 140px;
+				max-height: 105px;
+				margin: 8px auto 0;
+				object-fit: contain;
+			}
+			.about-me-timeline .about-pay img {
+				max-width: 220px;
+				max-height: 160px;
+			}
+
 			.column {
 			  float: left;
 			  width: 48%;
@@ -188,6 +226,62 @@
 				width: 430px;
 				max-height: 430px;
 				object-fit: contain;
+			}
+			.boris-quote-slide .boris-quote-layout {
+				display: grid;
+				grid-template-columns: minmax(260px, 34%) 1fr;
+				align-items: center;
+				gap: 56px;
+				max-width: 1120px;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.boris-quote-slide figure {
+				margin: 0;
+				text-align: center;
+			}
+			.boris-quote-slide figure img {
+				display: block;
+				width: 100%;
+				max-width: 360px;
+				margin: 0 auto 18px;
+				border-radius: 50%;
+				box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+			}
+			.boris-quote-slide figcaption {
+				font-size: 30px;
+				line-height: 1.15;
+			}
+			.boris-quote-slide figcaption span {
+				display: inline-block;
+				margin-top: 6px;
+				font-size: 20px;
+				color: #555;
+			}
+			.boris-quote-slide blockquote {
+				width: auto;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				box-shadow: none;
+				font-size: 43px;
+				line-height: 1.18;
+				font-style: normal;
+				background: transparent;
+			}
+			.boris-quote-slide blockquote strong {
+				color: #d97706;
+			}
+			.boris-quote-slide .quote-original {
+				margin: 26px 0 12px;
+				font-size: 21px;
+				line-height: 1.3;
+				color: #666;
+				font-style: italic;
+			}
+			.boris-quote-slide .quote-source {
+				margin: 0;
+				font-size: 19px;
 			}
 			th, td {
 				border: 1px solid black;
@@ -432,13 +526,114 @@
 								</ol>
 							</li>
 							<li class="fragment" style="font-style: italic">А GPT 5.6 Sol намного умнее:
-								<a href="https://chatgpt.com/s/t_6a930a8d95f881918b2be00eee0a0fe4">вот тут</a> верно посчитал в барицентрических координатах</li>
+								<a href="https://chatgpt.com/s/t_6a930a8d95f881918b2be00eee0a0fe4">вот тут</a> всё верно посчитал в барицентрических координатах</li>
 						</ul>
+					</section>
+					<section>
+						<h3>То же самое в программировании</h3>
+						<img src="images/o3-benchmark-coding.webp" alt="Результаты o3 в задачах по программированию" width="1400">
+					</section>
+
+					<section class="boris-quote-slide">
+						<div class="boris-quote-layout">
+							<figure>
+								<img src="images/boris_cherny.jpg" alt="Борис Чёрный">
+								<figcaption>
+									Борис Чёрный<br>
+									<span>создатель и руководитель Claude Code, Anthropic</span>
+								</figcaption>
+							</figure>
+							<div>
+								<blockquote>
+									«Я уже, кажется, восемь месяцев не написал вручную ни строчки кода.<br>
+									<strong>Claude Code на 100% написан Claude Code.</strong>»
+								</blockquote>
+								<p class="quote-original" lang="en">“I haven’t written a line of code by hand in, I think, eight months now. Claude Code, 100% written by Claude Code.”</p>
+								<p class="quote-source"><a href="https://fortune.com/2026/06/11/anthropic-claude-boris-cherny-doesnt-write-code-by-hand-anymore/">Fortune Brainstorm Tech, 11 июня 2026</a></p>
+							</div>
+						</div>
+						<aside class="notes">
+							Sources: quote — Fortune Brainstorm Tech, 11 June 2026, https://fortune.com/2026/06/11/anthropic-claude-boris-cherny-doesnt-write-code-by-hand-anymore/ ; portrait — Anthropic, https://resources.anthropic.com/webinar/claude-code-live
+						</aside>
 					</section>
                 </section>
 				<section>
-					<h3>То же самое — в программировании</h3>
-					<img src="images/o3-benchmark-coding.webp" alt="Результаты o3 в задачах по программированию" width="1400">
+					<section class="about-me-slide" data-transition="fade" data-background-color="#ffffff">
+						<h2>Заменит ли меня ИскИн?</h2>
+						<div class="about-me-timeline">
+						<p class="fragment" data-fragment-index="0" style="left: 0; top: 130px; width: 300px">
+							<img src="images/nsk_illustration.png" alt="Новосибирск" style="width:280px !important;max-width:280px;max-height:210px;border-radius: 50%">
+						</p>
+						<p class="fragment" data-fragment-index="1" style="left: 50px; top: 390px; width: 160px">
+							2003, серебряная медаль
+							<img src="images/pms.png" alt="ФМШ" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="2" style="left: 210px; top: 340px; width: 160px">
+							2009, магистр математики
+							<img src="images/mmf.png" alt="ММФ НГУ" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="3" style="left: 380px; top: 290px; width: 160px">
+							2014, кандидат наук
+							<img src="images/ict.png" alt="Институт вычислительных технологий" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="4" style="left: 540px; top: 230px; width: 150px">
+							2016, ШАД
+							<img src="images/shad.png" alt="Школа анализа данных" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="5" style="left: 670px; top: 100px; width: 160px">
+							2015–2018, аналитик<br>
+							<img src="images/yandex.jpg" alt="Яндекс" style="width:20%">
+						</p>
+						<p class="fragment" data-fragment-index="6" style="left: 810px; top: 70px; width: 180px">
+							2016–2022, руководитель в образовании<br>
+							<img src="images/csc.png" alt="Computer Science Center" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="6" style="left: 810px; top: 220px; width: 180px">
+							2019–2022, <br>доцент СПбГУ<br>
+							<img src="images/spbu_logo.png" alt="СПбГУ" style="width:100%">
+						</p>
+						<p class="fragment" data-fragment-index="7" style="left: 1000px; top: 10px; width: 170px">
+							2023–н.в., преподаватель и исследователь<br>
+							<img src="images/jblogo.jpeg" alt="JetBrains" style="width:40%">
+						</p>
+
+						<p class="fragment" data-fragment-index="9" style="left: 500px; top: 260px; width: 80px">
+							<i class="rectangle" style="height: 250px;width: 8px;border: solid darkorange;
+							border-width: 7px 7px 7px 7px;display: inline-block;"></i><br>
+							<span style="color: darkorange"><b>GPT-3.5</b></span>
+						</p>
+						<p class="fragment" data-fragment-index="9" style="left: 760px; top: 220px; width: 80px">
+							<i class="rectangle" style="height: 290px;width: 8px;border: solid darkorange;
+							border-width: 7px 7px 7px 7px;display: inline-block;"></i><br>
+							<span style="color: darkorange"><b>GPT-5</b></span>
+						</p>
+						<p class="fragment" data-fragment-index="10" style="left: 960px; top: 430px; width: 150px">
+							<span style="color: darkorange"><b> GPT-5.6?</b></span>
+						</p>
+						<p class="fragment about-pay" data-fragment-index="11" style="left: 950px; top: 300px; width: 220px">
+							<img src="images/pay_the_bills.webp" alt="ИИ поможет оплачивать счета" style="width:100%; border-radius: 5%">
+						</p>
+
+						</div>
+						<aside class="notes">
+							Переключимся на мою личную историю и подумаем: заменит ли меня ИИ и когда это может произойти?
+							<br>
+							Я родился и вырос в далёком снежном Новосибирске. В седьмом классе победил на областной
+							математической олимпиаде, затем учился в физико-математической школе Академгородка,
+							на ММФ НГУ и защитил кандидатскую диссертацию по математическому моделированию
+							в Институте вычислительных технологий.
+							<br>
+							Во время аспирантуры начался подъём машинного обучения. Я поступил в новосибирское отделение
+							Школы анализа данных Яндекса, а после выпуска работал аналитиком и специалистом по данным.
+							<br>
+							Позже я вернулся к преподаванию и организации образования: руководил бакалаврской программой
+							по машинному обучению в СПбГУ и развивал Computer Science Center.
+							<br>
+							Сейчас я работаю в JetBrains на Кипре, преподаю и занимаюсь исследованиями.
+							Поэтому вопрос звучит особенно интересно: какие мои задачи ИИ уже может выполнять,
+							а в чём человеческий опыт пока остаётся незаменимым?
+						</aside>
+					</section>
 				</section>
 				<section>
 				  <h4 style="text-align: left">У каждого есть умный ИИ-ассистент — и он всегда готов помочь!</h4>
@@ -476,7 +671,7 @@
 					  <h4 style="text-align: left">Ключевые навыки в эпоху ИИ</h4>
 					  <ul>
 						<li>🗣️ Умение общаться с ИИ-моделями становится критически важным</li>
-						<li>👥 Нужно развивать гибкие навыки для взаимодействия с людьми</li>
+						<li>👥 Ещё нужно развивать soft skills для взаимодействия с людьми</li>
 					  </ul>
 				  </div>
 				  <br>
@@ -493,277 +688,9 @@
 					- решении задач более широкого масштаба.
 				  </aside>
 				</section>
-				<section class="dense-ai-slide">
-					<h4 style="text-align: left">Будущее разработки программного обеспечения с ИИ</h4>
-					<ul>
-						<li>🔬 Разработка базовых систем ИИ:
-							такие компании, как OpenAI и Anthropic, создают фундаментальные модели
-						</li>
-						<li>🛠️ Специалисты по интеграции ИИ
-							<ul>
-								<li class="fragment"><i>Технологии: JetBrains, VS Code…</i></li>
-								<li class="fragment"><i>Здравоохранение: диагностические системы, медицинская визуализация</i></li>
-								<li class="fragment"><i>Наука: анализ исследований, автоматизация лабораторий</i></li>
-								<li class="fragment"><i>Производство: оптимизация процессов, контроль качества</i></li>
-							</ul>
-						</li>
-					</ul>
-					<br><br>
-					<h4 class="fragment" style="text-align: left;color: white;
-						background-color: orange;padding-left: 20px">
-						Формируются два главных карьерных пути: разработка базовых систем ИИ и внедрение ИИ в конкретных отраслях
-					</h4>
-					<aside class="notes">
-						Индустрия ИИ разделяется на два основных направления:
-						1. Разработка базовых систем ИИ — создание и улучшение фундаментальных моделей и систем
-						2. Отраслевые специалисты — внедрение и адаптация ИИ-решений для конкретных индустрий
-
-						Оба пути требуют глубокой экспертизы и дают большие возможности для роста.
-						Главное — выбрать область, в которой ваши интересы и опыт позволят принести наибольшую пользу.
-					</aside>
-				</section>
-					<section class="quiz-slide">
-						<h3>1. Сколько лет длится бакалавриат по информатике в Европе?</h3>
-						<div class="quiz">
-							<div class="answer" onclick="checkAnswer(this, 'correct')">A. 3 года</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. 3+1 года</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. 4 года</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. 5 лет</div>
-						</div>
-						<aside class="notes">
-							Начнём викторину с базового вопроса
-							о продолжительности бакалавриата по информатике в Европе.
-							<br>
-							Вопрос: сколько обычно длится бакалавриат по информатике в Европе?
-							<br>
-							Выберите один из четырёх вариантов:
-							A. 3 года
-							B. 3+1 года
-							C. 4 года
-							D. 5 лет
-							<br>
-							Подумайте и нажмите на вариант, который считаете правильным.
-							Так можно проверить, что вы уже знаете о структуре этих программ.
-							<br>
-							Правильный ответ — A. Три года — стандартная продолжительность бакалавриата по информатике в Европе.
-						</aside>
-					</section>
-					<section class="quiz-slide">
-						<h3>2. На каком курсе обычно изучают машинное обучение?</h3>
-						<div class="quiz">
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. На первом</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. На втором</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. На третьем</div>
-							<div class="answer" onclick="checkAnswer(this, 'correct')">D. Машинное обучение не входит в обязательную программу</div>
-						</div>
-						<aside class="notes">
-							Следующий вопрос — о том, на каком курсе бакалавриата
-							студенты обычно знакомятся с машинным обучением.
-							<br>
-							Вопрос: на каком курсе обычно преподают машинное обучение?
-							<br>
-							Варианты ответа:
-							A. На первом
-							B. На втором
-							C. На третьем
-							D. Машинное обучение не входит в обязательную программу
-							<br>
-							Подумайте и нажмите на вариант, который считаете правильным.
-							Этот вопрос проверяет, насколько вы представляете место машинного обучения
-							в программах по информатике в разных университетах.
-							<br>
-							К сожалению, правильный ответ — D.
-							В первые три года обучения машинное обучение не входит в число обязательных дисциплин.
-						</aside>
-					</section>
-					<section class="quiz-slide">
-						<h3>3. В каких вузах есть <i>тьюторские занятия?</i></h3>
-						<div class="quiz">
-							<div class="answer" onclick="checkAnswer(this, 'correct')">A. Оксфорд</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. ETH Zurich</div>
-							<div class="answer" onclick="checkAnswer(this, 'correct')">C. Кембридж</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. Imperial College London</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">E. TUM</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">F. EPFL</div>
-						</div>
-						<aside class="notes">
-							Следующий вопрос посвящён особому элементу
-							программ по информатике в некоторых университетах.
-							<br>
-							Вопрос: где используют тьюторские занятия для развития мышления?
-							<br>
-							Выберите один или несколько вариантов:
-							A. Оксфордский университет
-							B. Швейцарская высшая техническая школа Цюриха (ETH Zurich)
-							C. Кембриджский университет
-							D. Имперский колледж Лондона
-							E. Мюнхенский технический университет (TUM)
-							F. Федеральная политехническая школа Лозанны (EPFL)
-							<br>
-							Подумайте и нажмите на вариант, который считаете правильным.
-							Этот вопрос проверяет, знаете ли вы об особых методах преподавания
-							в программах по информатике разных университетов.
-							<br>
-							Правильные ответы — A. Оксфордский университет и C. Кембриджский университет.
-							В обоих университетах тьюторские занятия помогают студентам развивать мышление.
-						</aside>
-					</section>
-					<section class="quiz-slide">
-						<h3>4. Где в бакалавриате по информатике целый семестр изучают физику?</h3>
-						<div class="quiz">
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. Оксфорд</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. ETH Zurich</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. TUM</div>
-							<div class="answer" onclick="checkAnswer(this, 'correct')">D. EPFL</div>
-						</div>
-						<aside class="notes">
-							Следующий вопрос — о дисциплине в программе по информатике,
-							которая не вполне типична для этого направления.
-							<br>
-							Вопрос: в какой программе бакалавриата по информатике есть семестровый курс физики?
-							<br>
-							Правильный ответ — D. Федеральная политехническая школа Лозанны (EPFL).
-						</aside>
-					</section>
-					<section class="quiz-slide">
-						<h3>5. Сколько обязательных дисциплин может быть на первом курсе?</h3>
-						<div class="quiz">
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. 8</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">B. 10</div>
-							<div class="answer" onclick="checkAnswer(this, 'correct')">C. 12</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. 14</div>
-						</div>
-						<aside class="notes">
-							Следующий вопрос викторины — о числе обязательных дисциплин,
-							которые студенты обычно изучают на первом курсе программы по информатике.
-							<br>
-							Вопрос: каково максимальное число обязательных дисциплин на первом курсе?
-							<br>
-							Выберите один из четырёх вариантов:
-							A. 8
-							B. 10
-							C. 12
-							D. 14
-							<br>
-							Подумайте и нажмите на вариант, который считаете правильным.
-							Этот вопрос проверяет ваше знание структуры и требований
-							программ по информатике на первом курсе.
-							<br>
-							Правильный ответ — C. 12. Это максимальное число обязательных дисциплин,
-							которые студенты обычно изучают на первом курсе программы по информатике.
-						</aside>
-					</section>
-					<section class="quiz-slide">
-						<h3>6. Где можно на год уйти работать, а затем вернуться в бакалавриат?</h3>
-						<div class="quiz">
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">A. ETH Zurich</div>
-							<div class="answer" onclick="checkAnswer(this, 'correct')">B. UCL</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">C. Imperial College London</div>
-							<div class="answer" onclick="checkAnswer(this, 'wrong')">D. TUM</div>
-						</div>
-						<aside class="notes">
-							Последний вопрос — об особой возможности, которую предлагает один из университетов:
-							студенты могут получить опыт работы прямо во время учёбы.
-							<br>
-							Вопрос: где можно на год уйти работать в компанию во время бакалавриата,
-							а затем вернуться и завершить обучение?
-							<br>
-							Правильный ответ — B. Университетский колледж Лондона (UCL).
-						</aside>
-					</section>
-				</section>
 				<section>
-					<section>
-						<h3>Что общего у сильных программ по информатике</h3>
-						<ul class="custom-list">
-							<li class="fragment">3 года обучения</li>
-							<li class="fragment">Около трети дисциплин — по выбору</li>
-							<li class="fragment">Как минимум один семестровый проект</li>
-							<li class="fragment"><a href="https://www.cst.cam.ac.uk/files/elephantdraft.pdf" style="color: deepskyblue">Тьюторские занятия</a> для развития мышления</li>
-							<li class="fragment minus">Мало математики</li>
-							<li class="fragment minus">Машинное обучение — по выбору</li>
-						</ul>
-						<aside class="notes">
-							После викторины рассмотрим общие черты ведущих европейских программ бакалавриата по информатике.
-							<br>
-							Обычно эти программы устроены так:
-							- стандартная продолжительность обучения — 3 года;
-							- примерно треть дисциплин можно выбрать;
-							- обязателен как минимум один семестровый проект;
-							- тьюторские занятия помогают развивать мышление;
-							- большое внимание уделяется практическим навыкам и проектному обучению.
-							<br>
-							При этом объём математики и машинного обучения в разных программах различается.
-							Эти различия влияют на общую структуру и направленность обучения.
-						</aside>
-					</section>
-					<section class="compact-text-slide">
-						<h3 style="text-align: left">Важное замечание</h3>
-						<p style="text-align: left" class="fragment"><span class="important">Тьюторские занятия</span>
-							часто заменяют еженедельную проверку заданий.
-							По основным предметам могут быть только годовые экзамены.</p>
 
-						<p style="text-align: left" class="fragment">
-							В <span class="important">Оксфорде</span> для перехода на второй курс
-						    нужно сдать 4 комплексных экзамена по 9 предметам:</p>
 
-						<ol class="fragment">
-							<li>Функциональное программирование, проектирование и анализ алгоритмов</li>
-							<li>Императивное программирование</li>
-							<li>Дискретная математика, теория вероятностей и непрерывная математика</li>
-							<li>Цифровые системы, линейная алгебра и введение в формальные доказательства</li>
-						</ol>
-
-						<aside class="notes">
-							Продолжим. Здесь я хочу подчеркнуть важность тьюторских занятий.
-							<br>
-							В некоторых университетах тьюторские занятия заменяют традиционную еженедельную проверку заданий.
-							Вместо регулярных аттестаций студентов нередко ждут только экзамены по основным предметам в конце первого курса.
-							<br>
-							Например, первый курс в Оксфорде особенно интенсивный.
-							Чтобы перейти на второй курс, студенты должны сдать четыре комплексных экзамена по девяти предметам.
-							Эти экзамены проходят в конце года, а не каждого семестра.
-							<br>
-							В экзамены входят следующие предметы:
-							1. Функциональное программирование, проектирование и анализ алгоритмов
-							2. Императивное программирование
-							3. Дискретная математика, теория вероятностей и непрерывная математика
-							4. Цифровые системы, линейная алгебра и введение в формальные доказательства
-
-							Такая система требует целостного понимания каждого предмета к моменту экзамена
-							и создаёт условия для более глубокого и связного обучения.
-						</aside>
-					</section>
-					<section>
-						<h3 style="text-align: left">Студенческие практические проекты</h3>
-						<ul class="custom-list">
-							<li class="fragment lamp">Индивидуальный проект — может быть частью курса (UCL, Оксфорд)</li>
-							<li class="fragment lamp">Групповой проект — часто от индустриального партнёра (TUM, EPFL, Оксфорд, Делфт)</li>
-							<li class="fragment lamp">Исследовательский проект — обычно завершается дипломной работой (везде, кроме EPFL)</li>
-						</ul>
-						<aside class="notes">
-							Обсудим виды практических проектов, которыми студенты могут заниматься во время обучения.
-							<br>
-							Во-первых, это **индивидуальные проекты**. Они часто встроены в учебные курсы
-							и позволяют студентам применить изученные концепции в более самостоятельной и сфокусированной работе.
-							Такие университеты, как UCL и Оксфорд, часто включают индивидуальные проекты в свои курсы.
-							<br>
-							Во-вторых, это **групповые проекты**. Обычно над ними работают команды,
-							часто совместно с индустриальными партнёрами.
-							Студенты получают опыт командной работы в условиях, близких к реальным,
-							и развивают навыки взаимодействия и коммуникации.
-							TUM, EPFL, Оксфорд и Делфт известны своими групповыми проектами,
-							которые часто проходят при участии индустриальных партнёров.
-							<br>
-							Наконец, есть **исследовательские проекты**. Обычно они завершаются дипломной работой
-							и обязательны в большинстве университетов, кроме EPFL.
-							Исследовательские проекты особенно важны для студентов, которые хотят углубить знания
-							и получить собственные результаты в выбранной области.
-							<br>
-							Каждый тип проектов даёт свой опыт и свои преимущества,
-							помогая подготовиться к будущей карьере в академической среде, индустрии или исследованиях.
-						</aside>
-					</section>
 				</section>
 				<section>
 					<section class="curriculum-table-slide">
