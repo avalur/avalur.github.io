@@ -872,6 +872,12 @@
 				line-height: 1.15;
 				color: #555;
 			}
+			.llm-lab .open-weights {
+				display: block;
+				margin-top: 3px;
+				font-weight: 700;
+				color: #2f4397;
+			}
 			.llm-valuations-takeaway {
 				max-width: 1120px;
 				margin: 20px auto 0;
@@ -1054,6 +1060,133 @@
 			.leiden-footer .math-link {
 				flex: 0 0 auto;
 				font-size: 18px;
+				white-space: nowrap;
+			}
+			.math-final-slide {
+				position: relative;
+				display: flex !important;
+				min-height: 620px;
+				flex-direction: column;
+				justify-content: center;
+				color: #f3ecd9;
+				text-align: left;
+				text-shadow: 0 0 5px rgba(255, 255, 255, 0.12);
+			}
+			.math-final-balls {
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				max-width: none;
+				max-height: none;
+				margin: 0;
+				pointer-events: none;
+			}
+			.math-final-head {
+				position: relative;
+				z-index: 2;
+				width: 100%;
+				height: 155px;
+				flex: none;
+			}
+			.math-final-layout {
+				position: relative;
+				z-index: 2;
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 330px;
+				gap: 58px;
+				align-items: center;
+				max-width: 1120px;
+				margin: 0 auto;
+			}
+			.math-final-reasons {
+				margin: 0;
+				padding-left: 1.2em;
+				font-size: 30px;
+				line-height: 1.35;
+			}
+			.math-final-reasons li {
+				margin: 0 0 14px;
+				padding-left: 8px;
+			}
+			.math-final-reasons li::marker {
+				color: #e8d59a;
+				font-weight: 700;
+			}
+			.math-final-reasons strong {
+				color: #f59e0b;
+			}
+			.math-final-telegram {
+				margin: 0;
+				text-align: center;
+			}
+			.math-final-telegram > p {
+				margin: 0 0 12px;
+				font-size: 20px;
+				line-height: 1.2;
+				color: #e8d59a;
+			}
+			.math-final-qr {
+				display: block;
+				padding: 13px 13px 10px;
+				border: 3px solid #f59e0b;
+				border-radius: 9px;
+				background: white;
+				box-shadow: 0 0 0 5px rgba(214, 51, 132, 0.55), 0 14px 34px rgba(0, 0, 0, 0.38);
+				text-decoration: none !important;
+			}
+			.math-final-qr img {
+				display: block;
+				width: 285px;
+				height: 285px;
+				max-height: none;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+			.math-final-qr-visual {
+				position: relative;
+				display: block;
+				width: 285px;
+				height: 285px;
+				margin: 0 auto;
+				background: white;
+			}
+			.math-final-qr-visual img,
+			.math-final-qr-particles {
+				position: absolute;
+				inset: 0;
+			}
+			.math-final-qr-particles {
+				z-index: 1;
+				display: block;
+				width: 285px;
+				height: 285px;
+				max-width: none;
+				max-height: none;
+				margin: 0;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 160ms ease;
+			}
+			.math-final-qr-particles.ready {
+				opacity: 1;
+			}
+			.math-final-qr-label {
+				display: block;
+				margin-top: 7px;
+				font-family: "SF Mono", Menlo, monospace;
+				font-size: 24px;
+				font-weight: 700;
+				color: #2f4397;
+				text-align: center;
+			}
+			.math-final-slide .fallback-title {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				overflow: hidden;
+				clip: rect(0 0 0 0);
 				white-space: nowrap;
 			}
 			th, td {
@@ -1732,33 +1865,34 @@
 							</article>
 							<article class="llm-lab">
 								<span class="rank">4</span>
+								<img src="images/liang_wenfeng.jpg" alt="Лян Вэньфэн, основатель DeepSeek">
+								<h4>DeepSeek</h4>
+								<p class="valuation">≈ $74 млрд</p>
+								<p class="ceo">Лян Вэньфэн · основатель<span class="open-weights">открытые веса</span></p>
+							</article>
+							<article class="llm-lab">
+								<span class="rank">5</span>
 								<img src="images/arthur_mensch.jpg" alt="Артур Менш, CEO Mistral AI">
 								<h4>Mistral AI</h4>
 								<p class="valuation">≈ $23 млрд</p>
 								<p class="ceo">Артур Менш · CEO</p>
 							</article>
-							<article class="llm-lab">
-								<span class="rank">5</span>
-								<img src="images/aidan_gomez.webp" alt="Эйдан Гомес, CEO Cohere">
-								<h4>Cohere</h4>
-								<p class="valuation">≈ $20 млрд</p>
-								<p class="ceo">Эйдан Гомес · CEO</p>
-							</article>
 						</div>
 						<p class="llm-valuations-takeaway">Математические способности — один из главных фронтов конкуренции между компаниями, которые вместе оцениваются <strong>более чем в $2 трлн</strong>.</p>
-						<p class="llm-valuations-note">Оценки частных компаний приблизительны. xAI — последняя самостоятельная оценка до объединения со SpaceX; Mistral AI и Cohere — оценки обсуждаемых или ещё не закрытых сделок.</p>
+						<p class="llm-valuations-note">Оценки частных компаний приблизительны. xAI — последняя самостоятельная оценка до объединения со SpaceX; DeepSeek и Mistral AI — оценки обсуждаемых сделок.</p>
 						<aside class="notes">
 							[Sources]
 							- Anthropic valuation ($965B): Anthropic Series H announcement, 28 May 2026, https://www.anthropic.com/news/series-h
 							- OpenAI valuation ($852B): OpenAI funding announcement, March 2026, https://openai.com/index/accelerating-the-next-phase-ai/
 							- xAI valuation (~$230B): reported Series E valuation before the SpaceX combination; round announcement: https://x.ai/news/series-e
+							- DeepSeek valuation (~$74B): reported fundraising talks, August 2026, https://www.axios.com/newsletters/axios-pro-rata-348b8ec6-f9a1-4bca-9f25-c7880cfa1e5c
+							- DeepSeek open-weight releases: DeepSeek Transparency Center, https://www.deepseek.com/en/transparency/
 							- Mistral AI valuation (~$23B): reported financing talks, July 2026, https://www.axios.com/2026/07/22/mistral-samsung-20-billion-valuation
-							- Cohere valuation (~$20B): reported Aleph Alpha transaction and concurrent Series E, April 2026, https://www.axios.com/2026/04/24/cohere-20-billion-aleph-alpha-europe
 							- Dario Amodei portrait: Anthropic Builder Summit, https://www.anthropic.com/events/builder-summit-bengaluru
 							- Sam Altman portrait: Qatar Foundation speaker profile, https://www.qf.org.qa/ar/education-city-speaker-series/experts/sam-altman
 							- Elon Musk portrait: Debbie Rowe, Wikimedia Commons, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Elon_Musk_(cropped).jpg
+							- Liang Wenfeng portrait: Toolmesh, https://www.toolmesh.ai/news/deepseek-v4-model-launch-enhanced-programming
 							- Arthur Mensch portrait: Imec Technology Forum, https://www.imecitf.com/world/speakers/arthur-mensch
-							- Aidan Gomez portrait: Cohere Newsroom, https://cohere.com/newsroom
 							[/Sources]
 						</aside>
 					</section>
@@ -1867,79 +2001,36 @@
 						- решении задач более широкого масштаба.
 					  </aside>
 					</section>
-				</section>
-				<section class="timeline-slide">
-					<h3>Ближайшие события 🌟🌍</h3>
-					<div class="timeline">
-						<div class="event">
-							<h5>Июнь 2025</h5>
-							<p class="highlight" style="text-align: left">Школа по алгоритмам и программированию</p>
-							<p style="text-align: left">📍 Румыния</p>
+					<section class="math-final-slide" data-background-color="#0b1020">
+						<h3 class="fallback-title">Так зачем же учить математику?</h3>
+						<canvas class="math-final-balls" aria-hidden="true"></canvas>
+						<div class="math-final-head" aria-hidden="true"></div>
+						<div class="math-final-layout">
+							<ol class="math-final-reasons">
+								<li>Это <strong>красиво</strong></li>
+								<li>Ум в порядок приводит</li>
+								<li>Можно поступить в вуз или магистратуру</li>
+								<li>Можно пройти в Яндекс, JetBrains, OpenAI</li>
+								<li><strong>Профит!</strong></li>
+							</ol>
+							<figure class="math-final-telegram">
+								<p><strong>Англоязычный канал</strong><br>о математике, ИИ и образовании</p>
+								<a class="math-final-qr" href="https://t.me/TechneNotes" target="_blank" rel="noopener">
+									<span class="math-final-qr-visual">
+										<img src="images/techne_notes_qr.png" alt="">
+										<canvas class="math-final-qr-particles" role="img" aria-label="QR-код англоязычного Telegram-канала TechneNotes"></canvas>
+									</span>
+									<span class="math-final-qr-label">@TechneNotes</span>
+								</a>
+							</figure>
 						</div>
-
-						<div class="event">
-							<h5>Сентябрь / октябрь 2025</h5>
-							<p class="highlight">Молодёжные клубы JetBrains</p>
-							<p>📍 Онлайн: математика, программирование и ИИ</p>
-						</div>
-
-						<div class="event">
-							<h5>Октябрь / ноябрь 2025</h5>
-							<p class="highlight">Молодёжный конкурс JetBrains Academy</p>
-							<p style="text-align: left">📍 Онлайн</p>
-						</div>
-					</div>
-				</section>
-				<section class="community-slide">
-					<h3>Как узнавать о новых возможностях?</h3>
-					<div class="container">
-						<div class="content column">
-							<p class="highlight">Присоединяйтесь к нашему сообществу в Discord!</p>
-							<div style="text-align: left">
-								<ul>
-									<li>✨ <strong>Викторины</strong>, чтобы проверить знания</li>
-									<li>📅 <strong>Задача недели</strong>, чтобы поддерживать навыки</li>
-									<li>📚 <strong>Обмен учебными материалами</strong> для вашего развития</li>
-									<li>🌍 <strong>Общение с единомышленниками</strong> со всего мира!</li>
-								</ul>
-							</div>
-							<p class="link">🔗 <a href="https://jb.gg/youth-discord" style="color: blue">https://jb.gg/youth-discord</a></p>
-						</div>
-						<div class="qr-code column">
-							<img src="images/youth-discord.png" alt="QR-код сообщества в Discord" width="500">
-						</div>
-					</div>
-				</section>
-				<section>
-					<section>
-						<h3 style="text-align: left">Темы для жарких дискуссий</h3>
-						<ul class="custom-list">
-							<li class="lamp fragment">Сколько математики нужно в бакалавриате по информатике: 3 дисциплины или 10 из 30?</li>
-							<li class="lamp fragment">Нужны ли отдельные курсы по командной работе, этике и гибким навыкам?</li>
-							<li class="lamp fragment">Каким должен быть идеальный выпускник бакалавриата по информатике?</li>
-						</ul>
+						<aside class="notes">
+							[Sources]
+							- Telegram channel and QR target: https://t.me/TechneNotes
+							- Interactive particle treatment for the title and QR adapted from the local reference: talks/imo_preparation/src/slides/balls.js
+							[/Sources]
+						</aside>
 					</section>
-					<aside class="notes">
-						Наконец, обсудим несколько самых спорных тем в образовании по информатике.
-						Их нередко называют «холиварами», потому что они вызывают особенно сильные разногласия.
-						<br>
-						Первый вопрос: **сколько математики нужно в бакалавриате по информатике?**
-						Достаточно примерно 3 дисциплин или их должно быть 10 из 30?
-						Этот спор касается баланса между теоретическими знаниями и практическими навыками.
-						Одни считают, что прочная математическая база необходима для понимания сложных алгоритмов и систем,
-						другие — что чрезмерный акцент на математике мешает практическому освоению программирования и разработки ПО.
-						<br>
-						Второй вопрос: **нужно ли преподавать командную работу, этику и гибкие навыки на отдельных курсах?**
-						В технологической индустрии сотрудничество и этические вопросы становятся всё важнее.
-						Однако интеграция этих навыков в программу, традиционно ориентированную на техническую подготовку, остаётся спорной.
-						Стоит ли выделять для них отдельные дисциплины или лучше встроить их в технические курсы?
-						<br>
-						Наконец, обсудим **идеальный портрет выпускника бакалавриата по информатике**.
-						Какими качествами и навыками он должен обладать? Здесь важны и глубина, и широта знаний,
-						баланс теории и практики, а также личное и профессиональное развитие.
-						<br>
-						Спасибо за внимание. Буду рад ответить на вопросы.
-					</aside>
 				</section>
             </div>
         </div>
@@ -2001,5 +2092,200 @@
 			}
 
         </script>
+		<script type="module">
+			import { initBalls } from './imo_preparation/src/slides/balls.js';
+
+			let stopFinalMathBalls = null;
+			let finalMathResizeTimer = null;
+			const QR_RAINBOW = ['#ff0000', '#ff7f00', '#f0c800', '#00b64f', '#0080ff', '#4b0082', '#9400d3'];
+
+			function initQrBalls(canvas, image) {
+				let stopped = false;
+				let cleanup = null;
+
+				async function boot() {
+					try {
+						await image.decode();
+						if (stopped) return;
+						if (!canvas.clientWidth || !canvas.clientHeight) {
+							requestAnimationFrame(boot);
+							return;
+						}
+						cleanup = startQrBalls(canvas, image);
+					} catch (error) {
+						console.warn('Не удалось собрать QR-код из точек:', error);
+					}
+				}
+
+				boot();
+				return () => {
+					stopped = true;
+					cleanup?.();
+				};
+			}
+
+			function startQrBalls(canvas, image) {
+				const width = canvas.clientWidth;
+				const height = canvas.clientHeight;
+				const scale = 2;
+				const ctx = canvas.getContext('2d');
+				canvas.width = width * scale;
+				canvas.height = height * scale;
+				ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+				const mask = document.createElement('canvas');
+				mask.width = width;
+				mask.height = height;
+				const maskCtx = mask.getContext('2d', { willReadFrequently: true });
+				maskCtx.drawImage(image, 0, 0, width, height);
+				const pixels = maskCtx.getImageData(0, 0, width, height).data;
+				const anchors = [];
+				const step = 4;
+				for (let y = step / 2; y < height; y += step) {
+					for (let x = step / 2; x < width; x += step) {
+						const pixel = (Math.floor(y) * width + Math.floor(x)) * 4;
+						if (pixels[pixel] > 128) continue;
+						anchors.push({
+							ox: x,
+							oy: y,
+							active: false,
+							fragments: QR_RAINBOW.map(() => ({ x, y, vx: 0, vy: 0 })),
+						});
+					}
+				}
+
+				const mouse = { x: -9999, y: -9999, active: false };
+				function onMove(event) {
+					const bounds = canvas.getBoundingClientRect();
+					if (!bounds.width || !bounds.height) return;
+					mouse.x = ((event.clientX - bounds.left) / bounds.width) * width;
+					mouse.y = ((event.clientY - bounds.top) / bounds.height) * height;
+					mouse.active = event.clientX >= bounds.left && event.clientX <= bounds.right
+						&& event.clientY >= bounds.top && event.clientY <= bounds.bottom;
+				}
+				function onLeave() {
+					mouse.active = false;
+					mouse.x = mouse.y = -9999;
+				}
+				window.addEventListener('pointermove', onMove);
+				window.addEventListener('pointerdown', onMove);
+				window.addEventListener('pointerleave', onLeave);
+
+				const radius = 1.9;
+				const repelRadius = 42;
+				const repelRadiusSquared = repelRadius * repelRadius;
+				let frameId = 0;
+				let last = performance.now();
+
+				function split(anchor) {
+					anchor.active = true;
+					const base = Math.atan2(anchor.oy - mouse.y, anchor.ox - mouse.x);
+					anchor.fragments.forEach((fragment) => {
+						const angle = base + (Math.random() - 0.5) * Math.PI;
+						const speed = 250 + Math.random() * 390;
+						fragment.vx = Math.cos(angle) * speed;
+						fragment.vy = Math.sin(angle) * speed;
+					});
+				}
+
+				function drawAnchor(anchor, dt) {
+					if (!anchor.active && mouse.active) {
+						const dx = anchor.ox - mouse.x;
+						const dy = anchor.oy - mouse.y;
+						if (dx * dx + dy * dy < repelRadiusSquared) split(anchor);
+					}
+					if (!anchor.active) {
+						ctx.beginPath();
+						ctx.fillStyle = '#0b1020';
+						ctx.arc(anchor.ox, anchor.oy, radius, 0, Math.PI * 2);
+						ctx.fill();
+						return;
+					}
+
+					let allAtRest = true;
+					anchor.fragments.forEach((fragment, index) => {
+						if (mouse.active) {
+							const dx = fragment.x - mouse.x;
+							const dy = fragment.y - mouse.y;
+							const distanceSquared = dx * dx + dy * dy;
+							if (distanceSquared < repelRadiusSquared && distanceSquared > 0.001) {
+								const distance = Math.sqrt(distanceSquared);
+								const force = (3600 * (1 - distance / repelRadius)) / distance;
+								fragment.vx += dx * force * dt;
+								fragment.vy += dy * force * dt;
+							}
+						}
+						fragment.vx = (fragment.vx + (anchor.ox - fragment.x) * 0.05) * 0.86;
+						fragment.vy = (fragment.vy + (anchor.oy - fragment.y) * 0.05) * 0.86;
+						fragment.x += fragment.vx * dt * 8;
+						fragment.y += fragment.vy * dt * 8;
+						const dxHome = fragment.x - anchor.ox;
+						const dyHome = fragment.y - anchor.oy;
+						if (dxHome * dxHome + dyHome * dyHome > 0.36
+							|| fragment.vx * fragment.vx + fragment.vy * fragment.vy > 1.44) allAtRest = false;
+						ctx.beginPath();
+						ctx.fillStyle = QR_RAINBOW[index];
+						ctx.arc(fragment.x, fragment.y, radius, 0, Math.PI * 2);
+						ctx.fill();
+					});
+					if (allAtRest) {
+						anchor.active = false;
+						anchor.fragments.forEach((fragment) => {
+							fragment.x = anchor.ox;
+							fragment.y = anchor.oy;
+							fragment.vx = fragment.vy = 0;
+						});
+					}
+				}
+
+				function frame(now) {
+					const dt = Math.min(0.033, (now - last) / 1000);
+					last = now;
+					ctx.fillStyle = '#ffffff';
+					ctx.fillRect(0, 0, width, height);
+					anchors.forEach((anchor) => drawAnchor(anchor, dt));
+					frameId = requestAnimationFrame(frame);
+				}
+
+				canvas.classList.add('ready');
+				frameId = requestAnimationFrame(frame);
+				return () => {
+					cancelAnimationFrame(frameId);
+					canvas.classList.remove('ready');
+					window.removeEventListener('pointermove', onMove);
+					window.removeEventListener('pointerdown', onMove);
+					window.removeEventListener('pointerleave', onLeave);
+				};
+			}
+
+			function syncFinalMathBalls(slide = Reveal.getCurrentSlide()) {
+				stopFinalMathBalls?.();
+				stopFinalMathBalls = null;
+				if (!slide?.classList.contains('math-final-slide')) return;
+				const canvas = slide.querySelector('.math-final-balls');
+				const box = slide.querySelector('.math-final-head');
+				stopFinalMathBalls = initBalls(canvas, {
+					text: 'Так зачем же учить математику?',
+					box,
+				});
+				const stopQrBalls = initQrBalls(
+					slide.querySelector('.math-final-qr-particles'),
+					slide.querySelector('.math-final-qr-visual img'),
+				);
+				const stopTitleBalls = stopFinalMathBalls;
+				stopFinalMathBalls = () => {
+					stopTitleBalls();
+					stopQrBalls();
+				};
+			}
+
+			Reveal.addEventListener('ready', (event) => syncFinalMathBalls(event.currentSlide));
+			Reveal.addEventListener('slidechanged', (event) => syncFinalMathBalls(event.currentSlide));
+			window.addEventListener('resize', () => {
+				clearTimeout(finalMathResizeTimer);
+				finalMathResizeTimer = setTimeout(() => syncFinalMathBalls(), 120);
+			});
+			requestAnimationFrame(() => syncFinalMathBalls());
+		</script>
 	</body>
 </html>
