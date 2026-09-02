@@ -2110,7 +2110,8 @@
 						<aside class="notes">
 							[Sources]
 							- Telegram channel and QR target: https://t.me/TechneNotes
-							- Interactive particle treatment for the title and QR adapted from the local reference: talks/imo_preparation/src/slides/balls.js
+							- Interactive particle treatment for the title adapted from the local reference: talks/imo_preparation/src/slides/balls.js
+							- QR matrix and scannable module geometry adapted from the working local reference: avalur.me/public/talks/imo-2026/src/slides/qr_techne.js and balls.js
 							[/Sources]
 						</aside>
 					</section>
@@ -2181,23 +2182,51 @@
 			let stopFinalMathBalls = null;
 			let finalMathResizeTimer = null;
 			const QR_RAINBOW = ['#ff0000', '#ff7f00', '#f0c800', '#00b64f', '#0080ff', '#4b0082', '#9400d3'];
+			const QR_QUIET_ZONE = 4;
+			// Та же матрица версии 3 / коррекции H, что и в рабочем QR из imo-2026.
+			const QR_MATRIX = [
+				'11111110110111010101001111111',
+				'10000010100011110110101000001',
+				'10111010011100001100101011101',
+				'10111010100001000011001011101',
+				'10111010110111000010001011101',
+				'10000010110010001101101000001',
+				'11111110101010101010101111111',
+				'00000000000011010111100000000',
+				'00010010010000111111000111011',
+				'11001000000001000100111000001',
+				'00110111000010110011101001110',
+				'01111001101110010001011110110',
+				'10101010010011001100101100000',
+				'00011000110010010011010101001',
+				'01010011110011000010011000011',
+				'01011100000100100101100100001',
+				'11011010111000010101010000011',
+				'00100100001111001010010100111',
+				'10110110110101100000010011111',
+				'00011101000101110001100111011',
+				'10110111101111100101111110100',
+				'00000000101011001110100010011',
+				'11111110001100010000101011100',
+				'10000010011010110110100010100',
+				'10111010001110100000111111011',
+				'10111010110011111111111010001',
+				'10111010011111100001100011101',
+				'10000010010110101011101100010',
+				'11111110000100110110101011010',
+			];
 
-			function initQrBalls(canvas, image) {
+			function initQrBalls(canvas) {
 				let stopped = false;
 				let cleanup = null;
 
-				async function boot() {
-					try {
-						await image.decode();
-						if (stopped) return;
-						if (!canvas.clientWidth || !canvas.clientHeight) {
-							requestAnimationFrame(boot);
-							return;
-						}
-						cleanup = startQrBalls(canvas, image);
-					} catch (error) {
-						console.warn('Не удалось собрать QR-код из точек:', error);
+				function boot() {
+					if (stopped) return;
+					if (!canvas.clientWidth || !canvas.clientHeight) {
+						requestAnimationFrame(boot);
+						return;
 					}
+					cleanup = startQrBalls(canvas);
 				}
 
 				boot();
@@ -2207,7 +2236,7 @@
 				};
 			}
 
-			function startQrBalls(canvas, image) {
+			function startQrBalls(canvas) {
 				const width = canvas.clientWidth;
 				const height = canvas.clientHeight;
 				const scale = 2;
@@ -2216,23 +2245,22 @@
 				canvas.height = height * scale;
 				ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
-				const mask = document.createElement('canvas');
-				mask.width = width;
-				mask.height = height;
-				const maskCtx = mask.getContext('2d', { willReadFrequently: true });
-				maskCtx.drawImage(image, 0, 0, width, height);
-				const pixels = maskCtx.getImageData(0, 0, width, height).data;
+				const totalModules = QR_MATRIX.length + 2 * QR_QUIET_ZONE;
+				const moduleSize = Math.floor(Math.min(width, height) / totalModules);
+				const qrSize = totalModules * moduleSize;
+				const x0 = Math.floor((width - qrSize) / 2);
+				const y0 = Math.floor((height - qrSize) / 2);
 				const anchors = [];
-				const step = 4;
-				for (let y = step / 2; y < height; y += step) {
-					for (let x = step / 2; x < width; x += step) {
-						const pixel = (Math.floor(y) * width + Math.floor(x)) * 4;
-						if (pixels[pixel] > 128) continue;
+				for (let y = 0; y < QR_MATRIX.length; y++) {
+					for (let x = 0; x < QR_MATRIX.length; x++) {
+						if (QR_MATRIX[y][x] !== '1') continue;
+						const anchorX = x0 + (x + QR_QUIET_ZONE + 0.5) * moduleSize;
+						const anchorY = y0 + (y + QR_QUIET_ZONE + 0.5) * moduleSize;
 						anchors.push({
-							ox: x,
-							oy: y,
+							ox: anchorX,
+							oy: anchorY,
 							active: false,
-							fragments: QR_RAINBOW.map(() => ({ x, y, vx: 0, vy: 0 })),
+							fragments: QR_RAINBOW.map(() => ({ x: anchorX, y: anchorY, vx: 0, vy: 0 })),
 						});
 					}
 				}
@@ -2254,7 +2282,7 @@
 				window.addEventListener('pointerdown', onMove);
 				window.addEventListener('pointerleave', onLeave);
 
-				const radius = 1.9;
+				const radius = moduleSize / 2;
 				const repelRadius = 42;
 				const repelRadiusSquared = repelRadius * repelRadius;
 				let frameId = 0;
@@ -2353,7 +2381,6 @@
 				});
 				const stopQrBalls = initQrBalls(
 					slide.querySelector('.math-final-qr-particles'),
-					slide.querySelector('.math-final-qr-visual img'),
 				);
 				const stopTitleBalls = stopFinalMathBalls;
 				stopFinalMathBalls = () => {
