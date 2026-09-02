@@ -35,6 +35,53 @@
 			.about-me-slide h2 {
 				margin: 0 0 6px;
 			}
+			.section-map-slide {
+				box-sizing: border-box;
+				padding: 34px 58px !important;
+				text-align: left;
+			}
+			.section-map-slide h2 {
+				margin: 0 0 34px;
+				font-size: 54px;
+				line-height: 1.05;
+				color: #242936;
+			}
+			.section-map-slide .section-map-list {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.section-map-slide .section-map-list li {
+				display: grid;
+				grid-template-columns: 74px minmax(0, 1fr);
+				align-items: center;
+				box-sizing: border-box;
+				min-height: 82px;
+				margin: 0;
+				padding: 12px 18px;
+				border-top: 1px solid #d9dbe1;
+				font-size: 39px;
+				line-height: 1.1;
+				color: #777c87;
+			}
+			.section-map-slide .section-map-list li:last-child {
+				border-bottom: 1px solid #d9dbe1;
+			}
+			.section-map-slide .section-map-number {
+				font-size: 25px;
+				font-weight: 700;
+				font-variant-numeric: tabular-nums;
+				color: #838892;
+			}
+			.section-map-slide .section-map-list li.current {
+				box-shadow: inset 7px 0 #f59e0b;
+				font-weight: 700;
+				color: #d86100;
+			}
+			.section-map-slide .section-map-list li.current .section-map-number {
+				color: #d86100;
+			}
 			.about-me-timeline {
 				position: relative;
 				width: 100%;
@@ -1264,6 +1311,15 @@
 				  	</aside>
                 </section>
 				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li class="current" aria-current="step"><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
 					<section>
 					<h3>Начнём с примера</h3>
 					<p style="text-align: left;font-style: italic;">
@@ -1477,6 +1533,15 @@
 					</section>
 				</section>
 				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li class="current" aria-current="step"><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
 					<section class="about-me-slide" data-transition="fade" data-background-color="#ffffff">
 						<h2>Заменит ли меня ИскИн?</h2>
 						<div class="about-me-timeline">
@@ -1555,6 +1620,15 @@
 					</section>
 				</section>
 				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li class="current" aria-current="step"><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
 					<section class="claudes-cycles-slide" data-background-color="#ffffff">
 						<h3>Claude’s Cycles</h3>
 						<div class="cycles-top">
@@ -1948,6 +2022,15 @@
 					</section>
 				</section>
 				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li class="current" aria-current="step"><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
 					<section>
 					  <h4 style="text-align: left">У каждого есть умный ИИ-ассистент — и он всегда готов помочь!</h4>
 					  <ul>
@@ -2007,11 +2090,11 @@
 						<div class="math-final-head" aria-hidden="true"></div>
 						<div class="math-final-layout">
 							<ol class="math-final-reasons">
-								<li>Это <strong>красиво</strong></li>
-								<li>Ум в порядок приводит</li>
-								<li>Можно поступить в вуз или магистратуру</li>
-								<li>Можно пройти в Яндекс, JetBrains, OpenAI</li>
-								<li><strong>Профит!</strong></li>
+								<li class="fragment">Это <strong>красиво</strong></li>
+								<li class="fragment">Ум в порядок приводит</li>
+								<li class="fragment">Можно поступить в вуз или магистратуру</li>
+								<li class="fragment">Можно пройти в Яндекс, JetBrains, OpenAI</li>
+								<li class="fragment"><strong>Профит!</strong></li>
 							</ol>
 							<figure class="math-final-telegram">
 								<p><strong>Англоязычный канал</strong><br>о математике, ИИ и образовании</p>
