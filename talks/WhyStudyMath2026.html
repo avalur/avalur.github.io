@@ -26,6 +26,56 @@
 		<script src="../plugin/reveald3.js"></script>
 	    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 		<style>
+			.language-switcher {
+				position: fixed;
+				top: 14px;
+				right: 18px;
+				display: flex;
+				gap: 2px;
+				padding: 4px;
+				border: 1px solid rgba(36, 41, 54, 0.2);
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.92);
+				box-shadow: 0 4px 18px rgba(11, 16, 32, 0.12);
+				backdrop-filter: blur(8px);
+				z-index: 1000;
+			}
+			.language-switcher button {
+				min-width: 44px;
+				padding: 6px 10px;
+				border: 0;
+				border-radius: 999px;
+				font: 700 14px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+				letter-spacing: 0.04em;
+				color: #666b75;
+				background: transparent;
+				cursor: pointer;
+			}
+			.language-switcher button[aria-pressed="true"] {
+				color: #fff;
+				background: #d86100;
+			}
+			.language-switcher button:focus-visible {
+				outline: 3px solid rgba(245, 158, 11, 0.45);
+				outline-offset: 2px;
+			}
+			html[lang="en"] .boris-quote-slide .quote-original {
+				display: none;
+			}
+			.lang-en-only {
+				display: none !important;
+			}
+			html[lang="en"] .lang-ru-only {
+				display: none !important;
+			}
+			html[lang="en"] .lang-en-only {
+				display: block !important;
+			}
+			@media print {
+				.language-switcher {
+					display: none;
+				}
+			}
 			.reveal a,
 			.reveal a:visited {
 				color: blue !important;
@@ -1291,6 +1341,10 @@
 		</style>
 	</head>
 	<body onload="totalWrapper();">
+		<nav class="language-switcher" aria-label="Язык презентации">
+			<button type="button" data-language="ru" aria-pressed="true">RU</button>
+			<button type="button" data-language="en" aria-pressed="false">EN</button>
+		</nav>
 		<div class="reveal">
 			<div class="slides">
                 <section id="title" class="title-slide">
@@ -1493,8 +1547,10 @@
 					</section>
 					<section class="alphago-results-slide" data-background-color="#ffffff">
 						<h3>«AlphaGo moment» в олимпиадной математике</h3>
-						<img src="images/alphago_moment_imc_results.svg"
+						<img class="lang-ru-only" src="images/alphago_moment_imc_results.svg"
 							 alt="Результаты человеческих команд и моделей на задачах IMC 2025">
+						<img class="lang-en-only" src="images/alphago_moment_imc_results_en.svg"
+							 alt="Results of human teams and models on IMC 2025 problems">
 						<p class="alphago-post-link">
 							<a href="../posts/AlphaGoMomentForMaths.html">Подробности и методика — в моём посте</a>
 						</p>
@@ -2116,8 +2172,297 @@
 						</aside>
 					</section>
 				</section>
-            </div>
+			</div>
         </div>
+		<script>
+			(() => {
+				const TEXT_TRANSLATIONS = new Map([
+					["Зачем учить математику, если ИскИны всё знают лучше нас?", "Why learn mathematics if AI already knows it better than we do?"],
+					["Эта презентация на avalur.github.io", "This presentation at avalur.github.io"],
+					["О чём поговорим", "Where we’re headed"],
+					["Что ИИ уже умеет", "What AI can already do"],
+					["Заменит ли он меня", "Will it replace me?"],
+					["Как ИИ меняет математику", "How AI is changing mathematics"],
+					["Зачем всё-таки учить математику", "Why learn mathematics after all?"],
+					["Начнём с примера", "Let’s start with an example"],
+					["Докажите, что пунктирные прямые проходят через одну точку", "Prove that the dashed lines pass through a common point"],
+					["Ошибка!", "Wrong!"],
+					["Это верно!", "Correct!"],
+					["Статья «Окружности Мальфатти» в Википедии", "Wikipedia article on Malfatti circles"],
+					["Основные шаги доказательства", "Main steps of the proof"],
+					["Гомотетии для каждой пары окружностей дают нам центры $A_2, B_2, C_2$", "The homotheties for each pair of circles give us the centers $A_2, B_2, C_2$"],
+					["Эти три центра гомотетии лежат на одной прямой по", "These three homothety centers are collinear by"],
+					["теореме Монжа", "Monge’s theorem"],
+					["Последний шаг — применить", "The final step is to apply"],
+					["теорему Дезарга", "Desargues’ theorem"],
+					["к треугольникам $ABC$ и $A_1B_1C_1$", "to triangles $ABC$ and $A_1B_1C_1$"],
+					["А GPT 5.6 Sol намного умнее:", "But GPT-5.6 Sol is much smarter:"],
+					["вот тут", "here"],
+					["всё верно посчитал в барицентрических координатах", "it got everything right using barycentric coordinates"],
+					["«AlphaGo moment» в олимпиадной математике", "An “AlphaGo moment” in olympiad mathematics"],
+					["Подробности и методика — в моём посте", "Details and methodology — in my post"],
+					["То же самое в программировании", "The same is happening in programming"],
+					["Борис Чёрный", "Boris Cherny"],
+					["создатель и руководитель Claude Code, Anthropic", "creator and lead of Claude Code at Anthropic"],
+					["«Я уже, кажется, восемь месяцев не написал вручную ни строчки кода.", "“I haven’t written a line of code by hand in, I think, eight months now."],
+					["Claude Code на 100% написан Claude Code.", "Claude Code is 100% written by Claude Code.”"],
+					["»", ""],
+					["Fortune Brainstorm Tech, 11 июня 2026", "Fortune Brainstorm Tech, June 11, 2026"],
+					["Заменит ли меня ИскИн?", "Will AI replace me?"],
+					["2003, серебряная медаль", "2003, silver medal"],
+					["2009, магистр математики", "2009, MSc in Mathematics"],
+					["2014, кандидат наук", "2014, PhD"],
+					["2016, ШАД", "2016, Yandex School of Data Analysis"],
+					["2015–2018, аналитик", "2015–2018, data scientist"],
+					["2016–2022, руководитель в образовании", "2016–2022, education lead"],
+					["доцент СПбГУ", "associate professor at SPbU"],
+					["2023–н.в., преподаватель и исследователь", "2023–present, educator and researcher"],
+					["Дональд Кнут, февраль 2026", "Donald Knuth, February 2026"],
+					["решил открытую задачу, над которой Кнут работал несколько недель.", "solved an open problem that Knuth had worked on for several weeks."],
+					["Решение проверили независимо и формализовали в Lean.", "The solution was independently verified and formalized in Lean."],
+					["Donald Knuth, “Claude’s Cycles”, 28 февраля 2026", "Donald Knuth, “Claude’s Cycles”, February 28, 2026"],
+					["Единичные расстояния", "Unit distances"],
+					["Насколько много пар точек на плоскости могут находиться", "How many pairs of points in the plane can be"],
+					["ровно на расстоянии 1", "exactly distance 1"],
+					["друг от друга?", "apart?"],
+					["GPT-5.4 Pro, апрель 2026:", "GPT-5.4 Pro, April 2026:"],
+					["нашёл неожиданный красивый контрпример к важной гипотезе Эрдёша.", "found a surprising and elegant counterexample to an important conjecture of Erdős."],
+					["Эрдёш поставил задачу.", "Erdős posed the problem."],
+					["ИИ сдвинул границу известного.", "AI pushed the boundary of what was known."],
+					["Как устроен контрпример", "How the counterexample works"],
+					["сообщение Джареда Лихтмана", "Jared Lichtman’s announcement"],
+					["Выделены пары точек, находящиеся на одинаковом расстоянии.", "Highlighted pairs of points are the same distance apart."],
+					["Двойное покрытие циклами", "Cycle double cover"],
+					["Можно ли в любом графе без мостов выбрать простые циклы так, чтобы", "Can every bridgeless graph be given a set of simple cycles such that"],
+					["каждое ребро вошло ровно в два цикла", "every edge belongs to exactly two cycles"],
+					["Гипотеза оставалась открытой с 1970-х.", "The conjecture had remained open since the 1970s."],
+					["10 июля 2026:", "July 10, 2026:"],
+					["опубликован препринт с полным доказательством.", "a preprint with a complete proof was published."],
+					["OpenAI: препринт «A Proof of the Cycle Double Cover Conjecture»", "OpenAI preprint: “A Proof of the Cycle Double Cover Conjecture”"],
+					["Шесть циклов двойного покрытия графа Петерсена", "Six cycles forming a double cover of the Petersen graph"],
+					["Каждое ребро графа Петерсена выделено ровно в двух из шести пятиугольных циклов.", "Every edge of the Petersen graph appears in exactly two of the six pentagonal cycles."],
+					["Граф Петерсена: шесть циклов, каждое ребро выделено дважды.", "The Petersen graph: six cycles, with every edge highlighted twice."],
+					["Проблема Якобиана", "The Jacobian conjecture"],
+					["Если определитель Якобиана полиномиального отображения", "If the Jacobian determinant of a polynomial map"],
+					["— ненулевая константа, обязательно ли", "is a nonzero constant, must"],
+					["обратимо?", "be invertible?"],
+					["Проблема была открыта с 1939 года.", "The problem had been open since 1939."],
+					["Claude Fable 5, 20 июля 2026:", "Claude Fable 5, July 20, 2026:"],
+					["найден явный контрпример уже при \\(n=3\\).", "an explicit counterexample was found already for \\(n=3\\)."],
+					["Исходное сообщение Левента Альпёге", "Levent Alpöge’s original announcement"],
+					["Подробное объяснение контрпримера", "A detailed explanation of the counterexample"],
+					["Для \\(n=2\\) вопрос всё ещё остаётся открытым.", "For \\(n=2\\), the question remains open."],
+					["Якобиан постоянен:", "The Jacobian is constant:"],
+					["Но отображение не инъективно:", "But the map is not injective:"],
+					["Гипотеза Диница — Гарга — Гёманса", "The Dinitz–Garg–Goemans conjecture"],
+					["Дробный поток может делить груз между маршрутами. Можно ли всегда превратить его в", "A fractional flow can split demand across routes. Can it always be made"],
+					["неделимый", "unsplittable"],
+					[", не повысив цену и перегрузив каждое ребро не более чем на максимальный спрос одного стока?", "without increasing the cost and overloading any edge by more than the largest demand of one sink?"],
+					["GPT-5.6 Pro и Дмитрий Рыбин, 22 июля 2026:", "GPT-5.6 Pro and Dmitry Rybin, July 22, 2026:"],
+					["построен небольшой явный контрпример.", "constructed a small explicit counterexample."],
+					["Дробный поток:", "Fractional flow:"],
+					["цена 58.", "cost 58."],
+					["Любой неделимый:", "Any unsplittable flow:"],
+					["при допустимой перегрузке ≤ 15 цена не меньше 60.", "with allowed overload ≤ 15, its cost is at least 60."],
+					["Объявление Дмитрия Рыбина", "Dmitry Rybin’s announcement"],
+					["Полный диалог с GPT-5.6 Pro", "Full conversation with GPT-5.6 Pro"],
+					["Сеть контрпримера к гипотезе Диница — Гарга — Гёманса", "Counterexample network for the Dinitz–Garg–Goemans conjecture"],
+					["Источник s, внутренние вершины u, v, w и три стока с требованиями 10, 15 и 15. Синим подписан дробный поток, красным цена рёбер.", "Source s, internal vertices u, v, w, and three sinks with demands 10, 15, and 15. Fractional flow is labeled in blue; edge cost in red."],
+					["спрос 10", "demand 10"],
+					["спрос 15", "demand 15"],
+					["Синий — дробный поток; красный — цена; золотой — спрос стока.", "Blue — fractional flow; red — cost; gold — sink demand."],
+					["Контрпример родился не с первой попытки", "The counterexample did not emerge on the first try"],
+					["Четыре длинных запуска GPT-5.6 Pro — каждый продолжал исследование предыдущего.", "Four long GPT-5.6 Pro runs — each continued the previous one’s investigation."],
+					["52 мин 52 с", "52 min 52 sec"],
+					["«Построй структурированный контрпример для общего непланарного случая»", "“Construct a structured counterexample for the general nonplanar case.”"],
+					["Корректный контрпример не найден.", "No valid counterexample found."],
+					["89 мин 12 с", "89 min 12 sec"],
+					["«Продолжай исследование и найди полный безусловный контрпример»", "“Continue the investigation and find a complete unconditional counterexample.”"],
+					["Полного контрпримера всё ещё нет.", "Still no complete counterexample."],
+					["93 мин 57 с", "93 min 57 sec"],
+					["«Продолжай поиск. Сначала выработай ясную стратегию»", "“Keep searching. First develop a clear strategy.”"],
+					["Точного сертификата разделения пока нет.", "No exact separation certificate yet."],
+					["88 мин 24 с", "88 min 24 sec"],
+					["«Хватит частичных результатов. Завершим полным безусловным контрпримером»", "“No more partial results. Let’s finish with a complete unconditional counterexample.”"],
+					["Полный конечный контрпример найден.", "A complete finite counterexample was found."],
+					["5 часов 24 минуты исследования.", "5 hours 24 minutes of investigation."],
+					["Человек удерживал цель, а модель не выдавала правдоподобную ошибку за результат.", "The human kept the goal in view, while the model did not pass off a plausible error as a result."],
+					["Посмотреть полный исследовательский диалог", "Read the full research conversation"],
+					["Гипотеза Круазе", "Crouzeix’s conjecture"],
+					["Для любой матрицы \\(A\\) и любого полинома \\(p\\) верна оценка с оптимальной константой 2?", "For every matrix \\(A\\) and every polynomial \\(p\\), does the bound hold with the optimal constant 2?"],
+					["Шаньму Цзинь, июль 2026:", "Shanmu Jin, July 2026:"],
+					["ключевой шаг доказательства возник в 16-часовом автономном запуске GPT-5.6 Sol.", "the key step of the proof emerged during a 16-hour autonomous GPT-5.6 Sol run."],
+					["Доказательство проверили", "The proof was verified by"],
+					["Алекс Таунсенд, Энн Гринбаум и сам Мишель Круазе.", "Alex Townsend, Anne Greenbaum, and Michel Crouzeix himself."],
+					["Через восемь дней", "Eight days later"],
+					["Lorist и Schwenninger опубликовали другое короткое доказательство — тоже с помощью ИИ.", "Lorist and Schwenninger published another short proof — also with AI assistance."],
+					["Препринт Цзиня", "Jin’s preprint"],
+					["проверка и история", "verification and story"],
+					["второе доказательство", "second proof"],
+					["Шаньму Цзинь (Shanmu Jin)", "Shanmu Jin"],
+					["ординатор-нейрохирург и математик-самоучка", "neurosurgery resident and self-taught mathematician"],
+					["«Мы начали читать препринт со скепсисом, но через несколько часов поняли: доказательство настоящее».", "“We started reading the preprint skeptically, but within hours we realized the proof was real.”"],
+					["Продвижение к гипотезе Римана", "Progress toward the Riemann hypothesis"],
+					["Гипотеза Римана:", "The Riemann hypothesis:"],
+					["все нетривиальные нули дзета-функции лежат на критической прямой \\(\\operatorname{Re}s=\\tfrac12\\).", "all nontrivial zeros of the zeta function lie on the critical line \\(\\operatorname{Re}s=\\tfrac12\\)."],
+					["41,6%", "41.6%"],
+					["67,2%", "67.2%"],
+					["Claude, 10 августа 2026:", "Claude, August 10, 2026:"],
+					["безусловно доказал, что более двух третей простых нулей лежат на критической прямой.", "proved unconditionally that more than two-thirds of the simple zeros lie on the critical line."],
+					["Формальная проверка:", "Formal verification:"],
+					["Claude подготовил доказательство в Lean; его также изучили математики Anthropic и независимые эксперты.", "Claude produced a Lean proof; Anthropic mathematicians and independent experts also reviewed it."],
+					["Рассказ Anthropic и материалы исследования", "Anthropic’s account and research materials"],
+					["Полный текст доказательства", "Full proof"],
+					["«Более двух третей нулей дзета-функции Римана лежат на критической прямой».", "“More than two-thirds of the zeros of the Riemann zeta function are on the critical line.”"],
+					["Зачем вообще учить LLM математике?", "Why teach mathematics to LLMs at all?"],
+					["Пять самых дорогих независимых разработчиков языковых моделей · публичные оценки на 1 сентября 2026 года", "The five most highly valued independent language-model developers · public valuations as of September 1, 2026"],
+					["$965 млрд", "$965B"],
+					["Дарио Амодеи · CEO", "Dario Amodei · CEO"],
+					["$852 млрд", "$852B"],
+					["Сэм Альтман · CEO", "Sam Altman · CEO"],
+					["≈ $230 млрд", "≈ $230B"],
+					["Илон Маск · основатель", "Elon Musk · founder"],
+					["≈ $74 млрд", "≈ $74B"],
+					["Лян Вэньфэн · основатель", "Liang Wenfeng · founder"],
+					["открытые веса", "open weights"],
+					["≈ $23 млрд", "≈ $23B"],
+					["Артур Менш · CEO", "Arthur Mensch · CEO"],
+					["Математические способности — один из главных фронтов конкуренции между компаниями, которые вместе оцениваются", "Mathematical ability is one of the main competitive frontiers among companies collectively valued at"],
+					["более чем в $2 трлн", "more than $2T"],
+					["Оценки частных компаний приблизительны. xAI — последняя самостоятельная оценка до объединения со SpaceX; DeepSeek и Mistral AI — оценки обсуждаемых сделок.", "Private-company valuations are approximate. xAI uses its last standalone valuation before combining with SpaceX; DeepSeek and Mistral AI use valuations from reported deal talks."],
+					["Vibemathed: карта математических результатов", "Vibemathed: mapping mathematical results"],
+					["Задачи можно сравнивать по значимости и возрасту — но результат имеет смысл только вместе со статусом проверки.", "Problems can be compared by significance and age — but a result only means something together with its verification status."],
+					["Уровень проверки", "Verification level"],
+					["Формально проверено в Lean", "Formally verified in Lean"],
+					["Проверено независимыми экспертами", "Verified by independent experts"],
+					["Подтверждено площадкой", "Confirmed by the platform"],
+					["Утверждение проверено в Lean, доказательство не аудировано", "Statement checked in Lean; proof not audited"],
+					["Ещё не проверено", "Not yet reviewed"],
+					["Результат оспаривается", "Result contested"],
+					["Открытия ускоряются.", "Discoveries are accelerating."],
+					["Новое узкое место — доверие к результату.", "The new bottleneck is trust in the result."],
+					["Лейденская декларация", "The Leiden Declaration"],
+					["2 июня 2026 · принципы ответственного применения ИИ в математике, одобренные Международным математическим союзом", "June 2, 2026 · principles for the responsible use of AI in mathematics, endorsed by the International Mathematical Union"],
+					["Доказательство — основа математики:", "Proof is the foundation of mathematics:"],
+					["оно даёт не только уверенность, но и понимание.", "it provides not only confidence, but understanding."],
+					["У результата есть авторы:", "Results have authors:"],
+					["вместе с признанием они принимают ответственность за корректность.", "with recognition comes responsibility for correctness."],
+					["Аргументы прозрачны:", "Arguments are transparent:"],
+					["доказательство должно допускать независимую проверку.", "a proof must allow independent verification."],
+					["Результаты оценивает сообщество:", "Results are judged by the community:"],
+					["по глубине, сложности и значимости.", "by their depth, difficulty, and significance."],
+					["Ценно понимание, а не только ответ:", "Understanding matters, not just the answer:"],
+					["математика развивает ясность и профессиональное суждение.", "mathematics develops clarity and professional judgment."],
+					["ИИ может ускорять исследование —", "AI can accelerate research —"],
+					["но доверие остаётся человеческой и общественной практикой.", "but trust remains a human and social practice."],
+					["Прочитать декларацию", "Read the declaration"],
+					["У каждого есть умный ИИ-ассистент — и он всегда готов помочь!", "Everyone has a smart AI assistant — and it is always ready to help!"],
+					["✨ Помогает выстроить ход рассуждений", "✨ Helps structure your reasoning"],
+					["🔍 Быстро находит самую важную информацию", "🔍 Quickly finds the most important information"],
+					["💡 Предлагает идеи и помогает находить новые решения", "💡 Suggests ideas and helps discover new solutions"],
+					["Мы можем сосредоточиться на главном: критическом мышлении, принятии решений и проверке результатов", "We can focus on what matters most: critical thinking, decision-making, and verifying results"],
+					["ИТ-индустрия меняется так же!", "The tech industry is changing too!"],
+					["🤖 ИИ-модели уже пишут код лучше многих junior- и middle-разработчиков", "🤖 AI models already write code better than many junior and mid-level developers"],
+					["⚡ Они делают это быстрее, дешевле и на любом языке программирования", "⚡ They do it faster, more cheaply, and in any programming language"],
+					["📈 Нужно учиться и развиваться до уровня senior!", "📈 We need to learn and grow to senior level!"],
+					["Ключевые навыки в эпоху ИИ", "Key skills in the age of AI"],
+					["🗣️ Умение общаться с ИИ-моделями становится критически важным", "🗣️ Communicating effectively with AI models is becoming essential"],
+					["👥 Ещё нужно развивать soft skills для взаимодействия с людьми", "👥 We also need soft skills for working with people"],
+					["Сосредоточьтесь на том, что ИИ не заменит: лидерстве, архитектурных решениях и взаимодействии с людьми", "Focus on what AI cannot replace: leadership, architectural decisions, and working with people"],
+					["Так зачем же учить математику?", "So why learn mathematics?"],
+					["Это", "It is"],
+					["красиво", "beautiful"],
+					["Ум в порядок приводит", "It trains your mind"],
+					["Можно поступить в вуз или магистратуру", "It can get you into university or graduate school"],
+					["Можно пройти в Яндекс, JetBrains, OpenAI", "It can get you into Yandex, JetBrains, or OpenAI"],
+					["Профит!", "Profit!"],
+					["Англоязычный канал", "English-language channel"],
+					["о математике, ИИ и образовании", "about mathematics, AI, and education"],
+				]);
+
+				const ATTRIBUTE_TRANSLATIONS = new Map([
+					["Неверный ответ GPT-4", "Incorrect answer from GPT-4"],
+					["Неверный ответ GPT-4o", "Incorrect answer from GPT-4o"],
+					["Верный ответ GPT-o1", "Correct answer from GPT-o1"],
+					["Результаты человеческих команд и моделей на задачах IMC 2025", "Results of human teams and models on IMC 2025 problems"],
+					["Результаты o3 в задачах по программированию", "o3 results on programming tasks"],
+					["Борис Чёрный", "Boris Cherny"],
+					["Новосибирск", "Novosibirsk"],
+					["ФМШ", "SESC NSU"],
+					["ММФ НГУ", "Department of Mathematics and Mechanics, NSU"],
+					["Институт вычислительных технологий", "Institute of Computational Technologies"],
+					["Школа анализа данных", "School of Data Analysis"],
+					["Яндекс", "Yandex"],
+					["СПбГУ", "Saint Petersburg State University"],
+					["ИИ поможет оплачивать счета", "AI will help pay the bills"],
+					["Дональд Кнут и Claude обсуждают гамильтоновы циклы", "Donald Knuth and Claude discuss Hamiltonian cycles"],
+					["Фрагмент заметки Дональда Кнута Claude’s Cycles", "Excerpt from Donald Knuth’s note Claude’s Cycles"],
+					["Новая иллюстрация конфигураций точек с выделенными рёбрами одинаковой длины", "Illustration of point configurations with equal-length edges highlighted"],
+					["Полиномиальное отображение, опровергающее проблему Якобиана", "Polynomial map disproving the Jacobian conjecture"],
+					["Неравенство гипотезы Круазе", "Crouzeix conjecture inequality"],
+					["Шаньму Цзинь", "Shanmu Jin"],
+					["Нижняя оценка выросла с 41,6 до 67,2 процента", "The lower bound increased from 41.6 to 67.2 percent"],
+					["Первая страница статьи Claude о нулях дзета-функции Римана", "First page of Claude’s paper on zeros of the Riemann zeta function"],
+					["Дарио Амодеи, CEO Anthropic", "Dario Amodei, CEO of Anthropic"],
+					["Сэм Альтман, CEO OpenAI", "Sam Altman, CEO of OpenAI"],
+					["Илон Маск, основатель xAI", "Elon Musk, founder of xAI"],
+					["Лян Вэньфэн, основатель DeepSeek", "Liang Wenfeng, founder of DeepSeek"],
+					["Артур Менш, CEO Mistral AI", "Arthur Mensch, CEO of Mistral AI"],
+					["График Vibemathed: значимость задачи и число лет до решения", "Vibemathed chart: problem significance and years until resolution"],
+					["График Vibemathed: значимость математических задач и число лет до решения", "Vibemathed chart: significance of mathematical problems and years until resolution"],
+					["QR-код англоязычного Telegram-канала TechneNotes", "QR code for the English-language Telegram channel TechneNotes"],
+				]);
+
+				const language = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'ru';
+				document.documentElement.lang = language;
+				window.presentationLanguage = language;
+
+				if (language === 'en') {
+					document.title = "Why learn mathematics if AI already knows it better than we do?";
+					document.querySelector('meta[name="description"]')?.setAttribute('content', 'SESC NSU, Novosibirsk, 2026');
+					document.querySelector('meta[name="author"]')?.setAttribute('content', 'Aleksandr Avdiushenko');
+					document.querySelector('meta[name="keywords"]')?.setAttribute('content', 'education, AI, science');
+
+					const walker = document.createTreeWalker(document.querySelector('.slides'), NodeFilter.SHOW_TEXT, {
+						acceptNode(node) {
+							if (!node.parentElement || node.parentElement.closest('aside.notes, script, style')) {
+								return NodeFilter.FILTER_REJECT;
+							}
+							return TEXT_TRANSLATIONS.has(node.nodeValue.trim())
+								? NodeFilter.FILTER_ACCEPT
+								: NodeFilter.FILTER_REJECT;
+						},
+					});
+					const translatedNodes = [];
+					while (walker.nextNode()) translatedNodes.push(walker.currentNode);
+					translatedNodes.forEach((node) => {
+						const source = node.nodeValue;
+						const sourceTrimmed = source.trim();
+						node.nodeValue = source.replace(sourceTrimmed, TEXT_TRANSLATIONS.get(sourceTrimmed));
+					});
+
+					document.querySelectorAll('.slides [alt], .slides [aria-label], .language-switcher[aria-label]').forEach((element) => {
+						['alt', 'aria-label'].forEach((attribute) => {
+							const source = element.getAttribute(attribute);
+							if (ATTRIBUTE_TRANSLATIONS.has(source)) element.setAttribute(attribute, ATTRIBUTE_TRANSLATIONS.get(source));
+						});
+					});
+					document.querySelector('.language-switcher')?.setAttribute('aria-label', 'Presentation language');
+				}
+
+				document.querySelectorAll('.language-switcher button').forEach((button) => {
+					const isCurrent = button.dataset.language === language;
+					button.setAttribute('aria-pressed', String(isCurrent));
+					button.addEventListener('click', (event) => {
+						event.stopPropagation();
+						if (button.dataset.language === language) return;
+						const url = new URL(window.location.href);
+						url.searchParams.set('lang', button.dataset.language);
+						window.location.assign(url.href);
+					});
+				});
+			})();
+		</script>
 		<script src="../dist/reveal.js"></script>
 		<script src="../plugin/notes/notes.js"></script>
 		<script src="../plugin/markdown/markdown.js"></script>
@@ -2376,7 +2721,9 @@
 				const canvas = slide.querySelector('.math-final-balls');
 				const box = slide.querySelector('.math-final-head');
 				stopFinalMathBalls = initBalls(canvas, {
-					text: 'Так зачем же учить математику?',
+					text: window.presentationLanguage === 'en'
+						? 'So why learn mathematics?'
+						: 'Так зачем же учить математику?',
 					box,
 				});
 				const stopQrBalls = initQrBalls(
