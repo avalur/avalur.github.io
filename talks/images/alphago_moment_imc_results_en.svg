@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="540" viewBox="0 0 1180 540" role="img" aria-labelledby="title desc">
+  <title id="title">Human and model results on IMC 2025 problems</title>
+  <desc id="desc">The model team would have placed second, between Saint Petersburg State University and the University of Bonn. Gemini scored 100 out of 100, GPT o3 scored 93, Claude Opus 4 scored 65, Grok 4 scored 64, and DeepSeek R1 scored 52.</desc>
+  <rect width="1180" height="540" fill="#ffffff"/>
+
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#2d2d2d">
+    <text x="42" y="42" font-size="26" font-weight="700">Unofficial IMC 2025 team ranking</text>
+    <text x="42" y="70" font-size="17" fill="#666666">top three scores + the team’s average score</text>
+
+    <text x="42" y="119" font-size="27" font-weight="700" fill="#2f4397">1</text>
+    <text x="82" y="113" font-size="20" font-weight="700">SPbU</text>
+    <text x="225" y="113" font-size="15" fill="#666666">human team</text>
+    <rect x="82" y="127" width="548" height="38" rx="7" fill="#2f4397"/>
+    <text x="616" y="153" font-size="22" font-weight="700" fill="#ffffff" text-anchor="end">355</text>
+
+    <text x="42" y="210" font-size="27" font-weight="700" fill="#d63384">2</text>
+    <text x="82" y="204" font-size="20" font-weight="700">Model team</text>
+    <text x="315" y="204" font-size="15" fill="#666666">Gemini · GPT o3 · Claude · Grok · DeepSeek</text>
+    <rect x="82" y="218" width="514" height="38" rx="7" fill="#d63384"/>
+    <text x="582" y="244" font-size="22" font-weight="700" fill="#ffffff" text-anchor="end">332.8</text>
+
+    <text x="42" y="301" font-size="27" font-weight="700" fill="#2f4397">3</text>
+    <text x="82" y="295" font-size="20" font-weight="700">University of Bonn</text>
+    <text x="355" y="295" font-size="15" fill="#666666">human team</text>
+    <rect x="82" y="309" width="500" height="38" rx="7" fill="#7483bd"/>
+    <text x="568" y="335" font-size="22" font-weight="700" fill="#ffffff" text-anchor="end">324.38</text>
+
+    <line x1="680" y1="22" x2="680" y2="518" stroke="#d8d8d8" stroke-width="2"/>
+
+    <text x="720" y="42" font-size="29" font-weight="700">Model results</text>
+    <text x="720" y="70" font-size="17" fill="#666666">score on 10 problems, maximum 100</text>
+
+    <text x="720" y="119" font-size="19">Gemini 2.5 Pro</text>
+    <rect x="875" y="96" width="250" height="32" rx="6" fill="#d63384"/>
+    <text x="1112" y="119" font-size="20" font-weight="700" fill="#ffffff" text-anchor="end">100</text>
+
+    <text x="720" y="184" font-size="19">GPT o3</text>
+    <rect x="875" y="161" width="233" height="32" rx="6" fill="#e15d9d"/>
+    <text x="1095" y="184" font-size="20" font-weight="700" fill="#ffffff" text-anchor="end">93</text>
+
+    <text x="720" y="249" font-size="19">Claude Opus 4</text>
+    <rect x="875" y="226" width="163" height="32" rx="6" fill="#f59e0b"/>
+    <text x="1025" y="249" font-size="20" font-weight="700" fill="#ffffff" text-anchor="end">65</text>
+
+    <text x="720" y="314" font-size="19">Grok 4</text>
+    <rect x="875" y="291" width="160" height="32" rx="6" fill="#f4b43d"/>
+    <text x="1022" y="314" font-size="20" font-weight="700" fill="#ffffff" text-anchor="end">64</text>
+
+    <text x="720" y="379" font-size="19">DeepSeek R1</text>
+    <rect x="875" y="356" width="130" height="32" rx="6" fill="#7583bd"/>
+    <text x="992" y="379" font-size="20" font-weight="700" fill="#ffffff" text-anchor="end">52</text>
+
+    <text x="42" y="412" font-size="34" font-weight="700" fill="#d63384">Second place.</text>
+    <text x="42" y="449" font-size="25">The best human result is still higher,</text>
+    <text x="42" y="482" font-size="25">but models already outrank most teams.</text>
+
+    <text x="720" y="454" font-size="22" font-style="italic" fill="#2f4397">Gemini solved all 10 problems.</text>
+    <text x="720" y="482" font-size="17" fill="#666666">Experiment: identical conditions,</text>
+    <text x="720" y="505" font-size="17" fill="#666666">independent runs, with solutions checked</text>
+    <text x="720" y="528" font-size="17" fill="#666666">by two IMC jury members.</text>
+  </g>
+</svg>

@@ -1,0 +1,2748 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <meta name="description" content="СУНЦ НГУ, Новосибирск, 2026">
+        <meta name="author" content="Александр Авдюшенко" />
+        <meta name="keywords" content="образование, ИИ, наука">
+
+		<title>Зачем учить математику, если ИскИны всё знают лучше нас?</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/serif.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+	    <link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+        <!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Include Chart.js CDN -->
+		<script src="../plugin/reveald3.js"></script>
+	    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+		<style>
+			.language-switcher {
+				position: fixed;
+				top: 14px;
+				right: 18px;
+				display: flex;
+				gap: 2px;
+				padding: 4px;
+				border: 1px solid rgba(36, 41, 54, 0.2);
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.92);
+				box-shadow: 0 4px 18px rgba(11, 16, 32, 0.12);
+				backdrop-filter: blur(8px);
+				z-index: 1000;
+			}
+			.language-switcher button {
+				min-width: 44px;
+				padding: 6px 10px;
+				border: 0;
+				border-radius: 999px;
+				font: 700 14px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+				letter-spacing: 0.04em;
+				color: #666b75;
+				background: transparent;
+				cursor: pointer;
+			}
+			.language-switcher button[aria-pressed="true"] {
+				color: #fff;
+				background: #d86100;
+			}
+			.language-switcher button:focus-visible {
+				outline: 3px solid rgba(245, 158, 11, 0.45);
+				outline-offset: 2px;
+			}
+			html[lang="en"] .boris-quote-slide .quote-original {
+				display: none;
+			}
+			.lang-en-only {
+				display: none !important;
+			}
+			html[lang="en"] .lang-ru-only {
+				display: none !important;
+			}
+			html[lang="en"] .lang-en-only {
+				display: block !important;
+			}
+			@media print {
+				.language-switcher {
+					display: none;
+				}
+			}
+			.reveal a,
+			.reveal a:visited {
+				color: blue !important;
+				text-decoration: underline !important;
+			}
+
+			.about-me-slide h2 {
+				margin: 0 0 6px;
+			}
+			.section-map-slide {
+				box-sizing: border-box;
+				padding: 34px 58px !important;
+				text-align: left;
+			}
+			.section-map-slide h2 {
+				margin: 0 0 34px;
+				font-size: 54px;
+				line-height: 1.05;
+				color: #242936;
+			}
+			.section-map-slide .section-map-list {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.section-map-slide .section-map-list li {
+				display: grid;
+				grid-template-columns: 74px minmax(0, 1fr);
+				align-items: center;
+				box-sizing: border-box;
+				min-height: 82px;
+				margin: 0;
+				padding: 12px 18px;
+				border-top: 1px solid #d9dbe1;
+				font-size: 39px;
+				line-height: 1.1;
+				color: #777c87;
+			}
+			.section-map-slide .section-map-list li:last-child {
+				border-bottom: 1px solid #d9dbe1;
+			}
+			.section-map-slide .section-map-number {
+				font-size: 25px;
+				font-weight: 700;
+				font-variant-numeric: tabular-nums;
+				color: #838892;
+			}
+			.section-map-slide .section-map-list li.current {
+				box-shadow: inset 7px 0 #f59e0b;
+				font-weight: 700;
+				color: #d86100;
+			}
+			.section-map-slide .section-map-list li.current .section-map-number {
+				color: #d86100;
+			}
+			.about-me-timeline {
+				position: relative;
+				width: 100%;
+				height: 560px;
+				margin: 0 auto;
+				background: transparent;
+			}
+			.about-me-timeline .fragment {
+				position: absolute !important;
+				width: 160px;
+				margin: 0;
+				font-size: 20px;
+				line-height: 1.08;
+				text-align: center;
+				background: transparent;
+			}
+			.about-me-timeline img {
+				display: block;
+				width: auto !important;
+				max-width: 140px;
+				max-height: 105px;
+				margin: 8px auto 0;
+				object-fit: contain;
+			}
+			.about-me-timeline .about-pay img {
+				max-width: 220px;
+				max-height: 160px;
+			}
+
+			.column {
+			  float: left;
+			  width: 48%;
+			  padding: 2px;
+			}
+			/* Clear floats after image containers */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			.important {
+				color: orange;
+			}
+			.quiz {
+				display: flex;
+				flex-direction: column;
+				margin-top: 20px;
+			}
+			.answer {
+				background-color: #f9f9f9;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				padding: 10px;
+				margin: 5px 0;
+				cursor: pointer;
+				transition: background-color 0.3s, color 0.3s;
+			}
+			.answer.correct {
+				background-color: #d4edda;
+				color: #155724;
+			}
+			.answer.wrong {
+				background-color: #f8d7da;
+				color: #721c24;
+			}
+			.answer.shadow {
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				color: gray;
+			}
+			.quiz-slide h3 {
+				font-size: 50px;
+				margin-bottom: 10px;
+			}
+			.quiz-slide .quiz {
+				margin-top: 10px;
+			}
+			.quiz-slide .answer {
+				font-size: 34px;
+				padding: 8px;
+				margin: 4px 0;
+			}
+			.curriculum-table-slide h3 {
+				font-size: 42px;
+				margin-bottom: 12px;
+			}
+			.curriculum-table-slide table {
+				font-size: 26px;
+			}
+			.curriculum-table-slide th,
+			.curriculum-table-slide td {
+				padding: 7px;
+			}
+			.compact-text-slide h3 {
+				font-size: 42px;
+				margin-bottom: 14px;
+			}
+			.compact-text-slide p,
+			.compact-text-slide li {
+				font-size: 30px;
+				line-height: 1.2;
+			}
+			.compact-text-slide p {
+				margin: 0 0 14px;
+			}
+			.compact-text-slide ol {
+				margin-top: 0;
+			}
+			.title-slide > .column:first-of-type {
+				width: 52%;
+			}
+			.title-slide > .column:last-of-type {
+				width: 46%;
+				font-size: 30px;
+			}
+			.title-slide .fig-container {
+				height: 580px !important;
+				padding-left: 0 !important;
+			}
+			.title-slide .iframe-visualization {
+				height: 580px !important;
+			}
+			.image-slide img {
+				display: block;
+				width: auto;
+				max-width: 100%;
+				max-height: 630px;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+			.alphago-results-slide h3 {
+				margin: 0 0 12px;
+				font-size: 48px;
+				text-align: left;
+			}
+			.alphago-results-slide img {
+				display: block;
+				width: 96%;
+				max-width: 1180px;
+				max-height: 540px;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+			.alphago-results-slide .alphago-post-link {
+				margin: 0 4%;
+				font-size: 18px;
+				text-align: left;
+			}
+			.alphago-results-slide .alphago-post-link a {
+				color: blue;
+				text-decoration: underline;
+			}
+			.dense-ai-slide > br {
+				display: none;
+			}
+			.dense-ai-slide h4 {
+				font-size: 38px;
+				line-height: 1.15;
+				margin: 8px 0;
+			}
+			.dense-ai-slide ul {
+				margin-top: 6px;
+				margin-bottom: 10px;
+			}
+			.dense-ai-slide li {
+				font-size: 30px;
+				line-height: 1.15;
+				margin-bottom: 6px;
+			}
+			.timeline-slide h3 {
+				font-size: 50px;
+				margin-bottom: 10px;
+			}
+			.timeline-slide .event {
+				margin-bottom: 14px;
+				padding-left: 24px;
+			}
+			.timeline-slide .event::before {
+				font-size: 40px;
+			}
+			.timeline-slide h5 {
+				font-size: 30px;
+				margin: 4px 0;
+			}
+			.timeline-slide p {
+				font-size: 28px;
+				margin: 6px 0;
+			}
+			.community-slide h3 {
+				font-size: 46px;
+				margin-bottom: 12px;
+			}
+			.community-slide .content {
+				font-size: 26px;
+			}
+			.community-slide .highlight {
+				font-size: 30px;
+				margin: 8px 0;
+			}
+			.community-slide ul {
+				margin: 0 0 8px;
+				padding-left: 28px;
+			}
+			.community-slide li {
+				margin: 5px 0;
+			}
+			.community-slide .link {
+				font-size: 22px;
+				margin: 8px 0;
+			}
+			.community-slide .qr-code img {
+				width: 430px;
+				max-height: 430px;
+				object-fit: contain;
+			}
+			.boris-quote-slide .boris-quote-layout {
+				display: grid;
+				grid-template-columns: minmax(260px, 34%) 1fr;
+				align-items: center;
+				gap: 56px;
+				max-width: 1120px;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.boris-quote-slide figure {
+				margin: 0;
+				text-align: center;
+			}
+			.boris-quote-slide figure img {
+				display: block;
+				width: 100%;
+				max-width: 360px;
+				margin: 0 auto 18px;
+				border-radius: 50%;
+				box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+			}
+			.boris-quote-slide figcaption {
+				font-size: 30px;
+				line-height: 1.15;
+			}
+			.boris-quote-slide figcaption span {
+				display: inline-block;
+				margin-top: 6px;
+				font-size: 20px;
+				color: #555;
+			}
+			.boris-quote-slide blockquote {
+				width: auto;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				box-shadow: none;
+				font-size: 43px;
+				line-height: 1.18;
+				font-style: normal;
+				background: transparent;
+			}
+			.boris-quote-slide blockquote strong {
+				color: #d97706;
+			}
+			.boris-quote-slide .quote-original {
+				margin: 26px 0 12px;
+				font-size: 21px;
+				line-height: 1.3;
+				color: #666;
+				font-style: italic;
+			}
+			.boris-quote-slide .quote-source {
+				margin: 0;
+				font-size: 19px;
+			}
+			.claudes-cycles-slide h3 {
+				margin: 0 0 12px;
+				font-size: 48px;
+				text-align: left;
+			}
+			.claudes-cycles-slide .cycles-top {
+				display: grid;
+				grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+				align-items: center;
+				gap: 30px;
+				max-width: 1180px;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.claudes-cycles-slide .cycles-claim {
+				margin: 0;
+				font-size: 30px;
+				line-height: 1.24;
+			}
+			.claudes-cycles-slide .cycles-claim strong {
+				color: #d63384;
+			}
+			.claudes-cycles-slide .cycles-result {
+				display: block;
+				margin-top: 14px;
+				font-size: 27px;
+				line-height: 1.2;
+			}
+			.claudes-cycles-slide .cycles-scene {
+				display: block;
+				width: 100%;
+				max-height: 220px;
+				margin: 0;
+				object-fit: cover;
+				border-radius: 10px;
+			}
+			.claudes-cycles-slide .cycles-note {
+				display: block;
+				width: 100%;
+				max-width: 1180px;
+				max-height: 220px;
+				margin: 14px auto 0;
+				object-fit: contain;
+				background: white;
+				border-top: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+			}
+			.claudes-cycles-slide .cycles-source {
+				max-width: 1180px;
+				margin: 6px auto 0;
+				font-size: 17px;
+				text-align: right;
+			}
+			.unit-distances-slide h3,
+			.cycle-double-cover-slide h3 {
+				margin: 0 0 16px;
+				font-size: 48px;
+				text-align: left;
+			}
+			.math-breakthrough-layout {
+				display: grid;
+				grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+				align-items: center;
+				gap: 42px;
+				max-width: 1180px;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.math-breakthrough-copy .math-question {
+				margin: 0 0 22px;
+				font-size: 31px;
+				line-height: 1.22;
+			}
+			.math-breakthrough-copy .math-result {
+				margin: 0 0 20px;
+				padding-left: 18px;
+				border-left: 6px solid #f59e0b;
+				font-size: 27px;
+				line-height: 1.22;
+			}
+			.math-breakthrough-copy .math-result strong {
+				color: #d63384;
+			}
+			.math-breakthrough-copy .math-link {
+				margin: 0;
+				font-size: 21px;
+				line-height: 1.25;
+			}
+			.unit-distances-visual img {
+				display: block;
+				width: 100%;
+				max-height: 405px;
+				margin: 0;
+				object-fit: contain;
+				border-radius: 10px;
+			}
+			.math-visual-caption {
+				margin: 8px 0 0;
+				font-size: 18px;
+				line-height: 1.2;
+				color: #666;
+				text-align: center;
+			}
+			.math-mini-timeline {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				gap: 7px 14px;
+				margin: 24px 0 0;
+				font-size: 22px;
+				line-height: 1.18;
+			}
+			.math-mini-timeline strong {
+				color: #2f4397;
+			}
+			.cycle-cover-visual {
+				margin: 0;
+			}
+			.cycle-cover-diagram {
+				display: block;
+				width: 100%;
+				max-height: 455px;
+				margin: 0 auto;
+			}
+			.cycle-cover-diagram .base-edge {
+				fill: none;
+				stroke: #d6d9df;
+				stroke-width: 2.4;
+			}
+			.cycle-cover-diagram .cycle-path {
+				fill: none;
+				stroke-width: 7;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
+			.cycle-cover-diagram .node {
+				fill: white;
+				stroke: #343a40;
+				stroke-width: 2.4;
+			}
+			.cycle-cover-diagram .cycle-label {
+				font-size: 20px;
+				font-family: Georgia, serif;
+				font-style: italic;
+				fill: #333;
+				text-anchor: middle;
+			}
+			.jacobian-slide h3 {
+				margin: 0 0 16px;
+				font-size: 48px;
+				text-align: left;
+			}
+			.jacobian-slide .math-breakthrough-layout {
+				grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+			}
+			.jacobian-formula {
+				padding: 10px 14px;
+				border-top: 2px solid #2f4397;
+				border-bottom: 2px solid #2f4397;
+				font-size: 23px;
+				text-align: left;
+			}
+			.jacobian-formula .katex-display {
+				margin: 0.35em 0;
+			}
+			.jacobian-checks {
+				margin: 16px 0 0;
+				font-size: 22px;
+				line-height: 1.25;
+				text-align: left;
+			}
+			.jacobian-checks strong {
+				color: #d63384;
+			}
+			.jacobian-plane-note {
+				margin: 18px 0 0;
+				font-size: 22px;
+				line-height: 1.2;
+				color: #555;
+			}
+			.dgg-slide h3,
+			.prompt-history-slide h3 {
+				margin: 0 0 14px;
+				font-size: 46px;
+				text-align: left;
+			}
+			.dgg-slide .math-breakthrough-layout {
+				grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+				gap: 34px;
+			}
+			.dgg-slide .math-question {
+				font-size: 28px;
+			}
+			.dgg-slide .math-result {
+				font-size: 25px;
+			}
+			.dgg-network {
+				display: block;
+				width: 100%;
+				max-height: 470px;
+				margin: 0 auto;
+			}
+			.dgg-network .edge {
+				fill: none;
+				stroke: #273142;
+				stroke-width: 4;
+			}
+			.dgg-network .node {
+				fill: #fff;
+				stroke: #273142;
+				stroke-width: 4;
+			}
+			.dgg-network .source {
+				fill: #eef5ff;
+				stroke: #3f77ad;
+			}
+			.dgg-network .sink {
+				fill: #fff9e8;
+				stroke: #d5a63a;
+			}
+			.dgg-network .node-name {
+				font-size: 24px;
+				font-weight: 700;
+				text-anchor: middle;
+				dominant-baseline: middle;
+				fill: #222;
+			}
+			.dgg-network .flow-label {
+				font-size: 21px;
+				font-weight: 700;
+				fill: #2f80d8;
+			}
+			.dgg-network .cost-label {
+				font-size: 21px;
+				font-weight: 700;
+				fill: #dc4458;
+			}
+			.dgg-network .demand-label {
+				font-size: 16px;
+				font-weight: 700;
+				text-anchor: middle;
+				fill: #9a6d00;
+			}
+			.prompt-history-slide .research-subtitle {
+				margin: 0 0 14px;
+				font-size: 27px;
+				line-height: 1.18;
+				text-align: left;
+			}
+			.research-timeline {
+				position: relative;
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 26px;
+				max-width: 1180px;
+				margin: 12px auto 0;
+				text-align: left;
+			}
+			.research-timeline::before {
+				content: '';
+				position: absolute;
+				left: 9%;
+				right: 9%;
+				top: 48px;
+				height: 4px;
+				background: #f59e0b;
+			}
+			.research-step {
+				position: relative;
+				padding-top: 76px;
+			}
+			.research-step::before {
+				content: '';
+				position: absolute;
+				left: 50%;
+				top: 39px;
+				width: 18px;
+				height: 18px;
+				border: 5px solid #f59e0b;
+				border-radius: 50%;
+				background: white;
+				transform: translateX(-50%);
+				box-sizing: border-box;
+			}
+			.research-step.final::before {
+				border-color: #d63384;
+				background: #d63384;
+			}
+			.research-duration {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				font-size: 20px;
+				font-weight: 700;
+				color: #2f4397;
+				text-align: center;
+			}
+			.research-step blockquote {
+				width: auto;
+				margin: 0 0 12px;
+				padding: 0;
+				border: 0;
+				box-shadow: none;
+				background: transparent;
+				font-size: 22px;
+				line-height: 1.18;
+				font-style: normal;
+			}
+			.research-step .research-outcome {
+				margin: 0;
+				font-size: 18px;
+				line-height: 1.2;
+				color: #666;
+			}
+			.research-step.final .research-outcome {
+				color: #d63384;
+				font-weight: 700;
+			}
+			.research-takeaway {
+				max-width: 1100px;
+				margin: 28px auto 0;
+				padding-left: 18px;
+				border-left: 6px solid #f59e0b;
+				font-size: 27px;
+				line-height: 1.2;
+				text-align: left;
+			}
+			.crouzeix-slide h3 {
+				margin: 0 0 14px;
+				font-size: 48px;
+				text-align: left;
+			}
+			.crouzeix-layout {
+				display: grid;
+				grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+				align-items: center;
+				gap: 42px;
+				max-width: 1180px;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.crouzeix-slide .math-question {
+				margin: 0;
+				font-size: 25px;
+				line-height: 1.2;
+			}
+			.crouzeix-formula {
+				margin: 5px 0 13px;
+				padding: 2px 12px;
+				border-top: 2px solid #2f4397;
+				border-bottom: 2px solid #2f4397;
+				font-size: 27px;
+				text-align: center;
+			}
+			.crouzeix-formula .katex-display {
+				margin: 0.25em 0;
+			}
+			.crouzeix-slide .math-result {
+				margin: 0 0 13px;
+				padding-left: 16px;
+				border-left: 6px solid #f59e0b;
+				font-size: 25px;
+				line-height: 1.2;
+			}
+			.crouzeix-slide .math-result strong,
+			.crouzeix-checks strong {
+				color: #d63384;
+			}
+			.crouzeix-checks,
+			.crouzeix-second-proof {
+				margin: 0 0 12px;
+				font-size: 21px;
+				line-height: 1.22;
+			}
+			.crouzeix-second-proof strong {
+				color: #2f4397;
+			}
+			.crouzeix-slide .math-link {
+				margin: 0;
+				font-size: 18px;
+				line-height: 1.2;
+			}
+			.crouzeix-person {
+				margin: 0;
+				text-align: center;
+			}
+			.crouzeix-portrait-crop {
+				position: relative;
+				width: 310px;
+				height: 310px;
+				margin: 0 auto 10px;
+				overflow: hidden;
+				border-radius: 50%;
+				box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+			}
+			.crouzeix-portrait-crop img {
+				position: absolute;
+				left: 50%;
+				top: -160%;
+				width: 270%;
+				height: auto;
+				max-width: none;
+				max-height: none;
+				margin: 0;
+				transform: translateX(-50%);
+			}
+			.crouzeix-person figcaption {
+				font-size: 20px;
+				line-height: 1.2;
+			}
+			.crouzeix-person blockquote {
+				width: auto;
+				margin: 14px 0 0;
+				padding: 0;
+				border: 0;
+				box-shadow: none;
+				background: transparent;
+				font-size: 22px;
+				line-height: 1.23;
+				font-style: italic;
+				text-align: left;
+			}
+			.riemann-slide h3 {
+				margin: 0 0 14px;
+				font-size: 46px;
+				text-align: left;
+			}
+			.riemann-layout {
+				display: grid;
+				grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+				align-items: center;
+				gap: 42px;
+				max-width: 1180px;
+				margin: 0 auto;
+				text-align: left;
+			}
+			.riemann-slide .math-question {
+				margin: 0 0 16px;
+				font-size: 27px;
+				line-height: 1.22;
+			}
+			.riemann-slide .math-question strong {
+				color: #2f4397;
+			}
+			.riemann-jump {
+				display: flex;
+				align-items: baseline;
+				gap: 14px;
+				margin: 0 0 14px;
+				font-weight: 700;
+				white-space: nowrap;
+			}
+			.riemann-jump .old {
+				font-size: 39px;
+				color: #7483bd;
+			}
+			.riemann-jump .jump-arrow {
+				font-size: 34px;
+				color: #f59e0b;
+			}
+			.riemann-jump .new {
+				font-size: 58px;
+				color: #d63384;
+			}
+			.riemann-slide .math-result {
+				margin: 0 0 15px;
+				padding-left: 16px;
+				border-left: 6px solid #f59e0b;
+				font-size: 24px;
+				line-height: 1.22;
+			}
+			.riemann-slide .math-result strong {
+				color: #d63384;
+			}
+			.riemann-verification {
+				margin: 0 0 14px;
+				font-size: 21px;
+				line-height: 1.22;
+			}
+			.riemann-verification strong {
+				color: #2f4397;
+			}
+			.riemann-slide .math-link {
+				margin: 0;
+				font-size: 19px;
+			}
+			.riemann-paper {
+				margin: 0;
+			}
+			.riemann-paper img {
+				display: block;
+				width: 100%;
+				max-height: 430px;
+				margin: 0;
+				object-fit: contain;
+				border: 1px solid #ddd;
+				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+			}
+			.riemann-paper figcaption {
+				margin: 8px 0 0;
+				font-size: 18px;
+				line-height: 1.2;
+				color: #666;
+				text-align: center;
+			}
+			.llm-valuations-slide h3 {
+				margin: 0 0 7px;
+				font-size: 46px;
+				text-align: left;
+			}
+			.llm-valuations-subtitle {
+				margin: 0;
+				font-size: 22px;
+				color: #555;
+				text-align: left;
+			}
+			.llm-valuation-row {
+				display: grid;
+				grid-template-columns: repeat(5, minmax(0, 1fr));
+				gap: 18px;
+				max-width: 1180px;
+				margin: 18px auto 0;
+			}
+			.llm-lab {
+				position: relative;
+				min-width: 0;
+				text-align: center;
+			}
+			.llm-lab .rank {
+				position: absolute;
+				left: 5px;
+				top: -7px;
+				z-index: 2;
+				font-size: 34px;
+				font-weight: 700;
+				color: #2f4397;
+			}
+			.llm-lab img {
+				display: block;
+				width: 158px;
+				height: 158px;
+				max-height: none;
+				margin: 0 auto 8px;
+				border: 5px solid white;
+				border-radius: 50%;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+				object-fit: cover;
+			}
+			.llm-lab h4 {
+				margin: 0 0 3px;
+				font-size: 27px;
+				line-height: 1.1;
+			}
+			.llm-lab .valuation {
+				margin: 0;
+				font-size: 37px;
+				font-weight: 700;
+				line-height: 1.08;
+				color: #d63384;
+				white-space: nowrap;
+			}
+			.llm-lab .ceo {
+				margin: 5px 0 0;
+				font-size: 18px;
+				line-height: 1.15;
+				color: #555;
+			}
+			.llm-lab .open-weights {
+				display: block;
+				margin-top: 3px;
+				font-weight: 700;
+				color: #2f4397;
+			}
+			.llm-valuations-takeaway {
+				max-width: 1120px;
+				margin: 20px auto 0;
+				padding-left: 17px;
+				border-left: 6px solid #f59e0b;
+				font-size: 27px;
+				line-height: 1.18;
+				text-align: left;
+			}
+			.llm-valuations-takeaway strong {
+				color: #d63384;
+			}
+			.llm-valuations-note {
+				max-width: 1120px;
+				margin: 9px auto 0;
+				font-size: 15px;
+				line-height: 1.18;
+				color: #777;
+				text-align: left;
+			}
+			.vibemathed-slide h3,
+			.leiden-slide h3 {
+				margin: 0 0 7px;
+				font-size: 46px;
+				text-align: left;
+			}
+			.vibemathed-subtitle,
+			.leiden-subtitle {
+				margin: 0;
+				font-size: 22px;
+				line-height: 1.2;
+				color: #555;
+				text-align: left;
+			}
+			.vibemathed-layout {
+				display: grid;
+				grid-template-columns: minmax(0, 2.4fr) minmax(285px, 1fr);
+				gap: 30px;
+				align-items: center;
+				margin-top: 15px;
+			}
+			.vibemathed-chart {
+				position: relative;
+				height: 425px;
+				margin: 0;
+				overflow: hidden;
+				border: 1px solid #e1ddd2;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+				background: #fbf8f1;
+			}
+			.vibemathed-chart img {
+				position: absolute;
+				left: 24px;
+				top: -200px;
+				width: 1148px;
+				max-width: none;
+				max-height: none;
+				margin: 0;
+			}
+			.vibemathed-chart::after {
+				content: "";
+				position: absolute;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 45px;
+				background: white;
+			}
+			.vibemathed-chart::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 1;
+				height: 16px;
+				background: white;
+			}
+			.verification-scale {
+				margin: 0;
+				text-align: left;
+			}
+			.verification-scale h4 {
+				margin: 0 0 13px;
+				font-size: 27px;
+				color: #2f4397;
+			}
+			.verification-scale ol {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				counter-reset: verification;
+			}
+			.verification-scale li {
+				position: relative;
+				margin: 0;
+				padding: 0 0 12px 39px;
+				font-size: 19px;
+				line-height: 1.15;
+				counter-increment: verification;
+			}
+			.verification-scale li::before {
+				content: counter(verification);
+				position: absolute;
+				left: 0;
+				top: -3px;
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				background: #2f4397;
+				color: white;
+				font-size: 17px;
+				font-weight: 700;
+				line-height: 28px;
+				text-align: center;
+			}
+			.verification-scale li:nth-child(3)::before {
+				background: #d63384;
+			}
+			.verification-scale li:nth-child(n+4)::before {
+				background: #9ca3af;
+			}
+			.vibemathed-takeaway {
+				margin: 11px 0 0;
+				padding-left: 14px;
+				border-left: 5px solid #f59e0b;
+				font-size: 20px;
+				line-height: 1.18;
+				text-align: left;
+			}
+			.vibemathed-takeaway strong {
+				color: #d63384;
+			}
+			.leiden-values {
+				max-width: 1110px;
+				margin: 19px auto 0;
+				padding: 0;
+				list-style: none !important;
+				counter-reset: leiden;
+				text-align: left;
+			}
+			.leiden-values .leiden-value {
+				display: block;
+				position: relative;
+				min-height: 55px;
+				margin: 0;
+				padding: 0 0 10px 75px;
+				font-size: 25px;
+				line-height: 1.18;
+				counter-increment: leiden;
+			}
+			.leiden-values .leiden-value::before {
+				content: counter(leiden, decimal-leading-zero);
+				position: absolute;
+				left: 0;
+				top: -7px;
+				font-size: 35px;
+				font-weight: 700;
+				color: #d63384;
+			}
+			.leiden-values strong {
+				color: #2f4397;
+			}
+			.leiden-footer {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 25px;
+				max-width: 1110px;
+				margin: 3px auto 0;
+				padding-top: 12px;
+				border-top: 4px solid #f59e0b;
+			}
+			.leiden-footer p {
+				margin: 0;
+				font-size: 22px;
+				line-height: 1.2;
+				text-align: left;
+			}
+			.leiden-footer .math-link {
+				flex: 0 0 auto;
+				font-size: 18px;
+				white-space: nowrap;
+			}
+			.math-final-slide {
+				position: relative;
+				display: flex !important;
+				min-height: 620px;
+				flex-direction: column;
+				justify-content: center;
+				color: #f3ecd9;
+				text-align: left;
+				text-shadow: 0 0 5px rgba(255, 255, 255, 0.12);
+			}
+			.math-final-balls {
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				width: 100%;
+				height: 100%;
+				max-width: none;
+				max-height: none;
+				margin: 0;
+				pointer-events: none;
+			}
+			.math-final-head {
+				position: relative;
+				z-index: 2;
+				width: 100%;
+				height: 155px;
+				flex: none;
+			}
+			.math-final-layout {
+				position: relative;
+				z-index: 2;
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 330px;
+				gap: 58px;
+				align-items: center;
+				max-width: 1120px;
+				margin: 0 auto;
+			}
+			.math-final-reasons {
+				margin: 0;
+				padding-left: 1.2em;
+				font-size: 30px;
+				line-height: 1.35;
+			}
+			.math-final-reasons li {
+				margin: 0 0 14px;
+				padding-left: 8px;
+			}
+			.math-final-reasons li::marker {
+				color: #e8d59a;
+				font-weight: 700;
+			}
+			.math-final-reasons strong {
+				color: #f59e0b;
+			}
+			.math-final-telegram {
+				margin: 0;
+				text-align: center;
+			}
+			.math-final-telegram > p {
+				margin: 0 0 12px;
+				font-size: 20px;
+				line-height: 1.2;
+				color: #e8d59a;
+			}
+			.math-final-qr {
+				display: block;
+				padding: 13px 13px 10px;
+				border: 3px solid #f59e0b;
+				border-radius: 9px;
+				background: white;
+				box-shadow: 0 0 0 5px rgba(214, 51, 132, 0.55), 0 14px 34px rgba(0, 0, 0, 0.38);
+				text-decoration: none !important;
+			}
+			.math-final-qr img {
+				display: block;
+				width: 285px;
+				height: 285px;
+				max-height: none;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+			.math-final-qr-visual {
+				position: relative;
+				display: block;
+				width: 285px;
+				height: 285px;
+				margin: 0 auto;
+				background: white;
+			}
+			.math-final-qr-visual img,
+			.math-final-qr-particles {
+				position: absolute;
+				inset: 0;
+			}
+			.math-final-qr-particles {
+				z-index: 1;
+				display: block;
+				width: 285px;
+				height: 285px;
+				max-width: none;
+				max-height: none;
+				margin: 0;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 160ms ease;
+			}
+			.math-final-qr-particles.ready {
+				opacity: 1;
+			}
+			.math-final-qr-label {
+				display: block;
+				margin-top: 7px;
+				font-family: "SF Mono", Menlo, monospace;
+				font-size: 24px;
+				font-weight: 700;
+				color: #2f4397;
+				text-align: center;
+			}
+			.math-final-slide .fallback-title {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				overflow: hidden;
+				clip: rect(0 0 0 0);
+				white-space: nowrap;
+			}
+			th, td {
+				border: 1px solid black;
+				padding: 10px;
+				text-align: center;
+			}
+			ul.custom-list {
+				list-style: none;
+				padding: 0;
+			}
+			ul.custom-list li::before {
+				content: '➕';
+				margin-right: 8px;
+			}
+			ul.custom-list li.minus::before {
+				content: '➖';
+			}
+			ul.custom-list li.lamp::before {
+				content: '💡';
+			}
+			.timeline {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				position: relative;
+				padding-left: 20px;
+			}
+			.timeline::before {
+				content: '';
+				position: absolute;
+				left: 5px;
+				top: 0;
+				bottom: 0;
+				width: 3px;
+				background: orange;
+			}
+			.event {
+				margin-bottom: 40px;
+				position: relative;
+				padding-left: 30px;
+			}
+			.event::before {
+				content: '→';
+				position: absolute;
+				left: 0;
+				top: 5px;
+				font-size: 60px;
+				color: orange;
+			}
+			.highlight {
+				color: #42a5f5;
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body onload="totalWrapper();">
+		<nav class="language-switcher" aria-label="Язык презентации">
+			<button type="button" data-language="ru" aria-pressed="true">RU</button>
+			<button type="button" data-language="en" aria-pressed="false">EN</button>
+		</nav>
+		<div class="reveal">
+			<div class="slides">
+                <section id="title" class="title-slide">
+						<h3>Зачем учить математику, если ИскИны всё знают лучше нас?</h3>
+					<div class="column">
+						<div class="fig-container no-margin-top" data-file="images/modular-multiplication.html"
+						style="padding-left: 10%"></div>
+					</div>
+					<div class="column">
+						<br/><br/><br/>
+							<a style="color: blue" href="mailto:aleksandr.avdiushenko@jetbrains.com">aleksandr.avdiushenko@jetbrains.com</a>
+						<p><a style="color: blue;text-decoration: underline;" href="https://avalur.github.io/talks/WhyStudyMath2026.html">
+						Эта презентация на avalur.github.io</a></p>
+					</div>
+					<aside class="notes">
+						Всем привет!
+						Меня зовут Александр Авдюшенко, и я рад выступать здесь.
+				  	</aside>
+                </section>
+				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li class="current" aria-current="step"><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
+					<section>
+					<h3>Начнём с примера</h3>
+					<p style="text-align: left;font-style: italic;">
+						Докажите, что пунктирные прямые проходят через одну точку
+					</p>
+					<div id="applet_container" style="width: 1200px; height: 400px;align-content: center"></div>
+					<script>
+						var ggbApp = new GGBApplet({
+							"appName": "classic",
+							"perspective": "AG",
+							"width": 1200,
+							"height": 400,
+							"showToolBar": false,
+							"showAlgebraInput": false,
+							"showMenuBar": false,
+							"appletOnLoad": function(api) {
+								// Define triangle vertices
+								api.evalCommand("A = (-5, -2)");
+								api.evalCommand("B = (6, -2)");
+								api.evalCommand("C = (3, 3)");
+								// Define triangle lines
+								api.evalCommand("a = Line(B, C)");
+								api.evalCommand("b = Line(C, A)");
+								api.evalCommand("c = Line(A, B)");
+								// Draw the triangle
+								api.evalCommand("triangle = Polygon(A, B, C)");
+
+								// Create angle bisector at A
+								api.evalCommand("bisectorA = AngleBisector(B, A, C)");
+								// Find a point on the angle bisector
+								api.evalCommand("D1 = Point(bisectorA, 0.928)");
+								// Create perpendicular lines from D
+								api.evalCommand("perpD1 = PerpendicularLine(D1, c)");
+								// Find intersection points
+								api.evalCommand("E1 = Intersect(perpD1, c)");
+								// Create the circle
+								api.evalCommand("circle1 = Circle(D1, Distance(D1, E1))");
+								api.evalCommand("center1 = Center(circle1)");
+								api.evalCommand("r1 = Radius(circle1)");
+
+								// Create angle bisector at B
+								api.evalCommand("bisectorB = AngleBisector(A, B, C)");
+								// Find a point on the angle bisector
+								api.evalCommand("D2 = Point(bisectorB, 0.865)");
+								// Create perpendicular lines from D
+								api.evalCommand("perpD2 = PerpendicularLine(D2, c)");
+								// Find intersection points
+								api.evalCommand("E2 = Intersect(perpD2, c)");
+								// Create the circle
+								api.evalCommand("circle2 = Circle(D2, Distance(D2, E2))");
+								api.evalCommand("center2 = Center(circle2)");
+								api.evalCommand("r2 = Radius(circle2)");
+
+								// Create angle bisector at C
+								api.evalCommand("bisectorC = AngleBisector(A, C, B)");
+								// Find a point on the angle bisector
+								api.evalCommand("D3 = Point(bisectorC, 0.8)");
+								// Create perpendicular lines from D
+								api.evalCommand("perpD3 = PerpendicularLine(D3, a)");
+								// Find intersection points
+								api.evalCommand("E3 = Intersect(perpD3, a)");
+								// Create the circle
+								api.evalCommand("circle3 = Circle(D3, Distance(D3, E3))");
+								api.evalCommand("center3 = Center(circle3)");
+								api.evalCommand("r3 = Radius(circle3)");
+
+								// Find tangent points
+								api.evalCommand("A1 = Barycenter({center3, center2}, {r2, r3})");
+								api.evalCommand("B1 = Barycenter({center3, center1}, {r1, r3})");
+								api.evalCommand("C1 = Barycenter({center1, center2}, {r2, r1})");
+
+								// Draw segments
+								api.evalCommand("aa = Segment(A, A1)");
+								api.evalCommand("bb = Segment(B, B1)");
+								api.evalCommand("cc = Segment(C, C1)");
+
+								// Customize colors
+								api.evalCommand('SetColor(triangle, 0, 0, 1)');
+								api.evalCommand('SetColor(circle1, 0, 0, 0)');
+								api.evalCommand('SetLineStyle(circle1, 0)');
+								api.evalCommand('SetColor(circle2, 0, 0, 0)');
+								api.evalCommand('SetLineStyle(circle2, 0)');
+								api.evalCommand('SetColor(circle3, 0, 0, 0)');
+								api.evalCommand('SetLineStyle(circle3, 0)');
+								api.evalCommand('SetLineStyle(aa, 2)');
+								api.evalCommand('SetLineStyle(bb, 2)');
+								api.evalCommand('SetLineStyle(cc, 2)');
+
+								// Hide construction elements
+								api.evalCommand('SetVisibleInView(perpD1, 1, false)');
+								api.evalCommand('SetVisibleInView(perpD2, 1, false)');
+								api.evalCommand('SetVisibleInView(perpD3, 1, false)');
+								api.evalCommand('SetVisibleInView(D1, 1, false)');
+								api.evalCommand('SetVisibleInView(E1, 1, false)');
+								api.evalCommand('SetVisibleInView(D2, 1, false)');
+								api.evalCommand('SetVisibleInView(E2, 1, false)');
+								api.evalCommand('SetVisibleInView(D3, 1, false)');
+								api.evalCommand('SetVisibleInView(E3, 1, false)');
+								api.evalCommand('SetVisibleInView(bisectorA, 1, false)');
+								api.evalCommand('SetVisibleInView(bisectorB, 1, false)');
+								api.evalCommand('SetVisibleInView(bisectorC, 1, false)');
+								api.evalCommand('SetVisibleInView(a, 1, false)');
+								api.evalCommand('SetVisibleInView(b, 1, false)');
+								api.evalCommand('SetVisibleInView(c, 1, false)');
+								api.evalCommand('SetVisibleInView(center1, 1, false)');
+								api.evalCommand('SetVisibleInView(center2, 1, false)');
+								api.evalCommand('SetVisibleInView(center3, 1, false)');
+								api.setAxesVisible(false, false);
+								api.setGridVisible(false);
+								["triangle", "a_1", "b_1", "c_1", "circle1", "circle2", "circle3", "aa", "bb", "cc"].forEach(function(label) {
+									api.setLabelVisible(label, false);
+								});
+							}
+						}, true);
+
+						window.addEventListener("load", function() {
+							ggbApp.inject("applet_container");
+						});
+					</script>
+				</section>
+					<section class="image-slide" data-background-color="white">
+						<img src="images/GPT4_wrong_answer.png" alt="Неверный ответ GPT-4">
+						<div class="fragment"
+							 style="border: 5px solid red; position: absolute;
+							 left: 59%; top: 50.5%;
+							 width: 22%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: red;">
+							Ошибка!
+						</div>
+					</section>
+					<section class="image-slide" data-background-color="white">
+						<img src="images/GPT4o_wrong.png" alt="Неверный ответ GPT-4o">
+						<div class="fragment"
+							 style="border: 5px solid red; position: absolute;
+							 left: 56.7%; top: 55.5%;
+							 width: 32.5%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: red;">
+							Ошибка!
+						</div>
+					</section>
+					<section class="image-slide" data-background-color="white">
+						<img src="images/GPTo1_correct.png" alt="Верный ответ GPT-o1">
+						<div class="fragment"
+							 style="border: 5px solid green; position: absolute;
+							 left: 57.2%; top: 50%;
+							 width: 34%; height: 6%; border-radius: 10px;
+							 text-align: right; font-size: 25px;color: green;">
+							Это верно!
+						</div>
+					</section>
+					<section>
+						<ul>
+							<li><a style="color: blue" href="https://en.wikipedia.org/wiki/Malfatti_circles">
+								Статья «Окружности Мальфатти» в Википедии</a>
+							</li>
+							<li class="fragment">Основные шаги доказательства
+								<ol>
+									<li>Гомотетии для каждой пары окружностей дают нам центры $A_2, B_2, C_2$</li>
+									<li>Эти три центра гомотетии лежат на одной прямой по
+									<a style="color: blue" href="https://en.wikipedia.org/wiki/Monge%27s_theorem">
+										теореме Монжа</a>
+									</li>
+									<li>Последний шаг — применить <a style="color: blue" href="https://en.wikipedia.org/wiki/Desargues%27s_theorem">
+										теорему Дезарга</a> к треугольникам $ABC$ и $A_1B_1C_1$
+									</li>
+								</ol>
+							</li>
+							<li class="fragment" style="font-style: italic">А GPT 5.6 Sol намного умнее:
+								<a href="https://chatgpt.com/s/t_6a930a8d95f881918b2be00eee0a0fe4">вот тут</a> всё верно посчитал в барицентрических координатах</li>
+						</ul>
+					</section>
+					<section class="alphago-results-slide" data-background-color="#ffffff">
+						<h3>«AlphaGo moment» в олимпиадной математике</h3>
+						<img class="lang-ru-only" src="images/alphago_moment_imc_results.svg"
+							 alt="Результаты человеческих команд и моделей на задачах IMC 2025">
+						<img class="lang-en-only" src="images/alphago_moment_imc_results_en.svg"
+							 alt="Results of human teams and models on IMC 2025 problems">
+						<p class="alphago-post-link">
+							<a href="../posts/AlphaGoMomentForMaths.html">Подробности и методика — в моём посте</a>
+						</p>
+						<aside class="notes">
+							[Sources]
+							- Data and methodology: https://avalur.github.io/posts/AlphaGoMomentForMaths.html
+							- Human team standings: IMC 2025, reproduced in the source post
+							[/Sources]
+						</aside>
+					</section>
+					<section>
+						<h3>То же самое в программировании</h3>
+						<img src="images/o3-benchmark-coding.webp" alt="Результаты o3 в задачах по программированию" width="1400">
+					</section>
+					<section class="boris-quote-slide">
+						<div class="boris-quote-layout">
+							<figure>
+								<img src="images/boris_cherny.jpg" alt="Борис Чёрный">
+								<figcaption>
+									Борис Чёрный<br>
+									<span>создатель и руководитель Claude Code, Anthropic</span>
+								</figcaption>
+							</figure>
+							<div>
+								<blockquote>
+									«Я уже, кажется, восемь месяцев не написал вручную ни строчки кода.<br>
+									<strong>Claude Code на 100% написан Claude Code.</strong>»
+								</blockquote>
+								<p class="quote-original" lang="en">“I haven’t written a line of code by hand in, I think, eight months now. Claude Code, 100% written by Claude Code.”</p>
+								<p class="quote-source"><a href="https://fortune.com/2026/06/11/anthropic-claude-boris-cherny-doesnt-write-code-by-hand-anymore/">Fortune Brainstorm Tech, 11 июня 2026</a></p>
+							</div>
+						</div>
+						<aside class="notes">
+							Sources: quote — Fortune Brainstorm Tech, 11 June 2026, https://fortune.com/2026/06/11/anthropic-claude-boris-cherny-doesnt-write-code-by-hand-anymore/ ; portrait — Anthropic, https://resources.anthropic.com/webinar/claude-code-live
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li class="current" aria-current="step"><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
+					<section class="about-me-slide" data-transition="fade" data-background-color="#ffffff">
+						<h2>Заменит ли меня ИскИн?</h2>
+						<div class="about-me-timeline">
+						<p class="fragment" data-fragment-index="0" style="left: 0; top: 130px; width: 300px">
+							<img src="images/nsk_illustration.png" alt="Новосибирск" style="width:280px !important;max-width:280px;max-height:210px;border-radius: 50%">
+						</p>
+						<p class="fragment" data-fragment-index="1" style="left: 50px; top: 390px; width: 160px">
+							2003, серебряная медаль
+							<img src="images/pms.png" alt="ФМШ" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="2" style="left: 210px; top: 340px; width: 160px">
+							2009, магистр математики
+							<img src="images/mmf.png" alt="ММФ НГУ" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="3" style="left: 380px; top: 290px; width: 160px">
+							2014, кандидат наук
+							<img src="images/ict.png" alt="Институт вычислительных технологий" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="4" style="left: 540px; top: 230px; width: 150px">
+							2016, ШАД
+							<img src="images/shad.png" alt="Школа анализа данных" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="5" style="left: 670px; top: 100px; width: 160px">
+							2015–2018, аналитик<br>
+							<img src="images/yandex.jpg" alt="Яндекс" style="width:20%">
+						</p>
+						<p class="fragment" data-fragment-index="6" style="left: 810px; top: 70px; width: 180px">
+							2016–2022, руководитель в образовании<br>
+							<img src="images/csc.png" alt="Computer Science Center" style="width:50%">
+						</p>
+						<p class="fragment" data-fragment-index="6" style="left: 810px; top: 220px; width: 180px">
+							2019–2022, <br>доцент СПбГУ<br>
+							<img src="images/spbu_logo.png" alt="СПбГУ" style="width:100%">
+						</p>
+						<p class="fragment" data-fragment-index="7" style="left: 1000px; top: 10px; width: 170px">
+							2023–н.в., преподаватель и исследователь<br>
+							<img src="images/jblogo.jpeg" alt="JetBrains" style="width:40%">
+						</p>
+
+						<p class="fragment" data-fragment-index="9" style="left: 500px; top: 260px; width: 80px">
+							<i class="rectangle" style="height: 250px;width: 8px;border: solid darkorange;
+							border-width: 7px 7px 7px 7px;display: inline-block;"></i><br>
+							<span style="color: darkorange"><b>GPT-3.5</b></span>
+						</p>
+						<p class="fragment" data-fragment-index="10" style="left: 760px; top: 220px; width: 80px">
+							<i class="rectangle" style="height: 290px;width: 8px;border: solid darkorange;
+							border-width: 7px 7px 7px 7px;display: inline-block;"></i><br>
+							<span style="color: darkorange"><b>GPT-5</b></span>
+						</p>
+						<p class="fragment" data-fragment-index="11" style="left: 960px; top: 430px; width: 150px">
+							<span style="color: darkorange"><b> GPT-5.6?</b></span>
+						</p>
+						<p class="fragment about-pay" data-fragment-index="12" style="left: 950px; top: 300px; width: 220px">
+							<img src="images/pay_the_bills.webp" alt="ИИ поможет оплачивать счета" style="width:100%; border-radius: 5%">
+						</p>
+
+						</div>
+						<aside class="notes">
+							Переключимся на мою личную историю и подумаем: заменит ли меня ИИ и когда это может произойти?
+							<br>
+							Я родился и вырос в далёком снежном Новосибирске. В седьмом классе победил на областной
+							математической олимпиаде, затем учился в физико-математической школе Академгородка,
+							на ММФ НГУ и защитил кандидатскую диссертацию по математическому моделированию
+							в Институте вычислительных технологий.
+							<br>
+							Во время аспирантуры начался подъём машинного обучения. Я поступил в новосибирское отделение
+							Школы анализа данных Яндекса, а после выпуска работал аналитиком и специалистом по данным.
+							<br>
+							Позже я вернулся к преподаванию и организации образования: руководил бакалаврской программой
+							по машинному обучению в СПбГУ и развивал Computer Science Center.
+							<br>
+							Сейчас я работаю в JetBrains на Кипре, преподаю и занимаюсь исследованиями.
+							Поэтому вопрос звучит особенно интересно: какие мои задачи ИИ уже может выполнять,
+							а в чём человеческий опыт пока остаётся незаменимым?
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li class="current" aria-current="step"><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
+					<section class="claudes-cycles-slide" data-background-color="#ffffff">
+						<h3>Claude’s Cycles</h3>
+						<div class="cycles-top">
+							<p class="cycles-claim">
+								<a href="https://cs.stanford.edu/~knuth/papers/claude-cycles.pdf">Дональд Кнут, февраль 2026</a><br>
+								<strong>Claude Opus 4.6</strong> решил открытую задачу, над которой Кнут работал несколько недель.
+								<span class="cycles-result">Решение проверили независимо и формализовали в Lean.</span>
+							</p>
+							<img class="cycles-scene" src="images/claudes_cycles_knuth_claude.png" alt="Дональд Кнут и Claude обсуждают гамильтоновы циклы">
+						</div>
+						<a href="https://cs.stanford.edu/~knuth/papers/claude-cycles.pdf">
+							<img class="cycles-note" src="images/claudes_cycles_knuth_note.png" alt="Фрагмент заметки Дональда Кнута Claude’s Cycles">
+						</a>
+						<p class="cycles-source"><a href="https://cs.stanford.edu/~knuth/papers/claude-cycles.pdf">Donald Knuth, “Claude’s Cycles”, 28 февраля 2026</a></p>
+						<aside class="notes">
+							[Sources]
+							- Illustration: portrait of Donald Knuth by Alexandra Drofina, CC BY, https://cs.stanford.edu/~knuth/graphics.html
+							- Claim and document excerpt: Donald Knuth, “Claude’s Cycles”, https://cs.stanford.edu/~knuth/papers/claude-cycles.pdf
+							[/Sources]
+						</aside>
+					</section>
+					<section class="unit-distances-slide" data-background-color="#ffffff">
+						<h3>Единичные расстояния</h3>
+						<div class="math-breakthrough-layout">
+							<div class="math-breakthrough-copy">
+								<p class="math-question">Насколько много пар точек на плоскости могут находиться <em>ровно на расстоянии 1</em> друг от друга?</p>
+								<p class="math-result"><strong>GPT-5.4 Pro, апрель 2026:</strong><br>нашёл неожиданный красивый контрпример к важной гипотезе Эрдёша.</p>
+								<div class="math-mini-timeline">
+									<strong>1946</strong><span>Эрдёш поставил задачу.</span>
+									<strong>2026</strong><span>ИИ сдвинул границу известного.</span>
+								</div>
+								<p class="math-link"><a href="https://www.sergeynikolenko.ru/blog/gpt-and-unit-distances-erdos-hypothesis">Как устроен контрпример</a> · <a href="https://x.com/jdlichtman/status/2044298382852927894">сообщение Джареда Лихтмана</a></p>
+							</div>
+							<figure class="unit-distances-visual">
+								<img src="images/unit_distances_illustration.png" alt="Новая иллюстрация конфигураций точек с выделенными рёбрами одинаковой длины">
+								<figcaption class="math-visual-caption">Выделены пары точек, находящиеся на одинаковом расстоянии.</figcaption>
+							</figure>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Claim: Vibemathed_Nikolenko_August_17_2026, slide 18
+							- Illustration: OpenAI ImageGen, generated for this presentation
+							- Jared Lichtman announcement: https://x.com/jdlichtman/status/2044298382852927894
+							- Background article: https://www.sergeynikolenko.ru/blog/gpt-and-unit-distances-erdos-hypothesis
+							[/Sources]
+						</aside>
+					</section>
+					<section class="cycle-double-cover-slide" data-background-color="#ffffff">
+						<h3>Двойное покрытие циклами</h3>
+						<div class="math-breakthrough-layout">
+							<div class="math-breakthrough-copy">
+								<p class="math-question">Можно ли в любом графе без мостов выбрать простые циклы так, чтобы <em>каждое ребро вошло ровно в два цикла</em>?</p>
+								<p class="math-result">Гипотеза оставалась открытой с 1970-х.<br><strong>10 июля 2026:</strong> опубликован препринт с полным доказательством.</p>
+								<p class="math-link"><a href="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf">OpenAI: препринт «A Proof of the Cycle Double Cover Conjecture»</a></p>
+							</div>
+							<figure class="cycle-cover-visual">
+								<svg class="cycle-cover-diagram" viewBox="0 0 660 400" role="img" aria-labelledby="cycle-cover-title cycle-cover-desc">
+									<title id="cycle-cover-title">Шесть циклов двойного покрытия графа Петерсена</title>
+									<desc id="cycle-cover-desc">Каждое ребро графа Петерсена выделено ровно в двух из шести пятиугольных циклов.</desc>
+									<defs>
+										<g id="petersen-edges" fill="none" stroke="#d6d9df" stroke-width="2.4">
+											<path d="M100 10 L180 70 L150 170 L50 170 L20 70 Z"/>
+											<path d="M100 10 L100 60 M180 70 L140 90 M150 170 L125 135 M50 170 L75 135 M20 70 L60 90"/>
+											<path d="M100 60 L125 135 L60 90 L140 90 L75 135 Z"/>
+										</g>
+										<g id="petersen-nodes" fill="white" stroke="#343a40" stroke-width="2.4">
+											<circle class="node" cx="100" cy="10" r="7"/><circle class="node" cx="180" cy="70" r="7"/>
+											<circle class="node" cx="150" cy="170" r="7"/><circle class="node" cx="50" cy="170" r="7"/>
+											<circle class="node" cx="20" cy="70" r="7"/><circle class="node" cx="100" cy="60" r="7"/>
+											<circle class="node" cx="140" cy="90" r="7"/><circle class="node" cx="125" cy="135" r="7"/>
+											<circle class="node" cx="75" cy="135" r="7"/><circle class="node" cx="60" cy="90" r="7"/>
+										</g>
+									</defs>
+									<text class="cycle-label" x="100" y="22">C₁</text>
+									<g transform="translate(15 30) scale(.85)"><use href="#petersen-edges"/><polyline fill="none" stroke="#3f77ad" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="20,70 50,170 150,170 180,70 100,10 20,70"/><use href="#petersen-nodes"/></g>
+									<text class="cycle-label" x="320" y="22">C₂</text>
+									<g transform="translate(235 30) scale(.85)"><use href="#petersen-edges"/><polyline fill="none" stroke="#ef5b6c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="75,135 140,90 180,70 100,10 100,60 75,135"/><use href="#petersen-nodes"/></g>
+									<text class="cycle-label" x="540" y="22">C₃</text>
+									<g transform="translate(455 30) scale(.85)"><use href="#petersen-edges"/><polyline fill="none" stroke="#269443" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="60,90 125,135 100,60 100,10 20,70 60,90"/><use href="#petersen-nodes"/></g>
+									<text class="cycle-label" x="100" y="218">C₄</text>
+									<g transform="translate(15 225) scale(.85)"><use href="#petersen-edges"/><polyline fill="none" stroke="#d5b82e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="60,90 125,135 150,170 180,70 140,90 60,90"/><use href="#petersen-nodes"/></g>
+									<text class="cycle-label" x="320" y="218">C₅</text>
+									<g transform="translate(235 225) scale(.85)"><use href="#petersen-edges"/><polyline fill="none" stroke="#53c5df" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="75,135 100,60 125,135 150,170 50,170 75,135"/><use href="#petersen-nodes"/></g>
+									<text class="cycle-label" x="540" y="218">C₆</text>
+									<g transform="translate(455 225) scale(.85)"><use href="#petersen-edges"/><polyline fill="none" stroke="#b7337d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="60,90 140,90 75,135 50,170 20,70 60,90"/><use href="#petersen-nodes"/></g>
+								</svg>
+								<figcaption class="math-visual-caption">Граф Петерсена: шесть циклов, каждое ребро выделено дважды.</figcaption>
+							</figure>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Claim: Vibemathed_Nikolenko_August_17_2026, slide 23
+							- Primary source: OpenAI, “A Proof of the Cycle Double Cover Conjecture”, July 2026, https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf
+							[/Sources]
+						</aside>
+					</section>
+					<section class="jacobian-slide" data-background-color="#ffffff">
+						<h3>Проблема Якобиана</h3>
+						<div class="math-breakthrough-layout">
+							<div class="math-breakthrough-copy">
+								<p class="math-question">Если определитель Якобиана полиномиального отображения <em>F: ℂ<sup>n</sup> → ℂ<sup>n</sup></em> — ненулевая константа, обязательно ли <em>F</em> обратимо?</p>
+								<p class="math-result">Проблема была открыта с 1939 года.<br><strong>Claude Fable 5, 20 июля 2026:</strong> найден явный контрпример уже при \(n=3\).</p>
+								<p class="math-link"><a href="https://x.com/__alpoge__/status/2079028340955197566">Исходное сообщение Левента Альпёге</a><br><a href="https://sergeynikolenko.ru/en/blog/the-fable-of-the-jacobian-conjecture">Подробное объяснение контрпримера</a></p>
+								<p class="jacobian-plane-note">Для \(n=2\) вопрос всё ещё остаётся открытым.</p>
+							</div>
+							<div>
+								<div class="jacobian-formula" aria-label="Полиномиальное отображение, опровергающее проблему Якобиана">
+									\[
+									\begin{aligned}
+									u &= 1+xy,\\
+									F_1 &= u^3z+y^2u(4+3xy),\\
+									F_2 &= y+3xu^2z+3xy^2(4+3xy),\\
+									F_3 &= 2x-3x^2y-x^3z.
+									\end{aligned}
+									\]
+								</div>
+								<div class="jacobian-checks">
+									<strong>Якобиан постоянен:</strong> \(\det J_F\equiv -2\).<br>
+									<strong>Но отображение не инъективно:</strong>
+									\[
+									\begin{aligned}
+									F(0,0,-\tfrac14)&=F(1,-\tfrac32,\tfrac{13}{2})\\
+									&=F(-1,\tfrac32,\tfrac{13}{2})=(-\tfrac14,0,0).
+									\end{aligned}
+									\]
+								</div>
+							</div>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Claim and formula: Vibemathed_Nikolenko_August_17_2026, slide 25
+							- Original announcement: Levent Alpöge, 20 July 2026, https://x.com/__alpoge__/status/2079028340955197566
+							- Background and verification details: https://sergeynikolenko.ru/en/blog/the-fable-of-the-jacobian-conjecture
+							[/Sources]
+						</aside>
+					</section>
+					<section class="dgg-slide" data-background-color="#ffffff">
+						<h3>Гипотеза Диница — Гарга — Гёманса</h3>
+						<div class="math-breakthrough-layout">
+							<div class="math-breakthrough-copy">
+								<p class="math-question">Дробный поток может делить груз между маршрутами. Можно ли всегда превратить его в <em>неделимый</em>, не повысив цену и перегрузив каждое ребро не более чем на максимальный спрос одного стока?</p>
+								<p class="math-result"><strong>GPT-5.6 Pro и Дмитрий Рыбин, 22 июля 2026:</strong><br>построен небольшой явный контрпример.</p>
+								<p style="margin:0 0 18px;font-size:25px;line-height:1.22"><strong style="color:#2f4397">Дробный поток:</strong> цена 58.<br><strong style="color:#d63384">Любой неделимый:</strong> при допустимой перегрузке ≤ 15 цена не меньше 60.</p>
+								<p class="math-link"><a href="https://x.com/DmitryRybin1/status/2079904005652893709">Объявление Дмитрия Рыбина</a><br><a href="https://chatgpt.com/share/6a60b2eb-0b64-83ee-9c76-7931ca1de063">Полный диалог с GPT-5.6 Pro</a></p>
+							</div>
+							<figure style="margin:0">
+								<svg class="dgg-network" viewBox="0 0 600 450" role="img" aria-labelledby="dgg-network-title dgg-network-desc">
+									<title id="dgg-network-title">Сеть контрпримера к гипотезе Диница — Гарга — Гёманса</title>
+									<desc id="dgg-network-desc">Источник s, внутренние вершины u, v, w и три стока с требованиями 10, 15 и 15. Синим подписан дробный поток, красным цена рёбер.</desc>
+									<defs>
+										<marker id="dgg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+											<path d="M 0 0 L 10 5 L 0 10 z" fill="#273142"/>
+										</marker>
+									</defs>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M278 58 C205 65 120 92 91 151"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M309 66 L327 150"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M328 52 C450 45 519 142 520 267"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M164 274 L101 203"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M330 270 L330 211"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M490 300 L361 300"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M300 300 L211 300"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M180 330 L180 376"/>
+									<path class="edge" marker-end="url(#dgg-arrow)" d="M510 328 C475 391 304 410 211 405"/>
+
+									<text class="flow-label" x="177" y="94">6</text><text class="cost-label" x="145" y="78">3</text>
+									<text class="flow-label" x="305" y="111">10</text><text class="cost-label" x="344" y="108">2</text>
+									<text class="flow-label" x="462" y="126">24</text>
+									<text class="flow-label" x="115" y="248">4</text><text class="flow-label" x="342" y="244">5</text>
+									<text class="flow-label" x="420" y="291">14</text><text class="flow-label" x="252" y="291">9</text>
+									<text class="flow-label" x="192" y="356">5</text><text class="flow-label" x="375" y="400">10</text><text class="cost-label" x="449" y="384">2</text>
+
+									<circle class="node source" cx="300" cy="40" r="30"/><text class="node-name" x="300" y="40">s</text>
+									<circle class="node sink" cx="80" cy="180" r="30"/><text class="node-name" x="80" y="180">t₂</text><text class="demand-label" x="80" y="220">спрос 10</text>
+									<circle class="node sink" cx="330" cy="180" r="30"/><text class="node-name" x="330" y="180">t₁</text><text class="demand-label" x="330" y="220">спрос 15</text>
+									<circle class="node" cx="180" cy="300" r="30"/><text class="node-name" x="180" y="300">w</text>
+									<circle class="node" cx="330" cy="300" r="30"/><text class="node-name" x="330" y="300">v</text>
+									<circle class="node" cx="520" cy="300" r="30"/><text class="node-name" x="520" y="300">u</text>
+									<circle class="node sink" cx="180" cy="405" r="30"/><text class="node-name" x="180" y="405">t₃</text><text class="demand-label" x="180" y="445">спрос 15</text>
+								</svg>
+								<figcaption class="math-visual-caption">Синий — дробный поток; красный — цена; золотой — спрос стока.</figcaption>
+							</figure>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Claim and source diagram: Vibemathed_Nikolenko_August_17_2026, slide 26
+							- Announcement: Dmitry Rybin, 22 July 2026, https://x.com/DmitryRybin1/status/2079904005652893709
+							- Full GPT-5.6 Pro session: https://chatgpt.com/share/6a60b2eb-0b64-83ee-9c76-7931ca1de063
+							- Exact conjecture statement: Traub, Vargas Koch, Zenklusen, arXiv:2308.02651
+							[/Sources]
+						</aside>
+					</section>
+					<section class="prompt-history-slide" data-background-color="#ffffff">
+						<h3>Контрпример родился не с первой попытки</h3>
+						<p class="research-subtitle">Четыре длинных запуска GPT-5.6 Pro — каждый продолжал исследование предыдущего.</p>
+						<div class="research-timeline">
+							<div class="research-step">
+								<span class="research-duration">52 мин 52 с</span>
+								<blockquote>«Построй структурированный контрпример для общего непланарного случая»</blockquote>
+								<p class="research-outcome">Корректный контрпример не найден.</p>
+							</div>
+							<div class="research-step">
+								<span class="research-duration">89 мин 12 с</span>
+								<blockquote>«Продолжай исследование и найди полный безусловный контрпример»</blockquote>
+								<p class="research-outcome">Полного контрпримера всё ещё нет.</p>
+							</div>
+							<div class="research-step">
+								<span class="research-duration">93 мин 57 с</span>
+								<blockquote>«Продолжай поиск. Сначала выработай ясную стратегию»</blockquote>
+								<p class="research-outcome">Точного сертификата разделения пока нет.</p>
+							</div>
+							<div class="research-step final">
+								<span class="research-duration">88 мин 24 с</span>
+								<blockquote>«Хватит частичных результатов. Завершим полным безусловным контрпримером»</blockquote>
+								<p class="research-outcome">Полный конечный контрпример найден.</p>
+							</div>
+						</div>
+						<p class="research-takeaway"><strong>5 часов 24 минуты исследования.</strong> Человек удерживал цель, а модель не выдавала правдоподобную ошибку за результат.</p>
+						<p class="math-link" style="margin:16px 0 0;font-size:22px;text-align:center"><a href="https://chatgpt.com/share/6a60b2eb-0b64-83ee-9c76-7931ca1de063">Посмотреть полный исследовательский диалог</a></p>
+						<aside class="notes">
+							[Sources]
+							- Prompts, durations, and outcomes: Vibemathed_Nikolenko_August_17_2026, slide 27
+							- Full GPT-5.6 Pro session: https://chatgpt.com/share/6a60b2eb-0b64-83ee-9c76-7931ca1de063
+							- Announcement: https://x.com/DmitryRybin1/status/2079904005652893709
+							[/Sources]
+						</aside>
+					</section>
+					<section class="crouzeix-slide" data-background-color="#ffffff">
+						<h3>Гипотеза Круазе</h3>
+						<div class="crouzeix-layout">
+							<div>
+								<p class="math-question">Для любой матрицы \(A\) и любого полинома \(p\) верна оценка с оптимальной константой 2?</p>
+								<div class="crouzeix-formula" aria-label="Неравенство гипотезы Круазе">
+									\[
+									\lVert p(A)\rVert_2 \le 2\max_{z\in W(A)} |p(z)|.
+									\]
+								</div>
+								<p class="math-result"><strong>Шаньму Цзинь, июль 2026:</strong><br>ключевой шаг доказательства возник в 16-часовом автономном запуске GPT-5.6 Sol.</p>
+								<p class="crouzeix-checks"><strong>Доказательство проверили</strong> Алекс Таунсенд, Энн Гринбаум и сам Мишель Круазе.</p>
+								<p class="crouzeix-second-proof"><strong>Через восемь дней</strong> Lorist и Schwenninger опубликовали другое короткое доказательство — тоже с помощью ИИ.</p>
+								<p class="math-link"><a href="https://www.preprints.org/manuscript/202607.1919">Препринт Цзиня</a> · <a href="https://alextownsend.net/essays/SIAMNews_CrouzeixConjecture.pdf">проверка и история</a> · <a href="https://arxiv.org/abs/2608.03841">второе доказательство</a></p>
+							</div>
+							<figure class="crouzeix-person">
+								<div class="crouzeix-portrait-crop">
+									<img src="images/crouzeix_siam_article.jpg" alt="Шаньму Цзинь">
+								</div>
+								<figcaption><strong>Шаньму Цзинь (Shanmu Jin)</strong><br>ординатор-нейрохирург и математик-самоучка</figcaption>
+								<blockquote>«Мы начали читать препринт со скепсисом, но через несколько часов поняли: доказательство настоящее».</blockquote>
+							</figure>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Source slide and structure: Vibemathed_Nikolenko_August_17_2026, slide 31
+							- Verification, biography, 16-hour GPT-5.6 Sol run, quote, and portrait: Alex Townsend and Anne Greenbaum, “The Neurosurgery Resident Who Proved Crouzeix’s Conjecture”, https://alextownsend.net/essays/SIAMNews_CrouzeixConjecture.pdf
+							- Shanmu Jin’s preprint: https://www.preprints.org/manuscript/202607.1919
+							- Independent AI-assisted proof: Emiel Lorist and Felix Schwenninger, arXiv:2608.03841, https://arxiv.org/abs/2608.03841
+							[/Sources]
+						</aside>
+					</section>
+					<section class="riemann-slide" data-background-color="#ffffff">
+						<h3>Продвижение к гипотезе Римана</h3>
+						<div class="riemann-layout">
+							<div>
+								<p class="math-question"><strong>Гипотеза Римана:</strong> все нетривиальные нули дзета-функции лежат на критической прямой \(\operatorname{Re}s=\tfrac12\).</p>
+								<div class="riemann-jump" aria-label="Нижняя оценка выросла с 41,6 до 67,2 процента">
+									<span class="old">41,6%</span><span class="jump-arrow">→</span><span class="new">67,2%</span>
+								</div>
+								<p class="math-result"><strong>Claude, 10 августа 2026:</strong><br>безусловно доказал, что более двух третей простых нулей лежат на критической прямой.</p>
+								<p class="riemann-verification"><strong>Формальная проверка:</strong> Claude подготовил доказательство в Lean; его также изучили математики Anthropic и независимые эксперты.</p>
+								<p class="math-link"><a href="https://www.anthropic.com/research/riemann-zeta">Рассказ Anthropic и материалы исследования</a><br><a href="https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf">Полный текст доказательства</a></p>
+							</div>
+							<figure class="riemann-paper">
+								<img src="images/riemann_claude_paper.jpg" alt="Первая страница статьи Claude о нулях дзета-функции Римана">
+								<figcaption>«Более двух третей нулей дзета-функции Римана лежат на критической прямой».</figcaption>
+							</figure>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Source slide and paper excerpt: Vibemathed_Nikolenko_August_17_2026, slide 33
+							- Result, previous bound, methodology, expert review, and Lean verification: Anthropic, “Learning more about Claude's mathematical capabilities”, 10 August 2026, https://www.anthropic.com/research/riemann-zeta
+							- Claude's paper: https://www-cdn.anthropic.com/564f962e60643842f5fcb4a17c9dbc8f608f1c37.pdf
+							[/Sources]
+						</aside>
+					</section>
+					<section class="llm-valuations-slide" data-background-color="#ffffff">
+						<h3>Зачем вообще учить LLM математике?</h3>
+						<p class="llm-valuations-subtitle">Пять самых дорогих независимых разработчиков языковых моделей · публичные оценки на 1 сентября 2026 года</p>
+						<div class="llm-valuation-row">
+							<article class="llm-lab">
+								<span class="rank">1</span>
+								<img src="images/dario_amodei.jpg" alt="Дарио Амодеи, CEO Anthropic">
+								<h4>Anthropic</h4>
+								<p class="valuation">$965 млрд</p>
+								<p class="ceo">Дарио Амодеи · CEO</p>
+							</article>
+							<article class="llm-lab">
+								<span class="rank">2</span>
+								<img src="images/sam_altman.jpg" alt="Сэм Альтман, CEO OpenAI">
+								<h4>OpenAI</h4>
+								<p class="valuation">$852 млрд</p>
+								<p class="ceo">Сэм Альтман · CEO</p>
+							</article>
+							<article class="llm-lab">
+								<span class="rank">3</span>
+								<img src="images/elon_musk.jpg" alt="Илон Маск, основатель xAI">
+								<h4>xAI</h4>
+								<p class="valuation">≈ $230 млрд</p>
+								<p class="ceo">Илон Маск · основатель</p>
+							</article>
+							<article class="llm-lab">
+								<span class="rank">4</span>
+								<img src="images/liang_wenfeng.jpg" alt="Лян Вэньфэн, основатель DeepSeek">
+								<h4>DeepSeek</h4>
+								<p class="valuation">≈ $74 млрд</p>
+								<p class="ceo">Лян Вэньфэн · основатель<span class="open-weights">открытые веса</span></p>
+							</article>
+							<article class="llm-lab">
+								<span class="rank">5</span>
+								<img src="images/arthur_mensch.jpg" alt="Артур Менш, CEO Mistral AI">
+								<h4>Mistral AI</h4>
+								<p class="valuation">≈ $23 млрд</p>
+								<p class="ceo">Артур Менш · CEO</p>
+							</article>
+						</div>
+						<p class="llm-valuations-takeaway">Математические способности — один из главных фронтов конкуренции между компаниями, которые вместе оцениваются <strong>более чем в $2 трлн</strong>.</p>
+						<p class="llm-valuations-note">Оценки частных компаний приблизительны. xAI — последняя самостоятельная оценка до объединения со SpaceX; DeepSeek и Mistral AI — оценки обсуждаемых сделок.</p>
+						<aside class="notes">
+							[Sources]
+							- Anthropic valuation ($965B): Anthropic Series H announcement, 28 May 2026, https://www.anthropic.com/news/series-h
+							- OpenAI valuation ($852B): OpenAI funding announcement, March 2026, https://openai.com/index/accelerating-the-next-phase-ai/
+							- xAI valuation (~$230B): reported Series E valuation before the SpaceX combination; round announcement: https://x.ai/news/series-e
+							- DeepSeek valuation (~$74B): reported fundraising talks, August 2026, https://www.axios.com/newsletters/axios-pro-rata-348b8ec6-f9a1-4bca-9f25-c7880cfa1e5c
+							- DeepSeek open-weight releases: DeepSeek Transparency Center, https://www.deepseek.com/en/transparency/
+							- Mistral AI valuation (~$23B): reported financing talks, July 2026, https://www.axios.com/2026/07/22/mistral-samsung-20-billion-valuation
+							- Dario Amodei portrait: Anthropic Builder Summit, https://www.anthropic.com/events/builder-summit-bengaluru
+							- Sam Altman portrait: Qatar Foundation speaker profile, https://www.qf.org.qa/ar/education-city-speaker-series/experts/sam-altman
+							- Elon Musk portrait: Debbie Rowe, Wikimedia Commons, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Elon_Musk_(cropped).jpg
+							- Liang Wenfeng portrait: Toolmesh, https://www.toolmesh.ai/news/deepseek-v4-model-launch-enhanced-programming
+							- Arthur Mensch portrait: Imec Technology Forum, https://www.imecitf.com/world/speakers/arthur-mensch
+							[/Sources]
+						</aside>
+					</section>
+					<section class="vibemathed-slide" data-background-color="#ffffff">
+						<h3>Vibemathed: карта математических результатов</h3>
+						<p class="vibemathed-subtitle">Задачи можно сравнивать по значимости и возрасту — но результат имеет смысл только вместе со статусом проверки.</p>
+						<div class="vibemathed-layout">
+							<figure class="vibemathed-chart" aria-label="График Vibemathed: значимость задачи и число лет до решения">
+								<img src="images/vibemathed_source_slide_43.png" alt="График Vibemathed: значимость математических задач и число лет до решения">
+							</figure>
+							<div>
+								<div class="verification-scale">
+									<h4>Уровень проверки</h4>
+									<ol>
+										<li>Формально проверено в Lean</li>
+										<li>Проверено независимыми экспертами</li>
+										<li>Подтверждено площадкой</li>
+										<li>Утверждение проверено в Lean, доказательство не аудировано</li>
+										<li>Ещё не проверено</li>
+										<li>Результат оспаривается</li>
+									</ol>
+								</div>
+								<p class="vibemathed-takeaway"><strong>Открытия ускоряются.</strong><br>Новое узкое место — доверие к результату.</p>
+							</div>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Chart, verification categories, and source layout: Vibemathed_Nikolenko_August_17_2026, slide 43
+							- Takeaway is a synthesis of the source slide: the chart presents claimed results together with distinct verification states.
+							[/Sources]
+						</aside>
+					</section>
+					<section class="leiden-slide" data-background-color="#ffffff">
+						<h3>Лейденская декларация</h3>
+						<p class="leiden-subtitle">2 июня 2026 · принципы ответственного применения ИИ в математике, одобренные Международным математическим союзом</p>
+						<div class="leiden-values">
+							<div class="leiden-value"><strong>Доказательство — основа математики:</strong> оно даёт не только уверенность, но и понимание.</div>
+							<div class="leiden-value"><strong>У результата есть авторы:</strong> вместе с признанием они принимают ответственность за корректность.</div>
+							<div class="leiden-value"><strong>Аргументы прозрачны:</strong> доказательство должно допускать независимую проверку.</div>
+							<div class="leiden-value"><strong>Результаты оценивает сообщество:</strong> по глубине, сложности и значимости.</div>
+							<div class="leiden-value"><strong>Ценно понимание, а не только ответ:</strong> математика развивает ясность и профессиональное суждение.</div>
+						</div>
+						<div class="leiden-footer">
+							<p>ИИ может ускорять исследование — <strong>но доверие остаётся человеческой и общественной практикой.</strong></p>
+							<p class="math-link"><a href="https://leidendeclaration.ai/">Прочитать декларацию</a></p>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Source structure and five values: Vibemathed_Nikolenko_August_17_2026, slide 44
+							- Date, full declaration text, values, and IMU endorsement: Leiden Declaration on Artificial Intelligence and Mathematics, https://leidendeclaration.ai/
+							[/Sources]
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section class="section-map-slide" data-background-color="#ffffff">
+						<h2>О чём поговорим</h2>
+						<ol class="section-map-list">
+							<li><span class="section-map-number">01</span><span>Что ИИ уже умеет</span></li>
+							<li><span class="section-map-number">02</span><span>Заменит ли он меня</span></li>
+							<li><span class="section-map-number">03</span><span>Как ИИ меняет математику</span></li>
+							<li class="current" aria-current="step"><span class="section-map-number">04</span><span>Зачем всё-таки учить математику</span></li>
+						</ol>
+					</section>
+					<section>
+					  <h4 style="text-align: left">У каждого есть умный ИИ-ассистент — и он всегда готов помочь!</h4>
+					  <ul>
+						<li>✨ Помогает выстроить ход рассуждений</li>
+						<li>🔍 Быстро находит самую важную информацию</li>
+						<li>💡 Предлагает идеи и помогает находить новые решения</li>
+					  </ul>
+					  <br><br>
+					  <h4 class="fragment"
+						  style="text-align: left;color: white;
+							background-color: orange;padding-left: 20px">
+						Мы можем сосредоточиться на главном: критическом мышлении, принятии решений и проверке результатов
+					  </h4>
+					  <aside class="notes">
+						Технологии ИИ развиваются с огромной скоростью, и ассистенты с каждым днём становятся умнее и способнее.
+
+						Главный вопрос: как использовать эти возможности в учёбе и работе?
+
+						С ИИ вы учитесь не в одиночку.
+						Он помогает направлять рассуждения, искать ценную информацию
+						и вместе с вами генерировать идеи.
+						Благодаря этому вы можете направить силы на критическое осмысление и проверку того, подходит ли информация вашим задачам.
+					  </aside>
+					</section>
+					<section class="dense-ai-slide">
+					  <h4 style="text-align: left">ИТ-индустрия меняется так же!</h4>
+						  <ul>
+							<li>🤖 ИИ-модели уже пишут код лучше многих junior- и middle-разработчиков</li>
+							<li>⚡ Они делают это быстрее, дешевле и на любом языке программирования</li>
+							<li>📈 Нужно учиться и развиваться до уровня senior!</li>
+						  </ul>
+						  <br><br>
+					  <div class="fragment" style="text-align: left">
+						  <h4 style="text-align: left">Ключевые навыки в эпоху ИИ</h4>
+						  <ul>
+							<li>🗣️ Умение общаться с ИИ-моделями становится критически важным</li>
+							<li>👥 Ещё нужно развивать soft skills для взаимодействия с людьми</li>
+						  </ul>
+					  </div>
+					  <br>
+					  <h4 class="fragment" style="text-align: left;color: white;
+							background-color: orange;padding-left: 20px">
+						Сосредоточьтесь на том, что ИИ не заменит: лидерстве, архитектурных решениях и взаимодействии с людьми
+					  </h4>
+					  <aside class="notes">
+						ИТ-индустрия стремительно меняется: ИИ всё лучше справляется с программированием.
+						Пока ИИ берёт на себя рутинный код, успешным разработчикам важно сосредоточиться на навыках более высокого уровня:
+						- эффективном общении и с ИИ, и с людьми;
+						- стратегическом мышлении и проектировании систем;
+						- лидерстве и командной работе;
+						- решении задач более широкого масштаба.
+					  </aside>
+					</section>
+					<section class="math-final-slide" data-background-color="#0b1020">
+						<h3 class="fallback-title">Так зачем же учить математику?</h3>
+						<canvas class="math-final-balls" aria-hidden="true"></canvas>
+						<div class="math-final-head" aria-hidden="true"></div>
+						<div class="math-final-layout">
+							<ol class="math-final-reasons">
+								<li class="fragment">Это <strong>красиво</strong></li>
+								<li class="fragment">Ум в порядок приводит</li>
+								<li class="fragment">Можно поступить в вуз или магистратуру</li>
+								<li class="fragment">Можно пройти в Яндекс, JetBrains, OpenAI</li>
+								<li class="fragment"><strong>Профит!</strong></li>
+							</ol>
+							<figure class="math-final-telegram">
+								<p><strong>Англоязычный канал</strong><br>о математике, ИИ и образовании</p>
+								<a class="math-final-qr" href="https://t.me/TechneNotes" target="_blank" rel="noopener">
+									<span class="math-final-qr-visual">
+										<img src="images/techne_notes_qr.png" alt="">
+										<canvas class="math-final-qr-particles" role="img" aria-label="QR-код англоязычного Telegram-канала TechneNotes"></canvas>
+									</span>
+									<span class="math-final-qr-label">@TechneNotes</span>
+								</a>
+							</figure>
+						</div>
+						<aside class="notes">
+							[Sources]
+							- Telegram channel and QR target: https://t.me/TechneNotes
+							- Interactive particle treatment for the title adapted from the local reference: talks/imo_preparation/src/slides/balls.js
+							- QR matrix and scannable module geometry adapted from the working local reference: avalur.me/public/talks/imo-2026/src/slides/qr_techne.js and balls.js
+							[/Sources]
+						</aside>
+					</section>
+				</section>
+			</div>
+        </div>
+		<script>
+			(() => {
+				const TEXT_TRANSLATIONS = new Map([
+					["Зачем учить математику, если ИскИны всё знают лучше нас?", "Why learn mathematics if AI already knows it better than we do?"],
+					["Эта презентация на avalur.github.io", "This presentation at avalur.github.io"],
+					["О чём поговорим", "Where we’re headed"],
+					["Что ИИ уже умеет", "What AI can already do"],
+					["Заменит ли он меня", "Will it replace me?"],
+					["Как ИИ меняет математику", "How AI is changing mathematics"],
+					["Зачем всё-таки учить математику", "Why learn mathematics after all?"],
+					["Начнём с примера", "Let’s start with an example"],
+					["Докажите, что пунктирные прямые проходят через одну точку", "Prove that the dashed lines pass through a common point"],
+					["Ошибка!", "Wrong!"],
+					["Это верно!", "Correct!"],
+					["Статья «Окружности Мальфатти» в Википедии", "Wikipedia article on Malfatti circles"],
+					["Основные шаги доказательства", "Main steps of the proof"],
+					["Гомотетии для каждой пары окружностей дают нам центры $A_2, B_2, C_2$", "The homotheties for each pair of circles give us the centers $A_2, B_2, C_2$"],
+					["Эти три центра гомотетии лежат на одной прямой по", "These three homothety centers are collinear by"],
+					["теореме Монжа", "Monge’s theorem"],
+					["Последний шаг — применить", "The final step is to apply"],
+					["теорему Дезарга", "Desargues’ theorem"],
+					["к треугольникам $ABC$ и $A_1B_1C_1$", "to triangles $ABC$ and $A_1B_1C_1$"],
+					["А GPT 5.6 Sol намного умнее:", "But GPT-5.6 Sol is much smarter:"],
+					["вот тут", "here"],
+					["всё верно посчитал в барицентрических координатах", "it got everything right using barycentric coordinates"],
+					["«AlphaGo moment» в олимпиадной математике", "An “AlphaGo moment” in olympiad mathematics"],
+					["Подробности и методика — в моём посте", "Details and methodology — in my post"],
+					["То же самое в программировании", "The same is happening in programming"],
+					["Борис Чёрный", "Boris Cherny"],
+					["создатель и руководитель Claude Code, Anthropic", "creator and lead of Claude Code at Anthropic"],
+					["«Я уже, кажется, восемь месяцев не написал вручную ни строчки кода.", "“I haven’t written a line of code by hand in, I think, eight months now."],
+					["Claude Code на 100% написан Claude Code.", "Claude Code is 100% written by Claude Code.”"],
+					["»", ""],
+					["Fortune Brainstorm Tech, 11 июня 2026", "Fortune Brainstorm Tech, June 11, 2026"],
+					["Заменит ли меня ИскИн?", "Will AI replace me?"],
+					["2003, серебряная медаль", "2003, silver medal"],
+					["2009, магистр математики", "2009, MSc in Mathematics"],
+					["2014, кандидат наук", "2014, PhD"],
+					["2016, ШАД", "2016, Yandex School of Data Analysis"],
+					["2015–2018, аналитик", "2015–2018, data scientist"],
+					["2016–2022, руководитель в образовании", "2016–2022, education lead"],
+					["доцент СПбГУ", "associate professor at SPbU"],
+					["2023–н.в., преподаватель и исследователь", "2023–present, educator and researcher"],
+					["Дональд Кнут, февраль 2026", "Donald Knuth, February 2026"],
+					["решил открытую задачу, над которой Кнут работал несколько недель.", "solved an open problem that Knuth had worked on for several weeks."],
+					["Решение проверили независимо и формализовали в Lean.", "The solution was independently verified and formalized in Lean."],
+					["Donald Knuth, “Claude’s Cycles”, 28 февраля 2026", "Donald Knuth, “Claude’s Cycles”, February 28, 2026"],
+					["Единичные расстояния", "Unit distances"],
+					["Насколько много пар точек на плоскости могут находиться", "How many pairs of points in the plane can be"],
+					["ровно на расстоянии 1", "exactly distance 1"],
+					["друг от друга?", "apart?"],
+					["GPT-5.4 Pro, апрель 2026:", "GPT-5.4 Pro, April 2026:"],
+					["нашёл неожиданный красивый контрпример к важной гипотезе Эрдёша.", "found a surprising and elegant counterexample to an important conjecture of Erdős."],
+					["Эрдёш поставил задачу.", "Erdős posed the problem."],
+					["ИИ сдвинул границу известного.", "AI pushed the boundary of what was known."],
+					["Как устроен контрпример", "How the counterexample works"],
+					["сообщение Джареда Лихтмана", "Jared Lichtman’s announcement"],
+					["Выделены пары точек, находящиеся на одинаковом расстоянии.", "Highlighted pairs of points are the same distance apart."],
+					["Двойное покрытие циклами", "Cycle double cover"],
+					["Можно ли в любом графе без мостов выбрать простые циклы так, чтобы", "Can every bridgeless graph be given a set of simple cycles such that"],
+					["каждое ребро вошло ровно в два цикла", "every edge belongs to exactly two cycles"],
+					["Гипотеза оставалась открытой с 1970-х.", "The conjecture had remained open since the 1970s."],
+					["10 июля 2026:", "July 10, 2026:"],
+					["опубликован препринт с полным доказательством.", "a preprint with a complete proof was published."],
+					["OpenAI: препринт «A Proof of the Cycle Double Cover Conjecture»", "OpenAI preprint: “A Proof of the Cycle Double Cover Conjecture”"],
+					["Шесть циклов двойного покрытия графа Петерсена", "Six cycles forming a double cover of the Petersen graph"],
+					["Каждое ребро графа Петерсена выделено ровно в двух из шести пятиугольных циклов.", "Every edge of the Petersen graph appears in exactly two of the six pentagonal cycles."],
+					["Граф Петерсена: шесть циклов, каждое ребро выделено дважды.", "The Petersen graph: six cycles, with every edge highlighted twice."],
+					["Проблема Якобиана", "The Jacobian conjecture"],
+					["Если определитель Якобиана полиномиального отображения", "If the Jacobian determinant of a polynomial map"],
+					["— ненулевая константа, обязательно ли", "is a nonzero constant, must"],
+					["обратимо?", "be invertible?"],
+					["Проблема была открыта с 1939 года.", "The problem had been open since 1939."],
+					["Claude Fable 5, 20 июля 2026:", "Claude Fable 5, July 20, 2026:"],
+					["найден явный контрпример уже при \\(n=3\\).", "an explicit counterexample was found already for \\(n=3\\)."],
+					["Исходное сообщение Левента Альпёге", "Levent Alpöge’s original announcement"],
+					["Подробное объяснение контрпримера", "A detailed explanation of the counterexample"],
+					["Для \\(n=2\\) вопрос всё ещё остаётся открытым.", "For \\(n=2\\), the question remains open."],
+					["Якобиан постоянен:", "The Jacobian is constant:"],
+					["Но отображение не инъективно:", "But the map is not injective:"],
+					["Гипотеза Диница — Гарга — Гёманса", "The Dinitz–Garg–Goemans conjecture"],
+					["Дробный поток может делить груз между маршрутами. Можно ли всегда превратить его в", "A fractional flow can split demand across routes. Can it always be made"],
+					["неделимый", "unsplittable"],
+					[", не повысив цену и перегрузив каждое ребро не более чем на максимальный спрос одного стока?", "without increasing the cost and overloading any edge by more than the largest demand of one sink?"],
+					["GPT-5.6 Pro и Дмитрий Рыбин, 22 июля 2026:", "GPT-5.6 Pro and Dmitry Rybin, July 22, 2026:"],
+					["построен небольшой явный контрпример.", "constructed a small explicit counterexample."],
+					["Дробный поток:", "Fractional flow:"],
+					["цена 58.", "cost 58."],
+					["Любой неделимый:", "Any unsplittable flow:"],
+					["при допустимой перегрузке ≤ 15 цена не меньше 60.", "with allowed overload ≤ 15, its cost is at least 60."],
+					["Объявление Дмитрия Рыбина", "Dmitry Rybin’s announcement"],
+					["Полный диалог с GPT-5.6 Pro", "Full conversation with GPT-5.6 Pro"],
+					["Сеть контрпримера к гипотезе Диница — Гарга — Гёманса", "Counterexample network for the Dinitz–Garg–Goemans conjecture"],
+					["Источник s, внутренние вершины u, v, w и три стока с требованиями 10, 15 и 15. Синим подписан дробный поток, красным цена рёбер.", "Source s, internal vertices u, v, w, and three sinks with demands 10, 15, and 15. Fractional flow is labeled in blue; edge cost in red."],
+					["спрос 10", "demand 10"],
+					["спрос 15", "demand 15"],
+					["Синий — дробный поток; красный — цена; золотой — спрос стока.", "Blue — fractional flow; red — cost; gold — sink demand."],
+					["Контрпример родился не с первой попытки", "The counterexample did not emerge on the first try"],
+					["Четыре длинных запуска GPT-5.6 Pro — каждый продолжал исследование предыдущего.", "Four long GPT-5.6 Pro runs — each continued the previous one’s investigation."],
+					["52 мин 52 с", "52 min 52 sec"],
+					["«Построй структурированный контрпример для общего непланарного случая»", "“Construct a structured counterexample for the general nonplanar case.”"],
+					["Корректный контрпример не найден.", "No valid counterexample found."],
+					["89 мин 12 с", "89 min 12 sec"],
+					["«Продолжай исследование и найди полный безусловный контрпример»", "“Continue the investigation and find a complete unconditional counterexample.”"],
+					["Полного контрпримера всё ещё нет.", "Still no complete counterexample."],
+					["93 мин 57 с", "93 min 57 sec"],
+					["«Продолжай поиск. Сначала выработай ясную стратегию»", "“Keep searching. First develop a clear strategy.”"],
+					["Точного сертификата разделения пока нет.", "No exact separation certificate yet."],
+					["88 мин 24 с", "88 min 24 sec"],
+					["«Хватит частичных результатов. Завершим полным безусловным контрпримером»", "“No more partial results. Let’s finish with a complete unconditional counterexample.”"],
+					["Полный конечный контрпример найден.", "A complete finite counterexample was found."],
+					["5 часов 24 минуты исследования.", "5 hours 24 minutes of investigation."],
+					["Человек удерживал цель, а модель не выдавала правдоподобную ошибку за результат.", "The human kept the goal in view, while the model did not pass off a plausible error as a result."],
+					["Посмотреть полный исследовательский диалог", "Read the full research conversation"],
+					["Гипотеза Круазе", "Crouzeix’s conjecture"],
+					["Для любой матрицы \\(A\\) и любого полинома \\(p\\) верна оценка с оптимальной константой 2?", "For every matrix \\(A\\) and every polynomial \\(p\\), does the bound hold with the optimal constant 2?"],
+					["Шаньму Цзинь, июль 2026:", "Shanmu Jin, July 2026:"],
+					["ключевой шаг доказательства возник в 16-часовом автономном запуске GPT-5.6 Sol.", "the key step of the proof emerged during a 16-hour autonomous GPT-5.6 Sol run."],
+					["Доказательство проверили", "The proof was verified by"],
+					["Алекс Таунсенд, Энн Гринбаум и сам Мишель Круазе.", "Alex Townsend, Anne Greenbaum, and Michel Crouzeix himself."],
+					["Через восемь дней", "Eight days later"],
+					["Lorist и Schwenninger опубликовали другое короткое доказательство — тоже с помощью ИИ.", "Lorist and Schwenninger published another short proof — also with AI assistance."],
+					["Препринт Цзиня", "Jin’s preprint"],
+					["проверка и история", "verification and story"],
+					["второе доказательство", "second proof"],
+					["Шаньму Цзинь (Shanmu Jin)", "Shanmu Jin"],
+					["ординатор-нейрохирург и математик-самоучка", "neurosurgery resident and self-taught mathematician"],
+					["«Мы начали читать препринт со скепсисом, но через несколько часов поняли: доказательство настоящее».", "“We started reading the preprint skeptically, but within hours we realized the proof was real.”"],
+					["Продвижение к гипотезе Римана", "Progress toward the Riemann hypothesis"],
+					["Гипотеза Римана:", "The Riemann hypothesis:"],
+					["все нетривиальные нули дзета-функции лежат на критической прямой \\(\\operatorname{Re}s=\\tfrac12\\).", "all nontrivial zeros of the zeta function lie on the critical line \\(\\operatorname{Re}s=\\tfrac12\\)."],
+					["41,6%", "41.6%"],
+					["67,2%", "67.2%"],
+					["Claude, 10 августа 2026:", "Claude, August 10, 2026:"],
+					["безусловно доказал, что более двух третей простых нулей лежат на критической прямой.", "proved unconditionally that more than two-thirds of the simple zeros lie on the critical line."],
+					["Формальная проверка:", "Formal verification:"],
+					["Claude подготовил доказательство в Lean; его также изучили математики Anthropic и независимые эксперты.", "Claude produced a Lean proof; Anthropic mathematicians and independent experts also reviewed it."],
+					["Рассказ Anthropic и материалы исследования", "Anthropic’s account and research materials"],
+					["Полный текст доказательства", "Full proof"],
+					["«Более двух третей нулей дзета-функции Римана лежат на критической прямой».", "“More than two-thirds of the zeros of the Riemann zeta function are on the critical line.”"],
+					["Зачем вообще учить LLM математике?", "Why teach mathematics to LLMs at all?"],
+					["Пять самых дорогих независимых разработчиков языковых моделей · публичные оценки на 1 сентября 2026 года", "The five most highly valued independent language-model developers · public valuations as of September 1, 2026"],
+					["$965 млрд", "$965B"],
+					["Дарио Амодеи · CEO", "Dario Amodei · CEO"],
+					["$852 млрд", "$852B"],
+					["Сэм Альтман · CEO", "Sam Altman · CEO"],
+					["≈ $230 млрд", "≈ $230B"],
+					["Илон Маск · основатель", "Elon Musk · founder"],
+					["≈ $74 млрд", "≈ $74B"],
+					["Лян Вэньфэн · основатель", "Liang Wenfeng · founder"],
+					["открытые веса", "open weights"],
+					["≈ $23 млрд", "≈ $23B"],
+					["Артур Менш · CEO", "Arthur Mensch · CEO"],
+					["Математические способности — один из главных фронтов конкуренции между компаниями, которые вместе оцениваются", "Mathematical ability is one of the main competitive frontiers among companies collectively valued at"],
+					["более чем в $2 трлн", "more than $2T"],
+					["Оценки частных компаний приблизительны. xAI — последняя самостоятельная оценка до объединения со SpaceX; DeepSeek и Mistral AI — оценки обсуждаемых сделок.", "Private-company valuations are approximate. xAI uses its last standalone valuation before combining with SpaceX; DeepSeek and Mistral AI use valuations from reported deal talks."],
+					["Vibemathed: карта математических результатов", "Vibemathed: mapping mathematical results"],
+					["Задачи можно сравнивать по значимости и возрасту — но результат имеет смысл только вместе со статусом проверки.", "Problems can be compared by significance and age — but a result only means something together with its verification status."],
+					["Уровень проверки", "Verification level"],
+					["Формально проверено в Lean", "Formally verified in Lean"],
+					["Проверено независимыми экспертами", "Verified by independent experts"],
+					["Подтверждено площадкой", "Confirmed by the platform"],
+					["Утверждение проверено в Lean, доказательство не аудировано", "Statement checked in Lean; proof not audited"],
+					["Ещё не проверено", "Not yet reviewed"],
+					["Результат оспаривается", "Result contested"],
+					["Открытия ускоряются.", "Discoveries are accelerating."],
+					["Новое узкое место — доверие к результату.", "The new bottleneck is trust in the result."],
+					["Лейденская декларация", "The Leiden Declaration"],
+					["2 июня 2026 · принципы ответственного применения ИИ в математике, одобренные Международным математическим союзом", "June 2, 2026 · principles for the responsible use of AI in mathematics, endorsed by the International Mathematical Union"],
+					["Доказательство — основа математики:", "Proof is the foundation of mathematics:"],
+					["оно даёт не только уверенность, но и понимание.", "it provides not only confidence, but understanding."],
+					["У результата есть авторы:", "Results have authors:"],
+					["вместе с признанием они принимают ответственность за корректность.", "with recognition comes responsibility for correctness."],
+					["Аргументы прозрачны:", "Arguments are transparent:"],
+					["доказательство должно допускать независимую проверку.", "a proof must allow independent verification."],
+					["Результаты оценивает сообщество:", "Results are judged by the community:"],
+					["по глубине, сложности и значимости.", "by their depth, difficulty, and significance."],
+					["Ценно понимание, а не только ответ:", "Understanding matters, not just the answer:"],
+					["математика развивает ясность и профессиональное суждение.", "mathematics develops clarity and professional judgment."],
+					["ИИ может ускорять исследование —", "AI can accelerate research —"],
+					["но доверие остаётся человеческой и общественной практикой.", "but trust remains a human and social practice."],
+					["Прочитать декларацию", "Read the declaration"],
+					["У каждого есть умный ИИ-ассистент — и он всегда готов помочь!", "Everyone has a smart AI assistant — and it is always ready to help!"],
+					["✨ Помогает выстроить ход рассуждений", "✨ Helps structure your reasoning"],
+					["🔍 Быстро находит самую важную информацию", "🔍 Quickly finds the most important information"],
+					["💡 Предлагает идеи и помогает находить новые решения", "💡 Suggests ideas and helps discover new solutions"],
+					["Мы можем сосредоточиться на главном: критическом мышлении, принятии решений и проверке результатов", "We can focus on what matters most: critical thinking, decision-making, and verifying results"],
+					["ИТ-индустрия меняется так же!", "The tech industry is changing too!"],
+					["🤖 ИИ-модели уже пишут код лучше многих junior- и middle-разработчиков", "🤖 AI models already write code better than many junior and mid-level developers"],
+					["⚡ Они делают это быстрее, дешевле и на любом языке программирования", "⚡ They do it faster, more cheaply, and in any programming language"],
+					["📈 Нужно учиться и развиваться до уровня senior!", "📈 We need to learn and grow to senior level!"],
+					["Ключевые навыки в эпоху ИИ", "Key skills in the age of AI"],
+					["🗣️ Умение общаться с ИИ-моделями становится критически важным", "🗣️ Communicating effectively with AI models is becoming essential"],
+					["👥 Ещё нужно развивать soft skills для взаимодействия с людьми", "👥 We also need soft skills for working with people"],
+					["Сосредоточьтесь на том, что ИИ не заменит: лидерстве, архитектурных решениях и взаимодействии с людьми", "Focus on what AI cannot replace: leadership, architectural decisions, and working with people"],
+					["Так зачем же учить математику?", "So why learn mathematics?"],
+					["Это", "It is"],
+					["красиво", "beautiful"],
+					["Ум в порядок приводит", "It trains your mind"],
+					["Можно поступить в вуз или магистратуру", "It can get you into university or graduate school"],
+					["Можно пройти в Яндекс, JetBrains, OpenAI", "It can get you into Yandex, JetBrains, or OpenAI"],
+					["Профит!", "Profit!"],
+					["Англоязычный канал", "English-language channel"],
+					["о математике, ИИ и образовании", "about mathematics, AI, and education"],
+				]);
+
+				const ATTRIBUTE_TRANSLATIONS = new Map([
+					["Неверный ответ GPT-4", "Incorrect answer from GPT-4"],
+					["Неверный ответ GPT-4o", "Incorrect answer from GPT-4o"],
+					["Верный ответ GPT-o1", "Correct answer from GPT-o1"],
+					["Результаты человеческих команд и моделей на задачах IMC 2025", "Results of human teams and models on IMC 2025 problems"],
+					["Результаты o3 в задачах по программированию", "o3 results on programming tasks"],
+					["Борис Чёрный", "Boris Cherny"],
+					["Новосибирск", "Novosibirsk"],
+					["ФМШ", "SESC NSU"],
+					["ММФ НГУ", "Department of Mathematics and Mechanics, NSU"],
+					["Институт вычислительных технологий", "Institute of Computational Technologies"],
+					["Школа анализа данных", "School of Data Analysis"],
+					["Яндекс", "Yandex"],
+					["СПбГУ", "Saint Petersburg State University"],
+					["ИИ поможет оплачивать счета", "AI will help pay the bills"],
+					["Дональд Кнут и Claude обсуждают гамильтоновы циклы", "Donald Knuth and Claude discuss Hamiltonian cycles"],
+					["Фрагмент заметки Дональда Кнута Claude’s Cycles", "Excerpt from Donald Knuth’s note Claude’s Cycles"],
+					["Новая иллюстрация конфигураций точек с выделенными рёбрами одинаковой длины", "Illustration of point configurations with equal-length edges highlighted"],
+					["Полиномиальное отображение, опровергающее проблему Якобиана", "Polynomial map disproving the Jacobian conjecture"],
+					["Неравенство гипотезы Круазе", "Crouzeix conjecture inequality"],
+					["Шаньму Цзинь", "Shanmu Jin"],
+					["Нижняя оценка выросла с 41,6 до 67,2 процента", "The lower bound increased from 41.6 to 67.2 percent"],
+					["Первая страница статьи Claude о нулях дзета-функции Римана", "First page of Claude’s paper on zeros of the Riemann zeta function"],
+					["Дарио Амодеи, CEO Anthropic", "Dario Amodei, CEO of Anthropic"],
+					["Сэм Альтман, CEO OpenAI", "Sam Altman, CEO of OpenAI"],
+					["Илон Маск, основатель xAI", "Elon Musk, founder of xAI"],
+					["Лян Вэньфэн, основатель DeepSeek", "Liang Wenfeng, founder of DeepSeek"],
+					["Артур Менш, CEO Mistral AI", "Arthur Mensch, CEO of Mistral AI"],
+					["График Vibemathed: значимость задачи и число лет до решения", "Vibemathed chart: problem significance and years until resolution"],
+					["График Vibemathed: значимость математических задач и число лет до решения", "Vibemathed chart: significance of mathematical problems and years until resolution"],
+					["QR-код англоязычного Telegram-канала TechneNotes", "QR code for the English-language Telegram channel TechneNotes"],
+				]);
+
+				const language = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'ru';
+				document.documentElement.lang = language;
+				window.presentationLanguage = language;
+
+				if (language === 'en') {
+					document.title = "Why learn mathematics if AI already knows it better than we do?";
+					document.querySelector('meta[name="description"]')?.setAttribute('content', 'SESC NSU, Novosibirsk, 2026');
+					document.querySelector('meta[name="author"]')?.setAttribute('content', 'Aleksandr Avdiushenko');
+					document.querySelector('meta[name="keywords"]')?.setAttribute('content', 'education, AI, science');
+
+					const walker = document.createTreeWalker(document.querySelector('.slides'), NodeFilter.SHOW_TEXT, {
+						acceptNode(node) {
+							if (!node.parentElement || node.parentElement.closest('aside.notes, script, style')) {
+								return NodeFilter.FILTER_REJECT;
+							}
+							return TEXT_TRANSLATIONS.has(node.nodeValue.trim())
+								? NodeFilter.FILTER_ACCEPT
+								: NodeFilter.FILTER_REJECT;
+						},
+					});
+					const translatedNodes = [];
+					while (walker.nextNode()) translatedNodes.push(walker.currentNode);
+					translatedNodes.forEach((node) => {
+						const source = node.nodeValue;
+						const sourceTrimmed = source.trim();
+						node.nodeValue = source.replace(sourceTrimmed, TEXT_TRANSLATIONS.get(sourceTrimmed));
+					});
+
+					document.querySelectorAll('.slides [alt], .slides [aria-label], .language-switcher[aria-label]').forEach((element) => {
+						['alt', 'aria-label'].forEach((attribute) => {
+							const source = element.getAttribute(attribute);
+							if (ATTRIBUTE_TRANSLATIONS.has(source)) element.setAttribute(attribute, ATTRIBUTE_TRANSLATIONS.get(source));
+						});
+					});
+					document.querySelector('.language-switcher')?.setAttribute('aria-label', 'Presentation language');
+				}
+
+				document.querySelectorAll('.language-switcher button').forEach((button) => {
+					const isCurrent = button.dataset.language === language;
+					button.setAttribute('aria-pressed', String(isCurrent));
+					button.addEventListener('click', (event) => {
+						event.stopPropagation();
+						if (button.dataset.language === language) return;
+						const url = new URL(window.location.href);
+						url.searchParams.set('lang', button.dataset.language);
+						window.location.assign(url.href);
+					});
+				});
+			})();
+		</script>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '100%',
+				height: '100%',
+				// Factor of the display size that should remain empty around the content
+				margin: 0.08,
+
+				slideNumber: true,
+				showSlideNumber: 'speaker',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				// showNotes: 'separate-page',
+
+				// Activate the scroll view
+				// view: 'scroll',
+				// Force the scrollbar to remain visible
+				// scrollProgress: true,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 2.0,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3]
+			});
+
+			Reveal.addEventListener('fragmentshown', function (event) {
+				if (lettersAnimate) {
+					[...event.fragment.getElementsByClassName('typesetting')].forEach(element => {
+						playAnimation(element);
+					});
+				}
+			});
+
+			function checkAnswer(element, correctness) {
+				const answers = element.closest('.quiz').querySelectorAll('.answer');
+				answers.forEach(answer => {
+				// answer.style.pointerEvents = 'none';  // Disable further clicks
+				if (answer === element) {
+				answer.classList.add(correctness);
+			} else {
+				answer.classList.add('shadow');
+			}
+			});
+			}
+
+        </script>
+		<script type="module">
+			import { initBalls } from './imo_preparation/src/slides/balls.js';
+
+			let stopFinalMathBalls = null;
+			let finalMathResizeTimer = null;
+			const QR_RAINBOW = ['#ff0000', '#ff7f00', '#f0c800', '#00b64f', '#0080ff', '#4b0082', '#9400d3'];
+			const QR_QUIET_ZONE = 4;
+			// Та же матрица версии 3 / коррекции H, что и в рабочем QR из imo-2026.
+			const QR_MATRIX = [
+				'11111110110111010101001111111',
+				'10000010100011110110101000001',
+				'10111010011100001100101011101',
+				'10111010100001000011001011101',
+				'10111010110111000010001011101',
+				'10000010110010001101101000001',
+				'11111110101010101010101111111',
+				'00000000000011010111100000000',
+				'00010010010000111111000111011',
+				'11001000000001000100111000001',
+				'00110111000010110011101001110',
+				'01111001101110010001011110110',
+				'10101010010011001100101100000',
+				'00011000110010010011010101001',
+				'01010011110011000010011000011',
+				'01011100000100100101100100001',
+				'11011010111000010101010000011',
+				'00100100001111001010010100111',
+				'10110110110101100000010011111',
+				'00011101000101110001100111011',
+				'10110111101111100101111110100',
+				'00000000101011001110100010011',
+				'11111110001100010000101011100',
+				'10000010011010110110100010100',
+				'10111010001110100000111111011',
+				'10111010110011111111111010001',
+				'10111010011111100001100011101',
+				'10000010010110101011101100010',
+				'11111110000100110110101011010',
+			];
+
+			function initQrBalls(canvas) {
+				let stopped = false;
+				let cleanup = null;
+
+				function boot() {
+					if (stopped) return;
+					if (!canvas.clientWidth || !canvas.clientHeight) {
+						requestAnimationFrame(boot);
+						return;
+					}
+					cleanup = startQrBalls(canvas);
+				}
+
+				boot();
+				return () => {
+					stopped = true;
+					cleanup?.();
+				};
+			}
+
+			function startQrBalls(canvas) {
+				const width = canvas.clientWidth;
+				const height = canvas.clientHeight;
+				const scale = 2;
+				const ctx = canvas.getContext('2d');
+				canvas.width = width * scale;
+				canvas.height = height * scale;
+				ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+				const totalModules = QR_MATRIX.length + 2 * QR_QUIET_ZONE;
+				const moduleSize = Math.floor(Math.min(width, height) / totalModules);
+				const qrSize = totalModules * moduleSize;
+				const x0 = Math.floor((width - qrSize) / 2);
+				const y0 = Math.floor((height - qrSize) / 2);
+				const anchors = [];
+				for (let y = 0; y < QR_MATRIX.length; y++) {
+					for (let x = 0; x < QR_MATRIX.length; x++) {
+						if (QR_MATRIX[y][x] !== '1') continue;
+						const anchorX = x0 + (x + QR_QUIET_ZONE + 0.5) * moduleSize;
+						const anchorY = y0 + (y + QR_QUIET_ZONE + 0.5) * moduleSize;
+						anchors.push({
+							ox: anchorX,
+							oy: anchorY,
+							active: false,
+							fragments: QR_RAINBOW.map(() => ({ x: anchorX, y: anchorY, vx: 0, vy: 0 })),
+						});
+					}
+				}
+
+				const mouse = { x: -9999, y: -9999, active: false };
+				function onMove(event) {
+					const bounds = canvas.getBoundingClientRect();
+					if (!bounds.width || !bounds.height) return;
+					mouse.x = ((event.clientX - bounds.left) / bounds.width) * width;
+					mouse.y = ((event.clientY - bounds.top) / bounds.height) * height;
+					mouse.active = event.clientX >= bounds.left && event.clientX <= bounds.right
+						&& event.clientY >= bounds.top && event.clientY <= bounds.bottom;
+				}
+				function onLeave() {
+					mouse.active = false;
+					mouse.x = mouse.y = -9999;
+				}
+				window.addEventListener('pointermove', onMove);
+				window.addEventListener('pointerdown', onMove);
+				window.addEventListener('pointerleave', onLeave);
+
+				const radius = moduleSize / 2;
+				const repelRadius = 42;
+				const repelRadiusSquared = repelRadius * repelRadius;
+				let frameId = 0;
+				let last = performance.now();
+
+				function split(anchor) {
+					anchor.active = true;
+					const base = Math.atan2(anchor.oy - mouse.y, anchor.ox - mouse.x);
+					anchor.fragments.forEach((fragment) => {
+						const angle = base + (Math.random() - 0.5) * Math.PI;
+						const speed = 250 + Math.random() * 390;
+						fragment.vx = Math.cos(angle) * speed;
+						fragment.vy = Math.sin(angle) * speed;
+					});
+				}
+
+				function drawAnchor(anchor, dt) {
+					if (!anchor.active && mouse.active) {
+						const dx = anchor.ox - mouse.x;
+						const dy = anchor.oy - mouse.y;
+						if (dx * dx + dy * dy < repelRadiusSquared) split(anchor);
+					}
+					if (!anchor.active) {
+						ctx.beginPath();
+						ctx.fillStyle = '#0b1020';
+						ctx.arc(anchor.ox, anchor.oy, radius, 0, Math.PI * 2);
+						ctx.fill();
+						return;
+					}
+
+					let allAtRest = true;
+					anchor.fragments.forEach((fragment, index) => {
+						if (mouse.active) {
+							const dx = fragment.x - mouse.x;
+							const dy = fragment.y - mouse.y;
+							const distanceSquared = dx * dx + dy * dy;
+							if (distanceSquared < repelRadiusSquared && distanceSquared > 0.001) {
+								const distance = Math.sqrt(distanceSquared);
+								const force = (3600 * (1 - distance / repelRadius)) / distance;
+								fragment.vx += dx * force * dt;
+								fragment.vy += dy * force * dt;
+							}
+						}
+						fragment.vx = (fragment.vx + (anchor.ox - fragment.x) * 0.05) * 0.86;
+						fragment.vy = (fragment.vy + (anchor.oy - fragment.y) * 0.05) * 0.86;
+						fragment.x += fragment.vx * dt * 8;
+						fragment.y += fragment.vy * dt * 8;
+						const dxHome = fragment.x - anchor.ox;
+						const dyHome = fragment.y - anchor.oy;
+						if (dxHome * dxHome + dyHome * dyHome > 0.36
+							|| fragment.vx * fragment.vx + fragment.vy * fragment.vy > 1.44) allAtRest = false;
+						ctx.beginPath();
+						ctx.fillStyle = QR_RAINBOW[index];
+						ctx.arc(fragment.x, fragment.y, radius, 0, Math.PI * 2);
+						ctx.fill();
+					});
+					if (allAtRest) {
+						anchor.active = false;
+						anchor.fragments.forEach((fragment) => {
+							fragment.x = anchor.ox;
+							fragment.y = anchor.oy;
+							fragment.vx = fragment.vy = 0;
+						});
+					}
+				}
+
+				function frame(now) {
+					const dt = Math.min(0.033, (now - last) / 1000);
+					last = now;
+					ctx.fillStyle = '#ffffff';
+					ctx.fillRect(0, 0, width, height);
+					anchors.forEach((anchor) => drawAnchor(anchor, dt));
+					frameId = requestAnimationFrame(frame);
+				}
+
+				canvas.classList.add('ready');
+				frameId = requestAnimationFrame(frame);
+				return () => {
+					cancelAnimationFrame(frameId);
+					canvas.classList.remove('ready');
+					window.removeEventListener('pointermove', onMove);
+					window.removeEventListener('pointerdown', onMove);
+					window.removeEventListener('pointerleave', onLeave);
+				};
+			}
+
+			function syncFinalMathBalls(slide = Reveal.getCurrentSlide()) {
+				stopFinalMathBalls?.();
+				stopFinalMathBalls = null;
+				if (!slide?.classList.contains('math-final-slide')) return;
+				const canvas = slide.querySelector('.math-final-balls');
+				const box = slide.querySelector('.math-final-head');
+				stopFinalMathBalls = initBalls(canvas, {
+					text: window.presentationLanguage === 'en'
+						? 'So why learn mathematics?'
+						: 'Так зачем же учить математику?',
+					box,
+				});
+				const stopQrBalls = initQrBalls(
+					slide.querySelector('.math-final-qr-particles'),
+				);
+				const stopTitleBalls = stopFinalMathBalls;
+				stopFinalMathBalls = () => {
+					stopTitleBalls();
+					stopQrBalls();
+				};
+			}
+
+			Reveal.addEventListener('ready', (event) => syncFinalMathBalls(event.currentSlide));
+			Reveal.addEventListener('slidechanged', (event) => syncFinalMathBalls(event.currentSlide));
+			window.addEventListener('resize', () => {
+				clearTimeout(finalMathResizeTimer);
+				finalMathResizeTimer = setTimeout(() => syncFinalMathBalls(), 120);
+			});
+			requestAnimationFrame(() => syncFinalMathBalls());
+		</script>
+	</body>
+</html>
