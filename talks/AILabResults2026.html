@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<meta name="description" content="AI Lab: Testing Agentic Development on Real Product Tasks — Projects Overview + Insights">
+		<meta name="author" content="Alex Avdiushenko and Pavel Egorov" />
+		<meta name="keywords" content="AI Lab, JetBrains, Agentic Development, Junie, LLM, Education">
+
+		<title>AI Lab: Projects Overview + Insights | JetBrains Edu Gathering 2026</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css">
+		<link rel="stylesheet" href="./css/style.css">
+
+		<link href="../css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+
+		<!-- Chart.js CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="../plugin/reveald3.js"></script>
+
+		<style>
+			:root {
+				--jb-orange: #ea580c;
+				--jb-pink: #e11d48;
+				--jb-purple: #7c3aed;
+				--jb-blue: #0284c7;
+				--jb-green: #059669;
+				--jb-bg: #ffffff;
+				--jb-card-bg: #ffffff;
+				--jb-border: #e2e8f0;
+				--jb-text: #1e293b;
+				--jb-text-muted: #64748b;
+			}
+
+			.reveal {
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+				color: var(--jb-text);
+				background-color: var(--jb-bg);
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				font-weight: 700;
+				letter-spacing: -0.02em;
+				text-transform: none;
+				color: #0f172a;
+			}
+
+			.reveal h2 {
+				font-size: 2em;
+				margin-bottom: 0.3em;
+			}
+
+			.reveal h3 {
+				font-size: 1.4em;
+				margin-bottom: 0.35em;
+			}
+
+			.time-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 5px;
+				font-size: 0.45em;
+				font-weight: 500;
+				padding: 3px 8px;
+				border-radius: 6px;
+				background: #f1f5f9;
+				border: 1px solid #e2e8f0;
+				color: #64748b;
+				margin-left: 10px;
+				vertical-align: middle;
+			}
+
+			.card-grid-2 {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 18px;
+				margin-top: 18px;
+				text-align: left;
+			}
+
+			.card-grid-3 {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 16px;
+				margin-top: 16px;
+				text-align: left;
+			}
+
+			.card-grid-4 {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 14px;
+				margin-top: 16px;
+				text-align: left;
+			}
+
+			.jb-card {
+				background: #ffffff;
+				border: 1px solid var(--jb-border);
+				border-radius: 10px;
+				padding: 16px 18px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.jb-card:hover {
+				border-color: #cbd5e1;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+			}
+
+			.jb-card-accent {
+				border-left: 4px solid var(--jb-orange);
+			}
+
+			.jb-card-blue {
+				border-left: 4px solid var(--jb-blue);
+			}
+
+			.jb-card-purple {
+				border-left: 4px solid var(--jb-purple);
+			}
+
+			.jb-card-green {
+				border-left: 4px solid var(--jb-green);
+			}
+
+			.stat-card {
+				background: #f8fafc;
+				border: 1px solid var(--jb-border);
+				border-radius: 12px;
+				padding: 20px 14px;
+				text-align: center;
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+			}
+
+			.stat-number {
+				font-size: 2.7em;
+				font-weight: 800;
+				line-height: 1.1;
+				margin-bottom: 4px;
+			}
+
+			.stat-label {
+				font-size: 0.65em;
+				color: var(--jb-text-muted);
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				font-weight: 600;
+			}
+
+			.stat-sub {
+				font-size: 0.52em;
+				color: #94a3b8;
+				margin-top: 4px;
+			}
+
+			.tag {
+				display: inline-block;
+				font-size: 0.54em;
+				padding: 2px 7px;
+				border-radius: 4px;
+				background: #f1f5f9;
+				border: 1px solid #e2e8f0;
+				color: #475569;
+				margin-right: 4px;
+				margin-bottom: 4px;
+				font-weight: 500;
+			}
+
+			.quote-callout {
+				background: #fff7ed;
+				border-left: 4px solid var(--jb-orange);
+				border-radius: 0 8px 8px 0;
+				padding: 12px 18px;
+				text-align: left;
+				margin: 16px 0;
+				font-size: 0.78em;
+				color: #1e293b;
+			}
+
+			.comparison-table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 0.65em;
+				margin-top: 14px;
+			}
+
+			.comparison-table th {
+				background: #f1f5f9;
+				color: #0f172a;
+				padding: 10px 12px;
+				border: 1px solid #cbd5e1;
+				text-align: left;
+				font-weight: 700;
+			}
+
+			.comparison-table td {
+				padding: 10px 12px;
+				border: 1px solid #e2e8f0;
+				text-align: left;
+				vertical-align: top;
+				background: #ffffff;
+				color: #334155;
+			}
+
+			.highlight-orange { color: #ea580c; font-weight: 700; }
+			.highlight-cyan { color: #0284c7; font-weight: 700; }
+			.highlight-purple { color: #7c3aed; font-weight: 700; }
+			.highlight-green { color: #059669; font-weight: 700; }
+
+			.chart-container-box {
+				position: relative;
+				width: 100%;
+				height: 360px;
+				margin: 0 auto;
+			}
+
+			.notes-speaker {
+				font-weight: bold;
+				color: #ea580c;
+			}
+		</style>
+	</head>
+	<body onload="totalWrapper();">
+		<div class="reveal">
+			<div class="slides">
+
+				<!-- SLIDE 1: Title Slide -->
+				<section id="title">
+					<br>
+					<h3>Testing Agentic Development<br>on Real Product Tasks</h3>
+					<p style="font-size: 32px"><a href="https://avalur.github.io/talks/AILabResults2026.html">avalur.github.io/talks/AILabResults2026.html</a></p>
+					<div class="column">
+						<div class="fig-container no-margin-top" data-file="images/gears.html"
+						style="padding-left: 10%;width: 80%;"></div>
+					</div>
+					<div class="column">
+						<br/><br/><i>by</i><br/>
+						<p style="font-size: 32px">Alex Avdiushenko and Pavel Egorov</p>
+						<a href="mailto:aleksandr.avdiushenko@jetbrains.com"
+						style="font-size: 32px">aleksandr.avdiushenko@jetbrains.com</a>
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[Sasha & Pasha | 00:00 - 01:30]</span><br>
+						<b>Sasha:</b> Welcome everyone to the AI Lab session at the Edu Gathering!
+						Today, Pasha and I will present what we accomplished in the AI Lab over this intensive period.
+						<br><br>
+						<b>Pasha:</b> We have a tight 30-minute overview followed by three crucial strategic discussions hosted by Ira Roeva:
+						how to evolve our curricula, how to prepare freshmen for agent-assisted engineering, and where to take AI Lab next year.
+						Let's dive right in!
+					</aside>
+				</section>
+
+				<!-- SLIDE 2: Core Question -->
+				<section>
+					<div style="text-align: left;">
+						<h3 style="font-size: 1.3em; line-height: 1.35; margin-bottom: 12px;">
+							Can student engineers with agentic tools deliver<br>
+							<span style="color: var(--jb-orange);">mergeable production code</span> into flagship JetBrains products?
+						</h3>
+					</div>
+
+					<div class="card-grid-3" style="margin-top: 28px;">
+						<div class="jb-card jb-card-accent">
+							<h4 style="font-size: 0.78em; color: #0f172a; margin-bottom: 8px;">
+								<i class="fa-solid fa-code" style="color: var(--jb-orange);"></i> Codebase Scale
+							</h4>
+							<p style="font-size: 0.6em; color: #334155; margin: 0; line-height: 1.5;">
+								Multi-million-line monorepos & legacy ASTs
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-blue">
+							<h4 style="font-size: 0.78em; color: #0f172a; margin-bottom: 8px;">
+								<i class="fa-solid fa-cogs" style="color: var(--jb-blue);"></i> Heavy Builds
+							</h4>
+							<p style="font-size: 0.6em; color: #334155; margin: 0; line-height: 1.5;">
+								Real Gradle & compiler build pipelines
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-purple">
+							<h4 style="font-size: 0.78em; color: #0f172a; margin-bottom: 8px;">
+								<i class="fa-solid fa-check-circle" style="color: var(--jb-purple);"></i> Review Bar
+							</h4>
+							<p style="font-size: 0.6em; color: #334155; margin: 0; line-height: 1.5;">
+								Strict architectural invariants & senior review
+							</p>
+						</div>
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[01:30 - 03:00]</span><br>
+						The core question: Can student engineers with agentic tools deliver mergeable production code into flagship JetBrains products?
+						Real production is fundamentally different from toy benchmarks: millions of lines of code, heavy Gradle builds, strict architectural reviews, and mandatory CI regression gates.
+						Over the summer, we tested this hypothesis across 8 teams and 14 student projects.
+					</aside>
+				</section>
+
+				<!-- SLIDE 3: Setup & Structure -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							AI Lab Setup
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							Structured experimentation across 14 students from NUP and CUB
+						</p>
+					</div>
+
+					<div class="card-grid-2">
+						<div class="jb-card jb-card-blue">
+							<h4 style="font-size: 0.8em; color: var(--jb-blue); margin-bottom: 6px;">
+								<i class="fa-solid fa-code-branch"></i> Product Track (major)
+							</h4>
+							<p style="font-size: 0.62em; color: #334155; margin: 0 0 6px 0;">
+								Embedded in GoLand, RustRover, WebStorm, TeamCity, Junie, Qodana Cloud
+							</p>
+							<div>
+								<span class="tag">Real Backlogs</span>
+								<span class="tag">Senior Mentors</span>
+								<span class="tag">Production PRs</span>
+							</div>
+						</div>
+
+						<div class="jb-card jb-card-purple">
+							<h4 style="font-size: 0.8em; color: var(--jb-purple); margin-bottom: 6px;">
+								<i class="fa-solid fa-microchip"></i> Benchmark Track (minor)
+							</h4>
+							<p style="font-size: 0.62em; color: #334155; margin: 0 0 6px 0;">
+								Internal reasoning benchmark based on real JetBrains issues to evaluate agents
+							</p>
+							<div>
+								<span class="tag">Reproducible Tasks</span>
+								<span class="tag">Agent Evaluation</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-grid-3 fragment" style="margin-top: 14px;">
+						<div class="jb-card" style="padding: 14px 14px;">
+							<strong style="color: var(--jb-orange); font-size: 0.58em; display: block; white-space: nowrap; letter-spacing: -0.01em;">Stage 1: Warmup & Tooling</strong>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin: 4px 0 0 0; line-height: 1.45;">
+								Reproducer scripts, CLI agent onboarding, environment setup.
+							</p>
+						</div>
+						<div class="jb-card" style="padding: 14px 14px;">
+							<strong style="color: var(--jb-orange); font-size: 0.58em; display: block; white-space: nowrap; letter-spacing: -0.01em;">Stage 2: Workflow Scaling</strong>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin: 4px 0 0 0; line-height: 1.45;">
+								Subagent delegation, context compaction, TDD iteration loops.
+							</p>
+						</div>
+						<div class="jb-card" style="padding: 14px 14px;">
+							<strong style="color: var(--jb-orange); font-size: 0.58em; display: block; white-space: nowrap; letter-spacing: -0.01em;">Stage 3: Deep PRs & Evals</strong>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin: 4px 0 0 0; line-height: 1.45;">
+								Complex features, retrospections, code reviews & merges.
+							</p>
+						</div>
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[03:00 - 05:00]</span><br>
+						28 students across 8 teams: 7 in product teams and 1 on the reasoning benchmark.
+						Phased approach: Stage 1 setup and reproducer tests, Stage 2 scaling workflows and context pruning, Stage 3 shipping major PRs.
+					</aside>
+				</section>
+
+				<!-- SLIDE 4: Participating Teams & Mentors -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Products & Teams Examples
+						</h3>
+					</div>
+
+					<div class="card-grid-3" style="margin-top: 14px;">
+						<div class="jb-card jb-card-blue">
+							<h5 style="color: var(--jb-blue); font-size: 0.72em; margin: 0 0 4px 0;">WebStorm / JS-TS</h5>
+							<p style="font-size: 0.6em; font-weight: 700; margin: 0 0 2px 0;">MDX Language Support</p>
+							<p style="font-size: 0.52em; color: #475569; margin: 0 0 4px 0;">A. Ivanov, A. Kogun, I. Mikhailov</p>
+							<p style="font-size: 0.5em; color: var(--jb-text-muted); margin: 0;"><em>Mentors:</em> A. Vorobev, V. Minaev</p>
+							<div style="margin-top: 6px;"><span class="tag">WebStorm</span><span class="tag">MDX + JSX</span></div>
+						</div>
+
+						<div class="jb-card jb-card-accent">
+							<h5 style="color: var(--jb-orange); font-size: 0.72em; margin: 0 0 4px 0;">Air ADE / AI Eng</h5>
+							<p style="font-size: 0.6em; font-weight: 700; margin: 0 0 2px 0;">AIAU-Bench (Automations)</p>
+							<p style="font-size: 0.52em; color: #475569; margin: 0 0 4px 0;">N. Magimedeminov, S. Suglobov</p>
+							<p style="font-size: 0.5em; color: var(--jb-text-muted); margin: 0;"><em>Mentors:</em> D. Domanskii, I. Dolgov</p>
+							<div style="margin-top: 6px;"><span class="tag">Air ADE</span><span class="tag">Cost Benchmark</span></div>
+						</div>
+
+						<div class="jb-card jb-card-blue">
+							<h5 style="color: var(--jb-blue); font-size: 0.72em; margin: 0 0 4px 0;"><img src="images/TeamCityLogo.png" style="height: 14px; vertical-align: middle; margin-right: 4px;" alt="TeamCity">Functional Automation</h5>
+							<p style="font-size: 0.6em; font-weight: 700; margin: 0 0 2px 0;">Test Launcher & UI Migration</p>
+							<p style="font-size: 0.52em; color: #475569; margin: 0 0 4px 0;">Aleksei Gurianov</p>
+							<p style="font-size: 0.5em; color: var(--jb-text-muted); margin: 0;"><em>Mentors:</em> L. Zagnetin, A. Grigorash</p>
+							<div style="margin-top: 6px;"><span class="tag">TeamCity</span><span class="tag">164 UI Friction Pts</span></div>
+						</div>
+
+						<div class="jb-card jb-card-accent">
+							<h5 style="color: var(--jb-orange); font-size: 0.72em; margin: 0 0 4px 0;">YouTrack Frontend Labs</h5>
+							<p style="font-size: 0.6em; font-weight: 700; margin: 0 0 2px 0;">Whiteboards Real-Time Canvas</p>
+							<p style="font-size: 0.52em; color: #475569; margin: 0 0 4px 0;">Mikhail Fadin</p>
+							<p style="font-size: 0.5em; color: var(--jb-text-muted); margin: 0;"><em>Mentor:</em> Andrey Volfman</p>
+							<div style="margin-top: 6px;"><span class="tag">YouTrack</span><span class="tag">Collab Canvas</span></div>
+						</div>
+
+						<div class="jb-card jb-card-purple">
+							<h5 style="color: var(--jb-purple); font-size: 0.72em; margin: 0 0 4px 0;">klibs.io / Open Source</h5>
+							<p style="font-size: 0.6em; font-weight: 700; margin: 0 0 2px 0;">AI Delegation Boundaries</p>
+							<p style="font-size: 0.52em; color: #475569; margin: 0 0 4px 0;">Daniel Volostnov, Daniel Emeka-Ilozor</p>
+							<p style="font-size: 0.5em; color: var(--jb-text-muted); margin: 0;"><em>Mentors:</em> N. Vlaev, N. Pachkov</p>
+							<div style="margin-top: 6px;"><span class="tag">klibs.io</span><span class="tag">Task Delegation</span></div>
+						</div>
+
+						<div class="jb-card jb-card-green">
+							<h5 style="color: var(--jb-green); font-size: 0.72em; margin: 0 0 4px 0;">Research</h5>
+							<p style="font-size: 0.6em; font-weight: 700; margin: 0 0 2px 0;">Grokking</p>
+							<p style="font-size: 0.52em; color: #475569; margin: 0 0 4px 0;">Yura Kabkov</p>
+							<p style="font-size: 0.5em; color: var(--jb-text-muted); margin: 0;"><em>Mentors:</em> D. Stepanov</p>
+							<div style="margin-top: 6px;"><span class="tag">Deep Learning</span></div>
+						</div>
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[05:00 - 07:00]</span><br>
+						Our 14 student projects covered major JetBrains products: WebStorm MDX, Air ADE benchmarks, TeamCity automation, YouTrack Whiteboards, and core CUB systems.
+					</aside>
+				</section>
+
+				<!-- SLIDE 5: Key Numbers & Milestones -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Impact Dashboard: Key Numbers
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							Hard metrics from the semester-long AI Lab deployment across NUP & CUB
+						</p>
+					</div>
+
+					<div class="card-grid-3" style="margin-top: 20px;">
+						<div class="stat-card">
+							<div class="stat-number highlight-orange">42</div>
+							<div class="stat-label">Production PRs Merged</div>
+							<div class="stat-sub">Into flagship JetBrains codebases</div>
+						</div>
+
+						<div class="stat-card">
+							<div class="stat-number highlight-green">100%</div>
+							<div class="stat-label">Fall 2026 Offers</div>
+							<div class="stat-sub">All 14 students offered internships</div>
+						</div>
+
+						<div class="stat-card">
+							<div class="stat-number highlight-purple">1</div>
+							<div class="stat-label">AIAU-Bench Suite</div>
+							<div class="stat-sub">Air ADE LLM cost-quality benchmark</div>
+						</div>
+					</div>
+
+					<div class="card-grid-2 fragment" style="margin-top: 18px;">
+						<div class="jb-card">
+							<h5 style="color: var(--jb-orange); font-size: 0.75em; margin: 0 0 4px 0;">
+								<i class="fa-solid fa-clock"></i> 350+ Hours Saved
+							</h5>
+							<p style="font-size: 0.6em; color: #334155; margin: 0;">
+								Mentors cleared substantial high-priority backlog debt across IDEs, UI canvas, and automation.
+							</p>
+						</div>
+						<div class="jb-card">
+							<h5 style="color: var(--jb-blue); font-size: 0.75em; margin: 0 0 4px 0;">
+								<i class="fa-solid fa-shield-alt"></i> 86% Acceptance Rate
+							</h5>
+							<p style="font-size: 0.6em; color: #334155; margin: 0;">
+								High acceptance on standard code review with zero regression incidents on main product tracks.
+							</p>
+						</div>
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[07:00 - 09:00]</span><br>
+						42 pull requests merged into production, 100% of students received internship offers, 164 UI friction points catalogued, and 350+ hours saved with zero regressions.
+					</aside>
+				</section>
+
+				<!-- SLIDE 7: Deep Dive 1: Air ADE & AI Delegation -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Deep Dive 1: Air ADE & AI Delegation
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							Benchmarking LLM automation costs and exploring human/AI task delegation boundaries
+						</p>
+					</div>
+
+					<div class="card-grid-2">
+						<div class="jb-card jb-card-accent">
+							<h4 style="font-size: 0.8em; color: var(--jb-orange); margin-bottom: 6px;">
+								<i class="fa-solid fa-microchip"></i> Air ADE: AIAU-Bench
+							</h4>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin-bottom: 6px;">
+								<strong>N. Magomedeminov, S. Suglobov</strong> | <em>Mentors: D. Domanskii, I. Dolgov</em>
+							</p>
+							<ul style="font-size: 0.63em; line-height: 1.55; color: #334155; padding-left: 18px;">
+								<li><strong>Problem:</strong> Over-reliance on expensive LLMs out of fear cheaper models degrade quality.</li>
+								<li><strong>Solution:</strong> Developed <strong>AIAU-Bench</strong> to systematically validate lightweight models on automations.</li>
+								<li><strong>Result:</strong> Identified tasks where cheaper models achieve quality parity, cutting costs.</li>
+							</ul>
+						</div>
+
+						<div class="jb-card jb-card-purple">
+							<h4 style="font-size: 0.8em; color: var(--jb-purple); margin-bottom: 6px;">
+								<i class="fa-solid fa-code-branch"></i> klibs.io: Delegation Boundaries
+							</h4>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin-bottom: 6px;">
+								<strong>Daniel Volostnov</strong> | <em>Mentors: N. Vlaev, N. Pachkov</em>
+							</p>
+							<ul style="font-size: 0.63em; line-height: 1.55; color: #334155; padding-left: 18px;">
+								<li><strong>Goal:</strong> Map where AI saves engineering hours vs where manual coding is superior.</li>
+								<li><strong>Vectors:</strong> Spec creation, agent skills, AI as critic, and feature delivery.</li>
+								<li><strong>Result:</strong> Clear empirical boundaries for effective task delegation in open-source.</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="quote-callout fragment">
+						<strong>Takeaway:</strong> Don't guess which LLM or task fits — build targeted benchmarks and clear delegation boundaries before scaling.
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[11:30 - 13:30]</span><br>
+						AIAU-Bench proved where cheaper LLMs can power Air ADE automations without quality loss.
+						Daniel on klibs.io defined exact boundaries for task delegation.
+					</aside>
+				</section>
+
+				<!-- SLIDE 8: Deep Dive 2: WebStorm MDX & YouTrack Canvas -->
+				<section>
+					<div style="text-align: left;">
+						<h4>
+							Deep Dive 2: WebStorm MDX & YouTrack Canvas
+						</h4>
+					</div>
+
+					<div class="card-grid-2">
+						<div class="jb-card jb-card-blue">
+							<h4 style="font-size: 0.8em; color: var(--jb-blue); margin-bottom: 6px;">
+								<i class="fa-brands fa-js"></i> WebStorm: MDX Support
+							</h4>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin-bottom: 6px;">
+								<strong>A. Ivanov, A. Kogun, I. Mikhailov</strong> | <em>Mentors: A. Vorobev, V. Minaev</em>
+							</p>
+							<ul style="font-size: 0.63em; line-height: 1.55; color: #334155; padding-left: 18px;">
+								<li><strong>Challenge:</strong> MDX crosses Markdown block boundaries with embedded JS expressions.</li>
+								<li><strong>Delivery:</strong> Full AST handling; Markdown and JS features tailored to work in hybrid contexts.</li>
+								<li><strong>Agent Role:</strong> Generated parser tests and AST visitors; students verified edge cases.</li>
+							</ul>
+						</div>
+
+						<div class="jb-card jb-card-accent">
+							<h4 style="font-size: 0.8em; color: var(--jb-orange); margin-bottom: 6px;">
+								<i class="fa-solid fa-paint-brush"></i> YouTrack: Whiteboards Canvas
+							</h4>
+							<p style="font-size: 0.54em; color: var(--jb-text-muted); margin-bottom: 6px;">
+								<strong>Mikhail Fadin</strong> | <em>Mentor: Andrey Volfman</em>
+							</p>
+							<ul style="font-size: 0.63em; line-height: 1.55; color: #334155; padding-left: 18px;">
+								<li><strong>Project:</strong> Real-time collaborative canvas for visual planning in YouTrack.</li>
+								<li><strong>Sophomore Velocity:</strong> Rapidly built interactive canvas components and event bindings.</li>
+								<li><strong>Outcome:</strong> Production merge into YouTrack frontend with seamless collaboration.</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="quote-callout fragment">
+						<strong>Takeaway:</strong> Multi-syntax grammars and visual canvases require strong AST and component contracts. Agents excel at boilerplate while students focus on structural correctness.
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[13:30 - 15:30]</span><br>
+						WebStorm MDX support solved a top user request by bridging Markdown and JS ASTs.
+						In YouTrack, 2nd-year student Mikhail Fadin delivered real-time Whiteboards canvas components.
+					</aside>
+				</section>
+
+				<!-- SLIDE 11: Insights 1 & 2: Architecture & Context -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Insights 1 & 2: Architecture & Context
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							Why software structure dictates agent capability
+						</p>
+					</div>
+
+					<div class="card-grid-2">
+						<div class="jb-card jb-card-accent">
+							<h4 style="font-size: 0.8em; color: var(--jb-orange); margin-bottom: 8px;">
+								#1: Architecture &gt; Prompt Engineering
+							</h4>
+							<p style="font-size: 0.64em; color: #334155; line-height: 1.5;">
+								Clean modular code with explicit interfaces makes an average agent brilliant. In spaghetti code, no prompt prevents hallucinations.
+							</p>
+							<p style="font-size: 0.58em; color: var(--jb-text-muted); margin-top: 6px;">
+								<strong>Modular design is the ultimate prompt optimizer.</strong>
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-blue">
+							<h4 style="font-size: 0.8em; color: var(--jb-blue); margin-bottom: 8px;">
+								#2: Context is the #1 Bottleneck
+							</h4>
+							<p style="font-size: 0.64em; color: #334155; line-height: 1.5;">
+								"Context stuffing" degrades reasoning. Agents need surgical retrieval: IDE symbol indices, scoped inspection, and bounded outputs.
+							</p>
+							<p style="font-size: 0.58em; color: var(--jb-text-muted); margin-top: 6px;">
+								<strong>Pruned context windows prevent agent looping.</strong>
+							</p>
+						</div>
+					</div>
+
+					<div class="quote-callout fragment">
+						"If your codebase is hard for a junior developer to navigate, it will be twice as hard for an autonomous agent."
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[19:00 - 21:00]</span><br>
+						Insight 1: Modular architecture beats prompt engineering.
+						Insight 2: Context window bloat degrades agent reasoning; surgical retrieval is key.
+					</aside>
+				</section>
+
+				<!-- SLIDE 12: Insights 3 & 4: Testing & Tooling -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Insights 3 & 4: Testing & Tooling
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							How to anchor stochastic agents in deterministic truth
+						</p>
+					</div>
+
+					<div class="card-grid-2">
+						<div class="jb-card jb-card-green">
+							<h4 style="font-size: 0.8em; color: var(--jb-green); margin-bottom: 8px;">
+								#3: Test-Driven Verification Loop
+							</h4>
+							<p style="font-size: 0.64em; color: #334155; line-height: 1.5;">
+								Writing a failing reproducer test first yielded <strong>3.2x faster</strong> completion than asking the agent to "fix the bug directly".
+							</p>
+							<p style="font-size: 0.58em; color: var(--jb-text-muted); margin-top: 6px;">
+								A failing test serves as an automated loss function for the agent.
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-purple">
+							<h4 style="font-size: 0.8em; color: var(--jb-purple); margin-bottom: 8px;">
+								#4: Tool Design & CLI Hygiene
+							</h4>
+							<p style="font-size: 0.64em; color: #334155; line-height: 1.5;">
+								Agents need high-signal tools: IDE AST lookups and bounded, non-interactive terminal executions with structured diffs.
+							</p>
+							<p style="font-size: 0.58em; color: var(--jb-text-muted); margin-top: 6px;">
+								Unbounded logs and interactive CLI prompts break agent autonomy.
+							</p>
+						</div>
+					</div>
+
+					<div class="quote-callout fragment">
+						"In agentic programming, TDD is no longer just a best practice — it is the primary steering mechanism."
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[21:00 - 23:00]</span><br>
+						Insight 3: TDD is the steering mechanism (3.2x faster with reproducer tests).
+						Insight 4: High-signal IDE tools beat raw CLI dumps.
+					</aside>
+				</section>
+
+				<!-- SLIDE 13: Insights 5 & 6: Humans & Tech Stacks -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Insights 5 & 6: Humans & Tech Stacks
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							Team dynamics and compiler mechanics under agentic amplification
+						</p>
+					</div>
+
+					<div class="card-grid-2">
+						<div class="jb-card jb-card-accent">
+							<h4 style="font-size: 0.8em; color: var(--jb-orange); margin-bottom: 8px;">
+								#5: Junior + Agent = Mid-Level Velocity*
+							</h4>
+							<p style="font-size: 0.64em; color: #334155; line-height: 1.5;">
+								Sophomores achieved task completion velocity comparable to mid-level engineers.
+							</p>
+							<p style="font-size: 0.58em; color: var(--jb-text-muted); margin-top: 6px;">
+								<strong>*The Asterisk:</strong> Requires senior mentors to set architectural contracts and review diffs. Without review, tech debt accumulates.
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-blue">
+							<h4 style="font-size: 0.8em; color: var(--jb-blue); margin-bottom: 8px;">
+								#6: Language & Compiler Feedback
+							</h4>
+							<p style="font-size: 0.64em; color: #334155; line-height: 1.5;">
+								Strongly typed languages (Kotlin, Rust, Go, TS) provide instant compiler feedback that guides agents with precision.
+							</p>
+							<p style="font-size: 0.58em; color: var(--jb-text-muted); margin-top: 6px;">
+								In large monorepos, specialized tool caches avoid minutes-long build delays.
+							</p>
+						</div>
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[23:00 - 25:00]</span><br>
+						Insight 5: Juniors achieve mid-level output with senior mentor guardrails.
+						Insight 6: Strong types and compiler feedback guide agents reliably.
+					</aside>
+				</section>
+
+				<!-- SLIDE 14: Insight 7: The Great Skill Shift -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Insight 7: The Great Skill Shift
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							How the day-to-day role of the software engineer is being redefined
+						</p>
+					</div>
+
+					<table class="comparison-table">
+						<thead>
+							<tr>
+								<th style="width: 26%;">Dimension</th>
+								<th style="width: 37%; color: #dc2626;">
+									<i class="fa-solid fa-arrow-down"></i> Decreasing in Value
+								</th>
+								<th style="width: 37%; color: var(--jb-green);">
+									<i class="fa-solid fa-arrow-up"></i> Increasing in Value
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong>Coding</strong></td>
+								<td>Typing boilerplate & routine syntax</td>
+								<td>Architectural decomposition & API contracts</td>
+							</tr>
+							<tr>
+								<td><strong>Problem Solving</strong></td>
+								<td>Manual trial-and-error debugging</td>
+								<td>Precise specs & edge-case reproducers</td>
+							</tr>
+							<tr>
+								<td><strong>Quality Assurance</strong></td>
+								<td>Superficial formatting checks</td>
+								<td>Concurrency, security & invariant testing</td>
+							</tr>
+							<tr>
+								<td><strong>Agent Steering</strong></td>
+								<td>Blindly accepting AI output ("vibe coding")</td>
+								<td>Context pruning & diff auditing</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="quote-callout fragment" style="margin-top: 14px;">
+						"The software engineer is transitioning from a typist of code to an architect, verifier, and editor-in-chief."
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[25:00 - 26:30]</span><br>
+						The engineer's role shifts from writing syntax to designing architectures, verifying invariants, and auditing diffs.
+					</aside>
+				</section>
+
+				<!-- SLIDE 17: Discussion 3 Pitch: AI Lab Next Year -->
+				<section>
+					<div style="text-align: left;">
+						<h3>
+							Discussion: AI Lab 2026/27 Roadmap
+						</h3>
+						<p style="font-size: 0.68em; color: var(--jb-text-muted);">
+							Scaling from 8 pilot teams to a company-wide talent incubator
+						</p>
+					</div>
+
+					<div class="card-grid-3" style="margin-top: 18px;">
+						<div class="jb-card jb-card-accent">
+							<h5 style="color: var(--jb-orange); font-size: 0.72em; margin: 0 0 6px 0;">
+								<i class="fa-solid fa-expand-arrows-alt"></i> Scale to 15+ Teams
+							</h5>
+							<p style="font-size: 0.6em; color: #334155; line-height: 1.5; margin: 0;">
+								Expand to 50+ students across IntelliJ, Rider, CLion, Fleet, and Cloud teams.
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-blue">
+							<h5 style="color: var(--jb-blue); font-size: 0.72em; margin: 0 0 6px 0;">
+								<i class="fa-solid fa-tachometer-alt"></i> Continuous Benchmark
+							</h5>
+							<p style="font-size: 0.6em; color: #334155; line-height: 1.5; margin: 0;">
+								Run AIAU-Bench & reasoning benchmarks continuously on every agent release.
+							</p>
+						</div>
+
+						<div class="jb-card jb-card-purple">
+							<h5 style="color: var(--jb-purple); font-size: 0.72em; margin: 0 0 6px 0;">
+								<i class="fa-solid fa-user-graduate"></i> Talent Pipeline
+							</h5>
+							<p style="font-size: 0.6em; color: #334155; line-height: 1.5; margin: 0;">
+								Institutionalize AI Lab as the primary feeder for JetBrains engineering internships.
+							</p>
+						</div>
+					</div>
+
+					<div class="quote-callout" style="border-left-color: var(--jb-purple); margin-top: 18px;">
+						<strong>Question:</strong> How do we institutionalize AI Lab as a permanent bridge between product teams and university talent?
+					</div>
+
+					<aside class="notes">
+						<span class="notes-speaker">[28:30 - 29:30]</span><br>
+						Discussion 3: Future roadmap, scaling to 15+ product teams and 50+ students.
+					</aside>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../scripts/utils.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				width: 1200,
+				height: 720,
+				margin: 0.06,
+				minScale: 0.2,
+				maxScale: 2.0,
+				slideNumber: 'c/t',
+				showSlideNumber: 'all',
+				hashOneBasedIndex: true,
+				autoPlayMedia: true,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, Reveald3]
+			});
+
+			// Initialize Chart.js when reveal is ready or slide changes
+			let tasksChart = null;
+			let velocityChart = null;
+
+			function initCharts() {
+				const tasksCtx = document.getElementById('tasksByAreaChart');
+				if (tasksCtx && !tasksChart) {
+					tasksChart = new Chart(tasksCtx, {
+						type: 'doughnut',
+						data: {
+							labels: ['IDE Features (38%)', 'Inspections & AST (28%)', 'Cloud & CI/CD (19%)', 'Agent Benchmark (15%)'],
+							datasets: [{
+								data: [16, 12, 8, 6],
+								backgroundColor: [
+									'#ea580c',
+									'#0284c7',
+									'#7c3aed',
+									'#059669'
+								],
+								borderWidth: 2,
+								borderColor: '#ffffff'
+							}]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							plugins: {
+								legend: {
+									position: 'bottom',
+									labels: {
+										color: '#334155',
+										font: { size: 12, family: 'Inter' },
+										boxWidth: 12,
+										padding: 10
+									}
+								}
+							}
+						}
+					});
+				}
+
+				const velCtx = document.getElementById('velocityChart');
+				if (velCtx && !velocityChart) {
+					velocityChart = new Chart(velCtx, {
+						type: 'bar',
+						data: {
+							labels: ['Stage 1 (Warmup)', 'Stage 2 (Scaling)', 'Stage 3 (Deep PRs)'],
+							datasets: [{
+								label: 'Avg Days to Merged PR',
+								data: [13.2, 6.8, 3.5],
+								backgroundColor: [
+									'rgba(234, 88, 12, 0.75)',
+									'rgba(2, 132, 199, 0.75)',
+									'rgba(5, 150, 105, 0.85)'
+								],
+								borderColor: [
+									'#ea580c',
+									'#0284c7',
+									'#059669'
+								],
+								borderWidth: 1.5,
+								borderRadius: 6
+							}]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							scales: {
+								y: {
+									beginAtZero: true,
+									title: {
+										display: true,
+										text: 'Days per Merged Task',
+										color: '#64748b',
+										font: { size: 11, family: 'Inter' }
+									},
+									ticks: { color: '#64748b', font: { size: 11 } },
+									grid: { color: 'rgba(0, 0, 0, 0.06)' }
+								},
+								x: {
+									ticks: { color: '#334155', font: { size: 11, family: 'Inter' } },
+									grid: { display: false }
+								}
+							},
+							plugins: {
+								legend: { display: false },
+								tooltip: {
+									callbacks: {
+										label: function(context) {
+											return context.parsed.y + ' days to production merge';
+										}
+									}
+								}
+							}
+						}
+					});
+				}
+			}
+
+			Reveal.on('ready', event => {
+				initCharts();
+			});
+
+			Reveal.on('slidechanged', event => {
+				initCharts();
+			});
+		</script>
+	</body>
+</html>

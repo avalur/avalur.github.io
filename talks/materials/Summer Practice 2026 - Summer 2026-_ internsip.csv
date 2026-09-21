@@ -1,0 +1,37 @@
+,,,,,,,
+,Student,University,Year,Summer 2026 Project,Team,Mentor,Fall 2026
+1,Artem Ivanov,NUP,4,"MDX language support in WebStorm
+
+MDX is a popular Markdown+JSX hybrid language, often used for content-heavy interactive applications. Unsatisfied with WebStorm’s minimal MDX support, users were asking for better editing experience. Our team of Anton Kogun, Ilya Mikhailov, and Artem Ivanov, mentored by Andrey Vorobev, let WebStorm handle complex MDX structure and tailored Markown features and JavaScript features to work in its contexts.",JS/TS Engineering,Andrey Vorobev (Vlad Minaev),Internship
+2,Nikita Magimedeminov,NUP,4,"Air Automations Benchmark (AIAU-Bench) 
+
+Air is a new ADE from JetBrains that has gained a range of AI-focused features over time, including automations. The Air development team currently uses overly expensive LLMs out of concern that cheaper alternatives may produce unsatisfactory results and deter customers during the early stages of testing. Our goal in this project is to develop a benchmark and a validation system that will help Air developers choose less expensive LLMs to power automations without compromising quality.
+",AI Engineering,Denis Domanskii (Ivan Dolgov),Internship
+3,Svyatoslav Suglobov,NUP,4,,AI Engineering,Denis Domanskii (Ivan Dolgov),Internship
+4,Daniel Volostnov,NUP,4,"AI-Assisted development in open source: Exploring the boundaries of human/AI task delegation
+
+Description:
+This project explores methods for working with AI in an open-source project, including specification creation, skills, AI as a critic, AI-assisted analytics and demonstrations, and agentic development of both small and large features. The project evaluates where AI can save developers time or reduce resource costs, and where manual development remains the preferable approach.",klibs.io,Nikita Vlaev (Nikolai Pachkov),Internship
+5,Aleksei Gurianov,NUP,2,"Test Stabilization Launcher
+
+Test Stabilization Launcher is an internal page of test-service that gives the Functional Automation team one place to start TeamCity test builds and watch them finish. An engineer fills a single form with a branch, the build configurations to run and the parameters to override, and the page queues every build, keeps them on screen while they run, and reports which builds passed, which tests failed, with links into TeamCity and the Allure report, and a Slack message once the run is over. A filled form can be saved as a shared preset and passed to other people, who open it by link and repeat the same run instead of rebuilding it by hand. It takes the place of the manual TeamCity routine the team used for reproducing flaky failures and stabilizing new tests, where a separate run had to be started for every operating system and the results lived in browser tabs. The page is developed under the guidance of Lev Zagnetin, team lead of Functional Automation, with day-to-day mentoring and review from Artem Grigorash, and with design decisions discussed with Roman Ivanitskii, team lead of Quality Tools & Automation, from a neighbouring team.
+
+
+
+Migration research: moving IntelliJ plugin UI tests off the legacy framework
+
+A study of how maintainers of open-source IntelliJ plugins test their UI, why many of them stay on the older framework, and what it takes to move them off it. Run in the Functional Automation team led by Lev Zagnetin, with Artem Grigorash guiding the work day to day. Twenty-one repositories were reviewed against public evidence rather than surveys, which produced a catalogue of 164 documented friction points. The decisive finding was the proportion: 73 of them are cases where the framework already offers a better way than the one in use, against 3 real gaps in the tool itself. Since the bottleneck is guidance rather than missing features, the deliverable is a migration guide built as a working repository: five scenarios implemented twice, once on the legacy framework and once on the current one, with every difference explained. The scenarios were chosen for what they expose. Each one reproduces mistakes taken straight from the catalogue and puts the biggest differences between the two frameworks next to each other, so a maintainer moving a test suite sees the wrong habit and its replacement in the same place.",Functional Automation,Lev Zagnetin,"Internship
+
+Quality Tools & Automation
+
+Roman Ivanitskii"
+6,Mikhail Fadin,NUP,2,At YouTrack as a frontend developer specifically on Whiteboards - real-time collaborative canvas for visual planning,YouTrack - Frontend labs,Andrey Volfman,Internship
+7,Yurii Kabkov,NUP,2,"Grokking Theory and What We Can Do to Speed Up the Training Process
+The ongoing project, supervised by Denis Stepanov and Kacper Ogórek (Paper Analyzer Team), investigates the grokking phenomenon (sudden generalization at late epochs after quick overfitting at the beginning) in the formalism introduced recently by Litman and Guo. Key findings are that, modifying this approach from theoretical to practical framework, one can achieve great improvement in accuracy just by analyzing carefully how does the model evolves during the training process and guiding it. The theory and observations made also rise a lot of questions, answering which can improve our understanding in what does the model actually do and learn throughout the training.",Paper-analyzer,Denis Stepanov (Sergey Dmitriev),Internship
+8,Ivan	Osipenko,CUB,2,,Taint Analysis,Niyaz Nigmatullin,Internship
+9,Vladislav	Ogloblin,CUB,2,,ML Workflow Engineering,Andrei Vishniakov,Internship
+10,Mikhail Redko,CUB,2,,Kotlin JS,Artem Kobzar,Internship
+11,Kiryl Krutsko ,CUB,2,,Kocelot,Vlad Kozyrev,Internship
+12,Nikita Breskanu,CUB,Master 2,,Kocelot,Radimir Sorokin,Internship
+13,Arseni Kanapelka ,CUB,3,,TeamCity Integrations,Mikhail Rodionichev,Internship
+14,Iaroslav Belozerov,CUB,2,,C/C++ Tools,Edem Ibraimov,Internship
