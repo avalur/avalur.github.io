@@ -51,19 +51,20 @@
 
             const path = frame.selectAll("path")
                 .data([
-                    {fill: "#c6dbef", teeth: 80, radius: -0.5, origin: [0, 0], annulus: true},
-                    {fill: "#6baed6", teeth: 16, radius: +0.1, origin: [0, 0]},
-                    {fill: "#9ecae1", teeth: 32, radius: -0.2, origin: [0, -0.3]},
-                    {fill: "#9ecae1", teeth: 32, radius: -0.2, origin: [-0.3 * x, -0.3 * y]},
-                    {fill: "#9ecae1", teeth: 32, radius: -0.2, origin: [0.3 * x, -0.3 * y]}
+                    {fill: "#c6dbef", teeth: 80, radius: -0.5, origin: [0, 0], annulus: true, offset: 0},
+                    {fill: "#6baed6", teeth: 16, radius: +0.1, origin: [0, 0], offset: 0},
+                    {fill: "#9ecae1", teeth: 32, radius: -0.2, origin: [0, -0.3], offset: 0},
+                    {fill: "#9ecae1", teeth: 32, radius: -0.2, origin: [-0.3 * x, -0.3 * y], offset: 3.75},
+                    {fill: "#9ecae1", teeth: 32, radius: -0.2, origin: [0.3 * x, -0.3 * y], offset: -3.75}
                 ])
                 .enter().append("path")
                 .attr("fill", d => d.fill)
-                .attr("d", d => gear({...d, toothRadius: 0.008, holeRadius: 0.02}));
+                .attr("d", d => gear({...d, toothRadius: 0.008, holeRadius: 0.02}))
+                .attr("transform", d => `translate(${d.origin}) rotate(${d.offset || 0})`);
 
             return Object.assign(svg.node(), {
                 update({angle, frameAngle}) {
-                    path.attr("transform", d => `translate(${d.origin}) rotate(${(angle / d.radius) % 360})`);
+                    path.attr("transform", d => `translate(${d.origin}) rotate(${((angle / d.radius) + (d.offset || 0)) % 360})`);
                     frame.attr("transform", `rotate(${frameAngle % 360})`);
                 }
             });
