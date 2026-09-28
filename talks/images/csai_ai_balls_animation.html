@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & CSAI Particle Animation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #stage-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 580px;
+      max-height: 580px;
+      aspect-ratio: 1 / 1;
+      border-radius: 0;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: none;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: crosshair;
+    }
+    .hud-subtext {
+      position: absolute;
+      bottom: 18px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 11.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #94a3b8;
+      pointer-events: none;
+      transition: opacity 0.6s ease, color 0.6s ease;
+      text-shadow: none;
+    }
+    .hud-subtext.highlight {
+      color: #0284c7;
+      opacity: 0.95 !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage-container">
+    <canvas id="anim-canvas"></canvas>
+    <div id="hud-text" class="hud-subtext">Computer Science & Artificial Intelligence</div>
+  </div>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById("anim-canvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const container = document.getElementById("stage-container");
+      const hudText = document.getElementById("hud-text");
+
+      // Vibrant ROYGBIV Rainbow Spectrum tuned for clean white background
+      const RAINBOW_HEX = [
+        "#e11d48", // Rose / Red
+        "#ea580c", // Vibrant Orange
+        "#d97706", // Amber / Warm Gold
+        "#16a34a", // Vibrant Green
+        "#0284c7", // Bright Sky Blue
+        "#2563eb", // Royal Azure Blue
+        "#7c3aed", // Vivid Purple
+        "#c026d3"  // Fuchsia / Magenta
+      ];
+
+      function hexToRgb(hex) {
+        const h = hex.replace("#", "");
+        return [
+          parseInt(h.slice(0, 2), 16),
+          parseInt(h.slice(2, 4), 16),
+          parseInt(h.slice(4, 6), 16)
+        ];
+      }
+      const RAINBOW_RGB = RAINBOW_HEX.map(hexToRgb);
+
+      let W = 580;
+      let H = 580;
+      let dpr = 1;
+
+      // Mouse tracking
+      const mouse = { x: -9999, y: -9999, active: false };
+
+      // Target Concepts to be shattered by AI (high-contrast vivid tones on white)
+      const TARGET_WORDS = [
+        { text: "Coding", color: "#0284c7" },
+        { text: "Maths", color: "#ea580c" },
+        { text: "Computer Science", color: "#2563eb" },
+        { text: "Thinking", color: "#e11d48" }
+      ];
+
+      // Time scale factor: 3x slower animation
+      const TIME_SCALE = 1 / 3;
+
+      // State machine
+      // 0: SPAWN / CHASE & SHATTER WORDS
+      // 1: CONVERGE INTO "CSAI"
+      // 2: HOLD "CSAI" (Fully interactive physics)
+      // 3: EXPLODING DISPERSAL
+      // 4: REASSEMBLE BACK INTO 4 ORIGINAL BLOCKS (Seamless loop!)
+      let state = 0;
+      let stateTimer = 0;
+      let targetIndex = 0;
+
+      let activeWords = [];
+      let particles = [];
+      let shockwaves = [];
+      let sparks = [];
+      let csaiAnchors = [];
+      let wordAnchors = [[], [], [], []];
+
+      // Hero "AI" Entity
+      const ai = {
+        x: 80,
+        y: 80,
+        vx: 0,
+        vy: 0,
+        targetVx: 0,
+        targetVy: 0,
+        angle: 0,
+        scale: 1,
+        pulse: 0,
+        trail: [],
+        glowColor: "#0284c7"
+      };
+
+      // Offscreen canvas for typography sampling
+      const maskCanvas = document.createElement("canvas");
+      const maskCtx = maskCanvas.getContext("2d", { willReadFrequently: true });
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const rect = container.getBoundingClientRect();
+        W = rect.width;
+        H = rect.height;
+
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        maskCanvas.width = Math.floor(W);
+        maskCanvas.height = Math.floor(H);
+
+        generateCsaiAnchors();
+        setupWordPositions();
+        generateWordAnchors();
+      }
+
+      // Generate grid anchor dots for "CSAI"
+      function generateCsaiAnchors() {
+        maskCtx.clearRect(0, 0, W, H);
+        maskCtx.fillStyle = "#ffffff";
+        maskCtx.textAlign = "center";
+        maskCtx.textBaseline = "middle";
+
+        const fontSize = Math.floor(Math.min(W * 0.27, 136));
+        maskCtx.font = `900 ${fontSize}px system-ui, -apple-system, sans-serif`;
+        const centerY = H * 0.45;
+        maskCtx.fillText("CSAI", W / 2, centerY);
+
+        const imgData = maskCtx.getImageData(0, 0, W, H).data;
+        csaiAnchors = [];
+        const step = Math.max(5, Math.floor(W / 92)); // High-density grid
+
+        // Calculate horizontal bounds of CSAI to create smooth rainbow gradient
+        let minX = W, maxX = 0;
+        for (let y = 0; y < H; y += step) {
+          for (let x = 0; x < W; x += step) {
+            const idx = (y * W + x) * 4 + 3;
+            if (imgData[idx] > 115) {
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+            }
+          }
+        }
+        const spanX = Math.max(1, maxX - minX);
+
+        for (let y = 0; y < H; y += step) {
+          for (let x = 0; x < W; x += step) {
+            const idx = (y * W + x) * 4 + 3;
+            if (imgData[idx] > 115) {
+              const fraction = (x - minX) / spanX;
+              const colorIdx = Math.min(
+                RAINBOW_HEX.length - 1,
+                Math.floor(fraction * RAINBOW_HEX.length)
+              );
+              csaiAnchors.push({ x, y, colorIdx, origX: x, origY: y });
+            }
+          }
+        }
+      }
+
+      function setupWordPositions() {
+        const padX = W * 0.23;
+        const padY = H * 0.22;
+
+        const positions = [
+          { x: padX, y: padY },                       // 0: Coding (Top-Left)
+          { x: W - padX, y: padY },                   // 1: Maths (Top-Right)
+          { x: W * 0.52, y: H * 0.74 },               // 2: Computer Science (Bottom-Center)
+          { x: padX * 1.05, y: H * 0.52 }             // 3: Thinking (Mid-Left)
+        ];
+
+        activeWords = TARGET_WORDS.map((w, i) => {
+          return {
+            id: i,
+            text: w.text,
+            color: w.color,
+            x: positions[i].x,
+            y: positions[i].y,
+            destroyed: false,
+            opacity: 0,
+            scale: 0.65,
+            floatOffset: Math.random() * Math.PI * 2
+          };
+        });
+      }
+
+      // Precompute anchor points for each of the 4 original word blocks
+      function generateWordAnchors() {
+        wordAnchors = [[], [], [], []];
+        activeWords.forEach((word, wIdx) => {
+          maskCtx.clearRect(0, 0, W, H);
+          maskCtx.fillStyle = "#ffffff";
+          maskCtx.textAlign = "center";
+          maskCtx.textBaseline = "middle";
+          const fSize = word.text.length > 10 ? Math.floor(W * 0.046) : Math.floor(W * 0.054);
+          maskCtx.font = `bold ${fSize}px system-ui, -apple-system, sans-serif`;
+          maskCtx.fillText(word.text, word.x, word.y);
+
+          const bounds = {
+            minX: Math.max(0, Math.floor(word.x - W * 0.28)),
+            maxX: Math.min(W, Math.floor(word.x + W * 0.28)),
+            minY: Math.max(0, Math.floor(word.y - 36)),
+            maxY: Math.min(H, Math.floor(word.y + 36))
+          };
+
+          const imgData = maskCtx.getImageData(0, 0, W, H).data;
+          const step = Math.max(4, Math.floor(W / 120));
+
+          for (let y = bounds.minY; y < bounds.maxY; y += step) {
+            for (let x = bounds.minX; x < bounds.maxX; x += step) {
+              const idx = (y * W + x) * 4 + 3;
+              if (imgData[idx] > 100) {
+                wordAnchors[wIdx].push({
+                  relX: x - word.x,
+                  relY: y - word.y
+                });
+              }
+            }
+          }
+
+          // Fallback if needed
+          if (wordAnchors[wIdx].length < 20) {
+            for (let ox = -40; ox <= 40; ox += 8) {
+              for (let oy = -10; oy <= 10; oy += 6) {
+                wordAnchors[wIdx].push({ relX: ox, relY: oy });
+              }
+            }
+          }
+        });
+      }
+
+      function initCycle() {
+        state = 0;
+        stateTimer = 0;
+        targetIndex = 0;
+        particles = [];
+        shockwaves = [];
+        sparks = [];
+        hudText.classList.remove("highlight");
+        hudText.style.opacity = "0.45";
+        setupWordPositions();
+
+        // Spawn AI hero gracefully in the upper left corner
+        ai.x = W * 0.12;
+        ai.y = H * 0.12;
+        ai.vx = 150;
+        ai.vy = 80;
+        ai.angle = 0.5;
+        ai.scale = 1;
+        ai.pulse = 0;
+        ai.trail = [];
+      }
+
+      function shatterWord(word, hitX, hitY) {
+        word.destroyed = true;
+
+        // Big impactful shockwave
+        shockwaves.push({
+          x: word.x,
+          y: word.y,
+          radius: 12,
+          maxRadius: Math.min(W * 0.32, 160),
+          color: word.color,
+          alpha: 1
+        });
+
+        // Spark explosion
+        for (let s = 0; s < 25; s++) {
+          const sAngle = Math.random() * Math.PI * 2;
+          const sSpeed = 120 + Math.random() * 260;
+          sparks.push({
+            x: word.x,
+            y: word.y,
+            vx: Math.cos(sAngle) * sSpeed,
+            vy: Math.sin(sAngle) * sSpeed,
+            color: word.color,
+            alpha: 1,
+            decay: 2.2 + Math.random() * 1.5,
+            size: 1.5 + Math.random() * 2
+          });
+        }
+
+        // Sample word letters into rich ball fragments
+        maskCtx.clearRect(0, 0, W, H);
+        maskCtx.fillStyle = "#ffffff";
+        maskCtx.textAlign = "center";
+        maskCtx.textBaseline = "middle";
+        const fSize = word.text.length > 10 ? Math.floor(W * 0.046) : Math.floor(W * 0.054);
+        maskCtx.font = `bold ${fSize}px system-ui, -apple-system, sans-serif`;
+        maskCtx.fillText(word.text, word.x, word.y);
+
+        const bounds = {
+          minX: Math.max(0, Math.floor(word.x - W * 0.28)),
+          maxX: Math.min(W, Math.floor(word.x + W * 0.28)),
+          minY: Math.max(0, Math.floor(word.y - 36)),
+          maxY: Math.min(H, Math.floor(word.y + 36))
+        };
+
+        const imgData = maskCtx.getImageData(0, 0, W, H).data;
+        const step = Math.max(4, Math.floor(W / 125));
+        let createdCount = 0;
+
+        for (let y = bounds.minY; y < bounds.maxY; y += step) {
+          for (let x = bounds.minX; x < bounds.maxX; x += step) {
+            const idx = (y * W + x) * 4 + 3;
+            if (imgData[idx] > 100) {
+              const dx = x - hitX;
+              const dy = y - hitY;
+              const dist = Math.max(2, Math.hypot(dx, dy));
+              const speed = (220 + Math.random() * 420) * (W / 600);
+              const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.7;
+              const colorIdx = Math.floor(Math.random() * RAINBOW_HEX.length);
+
+              particles.push({
+                x: x,
+                y: y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                colorIdx: colorIdx,
+                color: null,
+                radius: 2.2 + Math.random() * 1.1,
+                targetX: null,
+                targetY: null,
+                wordIdx: null,
+                targetRelX: 0,
+                targetRelY: 0,
+                spring: 0.052 + Math.random() * 0.02,
+                friction: 0.88 + Math.random() * 0.03
+              });
+              createdCount++;
+            }
+          }
+        }
+
+        // Guarantee sufficient ball density
+        const minBurst = 65;
+        if (createdCount < minBurst) {
+          for (let i = 0; i < (minBurst - createdCount); i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = (180 + Math.random() * 360) * (W / 600);
+            particles.push({
+              x: word.x + (Math.random() - 0.5) * 40,
+              y: word.y + (Math.random() - 0.5) * 16,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              colorIdx: Math.floor(Math.random() * RAINBOW_HEX.length),
+              color: null,
+              radius: 2.2 + Math.random() * 1.1,
+              targetX: null,
+              targetY: null,
+              wordIdx: null,
+              targetRelX: 0,
+              targetRelY: 0,
+              spring: 0.052,
+              friction: 0.89
+            });
+          }
+        }
+      }
+
+      function assignParticlesToCsai() {
+        const totalAnchors = csaiAnchors.length;
+        if (totalAnchors === 0) return;
+
+        // Shuffle anchors slightly to produce organic curving flow lines
+        const shuffled = [...csaiAnchors].sort(() => Math.random() - 0.5);
+
+        for (let i = 0; i < particles.length; i++) {
+          const anchor = shuffled[i % totalAnchors];
+          particles[i].targetX = anchor.x;
+          particles[i].targetY = anchor.y;
+          particles[i].wordIdx = null;
+          particles[i].color = null;
+          particles[i].colorIdx = anchor.colorIdx;
+        }
+
+        // Top up if anchors exceed current particles
+        if (particles.length < totalAnchors) {
+          const deficit = totalAnchors - particles.length;
+          for (let i = 0; i < deficit; i++) {
+            const anchor = shuffled[(particles.length + i) % totalAnchors];
+            const pAngle = Math.random() * Math.PI * 2;
+            const dist = 40 + Math.random() * 180;
+            particles.push({
+              x: W / 2 + Math.cos(pAngle) * dist,
+              y: H * 0.45 + Math.sin(pAngle) * dist,
+              vx: (Math.random() - 0.5) * 120,
+              vy: (Math.random() - 0.5) * 120,
+              colorIdx: anchor.colorIdx,
+              color: null,
+              radius: 2.2 + Math.random() * 1.0,
+              targetX: anchor.x,
+              targetY: anchor.y,
+              wordIdx: null,
+              targetRelX: 0,
+              targetRelY: 0,
+              spring: 0.052 + Math.random() * 0.02,
+              friction: 0.88
+            });
+          }
+        }
+      }
+
+      // Assign dispersed particles back to the 4 word positions
+      function assignParticlesToWords() {
+        const cx = W / 2;
+        const cy = H * 0.45;
+        const wordAngles = activeWords.map(w => Math.atan2(w.y - cy, w.x - cx));
+
+        // Prepare active words for materialization
+        activeWords.forEach(w => {
+          w.destroyed = false;
+          w.opacity = 0;
+          w.scale = 0.65;
+        });
+
+        // Distribute particles to the 4 words based on closest angular sector
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          const pAng = Math.atan2(p.y - cy, p.x - cx);
+
+          let bestW = 0;
+          let minDiff = Infinity;
+          for (let w = 0; w < 4; w++) {
+            let diff = Math.abs(pAng - wordAngles[w]);
+            if (diff > Math.PI) diff = Math.PI * 2 - diff;
+            if (diff < minDiff) {
+              minDiff = diff;
+              bestW = w;
+            }
+          }
+
+          const anchors = wordAnchors[bestW];
+          const anchor = anchors[i % anchors.length];
+
+          p.wordIdx = bestW;
+          p.targetRelX = anchor.relX;
+          p.targetRelY = anchor.relY;
+          p.color = TARGET_WORDS[bestW].color;
+          p.spring = 0.048 + Math.random() * 0.016;
+          p.friction = 0.88 + Math.random() * 0.02;
+        }
+      }
+
+      let lastTime = performance.now();
+      let simTime = 0;
+
+      function loop(now) {
+        const rawDt = Math.min(0.04, (now - lastTime) / 1000);
+        lastTime = now;
+        const dt = rawDt * TIME_SCALE;
+        simTime += dt;
+        stateTimer += dt;
+
+        update(dt, simTime);
+        draw(simTime);
+
+        requestAnimationFrame(loop);
+      }
+
+      function update(dt, simTime) {
+        ai.pulse += dt * 4;
+
+        // Update shockwaves
+        for (let i = shockwaves.length - 1; i >= 0; i--) {
+          const sw = shockwaves[i];
+          sw.radius += (sw.maxRadius - sw.radius) * 9 * dt;
+          sw.alpha -= 2.0 * dt;
+          if (sw.alpha <= 0) shockwaves.splice(i, 1);
+        }
+
+        // Update sparks
+        const fSp = Math.pow(0.95, dt * 60);
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const sp = sparks[i];
+          sp.x += sp.vx * dt;
+          sp.y += sp.vy * dt;
+          sp.vx *= fSp;
+          sp.vy *= fSp;
+          sp.alpha -= sp.decay * dt;
+          if (sp.alpha <= 0) sparks.splice(i, 1);
+        }
+
+        // ==================== STATE 0: HUNT & SHATTER ====================
+        if (state === 0) {
+          // Word entrance animation (initial cycle)
+          activeWords.forEach(w => {
+            if (!w.destroyed && w.opacity < 1) {
+              w.opacity = Math.min(1, w.opacity + dt * 3.5);
+              w.scale = Math.min(1, w.scale + dt * 1.5);
+            }
+          });
+
+          if (targetIndex < activeWords.length) {
+            const target = activeWords[targetIndex];
+            const dx = target.x - ai.x;
+            const dy = target.y - ai.y;
+            const dist = Math.hypot(dx, dy);
+
+            // Dynamic steering with acceleration burst
+            const speed = Math.min(680 * (W / 600), 300 + dist * 3.0);
+            const targetAngle = Math.atan2(dy, dx);
+
+            let diff = targetAngle - ai.angle;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            ai.angle += diff * Math.min(1, dt * 14);
+
+            ai.vx = Math.cos(ai.angle) * speed;
+            ai.vy = Math.sin(ai.angle) * speed;
+            ai.x += ai.vx * dt;
+            ai.y += ai.vy * dt;
+
+            // Collision check
+            const hitDist = Math.max(34, W * 0.075);
+            if (dist < hitDist) {
+              shatterWord(target, ai.x, ai.y);
+              targetIndex++;
+              ai.scale = 1.45; // Hero expansion punch
+            }
+          } else {
+            // All words shattered! Transition into CSAI assembly
+            if (stateTimer > 0.5) {
+              state = 1;
+              stateTimer = 0;
+              assignParticlesToCsai();
+              hudText.classList.add("highlight");
+
+              // Center convergence pulse
+              shockwaves.push({
+                x: W / 2,
+                y: H * 0.45,
+                radius: 10,
+                maxRadius: W * 0.52,
+                color: "#0284c7",
+                alpha: 1
+              });
+            }
+          }
+        }
+
+        // ==================== STATE 1: CSAI CONVERGENCE ====================
+        else if (state === 1) {
+          // AI glides smoothly to hover position right above CSAI
+          const targetX = W / 2;
+          const targetY = H * 0.17;
+          ai.x += (targetX - ai.x) * 4.5 * dt;
+          ai.y += (targetY - ai.y) * 4.5 * dt;
+          ai.angle += (0 - ai.angle) * 6 * dt;
+
+          if (stateTimer > 2.0) {
+            state = 2;
+            stateTimer = 0;
+          }
+        }
+
+        // ==================== STATE 2: CSAI STABLE & INTERACTIVE ====================
+        else if (state === 2) {
+          // AI gently floats with sine wave breathing
+          ai.y = H * 0.17 + Math.sin(simTime * 3) * 6;
+
+          // Hold CSAI for viewer / presenter interaction
+          if (stateTimer > 3.2) {
+            state = 3;
+            stateTimer = 0;
+
+            // Cosmic burst dispersal
+            particles.forEach(p => {
+              const ang = Math.random() * Math.PI * 2;
+              const spd = (160 + Math.random() * 320) * (W / 600);
+              p.vx = Math.cos(ang) * spd;
+              p.vy = Math.sin(ang) * spd;
+              p.targetX = null;
+              p.targetY = null;
+              p.wordIdx = null;
+            });
+
+            shockwaves.push({
+              x: W / 2,
+              y: H * 0.45,
+              radius: 15,
+              maxRadius: W * 0.48,
+              color: "#e11d48",
+              alpha: 1
+            });
+
+            hudText.classList.remove("highlight");
+          }
+        }
+
+        // ==================== STATE 3: DISPERSAL OUTWARD ====================
+        else if (state === 3) {
+          hudText.style.opacity = Math.max(0.45, 0.95 - stateTimer * 1.5);
+
+          // After a brief expansive burst, trigger reassembly back into 4 words!
+          if (stateTimer > 0.45) {
+            state = 4;
+            stateTimer = 0;
+            assignParticlesToWords();
+          }
+        }
+
+        // ==================== STATE 4: REASSEMBLE INTO 4 ORIGINAL BLOCKS ====================
+        else if (state === 4) {
+          // AI glides back towards upper left corner to be ready for the next cycle
+          const aiReadyX = W * 0.12;
+          const aiReadyY = H * 0.12;
+          ai.x += (aiReadyX - ai.x) * 3.5 * dt;
+          ai.y += (aiReadyY - ai.y) * 3.5 * dt;
+          ai.angle += (0.5 - ai.angle) * 4 * dt;
+
+          // Words smoothly materialize as particles converge
+          if (stateTimer > 0.3) {
+            const reformProgress = Math.min(1, (stateTimer - 0.3) / 0.85);
+            activeWords.forEach(w => {
+              w.opacity = reformProgress;
+              w.scale = 0.65 + 0.35 * reformProgress;
+            });
+          }
+
+          // When reassembly is complete, pop shockwaves & start cycle smoothly anew
+          if (stateTimer > 1.6) {
+            activeWords.forEach(w => {
+              shockwaves.push({
+                x: w.x,
+                y: w.y,
+                radius: 8,
+                maxRadius: 42,
+                color: w.color,
+                alpha: 0.75
+              });
+              w.destroyed = false;
+              w.opacity = 1;
+              w.scale = 1;
+            });
+
+            state = 0;
+            stateTimer = 0;
+            targetIndex = 0;
+            particles = []; // Particles fully absorbed back into the words
+            hudText.classList.remove("highlight");
+            hudText.style.opacity = "0.45";
+
+            ai.x = aiReadyX;
+            ai.y = aiReadyY;
+            ai.vx = 150;
+            ai.vy = 80;
+            ai.angle = 0.5;
+            ai.scale = 1;
+            ai.pulse = 0;
+            ai.trail = [];
+          }
+        }
+
+        // Hero badge scale recovery
+        ai.scale += (1.0 - ai.scale) * 7 * dt;
+
+        // Store AI ribbon trail
+        ai.trail.unshift({ x: ai.x, y: ai.y, alpha: 1 });
+        if (ai.trail.length > 35) ai.trail.pop();
+        ai.trail.forEach(t => t.alpha -= dt * 2.8);
+
+        // ==================== PARTICLE PHYSICS INTEGRATION ====================
+        const repelR = 52 * (W / 600);
+        const repelR2 = repelR * repelR;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          // Cursor interactive repulsion
+          if (mouse.active) {
+            const mdx = p.x - mouse.x;
+            const mdy = p.y - mouse.y;
+            const md2 = mdx * mdx + mdy * mdy;
+            if (md2 < repelR2 && md2 > 0.001) {
+              const dist = Math.sqrt(md2);
+              const force = (4200 * (1 - dist / repelR)) / dist;
+              p.vx += mdx * force * dt;
+              p.vy += mdy * force * dt;
+            }
+          }
+
+          if (state === 0) {
+            // Free flight + boundary bounce
+            p.x += p.vx * dt;
+            p.y += p.vy * dt;
+            const f0 = Math.pow(0.985, dt * 60);
+            p.vx *= f0;
+            p.vy *= f0;
+
+            const b = 0.82;
+            if (p.x < 10) { p.x = 10; p.vx = -p.vx * b; }
+            if (p.x > W - 10) { p.x = W - 10; p.vx = -p.vx * b; }
+            if (p.y < 10) { p.y = 10; p.vy = -p.vy * b; }
+            if (p.y > H - 10) { p.y = H - 10; p.vy = -p.vy * b; }
+          } 
+          else if (state === 1 || state === 2) {
+            // Elastic spring pull to CSAI anchor
+            if (p.targetX !== null) {
+              const ax = (p.targetX - p.x) * p.spring * 20;
+              const ay = (p.targetY - p.y) * p.spring * 20;
+              const f1 = Math.pow(p.friction, dt * 20);
+              p.vx = (p.vx + ax) * f1;
+              p.vy = (p.vy + ay) * f1;
+              p.x += p.vx * dt * 9;
+              p.y += p.vy * dt * 9;
+            }
+          } 
+          else if (state === 3) {
+            // Outward cosmic burst
+            p.x += p.vx * dt;
+            p.y += p.vy * dt;
+            const f3 = Math.pow(0.955, dt * 60);
+            p.vx *= f3;
+            p.vy *= f3;
+          }
+          else if (state === 4) {
+            // Elastic spring pull back into target word
+            if (p.wordIdx !== null && activeWords[p.wordIdx]) {
+              const w = activeWords[p.wordIdx];
+              const floatY = Math.sin(simTime * 2.5 + w.floatOffset) * 4;
+              const targetX = w.x + p.targetRelX;
+              const targetY = w.y + floatY + p.targetRelY;
+
+              const ax = (targetX - p.x) * p.spring * 20;
+              const ay = (targetY - p.y) * p.spring * 20;
+              const f4 = Math.pow(p.friction, dt * 20);
+              p.vx = (p.vx + ax) * f4;
+              p.vy = (p.vy + ay) * f4;
+              p.x += p.vx * dt * 9;
+              p.y += p.vy * dt * 9;
+            }
+          }
+        }
+      }
+
+      function draw(simTime) {
+        // Pure light background matching slide background #ffffff exactly
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, W, H);
+
+        // 1. Draw Shockwave Rings
+        shockwaves.forEach(sw => {
+          ctx.beginPath();
+          ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+          ctx.strokeStyle = sw.color;
+          ctx.lineWidth = 2.4;
+          ctx.globalAlpha = Math.max(0, sw.alpha);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        });
+
+        // 2. Draw Sparks
+        sparks.forEach(sp => {
+          ctx.beginPath();
+          ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
+          ctx.fillStyle = sp.color;
+          ctx.globalAlpha = Math.max(0, sp.alpha);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+
+        // 3. Draw Concept Target Word Capsules
+        activeWords.forEach(w => {
+          if (w.destroyed || w.opacity <= 0.01) return;
+
+          ctx.save();
+          ctx.globalAlpha = w.opacity;
+
+          // Gentle floating motion (slowed down)
+          const floatY = Math.sin(simTime * 2.5 + w.floatOffset) * 4;
+          ctx.translate(w.x, w.y + floatY);
+          ctx.scale(w.scale, w.scale);
+
+          const fontSize = w.text.length > 10 ? Math.floor(W * 0.046) : Math.floor(W * 0.054);
+          ctx.font = `700 ${fontSize}px system-ui, -apple-system, sans-serif`;
+          const tw = ctx.measureText(w.text).width;
+          const th = fontSize * 1.25;
+          const padW = 20;
+          const padH = 10;
+          const boxW = tw + padW * 2;
+          const boxH = th + padH * 2;
+          const r = boxH / 2;
+
+          // Soft drop shadow
+          ctx.shadowColor = "rgba(15, 23, 42, 0.08)";
+          ctx.shadowBlur = 10;
+          ctx.shadowOffsetY = 3;
+          ctx.shadowOffsetX = 0;
+
+          // Capsule body
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          ctx.roundRect(-boxW / 2, -boxH / 2, boxW, boxH, r);
+          ctx.fill();
+
+          // Colored border
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetY = 0;
+          ctx.strokeStyle = w.color;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Word Text
+          ctx.fillStyle = "#0f172a";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(w.text, 0, 1);
+
+          ctx.restore();
+        });
+
+        // 4. Draw Rainbow / Themed Particles (Balls)
+        const dotR = 2.45 * (W / 600);
+        let pGlobalAlpha = 1;
+        if (state === 4 && stateTimer > 0.8) {
+          pGlobalAlpha = Math.max(0, 1 - (stateTimer - 0.8) / 0.7);
+        }
+
+        if (pGlobalAlpha > 0) {
+          ctx.save();
+          ctx.globalAlpha = pGlobalAlpha;
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const color = p.color || RAINBOW_HEX[p.colorIdx];
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, dotR, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        // 5. Draw Hero "AI" Entity
+        drawAiHero();
+      }
+
+      function drawAiHero() {
+        // Glowing comet tail
+        for (let i = 0; i < ai.trail.length - 1; i++) {
+          const t1 = ai.trail[i];
+          const t2 = ai.trail[i + 1];
+          if (t1.alpha <= 0) continue;
+
+          ctx.beginPath();
+          ctx.moveTo(t1.x, t1.y);
+          ctx.lineTo(t2.x, t2.y);
+          ctx.strokeStyle = `rgba(2, 132, 199, ${t1.alpha * 0.35})`;
+          ctx.lineWidth = Math.max(1, (35 - i) * 0.45 * (W / 600));
+          ctx.lineCap = "round";
+          ctx.stroke();
+        }
+
+        // Hero Badge Container
+        ctx.save();
+        ctx.translate(ai.x, ai.y);
+        ctx.scale(ai.scale, ai.scale);
+
+        const ringR = 24 * (W / 600);
+
+        // Exterior aura pulse
+        const auraPulse = Math.sin(ai.pulse) * 3;
+        ctx.beginPath();
+        ctx.arc(0, 0, ringR + auraPulse, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(2, 132, 199, 0.25)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Subtle drop shadow for badge
+        ctx.shadowColor = "rgba(15, 23, 42, 0.12)";
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetY = 3;
+
+        // Core fill
+        ctx.beginPath();
+        ctx.arc(0, 0, ringR * 0.9, 0, Math.PI * 2);
+        const coreGrad = ctx.createRadialGradient(0, 0, 2, 0, 0, ringR);
+        coreGrad.addColorStop(0, "#ffffff");
+        coreGrad.addColorStop(0.7, "#f0f9ff");
+        coreGrad.addColorStop(1, "#e0f2fe");
+        ctx.fillStyle = coreGrad;
+        ctx.fill();
+
+        // Border ring
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.strokeStyle = "#0284c7";
+        ctx.lineWidth = 2.4;
+        ctx.stroke();
+
+        // "AI" Title
+        ctx.fillStyle = "#0369a1";
+        ctx.font = `900 ${Math.floor(20 * (W / 600))}px system-ui, -apple-system, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("AI", 0, 1);
+
+        ctx.restore();
+      }
+
+      // Pointer event listeners
+      function onPointerMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.active = true;
+      }
+      function onPointerLeave() {
+        mouse.active = false;
+        mouse.x = -9999;
+        mouse.y = -9999;
+      }
+
+      canvas.addEventListener("pointermove", onPointerMove);
+      canvas.addEventListener("pointerdown", onPointerMove);
+      canvas.addEventListener("pointerleave", onPointerLeave);
+
+      // Interactive Click Shockwave Burst
+      canvas.addEventListener("click", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+
+        shockwaves.push({
+          x: cx,
+          y: cy,
+          radius: 8,
+          maxRadius: 110,
+          color: "#0284c7",
+          alpha: 1
+        });
+
+        particles.forEach(p => {
+          const dx = p.x - cx;
+          const dy = p.y - cy;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 110 && dist > 1) {
+            const f = 200 * (1 - dist / 110);
+            p.vx += (dx / dist) * f;
+            p.vy += (dy / dist) * f;
+          }
+        });
+      });
+
+      window.addEventListener("resize", resize);
+
+      // Initialize and run
+      resize();
+      initCycle();
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
